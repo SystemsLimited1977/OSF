@@ -1,0 +1,4 @@
+<iscomment>
+	Purpose:	outputs success flag for response to ajax call of ltkEmailCapture-Start pipeline
+</iscomment>
+<isprint value="${pdict.success}">

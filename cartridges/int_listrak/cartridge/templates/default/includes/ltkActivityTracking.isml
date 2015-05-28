@@ -1,0 +1,14 @@
+<iscomment>
+	Purpose:	Starts pipeline that will send page browse activity to Listrak 
+</iscomment>
+
+<iscache status="off" />
+
+<script type="text/javascript">
+	var path = '${URLUtils.url("ltkActivityTracker-StartActivity")}';
+	jQuery.ajax({
+		  url: path.concat('?path=' + document.location.href),
+		  context: document,
+		  success: function(){}
+		});
+</script> 

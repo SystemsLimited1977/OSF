@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipelines creates the multi-ship object which includes the shipping address and method.</description>
+        </text-node>
+        <node-display x="0" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_2">
+    <segment>
+      <node>
+        <text-node>
+          <description>The TaxItems need to be split up by shipment so that the tax is applied to the correct products.</description>
+        </text-node>
+        <node-display x="3" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CreateMultiShipTo">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CreateMultiShipTo" secure="false"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="GetBasket" pipelet-set-identifier="bc_api">
+          <config-property key="Create" value="false"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="null" key="StoredBasket"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in2" target-path="./+1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="avatax/multiship/ShipTo/CreateAvataxMultiShipToObjects.ds"/>
+          <key-binding alias="log" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="ShipToAddresses" key="AvataxShipTo"/>
+          <key-binding alias="ShipToCollection" key="AvataxShipToCollection"/>
+          <key-binding alias="ShipToAddresses" key="AvataxShipToHashMap"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="custom/scripterror"/>
+              </interaction-node>
+              <node-display x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CreateMultiTaxItems">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CreateMultiTaxItems" secure="false"/>
+        <node-display x="3" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="GetBasket" pipelet-set-identifier="bc_api">
+          <config-property key="Create" value="false"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="null" key="StoredBasket"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in2" target-path="./+1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="avatax/multiship/Taxation/CreateAvataxMultiShipTaxationItemsObject.ds"/>
+          <key-binding alias="log" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="ia" key="itemarray"/>
+          <key-binding alias="im" key="itemmap"/>
+          <key-binding alias="itemArrayMapByShip" key="itemArrayByShip"/>
+          <key-binding alias="itemMapByShip" key="itemMapByShip"/>
+          <key-binding alias="itemArrayByOrder" key="itemArrayByOrder"/>
+          <key-binding alias="itemMapByOrder" key="itemMapByOrder"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="custom/scripterror"/>
+              </interaction-node>
+              <node-display x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

@@ -1,0 +1,647 @@
+/**
+ *
+ * A library file for Avatax communication.
+ *
+ */
+
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.value);
+
+var numbersOnlyRegExp : RegExp = /\D/g;
+var AvataxHelper = {
+	csReference : webreferences.taxsvc,
+	
+	getMerchantID : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtMerchantId");
+	},
+	
+	getSoapSecurityKey : function() {
+		return Site.getCurrent().getCustomPreferenceValue("AtSecurityKey");
+	},
+	
+	getEndpoint : function getEndpoint() : String {
+		return Site.getCurrent().getCustomPreferenceValue("AtEndpoint") == null ? "" : Site.getCurrent().getCustomPreferenceValue("AtEndpoint").toString();
+	},
+	
+	getValidationEndpoint : function getValidationEndpoint() : String {
+		return Site.getCurrent().getCustomPreferenceValue("AtAddressValidationEndpoint") == null ? "" : Site.getCurrent().getCustomPreferenceValue("AtAddressValidationEndpoint").toString();
+	},
+	
+
+	getDefaultShippingMethodTaxCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtDefaultShippingMethodTaxCode");
+	},	
+
+	getDefaultCouponTaxCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtDefaultCouponTaxCode");
+	},	
+
+	getDefaultProductTaxCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtDefaultProductTaxCode");
+	},	
+
+	
+	
+	getDavEnable : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtDavEnable");
+	},	
+
+	getDavOnAddressVerificationFailure : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtDavOnAddressVerificationFailure");
+	},
+
+	getShipFromCity : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtShipFromCity");
+	},
+	
+	getShipFromStateCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtShipFromStateCode");
+	},
+	
+	getShipFromZipCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtShipFromZipCode");
+	},
+		
+	getShipFromCountryCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtShipFromCountryCode");
+	},
+	
+	getCompanyCode : function () {
+		return Site.getCurrent().getCustomPreferenceValue("AtCompanyCode");
+	},
+
+	/*****************************************************************************
+	 * Name: getNexus
+	 * Description: Returns the Nexus site preference.
+	 ****************************************************************************/	
+	getNexus : function() {
+	
+		var nexusList : Collection	= Site.getCurrent().getCustomPreferenceValue('AtNexus');
+		var nexus : String			= '';
+		var nexusCount : Number		= 0;
+		
+		for each(var nexusEntry : String in nexusList) {
+		
+			if(!empty(nexusEntry)) {
+			
+				nexus += nexusCount > 0 ? ', ' : '';
+				nexus += nexusEntry;
+				nexusCount++;
+			}	
+		}		
+		return nexus;
+	},
+	
+	/*****************************************************************************
+	 * Name: getNoNexus
+	 * Description: Returns the NoNexus site preference.
+	 *****************************************************************************/
+	getNoNexus : function() {
+	
+		var noNexusList : Collection	= Site.getCurrent().getCustomPreferenceValue('AtNoNexus');
+		var noNexus : String			= '';
+		var noNexusCount : Number		= 0;
+		
+		for each(var noNexusEntry : String in noNexusList) {
+		
+			if(!empty(noNexusEntry)) {
+			
+				noNexus += noNexusCount > 0 ? ', ' : '';
+				noNexus += noNexusEntry;
+				noNexusCount++;
+			}
+			
+		}
+		
+		return noNexus;
+	},	
+
+	/*****************************************************************************
+	 * Name: createHeader
+	 * Description: create header.
+	 *****************************************************************************/		
+	createHeader : function (service : Stub){
+		var merchantID : String = AvataxHelper.getMerchantID();
+		var merchantPassword : String = AvataxHelper.getSoapSecurityKey();
+		
+		if(empty(merchantID) || empty(merchantPassword)){
+			Logger.error("MerchantID and/or MerchantPassword are missing.");	
+			return false;
+		}
+		
+		// create Security Header
+		var usernameToken : XML = 
+			<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+				<wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+					<wsse:Username>{merchantID}</wsse:Username>
+					<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{merchantPassword}</wsse:Password>
+				</wsse:UsernameToken>
+			</wsse:Security>;
+
+		SOAPUtil.setHeader( service, usernameToken, true );
+			
+		// create Security Header
+		var profile : XML = 
+			<ser:Profile xmlns:ser="http://avatax.avalara.com/services">
+				<ser:Name>5.7.0</ser:Name>
+				<ser:Client>DW,0.1</ser:Client>
+				<ser:Adapter>127.0.0.0</ser:Adapter>
+				<ser:Machine>AvalaraDW,0.13</ser:Machine>
+			</ser:Profile>; 
+
+		SOAPUtil.setHeader( service, profile, false );
+
+		return true;
+	},
+	
+	/*****************************************************************************
+	 * Name: createBMLHeader
+	 * Description: create BML header.
+	 *****************************************************************************/		
+	createBMLHeader : function (service : Stub){
+		var merchantID : String = AvataxHelper.getBMLMerchantID();
+		var merchantPassword : String = AvataxHelper.getBMLMerchantPassword();
+		
+		if(empty(merchantID) || empty(merchantPassword)){
+			Logger.error("MerchantID and/or MerchantPassword are missing.");	
+			return false;
+		}
+		
+		// create Security Header
+		var usernameToken : XML = 
+			<wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+				<wsse:Username>{merchantID}</wsse:Username>
+				<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+					{merchantPassword}
+				</wsse:Password>
+			</wsse:UsernameToken>;
+	
+		SOAPUtil.setHeader( service, "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd","Security", usernameToken, true, null );
+		return true;
+	},
+	
+	/*****************************************************************************
+	 * Name: createBMLPromoHeader
+	 * Description: create BML promo header.
+	 *****************************************************************************/			
+	createBMLPromoHeader : function (service : Stub){
+		var merchantID : String = Site.getCurrent().getCustomPreferenceValue("AtBmlPromoMerchantId");
+		var merchantPassword : String = Site.getCurrent().getCustomPreferenceValue("AtBmlPromoMerchantPassword");
+		
+		if(empty(merchantID) || empty(merchantPassword)){
+			Logger.error("MerchantID and/or MerchantPassword are missing.");	
+			return false;
+		}
+		
+		// create Security Header
+		var usernameToken : XML = 
+			<wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+				<wsse:Username>{merchantID}</wsse:Username>
+				<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+					{merchantPassword}
+				</wsse:Password>
+			</wsse:UsernameToken>;
+	
+		SOAPUtil.setHeader( service, "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd","Security", usernameToken, true, null );
+		return true;
+	},
+	 
+	/*****************************************************************************
+	 * Name: createBMLPromoHeader
+	 * Description: create BML promo header.
+	 *****************************************************************************/		
+	 setEndpoint : function (service : Stub)
+	 {
+		var endpoint : String = AvataxHelper.getEndpoint();
+		Logger.debug('Connection to system "{0}"',endpoint);
+		//Logger.error("endpoint:" + endpoint);
+		if(!empty(endpoint)) {
+			service._setProperty(Stub.ENDPOINT_ADDRESS_PROPERTY, endpoint); 
+			//service._setProperty(Stub.ENDPOINT_ADDRESS_PROPERTY,'https://development.avalara.net/Tax/TaxSvc.asmx');
+		}
+		else {
+			throw "Undefined Avatax Endpoint \"" + endpoint + "\"";
+		}
+	},
+	
+	 setValidationEndpoint : function (service : Stub)
+	 {
+		var endpoint : String = AvataxHelper.getValidationEndpoint();
+		Logger.debug('Connection to system "{0}"',endpoint);
+		//Logger.error("endpoint:" + endpoint);
+		if(!empty(endpoint)) {
+			service._setProperty(Stub.ENDPOINT_ADDRESS_PROPERTY, endpoint); 
+			//service._setProperty(Stub.ENDPOINT_ADDRESS_PROPERTY,'https://development.avalara.net/Tax/TaxSvc.asmx');
+		}
+		else {
+			throw "Undefined Avatax Endpoint \"" + endpoint + "\"";
+		}
+	},
+
+	 /*****************************************************************************
+	 * Name: addCCCaptureRequestInfo
+	 * Description: add CC capture request info.
+	 *****************************************************************************/		
+	addCCCaptureRequestInfo : function(request : Object, order : dw.order.Order){
+		request.merchantID = AvataxHelper.getMerchantID();
+		
+		__setClientData( request, order.orderNo );
+		
+		var pt : PaymentTransaction = order.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD)[0].paymentTransaction;
+		
+		request.purchaseTotals = new AvataxHelper.AtReference.PurchaseTotals();
+		request.purchaseTotals.currency=pt.amount.currencyCode;
+		request.purchaseTotals.grandTotalAmount=StringUtils.formatNumber(pt.amount.value,"000000.00","en_US");
+			
+		request.ccCaptureService=new AvataxHelper.AtReference.CCCaptureService();	
+		request.ccCaptureService.run=true;
+		request.ccCaptureService.authRequestID = pt.transactionID;	
+		request.ccCaptureService.authRequestToken = pt.custom.requestToken;	
+	},
+	
+	/*****************************************************************************
+	 * Name: addCCCaptureRequestInfo
+	 * Description: add CC capture request info.
+	 *****************************************************************************/		
+	addCCCaptureRequestInfoBasket : function(request : Object, order : dw.order.Order, orderNo:String ){
+		request.merchantID = AvataxHelper.getMerchantID();
+		
+		__setClientData( request, orderNo );
+		
+		var pt : PaymentTransaction = order.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD)[0].paymentTransaction;
+		
+		request.purchaseTotals = new AvataxHelper.AtReference.PurchaseTotals();
+		request.purchaseTotals.currency=pt.amount.currencyCode;
+		request.purchaseTotals.grandTotalAmount=StringUtils.formatNumber(pt.amount.value,"000000.00","en_US");
+			
+		request.ccCaptureService=new AvataxHelper.AtReference.CCCaptureService();	
+		request.ccCaptureService.run=true;
+		request.ccCaptureService.authRequestID = pt.transactionID;	
+		request.ccCaptureService.authRequestToken = pt.custom.requestToken;	
+	},
+		
+	/*****************************************************************************
+	 * request   : Object, 
+	 * billTo    : BillTo_Object, 
+	 * shipTo    : ShipTo_Object, 
+	 * purchase  : PurchaseTotals_Object, 
+	 * card      : Card_Object,
+	 * refCode   : String                    - Basket.UUID
+	 *****************************************************************************/	
+	addPayPalAuthRequestInfo : function(request : Object, billTo : BillTo_Object, shipTo : ShipTo_Object, purchase : PurchaseTotals_Object, card : Card_Object,refCode : String)
+	{
+		request.merchantID = AvataxHelper.getMerchantID();
+		__setClientData( request, refCode );
+		request.billTo = __copyBillTo( billTo );
+		request.shipTo = __copyShipTo( shipTo );
+		request.purchaseTotals = __copyPurchaseTotals( purchase );
+		// request.card = __copyCreditCard( card );
+		
+		request.payPalButtonCreateService = new AvataxHelper.AtReference.PayPalButtonCreateService();
+		request.payPalButtonCreateService.buttonType = "Buy";
+		request.payPalButtonCreateService.run = true;
+		
+		/*
+		request.payPalPaymentService = new AvataxHelper.AtReference.PayPalPaymentService();
+      	request.payPalPaymentService.cancelURL        = "COPayments-Start";
+      	request.payPalPaymentService.successURL       = "COSubmit-ReturnFromPayPal";
+      	request.payPalPaymentService.reconciliationID = "";
+		request.payPalPaymentService.run = true;
+		*/	
+	},
+	/*****************************************************************************	
+	 * request  : Object, 
+	 * billTo   : BillTo_Object, 
+	 * shipTo   : ShipTo_Object, 
+	 * purchase : PurchaseTotals_Object, 
+	 * card     : Card_Object,
+	 * refCode  : String   - Basket.UUID
+	 *****************************************************************************/	
+	addCCAuthRequestInfo : function(request : Object, billTo : BillTo_Object, shipTo : ShipTo_Object, purchase : PurchaseTotals_Object, card : Card_Object,refCode : String)
+	{
+		request.merchantID = AvataxHelper.getMerchantID();
+		__setClientData( request, refCode );
+		request.billTo = __copyBillTo( billTo );
+		request.shipTo = __copyShipTo( shipTo );
+		request.purchaseTotals = __copyPurchaseTotals( purchase );
+		request.card = __copyCreditCard( card );
+		
+		request.ccAuthService = new AvataxHelper.AtReference.CCAuthService();		
+		request.ccAuthService.run = true;	
+	},
+
+	addBMLAuthRequestInfo : function(request : Object, billTo : BillTo_Object, shipTo : ShipTo_Object, purchase : PurchaseTotals_Object, card : Card_Object,bml : BML_Object, promo : Boolean, refCode : String)
+	{			
+		request.merchantID = AvataxHelper.getBMLMerchantID();
+		__setClientData( request, refCode );
+		request.billTo = __copyBillTo( billTo );
+		request.shipTo = __copyShipTo( shipTo );
+		request.purchaseTotals = __copyPurchaseTotals( purchase );
+		request.card = __copyCreditCard( card );
+		request.bml = __copyBml( bml );
+		
+		request.ccAuthService=new AvataxHelper.AtReference.CCAuthService();	
+		request.ccAuthService.run=true;	
+	},
+
+
+	addDAVRequestInfo : function(request : Object, billTo : BillTo_Object, shipTo : ShipTo_Object, ignoreDAVResult : boolean, refCode : String )
+	{
+		request.merchantID = AvataxHelper.getMerchantID();
+		if( !empty(refCode) ) {
+			__setClientData( request, refCode );
+		}
+		request.billTo = __copyBillTo( billTo );
+		request.shipTo = __copyShipTo( shipTo );
+
+		request.davService=new AvataxHelper.AtReference.DAVService();	
+		request.davService.run=true;
+
+		if( !("businessRules" in request && !empty(request.businessRules)) ) {
+			request.businessRules = new AvataxHelper.AtReference.BusinessRules();				
+		}
+		
+		if( ignoreDAVResult ) {
+			request.businessRules.ignoreDAVResult = true;
+		} else {
+			request.businessRules.ignoreDAVResult = false;	
+		}
+	},
+	
+	
+	addAVSRequestInfo : function(request : Object, ignoreAVSResult : Boolean, declineAVSFlags : String )
+	{
+		if( !("businessRules" in request && !empty(request.businessRules)) ) {
+			request.businessRules = new AvataxHelper.AtReference.BusinessRules();				
+		}
+		
+		if( !empty(ignoreAVSResult) && ignoreAVSResult.valueOf() ) {
+			request.businessRules.ignoreAVSResult = true;
+		} else {
+			request.businessRules.ignoreAVSResult = false;
+		}
+		
+		if( !empty(declineAVSFlags) ) {
+			request.businessRules.declineAVSFlags = declineAVSFlags;
+		}
+	},
+	
+	
+	addPayerAuthEnrollInfo : function(request : Object, orderNo : String, creditCardForm : dw.web.FormElement, countryCode : String, amount : dw.value.Money, request : Request){
+		request.merchantID = AvataxHelper.getMerchantID();
+		
+		__setClientData( request, orderNo );
+
+		AvataxHelper.addCardInfo(request, creditCardForm);
+
+		// enroll specific stuff		
+		request.payerAuthEnrollService = new AvataxHelper.AtReference.PayerAuthEnrollService();
+		request.payerAuthEnrollService.countryCode = countryCode;
+		request.payerAuthEnrollService.merchantID = AvataxHelper.getPAMerchantID(); // NOT the Avatax merchant ID
+		request.payerAuthEnrollService.merchantName = AvataxHelper.getPAMerchantName();
+		request.payerAuthEnrollService.merchantURL = AvataxHelper.getMerchantURL();
+
+		request.purchaseTotals = new AvataxHelper.AtReference.PurchaseTotals();
+		request.purchaseTotals.currency=amount.currencyCode;
+
+		var items : Array = new Array();
+		var item = new AvataxHelper.AtReference.Item();
+		item.id = 0;
+		item.unitPrice = StringUtils.formatNumber(amount.value,"000000.00","en_US");;
+		items.push(item);
+		request.item = items;
+
+		request.payerAuthEnrollService.run=true;
+	},
+	
+	addPayerAuthValidateInfo : function(request : Object, orderNo : String, signedPARes : String, creditCardForm : dw.web.FormElement, currency : String){
+		request.merchantID = AvataxHelper.getMerchantID();
+		
+		__setClientData( request, orderNo );
+
+		AvataxHelper.addCardInfo(request, creditCardForm);
+
+		// validate specific stuff
+		request.payerAuthValidateService = new AvataxHelper.AtReference.PayerAuthValidateService();
+		request.payerAuthValidateService.signedPARes = signedPARes;
+
+		request.purchaseTotals = new AvataxHelper.AtReference.PurchaseTotals();
+		request.purchaseTotals.currency=currency;
+
+		request.payerAuthValidateService.run=true;
+	},
+	
+	addPayerAuthReplyInfo : function(request : Object, cavv : String, ucafAuthenticationData : String, ucafCollectionIndicator : String, eciRaw : String, commerceIndicator : String, xid : String){
+		if(request.ccAuthService == null){
+			request.ccAuthService=new AvataxHelper.AtReference.CCAuthService();
+		}
+		request.ccAuthService.commerceIndicator = commerceIndicator;
+		request.ccAuthService.xid = xid;
+		if(cavv != null){
+			request.ccAuthService.cavv = cavv;	
+		}
+		if(eciRaw != null){
+			request.ccAuthService.eciRaw = eciRaw;	
+		}
+		if(ucafAuthenticationData != null){
+			request.ucaf = new AvataxHelper.AtReference.UCAF();
+			request.ucaf.authenticationData = ucafAuthenticationData;
+			request.ucaf.collectionIndicator = ucafCollectionIndicator;
+		}
+	},
+
+   addTaxRequest : function(request : Object, billTo : BillTo_Object, shipTo : ShipTo_Object, purchase : PurchaseTotals_Object, card : Card_Object, shipFrom : ShipFrom_Object, taxService : TaxService_Object, items : Array, refCode : String)
+   {
+		/*request.merchantID = AvataxHelper.getMerchantID();
+		__setClientData( request, refCode );
+		
+		request.billTo     = __copyBillTo( billTo );
+		request.shipTo     = __copyShipTo( shipTo );
+		request.purchaseTotals = __copyPurchaseTotals( purchase );
+		request.card       = __copyCreditCard( card );
+		request.taxService = __copyTaxService( taxService );
+		request.shipFrom   = __copyShipFrom  ( shipFrom );
+		
+		// Nexus / No Nexus
+		var nexus : String		= AvataxHelper.getNexus();
+		var noNexus : String	= AvataxHelper.getNoNexus();
+		if(!empty(nexus) && empty(noNexus)) {			
+			request.taxService.nexus	= nexus;
+		}
+		else if(!empty(noNexus) && empty(nexus)) {			
+			request.taxService.noNexus	= noNexus;
+		}
+		else if(!empty(noNexus) && !empty(nexus)) {			
+			Logger.error("[libAvatax.ds] Nexus and NoNexus contains data. Please specify Nexus OR NoNexus!");
+			return PIPELET_ERROR;
+		}*/
+	
+		var _items : Array = new Array();
+		var length : Number = items.length;
+		var i = 0;
+		while(i < length){
+			_items[i] = items[i];
+			i++;
+		}
+		request.lines = _items;
+		//request.taxService.run=true;	
+	},	
+}
+
+// Helper method to export the helper
+function getAvataxHelper()
+{
+	return AvataxHelper;
+}
+
+function __setClientData( request : Object, refCode : String  )
+{
+	request.merchantReferenceCode = refCode; 
+	request.clientLibrary='Demandware';
+	request.clientLibraryVersion='2.2';
+	request.clientEnvironment='Linux';
+}
+
+function __copyBillTo( billTo : BillTo_Object ) : Object
+{
+	var request_billTo : Object = new AvataxHelper.AtReference.BillTo();
+	var value : String;
+	for ( var name : String in billTo )
+	{
+		if( name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = billTo[name];
+			if(value != "")
+			{
+				request_billTo[name] = value;
+			}
+		}
+	}
+	return request_billTo;
+}
+
+function __copyShipTo( shipTo : ShipTo_Object ) : Object
+{
+	var request_shipTo : Object = new AvataxHelper.AtReference.ShipTo();	
+	var value : String;
+	for ( var name : String in shipTo )
+	{
+		if(name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = shipTo[name];
+			if(value != "")
+			{
+				request_shipTo[name] = value;
+			}
+		}
+	}
+	return request_shipTo;
+}
+
+function __copyPurchaseTotals( purchase : PurchaseTotals_Object ) : Object
+{
+	var request_purchaseTotals : Object = new AvataxHelper.AtReference.PurchaseTotals();	
+	var value : String;
+	for ( var name : String in purchase )
+	{
+		if(name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = purchase[name];
+			if(value != "")
+			{
+				// trace( "setting purchase attirb " + name + " to " + value );
+				request_purchaseTotals[name] = value;
+			}
+		}
+	}
+	return request_purchaseTotals;
+}
+
+function __copyCreditCard( card : Card_Object ) : Object
+{
+	var request_card : Object = new AvataxHelper.AtReference.Card();		
+	var value : String;
+	for ( var name : String in card)
+	{
+		if(name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = card[name];
+			if(value != "")
+			{
+				// trace( "setting card attirb " + name + " to " + value );
+				request_card[name] = value;
+			}
+		}
+	}
+	return request_card;
+}
+
+function __copyBml( bml : BML_Object ) : Object
+{ 
+	var request_bml = new AvataxHelper.AtReference.BML();
+	var value : String;
+	for ( var name : String in bml)
+	{
+		if(name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = bml[name];
+			if(value != "")
+			{
+				request_bml[name] = value;
+			}
+		}
+	}
+	return request_bml;
+}
+
+function __copyTaxService( taxService : TaxService_Object ) : Object
+{
+	var request_taxService : Object = new AvataxHelper.AtReference.TaxService();		
+	var value : String;
+	for ( var name : String in taxService)
+	{
+		if(name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = taxService[name];
+			if(value != "")
+			{
+				request_taxService[name] = value;
+			}
+		}
+	}
+	return request_taxService;
+}
+
+function __copyShipFrom( shipFrom : ShipFrom_Object ) : Object
+{
+	var request_shipFrom : Object = new AvataxHelper.AtReference.ShipFrom();
+	var value : String;
+	for ( var name : String in shipFrom)
+	{
+		if ( name.indexOf("set") == -1 && name.indexOf("get") == -1)
+		{
+			value = shipFrom[name];
+			if(value != "")
+			{
+				request_shipFrom[name] = value;
+			}
+		}
+	}
+	return request_shipFrom;
+}
+
+function __copyTaxAmounts( _taxReply : Object ) : Object
+{
+	var taxReply : Object = new Object();
+	var value : String;
+	for ( var name : String in _taxReply ) {
+		if(name.indexOf("Amount")>-1 ) {
+			value = _taxReply[name];
+			taxReply[name] = value;
+		}
+	}
+	return taxReply;
+}

@@ -1,0 +1,230 @@
+importPackage( dw.system );
+importPackage( dw.net );
+importPackage( dw.util );
+importPackage( dw.object );
+
+importScript( "util/ltkErrorHandling.ds" );
+
+/*******************************************************************
+*  Client Settings                                                
+*	Purpose:	Loads client level settings and contains functions 
+*				for submitting information to Listrak endpoints.
+********************************************************************/
+function _Client() {
+    this.CTID = '';
+    if (!empty(dw.system.Site.current.preferences.custom.Listrak_MerchantTrackingID))
+    	this.CTID = dw.system.Site.current.preferences.custom.Listrak_MerchantTrackingID;
+    	
+    this.Endpoint = 's1.listrakbi.com';
+    	if (!empty(dw.system.Site.current.preferences.custom.Listrak_TrackingEndpoint))
+    		this.Endpoint = dw.system.Site.current.preferences.custom.Listrak_TrackingEndpoint;
+    		
+    this.SCAEndpoint = 'sca1.listrakbi.com';
+    	if (!empty(dw.system.Site.current.preferences.custom.Listrak_SCAEndpoint))
+    		this.SCAEndpoint = dw.system.Site.current.preferences.custom.Listrak_SCAEndpoint;
+    
+    this.AlertsEndpoint = 'alerts.listrakbi.com';
+    	if (!empty(dw.system.Site.current.preferences.custom.Listrak_AlertsEndpoint))
+    		this.AlertsEndpoint = dw.system.Site.current.preferences.custom.Listrak_AlertsEndpoint;
+
+    this.ActivityEndpoint = 'at1.listrakbi.com';
+    	if (!empty(dw.system.Site.current.preferences.custom.Listrak_ActivityEndpoint))
+    		this.ActivityEndpoint = dw.system.Site.current.preferences.custom.Listrak_ActivityEndpoint;
+    		    
+    this.DebugMode = false;
+}
+
+_Client.prototype.SubmitTracking = function(path, data) {
+	return this.SubmitQueryStringData(this.Endpoint, path, data);
+}
+
+_Client.prototype.SubmitSCA = function(path, data) {
+	return this.SubmitQueryStringData(this.SCAEndpoint, path, data);
+}
+
+_Client.prototype.SubmitAlerts = function(path, data) {
+	return this.SubmitQueryStringData(this.AlertsEndpoint, path, data);
+}
+
+_Client.prototype.SubmitQueryStringData = function(endpoint, path, data) {
+   	var req : HTTPClient = new HTTPClient();
+    var strURL : String = "http://" + endpoint + '/' + path + "?" + data;
+    req.open("GET", strURL);
+    req.timeout = 3000;
+    
+    try {
+    	req.send();
+    }
+    catch (ex)
+    {
+    	// do nothing 
+    }  
+    
+	if (req.statusCode == 200)
+	{
+		return new this.SubmitQueryStringDataResponse(true, req.text);
+	}
+	else
+	{
+		var transactionUID : string = UUIDUtils.createUUID();
+		var dataObject : CustomObject = CustomObjectMgr.createCustomObject("ltk_dataObject",transactionUID);		
+		dataObject.custom.data = strURL;
+		
+		return new this.SubmitQueryStringDataResponse(false, "");
+	}
+}
+
+_Client.prototype.SaveDataObject = function(url) {
+	
+}
+
+_Client.prototype.SubmitQueryStringDataResponse = function(successFlag, textResponse) {
+	this.success = successFlag;
+	this.response = textResponse;
+}
+
+_Client.prototype.uuidCompact = function() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    }).toUpperCase();
+}
+    
+/*******************************************************************
+*  Utility Functions
+*	Purpose:	Functions for working with cookies                                               
+********************************************************************/
+function _Cookie() {
+}
+
+_Cookie.prototype.Get = function (name) : String {
+	var cookies : dw.web.Cookies = request.getHttpCookies();
+	var cookie : dw.web.Cookie = cookies[name];
+	if (cookie) {
+		return cookie.value;
+	}
+	else
+	{
+		return "";
+	}
+}
+
+_Cookie.prototype.GetCookieDomain = function(domain) {
+	var parts = domain.split('.').reverse();
+    var cnt = parts.length;
+    if (cnt >= 3) {
+        // see if the second level domain is a common SLD.
+        if (parts[1].match(/^(com|edu|gov|net|mil|org|nom|co|name|info|biz)$/i)) {
+            return parts[2] + '.' + parts[1] + '.' + parts[0];
+        }
+    }
+    return parts[1]+'.'+parts[0];
+}
+
+_Cookie.prototype.Set = function (name, value, expiredays, domain) {
+	if (expiredays == undefined) { expiredays = 365; }
+	var maxAge = expiredays * 60 *60 * 24;
+	var cookie : dw.web.Cookie = new dw.web.Cookie(name, value); 	
+	//for session-life only cookies (with expiredays == 0), don't set maxAge
+	if (maxAge != 0) { cookie.setMaxAge(maxAge); } 
+	if (typeof domain != "unresolved" && domain != null ) {
+		var _cookieDomain = this.GetCookieDomain(domain); 
+		cookie.domain = _cookieDomain; 
+	}
+	cookie.path = "/";
+	response.addHttpCookie(cookie);
+}
+
+_Cookie.prototype.Delete = function (name) {
+	var cookies : dw.web.Cookies = request.getHttpCookies();
+	var cookie : dw.web.Cookie = cookies[name];
+ 	if(cookie)
+ 	{
+ 		cookie.setValue(null);
+ 		cookie.setMaxAge(0);
+ 	}
+ 		
+ 	response.addHttpCookie(cookie);		
+ }
+
+/*******************************************************************
+*  Exception Handler
+*	Purpose:	Reports error information to Listrak                                              
+********************************************************************/
+
+function _LTKException() {
+	this.Client = new _Client();
+	
+    _LTKException.prototype.Submit = function (ex, info) {
+    	var message = ex.name + ' - ' + ex.message + ' - ' + info + ' - ' + ex.stack;
+		reportError( message, 'High', '' );
+    }
+}
+
+/*******************************************************************
+*  Tracking Assembler
+*	Purpose:	Formats Listrak objects for submission to Listrak via http                                              
+********************************************************************/
+
+function _Assembler() {
+	this.Client = new _Client();
+    this.QueryHeader = null;
+    this.QueryMode = 0;
+    this.Endpoint = '';
+    this.EndPointPath = '/T.ashx';
+    this.EnumIndex = 0;
+    this.Query = '';
+    this._protocol = "http://";
+
+    _Assembler.prototype.Reset = function() {
+        this.Query = '';
+        if (this.QueryMode == 0) { this.EnumIndex = 0; }
+    }
+
+    _Assembler.prototype.Append = function(obj) {
+        var q = this.BuildQuery(obj); 
+   
+        this.Query += q;
+        if (this.QueryMode == 0 || obj._isIndexable) { this.EnumIndex++; }
+    }
+
+    _Assembler.prototype.Flush = function() {
+        if (this.Query != '') {
+
+			var resp = this.Client.SubmitQueryStringData(this.Endpoint, this.EndPointPath, this.QueryHeader + this.Query);
+            this.Reset(); 
+            return resp.response;
+        }
+    }
+
+    _Assembler.prototype.BuildQuery = function(obj) {
+        var i = -1;
+        var query = '';
+        for (var key in obj) {
+            if (key == "_varmap" || typeof obj[key] == 'function') continue;
+            i++;
+            if (typeof obj[key] == 'undefined' || obj[key] == null || typeof obj._varmap[key] == 'undefined') continue;
+            query += "&" + obj._varmap[key] + (this.QueryMode == 0 || obj._isIndexable ? "_" + this.EnumIndex : "") + "=" + encodeURIComponent(obj[key]);
+        }
+        return query;
+    }
+
+    _Assembler.prototype.AddObject = function(obj) {
+        if (typeof obj == 'undefined' || obj == null || !this.HasValue(obj) || typeof (obj._varmap) == 'undefined') return;
+        this.Append(obj);
+    }
+
+    _Assembler.prototype.AddArrayObject = function(obj) {
+        if (typeof obj == 'undefined' || obj == null) return;
+        for (var k in obj) {
+            this.AddObject(obj[k]);
+        }
+    }
+
+    _Assembler.prototype.HasValue = function(obj) {
+        if (typeof obj == 'undefined' || obj == null) return false;
+        for (var o in obj) if (typeof o != 'undefined' && o != null) return true;
+        return false;
+    }
+}
+

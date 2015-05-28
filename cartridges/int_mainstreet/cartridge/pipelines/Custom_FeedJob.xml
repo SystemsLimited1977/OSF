@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline group="Feeds" type="job">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>Feed job execution pipeline. Do not change in project.</description>
+        </text-node>
+        <node-display x="0" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_2">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual Export Ordres task</description>
+        </text-node>
+        <node-display x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportOrders">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportOrders" secure="false"/>
+        <node-display x="1" y="1"/>
+      </node>
+      <transition target-connector="in" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <loop-node element-key="Task" iterator-key="Tasks"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="do">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="Task.id=='ExportAndUploadOrders'" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <call-node start-name-ref="Custom_FeedJob-ExportAndUploadOrders"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <transition target-connector="in3" target-path="../+1"/>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="source" x="2" y="0"/>
+                <bend-point relative-to="target" x="2" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="loop" target-path="..">
+              <transition-display>
+                <bend-point relative-to="source" x="-1" y="0"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_4">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline that performs the generic download and import of feed files from remote SFTP</description>
+        </text-node>
+        <node-display x="4" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="DownloadAndImport">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="DownloadAndImport" secure="false">
+          <description>This is a feed job execution pipeline that performs the generic download and import of feed files from remote SFTP</description>
+        </start-node>
+        <node-display x="5" y="0"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedSteps-DownloadFeed"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="SUCCESS">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <decision-node condition-key="Task[remote-file-extention]==&quot;.zip&quot;" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="ScriptFile" value="feeds/UnZipFile.ds"/>
+                      <key-binding alias="loggy" key="ScriptLog"/>
+                      <key-binding alias="Task['temp-folder']" key="TempFolder"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in2" target-path="../../+1">
+                        <transition-display>
+                          <bend-point relative-to="source" x="2" y="0"/>
+                        </transition-display>
+                      </transition>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <decision-node condition-key="File.indexOf(&quot;.xml&quot;)==-1" condition-operator="expr"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b3" source-connector="yes">
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="source" x="0" y="1"/>
+                        </transition-display>
+                      </transition>
+                      <segment>
+                        <node>
+                          <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="false"/>
+                            <key-binding alias="File.replace(&quot;.zip&quot;,&quot;.xml&quot;)" key="From_0"/>
+                            <key-binding alias="File" key="To_0"/>
+                            <key-binding alias="null" key="From_1"/>
+                            <key-binding alias="null" key="To_1"/>
+                            <key-binding alias="null" key="From_2"/>
+                            <key-binding alias="null" key="To_2"/>
+                            <key-binding alias="null" key="From_3"/>
+                            <key-binding alias="null" key="To_3"/>
+                            <key-binding alias="null" key="From_4"/>
+                            <key-binding alias="null" key="To_4"/>
+                            <key-binding alias="null" key="From_5"/>
+                            <key-binding alias="null" key="To_5"/>
+                            <key-binding alias="null" key="From_6"/>
+                            <key-binding alias="null" key="To_6"/>
+                            <key-binding alias="null" key="From_7"/>
+                            <key-binding alias="null" key="To_7"/>
+                            <key-binding alias="null" key="From_8"/>
+                            <key-binding alias="null" key="To_8"/>
+                            <key-binding alias="null" key="From_9"/>
+                            <key-binding alias="null" key="To_9"/>
+                          </pipelet-node>
+                          <node-display x="0" y="1"/>
+                        </node>
+                        <transition target-connector="in1" target-path="../../+1"/>
+                      </segment>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="2" y="0"/>
+                      <bend-point relative-to="target" x="0" y="-1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="File.replace(&quot;.zip&quot;,&quot;&quot;)" key="From_0"/>
+                      <key-binding alias="File" key="To_0"/>
+                      <key-binding alias="null" key="From_1"/>
+                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="null" key="From_2"/>
+                      <key-binding alias="null" key="To_2"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="1" y="1"/>
+                  </node>
+                  <transition target-connector="in3" target-path="../+1">
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="2"/>
+                    </transition-display>
+                  </transition>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="1"/>
+                <bend-point relative-to="target" x="1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="4"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="Custom_FeedSteps-ValidateFeed"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="SUCCESS">
+                <transition target-connector="in"/>
+                <segment>
+                  <node>
+                    <call-node start-name-ref="Custom_FeedSteps-ImportFeed"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="LOCKED">
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="target" x="-1" y="0"/>
+                        </transition-display>
+                      </transition>
+                      <segment>
+                        <node>
+                          <end-node/>
+                          <node-display orientation="horizontal" x="1" y="1"/>
+                        </node>
+                      </segment>
+                    </branch>
+                    <branch basename="b3" source-connector="SUCCESS">
+                      <transition target-connector="in"/>
+                      <segment>
+                        <node>
+                          <call-node start-name-ref="Custom_FeedSteps-ArchiveFeed"/>
+                          <node-display x="0" y="2"/>
+                          <branch basename="b2" source-connector="SUCCESS">
+                            <transition target-connector="in">
+                              <transition-display>
+                                <bend-point relative-to="source" x="0" y="1"/>
+                              </transition-display>
+                            </transition>
+                            <segment>
+                              <node>
+                                <call-node start-name-ref="Custom_FeedSteps-DeleteFeed"/>
+                                <node-display x="0" y="1"/>
+                              </node>
+                              <transition target-connector="in1" target-path="../../../..">
+                                <transition-display>
+                                  <bend-point relative-to="source" x="0" y="1"/>
+                                  <bend-point relative-to="source" x="-2" y="1"/>
+                                  <bend-point relative-to="target" x="-2" y="0"/>
+                                </transition-display>
+                              </transition>
+                            </segment>
+                          </branch>
+                        </node>
+                      </segment>
+                    </branch>
+                  </node>
+                  <transition target-connector="in2" target-path="../+1"/>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_6">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual Export and upload Ordres to remote SFTP</description>
+        </text-node>
+        <node-display x="9" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="ExportAndUploadOrders">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ExportAndUploadOrders" secure="false"/>
+        <node-display x="9" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedSteps-ExportOrders"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="SUCCESS">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="Custom_FeedSteps-UploadFeed"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="ERROR">
+                <transition target-connector="in2" target-path="../+1"/>
+              </branch>
+              <branch basename="b3" source-connector="SUCCESS">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <call-node start-name-ref="Custom_FeedSteps-MarkOrdersExported"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <end-node/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_8">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual Export Catalog task</description>
+        </text-node>
+        <node-display x="13" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportCatalog">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportCatalog" secure="false"/>
+        <node-display x="13" y="1"/>
+      </node>
+      <transition target-connector="in" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <loop-node element-key="Task" iterator-key="Tasks"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="do">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="Task.id=='ExportAndUploadCatalog'" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <call-node start-name-ref="Custom_FeedJob-ExportAndUploadCatalog"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <transition target-connector="in3" target-path="../+1"/>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="source" x="2" y="0"/>
+                <bend-point relative-to="target" x="2" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="loop" target-path="..">
+              <transition-display>
+                <bend-point relative-to="source" x="-1" y="0"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_10">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual Export Pricebooks task</description>
+        </text-node>
+        <node-display x="16" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_11">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual Export and uploading of the catalog feed files</description>
+        </text-node>
+        <node-display x="18" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="ExportAndUploadCatalog">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ExportAndUploadCatalog" secure="false">
+          <description>This is a feed job execution pipeline
+that performs the actual Export and uploading of the catalog feed files</description>
+        </start-node>
+        <node-display x="19" y="0"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedSteps-ExportCatalog"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1"/>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="SUCCESS">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="File+&quot;.zip&quot;" key="From_0"/>
+                <key-binding alias="File" key="To_0"/>
+                <key-binding alias="RemoteFile+&quot;.zip&quot;" key="From_1"/>
+                <key-binding alias="RemoteFile" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Custom_FeedSteps-UploadFeed"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="ERROR">
+                <transition target-connector="in1" target-path="../b2.1"/>
+              </branch>
+              <branch basename="b3" source-connector="SUCCESS">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <end-node/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportPricebooks">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportPricebooks" secure="false"/>
+        <node-display x="16" y="1"/>
+      </node>
+      <transition target-connector="in" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <loop-node element-key="Task" iterator-key="Tasks"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="do">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="Task.id=='ExportAndUploadPricebooks'" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <call-node start-name-ref="Custom_FeedJob-ExportAndUploadPricebooks"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <transition target-connector="in3" target-path="../+1"/>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="source" x="2" y="0"/>
+                <bend-point relative-to="target" x="2" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="loop" target-path="..">
+              <transition-display>
+                <bend-point relative-to="source" x="-1" y="0"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_14">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that prforms the default task</description>
+        </text-node>
+        <node-display x="0" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartDefault">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartDefault" secure="false">
+          <description>This is a feed job execution pipeline
+that prforms the default task</description>
+        </start-node>
+        <node-display x="1" y="6"/>
+      </node>
+      <transition target-connector="in" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <loop-node element-key="Task" iterator-key="Tasks"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="do">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="Task.id=='ExportAndUploadOrders'" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in3" target-path="./+1">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="2"/>
+                  </transition-display>
+                </transition>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="2" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Custom_FeedJob-DownloadAndImport"/>
+              <node-display x="1" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="2"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="-1" y="1"/>
+            </node>
+            <transition target-connector="loop" target-path="..">
+              <transition-display>
+                <bend-point relative-to="source" x="-1" y="0"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-Index"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_16">
+    <segment>
+      <node>
+        <text-node>
+          <description>This end node is reached if there are no more files to download or if there was a download error (and on-temporary-error is CONTINUE).</description>
+        </text-node>
+        <node-display x="7" y="4"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_17">
+    <segment>
+      <node>
+        <text-node>
+          <description>This end node is reached if import failed due to a locking error (and on-temporary-error is CONTINUE). We won't attempt to download the same file again and import as it is very likely that the same locking error shows again. Instead we go to the next task and repeat later.</description>
+        </text-node>
+        <node-display x="7" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_18">
+    <segment>
+      <node>
+        <text-node>
+          <description>This end node is reached if there was nothing to export.</description>
+        </text-node>
+        <node-display x="11" y="4"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_19">
+    <segment>
+      <node>
+        <text-node>
+          <description>This end node is reached if there was an upload error (and on-temporary-error is CONTINUE).</description>
+        </text-node>
+        <node-display x="11" y="5"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_20">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual download and import inventory lists</description>
+        </text-node>
+        <node-display x="8" y="7"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_21">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is a feed job execution pipeline
+that performs the actual Export and uploading of the pricebook feed files</description>
+        </text-node>
+        <node-display x="18" y="5"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="ExportAndUploadPricebooks">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ExportAndUploadPricebooks" secure="false">
+          <description>This is a feed job execution pipeline
+that performs the actual Export and uploading of the pricebook feed files</description>
+        </start-node>
+        <node-display x="19" y="5"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedSteps-ExportPricebooks"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1"/>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <end-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="SUCCESS">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="File+&quot;.zip&quot;" key="From_0"/>
+                <key-binding alias="File" key="To_0"/>
+                <key-binding alias="RemoteFile+&quot;.zip&quot;" key="From_1"/>
+                <key-binding alias="RemoteFile" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Custom_FeedSteps-UploadFeed"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="ERROR">
+                <transition target-connector="in2" target-path="../b2.1"/>
+              </branch>
+              <branch basename="b3" source-connector="SUCCESS">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <end-node/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="Index">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="Index" secure="false"/>
+        <node-display x="8" y="8"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Task.id==&quot;DownloadAndImportInventoryLists&quot;" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="UpdateSearchIndex" pipelet-set-identifier="bc_api">
+                <config-property key="IndexerType" value="Incremental"/>
+                <config-property key="IndexerMode" value="Synchronous"/>
+                <config-property key="Index" value="availability"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="1" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="2"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

@@ -1,0 +1,5 @@
+<iscomment>
+	Purpose:	outputs status
+</iscomment>
+
+[<isprint value="${pdict.status}">]

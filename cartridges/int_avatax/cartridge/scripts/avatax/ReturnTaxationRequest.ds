@@ -1,0 +1,209 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Return Taxation Request
+*
+* DESCRIPTION:
+*
+*	Return taxes
+* 
+* INPUT PARAMETERS:
+*
+*	@input  Order : dw.order.Order
+* 	@input  shipTo : Object
+* 	@input  itemArray: Array
+* 	@input  PaymentProcessed : Boolean
+* 	@input  ShipToAddresses : dw.util.ArrayList
+* 	@input  CommitReturn : Boolean
+* 	@input  OrderNo : String
+* 	@input  IsTest : Boolean
+* 	@input  RMANumber : String
+* 	@input  Discount : dw.value.Money
+*
+* OUTPUT PARAMETERS:
+*
+*	@output totalTaxAmount : String
+* 	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.web );
+importPackage( dw.net );
+
+importScript('avatax/libAvatax.ds');
+importScript('avatax/Avatax_ShipTo_Object.ds');
+
+function execute( args : PipelineDictionary ) : Number
+{    
+	try
+	{
+		
+/************************************************************************************************************************/
+/******************************************** INITIALIZE VARIABLES ******************************************************/
+/************************************************************************************************************************/
+
+	    var csReference 	: WebReference 	= webreferences.taxsvc;
+		var order 			: Order 		= args.Order;
+		var taxationService : Stub 			= csReference.getDefaultService(); 
+		
+		if(order == null)
+		{
+			Logger.error("Please provide a Order!");
+			return PIPELET_ERROR;
+		}
+	
+		var shipToObject	: ShipTo_Object 	= args.shipTo;
+		var itemArray 		: Array 			= args.itemArray;
+		
+		var AvataxHelper = getAvataxHelper();
+		AvataxHelper.setEndpoint(taxationService);
+		
+		if(!AvataxHelper.createHeader(taxationService)) 
+		{
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/******************************************** BUILD THE REQUEST *********************************************************/
+/************************************************************************************************************************/
+		
+		var taxationRequest = new csReference.GetTax();
+		var req = taxationRequest.getTaxRequest = new csReference.GetTaxRequest();
+		
+		var overrideDate : Date = order.getCreationDate();
+		var _date : Date = new Date();
+	
+		if(args.PaymentProcessed)
+		{
+			req.docType = csReference.DocumentType.ReturnInvoice;
+		}
+		else
+		{
+			req.docType = csReference.DocumentType.ReturnOrder;
+		}
+
+/************************************************************************************************************************/
+/******************************************* DEFINE REQUEST PARAMETERS **************************************************/
+/************************************************************************************************************************/
+	
+		req.commit 			   			= args.CommitReturn;
+	    req.detailLevel 				= csReference.DetailLevel.Diagnostic;
+	    req.discount 					= 0.0;
+	    req.serviceMode 				= csReference.ServiceMode.Automatic;
+	    req.paymentDate 				= _date;
+	    req.exchangeRate 				= 1.0;
+	    req.exchangeRateEffDate 		= new Date("1970-01-01");
+		req.companyCode 				= AvataxHelper.getCompanyCode();
+	    req.docDate 					= _date;
+	    req.docCode 					= (args.IsTest ? args.OrderNo : order.orderNo) +'.' + args.RMANumber;
+	    req.referenceCode 				= (args.IsTest ? args.OrderNo : order.orderNo);
+	    req.customerCode 				= order.customer.ID;
+	    
+		var taxOverride					= csReference.TaxOverrideType.TaxDate;
+		req.taxOverride					= new csReference.TaxOverride();
+		req.taxOverride.taxOverrideType	= taxOverride;
+		req.taxOverride.taxDate			= overrideDate;
+		req.taxOverride.reason 			= "Return Items";
+
+/************************************************************************************************************************/
+/******************************************** SET ORIGIN ADDRESS ******************************************************/
+/************************************************************************************************************************/
+	    
+		var addresses : Array = new Array();
+		
+		// ORIGIN ADDRESS
+	    var origin 				= new csReference.BaseAddress();
+	    origin.taxRegionId 		= 0;
+	    origin.addressCode 		= '0';
+	    origin.line1 			= '';
+	    origin.line2 			= '';
+	    origin.city 			= AvataxHelper.getShipFromCity();
+	    origin.region 			= AvataxHelper.getShipFromStateCode();
+	    origin.postalCode 		= AvataxHelper.getShipFromZipCode();
+	    origin.country 			= AvataxHelper.getShipFromCountryCode();
+	    addresses.push(origin);  
+
+/************************************************************************************************************************/
+/***************************************** SET SHIPPING DESTINATION *****************************************************/
+/************************************************************************************************************************/
+	    
+	    var _shipToDestination = null;  
+	    
+	    for each(var _shipToAddress : ShipToObject in args.ShipToAddresses)
+	    {
+		    _shipToDestination 					= new csReference.BaseAddress();
+		    _shipToDestination.country 			= _shipToAddress.country.value;
+		    _shipToDestination.taxRegionId 		= 0;
+		    _shipToDestination.addressCode 		= _shipToAddress.addressCode;
+		    _shipToDestination.line1 			= _shipToAddress.street1;
+		    _shipToDestination.line2 			= _shipToAddress.street2;
+		    _shipToDestination.city 			= _shipToAddress.city;
+		    _shipToDestination.region 			= _shipToAddress.state;
+		    _shipToDestination.postalCode 		= _shipToAddress.postalCode;
+		    addresses.push(_shipToDestination);
+	    }
+	    
+	    req.addresses = addresses;
+	    req.originCode = '0';
+	    
+	    if(args.ShipToAddresses.length == 1)
+	    {
+	    	req.destinationCode = '1';
+	    }
+
+/************************************************************************************************************************/
+/******************************************** BUILD LINE ITEM ARRAY *****************************************************/
+/************************************************************************************************************************/
+	    
+	    var _items : Array = new Array();
+	    
+		for(var i=0;i<itemArray.length;i++)
+		{
+			_items[i] = itemArray[i];
+		}
+		
+		req.lines = _items;
+		req.discount = args.Discount.value;
+
+/************************************************************************************************************************/
+/******************************************** SEND THE REQUEST **********************************************************/
+/************************************************************************************************************************/
+		
+		var taxationResponse = null;
+	
+		// send request
+		taxationResponse = taxationService.getTax(taxationRequest);
+
+/************************************************************************************************************************/
+/******************************************** HANDLE THE RESPONSE *******************************************************/
+/************************************************************************************************************************/
+
+		if(!(taxationResponse == null)) 
+		{
+			var _reasonCode : String = taxationResponse.getTaxResult.resultCode.value;
+
+			args.totalTaxAmount 	= taxationResponse.getTaxResult.totalTax.toString();
+			args.ReasonCode 		= _reasonCode;
+			
+			if(!(_reasonCode.toLowerCase() == "success"))
+			{
+				throw "[Return Taxation] error!";
+			}
+		} 
+		else 
+		{
+			throw "General [Return Taxation] request error!";	
+		}
+	}
+	catch(e)
+	{
+		Logger.error("Return Taxation request script file failed with the following error message: ", e.message);
+		//trace(e.message);
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}

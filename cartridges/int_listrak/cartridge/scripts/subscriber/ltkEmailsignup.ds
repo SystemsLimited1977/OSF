@@ -1,0 +1,101 @@
+/**
+* Purpose:	Sends the email address to Listrak to for subscription to newsletter/email list 
+*
+*	@input CurrentHttpParameterMap	:	dw.web.HttpParameterMap
+*	@output successTemplate			:	String
+*	@output successContentAsset		:	String
+*	@output errorTemplate			:	String
+*	@output errorContentAsset		:	String
+*	
+*/
+
+importPackage( dw.system );
+importPackage( dw.web );
+importPackage( dw.net );
+importPackage( dw.object );
+importScript( "util/ltkErrorHandling.ds" );
+importScript( "objects/ltkUtil.ds");
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var client = new _Client();
+	
+	var ltkSubscriptionCode : string = args.CurrentHttpParameterMap.ltkSubscriptionCode;
+
+	if (ltkSubscriptionCode.stringValue == "" || ltkSubscriptionCode.stringValue == null)
+	{
+		reportError("[ltkSubscriptionCode] was not specified by submitting form.", "High", "ltk_emailsignup.ds");
+		return PIPELET_ERROR;
+	}
+
+///// Get Email Settings /////
+	var emailSettings : CustomObject = CustomObjectMgr.getCustomObject("ltk_emailSignup", ltkSubscriptionCode);
+
+///// Verify email settings object contains all required values /////
+	if (emailSettings == null) {
+		reportError("[ltkSubscriptionCode] not found. Make sure it is configured in Listrak Email Signup Configuration using the custom object editor.", "High", "ltk_emailsignup.ds");
+		return PIPELET_ERROR;
+	}
+	if (emailSettings.custom.emailField == "" || emailSettings.custom.emailField == null){
+		reportError("[Email Form Field] not found. Make sure it is configured in Listrak Email Signup Configuration using the custom object editor.", "High", "ltk_emailsignup.ds");
+		return PIPELET_ERROR;
+	}
+	
+	
+		
+///// Set content output parms /////
+	if (emailSettings.custom.successTemplate != "" && emailSettings.custom.successTemplate != null)
+		args.successTemplate = emailSettings.custom.successTemplate;
+	if (emailSettings.custom.successContentAsset != "" && emailSettings.custom.successContentAsset != null)
+		args.successContentAsset = emailSettings.custom.successContentAsset;
+	if (emailSettings.custom.errorTemplate != "" && emailSettings.custom.errorTemplate != null)
+		args.errorTemplate = emailSettings.custom.errorTemplate;
+	if (emailSettings.custom.errorContentAsset != "" && emailSettings.custom.errorContentAsset != null)
+		args.errorContentAsset = emailSettings.custom.errorContentAsset;
+		
+	// Check to see if a signup flag is set
+	if (emailSettings.custom.signupFlagField != "" && emailSettings.custom.signupFlagField != null)
+	{
+		// if the flag is set and is set to false, we're done here
+		var signupFlag : HttpParameter = args.CurrentHttpParameterMap.get(emailSettings.custom.signupFlagField);
+		if (signupFlag.isEmpty() || !signupFlag.booleanValue)
+			return PIPELET_ERROR; 
+	}
+
+	var emailParm : HttpParameter = args.CurrentHttpParameterMap.get(emailSettings.custom.emailField);
+	if (emailParm.isEmpty()) {
+		reportError("[Email Form Field] not found. Make sure it is configured in Listrak Email Signup Configuration using the custom object editor.", "High", "ltk_emailsignup.ds");
+		return PIPELET_ERROR;
+	}
+	// Check for watermarks first
+	if (!empty(dw.system.Site.current.preferences.custom.Listrak_EmailCapture_Watermarks))
+	{
+		var watermarks = dw.system.Site.current.preferences.custom.Listrak_EmailCapture_Watermarks;
+		for (var i=0;i<watermarks.length;i++)
+		{
+			if (emailParm == watermarks[i])
+				return PIPELET_ERROR;
+		}
+	}
+	
+	var qString : string = "ctid=" + client.CTID + "&uid=auto&_t_0=s&l_0=" + ltkSubscriptionCode + "&e_0=" + encodeURIComponent(emailParm.stringValue);
+
+	for each (var profileField in emailSettings.custom.profileField)
+	{
+		var profileParm : HttpParameter = args.CurrentHttpParameterMap.get(profileField);
+		if (profileParm.isEmpty()) {
+			reportError("[" + profileField + "] is defined in Listrak email settings, but is not part of the submitting form.", "Medium", "ltk_emailsignup.ds");
+		}
+		else
+		{
+			qString += "&" + profileField + "=" + encodeURIComponent(profileParm.stringValue);
+		}
+	}
+	
+
+	var path = "t/S.ashx";
+	client.SubmitTracking(path, qString);
+	
+	return PIPELET_NEXT;
+}
+

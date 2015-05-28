@@ -1,0 +1,221 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Address Validation Request
+*
+* DESCRIPTION:
+*
+*	Creates a request for the AVS call
+* 
+* INPUT PARAMETERS:
+*
+* 	@input  Basket : dw.order.Basket The basket whose tax is to be calculated
+* 	@input  billTo : Object
+* 	@input  shipTo : Object
+* 	@input  card : Object
+* 	@input  shipFrom : Object
+* 	@input  itemArray: Array 
+* 	@input  itemMap : dw.util.HashMap 
+* 	@input  purchaseTotals : Object
+* 	@input  taxService : Object
+*
+* OUTPUT PARAMETERS:
+*
+*	@output response : Object
+*	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+* 	@output addressCode : String
+* 	@output Address1 : String
+* 	@output Address2 : String
+* 	@output city : String
+* 	@output country : String
+* 	@output county : String
+* 	@output jurisCode : String
+* 	@output postalCode : String
+* 	@output region : String
+* 	@output fipsCode : String
+* 	@output postNet : String
+* 	@output addressType : String
+* 	@output latitude : String
+* 	@output longitude : String
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.web );
+importPackage( dw.net );
+
+importScript('avatax/libAvatax.ds');
+importScript('avatax/Avatax_BillTo_Object.ds');
+importScript('avatax/Avatax_ShipTo_Object.ds');
+importScript('avatax/Avatax_ShipFrom_Object.ds');
+importScript('avatax/Avatax_TaxRequest_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	try
+	{
+
+/************************************************************************************************************************/
+/*********************************************** INITIALIZE VARIABLES ***************************************************/
+/************************************************************************************************************************/	
+
+	    var csReference 		: WebReference 			= webreferences.addresssvc,
+			basket 				: Basket 				= pdict.Basket,
+			taxationService 	: Stub 					= csReference.getDefaultService(),
+			shipToObject		: ShipTo_Object 		= pdict.shipTo,
+			shipFrom 			: ShipFrom_Object 		= pdict.shipFrom,
+			taxService 			: TaxService_Object 	= pdict.taxService,
+			excludedCountries							= dw.system.Site.current.preferences.custom.AtExcludedCountries;
+		
+		if(excludedCountries != null)
+		{
+			var exCountriesArray = excludedCountries.split(",");
+			
+			for(var i in exCountriesArray)
+			{
+				if(exCountriesArray[i] == shipToObject.country.value)
+				{
+					return PIPELET_NEXT;
+				}
+			}
+		}
+		
+		if((basket == null))
+		{
+			Logger.error("Please provide a Basket!");
+			return PIPELET_ERROR;
+		}
+		
+		var AvataxHelper = getAvataxHelper();
+		AvataxHelper.setValidationEndpoint(taxationService);
+		
+		if(!AvataxHelper.createHeader(taxationService))
+		{
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/*********************************************** BUILD THE REQUEST ******************************************************/
+/************************************************************************************************************************/	
+		
+		var validationRequest = new csReference.Validate();
+		var req = validationRequest.validateRequest = new csReference.ValidateRequest();
+		
+		var date : Date 		= new Date();
+		var year : Number		= date.getFullYear();
+		var month : Number		= date.getMonth()+1;
+		var day : Number		= date.getDate();
+		var dateStr : String 	= date.getFullYear()+'-'+((month < 10)?'0':'')+month+'-'+((day < 10)?'0':'')+day;
+			
+		var destAddress = shipToObject;
+	     
+	    //set to shipping address
+	    var validationAddress = new csReference.BaseAddress();
+	    validationAddress.addressCode   = "1"
+	    validationAddress.taxRegionId 	= 0;
+	    validationAddress.addressCode 	= '1';
+	    validationAddress.line1 		= destAddress.street1;
+	    validationAddress.line2 		= destAddress.street2;
+	    validationAddress.city 			= destAddress.city;
+	    validationAddress.region 		= destAddress.state;
+	    validationAddress.postalCode 	= destAddress.postalCode;
+	    validationAddress.country 		= destAddress.country.value;
+	    
+	    req.address = validationAddress;
+	    
+	    req.textCase = csReference.TextCase.Mixed;
+	    req.coordinates = true;
+	    req.taxability = true;
+	    
+/************************************************************************************************************************/
+/******************************************* SEND REQUEST, RECEIVE RESPONSE *********************************************/
+/************************************************************************************************************************/	
+
+		var validationResponse = null;
+	
+		// send request
+		try
+		{
+			validationResponse = taxationService.validate(validationRequest);
+	
+			pdict.response 			= validationResponse.validateResult;
+			pdict.ReasonCode 		= validationResponse.validateResult.resultCode.value;
+		}
+		catch(e)
+		{
+			Logger.error("[validationRequest] Error in taxation request ( {0} )",e.message);
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/*********************************************** HANDLE RESPONSE ********************************************************/
+/************************************************************************************************************************/	
+		
+		// in case of success update basket
+		if(pdict.ReasonCode  != "Success")
+		{
+			var errorMsgs = "";
+	
+			if(null != validationResponse.validateResult.messages)
+			{
+				for(var i : Number = 0; i < validationResponse.validateResult.messages.length; i++)
+				{
+					errorMsgs += validationResponse.validateResult.messages[i].summary + '\n';
+				}
+			}
+			Logger.error("[validationRequest] Address Validation Failed (ReasonCode {0} ). \nMessages: {1}",pdict.ReasonCode,errorMsgs);
+		}
+		
+		Logger.debug("After request");
+
+/************************************************************************************************************************/
+/******************************** IF SUCCESS, UPDATE VALID ADDRESS OUTPUT VARIABLES *************************************/
+/************************************************************************************************************************/	
+
+		if(!empty(validationResponse.validateResult.validAddresses)) 
+		{
+			for each(validAddress in validationResponse.validateResult.validAddresses) 
+			{
+				if(!empty(validAddress)) 
+				{					
+					pdict.addressCode = validAddress.addressCode;
+					pdict.Address1 = validAddress.line1;
+					pdict.Address2 = validAddress.line2;
+					pdict.city = validAddress.city;
+					pdict.region = validAddress.region;
+					pdict.postalCode = validAddress.postalCode;
+					pdict.country = validAddress.country;
+					pdict.county = validAddress.county;
+					pdict.fipsCode =  validAddress.fipsCode;
+					pdict.postNet =  validAddress.postNet;
+					pdict.addressType =  validAddress.addressType;
+					pdict.latitude =  validAddress.latitude;
+					pdict.longitude =  validAddress.longitude;
+
+					break;	
+				}	
+			}
+		}
+
+/************************************************************************************************************************/
+/*********************************************** FINISH SCRIPT **********************************************************/
+/************************************************************************************************************************/	
+		
+		if(pdict.ReasonCode  == "Success")
+		{
+			return PIPELET_NEXT;
+		}
+		else
+		{
+			return PIPELET_ERROR;
+		}
+	}
+	catch(e)
+	{
+		Logger.error("Avatax Validation failed with error {0}:", e.message);
+		return PIPELET_ERROR;
+	}
+}

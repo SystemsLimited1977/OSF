@@ -1,0 +1,106 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Post Taxation Request
+*
+* DESCRIPTION:
+*
+*	Posts the taxation request
+*
+*	SampleTestCall: AvataxTest-CommitTax?orderno=001&commitorderno=002
+* 
+* INPUT PARAMETERS:
+*
+*	@input Order : dw.order.Order
+* 	@input OrderNo : String
+* 	@input IsTest : Boolean
+*
+* OUTPUT PARAMETERS:
+*
+* 	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.web );
+importPackage( dw.net );
+
+importScript('avatax/libAvatax.ds');
+
+function execute( args : PipelineDictionary ) : Number
+{  
+	try
+	{	
+		
+/************************************************************************************************************************/
+/******************************************** INITIALIZE VARIABLES ******************************************************/
+/************************************************************************************************************************/
+
+		var taxationResponse 				= null,
+			order 			: Order 		= args.Order,
+			csReference 	: WebReference 	= webreferences.taxsvc,
+			taxationService : Stub 			= csReference.getDefaultService(),
+			AvataxHelper 					= null,
+			taxationRequest 				= null,
+			req 							= null,
+			date 			: Date 			= new Date(),
+			year							= "",
+			month			: Number		= 1,
+			day				: Number		= 1,
+			dateTime						= "",
+			_reasonCode 	: String 		= "";
+
+		AvataxHelper = getAvataxHelper();
+		AvataxHelper.setEndpoint(taxationService);
+		
+		if(!AvataxHelper.createHeader(taxationService))
+		{
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/******************************************** BUILD THE REQUEST *********************************************************/
+/************************************************************************************************************************/
+		
+		taxationRequest 		= new csReference.PostTax();
+		req 					= taxationRequest.postTaxRequest = new csReference.PostTaxRequest();
+		req.docType 			= csReference.DocumentType.SalesInvoice;
+		req.commit 				= true;
+		req.companyCode 		= AvataxHelper.getCompanyCode();
+		req.totalAmount			= order.merchandizeTotalPrice.add(order.shippingTotalPrice).value;
+		req.totalTax			= order.totalTax.value;
+	    req.docDate 			= date;
+	    req.docCode				= args.OrderNo;
+
+/************************************************************************************************************************/
+/******************************************** POST THE REQUEST **********************************************************/
+/************************************************************************************************************************/
+
+		taxationResponse = taxationService.postTax(taxationRequest);
+		
+		if(!(taxationResponse == null)) {
+			
+			_reasonCode = taxationResponse.postTaxResult.resultCode.value;
+			
+			args.ReasonCode = _reasonCode;
+				
+			if(!(_reasonCode.toLowerCase() == "success"))
+			{
+				throw "[Post Taxation] error!";
+			}
+		} 
+		else 
+		{
+			throw "General [Post Taxation] request error!";	
+		}
+	}
+	catch(e)
+	{
+		Logger.error("[TaxationRequest] Error in taxation request ( {0} )", e.message);
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}

@@ -1,0 +1,69 @@
+/**
+*		Purpose: Construct and process ActivityTracking objects
+*/
+
+importPackage( dw.system );
+importPackage( dw.web );
+importPackage( dw.util );
+
+importScript( "objects/ltk.ds" );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_ActivityTracker_Enabled;
+	if (empty(enabled) || !enabled)
+	{
+		return PIPELET_NEXT;
+	}
+	
+	var httpParameterMap : HttpParameterMap = args.CurrentHttpParameterMap;
+	if( httpParameterMap.t.stringValue != null || httpParameterMap.title.stringValue != null) {
+		//app resource, or analytics request, so save time and exit function
+		return PIPELET_NEXT;
+	}
+	var source = httpParameterMap.source.stringValue;
+	var pid = httpParameterMap.pid.stringValue;
+	var cgid = httpParameterMap.cgid.stringValue;
+	var format = httpParameterMap.format.stringValue;
+	var path = httpParameterMap.path.stringValue;
+	
+	//record activity for certain page (Product, category) browses.  Activity is submitted in the page browse section.
+	//quickview browse, same as Product(pid).  Still here in case we want to differentiate between quickview and full product view
+	if( source != null && source == 'quickview') {
+		var _ltk = new LTK();
+		_ltk.AT.AddProductBrowse(pid);
+		_ltk.AT.Submit(); //quickview is ajax call, so need to submit here as JS won't be fired.
+		return PIPELET_NEXT;
+	}
+			
+	//pid is defined, but format isn't = initial product page request, secondary product requests come via ajax format
+	if( pid != null && format === null) {
+		var _ltk = new LTK();
+		_ltk.AT.AddProductBrowse(pid);
+		return PIPELET_NEXT;
+	}
+
+	//Category Refinement - ajax call, so get page browse here
+	if( cgid != null && format == "ajax" ) {
+		var _ltk = new LTK();
+		var qsArray : Array = request.session.clickStream.last.queryString.split("&");
+		var newQs : String = "";
+		//remove format=ajax from query string to make link clickable
+		for each( var i : string in qsArray) {
+			if (i.split("=")[0] != "format") {newQs += i + "&";}
+		}
+		_ltk.AT.AddPageBrowse(URLUtils.abs(request.session.clickStream.last.pipelineName).toString() + "?" + newQs, dataArray.length > 0 ? dataArray : "");
+		_ltk.AT.Submit(); //must submit here because of ajax, JS call won't be made.
+		return PIPELET_NEXT;
+	}
+	
+	//Page browse
+	if( path != null ) {
+		var _ltk = new LTK();
+		_ltk.AT.AddPageBrowse(path);
+		_ltk.AT.Submit();
+		return PIPELET_NEXT;		
+	}
+	
+	return PIPELET_NEXT;
+}

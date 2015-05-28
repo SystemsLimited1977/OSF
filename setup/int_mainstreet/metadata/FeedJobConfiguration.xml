@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="FeedJobConfiguration" object-id="ExportPricebooks">
+        <object-attribute attribute-id="description">Export Pricebooks</object-attribute>
+        <object-attribute attribute-id="fromEmail">donotreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="ExportAndUploadPricebooks"&gt;tejasin&#13;
+        &lt;remote-folder-url&gt;sftp://customers.mainstreetcommerce.com/Stage/Businessflow/from-demandware/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;mainstreet_demandware&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;pGbLdtDxCHfJi9vxfH1c&lt;/remote-password&gt;&#13;
+        &lt;pricebook-id&gt;usd-list-prices&lt;/pricebook-id&gt;&#13;
+        &lt;temp-folder&gt;pricebook_export_temp&lt;/temp-folder&gt;&#13;
+        &lt;sync-type&gt;Full&lt;/sync-type&gt;&#13;
+        &lt;file-prefix&gt;Pricebook_&lt;/file-prefix&gt;&#13;
+        &lt;encryption-algorithm&gt;&lt;/encryption-algorithm&gt;&#13;
+        &lt;encryption-key&gt;&lt;/encryption-key&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;bsudarsan@mainstreetcommerce.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;bsudarsan@mainstreetcommerce.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+        &lt;undelivered-notification-fromemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-fromemail&gt;&#13;
+        &lt;undelivered-notification-toemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-toemail&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ExportOrders">
+        <object-attribute attribute-id="description">Export Orders</object-attribute>
+        <object-attribute attribute-id="fromEmail">donotreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="ExportAndUploadOrders"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://customers.mainstreetcommerce.com/Stage/Businessflow/from-demandware/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;mainstreet_demandware&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;pGbLdtDxCHfJi9vxfH1c&lt;/remote-password&gt;&#13;
+        &lt;temp-folder&gt;Order_export_temp&lt;/temp-folder&gt;&#13;
+        &lt;file-prefix&gt;Orders_&lt;/file-prefix&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;bsudarsan@mainstreetcommerce.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;bsudarsan@mainstreetcommerce.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+        &lt;undelivered-notification-fromemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-fromemail&gt;&#13;
+        &lt;undelivered-notification-toemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-toemail&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ExportCatalog">
+        <object-attribute attribute-id="description">Export Catalog</object-attribute>
+        <object-attribute attribute-id="fromEmail">donotreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="ExportAndUploadCatalog"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://customers.mainstreetcommerce.com/Stage/Businessflow/from-demandware/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;mainstreet_demandware&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;pGbLdtDxCHfJi9vxfH1c&lt;/remote-password&gt;&#13;
+        &lt;temp-folder&gt;catalog_export_temp&lt;/temp-folder&gt;&#13;
+        &lt;catalog-id&gt;msc-master&lt;/catalog-id&gt;&#13;
+        &lt;file-prefix&gt;Catalog_&lt;/file-prefix&gt;&#13;
+        &lt;encryption-algorithm&gt;&lt;/encryption-algorithm&gt;&#13;
+        &lt;encryption-key&gt;&lt;/encryption-key&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;bsudarsan@mainstreetcommerce.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;bsudarsan@mainstreetcommerce.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+        &lt;undelivered-notification-fromemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-fromemail&gt;&#13;
+        &lt;undelivered-notification-toemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-toemail&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ImportCatalog">
+        <object-attribute attribute-id="description">Import Catalog</object-attribute>
+        <object-attribute attribute-id="fromEmail">donotreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="DownloadAndImportCatalog"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://customers.mainstreetcommerce.com/Stage/Businessflow/to-demandware/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;mainstreet_demandware&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;pGbLdtDxCHfJi9vxfH1c&lt;/remote-password&gt;&#13;
+        &lt;remote-file-pattern&gt;^Catalog_.*\.gz$&lt;/remote-file-pattern&gt;&#13;
+        &lt;remote-file-extension&gt;xml&lt;/remote-file-extension&gt;&#13;
+        &lt;import-mode&gt;MERGE&lt;/import-mode&gt;&#13;
+        &lt;temp-folder&gt;catalog&lt;/temp-folder&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;bsudarsan@mainstreetcommerce.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;bsudarsan@mainstreetcommerce.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+        &lt;undelivered-notification-fromemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-fromemail&gt;&#13;
+        &lt;undelivered-notification-toemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-toemail&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ImportPriceBooks">
+        <object-attribute attribute-id="description">Import PriceBooks</object-attribute>
+        <object-attribute attribute-id="fromEmail">donotreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="DownloadAndImportPriceBooks"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://customers.mainstreetcommerce.com/Stage/Businessflow/to-demandware/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;mainstreet_demandware&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;pGbLdtDxCHfJi9vxfH1c&lt;/remote-password&gt;&#13;
+        &lt;remote-file-pattern&gt;Pricebook_.*\.gz&lt;/remote-file-pattern&gt;&#13;
+        &lt;remote-file-extension&gt;xml&lt;/remote-file-extension&gt;&#13;
+        &lt;import-mode&gt;MERGE&lt;/import-mode&gt;&#13;
+        &lt;temp-folder&gt;pricebook&lt;/temp-folder&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;bsudarsan@mainstreetcommerce.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;bsudarsan@mainstreetcommerce.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+        &lt;undelivered-notification-fromemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-fromemail&gt;&#13;
+        &lt;undelivered-notification-toemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-toemail&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ImportInventoryLists">
+        <object-attribute attribute-id="description">Import Inventory</object-attribute>
+        <object-attribute attribute-id="fromEmail">donotreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="DownloadAndImportInventoryLists"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://customers.mainstreetcommerce.com/Stage/Businessflow/to-demandware/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;mainstreet_demandware&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;pGbLdtDxCHfJi9vxfH1c&lt;/remote-password&gt;&#13;
+        &lt;remote-file-pattern&gt;^Inventory_.*\.gz$&lt;/remote-file-pattern&gt;&#13;
+        &lt;import-mode&gt;MERGE&lt;/import-mode&gt;&#13;
+        &lt;temp-folder&gt;inventory&lt;/temp-folder&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;bsudarsan@mainstreetcommerce.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;bsudarsan@mainstreetcommerce.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+        &lt;undelivered-notification-fromemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-fromemail&gt;&#13;
+        &lt;undelivered-notification-toemail&gt;bsudarsan@mainstreetcommerce.com&lt;/undelivered-notification-toemail&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+</custom-objects>

@@ -1,0 +1,5 @@
+<iscomment>
+	Purpose:	outputs Listrak token for response to ajax call of ltkClickTracking-Start pipeline
+</iscomment>
+
+[<isprint value="${pdict.trkt}">]

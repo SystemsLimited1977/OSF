@@ -1,0 +1,18 @@
+/**
+* Purpose:	Loads a seekableIterator with message objects that will be sent to Listrak in ltkDataSync pipeline
+*
+*	@output ltkMessageObjects		:	dw.util.SeekableIterator 
+*
+*/
+
+importPackage( dw.system );
+importPackage( dw.object );
+importPackage( dw.util );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var messageObjects : SeekableIterator = CustomObjectMgr.queryCustomObjects("ltk_messageObject", "custom.sentStatus = false", "lastModified" );
+	args.ltkMessageObjects = messageObjects;
+
+   	return PIPELET_NEXT;
+}

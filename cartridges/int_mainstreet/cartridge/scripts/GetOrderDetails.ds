@@ -1,0 +1,41 @@
+/**
+* This script receives detail information about an order which is part of
+* the main street system.
+*
+* @author Demandware
+* @creationdate 2010-06-23
+*
+* @input OrderNo : String
+* @input InputOrder : Object
+* @output Order : Object
+*
+*/
+importPackage( dw.system );
+importScript("library/libMainstreet.ds");
+
+function execute( args : PipelineDictionary ) : Number {
+    var mainstreet = new MainStreet();
+    if (empty(args.InputOrder)) {
+	
+        var order = mainstreet.GetListOrdersByOrderId(new Array(args.OrderNo));
+        // UNIT TEST- The following line was used for Unit Testing
+        //var order = mainstreet.GetListOrdersByOrderId(new Array("00000086"));
+    	
+    	if (empty(order)||empty(order.orders[0])) {
+    		var order = mainstreet.GetListOrdersByShipOrderId(new Array(args.OrderNo));
+    	}
+    	//var order = mainstreet.GetOrders(new Array(args.OrderNo));
+    	
+    	if (!empty(order)) {
+			//args.Order = mainstreet.makeDemandwareSmallOrder(order.orders[0]);
+			args.Order = mainstreet.makeDemandwareBigOrder(mainstreet.makeDemandwareSmallOrder(order.orders[0]), order.orders[0]);
+			//args.Order = mainstreet.makeDemandwareBigOrder(mainstreet.makeDemandwareSmallOrder(order), order);
+			return PIPELET_NEXT;
+    	} else {
+    		return PIPELET_ERROR;
+    	}
+    } else {
+    	args.Order = mainstreet.makeDemandwareBigOrder(args.InputOrder, mainstreet.GetOrderDetail(args.OrderNo));
+    }
+    return PIPELET_NEXT;
+}

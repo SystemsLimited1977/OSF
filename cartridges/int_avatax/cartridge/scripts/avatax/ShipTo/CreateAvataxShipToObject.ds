@@ -1,0 +1,101 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Create Avatax Ship To Object
+*
+* DESCRIPTION:
+*
+*	Creates the shipping request object
+* 
+* INPUT PARAMETERS:
+*
+*	@input Basket : dw.order.Basket
+*
+* OUTPUT PARAMETERS:
+*
+*	@output AvataxShipTo : Object
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.order );
+
+importScript('avatax/Avatax_ShipTo_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	try
+	{
+		
+/************************************************************************************************************************/
+/****************************************** DEFINE INITIAL VARIABLES ****************************************************/
+/************************************************************************************************************************/
+
+		var basket 			: Basket 			= pdict.Basket,
+			shipToObject	: ShipTo_Object 	= new ShipTo_Object(),
+			shippingAddress : OrderAddress		= basket.defaultShipment.shippingAddress,
+			shippingMethod 	: ShippingMethod 	= null,
+			it 				: Iterator 			= basket.getShipments().iterator();
+
+/************************************************************************************************************************/
+/*************************************** SETS SHIPPING ADDRESS AND METHOD ***********************************************/
+/************************************************************************************************************************/
+		
+		// TODO: This code purposely does not handle the case of
+		// multiple shipments per order
+		if(shippingAddress == null)
+		{
+			while(it.hasNext())
+			{
+				var shipment : Shipment = it.next();
+				shippingAddress = shipment.getShippingAddress();
+				shippingMethod = shipment.getShippingMethod();
+				if(shippingAddress != null)
+				{
+					break;
+				}
+			}
+		}
+
+/************************************************************************************************************************/
+/******************************************** SETS SHIPPING OBJECT ******************************************************/
+/************************************************************************************************************************/
+		
+		if( !empty(shippingAddress) && !empty(basket) )
+		{
+			shipToObject.setFirstName(shippingAddress.firstName);
+			shipToObject.setLastName(shippingAddress.lastName);
+			shipToObject.setStreet1(shippingAddress.address1);
+			shipToObject.setStreet2(shippingAddress.address2);
+			shipToObject.setCity(shippingAddress.city);
+			shipToObject.setState(shippingAddress.stateCode);
+			shipToObject.setPostalCode(shippingAddress.postalCode);
+			shipToObject.setCountry(shippingAddress.countryCode);
+			shipToObject.setPhoneNumber(shippingAddress.phone);
+			shipToObject.setEmail(basket.customerEmail);
+			
+			if( !empty(shippingMethod) )
+			{
+				shipToObject.setShippingMethod(shippingMethod.displayName);
+			} 
+			else
+			{
+				shipToObject.setShippingMethod("N/A");
+			}
+		}
+		
+/************************************************************************************************************************/
+/****************************************** OUTPUT SHIPPING OBJECT ******************************************************/
+/************************************************************************************************************************/
+
+		pdict.AvataxShipTo = shipToObject;
+	
+	    return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("The CreateAvataxShipToObject.ds script has failed with the following error: ( {0} )",e.message);
+		return PIPELET_ERROR;	
+	}
+}

@@ -1,0 +1,30 @@
+/**
+* Purpose:	Sends Email to Listrak to be associated with SCA session 
+*			and adds email address to basket if a basket exists.
+*
+* @input CurrentRequest 	: dw.system.Request
+* @input Basket			 	: dw.order.Basket
+* @output success			: Boolean
+*/
+importPackage( dw.system );
+importPackage( dw.web );
+importScript( "objects/ltk.ds" );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var request : Request = args.CurrentRequest;    
+	var parms : HttpParameterMap = request.httpParameters;
+	var email = parms.email[0];
+	var _ltk = new LTK();
+	_ltk.SCA.Load();
+	_ltk.SCA.Update("email", email);
+
+	if (args.Basket)
+	{
+		args.Basket.setCustomerEmail(email);	
+	}
+
+	args.success = true;
+	
+   return PIPELET_NEXT;
+}

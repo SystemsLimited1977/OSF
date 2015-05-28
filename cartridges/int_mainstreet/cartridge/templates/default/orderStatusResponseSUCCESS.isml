@@ -1,0 +1,26 @@
+<iscomment>Page to display Order Status Success Response Data</iscomment>
+<!--- TEMPLATENAME: orderStatusResponse.isml --->
+<isdecorate template="account/pt_account">
+<h2>
+	Order Status of the Order <isprint value="${pdict.Order.orderNo}" />:-
+</h2>
+<html>
+	<body>
+		<br>
+		<table>
+			<tr>
+				<td><b>Status: </b></td>
+				<td><isprint value="${pdict.Order.status}" /></td>
+			</tr>
+			<tr>
+				<td><b>Gross Price: </b></td>
+				<td><isprint value="${pdict.Order.totalGrossPrice}" /></td>
+			</tr>
+			<tr>
+				<td><b>Total Tax: </b></td>
+				<td><isprint value="${pdict.Order.totalTax}" /></td>
+			</tr>
+		</table>
+	</body>
+</html>
+</isdecorate>

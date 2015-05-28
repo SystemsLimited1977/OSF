@@ -1,0 +1,45 @@
+/**
+* Purpose:	Tag orders being submitted with a Listrak tracking token if it exists in the 
+* 			cookie and submit the order to Listrak for SCA
+*
+* @input Order 				: dw.order.Order
+*/
+
+importPackage( dw.system );
+importPackage( dw.order );
+importScript( "objects/ltk.ds" );
+
+function execute( args : PipelineDictionary ) : Number
+{
+    // read pipeline dictionary input parameter 
+    var order : Order = args.Order;
+
+	if (order)
+	{ 
+		// Tag order with traking token
+		var cookies : dw.web.Cookies = request.getHttpCookies();
+		var clickTokenCookie : dw.web.Cookie = cookies._trkt;
+		var clickToken : string = "";
+		if (clickTokenCookie) {
+			order.custom.ltkSessionID = clickTokenCookie.value;
+		}
+		
+		// Submit conversion to Listrak
+		var _ltk = new LTK();
+		_ltk.Order.LoadOrder(order);
+		_ltk.Order.Submit();
+		
+		
+		var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_SCA_Enabled;
+		if (!empty(enabled) && enabled)
+		{
+			// SCA Tracking -> Close order for SCA purposes
+			_ltk.SCA.Load();
+			_ltk.SCA.LoadBasket(order);
+			_ltk.SCA.OrderNumber = order.orderNo;
+			_ltk.SCA.Submit();
+		}
+	}
+ 
+   return PIPELET_NEXT;
+}

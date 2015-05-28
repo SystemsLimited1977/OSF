@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline renders the test center screen on the storefront.</description>
+        </text-node>
+        <node-display x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_2">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline executes the request from the test center screen on the storefront.</description>
+        </text-node>
+        <node-display x="3" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="TestCenter">
+    <segment>
+      <node>
+        <start-node name="TestCenter" secure="false"/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="test/testcenter"/>
+        </interaction-node>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="RunTest">
+    <segment>
+      <node>
+        <start-node call-mode="public" name="RunTest" secure="false"/>
+        <node-display x="3" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="CurrentHttpParameterMap.test.stringValue" key="From_0"/>
+          <key-binding alias="Test" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Test == 'calculate'" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="AvataxTest-CalculateTax"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Test == 'commit'" condition-operator="expr"/>
+        <node-display x="1" y="0"/>
+        <branch basename="b3" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="AvataxTest-CommitTax"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Test == 'return'" condition-operator="expr"/>
+        <node-display x="1" y="0"/>
+        <branch basename="b4" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="AvataxTest-ReturnTax"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Test == 'cancel'" condition-operator="expr"/>
+        <node-display x="1" y="0"/>
+        <branch basename="b5" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="AvataxTest-CancelTax"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Test == 'ping'" condition-operator="expr"/>
+        <node-display x="1" y="0"/>
+        <branch basename="b6" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="AvataxTest-TestConnection"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <jump-node start-name-ref="AvataxTest-TestCenter"/>
+        <node-display x="1" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_5">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline is not used and will be added in future versions.</description>
+        </text-node>
+        <node-display x="10" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CalculateTax">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CalculateTax" secure="false"/>
+        <node-display x="10" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="AvataxTest-AuthorizeAvatax"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="test/output/calculatetax-output"/>
+              </interaction-node>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="OK">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="dw.system.Site.getCurrent().preferences.custom.ATEnable" condition-operator="expr"/>
+              <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in"/>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="CurrentHttpParameterMap.neworderno.stringValue" key="From_0"/>
+                      <key-binding alias="OrderNo" key="To_0"/>
+                      <key-binding alias="CurrentHttpParameterMap.processed.booleanValue" key="From_1"/>
+                      <key-binding alias="PaymentProcessed" key="To_1"/>
+                      <key-binding alias="null" key="From_2"/>
+                      <key-binding alias="Returns" key="To_2"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="GetOrder" pipelet-set-identifier="bc_api">
+                      <key-binding alias="CurrentHttpParameterMap.orderno.stringValue" key="OrderNo"/>
+                      <key-binding alias="Order" key="Order"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.2"/>
+                    </branch>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <decision-node condition-key="!empty(Order)&amp;&amp;!empty(Order.defaultShipment)&amp;&amp;!empty(Order.defaultShipment.shippingAddress)" condition-operator="expr"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b3" source-connector="yes">
+                      <transition target-connector="in"/>
+                      <segment>
+                        <node>
+                          <call-node start-name-ref="AvataxTest-CreateTaxItems"/>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b2" source-connector="ERROR">
+                            <transition target-connector="in1" target-path="../../../b2.4"/>
+                          </branch>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <call-node start-name-ref="AvataxTest-CreateShipTo"/>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b3" source-connector="ERROR">
+                            <transition target-connector="in1" target-path="../../../b2.5"/>
+                          </branch>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="target" x="0" y="-1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                            <config-property key="ScriptFile" value="avatax/TaxationRequest.ds"/>
+                            <config-property key="Transactional" value="true"/>
+                            <config-property key="Timeout" value="120"/>
+                            <config-property key="OnError" value="PIPELET_ERROR"/>
+                            <key-binding alias="ScriptLog" key="ScriptLog"/>
+                            <key-binding alias="Basket" key="Basket"/>
+                            <key-binding alias="ReasonCode" key="ReasonCode"/>
+                            <key-binding alias="BillToAddress" key="billTo"/>
+                            <key-binding alias="card" key="card"/>
+                            <key-binding alias="purchaseTaxTotals" key="purchaseTotals"/>
+                            <key-binding alias="im" key="itemMap"/>
+                            <key-binding alias="ia" key="itemsArray"/>
+                            <key-binding alias="shipfrom" key="shipFrom"/>
+                            <key-binding alias="ShipToAddresses" key="shipTo"/>
+                            <key-binding alias="ia" key="itemArray"/>
+                            <key-binding alias="taxService" key="taxService"/>
+                            <key-binding alias="totalTaxAmount" key="totalTaxAmount"/>
+                            <key-binding alias="foobar" key="foobar"/>
+                            <key-binding alias="request" key="request"/>
+                            <key-binding alias="response" key="response"/>
+                            <key-binding alias="Decision" key="Decision"/>
+                            <key-binding alias="address" key="address"/>
+                            <key-binding alias="addressCode" key="addressCode"/>
+                            <key-binding alias="boundaryLevel" key="boundaryLevel"/>
+                            <key-binding alias="city" key="city"/>
+                            <key-binding alias="country" key="country"/>
+                            <key-binding alias="jurisCode" key="jurisCode"/>
+                            <key-binding alias="postalCode" key="postalCode"/>
+                            <key-binding alias="region" key="region"/>
+                            <key-binding alias="taxRegionId" key="taxRegionId"/>
+                            <key-binding alias="OrderNo" key="OrderNo"/>
+                            <key-binding alias="PaymentProcessed" key="PaymentProcessed"/>
+                            <key-binding alias="Response" key="Response"/>
+                            <key-binding alias="Discount" key="Discount"/>
+                            <key-binding alias="CurrentCustomer.profile" key="CustomerProfile"/>
+                            <key-binding alias="BillToAddress" key="BillToAddress"/>
+                            <key-binding alias="ShipToAddresses" key="ShipToAddresses"/>
+                            <key-binding alias="Order" key="Order"/>
+                            <key-binding alias="true" key="IsTest"/>
+                          </pipelet-node>
+                          <node-display x="0" y="2"/>
+                          <branch basename="b4" source-connector="error">
+                            <transition target-connector="in1" target-path="../../../b2.6"/>
+                          </branch>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <interaction-node transaction-required="false">
+                            <template buffered="true" dynamic="false" name="test/output/calculatetax-output"/>
+                          </interaction-node>
+                          <node-display x="0" y="1"/>
+                        </node>
+                      </segment>
+                    </branch>
+                  </node>
+                  <transition target-connector="in1" target-path="../../b2.3"/>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../b2.1"/>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline commits the tax to the Avatax system using the original order number.</description>
+        </text-node>
+        <node-display x="13" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CommitTax">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CommitTax" secure="false"/>
+        <node-display x="13" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="AvataxTest-AuthorizeAvatax"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1"/>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="test/output/failed-committax-output"/>
+              </interaction-node>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="OK">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="dw.system.Site.getCurrent().preferences.custom.ATEnable" condition-operator="expr"/>
+              <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="CurrentHttpParameterMap.commitorderno.stringValue" key="From_0"/>
+                      <key-binding alias="OrderNo" key="To_0"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="GetOrder" pipelet-set-identifier="bc_api">
+                      <key-binding alias="OrderNo" key="OrderNo"/>
+                      <key-binding alias="Order" key="Order"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.2"/>
+                    </branch>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="ScriptFile" value="avatax/PostTaxationRequest.ds"/>
+                      <config-property key="Transactional" value="true"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="Timeout" value="120"/>
+                      <key-binding alias="ScriptLog" key="ScriptLog"/>
+                      <key-binding alias="Basket" key="Basket"/>
+                      <key-binding alias="ReasonCode" key="ReasonCode"/>
+                      <key-binding alias="billto" key="billTo"/>
+                      <key-binding alias="card" key="card"/>
+                      <key-binding alias="purchaseTaxTotals" key="purchaseTotals"/>
+                      <key-binding alias="im" key="itemMap"/>
+                      <key-binding alias="ia" key="itemsArray"/>
+                      <key-binding alias="shipfrom" key="shipFrom"/>
+                      <key-binding alias="shipto" key="shipTo"/>
+                      <key-binding alias="ia" key="itemArray"/>
+                      <key-binding alias="taxService" key="taxService"/>
+                      <key-binding alias="totalTaxAmount" key="totalTaxAmount"/>
+                      <key-binding alias="foobar" key="foobar"/>
+                      <key-binding alias="request" key="request"/>
+                      <key-binding alias="response" key="response"/>
+                      <key-binding alias="Decision" key="Decision"/>
+                      <key-binding alias="PaymentProcessed" key="PaymentProcessed"/>
+                      <key-binding alias="OrderNo" key="OrderNo"/>
+                      <key-binding alias="Order" key="Order"/>
+                      <key-binding alias="RMANumber" key="RMANumber"/>
+                      <key-binding alias="true" key="Istest"/>
+                      <key-binding alias="NewOrderNo" key="NewOrderNo"/>
+                      <key-binding alias="true" key="IsTest"/>
+                      <key-binding alias="DocCode" key="DocCode"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b3" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.3"/>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <interaction-node transaction-required="false">
+                      <template buffered="true" dynamic="false" name="test/output/committax-output"/>
+                    </interaction-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../b2.1"/>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_9">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline is not used and will be added in future versions.</description>
+        </text-node>
+        <node-display x="16" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_10">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline tests the connection to the Avatax system using the test/merchant key.</description>
+        </text-node>
+        <node-display x="19" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="ReturnTax">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ReturnTax" secure="false"/>
+        <node-display x="16" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="AvataxTest-AuthorizeAvatax"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="3"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="test/output/returntax-output.isml"/>
+              </interaction-node>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="OK">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="dw.system.Site.getCurrent().preferences.custom.ATEnable" condition-operator="expr"/>
+              <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in"/>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="true" key="From_8"/>
+                      <key-binding alias="IsTest" key="To_8"/>
+                      <key-binding alias="true" key="From_9"/>
+                      <key-binding alias="CommitReturn" key="To_9"/>
+                      <key-binding alias="CurrentHttpParameterMap.orderno.stringValue" key="From_0"/>
+                      <key-binding alias="CurrentHttpParameterMap.neworderno.stringValue" key="From_1"/>
+                      <key-binding alias="CurrentHttpParameterMap.itemid.stringValue" key="From_2"/>
+                      <key-binding alias="CurrentHttpParameterMap.itemqty.value" key="From_3"/>
+                      <key-binding alias="OrderNo" key="To_0"/>
+                      <key-binding alias="NewOrderNo" key="To_1"/>
+                      <key-binding alias="ItemID" key="To_2"/>
+                      <key-binding alias="ItemQty" key="To_3"/>
+                      <key-binding alias="PaymentProcessed" key="To_7"/>
+                      <key-binding alias="RMANumber" key="To_6"/>
+                      <key-binding alias="CurrentHttpParameterMap.processed.booleanValue" key="From_7"/>
+                      <key-binding alias="CurrentHttpParameterMap.rmanumber.stringValue" key="From_6"/>
+                      <key-binding alias="CurrentHttpParameterMap.itemid2.stringValue" key="From_4"/>
+                      <key-binding alias="CurrentHttpParameterMap.itemqty2.value" key="From_5"/>
+                      <key-binding alias="ItemID2" key="To_4"/>
+                      <key-binding alias="ItemQty2" key="To_5"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="GetOrder" pipelet-set-identifier="bc_api">
+                      <key-binding alias="OrderNo" key="OrderNo"/>
+                      <key-binding alias="Order" key="Order"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.2"/>
+                    </branch>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="ScriptFile" value="avatax/Taxation/CreateReturnsTestObject.ds"/>
+                      <key-binding alias="ScriptLog" key="ScriptLog"/>
+                      <key-binding alias="ItemID" key="ItemID"/>
+                      <key-binding alias="Number(ItemQty)" key="ItemQty"/>
+                      <key-binding alias="Returns" key="Returns"/>
+                      <key-binding alias="ItemID2" key="ItemID2"/>
+                      <key-binding alias="Number(ItemQty2)" key="ItemQty2"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b3" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.3"/>
+                    </branch>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <call-node start-name-ref="AvataxTest-CreateTaxItems"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <call-node start-name-ref="AvataxTest-CreateShipTo"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="ScriptFile" value="avatax/ReturnTaxationRequest.ds"/>
+                      <config-property key="Transactional" value="true"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="Timeout" value="120"/>
+                      <key-binding alias="ScriptLog" key="ScriptLog"/>
+                      <key-binding alias="Basket" key="Basket"/>
+                      <key-binding alias="ReasonCode" key="ReasonCode"/>
+                      <key-binding alias="billto" key="billTo"/>
+                      <key-binding alias="card" key="card"/>
+                      <key-binding alias="purchaseTaxTotals" key="purchaseTotals"/>
+                      <key-binding alias="im" key="itemMap"/>
+                      <key-binding alias="ia" key="itemsArray"/>
+                      <key-binding alias="shipfrom" key="shipFrom"/>
+                      <key-binding alias="shipto" key="shipTo"/>
+                      <key-binding alias="ia" key="itemArray"/>
+                      <key-binding alias="taxService" key="taxService"/>
+                      <key-binding alias="totalTaxAmount" key="totalTaxAmount"/>
+                      <key-binding alias="foobar" key="foobar"/>
+                      <key-binding alias="request" key="request"/>
+                      <key-binding alias="response" key="response"/>
+                      <key-binding alias="Decision" key="Decision"/>
+                      <key-binding alias="PaymentProcessed" key="PaymentProcessed"/>
+                      <key-binding alias="NewOrderNo" key="OrderNo"/>
+                      <key-binding alias="Order" key="Order"/>
+                      <key-binding alias="RMANumber" key="RMANumber"/>
+                      <key-binding alias="Response" key="Response"/>
+                      <key-binding alias="ReturnsDetails" key="ReturnsDetails"/>
+                      <key-binding alias="Discount" key="Discount"/>
+                      <key-binding alias="IsTest" key="IsTest"/>
+                      <key-binding alias="ShipToAddresses" key="ShipToAddresses"/>
+                      <key-binding alias="CommitReturn" key="CommitReturn"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b4" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.4"/>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <interaction-node transaction-required="false">
+                      <template buffered="true" dynamic="false" name="test/output/returntax-output.isml"/>
+                    </interaction-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../b2.1"/>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="TestConnection">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="TestConnection" secure="false"/>
+        <node-display x="19" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="AvataxTest-AuthorizeAvatax"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="test/output/failed-ping-output"/>
+              </interaction-node>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="OK">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="dw.system.Site.getCurrent().preferences.custom.ATEnable" condition-operator="expr"/>
+              <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="ScriptFile" value="avatax/VerifyAvataxSubscription.ds"/>
+                      <key-binding alias="ScriptLog" key="ScriptLog"/>
+                      <key-binding alias="MerchantID" key="MerchantID"/>
+                      <key-binding alias="SecurityKey" key="SecurityKey"/>
+                      <key-binding alias="taxService" key="taxService"/>
+                      <key-binding alias="ReasonCode" key="ReasonCode"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.2"/>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <interaction-node transaction-required="false">
+                      <template buffered="true" dynamic="false" name="test/output/ping-output"/>
+                    </interaction-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../b2.1"/>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_13">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline cancels the tax in the Avatax system using the order number in the Avatax console.</description>
+        </text-node>
+        <node-display x="23" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CancelTax">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CancelTax" secure="false"/>
+        <node-display x="23" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="AvataxTest-AuthorizeAvatax"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="ERROR">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="test/output/failed-cancel-output"/>
+              </interaction-node>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="OK">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="dw.system.Site.getCurrent().preferences.custom.ATEnable==true" condition-operator="expr"/>
+              <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="CurrentHttpParameterMap.orderno.stringValue" key="From_0"/>
+                      <key-binding alias="OrderNo" key="To_0"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="ScriptFile" value="avatax/CancelTaxationRequest.ds"/>
+                      <config-property key="Transactional" value="false"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="Timeout" value="120"/>
+                      <key-binding alias="ScriptLog" key="ScriptLog"/>
+                      <key-binding alias="Basket" key="Basket"/>
+                      <key-binding alias="ReasonCode" key="ReasonCode"/>
+                      <key-binding alias="billto" key="billTo"/>
+                      <key-binding alias="card" key="card"/>
+                      <key-binding alias="purchaseTaxTotals" key="purchaseTotals"/>
+                      <key-binding alias="im" key="itemMap"/>
+                      <key-binding alias="ia" key="itemsArray"/>
+                      <key-binding alias="shipfrom" key="shipFrom"/>
+                      <key-binding alias="shipto" key="shipTo"/>
+                      <key-binding alias="ia" key="itemArray"/>
+                      <key-binding alias="taxService" key="taxService"/>
+                      <key-binding alias="totalTaxAmount" key="totalTaxAmount"/>
+                      <key-binding alias="foobar" key="foobar"/>
+                      <key-binding alias="request" key="request"/>
+                      <key-binding alias="Response" key="response"/>
+                      <key-binding alias="Decision" key="Decision"/>
+                      <key-binding alias="PaymentProcessed" key="PaymentProcessed"/>
+                      <key-binding alias="OrderNo" key="OrderNo"/>
+                      <key-binding alias="Order" key="Order"/>
+                      <key-binding alias="RMANumber" key="RMANumber"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="../../b2.2"/>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <interaction-node transaction-required="false">
+                      <template buffered="true" dynamic="false" name="test/output/cancel-output.isml"/>
+                    </interaction-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../b2.1"/>
+          </segment>
+        </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_15">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline is not used and will be added in future versions.</description>
+        </text-node>
+        <node-display x="1" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CreateTaxItems">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CreateTaxItems" secure="false"/>
+        <node-display x="1" y="7"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="avatax/Taxation/CreateAvataxTaxationItemsObject.ds"/>
+          <key-binding alias="ScriptLog" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="ia" key="itemarray"/>
+          <key-binding alias="im" key="itemmap"/>
+          <key-binding alias="Discount" key="discount"/>
+          <key-binding alias="Order" key="Order"/>
+          <key-binding alias="Returns" key="Returns"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="ERROR"/>
+              <node-display x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_17">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline is not used and will be added in future versions.</description>
+        </text-node>
+        <node-display x="4" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_18">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline checks the custom site preference ATTestKey against the test/merchant key a user enters into the testing center.</description>
+        </text-node>
+        <node-display width="2" x="7" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CreateShipTo">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CreateShipTo" secure="false"/>
+        <node-display x="4" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="avatax/ShipTo/CreateAvataxShipToObject.ds"/>
+          <key-binding alias="ScriptLog" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="ShipToAddresses" key="AvataxShipTo"/>
+          <key-binding alias="Order" key="Order"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="ERROR"/>
+              <node-display x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="AuthorizeAvatax">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="AuthorizeAvatax" secure="false"/>
+        <node-display x="7" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="CurrentHttpParameterMap.testkey.stringValue" key="From_0"/>
+          <key-binding alias="TestKey" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="TestKey == dw.system.Site.getCurrent().preferences.custom.ATTestKey" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="OK"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node name="ERROR"/>
+        <node-display x="1" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="Website" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsp:Policy wsu:Id="BasicHttpBinding_IWebsite_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false"/>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict/>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://customers.mainstreetcommerce.com/demandware/services/v3/Website.svc?xsd=xsd0" namespace="http://tempuri.org/"/>
+      <xsd:import schemaLocation="https://customers.mainstreetcommerce.com/demandware/services/v3/Website.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="https://customers.mainstreetcommerce.com/demandware/services/v3/Website.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MainStreet.Demandware.Apps.Soap"/>
+      <xsd:import schemaLocation="https://customers.mainstreetcommerce.com/demandware/services/v3/Website.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xsd:import schemaLocation="https://customers.mainstreetcommerce.com/demandware/services/v3/Website.svc?xsd=xsd4" namespace="http://businessflow.mainstreetcommerce.com/impexp/contracts/v1"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWebsite_ListOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListOrders"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_ListOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListOrdersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GetOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrders"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GetOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GetInventoryLevels_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInventoryLevels"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GetInventoryLevels_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInventoryLevelsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GetCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomers"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GetCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_AquireItemHolds_InputMessage">
+    <wsdl:part name="parameters" element="tns:AquireItemHolds"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_AquireItemHolds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AquireItemHoldsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GiftCardBalanceInquiry_InputMessage">
+    <wsdl:part name="parameters" element="tns:GiftCardBalanceInquiry"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_GiftCardBalanceInquiry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GiftCardBalanceInquiryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_PaymentAuthorize_InputMessage">
+    <wsdl:part name="parameters" element="tns:PaymentAuthorize"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_PaymentAuthorize_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PaymentAuthorizeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_PaymentSale_InputMessage">
+    <wsdl:part name="parameters" element="tns:PaymentSale"/>
+  </wsdl:message>
+  <wsdl:message name="IWebsite_PaymentSale_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PaymentSaleResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IWebsite">
+    <wsdl:operation name="ListOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/ListOrders" message="tns:IWebsite_ListOrders_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/ListOrdersResponse" message="tns:IWebsite_ListOrders_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/GetOrders" message="tns:IWebsite_GetOrders_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/GetOrdersResponse" message="tns:IWebsite_GetOrders_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventoryLevels">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/GetInventoryLevels" message="tns:IWebsite_GetInventoryLevels_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/GetInventoryLevelsResponse" message="tns:IWebsite_GetInventoryLevels_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/GetCustomers" message="tns:IWebsite_GetCustomers_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/GetCustomersResponse" message="tns:IWebsite_GetCustomers_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AquireItemHolds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/AquireItemHolds" message="tns:IWebsite_AquireItemHolds_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/AquireItemHoldsResponse" message="tns:IWebsite_AquireItemHolds_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardBalanceInquiry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/GiftCardBalanceInquiry" message="tns:IWebsite_GiftCardBalanceInquiry_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/GiftCardBalanceInquiryResponse" message="tns:IWebsite_GiftCardBalanceInquiry_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentAuthorize">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/PaymentAuthorize" message="tns:IWebsite_PaymentAuthorize_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/PaymentAuthorizeResponse" message="tns:IWebsite_PaymentAuthorize_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentSale">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebsite/PaymentSale" message="tns:IWebsite_PaymentSale_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebsite/PaymentSaleResponse" message="tns:IWebsite_PaymentSale_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWebsite" type="tns:IWebsite">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IWebsite_policy"/>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ListOrders">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/ListOrders" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrders">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/GetOrders" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventoryLevels">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/GetInventoryLevels" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/GetCustomers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AquireItemHolds">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/AquireItemHolds" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardBalanceInquiry">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/GiftCardBalanceInquiry" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentAuthorize">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/PaymentAuthorize" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentSale">
+      <soap:operation soapAction="http://tempuri.org/IWebsite/PaymentSale" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Website">
+    <wsdl:port name="BasicHttpBinding_IWebsite" binding="tns:BasicHttpBinding_IWebsite">
+      <soap:address location="https://customers.mainstreetcommerce.com/demandware/services/v3/Website.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

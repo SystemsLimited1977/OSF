@@ -1,0 +1,25 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Get Avatax Helper
+*
+* DESCRIPTION:
+*
+*	Gets the avatax helper variable
+* 
+* OUTPUT PARAMETERS:
+*
+*	@output AvataxHelper : Object
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+
+importScript("avatax/libAvatax.ds");
+
+function execute( args : PipelineDictionary ) : Number
+{
+	args.AvataxHelper = getAvataxHelper();
+	 
+    return PIPELET_NEXT;
+}

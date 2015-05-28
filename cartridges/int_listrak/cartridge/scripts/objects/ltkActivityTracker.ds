@@ -1,0 +1,214 @@
+/**
+*	Purpose: Sends customer browse activity back to Listrak 
+* 
+*/
+importPackage( dw.web );
+importPackage( dw.content );
+importPackage( dw.system );
+importPackage( dw.crypto );
+
+importScript( "objects/ltkUtil.ds" );
+
+function _ActivityTracker() {
+    var activityArray = [];
+    var recentlyViewedCookie = "ltk-recentlyViewed";
+    var sessionViewedCookie = "ltk-sessionViewed";
+
+    /* Private objects/methods */
+	var Client = new _Client();
+    var Exception = new _LTKException();
+    var Cookie = new _Cookie(); 
+    
+    function Identifiers() {
+        this.SessionID = null;
+        this.GlobalSessionID = null;
+        this.TrackingToken = null;
+        this.ContactPID = null;
+        this._varmap = {
+            'SessionID': 'sid',
+            'TrackingToken': 'trkt',
+            'ContactPID': 'cpid'
+        };
+    }
+
+    function Activity() {
+        this._type = 'at';
+        this._isIndexable = true;
+        this.Type = null;
+        this.Key = null;
+        this.Data = null;
+        this._varmap = {
+            '_type': '_t',
+            'Type': 't',
+            'Key': 'k',
+            'Data': 'd'
+        };
+        
+    }
+
+    function AddActivity(Type, Key, Data) {
+        var _activity = new Activity;
+        _activity.Type = Type;
+        _activity.Key = Key;
+        if (typeof Data == "object" && Data != null) {
+            _activity.Data = JSON.stringify(Data);
+        }
+        activityArray.push(_activity);
+    }
+    
+    function SetSkusCookie(cookieName, sku, isSessionCookie) {
+        var skus = GetSkusCookie(cookieName),
+            expireDays = 0,
+            skuLocation = -1;
+        if (!skus)
+            skus = [];
+        skuLocation = skus.indexOf(sku.toString());
+        if (skuLocation >= 0)
+            skus.splice(skuLocation, 1);
+        if (skus.length == 25)
+            skus.shift();
+        skus.push(sku);
+
+        if (!isSessionCookie) {
+            expireDays = 3650; // 10 years
+        }
+        Cookie.Set(cookieName, skus, expireDays);
+    }
+
+    function GetSkusCookie(cookieName) {
+        var skus = Cookie.Get(cookieName);
+        if (skus)
+            skus = skus.split(",");
+        return skus;
+    }
+
+    /* Public methods */
+    this.Submit = function() {
+        var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_ActivityTracker_Enabled;
+		if (empty(enabled) || !enabled)
+		{
+			return PIPELET_NEXT;
+		}
+		var gsidInitialized = false;
+		try {
+			var identifiers = new Identifiers();
+			identifiers.TrackingToken = Cookie.Get("_trkt");
+			identifiers.ContactPID = Cookie.Get("_cpid");
+			var gsid = Cookie.Get('_gsid');
+			if (gsid) { identifiers.GlobalSessionID = gsid; }
+			
+			var sid = Cookie.Get("STSID");
+	        if (sid) { identifiers.SessionID = sid;	}
+	        
+	        if (typeof identifiers.SessionID == 'undefined' || identifiers.SessionID == null) { 
+				identifiers.SessionID = ''; 
+			}
+			if (typeof identifiers.GlobalSessionID == 'undefined' || identifiers.GlobalSessionID == null) { 
+				identifiers.GlobalSessionID = ''; 
+			}
+			else { gsidInitialized = true; }
+	    	
+			var assembler = new _Assembler();
+			assembler.QueryMode = 1;
+			assembler.Endpoint = Client.ActivityEndpoint;
+	        assembler.EndPointPath = 'Handlers/dwSet.ashx';
+	        assembler.QueryHeader = 'ctid=' + Client.CTID + '&uid=' + Client.uuidCompact() + '&gsid=' + identifiers.GlobalSessionID + '&dw=1';
+	
+	        assembler.AddObject(identifiers);
+	        
+	        //add custom session activity if it exists
+	        var sessionCategory = session.custom.CatBrowse;
+	        if (typeof sessionCategory != 'undefined' && sessionCategory != null)
+	        {
+	        	AddActivity("CategoryBrowse", sessionCategory);
+	        	session.custom.CatBrowse = null;
+	        }
+	        
+	        var sessionProduct = session.custom.ProdBrowse;
+	        if (typeof sessionProduct != 'undefined' && sessionProduct != null)
+	        {
+	        	AddActivity("ProductBrowse", sessionProduct);
+	        	session.custom.ProdBrowse = null;
+	        }
+	        assembler.AddArrayObject(activityArray);
+			
+			var retValue = assembler.Flush();
+			
+			if( retValue != '' ) {
+				try {
+					var obj : Object = JSON.parse(retValue);
+			        sid = obj["STSID"];
+			        gsid = obj["gsid"];
+				
+			        //set cookies if needed
+			        var domain = request.httpHost;
+			        if ( identifiers.SessionID == '' || identifiers.SessionID == null)
+			        {
+			        	if( typeof sid != 'undefined') { Cookie.Set("STSID", sid, 365, domain);}
+			        }
+			        if(identifiers.GlobalSessionID == '' || identifiers.GlobalSessionID == null) {
+			        	if( typeof gsid != 'undefined' && gsid != null) { Cookie.Set("_gsid", gsid, 365, domain);}
+			        }
+				}
+				catch(exc) {
+					this.Exception.Submit(ex, 'ActivityTrackerEndpoint Return Value');
+					//If endpoint doesn't return correct objects, just continue
+				}
+			}
+			activityArray.length = 0;
+		}
+        catch (ex) {
+        	Exception.Submit(ex, 'Activity Submit');
+        }
+    };
+    
+    this.AddProductBrowse = function(Sku, Data) {
+        if (typeof Sku == "string") {
+            Sku = Sku.trim();
+            if (Sku.length > 0) {
+                session.custom.ProdBrowse = Sku;
+                SetSkusCookie(recentlyViewedCookie, Sku, false);
+                SetSkusCookie(sessionViewedCookie, Sku, true);
+            }
+        }
+    };
+
+    this.AddPageBrowse = function(Page, Data) {
+        var a = null;
+
+        if (typeof Page == "object" && typeof Data == "undefined") {
+            Data = Page;
+            Page = null;
+        }
+
+        if (typeof Page == "undefined" || Page == null) {
+            a = document.createElement('a');
+            a.href = window.location;
+            Page = a.pathname;
+        }
+
+        if (typeof Page == "string") {
+            Page = Page.trim();
+            if (Page.length > 0) {
+                AddActivity("PageBrowse", Page, Data);
+            }
+        }
+    };
+    
+    this.AddCategoryBrowse = function(Category, Data) {
+        if (typeof Category == "string") {
+            Category = Category.trim();
+            if (Category.length > 0) {
+            	session.custom.CatBrowse = Category;
+            }
+        }
+    };
+    
+    this.GetRecentlyViewedSkus = function () {
+        return GetSkusCookie(recentlyViewedCookie);
+    };
+
+    this.GetSessionViewedSkus = function () {
+        return GetSkusCookie(sessionViewedCookie);
+    };
+};

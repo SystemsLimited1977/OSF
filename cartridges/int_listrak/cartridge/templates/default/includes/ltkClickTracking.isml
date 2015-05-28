@@ -1,0 +1,34 @@
+<iscomment>
+	Purpose:	Reports click from Listrak Emails and sets Listrak tracking token cookie 
+</iscomment>
+
+<iscache status="off" />
+
+<script type="text/javascript">
+
+	jQuery.ajax({
+		  url: '${URLUtils.url("ltkClickTracking-Start")}' + '?' + document.location.search,
+		  context: document,
+		  success: function(trkt){
+			  var start = trkt.indexOf('[');
+			  var end = trkt.indexOf(']');
+			  var token = trkt.substring(start+1, end); 
+			  setCookie("_trkt", token, 365, null, '/'); 
+			  }
+		});
+	
+	function setCookie(c_name,value,exdays, domain, path, secure)
+	{
+		if (value != '' && value != undefined)
+		{
+			var exd = new Date();
+			exd.setDate(exd.getDate() + exdays);
+			document.cookie =
+				c_name + "=" + encodeURIComponent(value) +
+		        ((exdays == null) ? "" : "; expires=" + exd.toGMTString()) +
+		        ((domain == null && domain != "") ? "" : "; domain=" + domain) +
+		        ((path == null) ? "" : "; path=" + path) +
+		        ((secure) ? "; secure" : "");			
+		}
+	}	
+</script> 

@@ -1,0 +1,144 @@
+/**
+* Purpose: Sends order information to Listrak	
+*/
+
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.net );
+importScript( "util/ltkErrorHandling.ds" );
+importScript( "objects/ltkUtil.ds" );
+
+function ltkOrder()
+{
+	this.Client = new _Client();
+	this.Cookie = new _Cookie();
+		
+	this.endpointPath = "t/T.ashx";
+	this.uid = "auto"; 
+	this.items = new Array(); 
+	
+	// Get the order parameters
+	this.orderNumber = null;
+	this.itemTotal = null;
+	this.taxTotal = null;
+	this.shipTotal = null;
+	this.clickToken = null;
+	this.emailAddress = null;
+	this.firstName = null; 
+	this.lastName = null;
+	this.orderDate = null;
+	this.status = null;
+	this.couponCodes = null;
+	this.trackingNumbers = null;
+}
+
+ltkOrder.prototype.LoadOrder = function( order : Order ) {
+
+	// Get the order parameters
+	this.orderNumber = order.orderNo;
+	this.itemTotal = order.adjustedMerchandizeTotalNetPrice;
+	this.taxTotal = order.getTotalTax();
+	this.shipTotal = order.getAdjustedShippingTotalNetPrice();
+	
+	if (!empty(order.custom.ltkSessionID))
+	{
+		this.clickToken = order.custom.ltkSessionID;
+	}
+	else
+	{
+		this.clickToken = this.Cookie.Get("_trkt");
+	}
+		
+	this.emailAddress = order.customerEmail;
+	this.firstName = order.billingAddress.firstName; 
+	this.lastName = order.billingAddress.lastName;
+	this.orderDate = order.creationDate;
+	this.status = order.status.toString();
+	
+	this.items = new Array();
+	this.loadItems(order.allProductLineItems);
+	
+	var cCodes = new Array();
+	for each( var cli : CouponLineItem in order.getCouponLineItems() ) {
+		cCodes.push(cli.couponCode);
+	}
+	if (cCodes.length > 0) { this.couponCodes = cCodes.join(","); }
+	
+	var tNumbers = new Array();
+	for each( var shipment : Shipment in order.getShipments() ) {
+		if (shipment.trackingNumber != null ) { 
+			tNumbers.push(shipment.trackingNumber); 
+		}
+	}
+	if (tNumbers.length > 0 ) { this.trackingNumbers = tNumbers.join(","); }
+}
+
+ltkOrder.prototype.orderTotal = function() {
+	return this.itemTotal + this.taxTotal + this.shipTotal;	
+}
+
+ltkOrder.prototype.loadItems = function(orderItems : SeekableIterator) {
+	for each( var orderItem : ProductLineItem in orderItems ) {
+		var item = new ltkOrderItem(orderItem);
+		if (!empty(item.sku) && item.price.currencyCode != "N/A") {
+			this.items.push(item);
+		}
+	}
+}
+
+ltkOrder.prototype.buildQuerystring = function() : String {
+	var qString = "ctid=" + this.Client.CTID + "&api=dw&uid=" + this.uid + "&_t_0=o&on_0=" + this.orderNumber + "&ot_0=" + this.orderTotal() + 
+					"&tt_0=" + this.taxTotal.toNumberString() + "&st_0=" + this.shipTotal.toNumberString() + "&it_0=" + this.itemTotal.toNumberString(); 
+	
+	if (this.clickToken != "") { qString += "&_t_1=tt&t_1=" + this.clickToken + "&e_1=t"; }
+	
+	qString += "&_t_2=c&e_2=" + encodeURIComponent(this.emailAddress) + "&fn_2=" + encodeURIComponent(this.firstName) + "&ln_2=" + encodeURIComponent(this.lastName);
+	
+	var itemIndex : Number = 3;
+	for each( var item in this.items ) {
+		 qString = qString + "&_t_" + itemIndex.toString() + "=i&id_" + itemIndex.toString() + "=" + encodeURIComponent(item.sku) + "&q_" + itemIndex.toString() + 
+		 						"=" + item.qty.toString() + "&p_" + itemIndex.toString() + "=" + item.price.toNumberString();
+		 
+		 itemIndex = itemIndex + 1;
+	}
+
+	return qString;	
+}
+
+ltkOrder.prototype.Submit = function() : Boolean {
+	
+	var result = this.Client.SubmitTracking(this.endpointPath, this.buildQuerystring());
+	
+	if (result.success)
+	{
+		return true;
+	}
+	else
+	{
+		return false; // We can't continue but their data is stored. Don't show the user the error
+	}
+}
+
+function ltkOrderItem ( item : dw.order.ProductLineItem ) {
+	if (!empty(item.product)) {
+		//if (item.product.variant)
+		//{
+		//	this.sku = '{' + item.product.masterProduct.ID + '}' + item.product.ID; 
+		//}
+		//else
+		//{
+		//	this.sku = '{' + item.product.ID + '}';	
+		//}
+		this.sku = item.product.ID;
+		this.price = item.product.getPriceModel().getPrice();
+	}
+	
+	if (!empty(item.shipment) && item.shipment.trackingNumber != null) {
+		this.trackingNumber = item.shipment.trackingNumber;
+	}
+	
+	this.qty = item.quantity.value;
+	this.product = item.product;
+}
+

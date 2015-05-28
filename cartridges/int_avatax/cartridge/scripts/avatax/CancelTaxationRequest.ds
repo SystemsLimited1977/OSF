@@ -1,0 +1,93 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Cancel Taxation request
+*
+* DESCRIPTION:
+*
+*	Cancels the taxation request
+* 
+* INPUT PARAMETERS:
+*
+*	@input  OrderNo : String
+*
+* OUTPUT PARAMETERS:
+*
+*	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.web );
+importPackage( dw.net );
+
+importScript('avatax/libAvatax.ds');
+
+function execute( args : PipelineDictionary ) : Number
+{   
+	try
+	{
+		
+/************************************************************************************************************************/
+/******************************************** INITIALIZE VARIABLES ******************************************************/
+/************************************************************************************************************************/
+
+	    var csReference 		: WebReference 	= webreferences.taxsvc;
+		var taxationService 	: Stub 			= csReference.getDefaultService();
+		var AvataxHelper 						= getAvataxHelper();
+		
+		AvataxHelper.setEndpoint(taxationService);
+		if(!AvataxHelper.createHeader(taxationService))
+		{
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/***************************************** BUILD THE REQUEST OBJECT *****************************************************/
+/************************************************************************************************************************/
+		
+		var taxationRequest 	= new csReference.CancelTax();
+		var req 				= taxationRequest.cancelTaxRequest = new csReference.CancelTaxRequest();
+		
+		req.docType 			= csReference.DocumentType.SalesInvoice;  
+		req.companyCode 		= AvataxHelper.getCompanyCode();
+	    req.cancelCode 			= csReference.CancelCode.DocDeleted;    
+	    req.docCode 			= args.OrderNo;
+
+/************************************************************************************************************************/
+/******************************************** SEND THE RESPONSE *********************************************************/
+/************************************************************************************************************************/
+	
+		var taxationResponse = null;
+		
+		// send request
+		taxationResponse = taxationService.cancelTax(taxationRequest);
+
+/************************************************************************************************************************/
+/******************************************** HANDLE THE RESPONSE *******************************************************/
+/************************************************************************************************************************/
+		
+		if(!(taxationResponse == null)) 
+		{
+			args.ReasonCode = taxationResponse.cancelTaxResult.resultCode.value;
+			
+			if(!(args.ReasonCode.toLowerCase() == "success"))
+			{
+				throw "[Cancel Taxation] error!";
+			}	
+		} 
+		else 
+		{
+			throw "General [Cancel Taxation] request error!";	
+		}
+		return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("Cancel Taxation Request script has failed with the following error message: ", e.message);
+		return PIPELET_ERROR;	
+	}
+}

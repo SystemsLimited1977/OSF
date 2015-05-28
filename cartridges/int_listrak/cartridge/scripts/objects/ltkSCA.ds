@@ -1,0 +1,286 @@
+/**
+* Purpose: Sends SCA Information to Listrak	
+*/
+
+importPackage( dw.order );
+importPackage( dw.customer );
+importPackage( dw.catalog );
+importPackage( dw.web );
+importPackage( dw.content );
+
+importScript( "objects/ltkUtil.ds" );
+importScript( "objects/ltkProduct.ds" );
+
+function _SessionTracker() {
+    this.Client = new _Client();
+    this.Exception = new _LTKException();
+    this.Cookie = new _Cookie(); 
+    this.Assembler = new _Assembler();
+	
+    this.userData = new UserData;
+    this.items = new Array();
+    this.domain = null;
+    this.initialized = false;
+    this.submitQueued = false;
+    this.sessionID;
+    this.globalSessionID;
+    this.tid = this.Client.CTID;
+    this.debug = false;
+    this.FirstName = null;
+    this.LastName = null;
+    this.Email = null;
+    this.Stage = null;
+    this.OrderNumber = null;
+    this.Total = null;
+    this.Meta1 = null;
+    this.Meta2 = null;
+    this.Token = null;
+    this.CartLink = null;
+    this.Source = null;
+    this.trkt = null;
+    this._varmap = {
+        '_type': '_st',
+        'Email': 'e',
+        'FirstName': 'fn',
+        'LastName': 'ln',
+        'Meta1': 'sm1',
+        'Meta2': 'sm2',
+        'Stage': 'st',
+        'OrderNumber': 'on',
+        'Total': 'tt',
+        'Token' : 'tk',
+        'Source' : 'sr',
+        'CartLink' : 'cl',
+        'NewCustomer' : 'nc'
+    };
+    this.Exception = new _LTKException();
+
+	// Load settings needed for SCA    
+    this.CustomViewType = dw.system.Site.current.preferences.custom.Listrak_ProductImageViewType;
+    this.UseAbsoluteImageURLs = dw.system.Site.current.preferences.custom.Listrak_UseAbsoluteImageURLs;
+    this.UseAbsoluteProductURLs = dw.system.Site.current.preferences.custom.Listrak_UseAbsoluteProductURLs;
+
+    function UserData() {
+    	this._varmap = { };
+    }
+
+    _SessionTracker.prototype.Load = function () {
+        try {
+            var sid = this.Cookie.Get("STSID");
+	        if (sid) { 
+    	    	this.sessionID = sid; 
+        	}
+        	else
+        	{
+        		this.sessionID = '';
+        	}
+        	var gsid = this.Cookie.Get("_gsid");
+	        if (gsid) { 
+    	    	this.globalSessionID = gsid; 
+        	}
+        	else
+        	{
+        		this.globalSessionID = '';
+        	}
+            
+            this.trkt = this.Cookie.Get("_trkt");
+            
+            this.initialized = true;
+        }
+        catch (ex) {
+            this.Exception.Submit(ex, 'Load');
+        }
+    }
+
+    _SessionTracker.prototype.SetCustomer = function (email, firstname, lastname) {
+        if (email) { this.Email = email; }
+        if (firstname) { this.FirstName = firstname; }
+        if (lastname) { this.LastName = lastname; }
+    }
+
+    _SessionTracker.prototype.AddItem = function (sku, quantity, price, name) {
+        this.items.push(new SCAItem(sku, quantity, price, name));
+    }
+
+    _SessionTracker.prototype.AddItemWithLinks = function (sku, quantity, price, name, imageurl, linkurl) {
+        try {
+            var _ni = new SCAItem(sku, quantity, price, name);
+            _ni.ImageUrl = imageurl;
+            _ni.LinkUrl = linkurl;
+            this.items.push(_ni);
+        }
+        catch (ex) {
+            this.parent.Exception.Submit(ex, 'Add Item With Links');
+        }
+    }
+
+    _SessionTracker.prototype.AddItemEx = function (item) {
+        this.items.push(item);
+    }
+
+    _SessionTracker.prototype.Update = function (k, v) {
+        try {
+            this.Client.SubmitSCA('Handlers/Update.ashx', 'gsid=' + this.globalSessionID + '&_sid=' + this.sessionID + '&_tid=' + this.tid + "&" + k + "=" + encodeURIComponent(v) + "&_t=" + new Date().valueOf());
+        }
+        catch (ex) {
+            this.Exception.Submit(ex, 'Update');
+        }
+    }
+
+    _SessionTracker.prototype.SetData = function (k, v) {
+    	if (v) {
+    		this.userData[k.toLowerCase()] = v;
+			if (!this.userData._varmap[k]) this.userData._varmap[k] = k;
+		}
+    }
+
+    _SessionTracker.prototype.ClearCart = function () {
+        this.SetData("cc", "true");
+    }
+
+
+    _SessionTracker.prototype.Submit = function () {
+        try {
+            if (!this.initialized) {
+                this.submitQueued = true;
+                return;
+            }
+
+            if (this.getCookie("_trkt") != "") {
+                this.Token = this.getCookie("_trkt");
+            }
+
+            this.Assembler = new _Assembler();
+            this.Assembler.QueryMode = 1;
+            this.Assembler.Endpoint = this.Client.SCAEndpoint;
+            this.Assembler.EndPointPath = 'Handlers/dwSet.ashx';
+            this.Assembler.QueryHeader = 'gsid=' + this.globalSessionID + '&_sid=' + this.sessionID + '&_tid=' + this.tid + '&_uid=' + this.Client.uuidCompact() + '&dw=1';
+
+            this.Assembler.AddObject(this);
+            if (this.OrderNumber == null) {
+                this.Assembler.AddArrayObject(this.items);
+            }
+
+            if (this.userData) {
+                this.Assembler.AddObject(this.userData);
+            }
+
+            var retValue = this.Assembler.Flush();
+            if( retValue != '' ) {
+				try {
+		            var obj : Object = JSON.parse(retValue);
+			        var sid = obj["STSID"];
+			        var gsid = obj["gsid"];
+			        //set cookies if needed
+			        var domain = request.httpHost;
+		        	if(typeof sid != 'unresolved' && sid != null) { 
+		        		this.Cookie.Set("STSID", sid, 365, domain);
+		        	}
+		        	if( typeof gsid != 'unresolved' && gsid != null) { 
+		        		this.Cookie.Set("_gsid", gsid, 365, domain);
+		        	}
+		    	}
+				catch(exc) {
+					this.Exception.Submit(ex, 'SCA-Endpoint Return Value');
+					//If endpoint doesn't return correct objects, just continue
+				}
+            }
+        }
+        catch (ex) {
+            this.Exception.Submit(ex, 'Submit');
+        }
+    }
+
+    _SessionTracker.prototype.getCookie = function (c_name) {
+        return this.Cookie.Get(c_name);
+    }
+
+    _SessionTracker.prototype.setCookie = function (c_name, value, expiredays, domain) {
+    	this.Cookie.Set(c_name, value, expiredays);
+    }
+}
+
+function SCAItem(sku, quantity, price, name) {
+    this.Sku = sku;
+    this.Quantity = quantity;
+    this.Price = price;
+    this.Name = name;
+    this.ImageUrl = null;
+    this.LinkUrl = null;
+    this.Size = null;
+    this.Meta1 = null;
+    this.Meta2 = null;
+    this._isIndexable = true;
+    this._varmap = {
+        '_type': '_i',
+        'Sku': 's',
+        'Quantity': 'q',
+        'Price': 'p',
+        'Name': 'n',
+        'ImageUrl': 'iu',
+        'LinkUrl': 'lu',
+        'Size': 'sz',
+        'Meta1': 'm1',
+        'Meta2' : 'm2'
+    };
+}
+
+
+_SessionTracker.prototype.LoadBasket = function (Basket : dw.order.LineItemCtnr) {
+	// Check to see if this is an authenticated customer and get info from there
+	if (Basket == null)
+	{
+		return false;	
+	}
+	
+    var customer : Customer = Basket.getCustomer();
+    if (customer)
+    {
+    	if (customer.profile)
+    	{
+		    this.FirstName = customer.profile.firstName + ' ' + customer.profile.lastName;
+		    this.Email = customer.profile.email;
+    	}
+    }
+    else
+    {
+    	this.FirstName = Basket.customerName;
+    }
+
+	// if basket.customEmail has a value it trumps anything from the customer object
+	if (Basket.customerEmail != '' && Basket.customerEmail != null)
+		this.Email = Basket.customerEmail;
+    
+    if (Basket.billingAddress != null)
+    	this.FirstName = Basket.billingAddress.firstName + ' ' + Basket.billingAddress.lastName; 	
+
+
+	// set the order values    
+    this.Total = Basket.getMerchandizeTotalNetPrice();
+
+	var orderItems = Basket.getAllProductLineItems().iterator();
+	for each( var orderItem : ProductLineItem in orderItems ) {
+		var product : Product = orderItem.getProduct();
+		if (product != null)
+		{
+			var prd = new ltkProduct();
+			prd.LoadProduct(product);
+			
+			var sku = prd.sku;
+			var qty : Number = orderItem.quantity.value;
+			var price : Money = orderItem.product.getPriceModel().getPrice();
+			var name : string = orderItem.lineItemText;
+			
+			// Image URL
+			var imageurl = prd.imageURL; 
+				
+			// Link URL
+			var linkurl = prd.linkURL;
+	
+			this.AddItemWithLinks(sku, qty, price, name, imageurl, linkurl)
+		}
+	}
+	
+	return true;
+}
+

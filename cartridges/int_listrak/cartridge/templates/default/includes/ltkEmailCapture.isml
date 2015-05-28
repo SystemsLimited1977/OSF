@@ -1,0 +1,72 @@
+<iscomment>
+	Purpose:	Performs email capture for fields specified in "Listrak Email Capture Fields" in custom preferences. 
+				This file should be included on every page as part of ltkInclude.isml
+</iscomment>
+
+<iscache status="off" />
+
+<isif condition = "${empty(dw.system.Site.current.preferences.custom.Listrak_SCA_Enabled) || dw.system.Site.current.preferences.custom.Listrak_SCA_Enabled == true}">
+	<script type="text/javascript">
+	
+	var _ltkwmt = '';
+	<isif condition = "${dw.system.Site.current.preferences.custom.Listrak_EmailCapture_Watermarks != null}">
+		_ltkwmt = '<isprint value="${dw.system.Site.current.preferences.custom.Listrak_EmailCapture_Watermarks.join()}">';
+	</isif>
+	
+	
+	function isWatermark(wmt) {
+	    if(!_ltkwmt || _ltkwmt.length == 0) {
+	        return false;
+	    }
+	    if(_ltkwmt.indexOf(wmt) >= 0) { 
+	        return true; 
+	    }
+	    else { return false; }
+	}
+		
+	function ltkCaptureEmail(id) {
+	    try {
+	        var _stsi1 = setInterval(function () {
+	            if (!window.jQuery) { return; }
+	            clearInterval(_stsi1);
+	            if (typeof id == "undefined" || id == "") { return; }
+	            var _sl = jQuery("[id='" + id + "']");
+	            if (_sl.length == 0) { _sl = jQuery("input[name='" + id + "']"); }
+	            if (_sl.length) {
+	                _sl.change(function () { 
+			                if (jQuery(_sl).val().length > 0 && !isWatermark(jQuery(_sl).val()))
+			                {
+			                	jQuery.ajax({
+			              		  url: '${URLUtils.url("ltkEmailCapture-Start")}' + '?email=' + jQuery(this).val(),
+			              		  context: document,
+			              		  success: function(success){ return; }
+			              		});
+			                }
+						}
+	                );
+	                if (jQuery(_sl).val().length > 0 && !isWatermark(jQuery(_sl).val())) { _ltk.SCA.Update("email", jQuery(_sl).val()); }
+	            }
+	        }, 100);
+	    }
+	    catch (ex) {
+	        _ltk.Exception.Submit(ex, 'CaptureEmail');
+	    }
+	}
+	
+	<isif condition = "${!empty(dw.system.Site.current.preferences.custom.Listrak_EmailCapture)}">
+		<isloop iterator = "${dw.system.Site.current.preferences.custom.Listrak_EmailCapture}" alias = "emailField">
+			ltkCaptureEmail("<isprint value = "${emailField}">");
+		</isloop>
+	<iselse>
+		<!-- No Email capture fields are configured. Please specify email capture fields in Custom Preferences -->
+	</isif>
+	
+	jQuery(document).bind("ltkmodal.show", function() {
+		ltkCaptureEmail("ltkmodal-email");
+	});
+	
+	</script> 
+
+<iselse>
+	<!-- Listrak Shopping Cart Abandonment is Disabled. To Enable Edit Custom Site Preferences -->
+</isif>

@@ -1,0 +1,122 @@
+<certification>
+	<cartridgeInfo>
+		<name>Mainstreet</name>
+		<version>1.1.0</version>
+		<implementer>Mainstreet</implementer>
+	</cartridgeInfo>
+	<certificationInfo>
+		<certificationID>73</certificationID>
+		<certifiedby>
+			Brian LeBlanc
+		</certifiedby>
+		<date>
+			4/23/2013
+		</date>
+		<platform>
+			<version>13.1</version>
+			<storefront>SG2</storefront>
+		</platform>
+		<usecases>
+			<usecase>
+				<description>
+					Test Export Catalog Job
+				</description>
+				<steps>
+					1.  Execute the job ExportCatalog
+					2.  Verify that the job completes without errors in the log files and that the data is received by Mainstreet.
+				</steps>
+			</usecase>
+			<usecase>
+				<description>
+					Test Export Pricebooks Job
+				</description>
+				<steps>
+					1.  Execute the job ExportPricebooks
+					2.  Verify that the job completes without errors in the log files and that the data is received by Mainstreet.
+				</steps>
+			</usecase>
+			<usecase>
+				<description>
+					Test Export Orders Job
+				</description>
+				<steps>
+					1.  Execute the job ExportOrders
+					2.  Verify that the job completes without errors in the log files and that the data is received by Mainstreet.
+				</steps>
+				</steps>
+			</usecase>
+			<usecase>
+				<description>
+					Test Import Inventory Job
+				</description>
+				<steps>
+					1.  Execute the job ImportInventory
+					2.  Verify that the job completes without errors in the log files and the inventory data is successfully imported.
+				</steps>
+			</usecase>
+
+			<usecase>
+				<description>
+					Test Import Catalog Job
+				</description>
+				<steps>
+					1.  Execute the job ImportCatalog
+					2.  Verify that the job completes without errors in the log files and that the catalog data is successfully imported.
+				</steps>
+			</usecase>
+
+			<usecase>
+				<description>
+					Test Import Pricebooks Job
+				</description>
+				<steps>
+					1.  Execute the job ImportPricebooks
+					2.  Verify that the job completes without errors in the log files and that the price book is successfully imported.
+				</steps>
+			</usecase>
+		</usecases>
+	</certificationInfo>
+	<contentInfo>
+		<file><hash>3514BFCC9F60C84C502D5885883D9996D807F5E9</hash><name>int_mainstreet/.project</name></file>
+		<file><hash>E6AAC1727E1B52293F11D01CBB61D6DA7485A29B</hash><name>int_mainstreet/cartridge/int_mainstreet.properties</name></file>
+		<file><hash>AEAD1EBD86EEF6558EBB31D0F776465AB4EAD4F9</hash><name>int_mainstreet/cartridge/pipelines/Custom_FeedJobs.xml</name></file>
+		<file><hash>1BF69D6E2E5C113437119FA5DDBC915AFF3405CA</hash><name>int_mainstreet/cartridge/pipelines/Custom_FeedSteps.xml</name></file>
+		<file><hash>37A2E9633351C42F3D6D65A4AD21E684911E17A6</hash><name>int_mainstreet/cartridge/pipelines/Custom_FeedJob.xml</name></file>
+		<file><hash>2C6809626912BDF2AE374FDFBA21482CB42B1FF7</hash><name>int_mainstreet/cartridge/pipelines/MainStreet.xml</name></file>
+		<file><hash>C65D959307AB95FB6EB0532288D73F1D71A0BEF6</hash><name>int_mainstreet/cartridge/webreferences/Website.wsdl</name></file>
+		<file><hash>ADE2C9C331A5E69B1E3238DF0D917648EEDED321</hash><name>int_mainstreet/cartridge/templates/default/orderStatusResponseSUCCESS.isml</name></file>
+		<file><hash>0FB2C3DBB97504724CE5729EBC093BBEF651B5E6</hash><name>int_mainstreet/cartridge/templates/default/orderHistoryResponseFAILURE.isml</name></file>
+		<file><hash>321C44557FCA98AABA41876DB883D9047227DB19</hash><name>int_mainstreet/cartridge/templates/default/orderHistoryResponseSUCCESS.isml</name></file>
+		<file><hash>B4B6133CCE1E58D17CC26CFBF68B8975984B6FF8</hash><name>int_mainstreet/cartridge/templates/default/orderStatusResponseFAILURE.isml</name></file>
+		<file><hash>E3E6490BE35666B6D430D4F52DE5CB3D5347C7A3</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/deletionerror_email.isml</name></file>
+		<file><hash>F1CBFF4722BAB35B5215EFDF09E5C25530307AC4</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/importprocesserror_email.isml</name></file>
+		<file><hash>021501FBE706A6FEE7F2B4332DDDEF8390F9054F</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/importdataerror_email.isml</name></file>
+		<file><hash>3331E5209919C59B459E4AD4C4AE78A8A5A6F8EE</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/downloaderror_email.isml</name></file>
+		<file><hash>2C004C3828A04AAA7F7F76437A53C4A044A67D0E</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/uploaderror_email.isml</name></file>
+		<file><hash>90A07C588D94B85961F14C6F373EB5AA477FF4EF</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/archiveerror_email.isml</name></file>
+		<file><hash>4AFEBA9008AF911D175CAE9A08916AEB49FF4C09</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/validationerror_email.isml</name></file>
+		<file><hash>1311FC802F1B0CA1DA0ED4F708A7B1043DDF8543</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/importlockingerror_email.isml</name></file>
+		<file><hash>973CCC858DC8A16BA0B447F4D6CEDAF8EC3CAF2D</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/exporterror_email.isml</name></file>
+		<file><hash>C1EAB3870E8245A75ACFB2C74195B757FA028DBB</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/importsuccess_email.isml</name></file>
+		<file><hash>14DFDA9AF20F583038E3B039D32F5DA77F1C9CB8</hash><name>int_mainstreet/cartridge/templates/default/custom/feeds/uploadsuccess_email.isml</name></file>
+		<file><hash>C1A3957537377C5D3E39E8CC486AAB503BF7ED04</hash><name>int_mainstreet/cartridge/scripts/GetOrderDetails.ds</name></file>
+		<file><hash>422E5D26D37619F83905849C0B7078DEE6027CF6</hash><name>int_mainstreet/cartridge/scripts/AddMainstreetOrdersToCollection.ds</name></file>
+		<file><hash>88B9569E9105F089E955E7AD34B78902A11672ED</hash><name>int_mainstreet/cartridge/scripts/feeds/GenerateFilenamesForPricebookSync.ds</name></file>
+		<file><hash>732751D2B3C3F340AC3A0669F397E30A51505042</hash><name>int_mainstreet/cartridge/scripts/feeds/UnZipFile.ds</name></file>
+		<file><hash>C590D41C3A4093BF14569571A3C3EA00D10EAB68</hash><name>int_mainstreet/cartridge/scripts/feeds/UploadFeed.ds</name></file>
+		<file><hash>E8A25206D31FC49BF12CBD473073DBF8923AD4E8</hash><name>int_mainstreet/cartridge/scripts/feeds/GenerateFilenamesForCatalogSync.ds</name></file>
+		<file><hash>A7EED687C040FEBC1CD2D64ED9B1F2CD3B3FBD71</hash><name>int_mainstreet/cartridge/scripts/feeds/DownloadFeed.ds</name></file>
+		<file><hash>FA4DB58FFD2DEEC3141327D6D45D759F39897814</hash><name>int_mainstreet/cartridge/scripts/feeds/ArchiveFeed.ds</name></file>
+		<file><hash>AC20DF66C926C7E648DC426028E0AC589D8209CA</hash><name>int_mainstreet/cartridge/scripts/feeds/GenerateFilenames.ds</name></file>
+		<file><hash>6C737ED6FAD19BE90C775E7D505499E0868A85AE</hash><name>int_mainstreet/cartridge/scripts/feeds/GetJobConfiguration.ds</name></file>
+		<file><hash>F8DE48F3AFCE834640C281FCB1E09064EE0AA505</hash><name>int_mainstreet/cartridge/scripts/feeds/GetSchemaByTaskID.ds</name></file>
+		<file><hash>2DF92D0AA325B2D1AFD54C30F096CAACD3999706</hash><name>int_mainstreet/cartridge/scripts/feeds/ZipFile.ds</name></file>
+		<file><hash>407AA9AC8ABE8B015191F5EE96C9451B2A4F1D89</hash><name>int_mainstreet/cartridge/scripts/feeds/DeleteFeed.ds</name></file>
+		<file><hash>BC9488CBC19AB598B998D94798B87EAF0419F0DB</hash><name>int_mainstreet/cartridge/scripts/library/libMainstreet.ds</name></file>
+		<file><hash>2FC9B45E28F53268C828F5F1F43269829A44D44F</hash><name>documentation/MainStreet-DW-Cartridge-Integration.docx</name></file>
+		<file><hash>B2597AE35661A45E1B69ECA9FB4109FAE6BF6327</hash><name>metadata/CustomObjectTypes.xml</name></file>
+		<file><hash>EE9D1BF6C3FC6BE439894E0F6BCB813A9DECB3FF</hash><name>metadata/FeedJobConfiguration.xml</name></file>
+		<file><hash>1AAC35940245D16CC282EB8BC05C78DFAA9B7E2D</hash><name>metadata/JobSchedules.xml</name></file>
+		<file><hash>0C3C083A3080FE871F3B55A162CEEE0CB06DA9EE</hash><name>metadata/MainStreet-metadata.xml</name></file>
+	</contentInfo>
+</certification>

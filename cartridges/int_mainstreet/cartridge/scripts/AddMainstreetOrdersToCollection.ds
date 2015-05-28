@@ -1,0 +1,39 @@
+
+/**
+* This will add the orders from MainStreet to the Collection that was already generated
+* from the demandware system.
+* @author Demandware
+* @creationdate 2010-06-23
+*
+* @input OrderUnpaged : dw.util.Iterator 
+* @input OrderUnpagedCount : Number
+* @input customerNo : String
+* @output OrderMixedUnpaged : dw.util.Iterator
+* @output OrderMixedCount : Number 
+* @output Orders : Object
+*/
+importPackage( dw.system );
+importPackage( dw.util );
+importScript("library/libMainstreet.ds");
+
+function execute( args : PipelineDictionary ) : Number {
+   var orders : List = new ArrayList();
+   var mainstreet = new MainStreet();
+   var mainStreetOrders = mainstreet.GetListOrdersByCustomer(args.customerNo);
+   // UNIT TEST- The following line was used for Unit Testing
+   //var mainStreetOrders = mainstreet.GetListOrdersByCustomer("00002701");
+   
+   for each(var order in mainStreetOrders.orders) {
+       orders.push(mainstreet.makeDemandwareSmallOrder(order));
+      // orders.push(mainstreet.makeDemandwareBigOrder(mainstreet.makeDemandwareSmallOrder(order), order));
+   }
+   orders.sort( new PropertyComparator("creationDate", false ) );
+   
+   args.OrderMixedCount = orders.length;
+ 
+   args.OrderMixedUnpaged = orders.iterator();
+   
+   args.Orders = orders;
+
+   return PIPELET_NEXT;
+}

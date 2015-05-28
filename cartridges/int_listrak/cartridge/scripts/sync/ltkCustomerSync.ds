@@ -1,0 +1,109 @@
+/**
+* Purpose:	Exports Customers created or modified since last successful export. Customer file is sent to Listrak via FTP.
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.value );
+importPackage( dw.io );
+importPackage( dw.web );
+importPackage( dw.object );
+importPackage( dw.util );
+
+importScript( "sync/ltkExportUtils.ds" );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_CustomerExport_Enabled;
+	if (!empty(enabled) && !enabled)
+	{
+		return PIPELET_NEXT;
+	}	
+	
+	var lastExport = new ltkExportInfo("lastCustomerExportDate");
+	var calendar = new Calendar();
+	var currentExportStartTime = calendar.getTime().toISOString(); 
+	
+ 	var lastExportDate : Date = lastExport.GetValueAsDate();
+
+	calendar.set(Calendar.DATE , calendar.get(Calendar.DATE ) - 30); // 30 days before the current date
+	var maxHistoryDate : Date = calendar.getTime();
+		
+	if (empty(lastExportDate) || maxHistoryDate > lastExportDate)
+	{
+		lastExportDate = maxHistoryDate;
+	}
+	 	
+
+	var customers : SeekableIterator = SystemObjectMgr.querySystemObjects("Profile", "lastModified >= {0} ", "lastName, firstName", lastExportDate);
+
+	if (customers.hasNext())
+	{
+		var customerfile = new ExportFile("Customers_DW.txt");
+		
+		////////// Write header row //////////
+		customerfile.AddRowItem('Email');
+		customerfile.AddRowItem('FirstName');
+		customerfile.AddRowItem('LastName');
+		customerfile.AddRowItem('Gender');
+		customerfile.AddRowItem('Birthday');
+		customerfile.AddRowItem('ZipCode');
+		customerfile.AddRowItem('CustomerNumber');
+		customerfile.AddRowItem('Registered');
+
+		customerfile.WriteRow();
+		
+		////////// Write product rows //////////
+		while(customers.hasNext())
+		{
+			var customer : Profile = customers.next();
+	
+			// Email
+			customerfile.AddRowItem(customer.email, true);
+			
+			// First Name
+			customerfile.AddRowItem(customer.firstName, true);
+			
+			// Last Name
+			customerfile.AddRowItem(customer.lastName, true);
+			
+			// Gender
+			customerfile.AddRowItem(customer.gender.displayValue, true);					
+			
+			// Birthday
+			customerfile.AddRowItemAsDate(customer.birthday, true);
+			
+			// PostalCode
+			var postalCode = "";
+			if (customer.addressBook != null)
+			{
+				if (customer.addressBook.preferredAddress != null)
+					postalCode = customer.addressBook.preferredAddress.postalCode;
+				else
+					if (!empty(customer.addressBook.addresses))
+						if (customer.addressBook.addresses.size() > 0)
+							postalCode = customer.addressBook.addresses[0].postalCode;
+			}
+			customerfile.AddRowItem(postalCode,true);
+			
+			// Customer Number
+			customerfile.AddRowItem(customer.customerNo , true);
+			
+			// Registered User
+			customerfile.AddRowItem(true, true);
+			
+			customerfile.WriteRow();
+		}
+		
+		var result = customerfile.SubmitFile();
+		if (result == false)
+		{
+			return PIPELET_ERROR;
+		}
+		
+		customerfile.Delete();
+		lastExport.SetValue(currentExportStartTime);
+	}
+	
+    return PIPELET_NEXT;
+}
+

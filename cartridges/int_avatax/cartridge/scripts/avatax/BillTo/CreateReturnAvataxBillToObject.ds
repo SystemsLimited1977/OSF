@@ -1,0 +1,60 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Create Return Avatax Bill To Object
+*
+* DESCRIPTION:
+*
+*	Creates a return bill to object and adds all the neccessary parameters
+* 
+* INPUT PARAMETERS:
+*
+*	 @input ipAddress : String
+*    @input Order : dw.order.Order
+*
+* OUTPUT PARAMETERS:
+*
+*	@output AvataxBillTo : Object
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.order );
+importPackage( dw.object );
+
+importScript('avatax/Avatax_BillTo_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	try
+	{
+		var billToObject		: BillTo_Object 		= new BillTo_Object(),		
+			order 				: Order 				= pdict.Order,
+			billingAddress 		: OrderAddress 			= order.billingAddress;
+	
+		if( !empty(billingAddress)&&!empty(order) ) {
+			billToObject.setFirstName  ( billingAddress.firstName );
+			billToObject.setLastName   ( billingAddress.lastName );
+			billToObject.setStreet1    ( billingAddress.address1 );
+			billToObject.setStreet2    ( billingAddress.address2 );
+			billToObject.setCity       ( billingAddress.city );
+			billToObject.setState      ( billingAddress.stateCode );
+			billToObject.setPostalCode ( billingAddress.postalCode );
+			billToObject.setCountry    ( billingAddress.countryCode );
+			billToObject.setPhoneNumber( billingAddress.phone );
+			billToObject.setEmail      ( order.customerEmail );
+		}
+		
+		billToObject.setIpAddress(pdict.ipAddress);
+	
+		pdict.AvataxBillTo = billToObject;
+		
+	    return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("Create return Avatax Bill To Object failed with the following error message: ", e.message);
+		return PIPELET_ERROR;	
+	}
+}

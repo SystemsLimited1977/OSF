@@ -1,0 +1,300 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Taxation Request
+*
+* DESCRIPTION:
+*
+*	Sends a single taxation request to Avatax
+* 
+* INPUT PARAMETERS:
+*
+* 	@input  Basket : dw.order.Basket The basket whose tax is to be calculated
+* 	@input  billTo : Object
+* 	@input  shipTo : Object
+* 	@input  card : Object
+* 	@input  shipFrom : Object
+* 	@input  itemArray: Array 
+* 	@input  itemMap : dw.util.HashMap 
+* 	@input  purchaseTotals : Object
+* 	@input  taxService : Object
+* 	@input  customer : dw.customer.Customer
+*	@input	OrderNo : String
+*	@input  finalCall : Boolean
+*
+* OUTPUT PARAMETERS:
+*
+* 	@output totalTaxAmount : String
+* 	@output response : Object
+* 	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+* 	@output address : String
+* 	@output addressCode : String
+* 	@output boundaryLevel : Number
+* 	@output city : String
+* 	@output country : String
+* 	@output jurisCode : String
+* 	@output postalCode : String
+* 	@output region : String
+* 	@output taxRegionId : Number
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.web );
+importPackage( dw.net );
+importPackage( dw.crypto );
+
+importScript('avatax/libAvatax.ds');
+importScript('avatax/Avatax_BillTo_Object.ds');
+importScript('avatax/Avatax_ShipTo_Object.ds');
+importScript('avatax/Avatax_ShipFrom_Object.ds');
+importScript('avatax/Avatax_TaxRequest_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{   
+	try
+	{
+		
+/************************************************************************************************************************/
+/******************************************** INITIALIZE VARIABLES ******************************************************/
+/************************************************************************************************************************/
+
+	    var csReference 	: WebReference 	= webreferences.taxsvc,
+			basket 			: Basket 		= pdict.Basket,
+			taxationService : Stub 			= csReference.getDefaultService(),
+			finalCall		: Boolean		= pdict.finalCall,
+			randomNum		: Number		= new SecureRandom();
+		
+		//random number for Doc code, max integer int32
+		randomNum = randomNum.nextInt(2147483647);
+		
+		if(basket == null)
+		{
+			Logger.error("Please provide a Basket!");
+			return PIPELET_ERROR;
+		}
+	
+		var billToObject	: BillTo_Object 		= pdict.billTo,
+			shipToObject	: ShipTo_Object 		= pdict.shipTo,
+			itemArray 		: Array 				= pdict.itemArray,
+			itemMap 		: HashMap 				= pdict.itemMap,
+			shipFrom 		: ShipFrom_Object 		= pdict.shipFrom,
+			taxService 		: TaxService_Object 	= pdict.taxService,
+			customer		: dw.customer.Customer	= pdict.customer;
+		
+		var AvataxHelper = getAvataxHelper();
+		AvataxHelper.setEndpoint(taxationService);
+		
+		if(!AvataxHelper.createHeader(taxationService))
+		{
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/******************************************** BUILD TAXATION REQUEST ****************************************************/
+/************************************************************************************************************************/
+		
+		var taxationRequest 		= new csReference.GetTax();
+		var req 					= taxationRequest.getTaxRequest = new csReference.GetTaxRequest();
+		var date 	: Date 			= new Date();
+		var dateTime 				= ( date.getFullYear() +  "-" + insertLeadingZero(date.getMonth()+1) + "-" + insertLeadingZero(date.getDate()) ).toString();
+		var orderNum 				= pdict.OrderNo != null ? pdict.OrderNo : randomNum;
+		
+		if(finalCall != null && finalCall == true)
+		{
+			req.docType 				= csReference.DocumentType.SalesInvoice;
+		}
+		else
+		{
+			req.docType 				= csReference.DocumentType.SalesOrder;
+		}
+		
+		req.commit 					= false;
+	    req.detailLevel 			= csReference.DetailLevel.Diagnostic;
+	    req.discount 				= 0.0;
+		req.companyCode 			= AvataxHelper.getCompanyCode();
+	    req.docDate 				= dateTime;
+	    req.docCode 				= orderNum;
+	    req.customerCode 			= customer != null && 'ID' in customer ? customer.ID : 'Cust123';
+	    req.customerUsageType		= customer.authenticated && "entityCode" in customer.profile.custom ? customer.profile.custom.entityCode : "";
+	    
+/************************************************************************************************************************/
+/********************************************** SET ORIGIN ADDRESS ******************************************************/
+/************************************************************************************************************************/
+
+		var addresses 	: Array 	= new Array();
+		
+		//set to billing address using the origin address (i.e. warehouse address)
+	    var origin 					= new csReference.BaseAddress();
+	    origin.taxRegionId 			= 0;
+	    origin.addressCode 			= '0';
+	    origin.line1 				= '';
+	    origin.line2 				= '';
+	    origin.city 				= AvataxHelper.getShipFromCity();
+	    origin.region 				= AvataxHelper.getShipFromStateCode();
+	    origin.postalCode 			= AvataxHelper.getShipFromZipCode();
+	    origin.country 				= AvataxHelper.getShipFromCountryCode();
+	    addresses.push(origin);
+
+/************************************************************************************************************************/
+/********************************************** SET SHIPPING ADDRESS ****************************************************/
+/************************************************************************************************************************/
+	    
+		//Using the shipToObject, set the destination address
+	    var destAddress 				= (shipToObject != null && !empty(shipToObject.street1)) ? shipToObject : billToObject;
+ 
+	    var destination 				= new csReference.BaseAddress();
+	    destination.country 			= destAddress.country.value;
+	    destination.taxRegionId 		= 0;
+	    destination.addressCode 		= '1';
+	    destination.line1 				= destAddress.street1;
+	    destination.line2 				= destAddress.street2;
+	    destination.city 				= destAddress.city;
+	    destination.region 				= destAddress.state;
+	    destination.postalCode 			= destAddress.postalCode;
+	    addresses.push(destination);
+	    
+	    req.addresses = addresses;
+	    
+	    req.originCode 					= '0';
+	    req.destinationCode 			= '1';
+
+/************************************************************************************************************************/
+/******************************* ADD ALL LINE ITEMS TO AN ARRAY FOR THE REQUEST OBJECT **********************************/
+/************************************************************************************************************************/	
+    
+	    var _items : Array = new Array();
+		var length : Number = itemArray.length;
+		var i = 0;
+		
+		while(i < length)
+		{
+			_items[i] = itemArray[i];
+			i++;
+		}
+		req.lines = _items;
+
+/************************************************************************************************************************/
+/*********************************************** SEND THE TAXATION REQUEST **********************************************/
+/************************************************************************************************************************/	
+	
+		var taxationResponse = null;
+	
+		// send request
+		try
+		{			
+			taxationResponse = taxationService.getTax(taxationRequest);
+	
+			pdict.response 			= taxationResponse.getTaxResult;
+			pdict.totalTaxAmount 	= ''+taxationResponse.getTaxResult.totalTax;
+			pdict.ReasonCode 		= taxationResponse.getTaxResult.resultCode.value;
+		}
+		catch(e)
+		{
+			Logger.error("[TaxationRequest] Error in taxation request ( {0} )",e.message);
+			return PIPELET_ERROR;
+		}
+		
+/************************************************************************************************************************/
+/************************************** IF SUCCESSFUL RESPONSE, UPDATE BASKET *******************************************/
+/************************************************************************************************************************/ 
+
+		// in case of success update basket
+		if(pdict.ReasonCode  == "Success")
+		{
+			var lineItem = null,
+				rate = 0,
+				taxable = null;
+			
+			//Loop through all results and set taxes
+			for each(let resItem in taxationResponse.getTaxResult.taxLines)
+			{
+				//grab the representative lineitem
+				lineItem = itemMap.get(resItem.no);
+				
+				//get the rate and taxable amount (there may be exceptions)
+				rate = resItem.rate.get();
+				taxable = new dw.value.Money(resItem.taxable.get(),basket.currencyCode);
+				
+				//update tax
+				lineItem.updateTax(rate,taxable);
+			} 
+		} 
+		else 
+		{
+			//Tax service failure, set all lineItems to 0 tax rate
+			var lineItems = basket.getAllLineItems(),
+				rate = 0;
+			
+			for each(let lineItem in lineItems){
+				lineItem.updateTax(rate);
+			}
+			
+			var errorMsgs = "";
+	
+			if(taxationResponse.getTaxResult.messages != null)
+			{
+				for(var i : Number = 0; i < taxationResponse.getTaxResult.messages.length; i++)
+				{
+					errorMsgs += taxationResponse.getTaxResult.messages[i].summary + '\n';
+				}
+			}
+			Logger.error("[TaxationRequest] Taxation request REJECTED (ReasonCode {0} ). \nMessages: {1}",pdict.ReasonCode,errorMsgs);
+		}
+		
+		basket.updateTotals();
+
+/************************************************************************************************************************/
+/********************************************** OUTPUT VARIABLES ********************************************************/
+/************************************************************************************************************************/
+
+		if(!empty(taxationResponse.getTaxResult.taxAddresses)) 
+		{
+			for each(taxAddress in taxationResponse.getTaxResult.taxAddresses)
+			{
+				if(!empty(taxAddress.address))
+				{
+					pdict.address = taxAddress.address;
+					pdict.addressCode = taxAddress.addressCode;
+					pdict.boundaryLevel = Number(taxAddress.boundaryLevel);
+					pdict.city = taxAddress.city;
+					pdict.country = taxAddress.country;
+					pdict.jurisCode = taxAddress.jurisCode;
+					pdict.postalCode = taxAddress.postalCode;
+					pdict.region = taxAddress.region;
+					pdict.taxRegionId = Number(taxAddress.taxRegionId);
+					break;	
+				}	
+			}
+		}
+		
+		if(pdict.ReasonCode  == "Success")
+		{
+			return PIPELET_NEXT;
+		}
+		else
+		{
+			return PIPELET_ERROR;
+		}
+	}
+	catch(e)
+	{
+		Logger.error("[TaxationRequest] Script did not compile");
+		return PIPELET_ERROR;
+	}
+	
+	 function insertLeadingZero(nb : Number) : String 
+	 {
+	  	 if(nb < 10) 
+	  	 {
+	         return "0"+nb;
+	     } 
+	     else 
+	     {
+	         return ""+nb;
+	     }
+	 }
+}

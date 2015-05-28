@@ -1,0 +1,54 @@
+/**
+* Purpose: Sends tracking information to Listrak and retrieves a tracking token	
+*/
+
+importPackage( dw.system );
+importScript( "objects/ltkUtil.ds" );
+
+
+function _LTKClick() {
+	this.Client = new _Client();
+    this.Exception = new _LTKException();
+    this.Cookie = new _Cookie(); 
+    this.TRKT = new _TRKT();
+    this.Assembler = new _Assembler();
+
+    _LTKClick.prototype.Submit = function (querystring) {
+        try {
+            var trkRES = /[?&]*trk_[^=&]+=/gi;
+            var trkRE = new RegExp(trkRES);
+
+            var trkREMatch = trkRE.test(querystring);
+
+            if (trkREMatch) {
+                var result = this.Client.SubmitTracking('t/CT.ashx', ((this.Client.CTID == null) ? '' : 'ctid=' + this.Client.CTID + '&') + ((this.Client.DebugMode) ? 'debugmode=true&' : '') + 'uid=' + this.Client.uuidCompact() + '&_t_0=cp&e_0=c&q_0=' + encodeURIComponent(querystring) + '&_version=1');
+               if (result.success) {
+		            var jsonRES = "(token:'){1}([a-zA-Z0-9_]*)('){1}";
+               		var reg = new RegExp(jsonRES);
+               		var matches = reg.exec(result.response);
+               		if (matches)
+               		{
+	                	this.TRKT.UID = matches[2];
+               		}
+        		} 
+            }
+        }
+        catch (ex) {
+            this.Exception.Submit(ex, 'Submit Click');
+        }
+    }
+}
+
+
+function _TRKT() { //Tracking Token
+    this._type = 'tt';
+    this.UID = null;
+    this.T = null;
+    this.Event = null;
+    this._varmap = {
+        '_type': '_t',
+        'UID': 'uid',
+        'T': 't',
+        'Event': 'e'
+    };
+}

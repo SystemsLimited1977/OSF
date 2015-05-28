@@ -1,0 +1,42 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Create Avatax Tax Request Object
+*
+* DESCRIPTION:
+*
+*	Creates the request object
+*
+* OUTPUT PARAMETERS:
+*
+*	@output AvataxTaxService : Object
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.value);
+
+importScript('avatax/libAvatax.ds');
+importScript('avatax/Avatax_TaxRequest_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	try
+	{
+		var AvataxAddressHelper = getAvataxHelper();
+		
+		var taxServiceObject : TaxService_Object = new TaxService_Object();
+	
+	    pdict.AvataxTaxService = taxServiceObject;
+	        
+	    return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("The CreateAvataxTaxRequestObject.ds script has failed with the following error: ( {0} )",e.message);
+		return PIPELET_ERROR;	
+	}
+}

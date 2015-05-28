@@ -1,0 +1,35 @@
+/**
+* Purpose:	Sends Basket contents to Listrak for use in SCA
+*
+* @input  Basket : dw.order.Basket
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.order );
+importPackage( dw.catalog );
+importScript( "objects/ltk.ds" );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_SCA_Enabled;
+	if (empty(enabled) || !enabled)
+	{
+		return PIPELET_NEXT;
+	}	
+		
+	var _ltk = new LTK();
+	_ltk.SCA.Load();
+	var Basket : dw.order.Basket = args.Basket;
+	if (Basket.allProductLineItems.length > 0 ) {
+		if (_ltk.SCA.LoadBasket(Basket))
+		{
+			_ltk.SCA.Submit();
+		} 
+	}
+	else {
+		_ltk.SCA.ClearCart();
+		_ltk.SCA.Submit();
+	}
+
+	return PIPELET_NEXT;
+}

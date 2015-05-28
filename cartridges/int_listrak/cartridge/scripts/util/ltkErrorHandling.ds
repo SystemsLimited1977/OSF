@@ -1,0 +1,49 @@
+/**
+* Purpose:	Records error information to be sent to Listrak in ltk_messageObject custom object. Messages are later sent by ltkProcessing scheduled job.
+*/
+importPackage( dw.system );
+importPackage( dw.object );
+importPackage( dw.util );
+
+function reportError( message : string, severity : String, callingScript : String ) : Boolean
+{
+	var messageUID : string = UUIDUtils.createUUID();
+	var ltkMessage : CustomObject = CustomObjectMgr.createCustomObject("ltk_messageObject",messageUID);
+
+	ltkMessage.custom.version = "int_Listrak 1.0.0";
+	
+	switch (severity) {
+		case "Information" :
+			ltkMessage.custom.messageSeverity = "Information";
+			break;	
+		case "Low":
+			ltkMessage.custom.messageSeverity = "Low";
+			break;	
+		case "Medium":
+			ltkMessage.custom.messageSeverity = "Medium";
+			break;	
+		case "High":
+			ltkMessage.custom.messageSeverity = "High";
+			break;	
+		case "Critical":
+			ltkMessage.custom.messageSeverity = "Critical";
+			break;	
+		default :  
+			ltkMessage.custom.messageSeverity = "Medium";
+	}		
+		
+	ltkMessage.custom.scriptName = callingScript;
+	ltkMessage.custom.message = message;
+	ltkMessage.custom.sentStatus = false;
+	
+   return true;
+}
+
+function errorMessageToString(messageObject : CustomObject) : String 
+{
+	var message : String = messageObject.custom.messageSeverity.getDisplayValue() + " ";
+	
+	message += "[version:" + messageObject.custom.version + "] [ScriptName:" + messageObject.custom.scriptName + "]  " + messageObject.custom.message;
+	
+	return message;
+}

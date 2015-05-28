@@ -1,0 +1,301 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Taxation Request Multi-Shipping
+*
+* DESCRIPTION:
+*
+*	Sends multiple taxation requests to Avatax for each shipment if shipment addresses are greater than 1
+* 
+* INPUT PARAMETERS:
+*
+* 	@input  Basket : dw.order.Basket The basket whose tax is to be calculated
+* 	@input  OrderNo : String
+* 	@input  CustomerProfile : dw.customer.Profile
+* 	@input  shipToHashMap : dw.util.HashMap
+* 	@input  ShipToAddresses : dw.util.ArrayList
+* 	@input  itemArray: Array 
+* 	@input  itemMap : dw.util.HashMap 
+* 	@input  itemMapByShip : dw.util.HashMap
+* 	@input  itemArrayMapByShip : dw.util.HashMap
+* 	@input  Discount : dw.value.Money
+* 	@input  PaymentProcessed : Boolean
+*
+* OUTPUT PARAMETERS:
+*
+*	@output basket : dw.order.Basket
+* 	@output totalTaxAmount : dw.value.Money
+* 	@output response : Object
+* 	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+* 	@output address : String
+* 	@output addressCode : String
+* 	@output boundaryLevel : Number
+* 	@output city : String
+* 	@output country : String
+* 	@output jurisCode : String
+* 	@output postalCode : String
+* 	@output region : String
+* 	@output taxRegionId : Number
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.value );
+importPackage( dw.web );
+importPackage( dw.net );
+
+importScript('avatax/libAvatax.ds');
+importScript('avatax/Avatax_ShipTo_Object.ds');
+
+function execute( args : PipelineDictionary ) : Number
+{
+	try
+	{
+	
+/************************************************************************************************************************/
+/******************************************** INITIALIZE VARIABLES ******************************************************/
+/************************************************************************************************************************/
+
+	    var csReference 	: WebReference 		= webreferences.taxsvc,
+			basket 			: Basket 			= args.Basket,
+			taxationService : Stub 				= csReference.getDefaultService(),
+			totalTax 		: Number			= 0,					
+			shipNum 							= -1;
+		
+		if(!empty(args.Basket))
+		{
+			var _dataContainer : Basket = args.Basket;
+		}
+		if((_dataContainer == null))
+		{
+			Logger.error("Please provide a Basket/Order!");
+			return PIPELET_ERROR;
+		}
+		
+		var AvataxHelper = getAvataxHelper();
+		AvataxHelper.setEndpoint(taxationService);
+		
+		if(!AvataxHelper.createHeader(taxationService))
+		{
+			Logger.error("Please provide a Taxation Service");
+			return PIPELET_ERROR;
+		}
+
+/************************************************************************************************************************/
+/******************************************** LOOP THROUGH SHIPMENTS ****************************************************/
+/************************************************************************************************************************/		
+
+		// Loop through Shipments
+		for each(var shipment : Shipment in basket.getShipments()) 
+		{
+			var taxationRequest 			= new csReference.GetTax();
+			var req 						= taxationRequest.getTaxRequest = new csReference.GetTaxRequest();
+			var _date 			: Date		= new Date();
+			
+			shipNum++;
+			
+			var shipToObject	: ShipTo_Object 	= args.shipToHashMap.get(shipment.ID);
+			var _shipToAddress 	: ShipToObject 		= shipment;
+	
+			var itemArray 		: Array 			= args.itemArrayMapByShip.get(shipment.ID);
+			var itemMap 		: HashMap 			= args.itemMapByShip.get(shipment.ID);
+
+/************************************************************************************************************************/
+/****************************************** SET EACH SHIPMENT PROPERTY **************************************************/
+/************************************************************************************************************************/	
+		
+			req.docType 				= (args.PaymentProcessed ? csReference.DocumentType.SalesInvoice : csReference.DocumentType.SalesOrder);
+			req.commit 					= false;
+		    req.detailLevel 			= csReference.DetailLevel.Diagnostic;
+		    req.serviceMode 			= csReference.ServiceMode.Automatic;
+		    req.discount 				= (args.Discount != null) ? args.Discount.value : 0.0;
+		    req.paymentDate 			= _date;
+		    req.exchangeRate 			= 1.0;
+		    req.exchangeRateEffDate 	= new Date("1970-01-01");
+			req.companyCode 			= AvataxHelper.getCompanyCode();
+		    req.docDate 				= _date;
+		    req.docCode 				= (empty(args.OrderNo) ? '123' : args.OrderNo);
+		    req.customerCode 			= _dataContainer.customer != null && 'ID' in _dataContainer.customer ? _dataContainer.customer.ID : 'Cust123';
+		   	req.customerUsageType		= customer.authenticated && "entityCode" in customer.profile.custom ? customer.profile.custom.entityCode : "";
+	   		req.currencyCode			= _dataContainer.currencyCode != null ? _dataContainer.currencyCode : "";
+		    
+		    if(!(args.CustomerProfile == null)) 
+	    	{
+			      if('AvataxCustomerUsageType' in args.CustomerProfile.custom) 
+			      {
+				      	 if(!empty(args.CustomerProfile.custom.AvataxCustomerUsageType.getValue()))
+				      	 {
+					 	 	req.customerUsageType = args.CustomerProfile.custom.AvataxCustomerUsageType.getValue();
+				      	 }
+			      }
+	    	}
+
+/************************************************************************************************************************/
+/******************************************** SET ORIGIN ADDRESS ********************************************************/
+/************************************************************************************************************************/	
+	    
+			var addresses : Array = new Array();
+			
+			//ORIGIN ADDRESS
+		    var origin 				= new csReference.BaseAddress();
+		    origin.taxRegionId 		= 0;
+		    origin.addressCode 		= '0';
+		    origin.line1 			= '';
+		    origin.line2 			= '';
+		    origin.city 			= AvataxHelper.getShipFromCity();
+		    origin.region 			= AvataxHelper.getShipFromStateCode();
+		    origin.postalCode 		= AvataxHelper.getShipFromZipCode();
+		    origin.country 			= AvataxHelper.getShipFromCountryCode();
+		    addresses.push(origin);
+		   	var _shipToDestination 	= null; 
+
+/************************************************************************************************************************/
+/******************************** SET SHIPPING DESTINATION ADDRESS AND PROPERTIES ***************************************/
+/************************************************************************************************************************/
+	
+		    // SHIPMENT DESTINATIONS 
+		    _shipToDestination 				= new csReference.BaseAddress();
+		    _shipToDestination.country 		= _shipToAddress.shippingAddress.countryCode.value;
+		    _shipToDestination.taxRegionId 	= 0;
+		    _shipToDestination.addressCode 	= 1;
+		    _shipToDestination.line1 		= _shipToAddress.shippingAddress.address1;
+		    _shipToDestination.line2 		= _shipToAddress.shippingAddress.address2;
+		    _shipToDestination.city 		= _shipToAddress.shippingAddress.city;
+		    _shipToDestination.region 		= _shipToAddress.shippingAddress.stateCode;
+		    _shipToDestination.postalCode 	= _shipToAddress.shippingAddress.postalCode;
+		    
+		    addresses.push(_shipToDestination);
+		    
+		    req.addresses = addresses;
+
+		    req.originCode = '0';
+		    req.destinationCode = '1';
+		    
+/************************************************************************************************************************/
+/**************************** ADD ALL LINE ITEMS TO AN ARRAY FOR THE REQUEST OBJECT *************************************/
+/************************************************************************************************************************/		
+    
+		    var _items : Array = new Array();
+			var length : Number = itemArray.length;
+			var i = 0;
+			while(i < length)
+			{
+				_items[i] = itemArray[i];
+				i++;
+			}
+			req.lines = _items;
+			
+/************************************************************************************************************************/
+/******************************************** SEND TAXATION THE REQUEST *************************************************/
+/************************************************************************************************************************/			
+			
+			var taxationResponse = null;
+		
+			// send request
+			try
+			{
+				taxationResponse = taxationService.getTax(taxationRequest);
+		
+				if(taxationResponse != null && taxationResponse.getTaxResult.resultCode.value.toLowerCase() == "success")
+				{	
+					args.response 			= taxationResponse.getTaxResult;
+					totalTax 				+= taxationResponse.getTaxResult.totalTax;
+					args.ReasonCode 		= taxationResponse.getTaxResult.resultCode.value;
+				}
+			}
+			catch(e)
+			{
+				Logger.error("[TaxationRequestMultiShip] Error in taxation request ( {0} )",e.message);
+				return PIPELET_ERROR;
+			}
+
+/************************************************************************************************************************/
+/************************************ IF SUCCESSFUL RESPONSE, UPDATE BASKET *********************************************/
+/************************************************************************************************************************/
+
+			// in case of success update basket properties
+			if(args.ReasonCode  == "Success")
+			{
+				var resItem;
+				var lineItem : ProductLineItem = null;
+				var itemTax : dw.value.Money = null;
+				
+				for each(resItem in taxationResponse.getTaxResult.taxLines)
+				{
+					lineItem = itemMap.get(resItem.no);
+					itemTax = new dw.value.Money(new Number(resItem.tax), _dataContainer.currencyCode);
+					lineItem.setTax(itemTax);
+					lineItem.setPriceValue(lineItem.netPrice.add(itemTax).getValue());
+					//lineItem.updatePrice(lineItem.netPrice.add(itemTax));
+				} 
+			} 
+			else 
+			{
+				ResetTaxForBasketLineItems(_dataContainer);
+				Logger.error("[TaxationRequestMultiShip] Taxation request REJECTED (ReasonCode {0} ). \nMessages: {1}",args.ReasonCode,errorMsgs);
+			}
+			_dataContainer.updateTotals();
+		} // END FOR EACH shipment in Basket.getShipment
+
+/************************************************************************************************************************/
+/***************************************** AFTER LOOPING, OUTPUT VARIABLES **********************************************/
+/************************************************************************************************************************/
+		
+		if(!empty(taxationResponse.getTaxResult.taxAddresses)) 
+		{
+			for each(taxAddress in taxationResponse.getTaxResult.taxAddresses)  
+			{
+				if(!empty(taxAddress.address)) 
+				{
+					args.address = taxAddress.address;
+					args.addressCode = taxAddress.addressCode;
+					args.boundaryLevel = Number(taxAddress.boundaryLevel);
+					args.city = taxAddress.city;
+					args.country = taxAddress.country;
+					args.jurisCode = taxAddress.jurisCode;
+					args.postalCode = taxAddress.postalCode;
+					args.region = taxAddress.region;
+					args.taxRegionId = Number(taxAddress.taxRegionId);
+					break;	
+				}	
+			}
+		}
+	
+		if(args.ReasonCode  == "Success")
+		{
+			var totalTaxMoney : dw.value.Money = new Money(totalTax,"USD");
+			args.totalTaxAmount = totalTaxMoney;
+			return PIPELET_NEXT;
+		}
+		else
+		{
+			return PIPELET_ERROR;
+		}
+	}
+	catch(e) 
+	{
+		Logger.error("[TaxationRequestMultiShip] Error in entire script ( {0} )", e.message);
+		return PIPELET_ERROR;	
+	}	
+}
+
+/************************************************************************************************************************/
+/******************************* CUSTOM METHOD TO RESET BASKET LINE ITEM PROPERTIES *************************************/
+/************************************************************************************************************************/
+
+function ResetTaxForBasketLineItems(basket : Basket)
+{
+	var lineItems = basket.getAllLineItems();
+	var itemTax : dw.value.Money = new dw.value.Money(0, basket.currencyCode);
+	for each(lineItem in lineItems) 
+	{
+		lineItem.setTax(itemTax);	
+		lineItem.setPriceValue(lineItem.netPrice.value);
+		//lineItem.updatePrice(lineItem.netPrice);
+	}
+	
+	basket.updateTotals();
+}

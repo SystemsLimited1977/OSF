@@ -1,0 +1,198 @@
+/**
+* Purpose:	Exports Product Catalog. Product file is sent to Listrak via FTP.
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.value );
+importPackage( dw.util );
+importPackage( dw.web );
+
+importScript( "sync/ltkExportUtils.ds" );
+importScript( "objects/ltkProduct.ds" );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_ProductExport_Enabled;
+	if (!empty(enabled) && !enabled)
+	{
+		return PIPELET_NEXT;
+	}	
+	
+	var calendar = new Calendar();
+	var currentExportStartTime = calendar.getTime().toISOString(); 
+	var lastExport = new ltkExportInfo("lastProductExportDate");
+	var subCategoryLevels : Number = dw.system.Site.current.preferences.custom.Listrak_SubcategoryLevels;
+	//If maxRelated = 0, related products won't be exported
+	var maxRelated : Number = dw.system.Site.current.preferences.custom.Listrak_MaxRecommendedProductExport
+	if (subCategoryLevels <= 0 ) { subCategoryLevels = 1; } //if not set, use default of 1
+	
+	var prods : SeekableIterator = ProductMgr.queryAllSiteProducts();
+
+	if (prods.hasNext()) 
+	{
+		try {
+			var productFile = new ExportFile("products_DW.txt");
+		
+			////////// Write header row //////////
+			productFile.AddRowItem('Sku');
+			productFile.AddRowItem('Variant');
+			productFile.AddRowItem('Title');
+			productFile.AddRowItem('ImageUrl');
+			productFile.AddRowItem('LinkUrl');
+			productFile.AddRowItem('Description');
+			productFile.AddRowItem('Price');
+			productFile.AddRowItem('Brand');
+			productFile.AddRowItem('Category');
+			productFile.AddRowItem('SubCategory');
+			for (var i = 2; i <= subCategoryLevels; i++) {
+				var fieldName = 'SubCategory' + i.toString();
+				productFile.AddRowItem(fieldName);
+			}
+			productFile.AddRowItem('CategoryTree');
+			productFile.AddRowItem('QOH');
+			productFile.AddRowItem('InStock');
+			productFile.AddRowItem('MasterSku');
+			productFile.AddRowItem('ReviewProductID');
+			for (var x = 1; x <= maxRelated; x++) {
+				productFile.AddRowItem('Related_Sku_' + x.toString());
+				productFile.AddRowItem('Related_Type_' + x.toString());
+				productFile.AddRowItem('Related_Rank_' + x.toString());
+			}
+			productFile.WriteRow();
+			
+			////////// Write product rows //////////
+			for each( product in prods )
+			{
+				var rpSkus = new Array();
+				if (maxRelated > 0)
+					var relatedProducts : Collection = product.getOrderableRecommendations();
+				if (product.online && product.getAvailabilityModel().isInStock())
+				{
+					var prd = new ltkProduct();
+					prd.LoadProduct(product);
+					
+					//grab recommended products
+					var numRelated : Number = 0
+					if (maxRelated > 0 && !relatedProducts.empty)
+					{
+						numRelated = Math.min(maxRelated, relatedProducts.length);
+						for( rpID = 0; rpID < numRelated; rpID ++)
+						{
+							rpSkus.push( {sku:relatedProducts[rpID].recommendedItemID, type:getRelatedType(relatedProducts[rpID].recommendationType)} );
+						}
+					}
+				
+					
+					// Sku
+					productFile.AddRowItem(prd.sku, true);
+					
+					// Variant
+					productFile.AddRowItem(prd.variant, true);
+					
+					// Title
+					productFile.AddRowItem(prd.title, true);
+					
+					// Image URL
+					productFile.AddRowItem(prd.imageURL, true);
+					
+					// Link URL
+					productFile.AddRowItem(prd.linkURL, true);
+					
+					// Description
+					productFile.AddRowItem(prd.description, true);
+					
+					// Price
+					productFile.AddRowItem(prd.price, true); 
+					
+					// Brand
+					productFile.AddRowItem(prd.brand, true);
+					
+					// Category
+					productFile.AddRowItem(prd.categories[0], true); // Category
+					productFile.AddRowItem(prd.categories[1], true); // Sub-category
+					for (var i = 2; i <= subCategoryLevels; i++) {
+						productFile.AddRowItem(prd.categories[i], true);
+					}
+					// CategoryTree
+					var tree = '';
+					var index = 0;
+					for each(category in prd.categories)
+					{
+						if(index == 0)
+						{
+							tree = category;
+						}
+						else
+						{
+							tree += ' > ' + category;
+						}
+						index++;
+					}
+					productFile.AddRowItem(tree, true);
+					
+					// Quantity On Hand
+					productFile.AddRowItem(prd.QOH, true);
+					
+					// InStock
+					productFile.AddRowItem(prd.inStock, true);
+					
+					// MasterSku
+					productFile.AddRowItem(prd.masterSku, true);
+					
+					// ProductReviewID
+					productFile.AddRowItem(prd.reviewProductID, true);		
+					
+					// Related Products
+					for (var x = 0; x < maxRelated; x++) {
+						if( numRelated > x) //this product has related product in this index
+						{
+							productFile.AddRowItem(rpSkus[x].sku);
+							productFile.AddRowItem(rpSkus[x].type);
+							productFile.AddRowItem(x+1);
+						}
+						else
+						{
+							//send empty columns
+							productFile.AddRowItem();
+							productFile.AddRowItem();
+							productFile.AddRowItem();
+						}
+					}
+					
+					productFile.WriteRow();
+				}
+			}
+		}
+		catch (e)
+		{
+			reportError("Error creating product export file: " + e.message, "Low", "ltkProductSync.ds");
+		}
+		
+		var result = productFile.SubmitFile();
+		var result : Boolean = true;
+		
+		if (result == false)
+		{
+			return PIPELET_ERROR;
+		}
+		
+		productFile.Delete();
+		lastExport.SetValue(currentExportStartTime);
+	}
+    return PIPELET_NEXT;
+}
+
+function getRelatedType( type : number) : String  {
+	var typeString : String = "";
+	switch(type)
+	{
+		case 1:
+			typeString = "Cross-sell";
+			break;
+		case 2:
+			typeString = "Up-sell";
+			break;
+	}
+	return typeString;
+}
+

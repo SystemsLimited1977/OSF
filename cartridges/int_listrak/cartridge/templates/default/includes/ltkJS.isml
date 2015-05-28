@@ -1,0 +1,17 @@
+<!--- TEMPLATENAME: ltk_js_include.isml --->
+<iscomment>
+	Purpose: Load the Listrak Javascript onto the website pages.
+	Requirements: Listrak Tracking Endpoint must be configured in custom preferences. 
+</iscomment>
+
+<iscache status="off" />
+
+<isif condition = "${!empty(dw.system.Site.current.preferences.custom.Listrak_TrackingEndpoint)}">
+	<script type="text/javascript">
+	var biJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cscript src='" + biJsHost + "${dw.system.Site.current.preferences.custom.Listrak_TrackingEndpoint}/scripts/script.js?m=${dw.system.Site.current.preferences.custom.Listrak_MerchantTrackingID}&v=1' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+<iselse>
+	<!-- Listrak Configuration Error: Tracking Endpoint is not configured. -->
+</isif>
+

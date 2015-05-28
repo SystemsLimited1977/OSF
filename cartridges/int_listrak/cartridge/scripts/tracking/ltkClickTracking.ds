@@ -1,0 +1,23 @@
+/**
+* Purpose:	Submits click tracking to LIstrak and returns a tracking token
+*
+* @input CurrentRequest 	: dw.system.Request
+* @output trkt 				: String
+*
+*/
+importPackage( dw.system );
+importScript( "objects/ltk.ds" );
+
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var request : Request = args.CurrentRequest;    
+	var querystring = request.httpQueryString;
+	
+	var _ltk = new LTK();
+	_ltk.Click.Submit(querystring);
+
+	args.trkt = _ltk.Click.TRKT.UID;
+
+	return PIPELET_NEXT;
+}

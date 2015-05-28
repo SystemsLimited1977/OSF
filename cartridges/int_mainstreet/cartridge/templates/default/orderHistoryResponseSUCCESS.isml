@@ -1,0 +1,16 @@
+<iscomment>Page to display Order History Success Response Data</iscomment>
+<!--- TEMPLATENAME: orderStatusResponse.isml --->
+<isdecorate template="account/pt_account">
+<h2>
+	Order History:-
+</h2>
+<html>
+	<body>
+		<br>
+		<isloop items="${pdict.Orders}" var="order" status="status">
+			<p>Order Number: ${order.orderNo}</p>
+			<p>Status: ${order.status}</p>
+		</isloop>		
+	</body>
+</html>
+</isdecorate>

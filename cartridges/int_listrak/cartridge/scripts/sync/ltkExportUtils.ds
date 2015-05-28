@@ -1,0 +1,223 @@
+/*
+* Purpose: Utiltity functions used for export of data and submission to Listrak via FTP
+*/
+importPackage( dw.io );
+importPackage( dw.net );
+importPackage( dw.object );
+
+importScript( "util/ltkErrorHandling.ds" );
+
+
+function ExportFile(fileName) {
+	this.filePath = dw.io.File.IMPEX +'/src/Listrak';
+	this.fileName = fileName;
+	this.file = null;
+	this.fileWriter = null;
+	this.rowErrors = 0;
+	
+	this.rowItems = new Array();
+	
+	this.CreateFile();
+}
+
+ExportFile.prototype.CreateFile = function () : FileWriter {
+	try {
+		var dir : File = new File(this.filePath);
+		dir.mkdirs();
+		this.file = new dw.io.File(this.filePath + "/" + this.fileName);
+		this.fileWriter = new FileWriter(this.file);		
+	}
+	catch (e) {
+		reportError("Unable to create export file [" + this.fileName + "]: " + e.message, "High", "ltkExportUtils.ds");	
+	}
+
+}
+
+ExportFile.prototype.Delete = function () : FileWriter {
+	try {
+		this.file.remove();
+	}
+	catch (e) {
+		reportError("Unable to delete export file [" + this.fileName + "]: " + e.message, "High", "ltkExportUtils.ds");	
+	}
+}
+
+ExportFile.prototype.AddRowItemAsDate = function(date : Date, dateOnly : boolean) {
+	if (empty(date))
+	{
+		this.AddRowItem("", false);
+	}
+	else
+	{
+		var dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		
+		if (!dateOnly) 
+			dateString += " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " GMT" 
+			 
+		this.AddRowItem(dateString, false);
+	}
+}
+
+ExportFile.prototype.AddRowItem = function(item, isString) {
+	if (empty(item))
+	{
+		this.rowItems.push('');
+		return;
+	}
+	
+	if (isString)
+	{
+		// remove harmful characters
+		item = new String(item); 
+		item = item.replace(/(\r\n|\n|\r)/gm,"");
+		item =  item.replace("\'", "");
+		item =  item.replace("\"", "");
+		
+		// Add Text qualifier
+		item = '"' + item + '"';
+	}		
+
+	this.rowItems.push(item);	
+}
+
+ExportFile.prototype.WriteRow = function() {
+	try {
+		this.fileWriter.write(this.rowItems.join('|') + '\n');
+	}
+	catch (e) {
+		this.rowErrors++;	
+	}
+
+	this.rowItems = new Array();
+}
+
+ExportFile.prototype.SubmitFile = function() : Boolean {
+	// if there were row errors report them here.
+	if (this.rowErrors > 0)
+	{
+		reportError("Unable to write " + this.rowErrors + " export rows [" + this.fileName + "].", "High", "ltkExportUtils.ds");		
+	}
+
+	// Save the file
+	try {
+		this.fileWriter.flush();	
+		this.fileWriter.close();
+	}
+	catch (e) {
+		reportError("Unable to save export file [" + this.fileName + "]: " + e.message, "High", "ltkExportUtils.ds");	
+	}
+
+
+	var host = dw.system.Site.current.preferences.custom.Listrak_FTPHost; 
+	if (empty(host))
+	{
+        reportError("Listrak FTP Host was not set in Custom Site Preferences.", "High", "ltkExportUtils.ds");
+		return false;
+	}
+	var user = dw.system.Site.current.preferences.custom.Listrak_FTPUserName;
+	if (empty(user))
+	{
+        reportError("Listrak FTP User Name was not set in Custom Site Preferences.", "High", "ltkExportUtils.ds");
+		return false;
+	}
+	var pass = dw.system.Site.current.preferences.custom.Listrak_FTPPasword;
+	if (empty(pass))
+	{
+        reportError("Listrak FTP Password was not set in Custom Site Preferences.", "High", "ltkExportUtils.ds");
+		return false;
+	}
+	
+    var req : FTPClient = new FTPClient();
+    try
+    {
+        if(req.connect(host, user, pass))
+        {
+        	if (FileExists(req, this.file.name))
+        	{
+        		return false;	
+        	}
+        	
+            if(req.putBinary(this.file.name, this.file))
+            {
+            	return true;
+            }
+            else
+            {
+              	reportError("Error Uploading data", "High", "ltkExportUtils.ds");
+				return false;
+            }
+            req.disconnect();
+        }
+        else
+        {
+			reportError("Could not establish FTP Connection", "High", "ltkExportUtils.ds");
+            return false;
+        }
+    }
+    catch(e)
+    {
+		reportError("Error Uploading data: " + e.message, "High", "ltkExportUtils.ds");
+    	return false;
+    }	
+}
+
+function FileExists(ftpClient : FTPClient, fileName : string) {
+	var items = ftpClient.list();
+	for(var item : FTPFileInfo in items) {
+		if (items[item].name == fileName) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+function ltkExportInfo(name) {
+	this.name = name;
+	this.object = '';
+	
+	if (!empty(this.name)) {
+		this.object = CustomObjectMgr.queryCustomObject("ltk_info", "custom.name = {0}", this.name);
+	}
+}
+
+ltkExportInfo.prototype.GetValue = function() {
+	if (!empty(this.object) && !empty(this.object.custom.value) )
+	{
+		return this.object.custom.value
+	}
+	else
+	{
+		return null;	
+	}
+}
+
+ltkExportInfo.prototype.GetValueAsDate = function() {
+	if (!empty(this.object) && !empty(this.object.custom.value) )
+	{
+		var date = null;
+		try {
+			date = new Date(this.object.custom.value)
+		}
+		catch(e)
+		{
+			reportError("Error parsing ltk_info object as date: " + e.message, "Low", "ltkExportUtils.ds");
+			return null;
+		}
+		
+		return date;
+	}
+
+	return null;	
+}
+
+ltkExportInfo.prototype.SetValue = function(value) {
+	if (empty(this.object))
+	{
+		this.object = CustomObjectMgr.createCustomObject("ltk_info", this.name);
+	}
+	
+	this.object.custom.value = value;
+}
+
+

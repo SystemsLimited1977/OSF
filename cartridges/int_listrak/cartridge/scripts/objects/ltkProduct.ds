@@ -1,0 +1,183 @@
+/**
+Purpose: Loads product information needed by Listrak from DW Product object 
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.web );
+importPackage( dw.content );
+
+function ltkProduct()
+{
+	var viewtype = dw.system.Site.current.preferences.custom.Listrak_ProductImageViewType;
+	
+	this.sku = '';
+	this.masterSku = '';
+	this.variant = '';
+	this.title = '';
+	this.imageURL = '';
+	this.linkURL = '';
+	this.description = '';
+	this.price = 0.00;
+	this.brand = '';
+	this.categories = [];
+	this.QOH = 0;
+	this.inStock = true;
+	this.reviewProductID = '';
+	
+	this.product = null;
+	
+	// Load settings needed for loading product information    
+    this.customViewType = dw.system.Site.current.preferences.custom.Listrak_ProductImageViewType;
+    this.useAbsoluteImageURLs = dw.system.Site.current.preferences.custom.Listrak_UseAbsoluteImageURLs;
+    this.useAbsoluteProductURLs = dw.system.Site.current.preferences.custom.Listrak_UseAbsoluteProductURLs;
+    var catStartLevel : Number = dw.system.Site.current.preferences.custom.Listrak_TopLevelCategory;
+    this.categoryStartLevel = catStartLevel; 
+}
+
+ltkProduct.prototype.LoadProductURLOnly = function (product : Product) {
+	// Sku
+	this.sku = product.ID;
+		
+	// image url
+	this.imageURL = this.getImageURL(this.getImage(product));
+
+	// product url
+	this.linkURL = this.getProductURL(product);
+		
+}
+
+ltkProduct.prototype.LoadProduct = function (product : Product) {
+	this.product = product;
+	// Sku
+	if (product.variant) {
+		//this.sku = '{' + product.masterProduct.ID + '}' + product.ID; 
+		this.masterSku = product.masterProduct.ID;
+		this.reviewProductID = product.masterProduct.ID.replace(new RegExp('^[9]*'), '');
+	}  
+	else {	
+		//this.sku = '{' + product.ID + '}';
+		this.reviewProductID = product.ID;
+	}	
+	this.sku = product.ID;
+	
+	// Variant
+	if (product.variant)
+		this.variant = 'V';
+	else
+		this.variant = 'M';
+	
+	// product title	
+	this.title = product.name;
+
+	// image url
+	this.imageURL = this.getImageURL(this.getImage(product));
+
+	// product url
+	this.linkURL = this.getProductURL(product);
+	
+	this.description = product.shortDescription;
+	this.price = this.getProductPrice(product);
+	this.brand = product.brand;
+
+	// load category and subscategory
+	this.getCategory();
+
+	// quantity on hand
+	if (product.availabilityModel != null && product.availabilityModel.inventoryRecord != null) 
+		this.QOH = product.availabilityModel.inventoryRecord.stockLevel;
+
+	// instock flag
+	this.inStock = product.availabilityModel.inStock;
+}
+
+ltkProduct.prototype.getImage = function(product : Product) : MediaFile {
+	var image : MediaFile;
+	// Is there an image in a defined custom viewtype
+	if (!empty(this.customViewType)) {
+		image = product.getImage(this.customViewType,0);
+		if (!empty(image)) return image;
+	}
+	
+	// check small viewtype
+	image = product.getImage('small',0);
+	if (!empty(image)) return image;
+		
+	// check large viewtype
+	image = product.getImage('large',0); 
+	if (!empty(image)) return image;
+	
+	// image not found
+	return null;
+}
+
+ltkProduct.prototype.getImageURL = function(image : MediaFile) {
+	var imageurl = '';
+	
+	if (!empty(image))
+	{ 
+		if (empty(this.useAbsoluteImageURLs) || this.useAbsoluteImageURLs == true)
+			imageurl = image.httpURL;
+		else
+			imageurl = image.URL;
+	}
+	else
+		imageurl = '';
+	
+	return imageurl;
+}
+
+ltkProduct.prototype.getProductURL = function(product : Product) {
+	var linkurl = '';
+	
+	if (!empty(product.ID))
+	{
+		if (empty(this.useAbsoluteProductURLs) || this.useAbsoluteProductURLs == true)
+			linkurl = URLUtils.http('Product-Show', 'pid', product.ID);
+		else
+			linkurl = URLUtils.url('Product-Show', 'pid', product.ID);
+	}
+	
+	return linkurl;
+}
+
+ltkProduct.prototype.getProductPrice = function(product : Product) {
+	var price : Money = null;
+	
+	var priceModel : dw.catalog.ProductPriceModel = product.getPriceModel();
+	if (priceModel)
+	{
+		price = priceModel.getMinPrice();
+	}
+	
+	return price.toNumberString(); 
+}
+
+ltkProduct.prototype.getCategory = function() {
+	// Category
+	var category : Category = this.product.primaryCategory;
+	if (category == null)
+		category = this.product.classificationCategory;
+	if(category == null && !this.product.onlineCategories.empty)
+		category = this.product.onlineCategories[0];			
+		this.product.primaryCategory
+	
+	//Level = depth of the category that should be the Main Category
+	//ie- If categories in Demandware look like this: Root, Store, Main, Sub, Sub2
+	// then categoryStartLevel should be 3 so that Main becomes the Category and Sub becomes the subcategory
+	if (this.categoryStartLevel <= 0 ) { this.categoryStartLevel = 2; } //if not set, use default of 2
+	
+	if (category != null)
+	{
+		this.categories.push( category.displayName );
+		while ( category.parent != null ) {
+			this.categories.push(category.parent.displayName);
+			category = category.parent;
+		}
+		//drop off the uppermost categories (root/hidden) based on setting
+		for( var i = 1; i < this.categoryStartLevel; i++) {
+			this.categories.pop();
+		}
+		//categories are in reverse order, so reverse for the productSync (category will be element 0, followed by subs)
+		this.categories.reverse();
+	}
+}

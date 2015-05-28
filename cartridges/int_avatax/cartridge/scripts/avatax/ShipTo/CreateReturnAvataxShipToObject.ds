@@ -1,0 +1,82 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Create Return Avatax Ship To Object
+*
+* DESCRIPTION:
+*
+*	Creates a request for return shipping
+* 
+* INPUT PARAMETERS:
+*
+*    @input Order : dw.order.Order
+*	 @input ShippingMethodCode : Object
+*
+* OUTPUT PARAMETERS:
+*
+*    @output AvataxShipTo : Object	
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.order );
+importPackage( dw.object );
+
+importScript('avatax/Avatax_ShipTo_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	try
+	{
+		
+/************************************************************************************************************************/
+/****************************************** DEFINE INITIAL VARIABLE ****************************************************/
+/************************************************************************************************************************/
+
+		var order 				: Order 				= pdict.Order;
+		var returnDetails 		: SeekableIterator 		= CustomObjectMgr.queryCustomObjects("ReturnsDetail","custom.dwOrderNumber={0}",null, order.orderNo);
+		var returnHeaders 		: SeekableIterator 		= CustomObjectMgr.queryCustomObjects("ReturnsHeader","custom.dwOrderNumber={0}",null, order.orderNo);
+		var returnHeader 								= returnHeaders.first();
+		var shipToObject		: ShipTo_Object 		= new ShipTo_Object();
+		var shippingAddress 	: OrderAddress 			= order.defaultShipment.shippingAddress;
+
+/************************************************************************************************************************/
+/****************************************** SET SHIPPING ADDRESS ********************************************************/
+/************************************************************************************************************************/
+		
+		shipToObject.setFirstName(shippingAddress.firstName);
+		shipToObject.setLastName(shippingAddress.lastName);
+		shipToObject.setStreet1(shippingAddress.address1);
+		shipToObject.setStreet2(shippingAddress.address2);
+		shipToObject.setCity(shippingAddress.city);
+		shipToObject.setState(shippingAddress.stateCode);
+		shipToObject.setPostalCode(shippingAddress.postalCode);
+		shipToObject.setCountry(shippingAddress.countryCode);
+		shipToObject.setPhoneNumber(shippingAddress.phone);
+		shipToObject.setEmail(order.customerEmail);
+
+/************************************************************************************************************************/
+/****************************************** SET SHIPPING METHOD ****************************************************/
+/************************************************************************************************************************/
+		
+		var shippingMethod = pdict.ShippingMethodCode;
+		
+		if( !empty(shippingMethod) ) 
+		{
+			shipToObject.setShippingMethod(shippingMethod);
+		} 
+		else 
+		{
+			shipToObject.setShippingMethod("N/A");
+		}
+		pdict.AvataxShipTo = shipToObject;
+	
+	    return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("Create Return Avatax Ship To Object script failes with the following error: ", e.message);
+		return PIPELET_ERROR;	
+	}
+}

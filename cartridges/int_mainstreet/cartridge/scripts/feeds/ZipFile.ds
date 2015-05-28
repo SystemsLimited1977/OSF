@@ -1,0 +1,43 @@
+ /**
+ * Zips the files in the given TempFolder.
+ *
+ * Files of larger sizes are compressed into zip files
+ * before Demandware post them to common SFTP from where the external
+ * systems will pick up. This will avoid larger number of
+ * bytes transmitted in the network
+ * This pipelet does the zipping of files
+ * 
+ * @input TempFolder : String
+ * @input Prefix : String 
+ */ 
+
+importPackage( dw.io );
+importPackage( dw.net );
+importPackage( dw.system );
+importPackage( dw.util );
+
+function execute(args : PipelineDictionary) : Number {
+	
+	var filteredRemoteFiles : Collection = new ArrayList();
+	var prefix = args.Prefix;
+	var localFiles : Collection = new ArrayList();
+	var folder : File = new File(File.IMPEX+File.SEPARATOR+"src"+File.SEPARATOR+args.TempFolder);
+	var files = folder.listFiles();
+	
+	for each (var file : File in files) {
+		 
+		// filter out directories; this will automatically remove the current folder from the list
+		if (!file.directory) {
+			
+			if (file.name.match(/xml$/)) {
+				
+				if (!empty(prefix) && file.name.indexOf(prefix) >= 0) {
+					
+					file.zip(new File(File.IMPEX+File.SEPARATOR+"src"+File.SEPARATOR+args.TempFolder+"/"+file.name+".zip"));
+					file.remove(); 
+				}
+			}
+		}		
+	}
+	return PIPELET_NEXT;
+}

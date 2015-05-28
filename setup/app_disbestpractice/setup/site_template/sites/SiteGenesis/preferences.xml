@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+	<custom-preferences>
+		<development>
+			<preference preference-id="disConfiguration">{&#13;
+    "large": {&#13;
+        "scaleWidth": 556,&#13;
+        "scaleHeight": 680,&#13;
+        "scaleMode": "fit"&#13;
+    },&#13;
+    "medium": {&#13;
+        "scaleWidth": 270,&#13;
+        "scaleHeight": 330,&#13;
+        "scaleMode": "fit"&#13;
+    },&#13;
+    "small": {&#13;
+        "scaleWidth": 180,&#13;
+        "scaleHeight": 220,&#13;
+        "scaleMode": "fit"&#13;
+    },&#13;
+    "icon": {&#13;
+        "scaleWidth": 53,&#13;
+        "scaleHeight": 64,&#13;
+        "scaleMode": "fit"&#13;
+    },&#13;
+    "missingImages": {&#13;
+        "small": "testimgs/product180x220_001.jpg",&#13;
+        "medium": "testimgs/product270x330_001.jpg",&#13;
+        "large": "testimgs/product556x680_001.jpg",&#13;
+        "hi-res": "testimgs/osterhase.jpg"&#13;
+    },&#13;
+    "imageMissingText": "The product image is missing!",&#13;
+    "enforceImageScaling": false,&#13;
+    "testImageLocation": "Site",&#13;
+    "imageExistenceCheck": true,&#13;
+    "useTestImagesOnly":false&#13;
+}</preference>
+		</development>
+	</custom-preferences>
+</preferences>

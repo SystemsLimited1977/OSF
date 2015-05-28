@@ -1,0 +1,106 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Create Avatax Multi-Ship To Objects
+*
+* DESCRIPTION:
+*
+*	Creates a request object for multi shipping
+* 
+* INPUT PARAMETERS:
+*
+*	@input Basket : dw.order.Basket
+*
+* OUTPUT PARAMETERS:
+*
+*	@output AvataxShipTo : dw.util.ArrayList
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.order );
+
+importScript('avatax/Avatax_ShipTo_Object.ds');
+
+function execute( args : PipelineDictionary ) : Number
+{
+	try
+	{
+
+/************************************************************************************************************************/
+/********************************** SETTING DATA CONTAINER TO BASKET OR ORDER *******************************************/
+/************************************************************************************************************************/
+		
+		if(empty(args.Basket))
+		{
+			var _dataContainer : Order = args.Order;
+		}
+		else
+		{
+			var _dataContainer : Basket = args.Basket;
+		}
+
+/************************************************************************************************************************/
+/********************************************* INITIALIZE VARIABLES *****************************************************/
+/************************************************************************************************************************/		
+
+		var shipToObject 		: ShipTo_Object 	= new ShipTo_Object(),
+			shippingAddress 	: OrderAddress 		= null,
+			shippingMethod 		: ShippingMethod 	= null, 
+			_AvataxShipTo 		: ArrayList 		= new ArrayList(),
+			it 					: Iterator 			= _dataContainer.getShipments().iterator(),
+			_i 										= 1;
+	
+/************************************************************************************************************************/
+/**************************************** SETS SHIPPING OBJECT PROPERTIES ***********************************************/
+/************************************************************************************************************************/
+
+		while(it.hasNext())
+		{
+			var shipment : Shipment = it.next();
+			shippingAddress = shipment.getShippingAddress();
+			shippingMethod = shipment.getShippingMethod();
+			
+			if(shippingAddress != null)
+			{
+				shipToObject = new ShipTo_Object();
+				
+				shipToObject.setFirstName(shippingAddress.firstName);
+				shipToObject.setLastName(shippingAddress.lastName);
+				shipToObject.setStreet1(shippingAddress.address1);
+				shipToObject.setStreet2(shippingAddress.address2);
+				shipToObject.setCity(shippingAddress.city);
+				shipToObject.setState(shippingAddress.stateCode);
+				shipToObject.setPostalCode(shippingAddress.postalCode);
+				shipToObject.setCountry(shippingAddress.countryCode);
+				shipToObject.setPhoneNumber(shippingAddress.phone);
+				shipToObject.setEmail(_dataContainer.customerEmail);
+				shipToObject.setAddressCode(_i);
+				
+				if( !empty(shippingMethod) ) 
+				{
+					shipToObject.setShippingMethod(shippingMethod.displayName);
+				} 
+				else 
+				{
+					shipToObject.setShippingMethod("N/A");
+				}
+				_AvataxShipTo.add(shipToObject);
+			}
+		}
+		
+/************************************************************************************************************************/
+/****************************************** OUTPUT SHIPPING OBJECT *****************************************************/
+/************************************************************************************************************************/
+
+		args.AvataxShipTo = _AvataxShipTo;
+	
+	    return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("The CreateAvataxMultiShipToObject.ds script failed with the following error: ( {0} )",e.message);
+		return PIPELET_ERROR;
+	}
+}

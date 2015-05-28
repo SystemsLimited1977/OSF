@@ -1,0 +1,13 @@
+<iscomment>Page to display Order Status Failure Response Data</iscomment>
+<!--- TEMPLATENAME: orderStatusResponse.isml --->
+<isdecorate template="account/pt_account">
+<h2>
+	Retrieval of Order Status Failed !!!
+</h2>
+<html>
+	<body>
+		<br>
+		<h3>Technical ERROR while retrieving the order status !!!</h3>
+	</body>
+</html>
+</isdecorate>

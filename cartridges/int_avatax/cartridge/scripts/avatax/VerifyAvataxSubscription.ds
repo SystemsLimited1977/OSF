@@ -1,0 +1,49 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Verify Avatax Subscription
+*
+* DESCRIPTION:
+*
+*	Pings connection to verify functionality
+*
+* OUTPUT PARAMETERS:
+*
+*   @output ReasonCode : String The reason code returned by Avatax (100 = Success)
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+
+importScript('avatax/libAvatax.ds');
+importScript('avatax/Avatax_BillTo_Object.ds');
+importScript('avatax/Avatax_ShipTo_Object.ds');
+importScript('avatax/Avatax_ShipFrom_Object.ds');
+importScript('avatax/Avatax_TaxRequest_Object.ds');
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	try
+	{
+		var csReference 	: WebReference 	= webreferences.taxsvc;
+		var taxationService : Stub 			= csReference.getDefaultService();
+		
+		var AvataxHelper = getAvataxHelper();
+		AvataxHelper.setEndpoint(taxationService);
+		AvataxHelper.createHeader(taxationService);
+		
+		var taxationResponse = null;
+	
+		//Test Ping
+		var pingInput = new csReference.Ping();
+		taxationResponse = taxationService.ping(pingInput);
+		
+		pdict.ReasonCode = taxationResponse.pingResult.resultCode.value; 
+	}
+	catch(e)
+	{
+		Logger.error("Verify Avatax Subscription failed with the following error message: ", e.message);
+	}
+
+   return PIPELET_NEXT;
+}

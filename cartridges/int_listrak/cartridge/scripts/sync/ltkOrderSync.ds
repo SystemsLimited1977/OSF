@@ -1,0 +1,147 @@
+/**
+* Purpose:	Exports Orders placed or modified since last successful export. Order file is sent to Listrak via FTP.
+*	@output products : Array
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.object );
+importPackage( dw.catalog );
+
+importScript( "objects/ltkOrder.ds" ); 
+importScript( "sync/ltkExportUtils.ds" ); 
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var enabled : Boolean = dw.system.Site.current.preferences.custom.Listrak_OrderExport_Enabled;
+	if (!empty(enabled) && !enabled)
+	{
+		return PIPELET_NEXT;
+	}
+	
+	// Record the export start time
+	var calendar = new Calendar();
+	var currentExportStartTime = calendar.getTime().toISOString(); 
+	
+	// Load the date of the last successful export - If no date is found go back 5 yrs
+	var lastExport = new ltkExportInfo("lastOrderExportDate");
+	var lastExportDate : Date = lastExport.GetValueAsDate();
+
+	calendar.set(Calendar.DATE , calendar.get(Calendar.DATE ) - 30); // 30 days before the current date
+	var maxHistoryDate : Date = calendar.getTime();
+		
+	if (empty(lastExportDate) || maxHistoryDate > lastExportDate)
+	{
+		lastExportDate = maxHistoryDate;
+	}
+
+	
+	// Get the orders ready for export
+	var products : Array = new Array();
+	
+	//var products : List = new dw.util.List(Product);
+	var orders : SeekableIterator = OrderMgr.queryOrders("lastModified >= {1}", "orderNo", false, lastExportDate);
+	
+	if (orders.hasNext())
+	{
+		////////// Prepare order files //////////
+		var orderfile = new ExportFile("orders_DW.txt");
+		var itemfile = new ExportFile("orderItems_DW.txt");
+		
+		// order header row
+		orderfile.AddRowItem('Email');
+		orderfile.AddRowItem('OrderNumber');
+		orderfile.AddRowItem('DateEntered');
+		orderfile.AddRowItem('OrderTotal');
+		orderfile.AddRowItem('ItemTotal');
+		orderfile.AddRowItem('TaxTotal');
+		orderfile.AddRowItem('ShippingTotal');
+		orderfile.AddRowItem('Status');
+		orderfile.AddRowItem('CouponCode');
+		orderfile.AddRowItem('TrackingNumber');
+		orderfile.WriteRow();
+	
+		// item header row
+		itemfile.AddRowItem('OrderNumber');
+		itemfile.AddRowItem('Sku');
+		itemfile.AddRowItem('Quantity');
+		itemfile.AddRowItem('Price');
+		itemfile.AddRowItem('TrackingNumber');
+		itemfile.WriteRow();
+		
+		// Process all orders
+		for each(var order : order in orders)
+		{
+			var o = new ltkOrder();
+			o.LoadOrder(order);
+	
+			// Add the order information to the order file		
+			orderfile.AddRowItem(decodeURI(o.emailAddress), true);
+			orderfile.AddRowItem(o.orderNumber, true);
+			orderfile.AddRowItemAsDate(o.orderDate);
+			orderfile.AddRowItem(o.orderTotal());
+			orderfile.AddRowItem(o.itemTotal);
+			orderfile.AddRowItem(o.taxTotal);
+			orderfile.AddRowItem(o.shipTotal);
+			
+			var status = 'NotSet';
+			switch (o.status) {
+				case "NEW" :
+					status = 'Pending';
+					break;
+				case "OPEN" :
+					status = 'Pending';
+					break;
+				case "ORDER_STATUS_COMPLETED" :
+					status = 'Completed';
+					break;
+				case "ORDER_STATUS_CANCELLED" :
+					status = 'Canceled';
+					break;
+				case "ORDER_STATUS_REPLACED" :
+					status = 'Misc';
+					break;
+			}
+			orderfile.AddRowItem(status, true);
+			orderfile.AddRowItem(o.couponCodes, true);
+			orderfile.AddRowItem(o.trackingNumbers, true);
+			
+			orderfile.WriteRow();
+			
+			// Add the order items for this order to the items files
+			for each(var i : ProductLineItem in o.items)
+			{
+				itemfile.AddRowItem(o.orderNumber,true);
+				itemfile.AddRowItem(i.sku,true);
+				itemfile.AddRowItem(i.qty);
+				itemfile.AddRowItem(i.price);
+				itemfile.AddRowItem(i.trackingNumber, true);
+				
+				itemfile.WriteRow();
+				
+				if (i.product != null)
+					products.push(i.product);
+			}
+			
+		} 
+		args.products = products;
+		
+		// Write the files and submit via FTP to Listrak
+		var orderResult = orderfile.SubmitFile();
+		var itemResult = itemfile.SubmitFile();
+		
+		if (orderResult == false || itemResult == false)
+		{
+			return PIPELET_ERROR;
+		}
+
+		orderfile.Delete();
+		itemfile.Delete();			
+	}
+		
+	lastExport.SetValue(currentExportStartTime);
+	
+
+	
+	return PIPELET_NEXT;
+}

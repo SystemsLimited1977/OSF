@@ -1,0 +1,13 @@
+<iscomment>Page to display Order History Failure Response Data</iscomment>
+<!--- TEMPLATENAME: orderStatusResponse.isml --->
+<isdecorate template="account/pt_account">
+<h2>
+	Order History ERROR
+</h2>
+<html>
+	<body>
+		<br>
+		Technical ERROR while retrieving the Order History !!!
+	</body>
+</html>
+</isdecorate>

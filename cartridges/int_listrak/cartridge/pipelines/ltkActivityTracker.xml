@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>Tracks activity</description>
+        </text-node>
+        <node-display x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="TrackActivity">
+    <segment>
+      <node>
+        <start-node call-mode="public" name="TrackActivity" secure="false">
+          <start-parameter value="path"/>
+        </start-node>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="tracking/ltkTrackActivity.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="Product" key="Product"/>
+          <key-binding alias="ltkATSku" key="Sku"/>
+          <key-binding alias="ltkATSku" key="ltkATSku"/>
+          <key-binding alias="Product" key="P"/>
+          <key-binding alias="ltkCategoryPage" key="ltkCategoryPage"/>
+          <key-binding alias="ltkProductPage" key="ltkProductPage"/>
+          <key-binding alias="ltkQuickViewPage" key="ltkQuickViewPage"/>
+          <key-binding alias="CurrentRequest" key="CurrentRequest"/>
+          <key-binding alias="path" key="path"/>
+          <key-binding alias="Basket" key="basket"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="-1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node/>
+              <node-display orientation="horizontal" x="2" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="ajax/ltkActivityTrackingResponse"/>
+        </interaction-node>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_3">
+    <segment>
+      <node>
+        <text-node>
+          <description>Called to force OnRequest pipeline to fire with current path parameter</description>
+        </text-node>
+        <node-display x="5" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartActivity">
+    <segment>
+      <node>
+        <start-node name="StartActivity" secure="false">
+          <start-parameter value="path"/>
+        </start-node>
+        <node-display x="5" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="ajax/ltkActivityTrackingResponse"/>
+        </interaction-node>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

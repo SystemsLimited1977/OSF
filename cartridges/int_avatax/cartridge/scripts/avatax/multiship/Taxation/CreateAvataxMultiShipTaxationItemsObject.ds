@@ -1,0 +1,288 @@
+/**********************************************************************************************************************************************************************************************
+*
+* TITLE:  
+*
+*	Create Avatax Multi Ship Taxation Items Object
+*
+* DESCRIPTION:
+*
+*	Creates the request object for taxation for multi-shipping
+* 
+* INPUT PARAMETERS:
+*
+*    @input Basket : dw.order.Basket
+*
+* OUTPUT PARAMETERS:
+*
+*	 @output itemmap : dw.util.HashMap
+*    @output itemarray : Array
+*	 @output itemMapByShip : dw.util.HashMap contains a collection of itemmaps where the key is the shipmentID
+*	 @output itemArrayByShip : dw.util.HashMap contains collection of arrat's where the key is the shipmentID
+*	 @output itemMapByOrder :dw.util.HashMap this is price adjustments that happen at the order level (not sure where they really need to get applied)
+*	 @output itemArrayByOrder : Array this is the price adjustments that happen at the order level (not sure where they really need to get applied)
+*
+**********************************************************************************************************************************************************************************************/
+importPackage( dw.system );
+importPackage( dw.order);
+importPackage( dw.util );
+importPackage( dw.value);
+
+importScript('avatax/libAvatax.ds');
+
+function execute( args : PipelineDictionary ) : Number
+{
+	try
+	{
+		
+/************************************************************************************************************************/
+/****************************************** DEFINE INITIAL VARIABLES ****************************************************/
+/************************************************************************************************************************/
+
+		var itemMap 			: HashMap 			= new HashMap(),
+			items 				: Array 			= new Array(),
+			itemMapByShip 		: HashMap 			= new HashMap(),
+			itemArrayByShip 	: HashMap 			= new HashMap(),
+			itemMapByOrder		: HashMap 			= new HashMap(),
+			itemArrayByOrder	: Array 			= new Array(),
+			basket 				: Basket 			= args.Basket,
+			shipment 			: Shipment		 	= basket.getDefaultShipment(),
+			shippingMethod 		: ShippingMethod 	= shipment.getShippingMethod(),
+			lineItems 			: Iterator 			= basket.allLineItems.iterator(),
+			idcount 			: Number 			= 0,
+			shippingMethodTaxCode 					= null;
+			
+		if( !empty(shippingMethod) ) 
+		{
+			shippingMethodTaxCode = shippingMethod.taxClassID;
+		}
+		
+/************************************************************************************************************************/
+/****************************************** ADJUST ORDER LEVEL PROMOS ***************************************************/
+/************************************************************************************************************************/
+
+		var basketSubTotalPrice 			= basket.getAdjustedMerchandizeTotalNetPrice();			
+		var orderDiscount 		: Money		= new Money(0,basket.currencyCode);
+		var subTotal 			: Money 	= basket.adjustedMerchandizeTotalNetPrice;
+		
+		for each( var promo : PriceAdjustment in basket.priceAdjustments ) 
+		{
+			orderDiscount	= orderDiscount.add(promo.netPrice);
+			if(promo.netPrice.value < 0) 
+			{
+				basketSubTotalPrice	= subTotal.add(promo.netPrice.multiply(-1));
+			}
+		}
+			
+		var orderLevelAdjustment : Collection = basket.getPriceAdjustments();
+		var orderLevelIterator : Iterator = orderLevelAdjustment.iterator();
+		var orderLevelAdjustmentPrice = null;
+		
+		while( orderLevelIterator.hasNext() ) 
+		{
+		    var oLevelPriceAdjustment = orderLevelIterator.next();
+		    orderLevelAdjustmentPrice = oLevelPriceAdjustment.price;
+		}
+				
+/************************************************************************************************************************/
+/****************************************** SETTING LINE ITEM PROPERTIES ************************************************/
+/************************************************************************************************************************/
+		
+		var AvataxHelper = getAvataxHelper();
+		
+		// First Lookup Through the shipments
+		var shipmentLineItems:Iterator;
+		
+		for each(var shipment:dw.order.Shipment in basket.getShipments()) 
+		{
+			// now loop through the line items for each shipment	
+			shipmentLineItems = shipment.allLineItems.iterator();
+			
+			// create a new itemMap and itemArray (items)
+			itemMap = new HashMap();
+			items = new Array();
+			
+			while(shipmentLineItems.hasNext()) 
+			{
+				var actualQuantity 	: Number 			= 0;
+				var lineItem 		: ProductLineItem 	= shipmentLineItems.next();
+				var line 								= new AvataxHelper.csReference.Line();
+				
+				if( lineItem instanceof dw.order.ProductLineItem ) 
+				{
+					itemMap.put(idcount.toString(), lineItem);
+	 			
+		 			actualQuantity = lineItem.quantity.value;
+		 			
+		 			if( orderLevelAdjustmentPrice!=null )
+		 			{
+		         		orderLevelAdjustmentPrice = orderLevelAdjustmentPrice.multiply(-1);
+			        }
+			        
+					if( orderLevelAdjustmentPrice != null && !empty(orderLevelAdjustmentPrice) ) 
+					{		
+						adjustedLineItemFinalPrice = getOrderLevelAdjustedLineItemPrice(lineItem.adjustedNetPrice,orderLevelAdjustmentPrice,basketSubTotalPrice,basket.currencyCode,actualQuantity);
+					} 
+					else 
+					{
+						//do not adjust for quantity, send full price					
+					  	//adjustedLineItemFinalPrice = lineItem.adjustedNetPrice.divide(actualQuantity);		
+					    adjustedLineItemFinalPrice = lineItem.adjustedNetPrice;
+					}
+			
+		 			line.amount 		= StringUtils.formatNumber(Math.abs(adjustedLineItemFinalPrice.getValue()),"#####0.00","en_US");
+					line.qty 			= lineItem.quantity.value;
+					
+					line.description	= lineItem.productName;
+					line.itemCode 		= lineItem.productID;
+					line.taxCode 		= lineItem.taxClassID || lineItem.getProduct().taxClassID || AvataxHelper.getDefaultProductTaxCode();
+					
+					line.no = idcount++;
+					items.push(line);
+				}
+				else if(lineItem instanceof dw.order.ShippingLineItem) 
+				{
+					itemMap.put(idcount.toString(), lineItem);
+					line.qty			= 1;
+					line.description	= lineItem.lineItemText;
+					line.itemCode		= lineItem.ID;
+					line.taxCode		= lineItem.taxClassID || shippingMethodTaxCode || AvataxHelper.getDefaultShippingMethodTaxCode();
+					line.no = idcount++;
+		
+					var shipPriceAdjustTotal = 0;
+					var shipPriceTotal = 0;
+					var basketShippingPriceAdjustments : Iterator = basket.getShippingPriceAdjustments().iterator();
+		    		while( basketShippingPriceAdjustments.hasNext() ) 
+		    		{
+						var lineItem : PriceAdjustment = basketShippingPriceAdjustments.next();
+						var shipPriceAdjust = lineItem.getPrice();
+		
+						if( shipPriceAdjust != null ) 
+						{
+						    shipPriceAdjustTotal += shipPriceAdjust.getValue();
+						}
+					}
+					
+					if( empty(shipPriceAdjustTotal) || shipPriceAdjustTotal==0 ) 
+					{
+					   shipPriceAdjustTotal = lineItem.basePrice.value;
+					}
+					
+					line.amount =  StringUtils.formatNumber(Math.abs(lineItem.priceValue), '#####0.00', 'en_US');
+					items.push(line); 
+				}
+				// A ProductShippingLineItem defines lineitem-specific shipping costs.
+				else if(lineItem instanceof dw.order.ProductShippingLineItem ) 
+		 		{
+				    itemMap.put(idcount.toString(), lineItem);
+				    
+				    line.qty    		= 1;
+				    line.description  	= lineItem.lineItemText;
+				    //Replace below with shipping surcharge Item Code
+				    line.itemCode  		= lineItem.shipment.ID;
+				    //Replace below with shipping surcharge Tax Code
+				    line.taxCode    	= lineItem.taxClassID;
+				    line.no 			= idcount++;
+				    line.amount 		= lineItem.basePrice.value;
+				    
+				    items.push(line);   
+			 	}
+				else 
+				{
+					// this doesn't seem to have any real effect as line is never added to to the item array
+					// however the tax does get set for the lineItem, so maybe thats all that needs to happen
+					line.description 	= lineItem.lineItemText;
+					line.itemCode 		= "PriceAdjustment";
+					line.taxCode 		= lineItem.taxClassID || AvataxHelper.getDefaultCouponTaxCode();
+					lineItem.setTax(new dw.value.Money(new Number(0),basket.currencyCode));
+					lineItem.setPriceValue(lineItem.netPrice.add(new dw.value.Money(new Number(0),basket.currencyCode)).getValue());
+					//lineItem.updatePrice(lineItem.netPrice.add(new dw.value.Money(new Number(0),basket.currencyCode)));
+				}
+				
+				//build out the hash map with corresponding keys
+				itemMapByShip.put(shipment.ID, itemMap);
+				itemArrayByShip.put(shipment.ID, items);
+			}
+		}
+		
+/************************************************************************************************************************/
+/**************************************** SHIPPING AND ORDER LEVEL PROMOS ***********************************************/
+/************************************************************************************************************************/	
+	
+		// besides shipment line items, we need to calculate tax for possible order-level price adjustments
+		// this includes order-level shipping price adjustments
+		if( !basket.getPriceAdjustments().empty || !basket.getShippingPriceAdjustments().empty ) 
+		{
+			var basketPriceAdjustments : Iterator = basket.getPriceAdjustments().iterator();
+			while( basketPriceAdjustments.hasNext() ) 
+			{
+				var lineItem : PriceAdjustment = basketPriceAdjustments.next();
+				itemMapByOrder.put(idcount.toString(), lineItem);
+	
+				var item = new AvataxHelper.csReference.Line();
+				item.amount = StringUtils.formatNumber(Math.abs(lineItem.basePrice.value),"#####0.00","en_US"); 
+				item.qty = 1;
+				
+				item.description = lineItem.lineItemText;
+				item.itemCode = "PriceAdjustment";
+			}
+	
+			var basketShippingPriceAdjustments : Iterator = basket.getShippingPriceAdjustments().iterator();
+			while( basketShippingPriceAdjustments.hasNext() ) 
+			{
+				var lineItem : PriceAdjustment = basketShippingPriceAdjustments.next();
+				itemMapByOrder.put(idcount.toString(), lineItem);
+				var item = new csReference.Line();
+				item.amount = StringUtils.formatNumber(Math.abs(lineItem.basePrice.value),"#####0.00","en_US");
+				item.qty = 1;
+				
+				item.description = lineItem.lineItemText;
+				item.itemCode = "PriceAdjustment";
+			}
+	    }
+	    
+/************************************************************************************************************************/
+/*************************************** OUTPUT ITEM ARRAY AND HASH MAP *************************************************/
+/************************************************************************************************************************/	
+	
+		args.itemarray = items;
+		args.itemmap = itemMap;
+		args.itemMapByShip = itemMapByShip;
+		args.itemArrayByShip = itemArrayByShip;
+		args.itemMapByOrder = itemMapByOrder;
+	   
+	    return PIPELET_NEXT;
+	}
+	catch(e)
+	{
+		Logger.error("The CreateAvataxMultiShipTaxationItemsObject.ds script failed with the following error: ( {0} )",e.message);
+		return PIPELET_ERROR;
+	}
+}
+
+/************************************************************************************************************************/
+/******************************* CUSTOM METHOD FOR PRICE OF ORDER LEVEL ADJUSTMENTS *************************************/
+/************************************************************************************************************************/
+
+function getOrderLevelAdjustedLineItemPrice(lineItemPrice : Money, orderLevelAdjustmentPrice : Money, basketSubTotalPrice : Money, currencyCode : String, quantity : Number) 
+{
+	var price = 0;
+
+	if( lineItemPrice!=null && orderLevelAdjustmentPrice!=null && basketSubTotalPrice!=null && !empty(currencyCode) ) 
+	{
+	   var ratioDivided = lineItemPrice.divide(basketSubTotalPrice.getValue());
+
+	   var ratioAdjustment : Number = (ratioDivided * (Math.abs(orderLevelAdjustmentPrice.getValue())));
+
+	   var adjustedPrice = new Money(ratioAdjustment,currencyCode);
+	   
+	   price = lineItemPrice.subtract(adjustedPrice);
+	 	   
+	   if( !empty(quantity) && quantity>1 ) 
+	   {
+	      //price = price.divide(quantity);
+	      //do not adjust for quantity, send full price
+	   }	   
+	}
+
+	return price;
+}

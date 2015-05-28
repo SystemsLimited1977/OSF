@@ -1,0 +1,88 @@
+
+/**
+ * Generate local and remote filenames for PriceBook Sync using provided prefix and current timestamp in yyyy-MM-dd_HH-mm-ss GMT format.
+ *
+ * If TempFolder does not exist it is created.
+ *
+ * @input  TempFolder : String  mandatory, e.g. "pricebook", folder is underneath Impex share, src folder
+ * @input  FilePrefix : String  optional, e.g. "Pricebook_"
+ * @input  SyncType : String
+ * @input  PriceBookId : String
+ * @input  PriceType : String
+ * @output File : String  name of the local file, relative to the Impex share, src folder, e.g. "orders/Orders_[SyncType]_20090623201452.xml"
+ * @output RemoteFile : String  name of the remote file inside RemoteFolderURL, e.g. "Pricebook_[SyncType]_20090623201452.xml"
+ */
+
+importPackage( dw.io );
+importPackage( dw.system );
+importPackage( dw.util );
+
+function execute(args : PipelineDictionary) : Number {
+	
+	// read parameters
+    var tempFolder : String = args.TempFolder;
+	var filePrefix : String = args.FilePrefix;
+	if (!empty(args.PriceBookId)) {
+		
+		filePrefix = filePrefix + args.PriceBookId + "_";
+	}
+	
+	if (!empty(args.SyncType) && !empty(args.PriceType)) {
+		
+		filePrefix = filePrefix + args.SyncType + "_"+ args.PriceType +"_";
+	}
+	
+    // check parameters
+    if (empty(tempFolder)) {
+    	
+    	Logger.getLogger("simplefeeds").error( "GenerateExportFilename: Parameter TempFolder empty" );
+    	return PIPELET_ERROR;
+    }
+	
+    Logger.getLogger("simplefeeds").debug( "GenerateExportFilename: TempFolder: " + tempFolder + ", FilePrefix: " + ( !empty( filePrefix ) ? filePrefix : "(empty)" ) );
+
+	// create temp folder
+	if (!createTempFolder(tempFolder)) {
+		
+		// couldn't create folder
+		return PIPELET_ERROR;
+	}
+	
+	// create filename
+	var calendar : Calendar = new Calendar();
+	calendar.timeZone = "GMT";
+	var gmtDateString : String = StringUtils.formatCalendar( calendar, "yyyy-MM-dd_HH-mm-ss" );
+	
+	var remoteFile : String = ( !empty( filePrefix ) ? filePrefix : "" ) + gmtDateString + "_" + Site.getCurrent().httpHostName.split('.')[0] + ".xml";
+	var file : String = tempFolder + File.SEPARATOR + remoteFile;
+	
+	Logger.getLogger("simplefeeds").debug( "GenerateExportFilename: File: " + file + ", RemoteFile: " + remoteFile );
+	
+	args.File = file;
+	args.RemoteFile = remoteFile;
+
+    return PIPELET_NEXT;
+}
+
+function createTempFolder(tempFolder : String) : boolean {
+	
+	var folder : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + tempFolder );
+
+	if (folder.exists()) {
+		
+		// nothing to do
+		return true;
+	}
+
+	Logger.getLogger("simplefeeds").debug( "GenerateExportFilename: Creating temp folder " + folder.fullPath );
+
+	// create folder	
+	var result : boolean = folder.mkdirs();
+	if (!result) {
+		
+		Logger.getLogger("simplefeeds").error( "GenerateExportFilename: Error creating temp folder " + folder.fullPath );
+		return false;
+	}
+	
+	return true;
+}

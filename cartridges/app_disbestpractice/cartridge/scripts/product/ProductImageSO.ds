@@ -1,0 +1,362 @@
+/**
+* This script provides a wrapper for Product Image API so transformation rules can be retrieved 
+* from preferences without having any effect on the actual code. That helps to easily adjust 
+* transformation settings and introduce new view types.
+*/
+importPackage ( dw.catalog );
+importPackage ( dw.content );
+importPackage ( dw.system );
+importPackage ( dw.web );
+var cvLogger : Logger = Logger.getLogger("ProductImageSO.ds");
+
+//configuration 'singleton' for the duration of a request
+var cvDISConfiguration : Object = null;
+//image cache 'singleton' for the duration of a request
+var cvProductImageCache = {};
+
+/**
+* Initializes the ProductImage wrapper object
+*
+* @param viewType 		: String type of view (resolution) that should be generated (required) 
+* @param imageObject 	: Product or ProductVariationAttributeValue	(required)
+* @index index			: Number position of the image in the list of images for the view type. Defaults to 0 if not provided
+*/
+function ProductImage( viewType: String, imageObject : Object, index : Number ) : ProductImage {
+
+	var self = this;
+
+	//Check what type of image object the wrapper got
+	if ( imageObject instanceof dw.catalog.ProductVariationAttributeValue) {
+		this.referenceType = 'ProductVariationAttributeValue';
+	} else {
+		this.referenceType = 'Product';
+	}
+
+	//initialize the DIS config object from JSON
+	if ( !cvDISConfiguration ) {
+		var disConfigurationJSON : String = dw.system.Site.getCurrent().getCustomPreferenceValue("disConfiguration");
+		if ( !empty( disConfigurationJSON ) ) {
+			cvDISConfiguration = JSON.parse( disConfigurationJSON );
+			if ( cvDISConfiguration.testImageLocation && cvDISConfiguration.testImageLocation.equalsIgnoreCase('Catalog') ) {
+				cvDISConfiguration.testImageLocation = URLUtils.CONTEXT_CATALOG;
+			} else {
+				cvDISConfiguration.testImageLocation = URLUtils.CONTEXT_SITE;
+			}
+		} else {
+			cvDISConfiguration = {};
+		}
+	}
+
+	//init basic object attributes
+	// --> defines if image needs to be scaled
+	this.scaleImage = false;
+	// --> view type that should be rendered
+	this.viewType = viewType;
+	// --> the image object --> escape empty object
+	this.imageObject = (empty(imageObject)) ? {name: '', getImages: function(){return new dw.util.ArrayList()}, getImage: function(){return null;}} : imageObject;
+	// --> the view type that can be scaled - typically high resolution
+	this.scalableViewType = null;
+	// --> index of the image
+	this.index = (empty(index)) ? 0 : index;
+	// --> defines if the image needs to be scaled. That's not necessary if a product has an image for the given view type configured 
+	this.scaleImage = false;
+	
+	this.transformationObj = ( empty(cvDISConfiguration[viewType]) ) ? {} : cvDISConfiguration[viewType];
+	
+	//determine the scaleableImageType that correspoonds with the viewType
+	switch (this.viewType){
+		case 'icon':
+		case 'thumbnail':
+		case 'small':
+		case 'medium':
+		case 'large':
+			this.scalableViewType = 'hi-res';
+			break;
+		case 'gallery-large':
+		case 'gallery-small':
+			this.scalableViewType = 'gallery';
+			break;
+		default:
+			this.scalableViewType = this.viewType;
+			break;
+	};
+
+	var scaleableImage : MediaFile = this.imageObject.getImage(this.scalableViewType, this.index);
+
+	//Get the image for the image object if not only test images should be used
+	if ( !cvDISConfiguration.useTestImagesOnly ) { 
+		this.image = this.imageObject.getImage(this.viewType, this.index);
+	} else {
+		this.image = null;
+	}
+	if ( !cvDISConfiguration.useTestImagesOnly && (empty(this.image) || cvDISConfiguration.enforceImageScaling && !empty(scaleableImage) ) ) {
+		//there hasn't been a image configured and we fall back to the highres one which needs to be scaled
+		this.image = scaleableImage;
+		this.scaleImage = true;
+	}
+
+	/**
+	* Get the physical file for the image.
+	*/	
+	this.getMediaFile = function() {
+		if ( this.mediaFile == null ){
+			var baseImageURL : String = this.image.httpURL.toString();
+			baseImageURL = baseImageURL.substr( baseImageURL.indexOf("/on/demandware.static/") + 22);
+			var baseImageURLArray : Array = baseImageURL.split( '/' );
+			var filePathArray : Array = [ dw.io.File.CATALOGS ];
+			for ( var i : Number = 0; i < baseImageURLArray.length; i++) {
+				if ( i == 0 || i == 3 ) {
+					continue;
+				} else if ( i == 1 ) {
+					filePathArray.push( baseImageURLArray[i].replace('Sites-', '') );
+				} else {
+					filePathArray.push( baseImageURLArray[i] );
+				}
+			}
+			var filePath : String = filePathArray.join( dw.io.File.SEPARATOR );
+			this.mediaFile = new dw.io.File( filePath );
+			// locale fallback
+			if(!this.mediaFile.exists()){
+				filePathArray[2] = filePathArray[2].replace(/_[A_Z]{2}/,"");
+				filePath = filePathArray.join( dw.io.File.SEPARATOR );
+				this.mediaFile = new dw.io.File( filePath );
+				if(!this.mediaFile.exists()){
+					filePathArray[2] = "default";
+					filePath = filePathArray.join( dw.io.File.SEPARATOR );
+					this.mediaFile = new dw.io.File( filePath );
+				}
+			}
+		}
+		return this.mediaFile;
+	}
+
+	// Check existence of the referenced image file.
+	if( cvDISConfiguration.imageExistenceCheck ) {
+		if ( !empty(this.image) ) {
+			if ( !this.getMediaFile().exists() ) {
+				// Only log on non production instances.
+				if ( dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM ) {
+					cvLogger.error( "Image doesn't exist: \"" + this.getMediaFile().path + "\". Product ID: \"" + this.imageObject.ID ); 
+				}
+				this.image = null;
+			}
+		} else {
+			// Only log on non production instances.
+			if ( dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM ) {
+				cvLogger.error( "Image couldn't be determined for Product ID: \"" + this.imageObject.ID );
+			}
+			this.image = null;
+		}
+	}
+
+	
+	/**
+	* Gets the dimensions of the image - supports JPG only
+	*/
+	this.getDimensions = function() {
+		var file : dw.io.File = this.getMediaFile();
+		if ( file.exists() ) {
+			function to16BitInt(int1, int2)
+			{
+				function unsignInt(signedInt) {
+					if (signedInt < 0)
+						return signedInt += 256;
+					return signedInt;
+				}
+				return unsignInt(int1) * 256 + unsignInt(int2);	
+			}
+			var reader : dw.io.RandomAccessFileReader = new dw.io.RandomAccessFileReader(file);
+			try {
+				while ( reader.position <= reader.length()-1 ) {
+					if (reader.readByte() == -1) { // 0xFF, marker
+						var indicator = reader.readByte();
+						//check if it's a JFIF section, such as thumbnail, if so, jump past the segment (first 2 bytes tells the length)
+						if (indicator >= -32 && indicator <= -17 ) { //0xE0 - 0xEF, JFIF section
+							var jumplength = to16BitInt(reader.readByte(), reader.readByte());
+							reader.setPosition(reader.position + jumplength-2);
+						}
+						else if (indicator == -64) { //0xC0 Metadata section
+							reader.setPosition(reader.position + 3);
+							var height = to16BitInt(reader.readByte(), reader.readByte());
+							var width = to16BitInt(reader.readByte(), reader.readByte());
+							return [ width, height ];	
+						}
+					}
+				}
+			} catch( e ) {
+				Logger.error( e );
+			} finally {
+				reader.close();
+			}
+		}
+		return [ 0, 0 ];	
+	}
+
+	/*************************************************************************************************
+	******************************** API Methods *****************************************************
+	*************************************************************************************************/
+
+	this.getURL = function(){
+		return this.getImageURL();
+	};
+	
+	this.getHttpURL = function(){
+		return this.getImageURL('Http');
+	};
+	
+	this.getHttpsURL = function(){
+		return this.getImageURL('Https');
+	};
+	
+	this.getAbsURL = function(){
+		return this.getImageURL('Abs');
+	};
+	
+	this.getImageURL = function( imageFunctionID : String){
+		if ( empty(this.image) ) {
+			//check if test images should be used --> makes sense in cases where the product images haven't yet been configured
+			var testFileContext : String = cvDISConfiguration.testImageLocation;
+			var testImage : String = null;
+			if ( cvDISConfiguration ) {
+				if ( cvDISConfiguration.missingImages ) {
+					if ( cvDISConfiguration.missingImages[viewType] ) {
+						testImage = cvDISConfiguration.missingImages[viewType];
+						this.scaleImage = false;
+					}
+					if ( ( !testImage || cvDISConfiguration.enforceImageScaling) && this.scalableViewType != this.viewType && cvDISConfiguration.missingImages[this.scalableViewType] ) {
+						testImage = cvDISConfiguration.missingImages[this.scalableViewType];
+						this.scaleImage = true;
+					}
+				}
+			}
+			if ( testImage ) {
+				var test : String = URLUtils.CONTEXT_CATALOG;
+				if ( testFileContext == URLUtils.CONTEXT_CATALOG ) {
+					var catalog : Catalog = CatalogMgr.siteCatalog;
+					if ( catalog ) {
+						var imageURL : String = null;
+						if ( this.scaleImage ) {
+							imageURL = URLUtils[imageFunctionID?(imageFunctionID.toLowerCase()+'Static'):'imageURL']( URLUtils.CONTEXT_CATALOG, catalog.ID, testImage, this.transformationObj);
+						} else {
+							imageURL = URLUtils[imageFunctionID?(imageFunctionID.toLowerCase()+'Static'):'staticURL']( URLUtils.CONTEXT_CATALOG, catalog.ID, testImage);
+						}
+						return imageURL;
+					}
+					return dw.web.URLUtils[imageFunctionID?(imageFunctionID.toLowerCase()+'Static'):'staticURL']('/images/noimage'+ this.viewType +'.png');
+				} else {
+					var imageURL : String = null;
+					if ( this.scaleImage ) {
+						imageURL = URLUtils[imageFunctionID?(imageFunctionID.toLowerCase()+'Static'):'imageURL']( URLUtils.CONTEXT_SITE, Site.current.ID, testImage, this.transformationObj);
+					} else {
+						imageURL = URLUtils[imageFunctionID?(imageFunctionID.toLowerCase()+'Static'):'staticURL']( URLUtils.CONTEXT_SITE, Site.current.ID, testImage);
+					}
+					return imageURL;
+				}
+			}else if (this.viewType == 'swatch') {
+				return null;
+			} else {
+				return dw.web.URLUtils[imageFunctionID?(imageFunctionID.toLowerCase()+'Static'):'staticURL']('/images/noimage'+ this.viewType +'.png');
+			}
+		}
+		if ( this.scaleImage ) { 
+			return this.image[imageFunctionID?('get'+imageFunctionID+'ImageURL'):'getImageURL'](this.transformationObj);
+		} else {
+			return this.image[imageFunctionID?('get'+imageFunctionID+'URL'):'getURL']();
+		}
+	};
+	
+	this.getTitle = function(){
+		if ( this.referenceType == 'ProductVariationAttributeValue' && this.viewType == 'swatch' ) {
+			return this.imageObject.displayValue;
+		} else {
+			if ( empty(this.image) || empty(this.image.title) ) {
+				if ( this.referenceType == 'Product' ) {
+					return this.imageObject.name;
+				} else {
+					return this.imageObject.displayValue;
+				}
+			} else {
+				return this.image.title;
+			}
+		}
+	};
+	
+	this.getAlt = function(){
+		if ( this.referenceType == 'ProductVariationAttributeValue' && this.viewType == 'swatch' ) {
+			return this.imageObject.displayValue;
+		} else {
+			var altArray = [];
+			if ( empty(this.image) || empty(this.image.alt) ) {
+				if ( cvDISConfiguration.imageMissingText ) {
+					return cvDISConfiguration.imageMissingText;
+				} else if ( this.referenceType == 'Product' ) {
+					return this.imageObject.name;
+				} else {
+					return this.imageObject.displayValue;
+				}
+			} else {
+				return this.image.alt;
+			}
+		}
+	};
+	
+	// Returns a Collection of ProductImage Instances of the productimages assigned for this viewtype
+	this.getAllImages = function() : Collection {
+		var result : dw.util.List = new dw.util.ArrayList();
+		var images  : dw.util.List = this.imageObject.getImages(this.scalableViewType);
+		if (images.length == 0) images = this.imageObject.getImages(this.viewType);
+		for (var i = 0; i < images.length; i++){
+			if (i == this.index) {
+				result.add(this);
+			} else {
+				result.add( ProductImage.getImage(this.viewType, this.imageObject, i));
+			}
+		}
+		return result;
+	};
+	
+	this.getImages = function() : Collection {
+		return this.getAllImages();
+	};
+	
+	this.alt = this.getAlt();
+	this.title = this.getTitle();
+}
+
+/**
+* Gets a new Product Image Wrapper object if it hasn't been initialized during the request, 
+* otherwise the already initialzed version will be returned.
+*
+* @param viewType 		: String type of view (resolution) that should be generated (required) 
+* @param imageObject 	: Product or ProductVariationAttributeValue	(required)
+* @index index			: Number position of the image in the list of images for the view type. Defaults to 0 if not provided
+*/
+ProductImage.getImage = function(viewType, imageObject, index){
+	if(empty(imageObject) || empty(viewType)){
+		return null;
+	}
+	// @TODO: Implement a cache
+	var imageID = [imageObject.ID, viewType, index].join('_');
+	if ( cvProductImageCache[imageID] ) {
+		return cvProductImageCache[imageID];
+	} 
+	var img = new ProductImage(viewType, imageObject,index);
+	cvProductImageCache[imageID] = img;
+	return img;
+};
+
+
+/**
+* Gets a all images for a given image object
+*
+* @param viewType 		: String type of view (resolution) that should be generated (required) 
+* @param imageObject 	: Product or ProductVariationAttributeValue	(required)
+*
+* @return Collection of images assiciated with the image object and the view type
+*/
+ProductImage.getImages = function(imageObject, viewType) : Collection {
+	if(empty(imageObject) || empty(viewType)){
+		return null;
+	}
+	return ProductImage.getImage(viewType, imageObject, 0).getImages();
+};

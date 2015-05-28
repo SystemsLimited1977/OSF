@@ -1,0 +1,197 @@
+<!-- Calculate Tax Text -->
+<!-- AvataxTest-CalculateTax?orderno=001&neworderno=002&processed=true -->
+<html>
+<head>
+	<script src="${URLUtils.staticURL('lib/jquery/jquery-1.7.1.min.js')}" type="text/javascript"></script>
+	<style>
+		body {width:100%;}
+		img { display:block; padding:0; border:0; margin:0; }
+		.fl { float:left; display:block; }
+		.clear {clear:both;}
+		
+		.container { width:980px; margin:20px auto; }
+		.lbl { width:100px; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Avatax Test Center</h1>
+		<div>
+			<label>Avatax Test-Key</label>
+			<input id="testkey" type="text" />
+		</div>
+		<hr/>
+		<form>
+			<div class="fl" style="width:300px">
+				<h2>Test Connection</h2>
+				<div class="action-box">
+					<button id="testConnection">Test Avatax Connection</button>
+				</div>
+			</div>
+			<div class="fl" style="width:600px;">
+				<h2>Results</h2>
+				<div class="lbl fl">Status:</div><div class="fl ping-status"></div>
+				<div class="clear"></div>
+				<br/><br/>
+				<div class="lbl fl">Error:</div><div class="fl ping-error"></div>
+				<div class="clear"></div>	
+			</div>
+			<div class="clear"></div>	
+			
+			<hr/>
+			
+			<div class="fl" style="width:300px">
+				<h2>Commit Tax</h2>
+				<div style="padding:0 0 10px 0;">
+					<label style="width:120px;" class="fl">Original Order No</label>
+					<input id="commitorderno" type="text" class="fl" />
+					<div class="clear"></div>
+				</div>
+				<div class="action-box" style="padding:0 0 0 120px;">
+					<button id="commitTax">Commit Tax</button>
+				</div>
+			</div>
+			<div class="fl" style="width:600px;">
+				<h2>Results</h2>
+				<div class="lbl fl">Status:</div><div class="fl commit-status"></div>
+				<div class="clear"></div>
+				<br/><br/>
+				<div class="lbl fl">Error:</div><div class="fl commit-error"></div>
+				<div class="clear"></div>	
+			</div>
+			<div class="clear"></div>
+			
+			<hr/>
+			
+			<div class="fl" style="width:300px">
+				<h2>Cancel Tax</h2>
+				<div style="padding:0 0 10px 0;">
+					<label style="width:120px;" class="fl">Order No</label>
+					<input id="cancelorderno" type="text" class="fl" />
+					<div class="clear"></div>
+				</div>
+				<div class="action-box" style="padding:0 0 0 120px;">
+					<button id="cancelTax">Cancel Tax</button>
+				</div>
+			</div>
+			<div class="fl" style="width:600px;">
+				<h2>Results</h2>
+				<div class="lbl fl">Status:</div><div class="fl cancel-status"></div>
+				<div class="clear"></div>
+				<br/><br/>
+				<div class="lbl fl">Error:</div><div class="fl cancel-error"></div>
+				<div class="clear"></div>	
+			</div>
+			<div class="clear"></div>
+			
+		</form>
+	</div>
+	<script type="text/javascript">
+		var indicator = "<img src='${URLUtils.staticURL('/images/indicator-sm.gif')}' border='none' /><div class='fl'>Processing...</div><div class='clear'></div>";
+	
+		// ***** TEST CONNECTION ***************************
+		jQuery("#testConnection").live("click", function() {
+			var _actionBox = jQuery(this).closest(".action-box");
+			
+			jQuery(_actionBox).empty().html(indicator);
+			
+			var _testkey = jQuery("#testkey").val();		
+			
+			var _data = { "testkey" : _testkey, "test" : "ping" };
+			
+			jQuery.ajax({
+				dataType: "json",
+				url		: "${URLUtils.url('AvataxTest-RunTest')}",
+				cache	: false,
+				data	: _data,
+				async	: false,
+
+				success: function(response) {
+					jQuery(".ping-status").html(response.status);
+					jQuery(".ping-error").html(response.error);
+				},
+
+				error: function(response) {
+					alert("An error occurred...");
+				}
+			});
+			
+			jQuery(_actionBox).empty().html("<button id='testConnection'>Test Avatax Connection</button>");
+			
+			return false;
+		});
+		
+		
+		// ***** COMMIT TAX ***************************
+		jQuery("#commitTax").live("click", function() {
+			
+			var _actionBox = jQuery(this).closest(".action-box");
+			
+			jQuery(_actionBox).empty().html(indicator);			
+			
+			var _commitorderno = jQuery("#commitorderno").val();
+			var _doccode = jQuery("#doccode").val();
+			var _commitneworderno = jQuery("#commitneworderno").val();
+			var _testkey = jQuery("#testkey").val();		
+			
+			var _data = { "commitorderno" : _commitorderno, "testkey" : _testkey, "test" : "commit" };
+		
+			jQuery.ajax({
+				dataType: "json",
+				url		: "${URLUtils.url('AvataxTest-RunTest')}",
+				cache	: false,
+				data	: _data,
+				async   : false,
+
+				success: function(response) {
+					jQuery(".commit-status").html(response.status);
+					jQuery(".commit-error").html(response.error);
+				},
+
+				error: function(response) {
+					alert("An error occurred...");
+				}
+			});
+			
+			jQuery(_actionBox).empty().html("<button id='commitTax'>Commit Tax</button>");
+			
+			return false;
+		});	
+		
+
+		// ***** CANCEL TAX ***************************
+		jQuery("#cancelTax").live("click", function() {
+			
+			var _actionBox = jQuery(this).closest(".action-box");
+			
+			jQuery(_actionBox).empty().html(indicator);			
+			
+			var _cancelorderno = jQuery("#cancelorderno").val();
+			var _testkey = jQuery("#testkey").val();		
+			
+			var _data = { "orderno" : _cancelorderno, "testkey" : _testkey, "test" : "cancel" };
+		
+			jQuery.ajax({
+				dataType: "json",
+				url		: "${URLUtils.url('AvataxTest-RunTest')}",
+				cache	: false,
+				data	: _data,
+				async   : false,
+
+				success: function(response) {
+					jQuery(".cancel-status").html(response.status);
+					jQuery(".cancel-error").html(response.error);
+				},
+
+				error: function(response) {
+					alert("An error occurred...");
+				}
+			});
+			
+			jQuery(_actionBox).empty().html("<button id='cancelTax'>Cancel Tax</button>");
+			
+			return false;
+		});	
+	</script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline group="Feeds" type="job">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline contains all start nodes that are called by jobs. Currently it is not possible to pass parameters from a job to a pipeline, so whenever you set up a new job configuration, you need to add a new start node.</description>
+        </text-node>
+        <node-display x="0" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_2">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node is called from a job schedule, e.g. every 15 minutes.</description>
+        </text-node>
+        <node-display x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartDefault">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartDefault" secure="false"/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="CurrentJobParameterMap.JobConfigurationID" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartDefault"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_4">
+    <segment>
+      <node>
+        <text-node>
+          <description>Read configuration from CustomObject. The configuration ID is hard coded to &quot;Default&quot;.</description>
+        </text-node>
+        <node-display x="0" y="2"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_5">
+    <segment>
+      <node>
+        <text-node>
+          <description>The Stop node makes the job show as ERROR in BM. Standard job notification for ERRORs can be used.</description>
+        </text-node>
+        <node-display x="3" y="2"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_6">
+    <segment>
+      <node>
+        <text-node>
+          <description>This node is called from the ExportOrders job. This triggers the export of orders from D/w Storefront which are in the status of &quot;Ready to Export&quot;</description>
+        </text-node>
+        <node-display x="5" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node is triggered from Export Catalog job. This exports the catalogs, categories and the products mapped to it to the common SFTP from where external systems would pick</description>
+        </text-node>
+        <node-display x="7" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportOrders">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportOrders" secure="false">
+          <description>This node is called from the ExportOrders job. This triggers the export of orders from D/w Storefront which are in the status of &quot;Ready to Export&quot;</description>
+        </start-node>
+        <node-display x="5" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ExportOrders&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartExportOrders"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportCatalog">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportCatalog" secure="false">
+          <description>This start node is triggered from Export Catalog job. This exports the catalogs, categories and the products mapped to it to the common SFTP from where external systems would pick</description>
+        </start-node>
+        <node-display x="7" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ExportCatalog&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartExportCatalog"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_10">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node is called from the Export PriceBooks D/w job. This triggers the export of price books (both list price and sale price) from D/w Storefront to external systems.</description>
+        </text-node>
+        <node-display x="9" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportPricebooks">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportPricebooks" secure="false">
+          <description>This start node is called from the Export PriceBooks D/w job. This triggers the export of price books (both list price and sale price) from D/w Storefront to external systems.</description>
+        </start-node>
+        <node-display x="9" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ExportPricebooks&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartExportPricebooks"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_12">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node is called from Import Catalog D/w job. This triggers the import of catalog files from external systems into D/w Storefront</description>
+        </text-node>
+        <node-display x="1" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_13">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node is called from Import Inventory D/w job. This triggers the import of inventory files from external systems into D/w Storefront</description>
+        </text-node>
+        <node-display x="3" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartImportCatalog">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartImportCatalog" secure="false">
+          <description>This start node is called from Import Catalog D/w job. This triggers the import of catalog files from external systems into D/w Storefront</description>
+        </start-node>
+        <node-display x="1" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ImportCatalog&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartDefault"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartImportInventoryLists">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartImportInventoryLists" secure="false">
+          <description>This start node is called from Import Inventory D/w job. This triggers the import of inventory files from external systems</description>
+        </start-node>
+        <node-display x="3" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ImportInventoryLists&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartDefault"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_16">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node is called from Import Pricebooks D/w job. This triggers the import of pricebook files from external systems into D/w Storefront</description>
+        </text-node>
+        <node-display x="5" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartImportPriceBooks">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartImportPriceBooks" secure="false"/>
+        <node-display x="5" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ImportPriceBooks&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartDefault"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_18">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node triggers the export of Site Catalog</description>
+        </text-node>
+        <node-display x="8" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_19">
+    <segment>
+      <node>
+        <text-node>
+          <description>This start node triggers the export of the entire Catalog in D/w</description>
+        </text-node>
+        <node-display x="10" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportSiteCatalog">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportSiteCatalog" secure="false"/>
+        <node-display x="8" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ExportCatalogSite&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartExportCatalog"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="StartExportCatalogForFull">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="StartExportCatalogForFull" secure="false"/>
+        <node-display x="10" y="7"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="feeds/GetJobConfiguration.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="&quot;ExportCatalogFull&quot;" key="JobConfigurationID"/>
+          <key-binding alias="JobConfiguration" key="JobConfiguration"/>
+          <key-binding alias="Tasks" key="Tasks"/>
+          <key-binding alias="FeedJobConfiguration" key="FeedJobConfiguration"/>
+          <key-binding alias="Config" key="Config"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in2"/>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <stop-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="Custom_FeedJob-StartExportCatalog"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>
