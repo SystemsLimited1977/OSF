@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="Inventory-Import_Import-Inventory_1">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="parameters">{"InventoryFilePattern":"^[\\w\\-]{1,}\\.xml$","ImportMode":"MERGE","archiveFiles":"MOVE_TO_ARCHIVE","archivePrefix":"IMPEX","archiveFolder":""}</object-attribute>
+        <object-attribute attribute-id="position">1</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">Import-Inventory</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">Inventory-Import</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="Inventory-Import_RebuildProductAvailabilityIndex_2">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="parameters">{"Asynchronous":false,"FullRebuild":false,"RebuildAllSites":false}</object-attribute>
+        <object-attribute attribute-id="position">2</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">RebuildProductAvailabilityIndex</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">Inventory-Import</object-attribute>
+    </custom-object>
+
+</custom-objects>

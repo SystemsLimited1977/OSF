@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="WorkflowScheduleDefinition" object-id="Inventory-Import">
+        <object-attribute attribute-id="description" xml:lang="x-default">Imports inventory and updates the availability index.</object-attribute>
+        <object-attribute attribute-id="enabled">true</object-attribute>
+        <object-attribute attribute-id="executionActiveFrom">2012-11-28T05:00:00.000+0000</object-attribute>
+        <object-attribute attribute-id="executionInterval">1</object-attribute>
+        <object-attribute attribute-id="executionIntervalType">DAY</object-attribute>
+        <object-attribute attribute-id="executionTime">1970-01-01T06:00:00.000+0000</object-attribute>
+        <object-attribute attribute-id="executionWeekdays">
+            <value>2</value>
+            <value>6</value>
+            <value>3</value>
+            <value>7</value>
+            <value>4</value>
+            <value>1</value>
+            <value>5</value>
+        </object-attribute>
+        <object-attribute attribute-id="name" xml:lang="x-default">Inventory-Import</object-attribute>
+        <object-attribute attribute-id="notificationEmails">
+            <value>e@mail.com</value>
+        </object-attribute>
+        <object-attribute attribute-id="siteIds">
+            <value>SiteGenesis</value>
+        </object-attribute>
+        <object-attribute attribute-id="type">RECURRING</object-attribute>
+    </custom-object>
+
+</custom-objects>

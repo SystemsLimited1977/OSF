@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="WorkflowScheduleDefinition" object-id="StartContentCopySync">
+        <object-attribute attribute-id="description" xml:lang="x-default">Marks the sync process as running</object-attribute>
+        <object-attribute attribute-id="enabled">true</object-attribute>
+        <object-attribute attribute-id="executionTime">2013-04-26T04:15:00.000+0000</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">debug</object-attribute>
+        <object-attribute attribute-id="name" xml:lang="x-default">StartContentCopySync</object-attribute>
+        <object-attribute attribute-id="siteIds">
+            <value>SiteGenesis</value>
+        </object-attribute>
+        <object-attribute attribute-id="type">SINGLE</object-attribute>
+    </custom-object>
+
+</custom-objects>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="ElFinderUserRole" object-id="admin">
+        <object-attribute attribute-id="name">Admin</object-attribute>
+        <object-attribute attribute-id="users">
+            <value>admin</value>
+        </object-attribute>
+    </custom-object>
+
+    <custom-object type-id="ElFinderUserRole" object-id="las-vegas">
+        <object-attribute attribute-id="name">Las Vegas</object-attribute>
+        <object-attribute attribute-id="users">
+            <value>las-vegas</value>
+        </object-attribute>
+    </custom-object>
+
+</custom-objects>

@@ -1,0 +1,192 @@
+/*
+* usage:
+importScript("bc_library:io/libFileUtils.ds");**DEPRECATED**
+require("bc_library/cartridge/scripts/io/libFileUtils").FileUtils;
+*/
+
+importPackage( dw.io );
+importPackage( dw.system );
+
+function FileUtils(){
+
+}
+
+/**
+ * Copy source file to target location. All directories will be created if is necessary.
+ *
+ * @param	source
+ * @param	target
+ */
+FileUtils.copyFile = function(sourceString : String, targetString : String){
+
+	var source : File = new File(sourceString);
+	var target : File = new File(targetString);
+	
+	if (!source.isDirectory() && !target.isDirectory()) {
+		var targetPath = target.fullPath.split(File.SEPARATOR);
+		targetPath.pop();
+		var targetFolder = targetPath.join(File.SEPARATOR);
+		(new File(targetFolder)).mkdirs();
+		var fileReader : FileReader = new FileReader(source, "latin1");
+		var fileWriter : FileWriter = new FileWriter(target, "latin1", false);
+		
+		var bytesToCopy = source.length();
+		var buffer : String;
+		do{
+			if (bytesToCopy > 10240) {			
+				buffer = fileReader.read(10240);
+				bytesToCopy = bytesToCopy - 10240;
+			} else {
+				buffer = fileReader.read(bytesToCopy);
+				bytesToCopy = 0;
+			}
+			if(buffer != null){
+				fileWriter.write(buffer);
+			}
+		} while(bytesToCopy != 0);
+		
+		fileReader.close();
+		fileWriter.flush();
+		fileWriter.close();
+	} else {
+		target.mkdirs();
+		var sourceFile : File = source;
+		
+		var targetZipFileName : String = target.fullPath + ".zip";
+		var targetZipped : File = new File(targetZipFileName);
+		sourceFile.zip(targetZipped);
+		
+		var targetDirectory : File = findFileDirectory(targetZipped);
+		
+		targetZipped.unzip(targetDirectory);
+		targetZipped.remove();
+		
+	}
+}
+
+/**
+ * Ensures existence of file directories
+ * 
+ * @param	targetFile
+ */
+FileUtils.ensureFileDirectories = function(targetFile : File){
+	var targetFilePath : String = targetFile.fullPath;
+	var index : Number = targetFilePath.lastIndexOf(File.SEPARATOR);
+	var directoryFilePath = targetFilePath.substr(0, index);
+	new File(directoryFilePath).mkdirs();
+}
+
+/**
+ * Find directory for given file
+ *
+ * @param	file
+ */
+FileUtils.findFileDirectory = function(file : File){
+	var filePath : String = file.getFullPath();
+	
+	var lastSlashIndex = filePath.lastIndexOf('/');
+	var directoryPath : String = filePath.substring(0, lastSlashIndex);
+	var directory : File = new File(directoryPath);
+	
+	return directory;
+}
+
+
+/**
+ *
+ * Delete given derectory and all files and subdirectories in it
+ *
+ * @param file
+ */
+FileUtils.deleteDirectory = function(file : File){
+	if (!file.isDirectory()){
+		throw new Error("file instance is not directory");
+	}
+	
+	var fileNames : Array = file.list();
+	for each (var fileName : String in fileNames){
+		var filePath : String = file.getFullPath() + File.SEPARATOR + fileName;
+		var processedFile : File = new File(filePath);
+		
+		if (processedFile.isDirectory()){
+			FileUtils.deleteDirectory(processedFile);
+		}else{
+			processedFile.remove();
+		}
+	}
+	
+	file.remove();
+}
+
+/**
+ *
+ * creates a file and it's parent folder in case it does not exist
+ *
+ * @param file
+ */
+FileUtils.createFileAndFolders = function(file : File){
+	var path = file.fullPath.split(File.SEPARATOR);
+	path.pop();
+	var folder = new File(path.join(File.SEPARATOR));
+	
+	if (!folder.exists()) {
+		folder.mkdirs();
+	}
+	if (!file.exists()) {
+		file.createNewFile();
+	}
+
+}
+
+
+/**
+ *
+ * Delete all files and directories in given directory, respectively - clear directory content.
+ *
+ * @param file
+ */
+FileUtils.emptyDirectory = function(file : File){
+	if (!file.isDirectory()){
+		throw new Error("file instance is not directory");
+	}
+	
+	var fileNames : Array = file.list();
+	for each (var fileName : String in fileNames){
+		var filePath : String = file.getFullPath() + File.SEPARATOR + fileName;
+		var processedFile : File = new File(filePath);
+		
+		if (processedFile.isDirectory()){
+			FileUtils.deleteDirectory(processedFile);
+		}else{
+			processedFile.remove();
+		}		
+	}
+}
+/**
+ *
+ * checks a file pattern for specific placeholders and exchanges them
+ * valid placeholders: {siteID}
+ *
+ * @param filePattern
+ */
+FileUtils.checkFilePatternForPlaceholders = function(filePattern : String) : String{
+	if (empty(filePattern)){
+		return null;
+	}
+	
+	if (filePattern.match(/\{siteID\}/)) {
+		var siteID = dw.system.Site.getCurrent().getID();
+		if (siteID == 'Sites-Site'){			
+			return new Status(dw.system.Status.ERROR);
+			
+		}
+		
+		filePattern = filePattern.replace(/\{siteID\}/ig, siteID);	
+	}
+	
+	return filePattern;
+}
+
+if(typeof(exports) !== 'undefined') exports.FileUtils = FileUtils;	
+	
+

@@ -1,0 +1,49 @@
+/**
+* Trnasforms the category structure in a given catalog into a mapping file 
+*
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.io );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+
+	var catalogTraverser = new CatalogTraverser(CatalogMgr.getCatalog(pdict.CatalogID).getRoot());
+	catalogTraverser.start();
+	
+	
+    return PIPELET_NEXT;
+}
+
+function CatalogTraverser(catalogRoot){
+	this.catalogRoot = catalogRoot;
+	var folder : File = new File(File.IMPEX + File.SEPARATOR + "contentcopy" + File.SEPARATOR + "slots" + File.SEPARATOR + "categorymapping");
+	var file : File = new File(folder.getFullPath() + File.SEPARATOR + "category.map");
+	if (!folder.exists()) {
+		folder.mkdirs();
+	}
+	if (!file.exists()) {
+		file.createNewFile();
+	}
+	
+	var writer = FileWriter(file, "UTF8", false);
+	
+	this.writer = writer;
+	
+}
+
+CatalogTraverser.prototype.start = function() {
+	this.handleCategoryMapping(this.catalogRoot, "");
+	this.writer.close();
+	
+}
+
+CatalogTraverser.prototype.handleCategoryMapping = function(currentCategory : Category, currentPath : String) {
+	var newPath = currentPath + "/" + currentCategory.ID;
+	this.writer.writeLine(currentCategory.ID + ";" + newPath);	
+	var categories = currentCategory.getSubCategories();
+	for each (var subCat in categories) {
+		this.handleCategoryMapping(subCat, newPath);
+	}
+}

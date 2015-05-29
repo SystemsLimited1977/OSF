@@ -1,0 +1,24 @@
+<isdecorate template="application/ExtJSApplicationFrame">
+	<!-- TEMPLATENAME: workflow/overview.isml (Start) -->
+	<iscontent type="text/html" charset="UTF-8" compact="true">
+	
+	<script src="${URLUtils.absStatic('/jscript/ext/ux/Workflow.js')}" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="${URLUtils.absStatic('/css/workflow.css')}" />
+	
+	<isscript>
+		importScript('workflow/libWorkflowUI.ds');
+		
+		var libWorkflowUI = new LibWorkflowUI();
+		var configs = libWorkflowUI.createWorkflowScheduleDefinitionOverviewObject(pdict);
+	</isscript>
+	
+	<script type="text/javascript">
+		Ext.onReady(function() {
+			initWorkflowDefintionOverview(<isprint value="${JSON.stringify(configs)}" encoding="off" />);
+		});
+	</script>
+	
+	<div id="integrationframework-workflowScheduleOverview" style=""></div>
+
+	<!-- TEMPLATENAME: workflow/overview.isml (End) -->
+</isdecorate>

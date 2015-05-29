@@ -1,0 +1,18 @@
+<!--- TEMPLATENAME: serviceoverview.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true">
+<isdecorate template="application/ExtJS4ApplicationFrame">
+
+<link rel="stylesheet" href="${URLUtils.staticURL('/ext-resources/css/BoxSelect.css')}" />
+<script src="${URLUtils.absStatic('/ext-core/BoxSelect.js')}" type="text/javascript"></script>
+
+<script src="${URLUtils.absStatic('/utils/BMUtils.js')}" type="text/javascript"></script>
+<script src="${URLUtils.absStatic('/ext-store4/ObjectStore.js')}" type="text/javascript"></script>
+<script src="${URLUtils.absStatic('/ext-ui/CustomObjectGridEditor.js')}" type="text/javascript"></script>
+<script src="${URLUtils.absStatic('/ext-ui/UserRoleEditor.js')}" type="text/javascript"></script>
+<script src="${URLUtils.absStatic('/ext-ui/FolderPermissionEditor.js')}" type="text/javascript"></script>
+<script src="${URLUtils.absStatic('/ext-ui/roleEditorUI.js')}" type="text/javascript"></script>
+
+<div id="customobject-ui" data-customobjecttype="ElFinderRootFolder"></div>
+
+<!--- Service list --->
+</isdecorate>

@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+
+  <custom-object type-id="WorkflowComponentDefinition" object-id="StandardComponents-Import">
+        <object-attribute attribute-id="action">StandardComponents-Import</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Imports all demandware standard files. Provides a generic configuration that should be suitable for most use cases. Replaces general import components</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+    {&#13;
+        "id": "objectType",&#13;
+        "name": "Object Type",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "abtestabtest",&#13;
+            "activedata",&#13;
+            "catalog",&#13;
+            "coupon",&#13;
+            "customer",&#13;
+            "customergroup",&#13;
+            "customobject",&#13;
+            "giftcertificate",&#13;
+            "inventory",&#13;
+            "keyvaluemapping",&#13;
+            "library",&#13;
+            "pricebook",&#13;
+            "productlist",&#13;
+            "promotion",&#13;
+            "shipping",&#13;
+            "slot",&#13;
+            "sourcecode",&#13;
+            "store",&#13;
+            "tax"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "workingFolder",&#13;
+        "name": "Working folder in IMPEX (e.g src/catalog)",&#13;
+        "type": "string",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "filePattern",&#13;
+        "name": "File name pattern (RegExp e.g. ^cat_.*)",&#13;
+        "type": "string",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "importMode",&#13;
+        "name": "Import Mode",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "MERGE",&#13;
+            "REPLACE",&#13;
+            "UPDATE",&#13;
+            "DELETE"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "noFileFoundStatus",&#13;
+        "name": "Treat 'no files found' as",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "OK",&#13;
+            "WARN",&#13;
+            "ERROR"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "importFailedStatus",&#13;
+        "name": "Treat Import Failed as",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "WARN",&#13;
+            "ERROR"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "catalogImportConfig",&#13;
+        "name": "Catalog Import config (JSON) or Key/Value Mapping Name (String)",&#13;
+        "type": "string",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "afterProcessAction",&#13;
+        "name": "Handle file after process",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "DELETE_FILE",&#13;
+            "KEEP_FILE",&#13;
+            "ARCHIVE_ZIPPED_WITH_LOGS",&#13;
+            "ARCHIVE_PLAIN_FILE"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "archiveFolder",&#13;
+        "name": "Archive folder e.g. (src/archive)",&#13;
+        "type": "string",&#13;
+        "mandatory": false&#13;
+    }&#13;
+]</object-attribute>
+    </custom-object>
+
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Export-Catalog">
+        <object-attribute attribute-id="action">GeneralExport-Catalog</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Exports a Catalog</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"CatalogID",&#13;
+      "name":"CatalogID",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"FileNamePrefix",&#13;
+      "name":"File name prefix",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"ExportCategories",&#13;
+      "name":"Export Categories",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"ExportCategoryAssignments",&#13;
+      "name":"Export Category Assignment",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"ExportProductOptions",&#13;
+      "name":"Export Product Options",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"ExportProducts",&#13;
+      "name":"Export Products",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"ExportRecommendations",&#13;
+      "name":"Export Recommendations",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"ExportVariationAttributes",&#13;
+      "name":"Export Variation Attributes",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"OverwriteExportFile",&#13;
+      "name":"Overwrite export file",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="DateCondition">
+        <object-attribute attribute-id="action">GeneralComponent-DateCondition</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">You can define a date which must be before or after the			current time (the time of execution) to continue. If before is chosen			and the current time is after the defined date, the component will			exit with an error. If after is chosen and the date is not reached			yet, the component is suspended until it is reached.</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"date",&#13;
+      "name":"Date",&#13;
+      "type":"date",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"mode",&#13;
+      "name":"Mode",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "NOW_BEFORE_X",&#13;
+         "NOW_AFTER_X"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="TimeCondition">
+        <object-attribute attribute-id="action">GeneralComponent-TimeCondition</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">You can define a time which must be before or after the			current time (the time of execution) to continue. If before is chosen			and the current time is after the defined time, the component will			exit with an error. If after is chosen and the time is not reached			yet, the component is suspended until it is reached. Important note:			Do not define times near the day change, e.g. 23.59 (for after) or			00.01 (for before), this can lead to never ending workflows! Better			is something like 23.00, but this also depends on the number of DW			jobs for executing the workflows.</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"time",&#13;
+      "name":"Time",&#13;
+      "type":"time",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"mode",&#13;
+      "name":"Mode",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "NOW_BEFORE_X",&#13;
+         "NOW_AFTER_X"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="DateTimeCondition">
+        <object-attribute attribute-id="action">GeneralComponent-DateTimeCondition</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">You can define a date with time which must be before or			after the current time (the time of execution) to continue. If before			is chosen and the current time is after the defined value, the			component will exit with an error. If after is chosen and the time is			not reached yet, the component is suspended until it is reached.</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"datetime",&#13;
+      "name":"Date and time",&#13;
+      "type":"datetime",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"mode",&#13;
+      "name":"Mode",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "NOW_BEFORE_X",&#13;
+         "NOW_AFTER_X"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Workflow-CleanUp">
+        <object-attribute attribute-id="action">Workflow-CleanUp</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Removes old custom objects created through the integration			framework.</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"workflowMaximumObjectAgeBeforeDeletion",&#13;
+      "name":"Maximum age of integration framework object before deletion",&#13;
+      "type":"int",&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+        <custom-object type-id="WorkflowComponentDefinition" object-id="CleanUpFiles">
+        <object-attribute attribute-id="action">StandardComponents-CleanUpFiles</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Cleanup old files</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"FilePattern",&#13;
+      "name":"File name pattern (Default is \".*\")",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"DirectoriesToPurge",&#13;
+      "name":"Directories to purge",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"DirectoriesToArchive",&#13;
+      "name":"Directories to archive",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"DaysToKeep",&#13;
+      "name":"Number of days to keep old files",&#13;
+      "type":"int",&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Export-Order">
+        <object-attribute attribute-id="action">GeneralExport-Order</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Exports the orders to filesystem in DW format</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"orderStatus",&#13;
+      "name":"Input Order Status",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "All",&#13;
+         "Confirmed and Paid"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Transfer To FTP">
+        <object-attribute attribute-id="action">GeneralTransfer-ToFtp</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Transfer files into ftp server</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"HostURL",&#13;
+      "name":"Host URL",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"UserID",&#13;
+      "name":"User Name",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"Password",&#13;
+      "name":"Password",&#13;
+      "type":"password",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"SecureFtp",&#13;
+      "name":"Type of FTP connection",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "FTP",&#13;
+         "SFTP"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"FilePattern",&#13;
+      "name":"Input File pattern to search in local folder (default is \"^[\\w\\-]{1,}\\.xml$\" (*.xml))",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"SourceFolder",&#13;
+      "name":"Local folder with files, relative to IMPEX/",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"TargetFolder",&#13;
+      "name":"Remote folder of FTP Server",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"ArchiveFile",&#13;
+      "name":"When file is uploaded,move it to archive folder?",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "Keep",&#13;
+         "Move to archive"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+        "id": "noFileFoundStatus",&#13;
+        "name": "Treat 'no files found' as",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "OK",&#13;
+            "WARN",&#13;
+            "ERROR"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Rebuild indexes">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildIndexes</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the indexes that are configured</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"ProductIndexes",&#13;
+      "name":"Rebuild product related search indexes(product, suggest, synonym)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"AvailabilityIndex",&#13;
+      "name":"Rebuild availability search indexes",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"ContentIndex",&#13;
+      "name":"Rebuild content search indexes",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Export-Pricebook">
+        <object-attribute attribute-id="action">GeneralExport-PriceBook</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Exports a price book</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"PriceBookID",&#13;
+      "name":"Price Book ID",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"FileNamePrefix",&#13;
+      "name":"File name prefix (for example \"^[\\w\\-]{1,}\\.xml$\"(*.xml))",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"OverwriteExportFile",&#13;
+      "name":"Overwrite export file",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="Transfer From FTP">
+        <object-attribute attribute-id="action">GeneralTransfer-FromFtp</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Transfer files from a FTP-Location</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"HostURL",&#13;
+      "name":"Host URL",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"UserID",&#13;
+      "name":"User Name",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"Password",&#13;
+      "name":"Password",&#13;
+      "type":"password",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"SecureFtp",&#13;
+      "name":"Type of FTP connection",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "FTP",&#13;
+         "SFTP"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"FilePattern",&#13;
+      "name":"Input File pattern to search in local folder(default is \"^[\\w\\-]{1,}\\.xml$\"(*.xml))",&#13;
+      "type":"string",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"SourceFolder",&#13;
+      "name":"Source Folder",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"TargetFolder",&#13;
+      "name":"Local folder in which files will be placed, relatively to IMPEX/",&#13;
+      "type":"string",&#13;
+      "mandatory":true&#13;
+   },&#13;
+   {&#13;
+      "id":"DeleteFile",&#13;
+      "name":"When file is downloaded, delete or keep it?",&#13;
+      "type":"enum",&#13;
+      "enumValues":[&#13;
+         "Delete",&#13;
+         "Keep on server"&#13;
+      ],&#13;
+      "mandatory":true&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildSearchRedirectIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildSearchRedirectIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Search-Redirect indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildSynonymIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildSynonymIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Synonym indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildContentSearchIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildContentSearchIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Content-Search indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildProductSearchIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildProductSearchIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Product-Search indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildActiveDataIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildActiveDataIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Active-Data indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildProductAvailabilityIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildProductAvailabilityIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Product-Availability indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="RebuildSuggestIndex">
+        <object-attribute attribute-id="action">GeneralComponent-RebuildSuggestIndex</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Rebuilds the Suggestion indexes</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+   {&#13;
+      "id":"Asynchronous",&#13;
+      "name":"Asynchronous Indexer-Mode ('False' for Synchronous Index-Mode)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"FullRebuild",&#13;
+      "name":"Full Index-Rebuild ('False' for Incremental Index-Rebuild)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   },&#13;
+   {&#13;
+      "id":"RebuildAllSites",&#13;
+      "name":"Index-Rebuild for All Sites ('False' to Rebuild the Indexes only on the Current Site)",&#13;
+      "type":"boolean",&#13;
+      "mandatory":false&#13;
+   }&#13;
+]</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="StandardComponents-DownloadFiles">
+	<object-attribute attribute-id="action">StandardComponents-DownloadFiles</object-attribute>
+	<object-attribute attribute-id="description" xml:lang="x-default">Download files from a transfer server to demandware</object-attribute>
+	<object-attribute attribute-id="parameters">[&#13;
+    {&#13;
+        "id": "serverType",&#13;
+        "name": "Server type",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "FTP",&#13;
+            "SFTP",&#13;
+            "WEBDAV",&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "serverUrl",&#13;
+        "name": "Url (e.g. ftp://host.com:port/path)",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "userName",&#13;
+        "name": "User name",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "password",&#13;
+        "name": "Password",&#13;
+        "type": "password",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "filePattern",&#13;
+        "name": "File pattern (Regexp. e.g. ^cat.*xml)",&#13;
+        "type": "string",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "targetRootFolder",&#13;
+        "name": "Target Root Folder",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "IMPEX",&#13;
+            "TEMP",&#13;
+            "CATALOGS",&#13;
+            "LIBRARIES",&#13;
+            "STATIC"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "targetFolder",&#13;
+        "name": "Target Folder (in IMPEX)",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "deleteFile",&#13;
+        "name": "Delete File",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "DELETE",&#13;
+            "KEEP_ON_SERVER",&#13;
+            "MOVE_TO_ARCHIVE"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "extractArchives",&#13;
+        "name": "Extract Archives",&#13;
+        "type": "boolean",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "scanRecursively",&#13;
+        "name": "Scan Recursively",&#13;
+        "type": "boolean",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "createReport",&#13;
+        "name": "Create Report",&#13;
+        "type": "boolean",&#13;
+        "mandatory": false&#13;
+    }&#13;
+]</object-attribute>
+    </custom-object>
+    
+    <custom-object type-id="WorkflowComponentDefinition" object-id="StandardComponents-UploadFiles">
+        <object-attribute attribute-id="action">StandardComponents-UploadFiles</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">Upload files from demandware to a remote transfer server</object-attribute>
+        <object-attribute attribute-id="parameters">[&#13;
+    {&#13;
+        "id": "serverType",&#13;
+        "name": "Server type",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "FTP",&#13;
+            "SFTP",&#13;
+            "WEBDAV",&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "serverUrl",&#13;
+        "name": "Url (e.g. ftp://host.com:port/path)",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "userName",&#13;
+        "name": "User name",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "password",&#13;
+        "name": "Password",&#13;
+        "type": "password",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "filePattern",&#13;
+        "name": "File pattern (Regexp. e.g. ^cat.*xml)",&#13;
+        "type": "string",&#13;
+        "mandatory": false&#13;
+    },&#13;
+    {&#13;
+        "id": "sourceFolder",&#13;
+        "name": "Source Folder (in IMPEX)",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "targetFolder",&#13;
+        "name": "Target Folder",&#13;
+        "type": "string",&#13;
+        "mandatory": true&#13;
+    },&#13;
+    {&#13;
+        "id": "deleteFile",&#13;
+        "name": "Delete File",&#13;
+        "type": "enum",&#13;
+        "enumValues": [&#13;
+            "DELETE",&#13;
+            "KEEP_ON_SERVER"&#13;
+        ],&#13;
+        "mandatory": true&#13;
+    }&#13;
+]</object-attribute>
+    </custom-object>
+
+</custom-objects>

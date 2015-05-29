@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="WorkflowComponentDefinition" object-id="ContentCopyJobs-BuildAssetImport">
+        <object-attribute attribute-id="action">ContentCopyJobs-BuildAssetImport</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">ContentCopyJobs-BuildAssetImport</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="ContentCopyJobs-BuildSlotImport">
+        <object-attribute attribute-id="action">ContentCopyJobs-BuildSlotImport</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">ContentCopyJobs-BuildSlotImport</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="ContentCopyJobs-ExportAndAggregateAssetStructure">
+        <object-attribute attribute-id="action">ContentCopyJobs-ExportAndAggregateAssetStructure</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">ContentCopyJobs-ExportAndAggregateAssetStructure</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="ContentCopyJobs-ExportAndAggregateSlotStructure">
+        <object-attribute attribute-id="action">ContentCopyJobs-ExportAndAggregateSlotStructure</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">ContentCopyJobs-ExportAndAggregateSlotStructure</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="ContentCopyJobs-FinishSync">
+        <object-attribute attribute-id="action">ContentCopyJobs-FinishSync</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">ContentCopyJobs-FinishSync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowComponentDefinition" object-id="ContentCopyJobs-StartSync">
+        <object-attribute attribute-id="action">ContentCopyJobs-StartSync</object-attribute>
+        <object-attribute attribute-id="description" xml:lang="x-default">ContentCopyJobs-StartSync</object-attribute>
+    </custom-object>
+</custom-objects>

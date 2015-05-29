@@ -1,0 +1,61 @@
+/**
+* Trnasforms the category structure in a given catalog into a mapping file 
+*
+*
+*
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.io );
+
+var FileUtils = require("bc_library/cartridge/scripts/io/libFileUtils").FileUtils;
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+
+	var targetFolder : File = new File(File.IMPEX + File.SEPARATOR  + "contentcopy" + File.SEPARATOR + "content" + File.SEPARATOR + "export-batch");
+	var inProgressFolder : File = new File(File.IMPEX + File.SEPARATOR  + "contentcopy" + File.SEPARATOR + "content" + File.SEPARATOR + "export-batch-inprogress");
+
+	var destinationFile : File = new File(File.IMPEX + File.SEPARATOR  + "src" + File.SEPARATOR + "temp" + File.SEPARATOR + "assets_" + dw.system.Site.getCurrent().ID + ".xml");
+	FileUtils.createFileAndFolders(destinationFile);
+	
+	
+	if (targetFolder.exists()) {
+		targetFolder.renameTo(inProgressFolder);
+	}
+	
+	var fileWriter : FileWriter = new FileWriter(destinationFile, "UTF-8", false);
+	fileWriter.writeLine('<?xml version="1.0" encoding="UTF-8"?>');
+	fileWriter.writeLine('<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">');
+	
+	if (inProgressFolder.exists()) {
+		var siteInProgressFolder : File = new File(inProgressFolder.fullPath + File.SEPARATOR + dw.system.Site.getCurrent().ID);
+		var subFiles = siteInProgressFolder.listFiles();
+		for each ( var file : File in subFiles) {
+			if (!file.isDirectory()) {
+				var fileReader : FileReader = new FileReader(file, "UTF-8");
+				var readLine = "";
+				do {
+					readLine = fileReader.readLine();
+					if (readLine != null) {
+						fileWriter.write(readLine + "\n");	
+					}
+				} while (readLine != null);
+				
+				fileReader.close();
+			}
+		}
+		if (siteInProgressFolder.exists() && siteInProgressFolder.isDirectory()) {
+			FileUtils.deleteDirectory(siteInProgressFolder);
+		}
+		
+	}	
+	fileWriter.writeLine('</library>');
+
+	fileWriter.flush();
+	fileWriter.close();
+    
+
+   
+    return PIPELET_NEXT;
+}

@@ -1,0 +1,42 @@
+/**
+*	Move the found sub file into a unique location and prepares parameters for the import
+*
+* @input FileForImport : dw.io.File
+* @input LogObject : Object
+* @output ImportFile : String
+* @output ImportFileObject : dw.io.File
+* @output ImportMode : String
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.io );
+
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var fileToMove : File = pdict.FileForImport; 
+	// only process xml files
+	if (!fileToMove.isDirectory() && fileToMove.getFullPath().substring(fileToMove.getFullPath().length-3, fileToMove.getFullPath().length) == "xml") {
+		Logger.debug("Beginn processing file: " + fileToMove.getFullPath());
+		// single location for simple follow up actions
+		var destinationRelative = "temp" + File.SEPARATOR + "filetoimport.xml";
+		var destinationFile : File = new File(File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + destinationRelative);
+		if (destinationFile.exists()) {
+			destinationFile.remove();
+		}
+		
+		fileToMove.renameTo(destinationFile);
+		Logger.debug("Moved file to: " + destinationFile.getFullPath());
+		pdict.ImportFile = destinationRelative;
+		pdict.ImportFileObject = destinationFile;
+		
+		// Merge only for now, filename patterns could be a further enhancement
+		pdict.ImportMode = "MERGE";
+		
+		
+	    return PIPELET_NEXT;
+	} else {
+		Logger.error("Invalid File or folder found: " + fileToMove.getFullPath());		
+	    return PIPELET_ERROR;
+	}
+}

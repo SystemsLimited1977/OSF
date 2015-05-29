@@ -1,0 +1,156 @@
+/*
+* usage
+importScript("bc_library:io/libVirtualFileUtils.ds");**DEPRECATED**
+require("bc_library/cartridge/scripts/io/libVirtualFileUtils").VirtualFileUtils;
+*/
+
+
+importPackage( dw.io );
+importPackage( dw.system );
+
+var LocalFileUtils = require('/bc_library/cartridge/scripts/io/libFileUtils.ds').FileUtils;
+
+function VirtualFileUtils(){
+
+}
+
+/**
+ * Copy source file to target location. All directories will be created if is necessary.
+ *
+ * @param	source
+ * @param	target
+ */
+VirtualFileUtils.copyFile = function(source : Object, target : Object){
+
+	var action = "";
+	
+	if (('virtual' in source) && ('virtual' in target)) {
+		VirtualFileUtils.copyRemotely(source, target);
+	} else if (('virtual' in source) && !('virtual' in target)) {
+		VirtualFileUtils.download(source, target);	
+	} else if (!('virtual' in source) && ('virtual' in target)) {
+		VirtualFileUtils.upload(source, target);			
+	} else {
+		LocalFileUtils.copyFile(source, target);
+	}
+}
+
+VirtualFileUtils.download  = function(source : Object, target : Object){
+	if (!source.isDirectory()) {
+		source.transferClient.getBinary(source.getPath(), target);
+	} else {
+		// recursively download files	
+	}
+}
+
+VirtualFileUtils.upload  = function(source : Object, target : Object){
+	if (!source.isDirectory()) {
+		target.transferClient.putBinary(target.getFullPath(), source);
+	} else { 
+		// recursively upload files
+	}
+	
+}
+
+
+/**
+ * Ensures existence of file directories
+ * 
+ * @param	targetFile
+ */
+VirtualFileUtils.ensureFileDirectories = function(targetFile : File){
+	var targetFilePath : String = targetFile.fullPath;
+	var index : Number = targetFilePath.lastIndexOf(File.SEPARATOR);
+	var directoryFilePath = targetFilePath.substr(0, index);
+	new File(directoryFilePath).mkdirs();
+}
+
+/**
+ * Find directory for given file
+ *
+ * @param	file
+ */
+VirtualFileUtils.findFileDirectory = function(file : File){
+	var filePath : String = file.getFullPath();
+	
+	var lastSlashIndex = filePath.lastIndexOf('/');
+	var directoryPath : String = filePath.substring(0, lastSlashIndex);
+	var directory : File = new File(directoryPath);
+	
+	return directory;
+}
+
+
+/**
+ *
+ * Delete given derectory and all files and subdirectories in it
+ *
+ * @param file
+ */
+VirtualFileUtils.deleteDirectory = function(file : File){
+	if (!file.isDirectory()){
+		throw new Error("file instance is not directory");
+	}
+	
+	var fileNames : Array = file.list();
+	for each (var fileName : String in fileNames){
+		var filePath : String = file.getFullPath() + File.SEPARATOR + fileName;
+		var processedFile : File = new File(filePath);
+		
+		if (processedFile.isDirectory()){
+			VirtualFileUtils.deleteDirectory(processedFile);
+		}else{
+			processedFile.remove();
+		}
+	}
+	
+	file.remove();
+}
+
+/**
+ *
+ * creates a file and it's parent folder in case it does not exist
+ *
+ * @param file
+ */
+VirtualFileUtils.createFileAndFolders = function(file : File){
+	var path = file.fullPath.split(File.SEPARATOR);
+	path.pop();
+	var folder = new File(path.join(File.SEPARATOR));
+	
+	if (!folder.exists()) {
+		folder.mkdirs();
+	}
+	if (!file.exists()) {
+		file.createNewFile();
+	}
+
+}
+
+
+/**
+ *
+ * Delete all files and directories in given directory, respectively - clear directory content.
+ *
+ * @param file
+ */
+VirtualFileUtils.emptyDirectory = function(file : File){
+	if (!file.isDirectory()){
+		throw new Error("file instance is not directory");
+	}
+	
+	var fileNames : Array = file.list();
+	for each (var fileName : String in fileNames){
+		var filePath : String = file.getFullPath() + File.SEPARATOR + fileName;
+		var processedFile : File = new File(filePath);
+		
+		if (processedFile.isDirectory()){
+			VirtualFileUtils.deleteDirectory(processedFile);
+		}else{
+			processedFile.remove();
+		}		
+	}
+}
+
+if(typeof(exports) !== 'undefined') exports.VirtualFileUtils = VirtualFileUtils;
+

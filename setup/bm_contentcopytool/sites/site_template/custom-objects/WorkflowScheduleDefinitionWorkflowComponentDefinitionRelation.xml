@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_ContentCopyJobs-BuildAssetImport_2">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{}</object-attribute>
+        <object-attribute attribute-id="position">2</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">ContentCopyJobs-BuildAssetImport</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_ContentCopyJobs-BuildSlotImport_5">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{}</object-attribute>
+        <object-attribute attribute-id="position">5</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">ContentCopyJobs-BuildSlotImport</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_ContentCopyJobs-ExportAndAggregateAssetStructure_4">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{}</object-attribute>
+        <object-attribute attribute-id="position">4</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">ContentCopyJobs-ExportAndAggregateAssetStructure</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_ContentCopyJobs-ExportAndAggregateSlotStructure_7">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{}</object-attribute>
+        <object-attribute attribute-id="position">7</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">ContentCopyJobs-ExportAndAggregateSlotStructure</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_ContentCopyJobs-FinishSync_8">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{}</object-attribute>
+        <object-attribute attribute-id="position">8</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">ContentCopyJobs-FinishSync</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_ContentCopyJobs-StartSync_1">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{}</object-attribute>
+        <object-attribute attribute-id="position">1</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">ContentCopyJobs-StartSync</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_Import-Content_3">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{"inputPrefix":"IMPEX","inputFolder":"src/temp","filePattern":"assets.*","importMode":"MERGE","archiveFiles":"DELETE","archivePrefix":"IMPEX","archiveFolder":""}</object-attribute>
+        <object-attribute attribute-id="position">3</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">Import-Content</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation" object-id="StartContentCopySync_Import-Slots_6">
+        <object-attribute attribute-id="asynchron">false</object-attribute>
+        <object-attribute attribute-id="disabled">false</object-attribute>
+        <object-attribute attribute-id="fileLogLevel">inherit</object-attribute>
+        <object-attribute attribute-id="parameters">{"inputPrefix":"IMPEX","inputFolder":"src/temp","filePattern":"slotcopy_.*","importMode":"MERGE","archiveFiles":"DELETE","archivePrefix":"IMPEX","archiveFolder":""}</object-attribute>
+        <object-attribute attribute-id="position">6</object-attribute>
+        <object-attribute attribute-id="workflowComponentDefinitionName">Import-Slots</object-attribute>
+        <object-attribute attribute-id="workflowScheduleDefinitionID">StartContentCopySync</object-attribute>
+    </custom-object>
+
+</custom-objects>

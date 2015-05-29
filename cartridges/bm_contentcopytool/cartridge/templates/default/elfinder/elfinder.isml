@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head><title>IFrame Content</title>
+<!-- jQuery and jQuery UI (REQUIRED) -->
+<link rel="stylesheet" type="text/css" media="screen" href="${URLUtils.staticURL('/elfinder/jquery/ui-themes/smoothness/jquery-ui-1.8.18.custom.css')}">
+<script type="text/javascript" src="${URLUtils.staticURL('/elfinder/jquery/jquery-1.7.2.js')}"></script>
+<script type="text/javascript" src="${URLUtils.staticURL('/elfinder/jquery/jquery-ui-1.8.18.custom.min.js')}"></script>
+
+<iscomment><!-- Switch between debug and built version --></iscomment>
+<isif condition="${true}">
+	<!-- elFinder CSS (REQUIRED) -->
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="${URLUtils.staticURL('/elfinder/css/elfinder.min.css')}">
+	<link rel="stylesheet" type="text/css" media="screen" href="${URLUtils.staticURL('/elfinder/css/theme')}">
+	
+	<!-- elFinder JS (REQUIRED) -->
+	<script type="text/javascript" src="${URLUtils.staticURL('/elfinder/js/elfinder.min.js')}"></script>
+	<script type="text/javascript" src="${URLUtils.staticURL('/elfinder/js/elfinder_dw_patches.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/libcopy.js')}"></script>	
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/startimports.js')}"></script>	
+	<!-- Quicklook is overwritten with a custom plugin, as it is not disableable via below script -->
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/quicklook.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/search.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/paste.js')}"></script>
+	<style type="text/css">
+		.elfinder-button-icon.elfinder-button-icon-startimports {background-image: url("${URLUtils.staticURL('/elfinder/img/startimports.png')}")}
+		.elfinder-button-icon.elfinder-button-icon-libcopy 		{background-image: url("${URLUtils.staticURL('/elfinder/img/arrow_out.png')}")}
+	</style>
+<iselse>
+
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/common.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/dialog.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/toolbar.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/navbar.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/statusbar.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/contextmenu.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/cwd.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/quicklook.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/commands.css')}" type="text/css">
+	
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/fonts.css')}" type="text/css">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/elfinder/css/theme.css')}" type="text/css">
+	
+	<!-- elfinder core -->
+	<script src="${URLUtils.staticURL('/elfinder/js/elFinder.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/elFinder.version.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/jquery.elfinder.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/elFinder.resources.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/elFinder.options.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/elFinder.history.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/elFinder.command.js')}"></script>
+	
+	<!-- elfinder ui -->
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/overlay.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/workzone.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/navbar.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/dialog.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/tree.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/cwd.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/toolbar.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/button.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/uploadButton.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/viewbutton.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/searchbutton.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/sortbutton.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/panel.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/contextmenu.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/path.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/stat.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/ui/places.js')}"></script>
+	
+	<!-- elfinder commands -->
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/back.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/forward.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/reload.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/up.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/home.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/copy.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/cut.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/paste.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/open.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/rm.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/info.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/duplicate.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/rename.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/help.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/getfile.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/mkdir.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/mkfile.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/upload.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/download.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/edit.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/extract.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/archive.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/search.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/view.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/resize.js')}"></script>
+	<script src="${URLUtils.staticURL('/elfinder/js/commands/sort.js')}"></script>	
+</isif>
+
+<!-- elFinder initialization (REQUIRED) -->
+<script type="text/javascript" charset="utf-8">
+	$().ready(function() {
+		
+	    elFinder.prototype._options.commands.push('libcopy');
+	    elFinder.prototype._options.commands.push('startimports');
+	    elFinder.prototype._options.contextmenu.files.push('libcopy');
+	    //elFinder.prototype._options.contextmenu.files.push('startimports');
+	    elFinder.prototype.i18.en.messages['cmdlibcopy'] = 'Copy to Multiple Libraries';
+	    elFinder.prototype.i18.en.messages['cmdstartimports'] = 'Start All Imports';
+	    
+	    
+	    var myUiOptions = elFinder.prototype._options.uiOptions;
+	    myUiOptions.tree.syncTree = true;
+	    myUiOptions.toolbar[0].push("up"); 
+	    myUiOptions.toolbar[0].push("reload"); 
+	   // quickview is not "disablable"
+	    myUiOptions.toolbar.splice(4,1);
+	    myUiOptions.toolbar.push(['startimports']);
+	    
+		var myCommands = elFinder.prototype._options.commands;
+		
+		var disabled = ['edit', 'resize', 'mkfile','quicklook','file','download','duplicate','getfile','sort'];
+		$.each(disabled, function(i, cmd) {
+			(idx = $.inArray(cmd, myCommands)) !== -1 && myCommands.splice(idx,1);
+		});
+		
+		var elf = $('#elfinder').elfinder({
+			url : "${URLUtils.url('ElFinder-Connector','connectortype', pdict.CurrentHttpParameterMap.connectortype.stringValue)}",
+			commands : myCommands,
+			uiOptions : myUiOptions
+		}).elfinder('instance');
+	});
+
+</script>
+
+
+
+</head><body>
+<!-- Element where elFinder will be created (REQUIRED) -->
+<div id="elfinder"></div>
+</body></html>

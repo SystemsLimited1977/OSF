@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+
+	<!-- =============================================================== -->
+	<!-- ==                                                           == -->
+	<!-- ==  ADMINISTRATION MENU EXTENSIONS                           == -->
+	<!-- ==                                                           == -->
+	<!-- =============================================================== -->
+	<!--
+	A custom menu item in the Administration section
+-->
+	<menuitem id="customadminmenuextension_contentmanager" position="1500"
+		site="false">
+		<name xml:lang="x-default">File and Content Copy</name>
+		<short_description xml:lang="x-default">
+			The content copy toolkit
+  		</short_description>
+
+		<icon>icons/explorer_ico.gif</icon>
+	</menuitem>
+	
+	<menuaction id="customsubmenu_tools_file" menupath="customadminmenuextension_contentmanager"
+		position="200" site="false">
+		<name xml:lang="x-default">File Manager</name>
+		<short_description xml:lang="x-default">
+			Manage Files
+		</short_description>
+		<description xml:lang="x-default">
+			File Manager for basic and advanced file handling
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="ElFinder" node="IFrame" />
+		<sub-pipelines>
+			<pipeline name="ElFinder" />
+		</sub-pipelines>
+		<parameters>
+			<parameter name="connectortype" value="FILE" />
+			<parameter name="menuname" value="Server File Explorer" />
+			<parameter name="mainmenuname" value="File and Content Copy" />
+		</parameters>
+		<icon>icons/explorer_ico.gif</icon>
+	</menuaction>
+
+	<menuaction id="customsubmenu_tools_asset" menupath="customadminmenuextension_contentmanager"
+		position="201" site="false">
+		<name xml:lang="x-default">Content Asset Copy</name>
+		<short_description xml:lang="x-default">
+			Copy slots from one site or locale in a different site or locale
+		</short_description>
+		<description xml:lang="x-default">
+			Copy assets from one site or locale in a different site or locale
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="ElFinder" node="IFrame" />
+		<sub-pipelines>
+			<pipeline name="ElFinder-Show" />
+			<pipeline name="ElFinder-IFrame" />
+			<pipeline name="ElFinder-Connector" />
+		</sub-pipelines>
+		<parameters>
+			<parameter name="connectortype" value="ASSET" />
+			<parameter name="menuname" value="Server File Explorer" />
+			<parameter name="mainmenuname" value="File and Content Copy" />
+		</parameters>
+		<icon>icons/explorer_ico2.gif</icon>
+	</menuaction>
+
+	<menuaction id="customsubmenu_tools_slot" menupath="customadminmenuextension_contentmanager"
+		position="202" site="false">
+		<name xml:lang="x-default">Content Slot Copy</name>
+		<short_description xml:lang="x-default">
+			Copy slots from one site or locale in a different site or locale
+		</short_description>
+		<description xml:lang="x-default">
+			Copy slots from one site or locale in a different site or locale
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="ElFinder" node="IFrame" />
+		<sub-pipelines>
+			<pipeline name="ElFinder-Show" />
+			<pipeline name="ElFinder-IFrame" />
+			<pipeline name="ElFinder-Connector" />
+		</sub-pipelines>
+		<parameters>
+			<parameter name="connectortype" value="SLOT" />
+			<parameter name="menuname" value="Server File Explorer" />
+			<parameter name="mainmenuname" value="File and Content Copy" />
+		</parameters>
+		<icon>icons/explorer_ico3.gif</icon>
+	</menuaction>
+	
+	<menuaction id="customsubmenu_tools_easyimport" menupath="customadminmenuextension_contentmanager"
+		position="203" site="false">
+		<name xml:lang="x-default">Easy Import (Alpha)</name>
+		<short_description xml:lang="x-default">
+			Upload Demandware XML, distribute to multiple sites and import in one go.
+		</short_description>
+		<description xml:lang="x-default">
+			Upload Demandware XML, distribute to multiple sites and import in one go.
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="ElFinder" node="EasyImport" />
+		<sub-pipelines>
+			<pipeline name="ElFinder" />
+		</sub-pipelines>
+		<parameters>
+			<parameter name="connectortype" value="SLOT" />
+			<parameter name="menuname" value="Server File Explorer" />
+			<parameter name="mainmenuname" value="File and Content Copy" />
+		</parameters>
+		<icon>icons/explorer_ico3.gif</icon>
+	</menuaction>
+
+
+	<menuaction id="customsubmenu_roles" menupath="customadminmenuextension_contentmanager"
+		position="204" site="false">
+		<name xml:lang="x-default">Folder Permission</name>
+		<short_description xml:lang="x-default">
+			Grants access to certain folders, by assigning custom user roles
+		</short_description>
+		<description xml:lang="x-default">
+			Grants access to certain folders, by assigning custom user roles			
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="CustomRoles" node="Folder" />
+		<sub-pipelines>
+			<pipeline name="ObjectStore" />
+			<pipeline name="CustomRoles" />
+			<pipeline name="ViewSiteImpex" />
+			<pipeline name="ViewUser" />
+			<pipeline name="ViewUserList" />
+			<pipeline name="ViewLocales" />
+		</sub-pipelines>
+		<parameters>
+			<parameter name="connectortype" value="SLOT" />
+			<parameter name="menuname" value="Server File Explorer" />
+			<parameter name="mainmenuname" value="File and Content Copy" />
+		</parameters>
+		<icon>icons/roles_ico.gif</icon>
+	</menuaction>
+	
+</extensions>

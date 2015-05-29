@@ -1,0 +1,1297 @@
+/**
+*	@input CurrentHttpParameterMap : dw.web.HttpParameterMap
+*	@input CurrentUserName : String
+*	@output ResponseObject : Object
+*	@output FollowUpActions : Object maps an action which can not be executed in script. Only Jobs implemented so fa
+*/
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.object );
+importPackage( dw.io );
+
+importScript( "bm_contentcopytool:elfinder/MimeTypes.ds" );
+importScript( "bm_contentcopytool:elfinder/libNibbler.ds" );
+
+var uploadedFiles = new Array();
+
+function execute( pdict : PipelineDictionary ) : Number	{
+
+	
+	var elFinderConnector = new ElFinderConnector(pdict.CurrentHttpParameterMap, pdict.CurrentUserName);
+	
+	pdict.ResponseObject = elFinderConnector.externalProperties;
+	pdict.FollowUpActions = elFinderConnector.internalProperties.followUpActions;
+   	return PIPELET_NEXT;
+}
+
+/**
+*	@namespace
+*	Constructs the connector object
+* 	the constructor initiliases globally necessary values and dispatches commands, which will fill up the reposne obkect
+*/
+function ElFinderConnector(parameterMap, userName){
+	this.internalProperties = new Object();
+	this.externalProperties = new Object();
+	this.externalProperties.uplMaxSize  = "96M";
+	this.internalProperties.userName = userName;
+	
+	this.internalProperties.parameterMap = parameterMap;
+	this.internalProperties.userName = userName;
+	/** maps an action which can not be executed in script. Only Jobs implemented so far**/
+	this.internalProperties.followUpActions= new Object();
+	var rootFolders = new Array();
+	var rootFolderObjectArray = new Array();
+	
+	// cache root folder IDs on session privacy
+	var connectorType = parameterMap.connectortype.stringValue;
+	var rootFolderIDs = new Array();
+	// check if we have cache
+	if (empty(session.privacy['ef' + connectorType])) {
+		var currentRoles : dw.util.Iterator = CustomObjectMgr.queryCustomObjects("ElFinderUserRole", "custom.users = {0}","custom.ID asc",userName);
+		var rootFolderIDs = new Array();
+		for each (var currentRole in currentRoles) {
+			var rootFolderObjects : dw.util.Iterator = dw.object.CustomObjectMgr.queryCustomObjects("ElFinderRootFolder", "custom.roles = {0} AND custom.connectorType = {1}","custom.ID asc", currentRole.custom.ID, parameterMap.connectortype.stringValue);
+			for each (var rootFolderObject in rootFolderObjects) {
+				rootFolderIDs.push(rootFolderObject.custom.ID);
+			}
+		}
+		session.privacy['ef' + connectorType] = rootFolderIDs;
+	}
+	// retrieve ids from cacge
+	var sessionRootFolderIDs = session.privacy['ef' + connectorType];
+	for each (var rootFolderID in sessionRootFolderIDs) {
+		// get custom object by ID is using ORM cache and is therefore faster than direct queries
+		var rootFolderObject = CustomObjectMgr.getCustomObject("ElFinderRootFolder", rootFolderID);
+		var rootPathString = rootFolderObject.custom.rootPath;
+		if (rootPathString.charAt( rootPathString.length-1 )) {
+			rootPathString = rootPathString + File.SEPARATOR;
+		}
+		rootFolders.push((new File(rootPathString)));
+		rootFolderObjectArray.push(rootFolderObject);
+	}
+	
+	
+	this.internalProperties.rootFolders = rootFolders;
+	this.internalProperties.rootFolderObjects = rootFolderObjectArray;
+	
+	if (parameterMap.cmd.stringValue == "tree") {
+		this.externalProperties.tree = new Array();
+		this.commandTree();
+	} else if (parameterMap.cmd.stringValue == "parents") {
+		this.externalProperties.tree = new Array();
+		this.commandParents(1);
+	} else if (parameterMap.cmd.stringValue == "search") {		
+		this.externalProperties.files = new Array();
+		this.commandSearch();
+	} else if (parameterMap.cmd.stringValue == "paste") {
+		this.externalProperties.added = new Array();
+		this.externalProperties.removed = new Array();
+		this.commandPaste();
+	} else if (parameterMap.cmd.stringValue == "mkdir") {
+		this.externalProperties.added = new Array();
+		this.commandMakeDirectory();
+	} else if (parameterMap.cmd.stringValue == "startimport") {
+		this.commandStartImport();
+	} else if (parameterMap.cmd.stringValue == "filecopy") {
+		this.externalProperties.added = new Array();
+		this.commandLibCopy();
+	} else if (parameterMap.cmd.stringValue == "slotcopy") {
+		this.commandSlotCopy();
+	} else if (parameterMap.cmd.stringValue == "assetcopy") {
+		this.commandAssetCopy();
+	} else if (parameterMap.cmd.stringValue == "ccui") {
+		this.commandCCUI();
+	} else if (parameterMap.cmd.stringValue == "ls") {
+		this.externalProperties.list = new Array();
+		this.commandList();
+	} else if (parameterMap.cmd.stringValue == "archive") {
+		this.externalProperties.added = new Array();
+		this.commandArchive();
+	} else if (parameterMap.cmd.stringValue == "extract") {
+		this.externalProperties.added = new Array();
+		this.commandExtract();
+	} else if (parameterMap.cmd.stringValue == "rename") {
+		this.externalProperties.added = new Array();
+		this.externalProperties.removed = new Array();
+		this.commandRename();
+	} else if (parameterMap.cmd.stringValue == "open") {
+		this.externalProperties.files = new Array();
+		
+		
+		if (parameterMap.init.stringValue == "1") {
+			var that = this;
+			var initialisationSuceeded = this.initFileManager();
+			if (!initialisationSuceeded) {
+				return;
+			}
+		}			
+		
+		this.commandOpen();
+		
+		var duplicateFiles = this.externalProperties.files;
+		var cleanedFiles = new Array();
+		
+		for each (var file in duplicateFiles) {
+			var alreadyInList = false;
+			for each (var cleanedFile in cleanedFiles) {
+				if (file.hash == cleanedFile.hash) {
+					alreadyInList = true;
+				}
+			}
+			
+			if (!alreadyInList)	{
+				cleanedFiles.push(file);
+			}
+		}		
+		this.externalProperties.files = cleanedFiles;
+	} else if (parameterMap.cmd.stringValue == "rm") {
+		this.externalProperties.removed = new Array();
+		this.commandDelete();
+	} else if (!empty(request.httpHeaders['content-type']) && request.httpHeaders['content-type'].indexOf('multipart') != -1) {
+		this.processMultiPart();
+	}
+	
+}
+
+/**
+*	specific handler for multipart requests, as they work differently then the other commands
+*/
+ElFinderConnector.prototype.processMultiPart = function () {
+	
+	var fileMap : dw.util.LinkedHashMap = this.internalProperties.parameterMap.processMultipart( creatFilesFromMultipart );
+	var parameterMap = this.internalProperties.parameterMap;
+
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	
+	this.externalProperties.added = new Array();
+	// move uploaded files to destination folder
+	for each (var file in uploadedFiles) {
+		var newFilePath : String = "";
+		if (targetFile.fullPath.lastIndexOf(File.SEPARATOR) == targetFile.fullPath.length - 1) {
+			newFilePath = targetFile.fullPath + file.name;
+		} else {
+			newFilePath = targetFile.fullPath + File.SEPARATOR + file.name;
+		}
+		var newFile : File = new File(newFilePath);
+		file.renameTo( newFile );
+		// if file came in chunks
+		if (parameterMap.fullsize.submitted) {
+			// determine actual file name
+			var actualFilePath = newFilePath.substring(0,newFilePath.lastIndexOf('.chunk'));
+			var currentSize = 0;
+			var matchingFiles = new Array();
+			// calculate size of uploaded parts			
+			for each (var subFile : File in targetFile.listFiles()) {
+				if (subFile.fullPath.indexOf(actualFilePath) != -1 && subFile.fullPath.indexOf(".chunk") != -1 ) {
+					currentSize += subFile.length();
+					matchingFiles.push(subFile.fullPath);
+				}
+			}
+			// if everything is uploaded
+			if (currentSize == parameterMap.fullsize.intValue) {
+				var actualFile : File = new File(actualFilePath);
+				// create final file
+				if (!actualFile.exists()) {
+					actualFile.createNewFile();
+				} else {
+					actualFile.remove();
+					actualFile.createNewFile();					
+				}
+				matchingFiles = matchingFiles.sort();
+				var fileWriter : FileWriter = new FileWriter(actualFile, "latin1", true);
+				// merge chunks into final file
+				for each (var subFilePath : String in matchingFiles) {
+					var subFile = new File(subFilePath);
+					var fileReader : FileReader = new FileReader(subFile, "latin1");
+					var bytesToCopy = subFile.length();
+					var buffer : String;
+					do{
+						if (bytesToCopy > 10240) {			
+							buffer = fileReader.read(10240);
+							bytesToCopy = bytesToCopy - 10240;
+						} else {
+							buffer = fileReader.read(bytesToCopy);
+							bytesToCopy = 0;
+						}
+						if(buffer != null){
+							fileWriter.write(buffer);
+						}
+					} while(bytesToCopy != 0);
+					fileReader.close();
+					subFile.remove();
+				}
+				
+				fileWriter.flush();
+				fileWriter.close();
+				// notify UI
+				this.externalProperties.added.push(this.convertFile(actualFile, rootFolderIndex, rootFolders[rootFolderIndex]));
+			}
+			
+		} else {
+			this.externalProperties.added.push(this.convertFile(newFile, rootFolderIndex, rootFolders[rootFolderIndex]));
+		}
+		
+	}
+}
+
+/**
+*	Utility method: initialises demandware file object based on hashed filename. Used for single target actions. 
+*/
+ElFinderConnector.prototype.setSingleTarget = function () {
+	var rootFolders = this.internalProperties.rootFolders; 
+	var targetFile : File = null;
+	var targetFileName : String = "";
+	
+	var hash = this.internalProperties.parameterMap.target.stringValue;
+	if (!empty(hash)) {
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+		targetFileName = decodeFileName(hash);
+	} else {
+		var rootFolderIndex = 0;
+		targetFileName = rootFolders[0].fullPath;
+		
+	}
+	
+	try {
+		if (!empty(targetFileName)) {
+			targetFile = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+		} else {
+			targetFile = rootFolders[rootFolderIndex];
+		}
+	} catch (e) {
+		Logger.debug("ElFinder: tried to open non existing root folder  " + targetFileName)
+		targetFile = rootFolders[rootFolderIndex];		
+	}
+	this.targetFile = targetFile;
+	this.rootFolderIndex = rootFolderIndex;
+}
+
+
+/**
+*	Informs client lib about DW specs and sends initial folder set
+*/
+ElFinderConnector.prototype.initFileManager = function () {
+	// replace with user specific custom objects
+	this.externalProperties.api = "2.0";
+	
+	var rootFolders = this.internalProperties.rootFolders; 
+	if (!empty(rootFolders)) {
+		this.externalProperties.cwd = this.convertFile(rootFolders[0], 0, rootFolders[0]);
+		for (var index in rootFolders) {
+			this.externalProperties.files.push(this.convertFile(rootFolders[index], index, rootFolders[index]));
+		}
+		
+		var regExpString = this.internalProperties.rootFolderObjects[0].custom.subPathFolderRegexp;
+		var regExpPattern : RegExp = new RegExp(regExpString);
+		
+		var subFiles = rootFolders[0].listFiles();
+		for each (var subFile : File in subFiles) {
+			var subFolderPath = subFile.fullPath.replace(rootFolders[0].fullPath, "");
+			var matches = subFolderPath.match(regExpString);
+			if (!empty(subFolderPath.match(regExpString))) {
+				var efObject = this.convertFile(subFile,0, rootFolders[0]);
+				this.externalProperties.files.push(efObject);
+			}
+		}
+		return true;
+	} else {
+		this.externalProperties.error = "Unfortunately there is no folder assigned to your user account. Please update ElFinderRootFolder and ElFinderUserRole custom objects to match your login and relogin into Business Manager";
+		return false;
+	}
+}
+
+/**
+*	implements 'rm' command: deletes multiple files from server 
+*/
+ElFinderConnector.prototype.commandDelete = function () {
+	var rootFolders = this.internalProperties.rootFolders; 
+	for each (var hash in this.internalProperties.parameterMap['targets[]'].stringValues) {
+		var originalHash = hash;
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+		
+		var targetFileName : String = decodeFileName(hash);
+		if (!empty(targetFileName)) {
+			var targetFile = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+			var status : Status = deleteFile(targetFile);
+			if (status.getStatus() == Status.OK) {
+				this.externalProperties.removed.push(originalHash);
+			}
+		} 
+	}
+}
+/**
+*	implements 'filecopy' command: Copies files across folders in the same demandware root type directory or locale. I.e From Libraries/DE to Libraries/DK 
+*/
+ElFinderConnector.prototype.commandLibCopy = function () {
+	var rootFolders = this.internalProperties.rootFolders; 
+	for each (var hash in this.internalProperties.parameterMap['targets[]'].stringValues) {
+		var originalHash = hash;
+		
+		// get source volume and source file name
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+		
+		var targetFileName : String = decodeFileName(hash);
+
+		if (!empty(targetFileName)) {
+			var targetFile = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+			for each (var libHash in this.internalProperties.parameterMap['libs[]'].stringValues) {		
+				// get destination volume
+				var libVolumeIndex = libHash.substring(0, libHash.indexOf('_'));
+				libHash = libHash.substring(libHash.indexOf('_') + 1 , libHash.length);
+				var libRootFolderIndex = parseInt(libVolumeIndex.replace('v',''));
+				var libhashdecoded = decodeFileName(libHash);
+				// puzzle together destination filename
+				var destinationRootFullPath = rootFolders[libRootFolderIndex].fullPath;
+				var lastDestinationRootSymbol = destinationRootFullPath.charAt( destinationRootFullPath.length-1 );
+				if (lastDestinationRootSymbol == File.SEPARATOR) {
+					destinationRootFullPath = (new File(destinationRootFullPath.substring(0, destinationRootFullPath.length - 1)).getFullPath());
+				}
+				var destinationLib : String = destinationRootFullPath + decodeFileName(libHash);
+				
+				var rootFullPath = rootFolders[rootFolderIndex].fullPath;
+				var lastRootSymbol = rootFullPath.charAt( rootFullPath.length-1 );
+				if (lastRootSymbol == File.SEPARATOR) {
+					rootFullPath = (new File(rootFullPath.substring(0, rootFullPath.length - 1)).getFullPath());
+				}
+				if (this.internalProperties.parameterMap.connectortype.stringValue != "IMPORT") {
+					var sourceLib = rootFullPath + File.SEPARATOR + targetFileName.split(File.SEPARATOR)[1];
+				} else {
+					var sourceLib = rootFullPath  + File.SEPARATOR;				
+				}
+				var destinationFile = new File(targetFile.fullPath.replace(sourceLib, destinationLib));
+				
+				// copy actual files to the new destination
+				copyFile(targetFile, destinationFile);
+				this.externalProperties.added.push(this.convertFile(destinationFile,libRootFolderIndex, rootFolders[libRootFolderIndex]));
+			}
+		} 
+	}
+}
+
+/**
+*	implements 'ccui' command: Builds Commerce Center URL for 
+*	Note: function not used
+*/
+ElFinderConnector.prototype.commandCCUI = function () {
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	
+	var fileReader : FileReader = new FileReader(targetFile, "UTF-8");
+	var xmlreader : XMLStreamReader = new XMLStreamReader(fileReader);
+	var ccuiUrl; 
+	
+	var destinationPath = rootFolders[rootFolderIndex].fullPath.split(File.SEPARATOR);
+	var destinationSite = "";
+	for (var i = 0; i < destinationPath.length; i++) {
+		if (!empty( destinationPath[i])) {
+			destinationSite = destinationPath[i];
+		}
+	}
+	// /s/-/dw/cc_app/#slots/edit?site=DE&slotId=storefront2-hero-slot&editor=slotConfigurations&locale=default&slotType=CATEGORY&parentId=vila&state=edit&slotConfigurationId=vl-frontpage-schedule
+	// /s/-/dw/cc_app/#content/edit?site=DE&folder=root&editor=content&state=edit&content=jj-midseason-sale&locale=default
+	
+	if (this.internalProperties.parameterMap.connectortype.stringValue == "ASSET") {
+		while (xmlreader.hasNext()) {
+			var event = xmlreader.next();
+			if (event == XMLStreamConstants.START_ELEMENT && xmlreader.localName == 'content') {
+				var xmlObject : XML = xmlreader.getXMLObject();
+				var assetID = xmlObject.attribute('content-id').toString();
+			}
+		}
+		
+	} else if (this.internalProperties.parameterMap.connectortype.stringValue == "SLOT") {
+		var xmlObject : XML;
+		var categoryID = "";
+		var configurationID = "";
+		var slotID = "";
+		while (xmlreader.hasNext()) {
+			var event = xmlreader.next();
+			if (event == XMLStreamConstants.START_ELEMENT && xmlreader.localName == 'slot-configuration') {
+				xmlObject  = xmlreader.getXMLObject();
+				categoryID = xmlObject.attribute('context-id').toString();  
+				configurationID = xmlObject.attribute('configuration-id').toString();  
+				slotID =  xmlObject.attribute('slot-id');
+			}
+		}	 
+		ccuiUrl = "https://" + request.getHttpHost() + "/s/-/dw/cc_app/#slots/edit?site=" + destinationSite + "&slotId=" + encodeURIComponent(slotID) + "&editor=slotConfigurations&locale=default&slotType=CATEGORY&parentId=" + encodeURIComponent(categoryID) + "&state=edit&slotConfigurationId=" + encodeURIComponent(configurationID);
+	}
+	
+	this.externalProperties.ccuiUrl = ccuiUrl;
+	
+	fileReader.close();
+	xmlreader.close();
+	
+}
+/**
+*	implements 'filecopy' command: Copies files across folders in the same demandware root type directory or locale. I.e From Libraries/DE to Libraries/DK 
+*/
+ElFinderConnector.prototype.commandStartImport = function () {
+	this.internalProperties.followUpActions = {"RunJobNow": "ExecuteEasyImport"}
+}
+/**
+*	implements 'filecopy' command: Copies files across folders in the same demandware root type directory or locale. I.e From Libraries/DE to Libraries/DK 
+*/
+ElFinderConnector.prototype.commandSlotCopy = function () {
+	var rootFolders = this.internalProperties.rootFolders; 
+	for each (var hash in this.internalProperties.parameterMap['targets[]'].stringValues) {
+		var originalHash = hash;
+		// get source volume and source file name
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+	
+		var targetFileName : String = decodeFileName(hash);
+
+		if (!empty(targetFileName)) {
+			var targetFile = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+			var siteLocaleMap : HashMap = new HashMap(); 
+			var sourceLocale : String = targetFile.name.substring(targetFile.name.lastIndexOf('_') + 1, targetFile.name.lastIndexOf('.'));
+			
+			for each (var libHash in this.internalProperties.parameterMap['libs[]'].stringValues) {		
+				// get destination volume
+				var libVolumeIndex = libHash.substring(0, libHash.indexOf('_'));
+				libHash = libHash.substring(libHash.indexOf('_') + 1 , libHash.length);
+				var libRootFolderIndex = parseInt(libVolumeIndex.replace('v',''));
+				var destinationPath = rootFolders[libRootFolderIndex].fullPath.split(File.SEPARATOR);
+				var destinationSite = "";
+				for (var i = 0; i < destinationPath.length; i++) {
+					if (!empty( destinationPath[i])) {
+						destinationSite = destinationPath[i];
+					}
+				}
+				
+				var destinationLocale = decodeFileName(libHash);
+				// @FIXME The locales have leading slashed, the real cause should be fixed instead
+				destinationLocale = destinationLocale.replace('/','');
+				if (destinationLocale == "default") {
+					destinationLocale = "x-default";	
+				} else {
+					destinationLocale = destinationLocale.replace('_','-');						
+				}
+				if (empty(siteLocaleMap.get(destinationSite))) {
+					siteLocaleMap.put(destinationSite, (new ArrayList()));
+				}
+				var localeArray = siteLocaleMap.get(destinationSite);
+				localeArray.add1(destinationLocale);
+				siteLocaleMap.put(destinationSite, localeArray);
+			}
+			
+			for each (var siteID in siteLocaleMap.keySet()) {
+				
+				var localeArray = siteLocaleMap.get(siteID);
+				var fileReader : FileReader = new FileReader(targetFile, "UTF-8");
+				
+				var targetFolder = new File(File.IMPEX + File.SEPARATOR  + "contentcopy" + File.SEPARATOR + "slots" + File.SEPARATOR + "export-batch" + File.SEPARATOR + siteID);
+				targetFolder.mkdirs();
+				
+				var hotFolderFile : File = new File(targetFolder.fullPath + File.SEPARATOR +  UUIDUtils.createUUID() + "_" + targetFile.getName());
+				hotFolderFile.createNewFile();
+				
+				var fileWriter : FileWriter = new FileWriter(hotFolderFile, "UTF-8", false);
+				
+				var xmlString = fileReader.getString();
+				var xmlObject = new XML(xmlString);
+	
+				var xml = new Namespace("xml", "http://www.w3.org/XML/1998/namespace");
+				
+				/* The author did not copy random pieces of google code, the e4x usage is best practise here */
+				for each (var xmlElement in xmlObject.descendants()) {
+					for each(var xmlLang in (xmlElement.@xml::lang)){
+						var currentLocale = xmlLang.toString();
+						if (sourceLocale != currentLocale) {
+							xmlElement.@xml::lang = "xx-XX";
+						} else {
+							xmlElement.@xml::lang = destinationLocale;
+						}
+					}
+				}
+				var deletableElementCount = xmlObject..*.(@xml::lang=="xx-XX").length();
+				for (var j = 0; j < deletableElementCount; j++) {
+					delete xmlObject..*.(@xml::lang=="xx-XX")[0];
+				}
+				
+				
+				
+				fileWriter.write(xmlObject.toString());		
+	
+				fileReader.close();
+				fileWriter.flush();
+				fileWriter.close();
+			}
+		} 
+	}
+}
+/**
+*	implements 'filecopy' command: Copies files across folders in the same demandware root type directory or locale. I.e From Libraries/DE to Libraries/DK 
+*/
+ElFinderConnector.prototype.commandAssetCopy = function () {
+	var rootFolders = this.internalProperties.rootFolders; 
+	for each (var hash in this.internalProperties.parameterMap['targets[]'].stringValues) {
+		var originalHash = hash;
+		// get source volume and source file name
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+		
+		var targetFileName : String = decodeFileName(hash);
+
+		if (!empty(targetFileName)) {
+			var targetFile = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+			var siteLocaleMap : HashMap = new HashMap(); 
+			
+			for each (var libHash in this.internalProperties.parameterMap['libs[]'].stringValues) {		
+				// get destination volume
+				var libVolumeIndex = libHash.substring(0, libHash.indexOf('_'));
+				libHash = libHash.substring(libHash.indexOf('_') + 1 , libHash.length);
+				var libRootFolderIndex = parseInt(libVolumeIndex.replace('v',''));
+				var destinationPath = rootFolders[libRootFolderIndex].fullPath.split(File.SEPARATOR);
+				var destinationSite = "";
+				for (var i = 0; i < destinationPath.length; i++) {
+					if (!empty( destinationPath[i])) {
+						destinationSite = destinationPath[i];
+					}
+				}
+				
+				var destinationLocale = decodeFileName(libHash);
+				// @FIXME The locales have leading slashed, the real cause should be fixed instead
+				destinationLocale = destinationLocale.replace('/','');
+				if (destinationLocale == "default") {
+					destinationLocale = "x-default";	
+				} else {
+					destinationLocale = destinationLocale.replace('_','-');						
+				}
+				if (empty(siteLocaleMap.get(destinationSite))) {
+					siteLocaleMap.put(destinationSite, (new ArrayList()));
+				}
+				var localeArray = siteLocaleMap.get(destinationSite);
+				localeArray.add1(destinationLocale);
+				siteLocaleMap.put(destinationSite, localeArray);
+			}
+			
+			for each (var siteID in siteLocaleMap.keySet()) {
+				
+				var localeArray = siteLocaleMap.get(siteID);
+				
+				var sourceLocale : String = targetFile.name.substring(targetFile.name.lastIndexOf('_') + 1, targetFile.name.lastIndexOf('.'));
+				 
+				var fileReader : FileReader = new FileReader(targetFile, "UTF-8");
+				
+				var targetFolder = new File(File.IMPEX + File.SEPARATOR  + "contentcopy" + File.SEPARATOR + "content" + File.SEPARATOR + "export-batch" + File.SEPARATOR + siteID);
+				targetFolder.mkdirs();
+				
+				var hotFolderFile : File = new File(targetFolder.fullPath + File.SEPARATOR +  UUIDUtils.createUUID() + "_" + targetFile.getName());
+				hotFolderFile.createNewFile();
+				
+				var fileWriter : FileWriter = new FileWriter(hotFolderFile, "UTF-8", false);
+				
+				var xmlString = fileReader.getString();
+				var xmlObject = new XML(xmlString);
+	
+				var xml = new Namespace("xml", "http://www.w3.org/XML/1998/namespace");
+				
+				/* The author did not copy random pieces of google code, the e4x usage is best practise here */
+				for each (var xmlElement in xmlObject.descendants()) {
+					for each(var xmlLang in (xmlElement.@xml::lang)){
+						var currentLocale = xmlLang.toString();
+						if (sourceLocale != currentLocale) {
+							xmlElement.@xml::lang = "xx-XX";
+						} else {
+							xmlElement.@xml::lang = destinationLocale;
+						}
+					}
+				}
+				var deletableElementCount = xmlObject..*.(@xml::lang=="xx-XX").length();
+				for (var j = 0; j < deletableElementCount; j++) {
+					delete xmlObject..*.(@xml::lang=="xx-XX")[0];
+				}
+				
+				fileWriter.write(xmlObject.toString());		
+	
+				fileReader.close();
+				fileWriter.flush();
+				fileWriter.close();
+			}
+		} 
+	}
+}
+
+/**
+*	implements 'paste' command: moves or copies files in file system
+*/
+ElFinderConnector.prototype.commandPaste = function () {
+	
+	var rootFolders = this.internalProperties.rootFolders; 
+	for each (var hash in this.internalProperties.parameterMap['targets[]'].stringValues) {
+		var originalHash = hash;
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+		var dstHash = this.internalProperties.parameterMap['dst'].stringValue;
+		var dstVolumeIndex = dstHash.substring(0, dstHash.indexOf('_'));
+		dstHash = dstHash.substring(dstHash.indexOf('_') + 1 , dstHash.length);
+		var dstRootFolderIndex = parseInt(dstVolumeIndex.replace('v',''));
+		var destinationFolder = decodeFileName(dstHash);
+		
+		var targetFileName : String = decodeFileName(hash);
+		if (!empty(targetFileName)) {
+			var targetFile : File = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+			var destinationFile : File = new File(rootFolders[dstRootFolderIndex].fullPath + destinationFolder + File.SEPARATOR + targetFile.name);
+			if (this.internalProperties.parameterMap['cut'].stringValue == "1") {
+				this.externalProperties.removed.push(this.convertFile(targetFile ,rootFolderIndex, rootFolders[rootFolderIndex]).hash);
+				if (!targetFile.isDirectory()) {
+					targetFile.renameTo(destinationFile);
+					var finalDestination = destinationFile;
+				} else {
+					var finalDestination = copyFile(targetFile, destinationFile);
+					deleteFile(targetFile);
+				}
+				this.externalProperties.added.push(this.convertFile(destinationFile,dstRootFolderIndex, rootFolders[dstRootFolderIndex]));
+			} else {
+				var finalDestination : File = copyFile(targetFile, destinationFile);
+			}
+			this.externalProperties.added.push(this.convertFile(finalDestination ,dstRootFolderIndex, rootFolders[dstRootFolderIndex]));
+		}
+	}
+}
+
+/**
+*	implements 'archive' command: creates a folder on the server
+*/
+ElFinderConnector.prototype.commandArchive = function () {
+
+	var rootFolders = this.internalProperties.rootFolders; 
+	var zipFolderName = "";
+	
+	for each (var hash in this.internalProperties.parameterMap['targets[]'].stringValues) {
+		var originalHash = hash;
+		var volumeIndex = hash.substring(0, hash.indexOf('_'));
+		hash = hash.substring(hash.indexOf('_') + 1 , hash.length);
+		var rootFolderIndex = parseInt(volumeIndex.replace('v',''));
+		
+		var targetFileName : String = decodeFileName(hash);
+		if (!empty(targetFileName)) {
+			var targetFile : File = new File(rootFolders[rootFolderIndex].fullPath + targetFileName);
+			if (!targetFile.isDirectory()) {
+				var zipFolders = targetFile.fullPath.split(File.SEPARATOR);
+				zipFolders.pop();
+				
+				var parentFolder : File = new File(zipFolders.join(File.SEPARATOR));
+				var archives = function (candidate : dw.io.File) {
+  					var name = candidate.getName();
+  					return !!name.match(/archive.*\.zip/);
+				}
+				
+				zipFolders.push("archive-" + parentFolder.listFiles(archives).length);
+
+				zipFolderName = zipFolders.join(File.SEPARATOR);
+				var zipFolder : File = new File(zipFolderName);
+				zipFolder.mkdirs();
+				var destinationFile : File = new File(zipFolderName + File.SEPARATOR + targetFile.name);
+				
+				copyFile(targetFile, destinationFile);
+			} else {
+				
+				var filePath = targetFile.fullPath;
+				if (filePath.charAt(filePath.length-1) == "/") {
+				    filePath = filePath.substring(0,filePath.length-1);
+				}
+				var zipFile  : File = new File(filePath + ".zip");
+				targetFile.zip(zipFile);
+				this.externalProperties.added.push(this.convertFile(zipFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+			}
+		}
+	}
+	if (!empty(zipFolderName)) {
+		var zipFile  : File = new File(zipFolderName + ".zip");
+		var zipFolder : File = new File(zipFolderName);
+		zipFolder.zip(zipFile);
+		deleteFile(zipFolder);				
+		this.externalProperties.added.push(this.convertFile(zipFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+	}
+}
+
+/**
+*	implements 'archive' command: creates a folder on the server
+*/
+ElFinderConnector.prototype.commandExtract = function () {
+
+	var rootFolders = this.internalProperties.rootFolders; 
+	var zipFolderName = "";
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+		
+	if (!empty(targetFile)) {
+		if ( !targetFile.name.toLowerCase().match(/.zip/) ) {
+			return new Status( Status.ERROR, 'Only zip files can be decompressed!' );
+		} else {
+			var filePath : String = targetFile.fullPath;
+						
+			var rootDirectoryPath : String = filePath.substr(0, filePath.lastIndexOf('/'));
+			var rootDirectory : File = new File( rootDirectoryPath );
+			var beforeFiles : List = rootDirectory.listFiles();
+						
+			if ( !rootDirectory.exists() ) {
+				return;
+			}
+			try {
+				targetFile.unzip(rootDirectory);
+			} catch ( e ) {
+				return;
+			}
+			var addedFiles : List  = rootDirectory.listFiles();
+			addedFiles.removeAll(beforeFiles);
+			
+			var extractedFile = new File(targetFile.fullPath.replace(".zip", ""));
+			for each (var addedFile : File in addedFiles) { 
+				this.externalProperties.added.push(this.convertFile(addedFile, rootFolderIndex, rootFolders[rootFolderIndex]));
+			}
+
+			
+		}
+	}
+}
+
+/**
+*	implements 'mkdir' command: creates a folder on the server
+*/
+ElFinderConnector.prototype.commandMakeDirectory = function () {
+	
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	
+	var newFolder : File = new File(targetFile.fullPath + File.SEPARATOR + this.internalProperties.parameterMap['name'].stringValue);
+	newFolder.mkdirs();
+	
+	this.externalProperties.added.push(this.convertFile(newFolder,rootFolderIndex, rootFolders[rootFolderIndex]));
+}
+
+
+/**
+*	implements 'parents' command: returns list of parent folders to sync up LHN Tree 
+*/
+ElFinderConnector.prototype.commandParents = function () {
+	
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	
+ 	var currentFile : File = targetFile;
+ 	var iterationCount = 0;
+ 	var filesToSend : Set = new HashSet();
+	filesToSend.add1(this.convertFile(currentFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+ 	while (rootFolders[rootFolderIndex].fullPath != currentFile.fullPath) {
+ 		
+		
+		if (iterationCount < 1) {
+			if (currentFile.isDirectory()) {
+				var subFiles = currentFile.listFiles();	
+				for each (var subFile : File in subFiles) {
+					if (subFile.isDirectory()) {
+						filesToSend.add1(this.convertFile(subFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+					}
+			 	}
+			}
+ 		}
+ 		var directoryPath = currentFile.fullPath.split(File.SEPARATOR);
+		if (empty(directoryPath.pop())) {
+			directoryPath.pop();	
+		}
+		
+	
+		try {
+			var currentPathString = directoryPath.join(File.SEPARATOR);
+			if (currentPathString.substr(-1) != File.SEPARATOR) {
+				currentPathString = currentPathString + File.SEPARATOR
+			}
+			currentFile = new File(currentPathString);
+		} catch (e) {
+			Logger.debug("Invalid directory found")
+ 		}
+		filesToSend.add1(this.convertFile(currentFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+		
+		iterationCount ++;
+
+ 	}
+ 	
+ 	for each (var fileToSend in filesToSend) {
+ 		this.externalProperties.tree.push(fileToSend);
+ 	}
+}
+
+/**
+*	implements 'search' command: returns list of file names in selected folder or subfolders
+*/
+ElFinderConnector.prototype.commandSearch = function () {
+	var startTimeStamp = (new Date()).getTime();
+	this.setSingleTarget();
+	
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+
+	var files = new ArrayList(); 
+	var searchTerm = this.internalProperties.parameterMap.q.stringValue
+	
+	var subFiles : List = new ArrayList();
+	function directoriesFilter(candidate : dw.io.File) {
+		if (candidate.isDirectory()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	var regExpString = this.internalProperties.rootFolderObjects[rootFolderIndex].custom.subPathFolderRegexp;
+	var regExpPattern : RegExp = new RegExp(regExpString);
+	function matchSearch(candidate : dw.io.File) {
+		if (candidate.isDirectory()) {
+			return false;
+		} else {
+			return (candidate.getName().indexOf(searchTerm) != -1) && regExpPattern.test(candidate.getFullPath());
+		}
+	}
+	var subDirs = targetFile.listFiles(directoriesFilter);
+	files.addAll(targetFile.listFiles(matchSearch));	
+	while (!empty(subDirs)) {
+		var nextLevelSubDirs = new ArrayList();
+		for each (var subDir in subDirs) {
+			files.addAll(subDir.listFiles(matchSearch));	
+			nextLevelSubDirs.addAll(subDir.listFiles(directoriesFilter)); 
+		}
+		var subDirs = nextLevelSubDirs;
+		var currentTimeStamp = (new Date()).getTime();
+		
+		// perform a search for maximum 30s
+		if ((currentTimeStamp - startTimeStamp) > 30000) {
+			this.externalProperties.timeout = true;
+			break;
+		}	
+	} 
+	
+	
+	for each (var subFile : File in files) {
+		this.externalProperties.files.push(this.convertFile(subFile, rootFolderIndex, rootFolders[rootFolderIndex]));
+	}
+}
+
+/**
+*	implements 'ls' command: returns list of file names in folder
+*/
+ElFinderConnector.prototype.commandList = function () {
+	
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	
+	var subFiles : List = new ArrayList();
+	
+	if (targetFile.isDirectory()) {
+		subFiles = targetFile.listFiles();	
+	}
+	
+	for each (var subFile : File in subFiles) {
+		this.externalProperties.list.push(subFile.name);
+	}
+}
+
+/**
+*	implements 'tree' command: returns list of subfolders folders to sync up LHN Tree 
+*/
+ElFinderConnector.prototype.commandRename = function () {
+	
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	var filePath = targetFile.fullPath;
+	var newFile : File;
+	if (!targetFile.isDirectory()) {
+		var rootDirectoryPath : String = filePath.substr(0, filePath.lastIndexOf('/'));
+	} else {
+		if (filePath.charAt(filePath.length-1) == "/") {
+		    filePath = filePath.substring(0,filePath.length-1);
+		}
+		var rootDirectoryPath : String = filePath.substr(0, filePath.lastIndexOf('/'));
+	}
+	newFile = new File (rootDirectoryPath + File.SEPARATOR + this.internalProperties.parameterMap['name'].stringValue);
+	targetFile.renameTo(newFile);
+	this.externalProperties.added.push(this.convertFile(newFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+	this.externalProperties.removed.push(this.convertFile(targetFile,rootFolderIndex, rootFolders[rootFolderIndex]).hash);
+	
+}
+
+/**
+*	implements 'tree' command: returns list of subfolders folders to sync up LHN Tree 
+*/
+ElFinderConnector.prototype.commandTree = function () {
+	
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	
+	this.externalProperties.tree.push(this.convertFile(targetFile, rootFolderIndex, rootFolders[rootFolderIndex]));
+	
+	var subFiles : List = new ArrayList();
+	
+	if (targetFile.isDirectory()) {
+		subFiles = targetFile.listFiles();	
+	}
+	
+	for each (var subFile in subFiles) {
+		if (subFile.isDirectory()) {
+			this.externalProperties.tree.push(this.convertFile(subFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+		}
+	}	
+}
+
+
+/**
+*	implements 'open' command: returns list of files in folder to show up in main panel
+*/
+ElFinderConnector.prototype.commandOpen = function () {
+
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	
+	if (targetFile && targetFile.exists()) {
+		this.externalProperties.cwd = this.convertFile(targetFile, rootFolderIndex, rootFolders[rootFolderIndex]);
+		
+		this.externalProperties.files.push(this.convertFile(targetFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+	
+		var subFiles : List = new ArrayList();
+		
+		if (targetFile.isDirectory()) {
+			subFiles = targetFile.listFiles();	
+		}
+		var regExpString = this.internalProperties.rootFolderObjects[rootFolderIndex].custom.subPathFolderRegexp;
+		var regExpPattern : RegExp = new RegExp(regExpString);
+		
+		for each (var subFile : File in subFiles) {
+			var subFolderPath = subFile.fullPath.replace(rootFolders[rootFolderIndex].fullPath, "");
+			var matches = subFolderPath.match(regExpString);
+			if (!empty(subFolderPath.match(regExpString))) {
+				var efObject = this.convertFile(subFile,rootFolderIndex, rootFolders[rootFolderIndex]);
+				this.externalProperties.files.push(efObject);
+			}
+		}
+		
+		if (this.internalProperties.parameterMap.tree.booleanValue) {
+		 	var currentFile = null;
+		 	while (rootFolders.indexOf(currentFile) != -1 ) {
+		 		var directoryPath = file.fullPath.split(File.SEPARATOR);
+				directoryPath.pop();
+				currentFile = new File(directoryPath.join(File.SEPARATOR));
+				
+				if (currentFile.isDirectory()) {
+					subFiles = currentFile.listFiles();	
+				}
+		
+				for each (var subFile : File in subFiles) {
+					if (subFile.isDirectory()) {
+						this.externalProperties.tree.push(this.convertFile(subFile,rootFolderIndex, rootFolders[rootFolderIndex]));
+					}
+			 	}
+		 	}
+		}
+		
+		this.externalProperties.options = {
+			"path": targetFile.fullPath.replace(rootFolders[rootFolderIndex].fullPath, ""),
+			"url":"https://"+this.internalProperties.userName + "@" + request.httpHost + "/on/demandware.servlet/webdav/Sites" + rootFolders[rootFolderIndex].fullPath + "/",
+			"separator":"/",
+			"copyOverwrite":1,
+			"archivers": {
+				"create":["application/zip"],
+				"extract":["application/zip"]
+				},
+			"connectorType": this.internalProperties.parameterMap.connectortype.stringValue, 
+			"relatives" : this.getRelatives()	
+			};	
+	}
+}
+
+ElFinderConnector.prototype.getRelatives = function () {
+	this.setSingleTarget();
+	var targetFile : File = this.targetFile;
+	var rootFolderObjects = this.internalProperties.rootFolderObjects;
+	var rootFolders : Number = this.internalProperties.rootFolders;
+	var rootFolderIndex : Number = this.rootFolderIndex;
+	var relatives = new Array();
+	
+	for (var i = 0; i < rootFolderObjects.length; i++) {
+		var rootFolder = rootFolders[i];
+		if (targetFile.getRootDirectoryType() == rootFolder.getRootDirectoryType()) {		
+			for each (var locale : File in rootFolderObjects[i].custom.activeLocales) {
+				if (rootFolderObjects[rootFolderIndex].custom.connectorType == "IMPORT") {
+					var relativeFile = new File(rootFolders[i].fullPath);
+				} else {
+					var relativeFile = new File(rootFolders[i].fullPath + File.SEPARATOR + locale);
+				}	 
+				var relativesObject = this.convertFile(relativeFile, i, rootFolders[i]);
+				relativesObject.standardLocale = rootFolderObjects[i].custom.standardLocale;	
+				relativesObject.type = rootFolderObjects[rootFolderIndex].custom.connectorType.value;	
+				relatives.push(relativesObject);
+			}
+		}		
+	}
+	/*if (rootFolderObjects[rootFolderIndex].custom.connectorType == "IMPORT") {
+		for (var i = 0; i < rootFolders.length; i++) {
+			var rootFolder : File = rootFolders[i];
+			if (targetFile.getRootDirectoryType() == rootFolder.getRootDirectoryType()) {
+				var relativeFile = new File(rootFolders[i].fullPath + File.SEPARATOR + locale); 
+				var relativesObject = this.convertFile(relativeFile, i, rootFolders[i]);
+				relativesObject.standardLocale = rootFolderObjects[i].custom.standardLocale;	
+				relativesObject.type = rootFolderObjects[rootFolderIndex].custom.connectorType.value;	
+				relatives.push(relativesObject);				
+			}		
+		}
+	}*/
+	return relatives;
+}
+
+/**
+*	utitity function: converts a file into an ElFinder readable format
+*/ 
+ElFinderConnector.prototype.convertFile = function(file : File, volumeIndex : Number, rootPath : File) {
+	var efFileObject = new Object();
+	if (file.isDirectory()) {
+		efFileObject.mime = "directory";
+	} else {
+		try { 
+			
+			var extension : String = file.getName().split('.')[file.getName().split('.').length - 1];
+			efFileObject.mime = getMimeType("." + extension.toLowerCase());
+		} catch(e) {
+			var exc = e;
+			efFileObject.mime = "unknown";
+		}
+		
+		if (empty(efFileObject.mime)) {
+			efFileObject.mime = "unknown";
+		}
+	}
+	
+	efFileObject.debug = file.getFullPath();
+	
+	efFileObject.read = 1;
+	if (this.internalProperties.rootFolderObjects[volumeIndex].custom.connectorType == "FILE" || this.internalProperties.rootFolderObjects[volumeIndex].custom.connectorType == "IMPORT") {
+		var regExpString = this.internalProperties.rootFolderObjects[volumeIndex].custom.subPathFolderRegexp;
+		var regExpPattern : RegExp = new RegExp(regExpString);
+		
+		
+		var subFolderPath = file.fullPath.replace(this.internalProperties.rootFolders[volumeIndex].fullPath, "");
+		var matches = subFolderPath.match(regExpString);
+		
+		if (matches) {
+			efFileObject.write = 1;
+			efFileObject.locked = 0;
+		} else {
+			efFileObject.write = 0;
+			efFileObject.locked = 1;	
+		}	
+	} else {
+		efFileObject.write = 0;
+		efFileObject.locked = 1;		
+	}
+	efFileObject.dirs = 0;
+	
+	if (file.isDirectory()) {
+		var subFiles =  file.listFiles();
+		for each (var subFile in subFiles) {
+			if (subFile.isDirectory()) {
+				efFileObject.dirs = 1;
+				break;
+			}
+		}
+		efFileObject.size = 0;
+	} else {
+		efFileObject.size = file.length();	
+	}
+		
+	
+	efFileObject.name = file.name;
+	efFileObject.ts = file.lastModified();
+	
+	// Normalize Filepath to exclude slash on full files
+	if (file.isDirectory()) {
+		var fullPath = file.fullPath;
+		var lastSymbol = fullPath.charAt( fullPath.length-1 )
+		if (lastSymbol == File.SEPARATOR) {
+			file = new File(fullPath.substring(0, fullPath.length - 1));
+		}
+	}
+	
+	if (rootPath.isDirectory()) {
+		var rootFullPath = rootPath.fullPath;
+		var lastRootSymbol = rootFullPath.charAt( rootFullPath.length-1 )
+		if (lastRootSymbol == File.SEPARATOR) {
+			rootPath = new File(rootFullPath.substring(0, rootFullPath.length - 1));
+		}
+	}
+
+	if (rootPath.fullPath != file.fullPath) {
+		var directoryPath = file.fullPath.split(File.SEPARATOR);
+		directoryPath.pop();
+				
+		var parent = new File(directoryPath.join(File.SEPARATOR) + File.SEPARATOR);
+		efFileObject.phash =  'v' + volumeIndex + "_" + encodeFileName(parent, rootPath);
+
+	} else {
+		efFileObject.volumeid = 'v' + volumeIndex;
+		// overwrite name of root folders 	 
+		//efFileObject.name = rootPath.fullPath;
+		efFileObject.name = this.internalProperties.rootFolderObjects[volumeIndex].custom.ID;	
+	}
+
+	if (file.isDirectory() && file.fullPath.substring(file.fullPath.length-1,file.fullPath.length) != File.SEPARATOR) {
+		file = new File (file.fullPath + File.SEPARATOR);	
+	}
+	efFileObject.hash =  'v' + volumeIndex + "_" + encodeFileName(file, rootPath); 
+	// workaround incest - some files are there own parent :O
+	if (efFileObject.hash == efFileObject.phash) {
+		efFileObject.phash =  'v' + volumeIndex + "_";
+	}
+
+
+	return efFileObject;
+}
+
+/**
+*	utitity function: converts filename and path into html compatible hash
+*/ 
+function encodeFileName(file : File, rootPath : File) {
+	var hashedFilePath = file.fullPath;
+	var rootPathString = rootPath.fullPath;
+	
+	hashedFilePath = hashedFilePath.replace(rootPathString, "");
+	
+	hashedFilePath = Base32().encode(hashedFilePath);
+	return hashedFilePath;
+}
+
+/**
+*	utitity function: converts filehash into path information
+*/ 
+function decodeFileName(hash) {
+
+	hash = Base32().decode(hash);
+	return hash;
+}
+
+
+/**
+*	callback method for multipart processor
+*/ 
+function creatFilesFromMultipart ( field : String, contentType : String, fileName : String ) {
+    if( fileName == null || fileName == "") {
+		return null;
+    }
+    // workaround dw system putting files in a set. As Elfinder uses the same form key for each file, we store the files in an array.
+    var file : File = new File( [File.TEMP, '/', fileName].join('') );
+    uploadedFiles.push(file)
+    return file;
+}
+
+function deleteFile( file : File ) {
+	var systemFiles : Array = ['/IMPEX/log'];
+	if ( systemFiles.indexOf(file.fullPath) != -1 ) {
+		return new Status( Status.ERROR, 'The file/directory you try to delete is required by the system and must not be deleted!' );
+	} else {
+		try {
+			if ( file.directory && file.list().length > 0 ) {
+				for each ( var subFileName : File in file.list() ) {
+					var subFilePath : String = [file.fullPath, subFileName].join( File.SEPARATOR );
+					var status : Status = deleteFile( new File(subFilePath) );
+					if ( status.error ) {
+						return status;
+					}
+				}
+				return deleteFile( file );
+			} else  if ( !file.remove() ) {
+				return new Status( Status.ERROR, 'The file/directory \'' + file.fullPath + '\' couldn\'t be deleted!' );
+			}
+		} catch ( e ) {
+			return new Status( Status.ERROR, 'Operation failed: ' + e );
+		}
+	}
+	return new Status( Status.OK, 'Operation successfully performed.' );
+}
+
+function copyFile(source : File, target : File){
+
+	if (!source.isDirectory() && !target.isDirectory()) {
+		var targetPath = target.fullPath.split(File.SEPARATOR);
+		targetPath.pop();
+		var targetFolder = targetPath.join(File.SEPARATOR);
+		(new File(targetFolder)).mkdirs();
+		var fileReader : FileReader = new FileReader(source, "latin1");
+		var fileWriter : FileWriter = new FileWriter(target, "latin1", false);
+		
+		
+		do {
+			var readChar = fileReader.read();
+			if (readChar != null) {
+				fileWriter.write(readChar);	
+			}
+		} while (readChar != null);
+		
+		fileReader.close();
+		fileWriter.flush();
+		fileWriter.close();
+		
+		return target;
+	} else {
+		target.mkdirs();
+		var sourceFile : File = source;
+		
+		var beforeFiles : List = target.listFiles();
+		
+		var targetZipFileName : String = target.fullPath + ".zip";
+		var targetZipped : File = new File(targetZipFileName);
+		sourceFile.zip(targetZipped);
+		
+		var targetDirectory : File = findFileDirectory(targetZipped);
+		
+		targetZipped.unzip(targetDirectory);
+		targetZipped.remove();
+		
+		var addedFiles : List  = target.listFiles();
+		addedFiles.removeAll(beforeFiles);
+		if (addedFiles.length > 0) {
+			return addedFiles.get(0);
+		} else {
+			return null;
+		}
+	}
+	
+	
+}
+
+function findFileDirectory(file : File){
+	var filePath : String = file.getFullPath();
+	
+	var lastSlashIndex = filePath.lastIndexOf('/');
+	var directoryPath : String = filePath.substring(0, lastSlashIndex);
+	var directory : File = new File(directoryPath);
+	
+	return directory;
+}

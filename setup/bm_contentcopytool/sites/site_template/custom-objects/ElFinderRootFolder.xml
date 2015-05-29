@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+
+	<custom-object type-id="ElFinderRootFolder" object-id="Assets-SiteGenesis">
+        <object-attribute attribute-id="activeLocales">
+            <value>default</value>
+            <value>en_US</value>
+        </object-attribute>
+        <object-attribute attribute-id="connectorType">ASSET</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">/IMPEX/contentcopy/content/structure/SiteGenesis/</object-attribute>
+        <object-attribute attribute-id="standardLocale">en_US</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="ElFinderRootFolder" object-id="Catalog-apparel-catalog">
+        <object-attribute attribute-id="connectorType">FILE</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">CATALOGS/apparel-catalog</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+
+	<custom-object type-id="ElFinderRootFolder" object-id="Catalog-electronics-catalog">
+        <object-attribute attribute-id="connectorType">FILE</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">CATALOGS/electronics-catalog </object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="ElFinderRootFolder" object-id="Catalog-storefront-catalog-en">
+        <object-attribute attribute-id="connectorType">FILE</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">CATALOGS/storefront-catalog-en</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+	
+    <custom-object type-id="ElFinderRootFolder" object-id="Libr-SiteGenesis">
+        <object-attribute attribute-id="activeLocales">
+            <value>default</value>
+            <value>en_US</value>
+        </object-attribute>
+        <object-attribute attribute-id="connectorType">FILE</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">LIBRARIES/SiteGenesis</object-attribute>
+        <object-attribute attribute-id="standardLocale">default</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+	
+	<custom-object type-id="ElFinderRootFolder" object-id="Slots-SiteGenesis">
+        <object-attribute attribute-id="activeLocales">
+            <value>default</value>
+            <value>en_US</value>
+        </object-attribute>
+        <object-attribute attribute-id="connectorType">SLOT</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">/IMPEX/contentcopy/slots/structure/SiteGenesis/</object-attribute>
+        <object-attribute attribute-id="standardLocale">en_US</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="ElFinderRootFolder" object-id="Static">
+        <object-attribute attribute-id="activeLocales">
+            <value>default</value>
+            <value>en_US</value>
+        </object-attribute>
+        <object-attribute attribute-id="connectorType">FILE</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">STATIC</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="ElFinderRootFolder" object-id="Impex">
+        <object-attribute attribute-id="connectorType">FILE</object-attribute>
+        <object-attribute attribute-id="roles">
+            <value>admin</value>
+        </object-attribute>
+        <object-attribute attribute-id="rootPath">IMPEX</object-attribute>
+        <object-attribute attribute-id="subPathFolderRegexp">.*</object-attribute>
+    </custom-object>
+	
+</custom-objects>

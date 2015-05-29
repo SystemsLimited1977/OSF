@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Kay Domachowski (Demandware) -->
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+	<custom-type type-id="WorkflowComponentDefinition">
+		<staging-mode>no-staging</staging-mode>
+		<storage-scope>organization</storage-scope>
+		<key-definition attribute-id="name">
+			<display-name xml:lang="de-DE">Name</display-name>
+			<display-name xml:lang="x-default">Name</display-name>
+			<description xml:lang="de-DE">Die eindeutige ID.</description>
+			<description xml:lang="x-default">The unique ID.</description>
+			<type>string</type>
+			<min-length>0</min-length>
+		</key-definition>
+		<attribute-definitions>
+			<attribute-definition attribute-id="action">
+				<display-name xml:lang="de-DE">Action</display-name>
+				<display-name xml:lang="x-default">Action</display-name>
+				<description xml:lang="de-DE">Die Action die durch dieses Definition gerufen wird.</description>
+				<description xml:lang="x-default">The action called for this definition.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="description">
+				<display-name xml:lang="de-DE">Beschreibung</display-name>
+				<display-name xml:lang="x-default">Description</display-name>
+				<description xml:lang="de-DE">Eine Beschreibung.</description>
+				<description xml:lang="x-default">A description.</description>
+				<type>string</type>
+				<localizable-flag>true</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="parameters">
+				<display-name xml:lang="de-DE">Parameter</display-name>
+				<display-name xml:lang="x-default">Parameters</display-name>
+				<description xml:lang="de-DE">Die Defintion der Parameter die in dieser Definition genutzt werden können. Folgendes Format muss eingehalten werden: [{“id” : “attr1”,“name” : “A readable name”,“type” : “boolean|date|time|datetime|double|int|string|password|enum”,"enumValues":["value1", ...],“mandatory” : true|false},...]</description>
+				<description xml:lang="x-default">Definition of parameters which can be used for this definition in the following format: [{“id” : “attr1”,“name” : “A readable name”,“type” : “boolean|date|time|datetime|double|int|string|password|enum”,"enumValues":["value1", ...],“mandatory” : true|false},...]</description>
+				<type>text</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+		</attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="General">
+				<display-name xml:lang="de-DE">General</display-name>
+				<display-name xml:lang="x-default">General</display-name>
+				<attribute attribute-id="name"/>
+				<attribute attribute-id="description"/>
+				<attribute attribute-id="action"/>
+				<attribute attribute-id="parameters"/>
+			</attribute-group>
+		</group-definitions>
+	</custom-type>
+	<custom-type type-id="WorkflowComponentInstance">
+		<staging-mode>no-staging</staging-mode>
+		<storage-scope>organization</storage-scope>
+		<key-definition attribute-id="ID">
+			<display-name xml:lang="de-DE">ID</display-name>
+			<display-name xml:lang="x-default">ID</display-name>
+			<description xml:lang="de-DE">Eine ID generiert aus der Workflow Instance, der Component Definition und der Position.</description>
+			<description xml:lang="x-default">An ID generated of the workflow instance, the component definition and the position.</description>
+			<type>string</type>
+			<min-length>0</min-length>
+		</key-definition>
+		<attribute-definitions>
+			<attribute-definition attribute-id="disabled">
+				<display-name xml:lang="de-DE">Deaktiviert</display-name>
+				<display-name xml:lang="x-default">Disabled</display-name>
+				<description xml:lang="de-DE">Wenn true, dann wird die Komponente nicht asynchron ausgeführt.</description>
+				<description xml:lang="x-default">If true, the component execution will be skipped.</description>
+				<type>boolean</type>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="action">
+				<display-name xml:lang="de-DE">Action</display-name>
+				<display-name xml:lang="x-default">Action</display-name>
+				<description xml:lang="de-DE">Die Action die durch dieses Definition gerufen wird. (eine Kopie der Definition; um eine unabhängige Ausführung während eine Defintionsupdates zu gewähleisten)</description>
+				<description xml:lang="x-default">The action called for this instance. (a copy of the definition; to allow an undependent execution when updating definitions)</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="asynchron">
+				<display-name xml:lang="de-DE">Asynchrone Ausführung</display-name>
+				<display-name xml:lang="x-default">Asynchron execution</display-name>
+				<description xml:lang="de-DE">Wenn true, dann wird die Komponente asynchron ausgeführt, sonst synchron. (eine Kopie der Definition; um eine unabhängige Ausführung während eine Defintionsupdates zu gewähleisten)</description>
+				<description xml:lang="x-default">If true, the component will be executed asynchronous, else synchronous. (a copy of the definition; to allow an undependent execution when updating definitions)</description>
+				<type>boolean</type>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="endTime">
+				<display-name xml:lang="de-DE">Endzeitpunkt</display-name>
+				<display-name xml:lang="x-default">End time</display-name>
+				<description xml:lang="de-DE">Der Endzeitpunkt.</description>
+				<description xml:lang="x-default">The point of time when the component finished.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="fileLogLevel">
+				<display-name xml:lang="x-default">File Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job base file logging should be done. It uses the settings from the WorkflowScheduleInstance if 'inherit' is selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition>
+						<display xml:lang="x-default">none</display>
+						<value>none</value>
+					</value-definition>
+					<value-definition default="true">
+						<display xml:lang="x-default">inherit</display>
+						<value>inherit</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="componentLogLevel">
+				<display-name xml:lang="x-default">Component Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job component logging should be done. It uses the settings from the WorkflowScheduleInstance if 'inherit' is selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition>
+						<display xml:lang="x-default">none</display>
+						<value>none</value>
+					</value-definition>
+					<value-definition default="true">
+						<display xml:lang="x-default">inherit</display>
+						<value>inherit</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="parameterDefinitions">
+				<display-name xml:lang="de-DE">Parameter</display-name>
+				<display-name xml:lang="x-default">Parameters</display-name>
+				<description xml:lang="de-DE">Die Defintion der Parameter die in dieser Definition genutzt werden können. Folgendes Format muss eingehalten werden: [{“id” : “attr1”,“name” : “A readable name”,“type” : “boolean|date|time|datetime|double|int|string|password|enum”,"enumValues":["value1", ...],“mandatory” : true|false},...] (eine Kopie der Definition; um eine unabhängige Ausführung während eine Defintionsupdates zu gewähleisten)</description>
+				<description xml:lang="x-default">Definition of parameters which can be used for this definition in the following format: [{“id” : “attr1”,“name” : “A readable name”,“type” : “boolean|date|time|datetime|double|int|string|password|enum”,"enumValues":["value1", ...],“mandatory” : true|false},...] (a copy of the definition; to allow an undependent execution when updating definitions)</description>
+				<type>text</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="parameterValues">
+				<display-name xml:lang="de-DE">Parameter</display-name>
+				<display-name xml:lang="x-default">Parameters</display-name>
+				<description xml:lang="de-DE">Die Parameter als JSON mit folgendem Format: {“attribute1 id” : “attribute1 value”,“attribute2 id” : “attribute2 value”,...} (eine Kopie der Definition; um eine unabhängige Ausführung während eine Defintionsupdates zu gewähleisten)</description>
+				<description xml:lang="x-default">The parameters as JSON in the following format: {“attribute1 id” : “attribute1 value”,“attribute2 id” : “attribute2 value”,...} (a copy of the definition; to allow an undependent execution when updating definitions)</description>
+				<type>text</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="position">
+				<display-name xml:lang="de-DE">Position</display-name>
+				<display-name xml:lang="x-default">Position</display-name>
+				<description xml:lang="de-DE">Die Position. (eine Kopie der Definition; um eine unabhängige Ausführung während eine Defintionsupdates zu gewähleisten)</description>
+				<description xml:lang="x-default">The position. (a copy of the definition; to allow an undependent execution when updating definitions)</description>
+				<type>int</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="workflowComponentDefinitionName">
+				<display-name xml:lang="de-DE">WorkflowComponentDefinitionName</display-name>
+				<display-name xml:lang="x-default">WorkflowComponentDefinitionName</display-name>
+				<description xml:lang="de-DE">Der Name (ID) des zugehörigen WorkflowComponentDefinition Objektes.</description>
+				<description xml:lang="x-default">The name (ID) of the relating WorkflowComponentDefinition object.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="workflowScheduleInstanceID">
+				<display-name xml:lang="de-DE">Workflow schedule instance ID</display-name>
+				<display-name xml:lang="x-default">Workflow schedule instance ID</display-name>
+				<description xml:lang="de-DE">Die ID der zugehörigen Workflow Schedule Instance.</description>
+				<description xml:lang="x-default">The ID of the corresponding workflow schedule instance.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="processingJobId">
+				<display-name xml:lang="de-DE">ID des ausführenden DW Jobs</display-name>
+				<display-name xml:lang="x-default">Processing DW job ID</display-name>
+				<description xml:lang="de-DE">Die ID des ausführenden DW Jobs.</description>
+				<description xml:lang="x-default">The ID of the executing DW job.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="startTime">
+				<display-name xml:lang="de-DE">Startzeitpunkt</display-name>
+				<display-name xml:lang="x-default">Start time</display-name>
+				<description xml:lang="de-DE">Der Startzeitpunkt.</description>
+				<description xml:lang="x-default">The point of time when the component started.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="status">
+				<display-name xml:lang="de-DE">Status</display-name>
+				<display-name xml:lang="x-default">Status</display-name>
+				<description xml:lang="de-DE">Der aktuelle Status.</description>
+				<description xml:lang="x-default">The current status.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition>
+						<display xml:lang="de-DE">Wartend</display>
+						<display xml:lang="x-default">Waiting</display>
+						<value>WAITING</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Laufend</display>
+						<display xml:lang="x-default">Running</display>
+						<value>RUNNING</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Beendet</display>
+						<display xml:lang="x-default">Finished</display>
+						<value>FINISHED_OK</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Beendet mit Warnungen</display>
+						<display xml:lang="x-default">Finished with warnings</display>
+						<value>FINISHED_WARN</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Beendet mit Fehlern</display>
+						<display xml:lang="x-default">Finished with errors</display>
+						<value>FINISHED_ERROR</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="statusMessages">
+				<display-name xml:lang="de-DE">Statusmeldungen</display-name>
+				<display-name xml:lang="x-default">Status messages</display-name>
+				<description xml:lang="de-DE">Statusmeldungen zum Workflow der Komponente.</description>
+				<description xml:lang="x-default">Status messages describing the workflow of the component.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+		</attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="General">
+				<display-name xml:lang="de-DE">General</display-name>
+				<display-name xml:lang="x-default">General</display-name>
+				<attribute attribute-id="ID"/>
+				<attribute attribute-id="workflowScheduleInstanceID"/>
+				<attribute attribute-id="workflowComponentDefinitionName"/>
+				<attribute attribute-id="status"/>
+				<attribute attribute-id="statusMessages"/>
+				<attribute attribute-id="startTime"/>
+				<attribute attribute-id="endTime"/>
+				<attribute attribute-id="processingJobId"/>
+				<attribute attribute-id="action"/>
+				<attribute attribute-id="parameterDefinitions"/>
+				<attribute attribute-id="parameterValues"/>
+				<attribute attribute-id="position"/>
+				<attribute attribute-id="asynchron"/>
+				<attribute attribute-id="disabled"/>
+				<attribute attribute-id="fileLogLevel"/>
+				<attribute attribute-id="componentLogLevel"/>
+			</attribute-group>
+		</group-definitions>
+	</custom-type>
+	<custom-type type-id="WorkflowScheduleDefinition">
+		<staging-mode>no-staging</staging-mode>
+		<storage-scope>organization</storage-scope>
+		<key-definition attribute-id="ID">
+			<display-name xml:lang="de-DE">ID</display-name>
+			<display-name xml:lang="x-default">ID</display-name>
+			<description xml:lang="de-DE">Die eindeutige ID.</description>
+			<description xml:lang="x-default">The unique ID.</description>
+			<type>string</type>
+			<min-length>0</min-length>
+		</key-definition>
+		<attribute-definitions>
+			<attribute-definition attribute-id="description">
+				<display-name xml:lang="de-DE">Beschreibung</display-name>
+				<display-name xml:lang="x-default">Description</display-name>
+				<description xml:lang="de-DE">Eine Beschreibung.</description>
+				<description xml:lang="x-default">A description.</description>
+				<type>string</type>
+				<localizable-flag>true</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="enabled">
+				<display-name xml:lang="de-DE">Aktiv</display-name>
+				<display-name xml:lang="x-default">Enabled</display-name>
+				<description xml:lang="de-DE">Anhaken um den workflow zu aktivieren.</description>
+				<description xml:lang="x-default">Check to enable the workflow.</description>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="executionActiveFrom">
+				<display-name xml:lang="de-DE">Gültig ab</display-name>
+				<display-name xml:lang="x-default">Valid from</display-name>
+				<description xml:lang="de-DE">Der Zeitpunkt ab dem der workflow startet.</description>
+				<description xml:lang="x-default">The point of time at which the workflow starts.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="executionActiveTo">
+				<display-name xml:lang="de-DE">Gültig bis</display-name>
+				<display-name xml:lang="x-default">Valid to</display-name>
+				<description xml:lang="de-DE">Der Zeitpunkt bis zu dem der workflow läuft.</description>
+				<description xml:lang="x-default">The point of time to which the workflow will be executed.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="executionInterval">
+				<display-name xml:lang="de-DE">Ausführungsintervall</display-name>
+				<display-name xml:lang="x-default">Execution interval</display-name>
+				<description xml:lang="de-DE">Das Intervall in dem der workflow läuft.</description>
+				<description xml:lang="x-default">The interval at which the workflow will run.</description>
+				<type>int</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="executionIntervalType">
+				<display-name xml:lang="de-DE">Ausführungsintervalltyp</display-name>
+				<display-name xml:lang="x-default">Execution interval type</display-name>
+				<description xml:lang="de-DE">Der Typ des Intervalls.</description>
+				<description xml:lang="x-default">The type of the interval.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition>
+						<display xml:lang="de-DE">Minute</display>
+						<display xml:lang="x-default">Minute</display>
+						<value>MINUTE</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Stunde</display>
+						<display xml:lang="x-default">Hour</display>
+						<value>HOUR</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Tag</display>
+						<display xml:lang="x-default">Day</display>
+						<value>DAY</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Woche</display>
+						<display xml:lang="x-default">Week</display>
+						<value>WEEK</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Monat</display>
+						<display xml:lang="x-default">Month</display>
+						<value>MONTH</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Jahr</display>
+						<display xml:lang="x-default">Year</display>
+						<value>YEAR</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="executionTime">
+				<display-name xml:lang="de-DE">Zeitpunkt der Ausführung</display-name>
+				<display-name xml:lang="x-default">Execution time</display-name>
+				<description xml:lang="de-DE">Die Uhrzeit an der der workflow läuft.</description>
+				<description xml:lang="x-default">The time at which the workflow will run.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="executionWeekdays">
+				<display-name xml:lang="de-DE">Ausführungstage</display-name>
+				<display-name xml:lang="x-default">Execution week days</display-name>
+				<description xml:lang="de-DE">Die Tage an denen der workflow läuft.</description>
+				<description xml:lang="x-default">The days at which the workflow will run.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="fileLogLevel">
+				<display-name xml:lang="x-default">File Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job base file logging should be done. No file logging is done when 'none' has been selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition default="true">
+						<display xml:lang="x-default">none</display>
+						<value>none</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="componentLogLevel">
+				<display-name xml:lang="x-default">Component Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job component logging should be done. No file logging is done when 'none' has been selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition default="true">
+						<display xml:lang="x-default">none</display>
+						<value>none</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="name">
+				<display-name xml:lang="de-DE">Name</display-name>
+				<display-name xml:lang="x-default">Name</display-name>
+				<description xml:lang="de-DE">Der Name des workflows.</description>
+				<description xml:lang="x-default">The name of the workflow.</description>
+				<type>string</type>
+				<localizable-flag>true</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="notificationEmails">
+				<display-name xml:lang="de-DE">Benachrichtigungsemailadressen</display-name>
+				<display-name xml:lang="x-default">Notification email addresses</display-name>
+				<description xml:lang="de-DE">Eine Liste mit Emailadressen an die eine Benachrichtigungsmail geschrieben wird.</description>
+				<description xml:lang="x-default">A set of string with the notification email addresses.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="notificationMode">
+                <display-name xml:lang="x-default">Notification mode</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">concise</display>
+                        <value>CONCISE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">verbose</display>
+                        <value>VERBOSE</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+			<attribute-definition attribute-id="notificationStatuses">
+				<display-name xml:lang="de-DE">Benachrichtigungsstatus</display-name>
+				<display-name xml:lang="x-default">Notification statuses</display-name>
+				<description xml:lang="de-DE">Eine Liste mit den Status bei denen eine Benachrichtigungsemail geschickt wird.</description>
+				<description xml:lang="x-default">A set of string with the statuses at which a notification email will be sent.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="siteIds">
+				<display-name xml:lang="de-DE">Site IDs</display-name>
+				<display-name xml:lang="x-default">Site IDs</display-name>
+				<description xml:lang="de-DE">Die IDs der Seiten für die der Workflow ausgeführt werden soll.</description>
+				<description xml:lang="x-default">The IDs of the sites for which the workflow will be executed.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="type">
+				<display-name xml:lang="de-DE">Typ</display-name>
+				<display-name xml:lang="x-default">Type</display-name>
+				<description xml:lang="de-DE">Der Typ des workflows. Recurring workflows laufen in einem festgelegtem Intervall und single workflows nur einmal.</description>
+				<description xml:lang="x-default">The type of the workflow. Recurring workflows will run in a given intervall and single workflows will run only one time.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition>
+						<display xml:lang="de-DE">Single</display>
+						<display xml:lang="x-default">Single</display>
+						<value>SINGLE</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="de-DE">Recurring</display>
+						<display xml:lang="x-default">Recurring</display>
+						<value>RECURRING</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+		</attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="General">
+				<display-name xml:lang="de-DE">General</display-name>
+				<display-name xml:lang="x-default">General</display-name>
+				<attribute attribute-id="ID"/>
+				<attribute attribute-id="enabled"/>
+				<attribute attribute-id="name"/>
+				<attribute attribute-id="description"/>
+				<attribute attribute-id="type"/>
+				<attribute attribute-id="executionTime"/>
+				<attribute attribute-id="executionActiveFrom"/>
+				<attribute attribute-id="executionActiveTo"/>
+				<attribute attribute-id="executionInterval"/>
+				<attribute attribute-id="executionIntervalType"/>
+				<attribute attribute-id="executionWeekdays"/>
+				<attribute attribute-id="notificationStatuses"/>
+				<attribute attribute-id="notificationEmails"/>
+				<attribute attribute-id="notificationMode"/>
+				<attribute attribute-id="siteIds"/>
+				<attribute attribute-id="fileLogLevel"/>
+				<attribute attribute-id="componentLogLevel"/>
+			</attribute-group>
+		</group-definitions>
+	</custom-type>
+	<custom-type type-id="WorkflowScheduleDefinitionWorkflowComponentDefinitionRelation">
+		<staging-mode>no-staging</staging-mode>
+		<storage-scope>organization</storage-scope>
+		<key-definition attribute-id="ID">
+			<display-name xml:lang="de-DE">ID</display-name>
+			<display-name xml:lang="x-default">ID</display-name>
+			<description xml:lang="de-DE">Eine ID generiert aus der Workflow Definition, der Component Definition und der Position.</description>
+			<description xml:lang="x-default">An ID generated of the workflow definition, the component definition and the position.</description>
+			<type>string</type>
+			<min-length>0</min-length>
+		</key-definition>
+		<attribute-definitions>
+			<attribute-definition attribute-id="disabled">
+				<display-name xml:lang="de-DE">Deaktiviert</display-name>
+				<display-name xml:lang="x-default">Disabled</display-name>
+				<description xml:lang="de-DE">Wenn true, dann wird die Komponente nicht asynchron ausgeführt.</description>
+				<description xml:lang="x-default">If true, the component execution will be skipped.</description>
+				<type>boolean</type>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="asynchron">
+				<display-name xml:lang="de-DE">Asynchrone Ausführung</display-name>
+				<display-name xml:lang="x-default">Asynchron execution</display-name>
+				<description xml:lang="de-DE">Wenn true, dann wird die Komponente asynchron ausgeführt, sonst synchron.</description>
+				<description xml:lang="x-default">If true, the component will be executed asynchronous, else synchronous.</description>
+				<type>boolean</type>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="fileLogLevel">
+				<display-name xml:lang="x-default">File Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job base file logging should be done. It uses the settings from the WorkflowScheduleInstance if 'inherit' is selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition default="true">
+						<display xml:lang="x-default">inherit</display>
+						<value>inherit</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="componentLogLevel">
+				<display-name xml:lang="x-default">Component Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job component logging should be done. It uses the settings from the WorkflowScheduleInstance if 'inherit' is selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition default="true">
+						<display xml:lang="x-default">inherit</display>
+						<value>inherit</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="parameters">
+				<display-name xml:lang="de-DE">Parameter</display-name>
+				<display-name xml:lang="x-default">Parameters</display-name>
+				<description xml:lang="de-DE">Die Parameter als JSON mit folgendem Format: {“attribute1 id” : “attribute1 value”,“attribute2 id” : “attribute2 value”,...}</description>
+				<description xml:lang="x-default">The parameters as JSON in the following format: {“attribute1 id” : “attribute1 value”,“attribute2 id” : “attribute2 value”,...}</description>
+				<type>text</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="position">
+				<display-name xml:lang="de-DE">Position</display-name>
+				<display-name xml:lang="x-default">Position</display-name>
+				<description xml:lang="de-DE">Die Position.</description>
+				<description xml:lang="x-default">The position.</description>
+				<type>int</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="workflowComponentDefinitionName">
+				<display-name xml:lang="de-DE">WorkflowComponentDefinitionName</display-name>
+				<display-name xml:lang="x-default">WorkflowComponentDefinitionName</display-name>
+				<description xml:lang="de-DE">Der Name (ID) des zugehörigen WorkflowComponentDefinition Objektes.</description>
+				<description xml:lang="x-default">The name (ID) of the relating WorkflowComponentDefinition object.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="workflowScheduleDefinitionID">
+				<display-name xml:lang="de-DE">WorkflowScheduleDefinitionID</display-name>
+				<display-name xml:lang="x-default">WorkflowScheduleDefinitionID</display-name>
+				<description xml:lang="de-DE">Die ID des zugehörigen WorkflowScheduleDefinition Objektes.</description>
+				<description xml:lang="x-default">The ID of the relating WorkflowScheduleDefinition object.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+		</attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="General">
+				<display-name xml:lang="de-DE">General</display-name>
+				<display-name xml:lang="x-default">General</display-name>
+				<attribute attribute-id="ID"/>
+				<attribute attribute-id="workflowScheduleDefinitionID"/>
+				<attribute attribute-id="workflowComponentDefinitionName"/>
+				<attribute attribute-id="position"/>
+				<attribute attribute-id="parameters"/>
+				<attribute attribute-id="asynchron"/>
+				<attribute attribute-id="disabled"/>
+				<attribute attribute-id="fileLogLevel"/>
+				<attribute attribute-id="componentLogLevel"/>
+			</attribute-group>
+		</group-definitions>
+	</custom-type>
+	<custom-type type-id="WorkflowScheduleInstance">
+		<staging-mode>no-staging</staging-mode>
+		<storage-scope>organization</storage-scope>
+		<key-definition attribute-id="ID">
+			<display-name xml:lang="de-DE">ID</display-name>
+			<display-name xml:lang="x-default">ID</display-name>
+			<description xml:lang="de-DE">Eine ID generiert aus der Site ID, der Workflow Definition und dem geplanten Startzeitpunkt.</description>
+			<description xml:lang="x-default">An ID generated of the site ID, the workflow definition and the planned start time.</description>
+			<type>string</type>
+			<min-length>0</min-length>
+		</key-definition>
+		<attribute-definitions>
+			<attribute-definition attribute-id="endTime">
+				<display-name xml:lang="de-DE">Endzeit</display-name>
+				<display-name xml:lang="x-default">End time</display-name>
+				<description xml:lang="de-DE">Der Zeitpunkt an dem der workflow beendet wurde.</description>
+				<description xml:lang="x-default">The point of time at which the workflow finished.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="fileLogLevel">
+				<display-name xml:lang="x-default">File Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job base file logging should be done. No file logging is done when 'none' has been selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition default="true">
+						<display xml:lang="x-default">none</display>
+						<value>none</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="componentLogLevel">
+				<display-name xml:lang="x-default">Component Log Level</display-name>
+				<description xml:lang="x-default">Defines at which level the job component logging should be done. No file logging is done when 'none' has been selected.</description>
+				<type>enum-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<value-definitions>
+					<value-definition default="true">
+						<display xml:lang="x-default">none</display>
+						<value>none</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">error</display>
+						<value>error</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">debug</display>
+						<value>debug</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">info</display>
+						<value>info</value>
+					</value-definition>
+					<value-definition>
+						<display xml:lang="x-default">warn</display>
+						<value>warn</value>
+					</value-definition>
+				</value-definitions>
+			</attribute-definition>
+			<attribute-definition attribute-id="notificationEmails">
+				<display-name xml:lang="de-DE">Benachrichtigungsemailadressen</display-name>
+				<display-name xml:lang="x-default">Notification email addresses</display-name>
+				<description xml:lang="de-DE">Eine Liste mit Emailadressen an die eine Benachrichtigungsmail geschrieben wird.</description>
+				<description xml:lang="x-default">A set of string with the notification email addresses.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="notificationMode">
+                <display-name xml:lang="x-default">Notification mode</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="notificationStatuses">
+				<display-name xml:lang="de-DE">Benachrichtigungsstatus</display-name>
+				<display-name xml:lang="x-default">Notification statuses</display-name>
+				<description xml:lang="de-DE">Eine Liste mit den Status bei denen eine Benachrichtigungsemail geschickt wird.</description>
+				<description xml:lang="x-default">A set of string with the statuses at which a notification email will be sent.</description>
+				<type>set-of-string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="plannedStartTime">
+				<display-name xml:lang="de-DE">Geplante Startzeit</display-name>
+				<display-name xml:lang="x-default">Planned start time</display-name>
+				<description xml:lang="de-DE">Der Zeitpunkt an dem der Workflowstart geplant ist.</description>
+				<description xml:lang="x-default">The point of time at which the workflow start is planned.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="workflowScheduleDefinitionID">
+				<display-name xml:lang="de-DE">Workflow schedule definition ID</display-name>
+				<display-name xml:lang="x-default">Workflow schedule definition ID</display-name>
+				<description xml:lang="de-DE">Die ID des zugehörigen WorkflowScheduleDefinition Objektes.</description>
+				<description xml:lang="x-default">The ID of the related WorkflowScheduleDefinition object.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="runtimeData">
+				<display-name xml:lang="de-DE">Laufzeitdaten</display-name>
+				<display-name xml:lang="x-default">Runtime data</display-name>
+				<description xml:lang="de-DE">Wird genutzt um Daten während der Laufzeit des Workflows zu speichern.</description>
+				<description xml:lang="x-default">Used for saving data during the execution of the workflow.</description>
+				<type>text</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="siteId">
+				<display-name xml:lang="de-DE">Site ID</display-name>
+				<display-name xml:lang="x-default">Site ID</display-name>
+				<description xml:lang="de-DE">Die ID der Site in der der Workflow ausgeführt wird.</description>
+				<description xml:lang="x-default">The ID of the site in which the workflow will be executed.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>true</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+			<attribute-definition attribute-id="startTime">
+				<display-name xml:lang="de-DE">Startzeit</display-name>
+				<display-name xml:lang="x-default">Start time</display-name>
+				<description xml:lang="de-DE">Der Zeitpunkt an dem der workflow gestartet wurde.</description>
+				<description xml:lang="x-default">The point of time at which the workflow started.</description>
+				<type>datetime</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="status">
+				<display-name xml:lang="de-DE">Status</display-name>
+				<display-name xml:lang="x-default">Status</display-name>
+				<description xml:lang="de-DE">Der aktuelle Status.</description>
+				<description xml:lang="x-default">The current status.</description>
+				<type>string</type>
+				<localizable-flag>false</localizable-flag>
+				<mandatory-flag>false</mandatory-flag>
+			</attribute-definition>
+		</attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="General">
+				<display-name xml:lang="de-DE">General</display-name>
+				<display-name xml:lang="x-default">General</display-name>
+				<attribute attribute-id="ID"/>
+				<attribute attribute-id="workflowScheduleDefinitionID"/>
+				<attribute attribute-id="siteId"/>
+				<attribute attribute-id="plannedStartTime"/>
+				<attribute attribute-id="startTime"/>
+				<attribute attribute-id="endTime"/>
+				<attribute attribute-id="runtimeData"/>
+				<attribute attribute-id="status"/>
+				<attribute attribute-id="notificationStatuses"/>
+				<attribute attribute-id="notificationEmails"/>
+				<attribute attribute-id="notificationMode"/>
+				<attribute attribute-id="fileLogLevel"/>
+				<attribute attribute-id="componentLogLevel"/>
+			</attribute-group>
+		</group-definitions>
+	</custom-type>
+</metadata>

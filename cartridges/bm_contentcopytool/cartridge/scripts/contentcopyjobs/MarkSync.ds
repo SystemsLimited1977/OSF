@@ -1,0 +1,28 @@
+/**
+*	@input State : String
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage( dw.util );
+
+function execute( pdict : PipelineDictionary ) : Number {
+	var targetFolder : File = new File(File.IMPEX + File.SEPARATOR  + "contentcopy");
+	targetFolder.mkdirs();
+	
+	var targetFile : File = new File(targetFolder.getFullPath() + File.SEPARATOR + "state.txt");
+	if (!targetFile.exists()) {
+		targetFile.createNewFile();
+	}
+	
+	var fileWriter : FileWriter = new FileWriter(targetFile, "UTF-8", false);
+	
+	if (pdict.State == "START") {
+		fileWriter.write('<span style="color:red;">RUNNING</span>');
+	} else if (pdict.State == "STOP") {
+		fileWriter.write('<span>' + StringUtils.formatCalendar(dw.system.Site.getCalendar())  + '</span>');
+	}
+	
+	fileWriter.close();
+	
+    return PIPELET_NEXT;
+}

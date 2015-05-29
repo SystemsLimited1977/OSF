@@ -1,0 +1,99 @@
+/**
+*	
+*	Puts an imported file into the archive of the hot folder import.
+*
+* @input SourceFile : dw.io.File
+* @input ImportFileObject : dw.io.File
+* @input DaysToKeep : Number
+* @input Schema : String
+* @input LogObject : Object
+* @input Status : Object
+**/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage( dw.util );
+
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var logger = Logger;
+	var calendar = dw.system.Site.getCalendar()
+	var timestamp = dw.util.StringUtils.formatCalendar(calendar, "yyyy-MM-dd-HH-mm-ss");
+	var newFolder : File = new File(File.IMPEX + File.SEPARATOR + "contentcopy" + File.SEPARATOR + "import" + File.SEPARATOR + "archive");
+	newFolder.mkdirs();
+	var newFile : File = new File(newFolder.getFullPath() + File.SEPARATOR + timestamp + "_" + dw.system.Site.getCurrent().ID +  "_" + pdict.Schema + "_" + pdict.Status + "_"  + pdict.SourceFile.getName());
+	var success = pdict.ImportFileObject.renameTo(newFile);
+	
+	cleanupArchive(newFolder, logger, pdict.DaysToKeep);
+	
+    return PIPELET_NEXT;
+}
+
+function cleanupArchive( archiveFolder : File, logger : Object, daysToKeep : Number ) : boolean
+{
+	var cvLogger = logger;
+	var localArchiveFolder : File = archiveFolder;
+
+	if ( !localArchiveFolder.exists() )
+	{
+		cvLogger.error( "ArchiveFeed: Folder " + localArchiveFolder.fullPath + " does not exist." );			
+		return false;	
+	}
+	
+	cvLogger.debug( "ArchiveFeed: Cleaning up folder " + localArchiveFolder.fullPath );
+	
+	// everything that's older than purgeDate gets deleted
+	var purgeDate : Calendar = new Calendar();
+	purgeDate.timeZone = "GMT";
+	// keep archives for 7 days
+	purgeDate.add(Calendar.DATE, -1 * daysToKeep);
+	
+	cvLogger.debug( "ArchiveFeed: Purging archives before " + StringUtils.formatCalendar( purgeDate, "yyyy-MM-dd" ) );
+	
+	var calendar : Calendar = new Calendar();
+	calendar.timeZone = "GMT";
+
+	// iterate over archiveDayFolders	
+	for each ( var archiveDayName : String in localArchiveFolder.list() )
+	{
+		try
+		{		
+			calendar.parseByFormat( archiveDayName, "yyyy-MM-dd" );
+		}
+		catch ( ex )
+		{
+			cvLogger.warn( "ArchiveFeed: Unexpected name format in folder " + localArchiveFolder.fullPath + ": " + archiveDayName );
+			continue;
+		}
+		
+		if ( calendar.before( purgeDate ) )
+		{
+			var archiveDayString : String = archiveFolder + File.SEPARATOR + archiveDayName;
+			var archiveDayFolder : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + archiveDayString );
+		
+			cvLogger.debug( "ArchiveFeed: Purging folder " + archiveDayFolder.fullPath );
+			
+		 	// Delete files in folder. We do not expect subfolders in that folder.
+			for each ( var filename : String in archiveDayFolder.list() )
+			{
+				var file : File = new File(
+					File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR +
+					archiveDayString + File.SEPARATOR + filename );
+				if ( !file.remove() )
+				{
+					cvLogger.error( "ArchiveFeed: Couldn't delete file " + file.fullPath );
+					return false;
+				}
+			}		 	
+		 	
+		 	// delete the empty folder
+		 	if ( !archiveDayFolder.remove() )
+		 	{
+		 		cvLogger.error( "ArchiveFeed: Couldn't delete folder " + archiveDayFolder.fullPath );
+		 		return false;
+		 	}
+		}
+	}
+	
+	return true;
+}

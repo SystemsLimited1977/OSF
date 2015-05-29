@@ -1,0 +1,83 @@
+<!--- TEMPLATENAME: customobjectlisting.isml --->
+<isdecorate template="application/MenuFrame">
+<script type="text/javascript" src="${URLUtils.staticURL('/elfinder/jquery/jquery-1.7.2.js')}"></script>
+<script type="text/javascript">
+	$.noConflict();
+</script>
+
+<table cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+		<tr>
+			<td nowrap="nowrap" class="e n s table_tabs_dis_background"><a href="${URLUtils.url('ElFinder-Show','connectortype','IMPORT')}" class="table_tabs_dis jsSwitchIFrame" id="jsSloToolLink">Simple Import</a></td>
+			<td width="100%" class="s">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<iframe id="jsElFinderIFrame" border="0" height="556px" width="100%" style="height:556px;width:100%;border:0px" seamless="seamless">No Iframe</iframe>
+
+<script type="text/javascript">
+	
+	activateUrl("${URLUtils.url('ElFinder-Show','connectortype','IMPORT')}");		
+	
+	jQuery('.jsSwitchIFrame').click(function() {
+		activateUrl(jQuery(this).attr('href'));
+		return false;
+	});
+	
+	function activateUrl (url) {
+		jQuery('${'#'}jsElFinderIFrame').attr('src', url);
+		if (window.localStorage) {
+			 window.localStorage.dwEfLastVisitedLib = url;
+		}
+		
+		var newTable = jQuery('a[href="' + url + '"]').parents('td.table_tabs_dis_background')
+		var oldTable = jQuery('.table_tabs_en_background')
+		
+		oldTable.addClass('table_tabs_dis_background');
+		oldTable.removeClass('table_tabs_en_background');
+
+		newTable.addClass('table_tabs_en_background');
+		newTable.removeClass('table_tabs_dis_background');
+		
+		oldTable.find('a').addClass('table_tabs_dis');
+		oldTable.find('a').removeClass('table_tabs_en');
+		
+		newTable.find('a').addClass('table_tabs_en');
+		newTable.find('a').removeClass('table_tabs_dis');
+	} 
+	
+	function getUrlParameter (parameterName) {
+		if (this.parameterMap == null) {
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			var i = 0;
+			for (i; i < hashes.length; i++) {
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			this.parameterMap = vars;
+		}
+		var returnValue = '';
+		if (typeof (this.parameterMap[parameterName]) != 'undefined') {
+			returnValue = this.parameterMap[parameterName];
+		}
+		return returnValue;
+	}
+	
+</script>
+
+
+	<table style="border:0;"><tr><td>
+	
+		<a href="https://xchange.demandware.com/community/developer/community-suite" target="_blank"><img src="${URLUtils.absStatic('/icons/cs-logo-trans-small.png')}"/></a>
+	
+	</td><td>
+	
+		<div><span class="creator overview_title_description">UI based on elfinder by studio42: <a href="http://elfinder.org" target="_blank">http://elfinder.org</a>. Server side component provided by bestseller: <a href="http://www.bestseller.com" target="_blank">http://www.bestseller.com</a></div>
+		<div><span class="creator overview_title_description">This editor is part of the Demandware community suite. Use it for your own project. More info at <a href="https://xchange.demandware.com/community/developer/community-suite" target="_blank">Demandware XChange</a></span></div>
+		
+	</td></tr></table>
+
+</isdecorate>
