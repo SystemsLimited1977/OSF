@@ -1,0 +1,7 @@
+Call Center Error1
+
+<isprint value="${ pdict.Status.code}">
+
+<Br><Br><Br><Br>
+  <isprint value="${ pdict.AgentUserName}">+--+
+<isprint value="${ pdict.AgentPassword}">+--+

@@ -1,0 +1,342 @@
+    
+
+<Br>
+	<table style="width:700px" class="report_table_orders" border="0">
+		<!--- header --->
+		<tbody>
+		<TR>     
+          <TD class=report_title colSpan=6>Order Details (<isprint value="${pdict.Order.orderNo}">) </TD>
+        </TR>
+    
+			<tr >
+				 
+				<td  width="85"  class=report_header1>&nbsp;Quantity</td>
+				<td    class=report_header1 colspan="3">Product Details</td>
+				<td  width="60"  class=report_header1>Total</td>
+			</tr>
+		
+		
+		
+           
+			<isloop iterator="${request.custom.Container.shipments}" alias="Group" status="loopstatus">
+		
+
+				<isloop iterator="${Group.productLineItems}" alias="productLineItem">
+					<tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+						 <td   class="report_cell">
+			    	<isif condition="${productLineItem.bonusProductLineItem}">
+			    		&nbsp;<span class="bonus">BONUS</span>
+			    	<iselse>
+			    		&nbsp;<isprint value="${productLineItem.quantity}">
+			    	</isif>
+				    </td>
+					<td   class="report_cell" colspan="3">
+						<B>Product Name:</B> <a target="storefront" href="${URLUtils.https('Product-Show', 'pid', productLineItem.productID)}">
+							<isprint value="${productLineItem.productName}">
+						</a>
+					    <Br>
+						<b>Item Number:</b>&nbsp;&nbsp;<isprint value="${productLineItem.productID}">
+						<Br>
+						
+				<!--- variations --->
+					<isif condition="${productLineItem.getProduct().isVariant() && !empty(productLineItem.getProduct().getVariationModel().getAttributeDefinitions())}">
+
+
+							<isloop iterator="${productLineItem.getProduct().getVariationModel().getAttributeDefinitions()}" alias="VA">
+								<isset name="SelectedVariationValue" value="${productLineItem.product.variationModel.getSelectedValue(VA)}" scope="PAGE">
+								<isif condition="${VA != null && VA.displayName != null}">
+								   <B>${VA.displayName}:</B>
+								</isif>
+									<isif condition="${SelectedVariationValue != null}">
+										<isprint value="${SelectedVariationValue.displayValue}"><br>
+									<iselse>
+										-
+									</isif>		
+							
+							</isloop>
+						</isif>
+				<!--- /variations --->
+						<isif condition="${productLineItem.manufacturerName != null}">
+							<B>Manufacturer:</B>&nbsp; <isprint value="${productLineItem.manufacturerName}"></span>
+						</isif>
+				<!--- product promotions --->
+						<isloop iterator="${productLineItem.priceAdjustments}" alias="pli">
+							<p><isprint value="${pli.lineItemText}"></p>
+						</isloop> 
+				<!--- /product promotions --->
+					</td>
+				    <td class="report_cell">
+			            <isprint value="${productLineItem.price}">
+							<!--- product promotions --->
+						<isloop iterator="${productLineItem.priceAdjustments}" alias="pli">
+							<p class="bonus"><isprint value="${pli.price}"></p>
+						</isloop>
+				<!--- /product promotions --->
+				    </td>
+				</tr>
+				
+				
+				
+				<!---  shipping address --->
+				
+			<isif condition="${multipleShippingPreference}">	
+				<tr  onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+			 
+				   <td class="report_cell"></td>
+				   <td class="report_cell" colspan="10"><B>Shipping:</B>
+				      <isprint value="${Group.shippingAddress.firstName}"> 
+				      <isprint value="${Group.shippingAddress.lastName}">
+				      <isprint value="${Group.shippingAddress.address1}">
+				      <isprint value="${Group.shippingAddress.address2}">
+				      <isif condition="${Group.shippingAddress.city != null}">
+				         <isprint value="${Group.shippingAddress.city}">
+				      </isif>
+				      <isprint value="${Group.shippingAddress.postalCode}"> - 
+				      <isprint value="${Group.shippingMethod.displayName}">
+				   </td>
+				</tr>
+			</isif>
+				
+				<!--- bundles --->
+	        <isif condition = "${productLineItem.bundledProductLineItems.size() > 0}">
+				<isloop iterator="${productLineItem.bundledProductLineItems}" alias="Bundle">
+				<tr >
+					<td class="report_cell">&nbsp;</td>
+				    <td class="report_cell">&nbsp;</td>
+					<td class="report_cell">
+				       	
+							&nbsp;$-&nbsp;<isprint value="${Bundle.productName}">
+					
+					</td>
+				    <td  class="report_cell">included </td>
+				</tr>
+				</isloop>
+			</isif>
+				<!--- options --->
+	        <isif condition = "${productLineItem.optionProductLineItems.size() > 0}">
+				<isloop iterator="${productLineItem.optionProductLineItems}" alias="Option">
+				<tr class="odd">
+					<td class="report_cell">&nbsp;</td>
+				    <td class="report_cell">&nbsp;</td>
+					<td class="report_cell">
+		       
+					&nbsp;-&nbsp;<isprint value="${Option.productName}">
+			
+			<!--- product promotions --->
+			<isloop iterator="${Option.priceAdjustments}" alias="pli">
+				<p class="red"><isprint value="${pli.lineItemText}"></p>
+			</isloop>
+			<!--- /product promotions --->
+				</td>
+			    <td  class="report_cell">
+		            <isprint value="${Option.price}">
+					<!--- product promotions --->
+				<isloop iterator="${Option.priceAdjustments}" alias="pli">
+					<p><span style="color:#c41b0b;"><isprint value="${pli.price}"></span></p>
+				</isloop>
+			<!--- /product promotions --->
+			    </td>
+			</tr>
+			</isloop>
+		</isif>
+		
+			</isloop>
+			
+		
+			
+			
+			<!--- Gift Certificates --->
+	<isif condition="${Group.giftCertificateLineItems.size() > 0}">
+			<tr  class="report_cell"  onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td colspan="4"  class="report_cell">
+						Email Delivery
+						(<isprint value="${Group.giftCertificateLineItems.size()}"> 
+					<isif condition="${Group.giftCertificateLineItems.size() > 1}">
+						items):
+					<iselse>
+						item):
+					</isif>
+					</span>
+				</td>
+			</tr>
+		<isloop iterator="${Group.giftCertificateLineItems}" alias="GiftCertificate">
+			<tr  onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+			    <td  class="report_cell">1</td>
+				<td  class="report_cell"><isprint value="${GiftCertificate.lineItemText}"> for <isprint value="${GiftCertificate.recipientEmail}"></td>
+				<td  class="report_cell"><isprint value="${GiftCertificate.basePrice}"></td>
+			</tr>					
+		</isloop>
+	</isif>
+			<!--- /Gift Certificates --->
+			<!--- coupons --->
+		<isloop iterator="${request.custom.Container.couponLineItems}" alias="Coupon">
+			<tr class="report_cell"  onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';" >
+				<td  class="report_cell">&nbsp;</td>
+			    <td  class="report_cell">&nbsp;</td>
+			     <td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">
+						Coupon
+						<isprint value="${Coupon.couponCode}">
+					</td>
+				<td  class="report_cell">
+					<isif condition="${Coupon.applied}">
+						Applied
+					<iselse>
+						Not Applied
+					</isif>
+				</td>
+			</tr>
+		</isloop>
+			<!--- /Coupons --->
+			<!--- Order Promotions --->
+		<isloop iterator="${request.custom.Container.priceAdjustments}" alias="Promo">
+			<tr class="report_cell"  onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+		    	<td class="report_cell">&nbsp;</td>
+				<td class="report_cell">&nbsp;</td>
+			    <td class="report_cell" >&nbsp;</td>
+				<td class="report_cell">Order Discounts: <span class="promotiondescription"><isprint value="${Promo.lineItemText}"></span></td>
+				<td class="report_cell"><isprint value="${Promo.price}"></td>
+			</tr>
+		</isloop>
+			<!--- /Order Promotions --->
+		</isloop>
+	</tr>
+	
+			
+			<tr class="report_cell"  onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">&nbsp;</td>
+				<Td class="report_cell" width="360" >&nbsp;</Td>
+				<td class="report_cell">Merchandise Total</td>
+				<td class="report_cell"><isprint value="${request.custom.Container.adjustedMerchandizeTotalPrice}"></td>
+			</tr>
+			<isif condition="${request.custom.Container.giftCertificateLineItems.size() > 0}">
+			<tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">&nbsp;</td>
+				<Td class="report_cell">&nbsp;</Td>
+				<td  class="report_cell">Gift Certificate Total</td>
+				<td class="report_cell"><isprint value="${request.custom.Container.giftCertificateTotalPrice}"></td>
+			</tr>
+			</isif>
+			<isif condition="${request.custom.Container.allShippingPriceAdjustments.length > 0}">
+			 <tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">&nbsp;</td>
+				<Td class="report_cell">&nbsp;</Td>
+				
+	            <td  class="report_cell">Shipping
+	            -
+	            <!--- SHIPPING METHOD --->
+                
+                <isif condition="${request.custom.Container.shipments.size() > 0}">
+	                  <isloop iterator="${pdict.Order.shipments}" alias="Group">  
+						   <isif condition="${Group.shippingMethod.displayName != null}">
+							   <span class="name"><isprint value="${Group.shippingMethod.displayName}"></span>
+						   <iselse>
+							   <span class="name"><isprint value="${Group.shippingMethod.name}"></span>
+						   </isif>
+				      </isloop>	
+					</isif>
+		
+				<!-- END SHIPPING METHOD -->
+	            </td>
+                <td  class="report_cell"><isprint value="${request.custom.Container.shippingTotalPrice}"></td>
+	        </tr>
+	        <isloop iterator="${request.custom.Container.allShippingPriceAdjustments}" alias="Promo">
+			<tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">&nbsp;</td>
+				<Td class="report_cell">&nbsp;</Td>
+				<td  class="report_cell"><isprint value="${Promo.lineItemText}"></td>
+				<td  class="report_cell"><isprint value="${Promo.price}"></td>
+			</tr>
+			</isloop>
+			</isif>
+			<tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td class="report_cell">&nbsp;</td>
+				<Td class="report_cell">&nbsp;</Td>
+				<td  class="report_cell">Shipping Total</td>
+				<td  class="report_cell"><isprint value="${request.custom.Container.adjustedShippingTotalPrice}"></td>
+			</tr>
+
+			<tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">&nbsp;</td>
+				<Td class="report_cell">&nbsp;</Td>
+				<td class="report_cell">Sales Tax Total</td>
+				<td class="report_cell"><isprint value="${request.custom.Container.totalTax}"></td>
+			</tr>
+
+			<tr class="report_cell" onmouseover="this.style.backgroundColor='#FFFFE1';" onmouseout="this.style.backgroundColor='White';">
+				<td  class="report_cell">&nbsp;</td>
+				<td  class="report_cell">&nbsp;</td>
+				<Td class="report_cell">&nbsp;</Td>
+			    <td  class="report_cell">Order Total</td>
+			    <td  class="report_cell"><isprint value="${request.custom.Container.totalGrossPrice}"></td>
+			</tr>
+</table>
+
+</td><Td width="190" valign="top">
+
+<br>
+
+
+<!---  BILLING ADDRESS --->
+ 
+<isminiaddress_bill p_address = "${pdict.Order.billingAddress}" p_addressType = "Billing Address">
+
+
+
+<!---  SHIPPING ADDRESS --->
+<isif condition="${!multipleShippingPreference}">	
+   <isloop iterator="${pdict.Order.shipments}" alias="ShippingAddresses" status="loopstatus">
+			
+      <isminiaddress_ship p_address = "${ShippingAddresses.shippingAddress}" p_addressName = "Shipping Address">
+
+   </isloop>
+
+<Br>
+</isif>
+	
+<!--- PAYMENT INFO HERE --->
+    <table >
+       <TR>     
+          <TD class=report_title width="170">Payment Information </TD>
+       </TR>
+
+		<tr><td class="report_cell">
+		<isloop iterator="${pdict.Order.paymentInstruments}" alias="PaymentInstrument" status="loopstate">
+			<isif condition="${PaymentInstrument.paymentMethod == dw.order.PaymentInstrument.METHOD_CREDIT_CARD}">
+			  	
+			   <isminicreditcard p_card="${PaymentInstrument}">
+			  		
+	   <Tr><Td class="report_cell">	
+			  		<!---CREDIT CARD PAYMENT AMOUNT --->
+		  		Amount:&nbsp;
+		  		<isprint value="${PaymentInstrument.paymentTransaction.amount}">
+			  
+			<iselseif condition="${PaymentInstrument.paymentMethod == dw.order.PaymentInstrument.METHOD_BML}">	
+			  	
+			  		BillMeLater
+			 
+			<iselseif condition="${PaymentInstrument.paymentMethod == dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE}">
+			  	
+					<b>Gift Certificate</b><br />
+					<isprint value="${PaymentInstrument.giftCertificateID}">:
+					
+					<isprint value="${PaymentInstrument.paymentTransaction.amount}">
+			  		
+			<iselse>
+			
+			  		Unknown payment method
+			  	
+			</isif>	
+		</isloop>
+	</td></tr></table>
+ 
+ </Td></Tr>    
+ 
+ </table>
