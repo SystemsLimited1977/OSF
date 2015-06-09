@@ -1,4 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <iscomment>
 	Creates the image tag for the product.
 	p_productli : the product line item to render
@@ -17,7 +20,11 @@
 <iselse/>
 	<isif condition="${p_productli.product != null}">
 		<isset name="imageSize" value="${(empty(pdict.p_size) ? 'medium' : pdict.p_size)}" scope="page" />
-		<isset name="image" value="${p_productli.product.getImage(imageSize,0)}" scope="page" />	
+		<iscomment>Origional code
+			<isset name="image" value="${p_productli.product.getImage(imageSize,0)}" scope="page" />
+		</iscomment>
+		<iscomment>DIS changes </iscomment>	
+		<isset name="image" value="${new ProductImage(imageSize,p_productli.product, 0)}" scope="page" />
 		<isif condition="${!empty(image)}" >
 			<isif condition="${p_email != null && p_email}">										
 				<isset name="imageURL" value="${image.httpURL}" scope="page"/>	

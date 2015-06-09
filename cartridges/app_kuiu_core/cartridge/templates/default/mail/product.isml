@@ -2,6 +2,9 @@
 <!-- TemplateComment :  EMail form for inviting someone to shop  -->
 <iscontent type="text/html" charset="UTF-8"/>
 <isinclude template="util/modules"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/></isif></subject>
 <html>
 <head>
@@ -28,7 +31,9 @@
 					</tr>
 					<tr>
 						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
-							<isset name="image" value="${pdict.Product.getImage('medium',0)}" scope="page"/>	
+							<iscomment><isset name="image" value="${pdict.Product.getImage('medium',0)}" scope="page"/>	</iscomment>
+							<iscomment>DIS changes </iscomment>
+							<isset name="image" value="${new ProductImage('medium',pdict.Product, 0)}" scope="page"/>
 							<isset name="imageURL" value="${image.httpURL}" scope="page"/>	
 							<isif condition="${!empty(image)}">
 								<isset name="thumbnailUrl" value="${imageURL}" scope="page"/>

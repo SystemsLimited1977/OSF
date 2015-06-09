@@ -1,24 +1,43 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <isif condition="${pdict.Product.master && pdict.CurrentVariationModel && pdict.CurrentVariationModel.variants.size() > 0}">
 	<isset name="imageProduct" value="${pdict.CurrentVariationModel.variants[0]}" scope="page"/>
 <iselse/>
 	<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
 </isif>
 <isif condition="${pdict.BonusDiscountLineItem.bonusProducts.size() > 1}">
+<iscomment>Origional code
 	<isif condition="${!empty(imageProduct.getImage('small',0))}">
 		<isset name="imageUrl" value="${imageProduct.getImage('medium',0).getURL()}" scope="page"/>
 		<isset name="imageAlt" value="${imageProduct.getImage('medium',0).alt}" scope="page"/>
 		<isset name="imageTitle" value="${imageProduct.getImage('medium',0).title}" scope="page"/>
+	<iselse/>
+</iscomment>
+<iscomment>DIS changes </iscomment>
+<isif condition="${!empty(new ProductImage('small',imageProduct, 0).getURL())}">
+		<isset name="imageUrl" value="${new ProductImage('medium',imageProduct, 0).getURL()}" scope="page"/>
+		<isset name="imageAlt" value="${new ProductImage('medium',imageProduct, 0).alt}" scope="page"/>
+		<isset name="imageTitle" value="${new ProductImage('medium',imageProduct, 0).title}" scope="page"/>
 	<iselse/>
 		<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagemediuml.png')}" scope="page"/>
 		<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
 		<isset name="imageTitle" value="${pdict.Product.name}" scope="page"/>
 	</isif>
 <iselse/>
+<iscomment>Origional code
 	<isif condition="${!empty(imageProduct.getImage('large',0))}">
 		<isset name="imageUrl" value="${imageProduct.getImage('large',0).getURL()}" scope="page"/>
 		<isset name="imageAlt" value="${imageProduct.getImage('large',0).alt}" scope="page"/>
 		<isset name="imageTitle" value="${imageProduct.getImage('large',0).title}" scope="page"/>
+	<iselse/>
+</iscomment>
+<iscomment>DIS changes </iscomment>
+<isif condition="${!empty(new ProductImage('large',imageProduct, 0).getURL())}">
+		<isset name="imageUrl" value="${new ProductImage('large',imageProduct, 0).getURL()}" scope="page"/>
+		<isset name="imageAlt" value="${new ProductImage('large',imageProduct, 0).alt}" scope="page"/>
+		<isset name="imageTitle" value="${new ProductImage('large',imageProduct, 0).title}" scope="page"/>
 	<iselse/>
 		<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 		<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>

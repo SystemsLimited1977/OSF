@@ -165,7 +165,8 @@
                             	<isset name="productSearchHit" value="${suggestedProduct.getProductSearchHit()}" scope="page"/>
                                 <isset name="product" value="${productSearchHit.getProduct()}" scope="page"/>
                              	<div class="search-suggestion-right-panel-product<isif condition="${loopstate.last}">-last</isif>">
-                                	<isset name="productImage" value="${product.getImage('small')}" scope="page"/>
+                                	<iscomment><isset name="productImage" value="${product.getImage('small')}" scope="page"/></iscomment>
+                                	<isset name="productImgae" value="${new ProductImage('small', Product, 0)}"
                                 		<div class="search-suggestion-right-panel-product-image">
                                         	<isif condition="${productImage != null}">
                                           		<img src="${productImage.getURL()}" alt="${productImage.alt}" title="${productImage.title}" />

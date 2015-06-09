@@ -1,4 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <iscache type="relative" hour="24" varyby="price_promotion"/>
 <iscomment>
 	This template renders a product tile using a product. The following parameters
@@ -222,9 +225,13 @@
 					<ul class="swatch-list<isif condition="${selectableColors.size() > 5}"> swatch-toggle</isif>">
 						<isloop items="${selectableColors}" var="colorValue" status="varloop">
 							<iscomment>Determine the swatch and the thumbnail for this color</iscomment>
-							<isset name="colorSwatch" value="${colorValue.getImage('swatch')}" scope="page"/>
-							<isset name="colorThumbnail" value="${colorValue.getImage('medium')}" scope="page"/>
-
+							<iscomment>Origional code
+								<isset name="colorSwatch" value="${colorValue.getImage('swatch')}" scope="page"/>
+								<isset name="colorThumbnail" value="${colorValue.getImage('medium')}" scope="page"/>
+							</iscomment>
+							<iscomment>DIS changes</iscomment>
+								<isset name="colorSwatch" value="${new ProductImage('swatch', colorValue,0)}" scope="page"/>
+								<isset name="colorThumbnail" value="${new ProductImage('medium', colorValue,0)}" scope="page"/>
 							<iscomment>If images couldn't be determined, display a "no image" thumbnail</iscomment>
 							<isif condition="${!empty(colorSwatch)}">
 								<isset name="swatchUrl" value="${colorSwatch.getURL()}" scope="page"/>

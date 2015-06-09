@@ -1,7 +1,9 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/pt_checkout">
 <isinclude template="util/modules"/>
-
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <iscomment>
 	This template visualizes the first step of the multi shipping checkout
 	scenario. It renders a list of all product line items and offers a shipping
@@ -32,8 +34,14 @@
 					<tr class="cart-row <isif condition="${loopstate.first}"> first </isif>">
 
 						<td class="item-image">
+						<iscomment>Origional code
 							<isif condition="${quantityLIproduct != null && quantityLIproduct.getImage('small',0) != null}">
 								<img src="${quantityLIproduct.getImage('small',0).getURL()}" alt="${quantityLIproduct.getImage('small',0).alt}" title="${quantityLIproduct.getImage('small',0).title}"/>
+							<iselse/>
+						</iscomment>
+						<iscomment>DIS changes </iscomment>
+						<isif condition="${quantityLIproduct != null && new ProductImage('small',quantityLIproduct,0) != null}">
+								<img src="${new ProductImage('small',quantityLIproduct,0).getURL()}" alt="${new ProductImage('small',quantityLIproduct,0).alt}" title="${new ProductImage('small',quantityLIproduct,0).title}"/>
 							<iselse/>
 								<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${quantityLI.productName}" title="${quantityLI.productName}"/>
 							</isif>
@@ -131,8 +139,14 @@
 
 						<tr class="rowgiftcert">
 							<td class="item-image">
+							<iscomment>Origional code
 								<isif condition="${pliProduct != null && pli.product.getImage('small',0) != null}">
 									<img src="${pliProduct.getImage('small',0).getURL()}" alt="${pliProduct.getImage('small',0).alt}" title="${pliProduct.getImage('small',0).title}"/>
+								<iselse/>
+							</iscomment>
+							<iscomment>DIS changes </iscomment>
+							<isif condition="${pliProduct != null && new ProductImage('small',pli.product, 0) != null}">
+									<img src="${new ProductImage('small',pli.product, 0).getURL()}" alt="${new ProductImage('small',pli.product, 0).alt}" title="${new ProductImage('small',pli.product, 0).title}"/>
 								<iselse/>
 									<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${pliProduct.productName}" title="${pliProduct.productName}"/>
 								</isif>

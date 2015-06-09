@@ -1,4 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 
 <isif condition="${isQuickView}">
@@ -50,10 +53,16 @@
 	<isset name="FirstProductInSet" value="${pdict.ProductSetList[0]}" scope="pdict" />
 	<isset name="imageProduct" value="${pdict.FirstProductInSet}" scope="page"/>
 
-	<isif condition="${!empty(imageProduct.getImage('large', 0))}">
-		<isset name="imageUrl" value="${imageProduct.getImage('large', 0).getURL()}" scope="page"/>
-		<isset name="imageAlt" value="${imageProduct.getImage('large', 0).alt}" scope="page"/>
-		<isset name="imageTitle" value="${imageProduct.getImage('large', 0).title}" scope="page"/>
+	<isif condition="${!empty(new ProductImage.getImage('large', imageProduct,0).getURL())}">
+		<iscomment>Origional Code
+			<isset name="imageUrl" value="${imageProduct.getImage('large', 0).getURL()}" scope="page"/>
+			<isset name="imageAlt" value="${imageProduct.getImage('large', 0).alt}" scope="page"/>
+			<isset name="imageTitle" value="${imageProduct.getImage('large', 0).title}" scope="page"/>
+		</iscomment>
+		<iscomment>DIS changes</iscomment>
+			<isset name="imageUrl" value="${new ProductImage('large', imageProduct,0).getURL()}" scope="page"/>
+			<isset name="imageAlt" value="${new ProductImage('large', imageProduct,0).alt}" scope="page"/>
+			<isset name="imageTitle" value="${new ProductImage('large', imageProduct,0).title}" scope="page"/>
 	<iselse/>
 		<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 		<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>

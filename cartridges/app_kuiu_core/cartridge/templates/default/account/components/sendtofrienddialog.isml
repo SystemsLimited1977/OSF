@@ -1,5 +1,8 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="page"/>
 <isscript>
 	var sourceHash = {
@@ -87,10 +90,17 @@
 							<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
 						</isif>
 
-						<isif condition="${!empty(imageProduct.getImage('medium', 0))}">
-							<isset name="imageUrl" value="${imageProduct.getImage('medium', 0).getURL()}" scope="page"/>
-							<isset name="imageAlt" value="${imageProduct.getImage('medium', 0).alt}" scope="page"/>
-							<isset name="imageTitle" value="${imageProduct.getImage('medium', 0).title}" scope="page"/>
+						<iscomment>Origional Code
+							<isif condition="${!empty(imageProduct.getImage('medium', 0))}">
+								<isset name="imageUrl" value="${imageProduct.getImage('medium', 0).getURL()}" scope="page"/>
+								<isset name="imageAlt" value="${imageProduct.getImage('medium', 0).alt}" scope="page"/>
+								<isset name="imageTitle" value="${imageProduct.getImage('medium', 0).title}" scope="page"/>
+						</iscomment>
+						<iscomment>DIS changes</iscomment>
+							<isif condition="${!empty(new ProductImage('medium', imageProduct,0))}">
+								<isset name="imageUrl" value="${new ProductImage('medium',imageProduct, 0).getURL()}" scope="page"/>
+								<isset name="imageAlt" value="${new ProductImage('medium',imageProduct, 0).alt}" scope="page"/>
+								<isset name="imageTitle" value="${new ProductImage('medium',imageProduct, 0).title}" scope="page"/>
 						<iselse/>
 							<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 							<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
@@ -176,7 +186,8 @@
 				<isif condition="${pdict.Product != null}">
 
 					<isset name="product" value="${pdict.Product}" scope="page"/>
-					<isset name="image" value="${product.getImage('large',0)}" scope="page"/>
+					<iscomment><isset name="image" value="${product.getImage('large',0)}" scope="page"/></iscomment>
+					<isset name="image" value="${new ProductImage('large', product, 0)}"/>
 					<isif condition="${!empty(image)}">
 						<isset name="thumbnailUrl" value="${image.getURL()}" scope="page"/>
 					   	<isset name="imageAlt" value="${image.alt}" scope="page"/>

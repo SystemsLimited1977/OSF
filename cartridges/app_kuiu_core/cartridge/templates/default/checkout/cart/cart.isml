@@ -1,5 +1,9 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+
 <isdecorate template="checkout/cart/pt_cart">
+	<isscript>
+		importScript("app_disbestpractice:product/ProductImageSO.ds");
+	</isscript>
 	<isinclude template="util/modules" />
 	<isinclude template="util/reporting/ReportBasket.isml" />
 
@@ -152,8 +156,13 @@
 								<isif condition="${lineItem.bonusDiscountLineItem == null}">
 									<tr class="cart-row" data-uuid="${lineItem.getUUID()}">
 										<td class="item-image">
-											<isif condition="${lineItem.product != null && lineItem.product.getImage('small',0) != null}">
-												<img src="${lineItem.product.getImage('small',0).getURL()}"	alt="${lineItem.product.getImage('small',0).alt}" title="${lineItem.product.getImage('small',0).title}" />
+											<iscomment>Origional code
+													<isif condition="${lineItem.product != null && lineItem.product.getImage('small',0) != null}">
+													<img src="${lineItem.product.getImage('small',0).getURL()}"	alt="${lineItem.product.getImage('small',0).alt}" title="${lineItem.product.getImage('small',0).title}" />
+												</iscomment>
+												<iscomment>DIS change </iscomment>
+													<isif condition="${lineItem.product != null && new ProductImage('small', lineItem.product, 0).getURL() != null}">
+													<img src="${new ProductImage('small', lineItem.product, 0).getURL()}"	alt="${new ProductImage('small',lineItem.product, 0).alt}" title="${new ProductImage('small',lineItem.product, 0).title}" />
 											<iselse/>
 												<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${lineItem.productName}" title="${lineItem.productName}" />
 											</isif>
@@ -333,9 +342,15 @@
 												<td class="item-details">
 													<isif condition="${bli.product != null}">
 														<a href="${URLUtils.url('Product-Show','pid', bli.productID)}" title="${bli.productName}">
+														<iscomment>Origional code
 															<isif condition="${bli.product.getImage('small',0) != null}">
 																<img src="${bli.product.getImage('small',0).getURL()}" alt="${bli.product.getImage('small',0).alt}" title="${bli.product.getImage('small',0).title}" />
 															<iselse/>
+														</iscomment>
+														<iscomment>DIS changes</iscomment>
+														<isif condition="${new ProductImage('small',bli.product, 0).getURL() != null}">
+																<img src="${new ProductImage('small',bli.product, 0).getURL()}" alt="${new ProductImage('small',bli.product, 0).alt}" title="${new ProductImage('small',bli.product, 0).title}" />
+															<iselse/> 
 																<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${bli.productName}" title="${bli.productName}" />
 															</isif>
 														</a>
@@ -611,8 +626,14 @@
 
 										<tr>
 											<td class="item-image">
+											<iscomment>Origional code 
 												<isif condition="${lineItem.product != null && lineItem.product.getImage('small',0) != null}">
 													<img src="${lineItem.product.getImage('small',0).getURL()}" alt="${lineItem.product.getImage('small',0).alt}"  title="${lineItem.product.getImage('small',0).title}" />
+												<iselse/>
+											</iscomment>
+											<iscomment>DIS changes </iscomment>
+											<isif condition="${lineItem.product != null && new ProductImage('small',lineItem.product, 0).getURL() != null}">
+													<img src="${new ProductImage('small',lineItem.product, 0).getURL()}" alt="${new ProductImage('small',lineItem.product, 0).alt}"  title="${new ProductImage('small',lineItem.product, 0).title}" />
 												<iselse/>
 													<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${lineItem.productName}" title="${lineItem.productName}" />
 												</isif>
@@ -703,8 +724,14 @@
 													<td class="item-details">
 														<isif condition="${bli.product != null}">
 															<a href="${URLUtils.url('Product-Show','pid', bli.productID)}" title="${bli.productName}">
+															<iscomment>Origional code 
 																<isif condition="${bli.product.getImage('small',0) != null}">
 																	<img src="${bli.product.getImage('small',0).getURL()}" alt="${bli.product.getImage('small',0).alt}" title="${bli.product.getImage('small',0).title}" />
+																<iselse/>
+															</iscomment>
+															<iscomment>DIS changes </iscomment>
+															<isif condition="${new ProductImage('small',bli.product, 0).getURL() != null}">
+																	<img src="${new ProductImage('small',bli.product, 0).getURL()}" alt="${new ProductImage('small',bli.product, 0).alt}" title="${new ProductImage('small',bli.product, 0).title}" />
 																<iselse/>
 																	<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${bli.productName}" title="${bli.productName}" />
 																</isif>

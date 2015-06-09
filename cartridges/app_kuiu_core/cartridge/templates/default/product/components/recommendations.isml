@@ -1,4 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
 <isif condition="${!empty(pdict.Product)}">
 	<isscript>
 		// get all orderable cross sell recommendations (1 = cross sell)
@@ -43,8 +46,13 @@
 								<div class="analytics capture-product-id"><isprint value="${pdict.Product.ID}"/></div>
 								<div class="product-image recommendation_image">
 									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}">
+									<iscomment>Origional code
 										<isif condition="${!empty(pdict.Product.getImage('small',0))}">
 											<img src="${pdict.Product.getImage('small',0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}" title="${pdict.Product.getImage('small',0).title}"/>
+									</iscomment>
+									<iscomment>DIS changes</iscomment>
+									<isif condition="${!empty(new ProductImage('small',pdict.Product, 0).getURL())}">
+											<img src="${new ProductImage('small',pdict.Product, 0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}" title="${pdict.Product.getImage('small',0).title}"/>
 										<iselse/>
 											<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${pName}" title="${pName}"/>
 										</isif>
