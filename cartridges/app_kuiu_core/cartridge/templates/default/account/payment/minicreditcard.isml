@@ -9,6 +9,7 @@
 	p_cc_formfield : a credit card formfield element
 </iscomment>
 <isscript>
+	var maskedFourDigit  : String;
 	var ccType   : String;
 	var ccNumber : String;
 	var ccMonth  : Integer;
@@ -22,6 +23,7 @@
 		ccMonth  = pdict.p_card.creditCardExpirationMonth;
 		ccYear   = pdict.p_card.creditCardExpirationYear;
 		ccOwner  = pdict.p_card.creditCardHolder;
+		maskedFourDigit = pdict.p_card.custom.maskedFourDigit;
 	}
 	else
 	{
@@ -32,9 +34,9 @@
 		ccOwner  = pdict.p_cc_formfield.owner.htmlValue;
 	}
 </isscript>
-<isif condition="${!empty(ccOwner) && !empty(ccType) && !empty(ccNumber)}">
+<isif condition="${!empty(ccOwner) && !empty(ccType) && !empty(maskedFourDigit)}">
 	<isprint value="${ccOwner}"/><br />
-	<isprint value="${ccType}"/><br />
-	<isprint value="${ccNumber}"/><br />
+	<isprint value="${ccType}"/><br />	
+	<isprint value="${maskedFourDigit}"/><br />
 	${Resource.msg('account.payment.minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>.<isprint value="${ccYear}" formatter="0000"/>
 </isif>

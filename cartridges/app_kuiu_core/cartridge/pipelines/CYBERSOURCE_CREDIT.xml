@@ -75,8 +75,60 @@ The pipeline just reuses the basic credit card validation pipeline from processo
         </transition-display>
       </simple-transition>
       <node>
-        <end-node name="not_supported"/>
+        <call-node start-name-ref="Cybersource-AuthorizeCreditCard"/>
         <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="error"/>
+              <node-display x="-1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="authorized">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="authorized"/>
+              <node-display x="0" y="2"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b4" source-connector="declined">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="declined"/>
+              <node-display x="1" y="2"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b5" source-connector="review">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="review"/>
+              <node-display x="-1" y="2"/>
+            </node>
+          </segment>
+        </branch>
       </node>
     </segment>
   </branch>

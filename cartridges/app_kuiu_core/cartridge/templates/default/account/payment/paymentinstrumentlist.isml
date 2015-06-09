@@ -4,6 +4,12 @@
 	<isset name="bctext2" value="Payment Settings" scope="pdict"/>
 	<isslot id="account-banner" description="Banner for My Account pages" context="global" />
 	<h1>${Resource.msg('account.paymentinstrumentlist.header','account',null)}</h1>
+	<isif condition="${pdict.SubscriptionError != null}">
+        <div class="error-form">
+           ${Resource.msg(paymentinstrumentlist.deletesubscription','account',null)}
+        </div>
+     </isif>
+     
 	<div class="section-header">
 		${Resource.msg('account.paymentinstrumentlist.header','account',null)}
 		<a class="section-header-note add-card" href="${URLUtils.url('PaymentInstruments-Add')}" title="${Resource.msg('account.paymentinstrumentlist.addcard','account',null)}">

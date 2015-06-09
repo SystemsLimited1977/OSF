@@ -59,6 +59,9 @@
 	<!-- optional flags -->
 	<field formid="saveCard" label="creditcard.savecard" type="boolean" mandatory="false" default-value="true" />
 
+   <field formid="isSubscription" type="boolean" mandatory="false" default-value="false"/>
+   <field formid="maskedFourDigit" label="creditcard.number" type="string" masked="4" max-length="16"/>
+
 	<!-- confirm action to save the card details -->
     <action formid="confirm" valid-form="true"/>
 

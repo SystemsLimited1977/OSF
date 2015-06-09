@@ -5,6 +5,7 @@
  * @input PaymentInstrument : dw.customer.CustomerPaymentInstrument
  * @input CreditCardFormFields : dw.web.FormGroup
  */
+ 
 importPackage( dw.customer );
 importPackage( dw.order );
 importPackage( dw.system );
@@ -36,5 +37,10 @@ function execute( pdict : PipelineDictionary ) : Number
 	paymentInstr.setCreditCardExpirationYear( creditCardFields.year.value );
 	paymentInstr.setCreditCardType( creditCardFields.type.value );
 
+    if(!empty(creditCardFields.isSubscription.value))
+		paymentInstr.custom.isSubscription = creditCardFields.isSubscription.value;		
+	if(!empty(creditCardFields.maskedFourDigit.value))
+		paymentInstr.custom.maskedFourDigit = "************"+creditCardFields.maskedFourDigit.value.slice(creditCardFields.maskedFourDigit.value.length-4,creditCardFields.maskedFourDigit.value.length);
+    
     return PIPELET_NEXT;
 }
