@@ -197,6 +197,7 @@
                       <config-property key="ScriptFile" value="cybersource/CCAuthRequest.ds"/>
                       <config-property key="Transactional" value="true"/>
                       <config-property key="Timeout" value="30"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
                       <key-binding alias="Basket" key="Basket"/>
                       <key-binding alias="CurrentForms.billing.paymentMethods.creditCard" key="CreditCardForm"/>
@@ -231,6 +232,8 @@
                       <key-binding alias="ParesStatus" key="ParesStatus"/>
                       <key-binding alias="item" key="item"/>
                       <key-binding alias="StandardizedAddress" key="StandardizedAddress"/>
+                      <key-binding alias="InvalidFieldsArray" key="InvalidFieldsArray"/>
+                      <key-binding alias="MissingFieldsArray" key="MissingFieldsArray"/>
                     </pipelet-node>
                     <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="error">
