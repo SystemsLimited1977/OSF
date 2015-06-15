@@ -59,6 +59,7 @@
 									<img src="${productLineItem.product.getImage('small',0).getURL()}" alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}"/>
 								<iselse/>
 							</iscomment>
+							
 							<iscomment>DIS changes</iscomment>
 							<isif condition="${productLineItem.product != null && new ProductImage('small',productLineItem.product, 0).getURL() != null}">
 									<img src="${new ProductImage('small',productLineItem.product, 0).getURL()}" alt="${new ProductImage('small',productLineItem.product, 0).alt}" title="${new ProductImage('small',productLineItem.product, 0).title}"/>

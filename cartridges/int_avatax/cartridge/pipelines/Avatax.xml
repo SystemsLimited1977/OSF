@@ -684,7 +684,7 @@
       <simple-transition/>
       <node>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="ScriptFile" value="SiteGenesis20130418:cart/CalculateCart.ds"/>
+          <config-property key="ScriptFile" value="app_kuiu_core:cart/CalculateCart.ds"/>
           <config-property key="Transactional" value="true"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>

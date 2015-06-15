@@ -6,6 +6,12 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <meta charset=UTF-8>
 
+<iscomment>Styling for Call Center agent banner when logged in on behalf of a customer</iscomment>
+<isif condition="${pdict.CurrentSession.userAuthenticated}">
+	<link href="${URLUtils.absStatic('/callcenter/css/storefront_header.css')}" type="text/css" rel="stylesheet" />
+</isif>
+
+
 <iscomment>the page title calculated by the app </iscomment>
 
 <isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
