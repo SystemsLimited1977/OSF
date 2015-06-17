@@ -1,0 +1,87 @@
+<iscomment>
+	This is used for Page Tracking and custom dimension for all pages
+</iscomment>
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+  var uniqueID = '${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleAnalyticsId')}';
+  var domainName = '${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleDomainName')}';
+  ga('create',uniqueID, domainName);
+  	
+  	if (!String.prototype.endsWith) {
+  		String.prototype.endsWith = function(suffix) {
+  		    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+  		};
+  	}
+  
+	//Custom dimension specific tracking
+	<isset name="cat" value="" scope="page"/>
+	<isif condition = "${!empty(pdict.ProductSearchResult)}">
+		<isset name="cat" value="${pdict.ProductSearchResult.category}" scope="page"/>
+	</isif>
+	<isif condition = "${empty(cat) && !empty(pdict.ProductSet)}">
+		<isset name="cat" value="${pdict.ProductSet.primaryCategory}" scope="page"/>
+	</isif>
+	<isif condition = "${empty(cat) && !empty(pdict.Product)}">
+		<isset name="cat" value="${pdict.Product.primaryCategory}" scope="page"/>
+		<isif condition = "${empty(cat) && !empty(pdict.Product.variant)}">
+			<isset name="cat" value="${pdict.Product.masterProduct.primaryCategory}" scope="page"/>
+		</isif>
+	</isif>
+	<isif condition="${!empty(cat)}">
+		var catID = '${cat.ID}';	
+		var brandName = "";
+		
+		ga('set','dimension9',catID);
+		ga('set','dimension10',brandName);
+	</isif>
+	<isif condition="${pdict.CurrentCustomer.registered}">
+		var gender = '${pdict.CurrentCustomer.profile.gender}';
+		var zipCode = '${pdict.CurrentCustomer.profile.custom.zipCode}';
+		var birthday = new Date('${pdict.CurrentCustomer.profile.birthday}');
+		var today = new Date();
+		var age = today.getFullYear()- birthday.getFullYear();
+		if( today.getMonth() < birthday.getMonth() || ( today.getMonth() == birthday.getMonth() && today.getDate() < birthday.getDate() )) { 
+			age--;
+		}
+		ga('set','dimension4','registered');
+		<isif condition="${!empty(pdict.CurrentCustomer.profile.custom.zipCode)}">
+			ga('set','dimension6',zipCode);
+		</isif>
+		<isif condition="${!empty(pdict.CurrentCustomer.profile.gender) && pdict.CurrentCustomer.profile.gender !='0'}">
+			ga('set','dimension7',gender);
+		</isif>
+		<isif condition="${!empty(pdict.CurrentCustomer.profile.birthday)}">
+			ga('set','dimension8',age);
+		</isif>
+		<isif condition="${!empty(pdict.CurrentCustomer.activeData) && !empty(pdict.CurrentCustomer.activeData.orderValue)}">
+			var averageLifeTimeSales = ${pdict.CurrentCustomer.activeData.orderValue};
+			ga('set','dimension5',averageLifeTimeSales);
+		</isif>
+	<iselse>
+		ga('set','dimension4','guest');
+	</isif>
+		
+	<isif condition="${'plp' in pdict && pdict.plp}">
+		var baseUrl = window.location.protocol +'://' + window.location.hostname + window.location.pathname,
+			sp = baseUrl.endsWith('/') ? '' : '/',
+			pdListing = (window.location.search == "") ? '' : window.location.search;
+		var page = baseUrl + sp + 'ProductListingPage' + pdListing ;
+		ga('send', 'pageview', {
+			  'page': page
+		});	
+	<iselseif condition="${'pdp' in pdict && pdict.pdp}">
+		var page = window.location.href.split('#')[0] + '/ProductDetailsPage';
+		ga('send', 'pageview', {
+			  'page': page
+		});	
+	<iselse>
+		ga('send', 'pageview');
+	</isif>
+</script>
+<!-- End Google Analytics -->

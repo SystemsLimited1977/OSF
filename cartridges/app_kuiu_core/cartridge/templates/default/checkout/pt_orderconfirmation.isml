@@ -40,7 +40,9 @@
 			</div>
 
 		</div>
-
+		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleAnalyticsEnabled')}">
+			<isinclude template="components/analytics/ecommercetracking.isml"/>
+		</isif>
 		<isinclude template="components/footer/footer"/>
 		<isinclude template="checkout/pt_orderconfirmation_VARS"/>
 

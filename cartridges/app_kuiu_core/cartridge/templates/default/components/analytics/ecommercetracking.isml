@@ -1,0 +1,41 @@
+<iscomment>
+	This is used for ecommerce Tracking and custom dimensions specific to order confirmation page.
+</iscomment>
+<script>
+
+	//e-commerce tracking 
+	
+	  ga('require', 'ecommerce', 'ecommerce.js');	
+	  var transId = '${pdict.Order.orderNo}';
+	  var affiliationName = '${dw.system.Site.getCurrent().getName()}';
+	  var grandTotal = ${pdict.Order.getAdjustedMerchandizeTotalPrice(true).value};
+	  var shippingPrice = ${pdict.Order.getAdjustedShippingTotalPrice().value};
+	  var taxAmount = ${pdict.Order.totalTax.value};
+	  ga('ecommerce:addTransaction', {
+		  'id': transId,                    // Transaction ID. Required.
+		  'affiliation': affiliationName,   // Affiliation or store name.
+		  'revenue': grandTotal,            // Grand Total.
+		  'shipping': shippingPrice,		// Shipping.
+		  'tax': taxAmount                  // Tax.
+		});
+	
+	  //Custom dimension specific
+	  
+	  <isloop items="${pdict.Order.getAllProductLineItems()}" var="productLineItem">
+	  	var adjustedPrice = ${productLineItem.getAdjustedPrice(true).value}/${productLineItem.getQuantityValue()};
+	  	var category = null;
+	  	
+	  	ga('ecommerce:addItem', {
+			'id': transId,                     						// Transaction ID. Required.
+	     	'name': '${productLineItem.product.name}',    				// Product name. Required.
+			'sku': '${productLineItem.product.ID}',                 	// SKU/code.
+			'category': category,         	// Category or variation.
+			'price': adjustedPrice,	// Unit price.
+			'quantity': ${productLineItem.getQuantityValue()}		// Quantity.
+		});
+      </isloop>
+		  
+	  ga('ecommerce:send'); //submits transaction to the Analytics servers
+
+
+</script>

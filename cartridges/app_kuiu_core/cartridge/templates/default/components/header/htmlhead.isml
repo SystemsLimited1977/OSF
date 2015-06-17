@@ -59,3 +59,8 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>Gather device-aware scripts</iscomment>
 <isinclude url="${URLUtils.url('Home-SetLayout')}"/>
+
+<iscomment>Google Analytics Include</iscomment>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleAnalyticsEnabled')}">	
+	<isinclude template="components/analytics/googleanalytics.isml"/>
+</isif>
