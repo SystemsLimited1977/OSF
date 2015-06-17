@@ -71,7 +71,9 @@
 		} else {
 			imageSource = Product;
 		}
-		image = imageSource.getImage(imageSize, 0);
+		//image = imageSource.getImage(imageSize, 0);
+		//DIS changes
+		image = new ProductImage(imageSize, imageSource, 0);
 
 		// Generate link to product detail page: by default it's just the product of the product search hit.
 		// If a color variation is available, the first color is used as link URL.
