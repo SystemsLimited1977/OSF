@@ -81,7 +81,7 @@
 
             <isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.maskedFourDigit}" type="input"/> 
 			
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attribute1="autocomplete" value1="off"/>
+		    <isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attribute1="autocomplete" value1="off"/> 
 
 			<span class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate','checkout',null)}</span>
 
