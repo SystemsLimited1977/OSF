@@ -270,7 +270,11 @@ function ProductImage( viewType: String, imageObject : Object, index : Number ) 
 			return this.imageObject.displayValue;
 		} else {
 			if ( empty(this.image) || empty(this.image.title) ) {
-				if ( this.referenceType == 'Product' ) {
+				
+				if(this.imageObject instanceof dw.catalog.ProductVariationModel) {
+					return this.imageObject.master.name;
+				}
+				else if ( this.referenceType == 'Product' ) {
 					return this.imageObject.name;
 				} else {
 					return this.imageObject.displayValue;
@@ -289,7 +293,11 @@ function ProductImage( viewType: String, imageObject : Object, index : Number ) 
 			if ( empty(this.image) || empty(this.image.alt) ) {
 				if ( cvDISConfiguration.imageMissingText ) {
 					return cvDISConfiguration.imageMissingText;
-				} else if ( this.referenceType == 'Product' ) {
+				}
+				else if(this.imageObject instanceof dw.catalog.ProductVariationModel) {
+					return this.imageObject.master.name;
+				}
+				else if ( this.referenceType == 'Product' ) {
 					return this.imageObject.name;
 				} else {
 					return this.imageObject.displayValue;
