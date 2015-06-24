@@ -41,7 +41,7 @@
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="LineItemCtnr"/>
                 <key-binding alias="dw.order.PaymentInstrument.METHOD_CREDIT_CARD" key="PaymentType"/>
-                <key-binding alias="TRUE" key="RemoveExisting"/>
+                <key-binding alias="true" key="RemoveExisting"/>
                 <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
               </pipelet-node>
               <node-display x="0" y="2"/>
