@@ -67,7 +67,7 @@
 		ga('set','dimension4','guest');
 	</isif>
 		
-	<isif condition="${'plp' in pdict && pdict.plp}">
+	<isif condition="${pdict.ProductSearchResult.categorySearch && !empty(pdict.CurrentHttpParameterMap.cgid.value)}">
 		var baseUrl = window.location.protocol +'://' + window.location.hostname + window.location.pathname,
 			sp = baseUrl.endsWith('/') ? '' : '/',
 			pdListing = (window.location.search == "") ? '' : window.location.search;
@@ -75,11 +75,11 @@
 		ga('send', 'pageview', {
 			  'page': page
 		});	
-	<iselseif condition="${'pdp' in pdict && pdict.pdp}">
+	<iselseif condition="${!empty(pdict.CurrentHttpParameterMap.pid.value) && pdict.Product != null}">
 		var page = window.location.href.split('#')[0] + '/ProductDetailsPage';
 		ga('send', 'pageview', {
 			  'page': page
-		});	
+		});
 	<iselse>
 		ga('send', 'pageview');
 	</isif>
