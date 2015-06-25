@@ -72,7 +72,6 @@
 			imageSource = Product;
 		}
 		//image = imageSource.getImage(imageSize, 0);
-		//DIS changes
 		image = new ProductImage(imageSize, imageSource, 0);
 
 		// Generate link to product detail page: by default it's just the product of the product search hit.
@@ -90,6 +89,7 @@
 		<div class="product-image"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
 			<iscomment>Render the thumbnail</iscomment>
 			<iscomment>If image couldn't be determined, display a "no image" medium.</iscomment>
+			
 			<isif condition="${!empty(image)}">
 				<isset name="thumbnailUrl" value="${image.getURL()}" scope="page"/>
 				<isset name="thumbnailAlt" value="${image.alt}" scope="page"/>
@@ -227,13 +227,14 @@
 					<ul class="swatch-list<isif condition="${selectableColors.size() > 5}"> swatch-toggle</isif>">
 						<isloop items="${selectableColors}" var="colorValue" status="varloop">
 							<iscomment>Determine the swatch and the thumbnail for this color</iscomment>
-							<iscomment>Origional code
+							<iscomment>Origional code 
 								<isset name="colorSwatch" value="${colorValue.getImage('swatch')}" scope="page"/>
 								<isset name="colorThumbnail" value="${colorValue.getImage('medium')}" scope="page"/>
 							</iscomment>
 							<iscomment>DIS changes</iscomment>
 								<isset name="colorSwatch" value="${new ProductImage('swatch', colorValue,0)}" scope="page"/>
 								<isset name="colorThumbnail" value="${new ProductImage('medium', colorValue,0)}" scope="page"/>
+								
 							<iscomment>If images couldn't be determined, display a "no image" thumbnail</iscomment>
 							<isif condition="${!empty(colorSwatch)}">
 								<isset name="swatchUrl" value="${colorSwatch.getURL()}" scope="page"/>

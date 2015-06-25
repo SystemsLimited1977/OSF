@@ -1,0 +1,13 @@
+/**
+* EmailSignupConstants.ds
+*
+*	Object for storing Email Signup system constants
+*/
+importPackage( dw.system );
+
+function EmailSignup_Constants(){};
+
+/*****************************************************************
+**  CONFIGURATION VARIABLES:
+******************************************************************/
+EmailSignup_Constants.DiscountCodeWhenNoneAvailable = "None";

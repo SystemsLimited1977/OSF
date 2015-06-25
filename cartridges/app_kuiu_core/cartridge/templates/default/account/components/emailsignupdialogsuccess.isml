@@ -1,0 +1,7 @@
+<isinclude template="util/modules"/>
+<div id="thankYou">
+	<isdecorate template="util/pt_empty">
+		<h2>Thanks for signing up!</h2>
+	</isdecorate>
+</div>
+

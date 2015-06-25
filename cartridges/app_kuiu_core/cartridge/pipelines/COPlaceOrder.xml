@@ -820,8 +820,13 @@
             </node>
             <simple-transition/>
             <node>
-              <call-node start-name-ref="COPlaceOrder-ClearForms"/>
+              <call-node start-name-ref="ltkConversionTracking-Start"/>
               <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="COPlaceOrder-ClearForms"/>
+              <node-display x="0" y="2"/>
             </node>
             <simple-transition/>
             <node>

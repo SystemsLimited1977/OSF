@@ -41,11 +41,12 @@
                           <call-node start-name-ref="Cart-AddItem"/>
                           <node-display x="0" y="1"/>
                         </node>
-                        <simple-transition>
-                          <transition-display>
-                            <bend-point relative-to="source" x="0" y="1"/>
-                          </transition-display>
-                        </simple-transition>
+                        <simple-transition/>
+                        <node>
+                          <call-node start-name-ref="ltkSCA-UpdateCart"/>
+                          <node-display x="0" y="1"/>
+                        </node>
+                        <simple-transition/>
                         <node>
                           <decision-node condition-key="CurrentHttpParameterMap.format.stringValue == 'ajax'" condition-operator="expr"/>
                           <node-display x="0" y="1"/>
@@ -479,6 +480,11 @@
               <call-node start-name-ref="Cart-Calculate"/>
               <node-display x="0" y="1"/>
             </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="ltkSCA-UpdateCart"/>
+              <node-display x="0" y="1"/>
+            </node>
             <transition target-connector="in1" target-path="../b7.2"/>
           </segment>
         </branch>
@@ -733,6 +739,11 @@
               <call-node start-name-ref="Cart-UpdateCart"/>
               <node-display x="-1" y="7"/>
             </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="ltkSCA-UpdateCart"/>
+              <node-display x="0" y="2"/>
+            </node>
             <transition target-connector="in2" target-path="../b6.3"/>
           </segment>
         </branch>
@@ -897,11 +908,12 @@ just like miniaddproduct i.e. pid, options, quantiy.</description>
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="ltkSCA-UpdateCart"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <decision-node condition-key="Product.bundle" condition-operator="expr"/>
         <node-display x="0" y="1"/>
@@ -1362,7 +1374,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
         <text-node>
           <description>Add product to mini cart. Renders a new mini cart and not a full cart.</description>
         </text-node>
-        <node-display x="11" y="11"/>
+        <node-display x="11" y="12"/>
       </node>
     </segment>
   </branch>

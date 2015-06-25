@@ -282,8 +282,13 @@
                         </node>
                         <simple-transition/>
                         <node>
-                          <end-node name="ok"/>
+                          <call-node start-name-ref="ltkEmailSignup-Inline"/>
                           <node-display x="0" y="1"/>
+                        </node>
+                        <simple-transition/>
+                        <node>
+                          <end-node name="ok"/>
+                          <node-display x="-1" y="0"/>
                         </node>
                       </segment>
                     </branch>
@@ -660,12 +665,21 @@
                               </node>
                               <simple-transition transaction-control="commit"/>
                               <node>
+                                <call-node start-name-ref="ltkEmailSignup-Inline"/>
+                                <node-display x="0" y="3"/>
+                              </node>
+                              <simple-transition/>
+                              <node>
                                 <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
                                   <key-binding alias="CurrentForms.profile" key="FormElement"/>
                                 </pipelet-node>
-                                <node-display x="0" y="2"/>
+                                <node-display x="0" y="1"/>
                               </node>
-                              <simple-transition/>
+                              <simple-transition>
+                                <transition-display>
+                                  <bend-point relative-to="source" x="0" y="1"/>
+                                </transition-display>
+                              </simple-transition>
                               <node>
                                 <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                                   <config-property key="Transactional" value="false"/>
@@ -692,7 +706,11 @@
                                 </pipelet-node>
                                 <node-display x="0" y="1"/>
                               </node>
-                              <simple-transition/>
+                              <simple-transition>
+                                <transition-display>
+                                  <bend-point relative-to="source" x="0" y="1"/>
+                                </transition-display>
+                              </simple-transition>
                               <node>
                                 <jump-node start-name-ref="Account-Show"/>
                                 <node-display x="0" y="1"/>

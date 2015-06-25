@@ -443,6 +443,16 @@
             </node>
             <simple-transition/>
             <node>
+              <call-node start-name-ref="ltkEmailSignup-Inline"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="ltkSCA-UpdateCart"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <jump-node start-name-ref="COSummary-Start"/>
               <node-display x="0" y="1"/>
             </node>
