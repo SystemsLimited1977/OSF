@@ -17963,3 +17963,46 @@ module.exports = asap;
 },{"_process":50}]},{},[1]);
 
 //# sourceMappingURL=app.js.map
+
+//Footer signup popup for listrak
+jQuery(document).ready(function(){ 
+	jQuery('button[name="footer-email"]').click(function(e){
+		e.preventDefault();
+		var url = jQuery(this).parents('form').attr('action');
+		if (!url) { return; }
+
+		var form = jQuery(this).parents('form');
+		var method = form.attr("method")||"POST";
+		
+		if (method && method.toUpperCase() == "POST")
+		{
+	         var postData = form.serialize() + "&"+ jQuery(this).attr("name") + "=submit";
+	    }
+		
+		jQuery.ajax({
+			dataType : "html",
+			url : url
+		})
+		.done(function (response) {
+			jQuery('<div/>', {'id':'emailsignup','class':'emailsignupclass'}).appendTo('body');
+			jQuery('#emailsignup').css('display','none');
+			jQuery('#emailsignup').empty().html(response);
+			jQuery('#emailsignup').dialog({
+			    modal: true,
+			    draggable: false,
+			    resizable: false,
+			    width: 400,
+			    dialogClass: 'ui-dialog-osx'
+			});
+			
+		})
+		.fail(function (xhr, textStatus) {
+			
+		})
+		.always(function () {
+			
+		});
+		
+	});
+	
+});

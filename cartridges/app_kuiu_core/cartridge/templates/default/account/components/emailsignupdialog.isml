@@ -1,0 +1,54 @@
+<isinclude template="util/modules"/>
+<div class="emailSignupModal">
+<isdecorate template="util/pt_empty">
+		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm">
+			
+			<div class="clearfix">
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" name="firstname"  type="input" />
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.lastname}" type="input" />
+			</div>
+			<div class="clearfix">
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.dobmonth}" type="select" rowclass="bmonth" />
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.dobday}" type="select" rowclass="bday" />
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.zipcode}" type="input"  rowclass="zcode" />
+			</div>
+			
+			<div class="form-row form-row-button clearfix">
+				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>
+			</div>
+			
+		</form>
+</isdecorate>
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery('button[name="dwfrm_emailsignupdetails_submit"]').click(function(event) {	
+		debugger;
+		event.preventDefault();
+		var form = jQuery(this).parents('form');
+		var hitUrl = jQuery(form).attr('action');//"${URLUtils.continueURL()}",
+		jQuery.ajax({
+			  url: hitUrl,
+			  type: 'POST',
+			  dataType: 'html',
+			  async: false,
+	          cache: false, 
+			  data: form.serialize() + "&"+ jQuery(this).attr("name") + "=submit",
+			}).done(function ( data ) {
+				debugger;
+				jQuery('#emailsignup').dialog("close");
+				jQuery('<div/>', {'id':'thankyou'}).appendTo('body');
+				jQuery('#thankyou').css('display','none');
+				jQuery('#thankyou').empty().html(data);
+				jQuery('#thankyou').dialog({
+				    modal: true,
+				    draggable: false,
+				    resizable: false,
+				    width: 600,
+				    dialogClass: 'ui-dialog-osx'
+				}); 
+			});
+	});
+});
+</script>

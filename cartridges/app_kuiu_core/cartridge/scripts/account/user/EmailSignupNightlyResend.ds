@@ -1,0 +1,51 @@
+/**
+* Demandware Script File
+*   Nightly job that grab all EmailSignupDiscountCodeRecipients that did not yet receive
+*	a discount code (Discount Code = "None"). Then pass them on to the pipeline so they
+*	can be processed individually.
+*
+*   @output CodeResendStatusList : dw.util.List A List containing the list of statuses for each Discount Code
+*   @output EmailSignupDiscountCodeRecipients : dw.util.SeekableIterator All the EmailSignupDiscountCodeRecipient objects to process
+*/
+
+importPackage( dw.system );
+importPackage( dw.object );
+importPackage( dw.util );
+importScript("dooney_core:/account/user/EmailSignupConstants.ds" );
+
+function execute( pdict : PipelineDictionary ) : Number{
+
+	//var result : dw.util.List = new dw.util.ArrayList();
+	var logger = Logger.getLogger("EmailSignupNightlyResend");
+	//var codeResendStatusList : Array = Array();
+	//codeResendStatusList.push("Hi Adrian!");
+	var codeResendStatusList : dw.util.List = new dw.util.ArrayList();
+
+
+	try{
+		
+		// grab all EmailSignupDiscountCodeRecipients where discount code is "None Available"			
+	
+		// var discountCodeObjs : SeekableIterator = CustomObjectMgr.queryCustomObjects('WorkflowComponentInstance', 'custom.workflowScheduleInstanceID = {0}', 'custom.position', this.custom.ID);
+		// CustomObjectMgr.queryCustomObjects("ReturnsDetail","custom.dwOrderNumber={0}",null, order.orderNo);
+		var discountCodeRecipientObjs : SeekableIterator = CustomObjectMgr.queryCustomObjects("EmailSignupDiscountCodeRecipient", 'custom.discountCode LIKE {0}', null, EmailSignup_Constants.DiscountCodeWhenNoneAvailable);
+
+		// detect if NO entries, add a special message for the status email
+		if (! discountCodeRecipientObjs.hasNext()){
+			codeResendStatusList.add("There are no users who have not yet received a discount code");
+		}
+			
+		pdict.EmailSignupDiscountCodeRecipients = discountCodeRecipientObjs;
+		pdict.CodeResendStatusList = codeResendStatusList;
+	
+		return PIPELET_NEXT;
+	}
+	catch(e){
+		var errorMessage = e.message;
+		logger.error("EmailSignupNightlyResend: error while executing the code: " + errorMessage );
+		codeResendStatusList.add("Error while grabbing EmailSignupDiscountCodeRecipients for the nightly re-send codes job: " + errorMessage);
+		pdict.CodeResendStatusList = codeResendStatusList;
+		return PIPELET_ERROR;
+	}
+
+}

@@ -8,6 +8,7 @@
 
 <footer>
 	<div class="footer-container">
+	<iscomment>
 		<div class="footer-item">
 			<isslot id="footer-column" description="Content in column 1 of the Footer" context="global" />
 		</div>
@@ -20,8 +21,23 @@
 		<div class="footer-item">
 			<iscontentasset aid="footer-about"/>
 		</div>
+	</iscomment>
+	<iscomment>Listrak modal popup start</iscomment>
+		<div style="text-align:left" class="test">
+			<form action="${URLUtils.url('EmailSignUp-Start')}" method="post" id="email-alert-signup">
+				<div>
+					<input type="hidden" name="ltkSubscriptionCode" value="accountcreate" />
+					<input type="email" name="emailAddress" id="email-alert-address" value=""  placeholder="Enter email address"  />
+					<button name="footer-email" type="submit" value="Sign up"  title=""  style="width:50px">Sign up</button>
+				</div>
+			</form>
+		</div>
+	<iscomment>Listrak modal popup end</iscomment>
 	</div>	
 </footer>
+<script>
+	
+</script>
 
 <iscontentasset aid="footer-copy"/>	
 
@@ -33,3 +49,5 @@
 <isinclude template="util/reporting/ReportUserRegistration.isml"/>
 
 <isinclude template="components/footer/footer_UI"/>
+<iscomment>Listrak change for rendering javasceipt reference</iscomment>
+<isinclude url="${URLUtils.url('ltkInclude-Start')}"/>

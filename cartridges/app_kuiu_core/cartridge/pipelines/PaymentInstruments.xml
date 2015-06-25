@@ -400,7 +400,7 @@
                       <config-property key="Transactional" value="true"/>
                       <key-binding alias="true" key="From_0"/>
                       <key-binding alias="PaymentInstrument.custom.isSubscription" key="To_0"/>
-                      <key-binding alias="************&quot;+CurrentForms.paymentinstruments.creditcards.newcreditcard.maskedFourDigit.value.slice(CurrentForms.paymentinstruments.creditcards.newcreditcard.maskedFourDigit.value.length-4,CurrentForms.paymentinstruments.creditcards.newcreditcard.maskedFourDigit.value.length)" key="From_1"/>
+                      <key-binding alias="&quot;************&quot;+CurrentForms.paymentinstruments.creditcards.newcreditcard.maskedFourDigit.value.slice(CurrentForms.paymentinstruments.creditcards.newcreditcard.maskedFourDigit.value.length-4,CurrentForms.paymentinstruments.creditcards.newcreditcard.maskedFourDigit.value.length)" key="From_1"/>
                       <key-binding alias="PaymentInstrument.custom.maskedFourDigit" key="To_1"/>
                       <key-binding alias="null" key="From_2"/>
                       <key-binding alias="null" key="To_2"/>

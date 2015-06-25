@@ -1,0 +1,71 @@
+/**
+* Demandware Script File
+*   Grab an email signup code from the custom object EmailSignupDiscountCode and then delete that object
+*   If there's no code available, return null (pipeline should handle this as an error case)
+*   Also save the Email address in EmailSignupDiscountCodeRecipient. If this user has signed up and gotten a discount
+*   Before, they should get another one.
+*
+*  @input EmailSignupDiscountCodeRecipient : dw.object.CustomObject the recipient that should be re-tried (EmailSignupDiscountCodeRecipient)
+*  @input CodeResendStatusListInput : dw.util.List An array containing the list of statuses for each Discount Code
+*  @output CodeResendStatusListOutput : dw.util.List An array containing the list of statuses for each Discount Code
+*  @output EmailSignupDiscountCode : String The discount code to be included in the email
+*  @output EmailSignupDiscountCodeRecipientEmail : String The email address of the user to receive the discount code
+*  @output EmailSignupDiscountCodeExpirationDate : String When this discount expires (to be included in the email)
+*
+**/
+importPackage( dw.system );
+importPackage( dw.object );
+importScript("dooney_core:/account/user/EmailSignupConstants.ds" );
+
+
+function execute( pdict : PipelineDictionary ) : Number{
+
+	var logger = Logger.getLogger("ResendEmailSignupDiscountCode");	
+	
+	try{
+		var codeResendStatusList : dw.util.List = pdict.CodeResendStatusListInput;
+		
+		var recipientEmailAddress = pdict.EmailSignupDiscountCodeRecipient.custom.emailAddress;
+		
+		//if we somehow get here with no email address, return an error
+		if (recipientEmailAddress == null || recipientEmailAddress == ""){
+			logger.error("ResendEmailSignupDiscountCode: recipientEmailAddress not assigned - can't process without that");
+			return PIPELET_ERROR;	
+		}
+		
+		var emailSignupDiscountCode = null;
+		var emailSignupDiscountCodeExpirationDate = null;
+		
+		var discountCodeObj : CustomObject = CustomObjectMgr.queryCustomObject("EmailSignupDiscountCode", 'custom.discountCode LIKE {0}', '*');
+		if (discountCodeObj == null){
+			// special case - no code - the pipeline will detect that pdict.EmailSignupDiscountCode is null and handle this case		
+			logger.error("GrabEmailSignupDiscountCode: no discount code available - returning null");
+			codeResendStatusList.add("Unable to re-send discount code for user " + recipientEmailAddress + ": no discount code available");
+			// return an error so we skip the email stage - only email a user when their code has come through
+			return PIPELET_ERROR;
+		}
+		else{
+			// got the code - populate the data and then delete the object
+			emailSignupDiscountCode = discountCodeObj.custom.discountCode;
+			emailSignupDiscountCodeExpirationDate = discountCodeObj.custom.expirationDate;	
+			CustomObjectMgr.remove(discountCodeObj);
+			pdict.EmailSignupDiscountCodeRecipientEmail = recipientEmailAddress;
+			pdict.EmailSignupDiscountCodeRecipient.custom.discountCode = emailSignupDiscountCode; //update the recipient object
+			codeResendStatusList.add("New discount code (" + emailSignupDiscountCode + ") sent to user " + recipientEmailAddress);
+		}
+		
+		
+		pdict.EmailSignupDiscountCode = emailSignupDiscountCode;
+		pdict.EmailSignupDiscountCodeExpirationDate = emailSignupDiscountCodeExpirationDate;
+		pdict.CodeResendStatusListOutput = codeResendStatusList;
+	
+		return PIPELET_NEXT;
+	}
+	catch(e){
+		var errorMessage = e.message;
+		logger.error("ResendEmailSignupDiscountCode: error while exexcuting the code: " + errorMessage );
+		codeResendStatusList.add("Unable to re-send discount code for user " + recipientEmailAddress + ": " + errorMessage);
+		return PIPELET_ERROR;
+	}
+
+}

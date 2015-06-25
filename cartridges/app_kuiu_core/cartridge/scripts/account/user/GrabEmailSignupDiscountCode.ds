@@ -1,0 +1,83 @@
+/**
+* Demandware Script File
+*   Grab an email signup code from the custom object EmailSignupDiscountCode and then delete that object
+*   If there's no code available, return null (pipeline should handle this as an error case)
+*   Also save the Email address in EmailSignupDiscountCodeRecipient. If this user has signed up and gotten a discount
+*   Before, they should get another one.
+*
+*  @input  EmailSignupDiscountCodeRecipient : String the email address to receive the discount code. No code is sent if this user has signed up and gotten a discount before.
+*  @output EmailSignupDiscountCode : String The discount code to be included in the email
+*  @output EmailSignupDiscountCodeExpirationDate : String When this discount expires (to be included in the email)
+*  @output HasPreviouslyReceivedCode : Boolean If the user has received a code previously. If true, no code / email will be sent 
+*/
+importPackage( dw.system );
+importPackage( dw.object );
+importScript("dooney_core:/account/user/EmailSignupConstants.ds" );
+
+
+function execute( pdict : PipelineDictionary ) : Number{
+
+	var logger = Logger.getLogger("GrabEmailSignupDiscountCode");
+	
+	try{
+		
+		var recipientEmailAddress = pdict.EmailSignupDiscountCodeRecipient;
+		
+		//if we somehow get here with no email address, return an error
+		if (recipientEmailAddress == null || recipientEmailAddress == ""){
+			logger.error("GrabEmailSignupDiscountCode: recipientEmailAddress not assigned - can't process without that");
+			return PIPELET_ERROR;	
+		}
+		
+		// has this user previously received a code?
+		var hasPreviouslyReceivedCode = false;
+		var discountCodeRecipient = CustomObjectMgr.queryCustomObject("EmailSignupDiscountCodeRecipient", 'custom.emailAddress = {0}', recipientEmailAddress);
+		if (discountCodeRecipient != null){
+			// user has previously received a discount code, and shouldn't get another one, Just return Pipelet Next
+			pdict.HasPreviouslyReceivedCode = true;
+			return PIPELET_NEXT; 
+		}
+	
+
+		var emailSignupDiscountCode = null;
+		var emailSignupDiscountCodeExpirationDate = "N/A";
+
+		// grab EmailSignupDiscountCode - if there is none, leave pdict.EmailSignupDiscountCode null (the Pipeline will then correctly handle the situation)				
+		var discountCodeObj : CustomObject = CustomObjectMgr.queryCustomObject("EmailSignupDiscountCode", 'custom.discountCode LIKE {0}', '*');
+		if (discountCodeObj == null){
+			// special case - no code - the pipeline will detect that pdict.EmailSignupDiscountCode is null and handle this case		
+			logger.error("GrabEmailSignupDiscountCode: no discount code available - returning null");
+		}
+		else{
+			// got the code - populate the data and then delete the object
+			emailSignupDiscountCode = discountCodeObj.custom.discountCode;
+			emailSignupDiscountCodeExpirationDate = discountCodeObj.custom.expirationDate;	
+			CustomObjectMgr.remove(discountCodeObj);
+		}
+		
+
+		// if user hasn't previously received a code, save their email in a new EmailSignupDiscountCodeRecipient
+		// object so they can't request another discount code later
+		if(!hasPreviouslyReceivedCode){
+			var newDiscountCodeRecipient : dw.object.CustomObject = dw.object.CustomObjectMgr.createCustomObject("EmailSignupDiscountCodeRecipient", recipientEmailAddress);	
+			newDiscountCodeRecipient.custom.discountCode = emailSignupDiscountCode;
+			
+			// if no code available, specifically set this in the EmailSignupDiscountCodeRecipient object - a nightly job will 
+			// go through this and send send codes for all objects with the "No Code Available" discount code
+			if (emailSignupDiscountCode == null){
+				newDiscountCodeRecipient.custom.discountCode=EmailSignup_Constants.DiscountCodeWhenNoneAvailable;
+			}
+		}
+		
+		pdict.EmailSignupDiscountCode = emailSignupDiscountCode;
+		pdict.EmailSignupDiscountCodeExpirationDate = emailSignupDiscountCodeExpirationDate;
+	
+		return PIPELET_NEXT;
+	}
+	catch(e){
+		var errorMessage = e.message;
+		logger.error("GrabEmailSignupDiscountCode: error while exexcuting the code: " + errorMessage );
+		return PIPELET_ERROR;
+	}
+
+}
