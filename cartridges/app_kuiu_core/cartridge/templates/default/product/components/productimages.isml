@@ -47,9 +47,9 @@
 	<isif condition="${imageTitle.charAt(0) == ','}">
 		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
 	</isif>
-	<a ${href} class="product-image main-image" title="${imageTitle}">
+	<!-- <a ${href} class="product-image main-image" title="${imageTitle}"> -->
 		<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
-	</a>
+	<!-- </a> -->
 </div>
 
 <isset name="largeImagesSize" value="${imageProduct.getImages('large').size()}" scope="page"/>
