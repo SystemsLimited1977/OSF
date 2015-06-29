@@ -15,5 +15,7 @@
 		<isif condition="${!isQuickView}">
 			<isinclude template="product/components/recommendations"/>
 		</isif>
+		
+		<isinclude template="product/components/fieldshots"/>
 	</div><!--/pdpMain -->
 </isobject>
