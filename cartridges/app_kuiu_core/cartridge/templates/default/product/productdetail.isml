@@ -14,8 +14,8 @@
 		
 		<isif condition="${!isQuickView}">
 			<isinclude template="product/components/recommendations"/>
+			<isinclude template="product/components/fieldshots"/>
 		</isif>
 		
-		<isinclude template="product/components/fieldshots"/>
 	</div><!--/pdpMain -->
 </isobject>
