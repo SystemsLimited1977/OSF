@@ -26,7 +26,7 @@
 		<div style="text-align:left" class="test">
 			<form action="${URLUtils.url('EmailSignUp-Start')}" method="post" id="email-alert-signup">
 				<div>
-					<input type="hidden" name="ltkSubscriptionCode" value="accountcreate" />
+					<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
 					<input type="email" name="emailAddress" id="email-alert-address" value=""  placeholder="Enter email address"  />
 					<button name="footer-email" type="submit" value="Sign up"  title=""  style="width:50px">Sign up</button>
 				</div>

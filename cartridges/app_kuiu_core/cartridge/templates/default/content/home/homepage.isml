@@ -8,6 +8,11 @@
 	<div>
 		<isslot id="home-main" description="Flash Banner in homepage" context="global" />
 	</div>
+	 <div style="text-align:left" class="test" id="subscriberPopup">
+		 <!-- <form action="${URLUtils.url('EmailSignUp-Start')}" method="post" id="email-subscribe">  
+			
+		  </form>  -->
+	</div> 
 
 	<div class="home-bottom-slots">
 	
@@ -26,3 +31,95 @@
 	</div>
 	
 </isdecorate>
+
+ <script type="text/javascript">
+jQuery(document).ready(function(){
+		 if(${!pdict.CurrentSession.custom.IsAlreadySignedUp}){ 
+			jQuery(window).bind('load', function(event){
+				
+				debugger;
+				event.preventDefault();
+				
+				var emailSubscribeDiv = jQuery('<div/>', {'id' : 'emailSubscribe'}).appendTo('body');
+										emailSubscribeDiv.css('display', 'none');
+				
+				var head = jQuery('<div style ="font-size: 30px; font-weight : bold;margin-bottom:20px;">Do It Now!</div>');
+				var email = jQuery('<input id="inputEmail" type="email" placeholder="Enter email address" style="width:150px;"></input>');
+				//jQuery(email).value.match(/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i);
+				
+				var submitButton = jQuery('<button id="btnSubmit" style="width:100px;margin-left:10px;">Submit</button>');
+				
+				var footer = jQuery('<div style="margin-top:20px;">*Offer exclusive to new subscribers. By signing up you agree to receive emails with KUIU news and special offers. You can unsubscribe at any time.</div>');
+				
+				emailSubscribeDiv.append(head);
+				emailSubscribeDiv.append(email);
+				emailSubscribeDiv.append(submitButton);
+				emailSubscribeDiv.append(footer);
+				
+				jQuery('#emailSubscribe').dialog({
+					modal: true,
+				    draggable: false,
+				    resizable: false,
+				    width: 400,
+				    dialogClass: 'ui-dialog-osx'
+				});
+				
+				
+				jQuery('#btnSubmit').click(function(){
+					debugger;
+					jQuery(email).val();
+					 if (email.val() == null || email.val() == "" || email.length == 0)
+						 {
+						 	alert('Please enter email address');
+						 	return false;
+						 }
+						 
+					/* if (validateEmail(email.text())) {
+						alert('Nice!! your Email is valid, now you can continue..');
+						}
+						else {
+						alert('Invalid Email Address');
+						e.preventDefault();
+						} */
+					
+					var url = "${dw.web.URLUtils.url('EmailSignUp-Start')}";
+					
+					jQuery.ajax({
+						url : url,
+						type : 'GET',
+						dataType : 'html',
+						data : jQuery('#inputEmail').val()
+					}).done(function(data){
+						jQuery('#emailSubscribe').dialog('close');
+						
+						debugger;
+						jQuery('<div/>', {'id':'subscribeIno','class':'subscribeIno'}).appendTo('body');
+						jQuery('#subscribeIno').css('display','none');
+						jQuery('#subscribeIno').empty().html(data);
+						jQuery('#subscribeIno').dialog({
+						    modal: true,
+						    draggable: false,
+						    resizable: false,
+						    width: 400,
+						    dialogClass: 'ui-dialog-osx'
+						});
+					});
+					
+					
+				});
+				
+				
+				/* function validateEmail(email) {
+					var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+					if (filter.test(email)) {
+					return true;
+					}
+					else {
+					return false;
+					}
+				} */
+				
+	        });	
+		 } 
+});
+</script> 

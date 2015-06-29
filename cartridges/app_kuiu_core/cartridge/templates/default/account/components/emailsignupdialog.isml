@@ -2,19 +2,18 @@
 <div class="emailSignupModal">
 <isdecorate template="util/pt_empty">
 		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm">
-			
+			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
 			<div class="clearfix">
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" name="firstname"  type="input" />
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.lastname}" type="input" />
 			</div>
 			<div class="clearfix">
-				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.dobmonth}" type="select" rowclass="bmonth" />
-				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.dobday}" type="select" rowclass="bday" />
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.zipcode}" type="input"  rowclass="zcode" />
 			</div>
 			
 			<div class="form-row form-row-button clearfix">
 				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>
+				<button class="dialogify" id="cancel" name="" type="" value="Cancel"  title="">Cancel</button>
 			</div>
 			
 		</form>
@@ -23,9 +22,18 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function(){
+	
+	jQuery('#cancel').click(function(e){
+		e.preventDefault();
+		debugger;
+		jQuery('#emailsignup').dialog("close");
+		jQuery('#subscribeIno').dialog("close");
+	});
+	
 	jQuery('button[name="dwfrm_emailsignupdetails_submit"]').click(function(event) {	
 		debugger;
 		event.preventDefault();
+		jQuery('#email-alert-address').val('');
 		var form = jQuery(this).parents('form');
 		var hitUrl = jQuery(form).attr('action');//"${URLUtils.continueURL()}",
 		jQuery.ajax({
@@ -38,6 +46,7 @@ jQuery(document).ready(function(){
 			}).done(function ( data ) {
 				debugger;
 				jQuery('#emailsignup').dialog("close");
+				jQuery('#subscribeIno').dialog("close");
 				jQuery('<div/>', {'id':'thankyou'}).appendTo('body');
 				jQuery('#thankyou').css('display','none');
 				jQuery('#thankyou').empty().html(data);
@@ -45,7 +54,8 @@ jQuery(document).ready(function(){
 				    modal: true,
 				    draggable: false,
 				    resizable: false,
-				    width: 600,
+				    width: 400,
+				    height: 400,
 				    dialogClass: 'ui-dialog-osx'
 				}); 
 			});

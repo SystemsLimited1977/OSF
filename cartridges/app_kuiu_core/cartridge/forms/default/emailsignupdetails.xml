@@ -2,64 +2,10 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
 	<field formid="email" label="forms.emailsignupdetails.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
 		parse-error="profile.emailparseerror"/>
-	<field formid="firstname" binding="custom.firstName" label="First Name" type="string" mandatory="false" missing-error="forms.emailsignupdetails.firstname.missing-error"/>
-	<field formid="lastname" binding="custom.lastName" label="Last Name" type="string" mandatory="false" missing-error="forms.emailsignupdetails.lastname.missing-error"/>
-	<field formid="dobday" binding="custom.dobDay" label="Day" type="integer" mandatory="false"
-			missing-error="forms.emailsignupdetails.dayerror">
-		<options>
-			
-			<option label="day.001" value="01"/>
-			<option label="day.002" value="02"/>
-			<option label="day.003" value="03"/>
-			<option label="day.004" value="04"/>
-			<option label="day.005" value="05"/>
-			<option label="day.006" value="06"/>
-			<option label="day.007" value="07"/>
-			<option label="day.008" value="08"/>
-			<option label="day.009" value="09"/>
-			<option label="day.010" value="10"/>
-			<option label="day.011" value="11"/>
-			<option label="day.012" value="12"/>
-			<option label="day.013" value="13"/>
-			<option label="day.014" value="14"/>
-			<option label="day.015" value="15"/>
-			<option label="day.016" value="16"/>
-			<option label="day.017" value="17"/>
-			<option label="day.018" value="18"/>
-			<option label="day.019" value="19"/>
-			<option label="day.020" value="20"/>
-			<option label="day.021" value="21"/>
-			<option label="day.022" value="22"/>
-			<option label="day.023" value="23"/>
-			<option label="day.024" value="24"/>
-			<option label="day.025" value="25"/>
-			<option label="day.026" value="26"/>
-			<option label="day.027" value="27"/>
-			<option label="day.028" value="28"/>
-			<option label="day.029" value="29"/>
-			<option label="day.030" value="30"/>
-			<option label="day.031" value="31"/>
-		</options>
-	</field>	
-	<field formid="dobmonth" binding="custom.dobMonth" label="Month" type="integer" mandatory="false"
-			missing-error="forms.emailsignupdetails.montherror">
-		<options>
-			
-			<option label="month.january" value="01"/>
-			<option label="month.february" value="02"/>
-			<option label="month.march" value="03"/>
-			<option label="month.april" value="04"/>
-			<option label="month.may" value="05"/>
-			<option label="month.june" value="06"/>
-			<option label="month.july" value="07"/>
-			<option label="month.august" value="08"/>
-			<option label="month.september" value="09"/>
-			<option label="month.october" value="10"/>
-			<option label="month.november" value="11"/>
-			<option label="month.december" value="12"/>
-		</options>
-	</field>
-	<field formid="zipcode" binding="custom.zipCode" label="Zip code" type="string" mandatory="false" min-length="4" 
+	<field formid="firstname" binding="custom.firstName" label="First Name" type="string" mandatory="true" missing-error="forms.emailsignupdetails.firstname.missing-error"/>
+	<field formid="lastname" binding="custom.lastName" label="Last Name" type="string" mandatory="true" missing-error="forms.emailsignupdetails.lastname.missing-error"/>
+	<field formid="zipcode" binding="custom.zipCode" label="Zip code" type="string" mandatory="true" min-length="4" 
 	max-length="10"	missing-error="forms.errorzip" range-error="forms.address.field.invalid" value-error="forms.address.field.invalid" />
 	<action formid="submit" valid-form="true"/>
+	
 </form>

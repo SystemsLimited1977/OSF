@@ -17965,9 +17965,16 @@ module.exports = asap;
 //# sourceMappingURL=app.js.map
 
 //Footer signup popup for listrak
-jQuery(document).ready(function(){ 
+jQuery(document).ready(function(){
+	
 	jQuery('button[name="footer-email"]').click(function(e){
+		debugger;
 		e.preventDefault();
+		if (jQuery('#email-alert-address').val() == null || jQuery('#email-alert-address').val() == "" || jQuery('#email-alert-address').length == 0)
+		 {
+		 	alert('Please enter email address');
+		 	return false;
+		 }
 		var url = jQuery(this).parents('form').attr('action');
 		if (!url) { return; }
 
@@ -17984,6 +17991,7 @@ jQuery(document).ready(function(){
 			url : url
 		})
 		.done(function (response) {
+			debugger;
 			jQuery('<div/>', {'id':'emailsignup','class':'emailsignupclass'}).appendTo('body');
 			jQuery('#emailsignup').css('display','none');
 			jQuery('#emailsignup').empty().html(response);

@@ -97,7 +97,7 @@
 								<isset name="imageTitle" value="${imageProduct.getImage('medium', 0).title}" scope="page"/>
 						</iscomment>
 						<iscomment>DIS changes</iscomment>
-							<isif condition="${!empty(new ProductImage('medium', imageProduct,0))}">
+							<isif condition="${!empty(new ProductImage('medium', imageProduct,0).getURL())}">
 								<isset name="imageUrl" value="${new ProductImage('medium',imageProduct, 0).getURL()}" scope="page"/>
 								<isset name="imageAlt" value="${new ProductImage('medium',imageProduct, 0).alt}" scope="page"/>
 								<isset name="imageTitle" value="${new ProductImage('medium',imageProduct, 0).title}" scope="page"/>

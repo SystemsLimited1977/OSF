@@ -1,7 +1,39 @@
 <isinclude template="util/modules"/>
 <div id="thankYou">
 	<isdecorate template="util/pt_empty">
-		<h2>Thanks for signing up!</h2>
+		<isif condition="${!pdict.IsError}">
+			<h2>Error in Registration</h2>
+			<div>
+				<p>An error has been occurred while registration! please contact to customer service.</p>
+			</div>
+			<div>
+				<button id="cancelThankYou" type="">Close</button>
+			</div>
+		<iselse>
+			<h2>Thanks for signing up!</h2>
+			<div>
+				<p>
+					You're now officially a part of our vibrant community of bag-lovers.
+					You have subscribed to the Timbuk2 mailing list.
+					You're now officially a part of our vibrant community of bag-lovers.
+					
+					Now you'll be the first to know about:
+					
+					Spankin' new products and fresh colors
+					Special offers and product promotions
+					Gotta-be-there events
+					Company and community news and tidbits
+					We're glad you are around. We won't check in with you too often but we hope just enough to make you feel at home.
+					
+					We'd hate to see you go, but you can unsubscribe at any time.
+				</p>
+			</div>
+			<div>
+				<button id="cancelThankYou" type="">Close</button>
+			</div>
+		</isif>
 	</isdecorate>
 </div>
+
+
 
