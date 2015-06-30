@@ -81,6 +81,38 @@
       </node>
       <simple-transition/>
       <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="int_mainstreet:AddMainstreetOrdersToCollection.ds"/>
+          <config-property key="Timeout" value="90"/>
+          <key-binding alias="MainStreetLog" key="ScriptLog"/>
+          <key-binding alias="OrdersUnpaged" key="OrderUnpaged"/>
+          <key-binding alias="OrdersUnpagedCount" key="OrderUnpagedCount"/>
+          <key-binding alias="OrdersUnpagedCount" key="OrderMixedCount"/>
+          <key-binding alias="OrdersUnpaged" key="OrderMixedUnpaged"/>
+          <key-binding alias="Orders" key="Orders"/>
+          <key-binding alias="CurrentCustomer.profile.customerNo" key="customerNo"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="./+1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
         <pipelet-node pipelet-name="Paging" pipelet-set-identifier="bc_api">
           <config-property key="DefaultPageSize" value="5"/>
           <key-binding alias="OrdersUnpaged" key="Objects"/>
@@ -158,11 +190,12 @@
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="MainStreet-FindOrderDetailsMainstreet"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <interaction-node transaction-required="false">
                 <template buffered="true" dynamic="false" name="account/orderhistory/orderdetails"/>
@@ -301,6 +334,34 @@
       </node>
       <simple-transition/>
       <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="int_mainstreet:GetOrderDetails.ds"/>
+          <config-property key="Timeout" value="90"/>
+          <key-binding alias="ScriptLog" key="ScriptLog"/>
+          <key-binding alias="CurrentForms.ordertrack.orderNumber.value" key="OrderNo"/>
+          <key-binding alias="Order" key="Order"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="./+1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
         <interaction-node transaction-required="false">
           <template buffered="true" dynamic="false" name="account/orderhistory/orderdetails"/>
         </interaction-node>
@@ -420,6 +481,26 @@
                             <transition target-connector="in"/>
                             <segment>
                               <node>
+                                <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                                  <config-property key="Transactional" value="false"/>
+                                  <config-property key="OnError" value="PIPELET_ERROR"/>
+                                  <config-property key="ScriptFile" value="int_mainstreet:GetOrderDetails.ds"/>
+                                  <config-property key="Timeout" value="90"/>
+                                  <key-binding alias="ScriptLog" key="ScriptLog"/>
+                                  <key-binding alias="CurrentForms.ordertrack.orderNumber.value" key="OrderNo"/>
+                                  <key-binding alias="Order" key="Order"/>
+                                </pipelet-node>
+                                <node-display x="0" y="1"/>
+                                <branch basename="b2" source-connector="error">
+                                  <transition target-connector="in1" target-path="../../../../+4"/>
+                                </branch>
+                              </node>
+                              <simple-transition>
+                                <transition-display>
+                                  <bend-point relative-to="source" x="0" y="1"/>
+                                </transition-display>
+                              </simple-transition>
+                              <node>
                                 <end-node name="ok"/>
                                 <node-display x="0" y="1"/>
                               </node>
@@ -463,7 +544,18 @@
         <join-node/>
         <node-display x="0" y="2"/>
       </node>
-      <simple-transition/>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <end-node name="error"/>
         <node-display x="0" y="1"/>
