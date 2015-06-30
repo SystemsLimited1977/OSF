@@ -2,9 +2,9 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
 	<field formid="email" label="forms.emailsignupdetails.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
 		parse-error="profile.emailparseerror"/>
-	<field formid="firstname" binding="custom.firstName" label="First Name" type="string" mandatory="true" missing-error="forms.emailsignupdetails.firstname.missing-error"/>
-	<field formid="lastname" binding="custom.lastName" label="Last Name" type="string" mandatory="true" missing-error="forms.emailsignupdetails.lastname.missing-error"/>
-	<field formid="zipcode" binding="custom.zipCode" label="Zip code" type="string" mandatory="true" min-length="4" 
+	<field formid="firstname" binding="custom.firstName" label="First Name" type="string" max-length="50" mandatory="true" missing-error="forms.emailsignupdetails.firstname.missing-error"/>
+	<field formid="lastname" binding="custom.lastName" label="Last Name" type="string" max-length="50" mandatory="true" missing-error="forms.emailsignupdetails.lastname.missing-error"/>
+	<field formid="zipcode" binding="custom.zipCode" label="Zip code" type="number" mandatory="true" min-length="4" 
 	max-length="10"	missing-error="forms.errorzip" range-error="forms.address.field.invalid" value-error="forms.address.field.invalid" />
 	<action formid="submit" valid-form="true"/>
 	

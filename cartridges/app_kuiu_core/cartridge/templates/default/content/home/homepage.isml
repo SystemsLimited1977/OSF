@@ -38,6 +38,7 @@ jQuery(document).ready(function(){
 			jQuery(window).bind('load', function(event){
 				
 				debugger;
+				checkCookie();
 				event.preventDefault();
 				
 				var emailSubscribeDiv = jQuery('<div/>', {'id' : 'emailSubscribe'}).appendTo('body');
@@ -56,13 +57,24 @@ jQuery(document).ready(function(){
 				emailSubscribeDiv.append(submitButton);
 				emailSubscribeDiv.append(footer);
 				
-				jQuery('#emailSubscribe').dialog({
-					modal: true,
-				    draggable: false,
-				    resizable: false,
-				    width: 400,
-				    dialogClass: 'ui-dialog-osx'
-				});
+				 var user=getCookie("username");
+				    if (user != "") {
+				    	//alert('saved in cookie');
+				        return false;
+				    }
+				    else
+				    	{
+				    	 //alert('save cookie');
+				    	setCookie("username", user, 30);
+				    	jQuery('#emailSubscribe').dialog({
+							modal: true,
+						    draggable: false,
+						    resizable: false,
+						    width: 400,
+						    dialogClass: 'ui-dialog-osx'
+						});
+				    	}
+				
 				
 				
 				jQuery('#btnSubmit').click(function(){
@@ -108,7 +120,37 @@ jQuery(document).ready(function(){
 					
 				});
 				
-				
+				function setCookie(cname,cvalue,exdays) {
+				    var d = new Date();
+				    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+				    var expires = "expires=" + d.toGMTString();
+				    document.cookie = cname+"="+cvalue+"; "+expires;
+				}
+
+				function getCookie(cname) {
+				    var name = cname + "=";
+				    var ca = document.cookie.split(';');
+				    for(var i=0; i<ca.length; i++) {
+				        var c = ca[i];
+				        while (c.charAt(0)==' ') c = c.substring(1);
+				        if (c.indexOf(name) == 0) {
+				            return c.substring(name.length, c.length);
+				        }
+				    }
+				    return "";
+				}
+
+				 function checkCookie() {
+				    var user=getCookie("username");
+				    if (user != "") {
+				        //alert("Welcome again " + user);
+				    } else {
+				       user = "test";
+				       if (user != "" && user != null) {
+				           setCookie("username", user, 30);
+				       }
+				    }
+				} 
 				/* function validateEmail(email) {
 					var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
 					if (filter.test(email)) {
