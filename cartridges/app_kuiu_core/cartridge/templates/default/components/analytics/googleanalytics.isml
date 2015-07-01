@@ -12,7 +12,6 @@
   var uniqueID = '${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleAnalyticsId')}';
   var domainName = '${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleDomainName')}';
   ga('create',uniqueID, domainName);
-  	
   	if (!String.prototype.endsWith) {
   		String.prototype.endsWith = function(suffix) {
   		    return this.indexOf(suffix, this.length - suffix.length) !== -1;
@@ -73,12 +72,14 @@
 			pdListing = (window.location.search == "") ? '' : window.location.search;
 		var page = baseUrl + sp + 'ProductListingPage' + pdListing ;
 		ga('send', 'pageview', {
-			  'page': page
+			  'page': page,
+			  'dimension11': 'category serach'
 		});	
 	<iselseif condition="${!empty(pdict.CurrentHttpParameterMap.pid.value) && pdict.Product != null}">
 		var page = window.location.href.split('#')[0] + '/ProductDetailsPage';
 		ga('send', 'pageview', {
-			  'page': page
+			  'page': page,
+			  'dimension12': 'product detail'
 		});
 	<iselse>
 		ga('send', 'pageview');
