@@ -6,9 +6,9 @@
 			<div>
 				<p>An error has been occurred while registration! please contact to customer service.</p>
 			</div>
-			<div>
-				<button id="cancelThankYou" type="">Close</button>
-			</div>
+			<!-- <div>
+				<button id="cancelThankYou">Close</button>
+			</div> -->
 		<iselse>
 			<h2>Thanks for signing up!</h2>
 			<div>
@@ -28,9 +28,9 @@
 					We'd hate to see you go, but you can unsubscribe at any time.
 				</p>
 			</div>
-			<div>
-				<button id="cancelThankYou" type="">Close</button>
-			</div>
+			<!-- <div>
+				<button id="cancelThankYou"  >Close</button>
+			</div> -->
 		</isif>
 	</isdecorate>
 </div>
