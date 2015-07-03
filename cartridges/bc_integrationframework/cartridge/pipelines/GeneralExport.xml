@@ -16,7 +16,7 @@
       <node>
         <pipelet-node custom-name="Init parameters" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="'download/order/order_export_'+dw.system.Site.getCurrent().ID+'_'+dw.util.StringUtils.formatCalendar(dw.system.System.getCalendar(), 'yyyyMMdd_HHmmssSSS')+'.xml'" key="From_4"/>
+          <key-binding alias="'download/order/Order_'+dw.system.Site.getCurrent().ID+'_'+dw.util.StringUtils.formatCalendar(dw.system.System.getCalendar(), 'yyyyMMdd_HHmmssSSS')+'.xml'" key="From_4"/>
           <key-binding alias="ExportFile" key="To_4"/>
           <key-binding alias="null" key="From_6"/>
           <key-binding alias="null" key="To_6"/>
