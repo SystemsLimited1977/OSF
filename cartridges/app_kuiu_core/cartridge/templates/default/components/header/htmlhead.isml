@@ -46,8 +46,10 @@ If you are not using the build cartridge the comments can be safely removed.
 <isinclude template="components/header/htmlhead_UI"/>
 
 <!--  UI -->
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/bootstrap.css')}" />
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" />
-
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/kuiu.css')}" />
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/kuiu-responsive.css')}" />
 <!--[if lte IE 8]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js" type="text/javascript"></script>
 <script src="https://cdn.rawgit.com/chuckcarpenter/REM-unit-polyfill/master/js/rem.min.js" type="text/javascript"></script>

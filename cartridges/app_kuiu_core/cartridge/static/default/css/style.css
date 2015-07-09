@@ -334,13 +334,14 @@ td, th {
 .menu {
   float: left;
   margin: 0;
-  padding: 0; }
+  padding: 0; 
+  }
   .menu li {
     float: left;
     list-style: none outside none !important; }
 
 body {
-  background: none repeat scroll 0 0 #333;
+  background: #fbfbfb;
   color: #333;
   font-family: Arial, sans-serif;
   font-size: 12px; }
@@ -427,27 +428,31 @@ button, .button, .buttonstyle, input[type="button"] {
   width: 100%; }
 
 #wrapper {
-  background: none repeat scroll 0 0 #fff;
+  background: #fbfbfb;
   left: 0;
-  margin: auto;
-  max-width: 960px;
-  position: relative;
+  margin: auto; 
+  /*max-width: 960px; */
+  position: relative; 
   -webkit-transition: left 0.2s ease-in;
-          transition: left 0.2s ease-in;
-  width: 960px; }
+  transition: left 0.2s ease-in;
+  /*width: 960px;*/
+}
+
+ 
   #wrapper.menu-active {
-    left: 20em; }
+    left: 20em; 
+    }
   @media screen and (min-width: 768px) {
     #wrapper.menu-active {
       left: auto; } }
 
 .primary-content {
-  border-left: 1px solid #e0e0e0;
+  /* border-left: 1px solid #e0e0e0;
   float: right;
   margin-left: -1px;
   padding: 0 0 20px;
-  position: relative;
-  width: 787px; }
+  width: 787px; */
+  position: relative; }
   .primary-focus .primary-content {
     border: 0 none;
     float: left;
@@ -456,15 +461,15 @@ button, .button, .buttonstyle, input[type="button"] {
   .full-width .primary-content {
     border: 0 none;
     width: 100%; }
-  .page-content .primary-content {
+  /* .page-content .primary-content {
     padding-left: 3%;
-    width: 758px; }
+    width: 758px; } */
 
 #secondary {
-  background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+  /* background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
   border-right: 1px solid #e0e0e0;
   float: left;
-  width: 172px;
+  width: 172px; */
   position: relative; }
   #secondary nav {
     padding-left: 10px;
@@ -591,14 +596,14 @@ legend {
   text-transform: none em;
   text-transform-color: #333; }
 
-label {
+/* label {
   display: block;
   float: left;
   font-size: 1.1em;
   font-weight: 700;
   padding: 0.75em 0 0;
   text-align: right;
-  width: 22%; }
+  width: 22%; } */
 
 .form-label-text {
   display: block;
@@ -673,8 +678,8 @@ input[type="checkbox"], input[type="radio"] {
   text-align: left;
   text-indent: -999em; }
 
-.form-indent {
-  margin-left: 24%; }
+/* .form-indent {
+  margin-left: 24%; } */
   .form-indent .form-caption {
     margin-left: 0; }
 
@@ -923,10 +928,10 @@ div.error {
 .content-asset address {
   margin: 1em 0; }
 .content-asset ul li {
-  list-style: square outside none !important; }
+  list-style: square outside none; }
 .content-asset ol li {
   list-style: decimal outside none; }
-.content-asset .account-options {
+.content-asset .account-options
   margin: 0;
   padding: 0; }
   .content-asset .account-options li {
@@ -1414,8 +1419,8 @@ nav[role="navigation"] {
 .breadcrumb {
   font-size: 1em;
   line-height: 1em;
-  margin: 0;
-  padding: .1em .7em; }
+  /* margin: 0;
+  padding: .1em .7em; */ }
   .breadcrumb li {
     display: inline;
     list-style: none outside none; }
@@ -1459,11 +1464,11 @@ nav[role="navigation"] {
   color: #84bd00;
   padding: 0; }
 
-.primary-content h1 {
+/* .primary-content h1 {
   font-size: 1.75em;
   font-style: italic;
   font-weight: 400;
-  margin: 0 0 14px; }
+  margin: 0 0 14px; } */
 
 #secondary h1 {
   font-size: 1.75em;
@@ -4041,18 +4046,18 @@ h1 .account-logout {
     max-width: 100%;
     min-width: 320px;
     width: 100%; }
-  #primary {
+  /* #primary {
     background: none;
     border: 0 !important;
     float: none;
     margin: 0;
     padding-left: 0 !important;
-    width: 100% !important; }
-  #secondary {
+    width: 100% !important; } */
+  /* #secondary {
     border: 0;
     float: none;
     font-size: 1.1em;
-    width: 100% !important; }
+    width: 100% !important; } */
   .col-1, .col-2 {
     float: none;
     width: 100%; }
@@ -4430,7 +4435,7 @@ h1 .account-logout {
       float: none; } }
 
 @media screen and (min-width: 768px) and (max-width: 959px) {
-  #wrapper {
+  /* #wrapper {
     width: 760px; }
   #secondary {
     width: 171px; }
@@ -4438,7 +4443,7 @@ h1 .account-logout {
     width: 588px; }
   .page-content .primary-content {
     padding-left: 14px;
-    width: 574px; }
+    width: 574px; } */
   .primary-focus .primary-content {
     width: 540px; }
   .primary-focus #secondary {

@@ -26,25 +26,32 @@
 			<isinclude template="search/simplesearch"/>
 		</div>
 
-		<iscomment>INCLUDE: category menu</iscomment>
-		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
+		
 
 		<!--  utility user menu -->
 		<ul class="menu-utility-user">
 
-			<iscomment>Store Locator</iscomment>
+			<iscomment>Store Locator
 			<li>
 				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('global.header.storelocator', 'locale', null)}">
 					<i class="fa fa-map-marker"></i>
 					<span>${Resource.msg('global.header.storelocator', 'locale', null)}</span>
 				</a>
-			</li>
-
+			</li></iscomment>
+			<div class="generalnav">				  
+				<a href="${URLUtils.http('CustomerService-ContactUs')}" title="${Resource.msg('header.help','locale',null)}">${Resource.msg('header.help','locale',null)}</a>
+				<span class="phone">${Resource.msg('header.storelocatorphone','locale',null)}</span>
+				<span class="divider">|</span> 
+				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('header.storelocator','locale',null)}">${Resource.msg('header.storelocator','locale',null)}</a>
+  
+		    </div><!-- END: generalnav -->
+			
 			<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
 			<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
 
 		</ul>
-
+		<iscomment>INCLUDE: category menu</iscomment>
+		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
 		<iscomment>Multi-Currency Selection</iscomment>
 		<isinclude template="components/header/multicurrency"/>
 

@@ -29,7 +29,7 @@
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
-		<div id="main" role="main">
+		<div id="main" role="main" class="clearfix">
 			<isreplace/>
 			<isinclude template="components/browsertoolscheck"/>
 		</div>

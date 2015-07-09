@@ -32,16 +32,31 @@
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="page-content clearfix">
-
+			<div style="width: 99%;height: 100px;border-style: solid;border-width: 5px;background-color: white;">
+				<iscomment> <isslot id="contact-us-banner" description = "Content Slot for Customer Service" context="global"  /> </iscomment>
+				<iscontentasset aid="contact-us-banner"/>
+			</div>
 			<isbreadcrumbs bcurl1="${URLUtils.url('CustomerService-Show')}" bctext1="${'Customer Service'}" bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" />
 
 			<div id="primary" class="primary-content">
-				<section>
-					<isinclude template="components/browsertoolscheck"/>
-					<isreplace/>
-				</section>
+				<table>
+					<tr>
+						<td>
+						<section>
+							<isinclude template="components/browsertoolscheck"/>
+							<isreplace/>
+						</section>
+						</td>
+						<td style="width:160px;">
+							<div class="account-nav-asset">
+								<iscontentasset aid="account-nav-text"/>
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				
 			</div>
-
 			<div id="secondary" class="nav">
 				<nav>
 					<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
@@ -49,13 +64,10 @@
 						<isinclude url="${URLUtils.url('CustomerService-LeftNav')}"/>
 					</div>
 				</nav>
-				<div class="account-nav-asset">
-					<iscontentasset aid="account-nav-text"/>
-				</div>
 			</div>
-
+			
 		</div><!-- /main -->
-
+		
 		<isinclude template="components/footer/footer"/>
 		<isinclude template="content/pt_customerservice_VARS"/>
 
