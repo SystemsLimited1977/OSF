@@ -11,24 +11,34 @@
 <div class="header-banner">
 	<isslot id="header-banner" description="Slot above the site header" context="global" />
 </div>
+<header>
+<div class="container hidden-xs hidden-sm">
 <div class="top-banner" role="banner">
+  <div class="col-md-2">
 	<button class="menu-toggle"><i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span></button>
 	<h1 class="primary-logo">
 		<a href="${URLUtils.url('Home-Show')}" title="${Resource.msg('global.storename', 'locale', null)}  ${Resource.msg('global.home', 'locale', null)}">
-			<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
+			<img class="visible-lg-block" src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
+			<img class="hidden-lg" src="${URLUtils.staticURL('/images/logo_mob.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
 			<span class="visually-hidden">${Resource.msg('global.storename', 'locale', null)}</span>
 		</a>
 	</h1>
+   </div>
 
+
+<div class="col-md-6">
 	<nav id="navigation" role="navigation">
+		<iscomment>INCLUDE: category menu</iscomment>
+		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
+		<iscomment>Multi-Currency Selection</iscomment>
+		<isinclude template="components/header/multicurrency"/>
 
-		<div class="header-search">
-			<isinclude template="search/simplesearch"/>
-		</div>
+	</nav>
 
-		
-
+</div>
+	<div class="col-md-4" id="locate-1">
 		<!--  utility user menu -->
+		<div class="col-md-12 visible-md-block visible-lg-block">
 		<ul class="menu-utility-user">
 
 			<iscomment>Store Locator
@@ -50,16 +60,45 @@
 			<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
 
 		</ul>
+	</div>
+	<div class="col-md-12" id="search-bar">
+	<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
+	<div id="mini-cart">
+		<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
+	</div>
+	<div class="header-search visible-md-block visible-lg-block">
+	  <isinclude template="search/simplesearch"/>
+	</div>
+	</div>	
+  </div>
+
+</div>
+</div>
+<!-- /Responsive Menu Start -->
+<div class="top-banner responsive-nav hidden-lg hidden-md" role="banner">
+	<button class="menu-toggle"><i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span></button>
+	<h1 class="primary-logo">
+		<a href="${URLUtils.url('Home-Show')}" title="${Resource.msg('global.storename', 'locale', null)}  ${Resource.msg('global.home', 'locale', null)}">
+			<img class="hidden-lg" src="${URLUtils.staticURL('/images/logo_mob.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
+			<span class="visually-hidden tab-view">${Resource.msg('global.storename', 'locale', null)}</span>
+		</a>
+	<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
+	<div id="mini-cart">
+		<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
+	</div>
+	</h1>
+	
+  <nav id="navigation" role="navigation">
+	<div class="header-search">
+	  <isinclude template="search/simplesearch"/>
+	</div>
 		<iscomment>INCLUDE: category menu</iscomment>
 		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
 		<iscomment>Multi-Currency Selection</iscomment>
 		<isinclude template="components/header/multicurrency"/>
 
 	</nav>
-
-	<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
-	<div id="mini-cart">
-		<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
-	</div>
-
-</div><!-- /header -->
+	
+</div>
+<!-- /Responsive Menu End -->
+</header><!-- /header -->

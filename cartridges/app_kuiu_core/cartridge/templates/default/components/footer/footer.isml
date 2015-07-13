@@ -6,23 +6,35 @@
 </iscomment>
 <isinclude template="util/modules"/>
 
-<footer>
+<footer class="clearfix">
+<div class="logo-div">
+ <div class="container"  >
 	<iscontentasset aid="footer-logo-graphic"/>
-	
-	<div class="footer-container">
-		<iscontentasset aid="footer-customer_service-about"/>
-	<div class="footer-item">
-		<iscomment><isslot id="footer-social-email" description = "Content Slot for social icons and email signup" context="global"/></iscomment>
-		<iscontentasset aid="footer-social-email"/>
-	</div>
-		
-	</div>
-</footer>
+  </div>
+</div>
+
+  <div class="footer-container">
+    <div class="container">
+    
+	 <div id="footer-cust" class="col-lg-6">
+		 <iscontentasset aid="footer-customer_service-about"/>
+	  </div>
+	  <div class="col-lg-6">
+		  <iscomment><isslot id="footer-social-email" description = "Content Slot for social icons and email signup" context="global"/></iscomment>
+		  <iscontentasset aid="footer-social-email"/>
+	  </div>
+	</div>	
+  </div>
+
 <script>
 	
 </script>
+<div class="footer-container footer-privacy">
+ <div class="container">
 <iscontentasset aid="footer-copy-privacy-terms"/>
-
+</div>
+</div>
+</footer>
 <iscomment>
 	Customer registration can happen everywhere in the page flow. As special tag in the pdict
 	is indicating it. So we have to check on every page, if we have to report this event for

@@ -31,7 +31,7 @@
 		<li>
 			<isset name="topLevelClass" value="${''}" scope="page"/>
 			<isif condition="${getSubCategoriesLayout(topCat).hasContent}">
-				<i class="menu-item-toggle fa fa-chevron-right"></i>
+				<i class="menu-item-toggle fa fa-chevron-right1"></i>
 				<isset name="topLevelClass" value="has-sub-menu" scope="page"/>
 			</isif>
 			<a class="${topLevelClass}" href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>">
