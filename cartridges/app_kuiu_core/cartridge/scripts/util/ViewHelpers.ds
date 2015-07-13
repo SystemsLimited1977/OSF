@@ -39,7 +39,7 @@ function getTopLevelCategory() : dw.catalog.Category {
 function getSubCategoriesLayout(topCat) {
 	var layout = {};
 	var subCategories = getSubcategoriesInMenuForCategory(topCat);
-	layout.maxColLength = 5;
+	layout.maxColLength = !empty(dw.system.Site.getCurrent().getCustomPreferenceValue('maxColLength')) ? dw.system.Site.getCurrent().getCustomPreferenceValue('maxColLength') : 5;
 	layout.subCategories = subCategories;
 	layout.banner = !empty(topCat.custom.headerMenuBanner) ? topCat.custom.headerMenuBanner : undefined;
 	layout.hasContent = !!(layout.banner || subCategories.length !== 0);
