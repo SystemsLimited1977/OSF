@@ -1,8 +1,9 @@
 @media (min-width: 320px) {	
 }
-@media (min-width: 480px) {	
+@media (min-width: 480px) {
 }
-@media (min-width: 768px) {	
+@media (min-width: 768px) {
+
 }
 @media (min-width: 992px) {	
 }
@@ -11,6 +12,23 @@
 
 
 @media (min-width: 320px) and (max-width: 479px) {
+.login-box-content label, label, .form-caption, .form-label-text {width:auto;}
+.pt_customer-service .primary-content.col-md-9 .col-md-9 {min-height: 100px;border-right: none;}
+input[type="text"], input[type="password"], textarea, select {
+  width: 100% !important;
+}
+.form-row-button,button,input[type="button"] {
+	width:100%;
+}
+select {
+	  background-position: 280px 8px;
+}
+.pt_customer-service #secondary {
+	border-right: none;
+	width: 100%;
+	margin-left: 20px;
+	
+}
 
 }
 @media (min-width: 480px) and (max-width: 767px) {
@@ -30,4 +48,3 @@
 		width: 1400px;
 	}
 }
-

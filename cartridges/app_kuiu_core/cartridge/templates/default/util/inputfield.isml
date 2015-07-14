@@ -115,12 +115,13 @@
 		<iscomment>display the field label</iscomment>
 		<label for="${pi_name}">
 			<iscomment>Display Required Star</iscomment>
-			<isif condition="${pdict.formfield.mandatory}">
-				<span class="required-indicator">&#8226;</span>
-			</isif>
+			
 			<iscomment>span is required to allow for dynamic change of label text</iscomment>
 			<span>
 			<isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/>
+			<isif condition="${pdict.formfield.mandatory}">
+				<span class="required-indicator">&lowast;</span>
+			</isif>
 			</span>
 		</label>
 	</isif>

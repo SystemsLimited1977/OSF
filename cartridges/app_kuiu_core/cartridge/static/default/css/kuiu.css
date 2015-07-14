@@ -1,7 +1,10 @@
-.container {
-	/*border: 1px solid #ff0000;*/
+body{
+  background-color: #fff;
+  color: #1D1512;
+  font-family: Times New Roman;	
 }
-.pt_account, .pt_wish-list {
+
+.pt_account, .pt_wish-list,#main  {
 	background-color: #fff !important;
 }
 .primary-content h1 {
@@ -10,7 +13,7 @@
   margin: 0 0 14px; 
 }
 #secondary {
-	border-right: 1px solid #e0e0e0;4
+	border-right: 1px solid #e0e0e0;
 }
 #secondary .secondary-navigation .toggle {
 	font-weight: 600;
@@ -19,16 +22,17 @@
 	padding: 0;
 }
 #secondary .secondary-navigation ul li {
-	list-style-type: none;
+	list-style-type: none !important;
 }
 .account-nav-asset {
 	margin: 0;
-	padding: 2em 0;
+	padding:0;
 }
 .account-nav-asset h2 {
 	margin: 0;
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: 600;
+	font-style: normal;
 }
 .breadcrumb {
 	margin-left: 0;
@@ -137,4 +141,144 @@ fieldset.search-box {
 .container {
 	padding-left: 0;
 	padding-right: 0;
+}
+
+
+/*Contact us Page */
+.pt_customer-service #secondary .secondary-navigation .toggle {
+    font-size: 16px;
+    font-family: "Times New Roman";
+}
+    
+.pt_customer-service #secondary nav .secondary-navigation .toggle {
+	padding: 0px;
+	cursor: pointer;
+}
+
+.pt_customer-service #secondary .secondary-navigation ul li {
+	font-family: 'Roboto', sans-serif;
+	font-size:12px;
+}
+
+.pt_customer-service #secondary .secondary-navigation ul {
+	border-bottom:1px solid #e0e0e0;
+}
+.pt_customer-service #secondary .secondary-navigation ul:last-child {
+	border-bottom:none;
+}
+.pt_customer-service #secondary nav a {
+	  margin-left: 0px;
+}
+
+.pt_customer-service #secondary .secondary-navigation ul li:last-child {
+	 margin-bottom:15px !important;
+}
+
+.pt_customer-service #primary .account-nav-asset {
+	background:none;
+	padding:0px;
+}
+.pt_customer-service #primary .account-nav-asset h2 {
+	 color: #2b2b2b;
+}
+.pt_customer-service #primary .account-nav-asset a  {
+	font-family: 'Roboto', sans-serif;
+	font-size:12px;
+	color:#2b2b2b;
+}
+
+.pt_customer-service #main .container#cust-service {
+	padding-bottom:50px;
+	padding-top: 20px;
+}
+.pt_customer-service #main h1 {
+	font-size:32px;
+	line-height:20px;
+	font-family: "Times New Roman";
+	text-transform: uppercase;
+	margin-top: 29px;
+}
+
+.pt_customer-service  .primary-content.col-md-9 .col-md-9  {
+    min-height: 1100px;
+  	border-right: 1px solid #e0e0e0;
+}
+
+input[type="text"], input[type="number"], input[type="password"],select,textarea {
+  width: 330px;
+  height: 28px;
+  border: 1px solid #e1e1e1;
+  border-radius: 0px;
+  padding: 0px; 
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  margin-bottom: 22px;
+  margin-left: 0;
+}
+.required-indicator {
+	color:#1d1512;
+}
+.error {
+	  border-color: #b2595c;
+	  color :#b2595c;
+}
+span.error {
+	margin: 1% 2% 0% 22%;
+}
+
+button, .button, .buttonstyle, input[type="button"] {
+  height: 36px;
+  background-color: #000;
+  font-size: 12px;
+  border: none;
+  padding: 0 30px;
+  border-color: transparent;
+  border-radius: 0px;
+  border-style: none;
+  border-width: 0px;
+}
+  button:hover, .button:hover, .buttonstyle:hover, input[type="button"]:hover {
+    background-color: #7f7f7f;
+    border-color: #e0e0e0;
+    border-with:2px;
+    color: #7f7f7f; }
+    
+.pt_customer-service  #main .row {
+ 	 margin-right: 0px;
+ 	 margin-left: 0px;
+}
+
+.pt_customer-service label {
+	text-align: left;
+	}
+
+select
+{
+	appearance:none;
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari and Chrome */
+	margin-left:0px;
+	background-image: url("../images/arrow_down.png");
+	background-repeat: no-repeat;
+	background-position: 300px 8px;
+	cursor: pointer;
+}
+  button:hover, .button:hover, .buttonstyle:hover, input[type="button"]:hover {
+    background-color: #000;
+    border-color: #000;
+    color: #fff; 
+    }
+textarea {
+	height:88px;margin-left:0px;
+	}
+.contact_us_img {
+	background-image: url("../images/contact_us_ban.png");
+	background-size:cover;
+	height:360px;
+}
+
+.social-links.links-size {
+	background-position: 0px 26px;
+	margin-bottom: 15px;
+ 	margin-top: 10px;
 }

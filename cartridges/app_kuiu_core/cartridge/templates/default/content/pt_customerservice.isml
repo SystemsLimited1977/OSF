@@ -1,77 +1,77 @@
-<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscontent type="text/html" charset="UTF-8" compact="true" />
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
-
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
 <head>
 
-	<isscript>
+<isscript>
 		var pageContext = {
 			title: 'Customer Service',
 			type: 'customerservice',
 			ns:'account'
 		};
 	</isscript>
-	<isinclude template="util/modules"/>
+<isinclude template="util/modules" />
 
-	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>
+<iscomment>This page must be cachable. It inherits the
+caching attributes by the decorated template.</iscomment>
 
-	<isinclude template="components/header/htmlhead"/>
-	<isinclude template="content/pt_customerservice_UI"/>
+<isinclude template="components/header/htmlhead"/>
+<isinclude template="content/pt_customerservice_UI"/>
 
-	<iscomment>Add template-specific header information here.</iscomment>
+<iscomment>Add template-specific header information here.</iscomment>
 
 </head>
-
 <body>
-
 	<div id="wrapper" class="pt_customer-service">
-
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
-
+		<isinclude url="${URLUtils.url('Home-IncludeHeader')}" />
 		<div id="main" role="main" class="page-content clearfix">
-			<div style="width: 99%;height: 100px;border-style: solid;border-width: 5px;background-color: white;">
-				<iscomment> <isslot id="contact-us-banner" description = "Content Slot for Customer Service" context="global"  /> </iscomment>
-				<iscontentasset aid="contact-us-banner"/>
-			</div>
+				<iscomment> <isslot id="contact-us-banner" description="Content Slot for Customer Service" context="global" />
+				</iscomment>
+				<iscontentasset aid="contact-us-banner" />
+			<iscomment>
 			<isbreadcrumbs bcurl1="${URLUtils.url('CustomerService-Show')}" bctext1="${'Customer Service'}" bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" />
-
-			<div id="primary" class="primary-content">
-				<table>
-					<tr>
-						<td>
-						<section>
-							<isinclude template="components/browsertoolscheck"/>
-							<isreplace/>
-						</section>
-						</td>
-						<td style="width:160px;">
-							<div class="account-nav-asset">
-								<iscontentasset aid="account-nav-text"/>
+			</iscomment>
+			<div class="container">
+			  <div class="row text-center">
+			    <h1 class="cont-head"">Contact Us</h1>
+			    <p>Lorem ipsum dolor neque massa amet,consectetur adipiscing elit</p>
+			  </div>
+			</div>
+			<div class="container" id="cust-service">
+				<div class="row">
+					<div id="primary" class="primary-content col-md-9 pull-right">
+						<div class="row">
+							<div class="col-md-9">
+								<section>
+									<isinclude template="components/browsertoolscheck"/>
+									<isreplace/>
+								</section>
 							</div>
-						</td>
-					</tr>
-				</table>
-				
-				
-			</div>
-			<div id="secondary" class="nav">
-				<nav>
-					<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
-					<div class="secondary-navigation">
-						<isinclude url="${URLUtils.url('CustomerService-LeftNav')}"/>
+							<div class="col-md-3">
+								<div class="account-nav-asset">
+									<iscontentasset aid="account-nav-text"/>
+								</div>
+							</div>
+						</div>
 					</div>
-				</nav>
+					<div id="secondary" class="nav col-md-3 col-sm-12 pull-left">
+						<nav>
+							<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
+							<div class="secondary-navigation">
+								<isinclude url="${URLUtils.url('CustomerService-LeftNav')}"/>
+							</div>
+						</nav>
+					</div>
+				</div>
 			</div>
-			
-		</div><!-- /main -->
-		
-		<isinclude template="components/footer/footer"/>
-		<isinclude template="content/pt_customerservice_VARS"/>
-
-	</div><!--  /wrapper -->
-
+		</div>
+		<!-- /main -->
+		<isinclude template="components/footer/footer" />
+		<isinclude template="content/pt_customerservice_VARS" />
+	</div>
+	<!--  /wrapper -->
 </body>
 </html>

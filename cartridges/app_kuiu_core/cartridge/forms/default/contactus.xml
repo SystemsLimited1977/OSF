@@ -4,8 +4,8 @@
 	<field formid="firstname" label="contactus.firstname.label" type="string" mandatory="true" binding="firstName" max-length="50"/>
 	<field formid="lastname" label="contactus.lastname.label" type="string" mandatory="true" binding="lastName" max-length="50"/>
 	<field formid="email" label="contactus.email.label" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" parse-error="contactus.email.parse-error" binding="email" max-length="50"/>	
-	<field formid="phone" label="contactus.phone.label" type="string" mandatory="false" binding="phoneHome" max-length="50"/>		
- 	<field formid="ordernumber" label="contactus.ordernumber.label" type="string" mandatory="false" binding="orderNumber" missing-error="ordertrack.orderNumber.missing-error"/>
+	<field formid="phone" label="contactus.phone.label" type="string" mandatory="true" binding="phoneHome" max-length="50"/>		
+ 	<field formid="ordernumber" label="contactus.ordernumber.label" type="string" mandatory="true" binding="orderNumber" missing-error="ordertrack.orderNumber.missing-error"/>
 
 	<field formid="myquestion" label="contactus.myquestion.label" type="string" mandatory="false" binding="passwordQuestion">
 		<options>
