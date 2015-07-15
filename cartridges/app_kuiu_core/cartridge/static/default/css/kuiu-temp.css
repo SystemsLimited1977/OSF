@@ -1,0 +1,62 @@
+/* Email POP-UP Styling */
+
+
+.ui-dialog .ui-dialog-content {
+	  overflow: visible;
+	  padding-top: 10px;
+}
+
+.form-caption {
+	  margin: -2% 0 0% 23%;
+}
+
+.ui-dialog input[type="text"] {
+	width:78%;
+	margin-bottom: 22px;
+}
+
+.error-message {
+  border: none;
+  background-color: transparent;
+  padding: 0px;
+  text-indent: 0;
+  width: 49.5966%;
+}
+
+.ui-dialog .ui-widget-header {
+   background-color: #000;
+   height:32px;
+}
+
+.ui-dialog .cancel-button {
+	background-color: #e6e6e6;
+	color:#1d1512;
+	margin-left:18px;
+}
+.ui-dialog .cancel-button#cancelThankYou {
+	margin-left:0px;}
+.ui-dialog .cancel-button:hover {
+	background-color: #fff;
+	border:2px solid #e6e6e6;
+	color:#1d1512;
+}
+.ui-dialog .form-row-button {
+	  margin-left: 22%;
+}
+
+.ui-dialog .ui-icon-closethick {
+ 	background-image: url("../images/popup_close_icon.png");
+	background-repeat: no-repeat;
+}
+
+.ui-dialog h4{
+	  text-align: center;
+	  padding-botton:15px;
+}
+.ui-dialog h1, .ui-dialog h2 {
+	font-family: "Times New Roman";
+	}
+sup {
+  top: -6px;
+  font-size: 60%;
+}

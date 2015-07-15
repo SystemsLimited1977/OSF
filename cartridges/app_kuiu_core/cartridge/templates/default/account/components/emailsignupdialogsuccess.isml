@@ -3,44 +3,24 @@
 <div id="thankYou">
 	<isdecorate template="util/pt_empty">
 		<isif condition="${!pdict.IsError}">
-			<h2>Error in Registration</h2>
+			<h2>${Resource.msg('global.errorInRegidtration','locale',null)}</h2>
 			<div>
-				<p>An error has been occurred while registration! please contact to customer service.</p>
+				<p>${Resource.msg('global.errorDescription','locale',null)}</p>
 			</div>
 			 <div>
-				<button id="cancelThankYou">Close</button>
+				<button id="cancelThankYou">${Resource.msg('global.close', 'locale', null)}</button>
 			</div>
 		<iselse>
-			<h2>Thanks for signing up!</h2>
+			<h2>${Resource.msg('global.thanks','locale',null)}</h2>
 			<div>
 				<p>
-					You're now officially a part of our vibrant community of bag-lovers.
-					You have subscribed to the Timbuk2 mailing list.
-					You're now officially a part of our vibrant community of bag-lovers.
-					
-					Now you'll be the first to know about:
-					
-					Spankin' new products and fresh colors
-					Special offers and product promotions
-					Gotta-be-there events
-					Company and community news and tidbits
-					We're glad you are around. We won't check in with you too often but we hope just enough to make you feel at home.
-					
-					We'd hate to see you go, but you can unsubscribe at any time.
+					${Resource.msg('global.successfulSignUp','locale',null)}
 				</p>
 			</div>
 			 <div>
-				<button id="cancelThankYou"  >Close</button>
+				<button id="cancelThankYou"  >${Resource.msg('global.close', 'locale', null)}</button>
 			</div> 
 		</isif>
 	</isdecorate>
 </div>
-
-<script type="text/javascript">
-jQuery(document).ready(function(){
-	jQuery("#cancelThankYou").click(function(){
-		jQuery("#thankyou").dialog("close");
-	});
-});
-</script>
-
+<script src="${URLUtils.staticURL('/lib/jquery/thankyou.js')}" type="text/javascript"></script>
