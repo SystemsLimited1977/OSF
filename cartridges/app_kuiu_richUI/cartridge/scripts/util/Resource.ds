@@ -95,8 +95,13 @@ function ResourceHelper() {}
 			CONTINUE						: Resource.msg('global.continue', 'locale', null),
 			SEE_MORE						: Resource.msg('storelist.lightbox.seemore', 'storepickup', null),
 			SEE_LESS						: Resource.msg('storelist.lightbox.seeless', 'storepickup', null),
-			QUICK_VIEW						: Resource.msg('product.quickview', 'product', null)
-
+			QUICK_VIEW						: Resource.msg('product.quickview', 'product', null),
+			PLACE_HOLDER					: Resource.msg('global.emailNewsletterText', 'locale', null),
+			EMAIL_ALERT						: Resource.msg('global.emailAlert', 'locale', null),
+			INVALID_EMAIL					: Resource.msg('global.invalideEmail', 'locale', null),
+			THANKYOUMESSAGE					: Resource.msg('global.thankYouMessage', 'locale', null),
+			SUBMIT							: Resource.msg('global.submit', 'locale', null),
+			DOITNOW							: Resource.msg('global.DoItNow', 'locale', null)
 		};
 
 		// additional resources
@@ -170,7 +175,8 @@ function ResourceHelper() {}
 			billing						: URLUtils.url('COBilling-Start').toString(),
 			currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
 			addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),
-			cookieHint 					: URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString()
+			cookieHint 					: URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString(),
+			emailSignUp					: URLUtils.url('EmailSignUp-Start').toString()
 		};
 		return urls;
 
