@@ -234,6 +234,7 @@ header {
 	height: 23px;
 	padding: 0 0 0 10px;
 	width: 80%;
+	font-style:italic;
 }
 
 .header-search label {
