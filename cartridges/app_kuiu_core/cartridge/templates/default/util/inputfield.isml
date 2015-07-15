@@ -120,7 +120,7 @@
 			<span>
 			<isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/>
 			<isif condition="${pdict.formfield.mandatory}">
-				<span class="required-indicator">&lowast;</span>
+				<span class="required-indicator"><sup>&lowast;</sup></span>
 			</isif>
 			</span>
 		</label>

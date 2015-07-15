@@ -145,6 +145,7 @@ footer .footer-container.footer-privacy {
 
 footer .footer_email .fa-plus {
 	margin-left: -26px;
+	cursor: pointer;
 }
 footer {
 	background-color: #1a1a1a;
@@ -771,7 +772,13 @@ div {
 	border-right: 1px solid #e0e0e0;
 }
 
-#main input[type="text"], #main input[type="number"], #main input[type="password"],
+#main input[type="text"], 
+#main input[type="number"], 
+#main input[type="password"],
+.ui-dialog input[type="text"],
+.ui-dialog input[type="number"],
+.ui-dialog input[type="password"],
+.ui-dialog select,.ui-dialog textarea,
 	#main select, #main textarea {
 	width: 330px;
 	height: 28px;
@@ -797,7 +804,9 @@ span.error {
 	margin: 1% 2% 0% 22%;
 }
 
-#main button, #main .button, #main .buttonstyle, #main input[type="button"]
+#main button, #main .button, #main .buttonstyle, #main input[type="button"],
+.ui-dialog button, .ui-dialog .button, .ui-dialog .buttonstyle, .ui-dialog input[type="button"]
+
 	{
 	height: 36px;
 	background-color: #000;
@@ -810,7 +819,8 @@ span.error {
 	border-width: 0px;
 }
 
-#main button:hover, #main .button:hover, #main .buttonstyle:hover, #main input[type="button"]:hover
+#main button:hover, #main .button:hover, #main .buttonstyle:hover, #main input[type="button"]:hover,
+.ui-dialog button:hover, .ui-dialog .button:hover, .ui-dialog .buttonstyle:hover, .ui-dialog input[type="button"]:hover
 	{
 	background-color: #7f7f7f;
 	border-color: #e0e0e0;
@@ -824,7 +834,7 @@ span.error {
 	
 }
 
-#main label {
+#main label,.ui-dialog label {
 	text-align: left;
 }
 

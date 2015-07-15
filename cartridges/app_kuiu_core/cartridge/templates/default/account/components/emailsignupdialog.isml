@@ -1,5 +1,6 @@
 <isinclude template="util/modules"/>
 <div class="emailSignupModal">
+<h4>Subscribe to KUIU Newsletter</h4>
 <isdecorate template="util/pt_empty">
 		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm">
 			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
@@ -13,7 +14,7 @@
 			
 			<div class="form-row form-row-button clearfix">
 				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>
-				<button class="dialogify" id="cancel" name="" type="" value="Cancel"  title="">Cancel</button>
+				<button class="dialogify cancel-button" id="cancel" name="" type="" value="Cancel"  title="">Cancel</button>
 			</div>
 			
 		</form>
@@ -25,13 +26,11 @@ jQuery(document).ready(function(){
 	
 	jQuery('#cancel').click(function(e){
 		e.preventDefault();
-		debugger;
 		jQuery('#emailsignup').dialog("close");
 		jQuery('#subscribeIno').dialog("close");
 	});
 	
 	jQuery('button[name="dwfrm_emailsignupdetails_submit"]').click(function(event) {	
-		debugger;
 		event.preventDefault();
 		jQuery('#email-alert-address').val('');
 		var form = jQuery(this).parents('form');
@@ -44,7 +43,6 @@ jQuery(document).ready(function(){
 	          cache: false, 
 			  data: form.serialize() + "&"+ jQuery(this).attr("name") + "=submit",
 			}).done(function ( data ) {
-				debugger;
 				jQuery('#emailsignup').dialog("close");
 				jQuery('#subscribeIno').dialog("close");
 				jQuery('<div/>', {'id':'thankyou'}).appendTo('body');
@@ -55,7 +53,6 @@ jQuery(document).ready(function(){
 				    draggable: false,
 				    resizable: false,
 				    width: 400,
-				    height: 400,
 				    dialogClass: 'ui-dialog-osx'
 				}); 
 			});
