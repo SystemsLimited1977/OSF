@@ -3,23 +3,20 @@
 <!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
 
-<isscript>
-		var pageContext = {
-			title: 'Customer Service',
-			type: 'customerservice',
-			ns:'account'
-		};
-	</isscript>
+<isscript> var pageContext = { title: 'Customer Service',
+type: 'customerservice', ns:'account' }; </isscript>
 <isinclude template="util/modules" />
 
 <iscomment>This page must be cachable. It inherits the
 caching attributes by the decorated template.</iscomment>
 
-<isinclude template="components/header/htmlhead"/>
-<isinclude template="content/pt_customerservice_UI"/>
+<isinclude template="components/header/htmlhead" />
+<isinclude template="content/pt_customerservice_UI" />
 
 <iscomment>Add template-specific header information here.</iscomment>
 
@@ -28,42 +25,49 @@ caching attributes by the decorated template.</iscomment>
 	<div id="wrapper" class="pt_customer-service">
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}" />
 		<div id="main" role="main" class="page-content clearfix">
-				<iscomment> <isslot id="contact-us-banner" description="Content Slot for Customer Service" context="global" />
-				</iscomment>
-				<iscontentasset aid="contact-us-banner" />
-			<iscomment>
-			<isbreadcrumbs bcurl1="${URLUtils.url('CustomerService-Show')}" bctext1="${'Customer Service'}" bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" />
+			<iscomment> <isslot id="contact-us-banner"
+				description="Content Slot for Customer Service" context="global" />
 			</iscomment>
+			<iscontentasset aid="contact-us-banner"/>
+			<iscomment> <isbreadcrumbs
+				bcurl1="${URLUtils.url('CustomerService-Show')}"
+				bctext1="${'Customer Service'}"
+				bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" /> </iscomment>
 			<div class="container">
-			  <div class="row text-center">
-			    <h1 class="cont-head"">Contact Us</h1>
-			    <p>Lorem ipsum dolor neque massa amet,consectetur adipiscing elit</p>
-			  </div>
+				<div class="text-center">
+					<h1 class="cont-head"">Contact Us</h1>
+					<p>Lorem ipsum dolor neque massa amet,consectetur adipiscing
+						elit</p>
+				</div>
 			</div>
 			<div class="container" id="cust-service">
 				<div class="row">
-					<div id="primary" class="primary-content col-md-9 pull-right">
+					<div id="primary"
+						class="primary-content col-xs-12 col-sm-9 col-md-9 pull-right">
 						<div class="row">
-							<div class="col-md-9">
+							<div class="col-xs-12 col-sm-9 col-md-9">
 								<section>
 									<isinclude template="components/browsertoolscheck"/>
 									<isreplace/>
 								</section>
 							</div>
-							<div class="col-md-3">
+							<div class="col-xs-12 col-sm-3 col-md-3">
 								<div class="account-nav-asset">
 									<iscontentasset aid="account-nav-text"/>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="secondary" class="nav col-md-3 col-sm-12 pull-left">
-						<nav>
-							<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
-							<div class="secondary-navigation">
-								<isinclude url="${URLUtils.url('CustomerService-LeftNav')}"/>
-							</div>
-						</nav>
+					<div id="secondary"
+						class="nav col-xs-12 col-sm-3 col-md-3  pull-left">
+						<div class="row">
+							<nav>
+								<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
+								<div class="secondary-navigation">
+									<isinclude url="${URLUtils.url('CustomerService-LeftNav')}"/>
+								</div>
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>

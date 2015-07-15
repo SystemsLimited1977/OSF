@@ -15,8 +15,8 @@
 	        </isif>
 	        <a title="${Resource.msg('headercustomerinfo.not','locale',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.url('Login-Logout')}" class="usernot">(${Resource.msg('headercustomerinfo.not','locale',null)} ${pdict.CurrentCustomer.profile.firstName}?)</a>
     	<iselse>
-	        <span class="welcomemessage">${Resource.msg('headercustomerinfo.welcome','locale',null)}</span>
-	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login','locale',null)}" class="userlogin">(${Resource.msg('global.login','locale',null)})</a>
+	        
+	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login','locale',null)}" class="userlogin">${Resource.msg('headercustomerinfo.welcome','locale',null)}</a>
 	        <span class="divider">|</span>
 	        <iscomment>
 	        	<a title="${Resource.msg('global.subscribe','locale',null)}" class="userregister">${Resource.msg('global.subscribe','locale',null)}</a>

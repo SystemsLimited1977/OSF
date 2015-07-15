@@ -8,23 +8,37 @@
 	<isset name="subCatLayout" value="${getSubCategoriesLayout(topCat)}" scope="page"/>
 	<isif condition="${subCatLayout.hasContent}">
 		<div class="level-2">
-			<ul class="${subCatLayout.horizontal ? 'menu-horizontal' : 'menu-vertical'}">
+			
 				<isloop items="${topCat.custom.categoryGroupLabel}" var="categoryLabel" status="labelIndex">
-					<h4><isprint value="${categoryLabel}"/></h4>
-					<isloop items="${subCatLayout.subCategories}" var="subCat" status="stat">
-						<isif condition="${stat.index <= subCatLayout.maxColLength -1 && (subCat.custom.categoryGroupIndex.value.equals(labelIndex.count))}">
-							<li>
-								<a href="<isprint value="${getCategoryUrl(subCat)}" encoding="off"/>">
-									<isprint value="${subCat.getDisplayName()}"/>
-								</a>
-								<isset name="thirdLevelCategories" value="${getSubcategoriesInMenuForCategory(subCat)}" scope="page"/>
-								<isif condition="${thirdLevelCategories.length > 0}">
-									<isif condition="${subCat.custom.isMenuWithLables}">
-										<ul class="level-3">
-											<isloop items="${subCat.custom.categoryGroupLabel}" var="thirdCategoryLabel" status="thirdLabelIndex">
-												<h4><isprint value="${thirdCategoryLabel}"/></h4>
+					<ul class="${subCatLayout.horizontal ? 'menu-horizontal' : 'menu-vertical'}">
+						<h4><isprint value="${categoryLabel}"/></h4>
+						<isloop items="${subCatLayout.subCategories}" var="subCat" status="stat">
+							<isif condition="${stat.index <= subCatLayout.maxColLength -1 && (subCat.custom.categoryGroupIndex.value.equals(labelIndex.count))}">
+								<li>
+									<a href="<isprint value="${getCategoryUrl(subCat)}" encoding="off"/>">
+										<isprint value="${subCat.getDisplayName()}"/>
+									</a>
+									<isset name="thirdLevelCategories" value="${getSubcategoriesInMenuForCategory(subCat)}" scope="page"/>
+									<isif condition="${thirdLevelCategories.length > 0}">
+										<isif condition="${subCat.custom.isMenuWithLables}">
+											<ul class="level-3">
+												<isloop items="${subCat.custom.categoryGroupLabel}" var="thirdCategoryLabel" status="thirdLabelIndex">
+													<h4><isprint value="${thirdCategoryLabel}"/></h4>
+													<isloop items="${thirdLevelCategories}" var="thirdLevelCat">
+														<isif condition="${('showInMenu' in thirdLevelCat.custom) && thirdLevelCat.custom.showInMenu.valueOf() && (thirdLevelCat.custom.categoryGroupIndex.value.equals(thirdLabelIndex.count))}">
+															<li>
+																<a href="<isprint value="${getCategoryUrl(thirdLevelCat)}" encoding="off"/>">
+																	<isprint value="${thirdLevelCat.getDisplayName()}"/>
+																</a>
+															</li>
+														</isif>
+													</isloop>
+												</isloop>
+											</ul>
+										<iselse>
+											<ul class="level-3">
 												<isloop items="${thirdLevelCategories}" var="thirdLevelCat">
-													<isif condition="${('showInMenu' in thirdLevelCat.custom) && thirdLevelCat.custom.showInMenu.valueOf() && (thirdLevelCat.custom.categoryGroupIndex.value.equals(thirdLabelIndex.count))}">
+													<isif condition="${('showInMenu' in thirdLevelCat.custom) && thirdLevelCat.custom.showInMenu.valueOf()}">
 														<li>
 															<a href="<isprint value="${getCategoryUrl(thirdLevelCat)}" encoding="off"/>">
 																<isprint value="${thirdLevelCat.getDisplayName()}"/>
@@ -32,27 +46,14 @@
 														</li>
 													</isif>
 												</isloop>
-											</isloop>
-										</ul>
-									<iselse>
-										<ul class="level-3">
-											<isloop items="${thirdLevelCategories}" var="thirdLevelCat">
-												<isif condition="${('showInMenu' in thirdLevelCat.custom) && thirdLevelCat.custom.showInMenu.valueOf()}">
-													<li>
-														<a href="<isprint value="${getCategoryUrl(thirdLevelCat)}" encoding="off"/>">
-															<isprint value="${thirdLevelCat.getDisplayName()}"/>
-														</a>
-													</li>
-												</isif>
-											</isloop>
-										</ul>
+											</ul>
+										</isif>
 									</isif>
-								</isif>
-							</li>
-						</isif>
-					</isloop>
+								</li>
+							</isif>
+						</isloop>
+					</ul>
 				</isloop>
-			</ul>
 			<isif condition="${subCatLayout.banner}">
 				<div class="banner"><isprint value="${subCatLayout.banner}" encoding="off"/></div>
 			</isif>

@@ -15,19 +15,30 @@
 	</div> 
 
 	<div class="home-bottom-slots">
+		
+		<div class="container">
+			<isslot id="home-main-second" description="Gear and Assecesories" context="global" />
+		</div>
+			
+		<iscomment>
+			<div class="home-bottom-left">
+				<isslot id="home-bottom-left" description="Bottom content below flash banner - left side" context="global" />
+			</div>
+			
+			<div class="home-bottom-center">
+				<isslot id="home-bottom-center" description="Bottom content below flash banner - center side" context="global" />
+			</div>
+			
+			<div class="home-bottom-right">
+				<isslot id="home-bottom-right" description="Bottom content below flash banner - right side" context="global" />
+			</div>
+		</iscomment>		
+	</div>
 	
-		<div class="home-bottom-left">
-			<isslot id="home-bottom-left" description="Bottom content below flash banner - left side" context="global" />
+	<div class="home-bottom-first">
+		<div>
+			<isslot id="home-bottom-first" description="More From KUIU" context="global" />
 		</div>
-		
-		<div class="home-bottom-center">
-			<isslot id="home-bottom-center" description="Bottom content below flash banner - center side" context="global" />
-		</div>
-		
-		<div class="home-bottom-right">
-			<isslot id="home-bottom-right" description="Bottom content below flash banner - right side" context="global" />
-		</div>
-		
 	</div>
 	
 </isdecorate>
@@ -36,8 +47,6 @@
 jQuery(document).ready(function(){
 		 if(${!pdict.CurrentSession.custom.IsAlreadySignedUp}){ 
 			jQuery(window).bind('load', function(event){
-				
-				debugger;
 				event.preventDefault();
 				
 				var emailSubscribeDiv = jQuery('<div/>', {'id' : 'emailSubscribe'}).appendTo('body');

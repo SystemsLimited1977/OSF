@@ -1,104 +1,132 @@
-<iscontent type="text/html" charset="UTF-8" compact="true"/>
-<iscache type="relative" hour="24"/>
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<iscache type="relative" hour="24" />
 
-<iscomment>Show customer agent banner if logged in on behalf of a customer using call center application
-<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('callcenter_evouchers_enabled')!=null}">
-	<iscomponent pipeline="CCStorefrontHeader-Start" />
-</isif>
-</iscomment>
+<iscomment>Show customer agent banner if logged in on behalf
+of a customer using call center application <isif
+	condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('callcenter_evouchers_enabled')!=null}">
+<iscomponent pipeline="CCStorefrontHeader-Start" /> </isif> </iscomment>
 
-<iscomment>SLOT CONFIGURATION:  SLOT/ID: header-banner</iscomment>
+<iscomment>SLOT CONFIGURATION: SLOT/ID: header-banner</iscomment>
 <div class="header-banner">
-	<isslot id="header-banner" description="Slot above the site header" context="global" />
+	<isslot id="header-banner" description="Slot above the site header"
+		context="global" />
 </div>
-<header>
-<div class="container hidden-xs hidden-sm">
-<div class="top-banner" role="banner">
-  <div class="col-md-2">
-	<button class="menu-toggle"><i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span></button>
-	<h1 class="primary-logo">
-		<a href="${URLUtils.url('Home-Show')}" title="${Resource.msg('global.storename', 'locale', null)}  ${Resource.msg('global.home', 'locale', null)}">
-			<img class="visible-lg-block" src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
-			<img class="hidden-lg" src="${URLUtils.staticURL('/images/logo_mob.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
-			<span class="visually-hidden">${Resource.msg('global.storename', 'locale', null)}</span>
-		</a>
-	</h1>
-   </div>
+<header class="clearfix">
+	<div class="hidden-xs">
+		<div class="top-banner" role="banner">
+			<div class="header-logo pull-left">
+				<button class="menu-toggle">
+					<i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span>
+				</button>
+				<h1 class="primary-logo">
+					<a href="${URLUtils.url('Home-Show')}"
+						title="${Resource.msg('global.storename', 'locale', null)}  ${Resource.msg('global.home', 'locale', null)}">
+						<img class="visible-lg-block"
+						src="${URLUtils.staticURL('/images/logo.png')}"
+						alt="${Resource.msg('global.storename', 'locale', null)}"> <img
+						class="hidden-lg"
+						src="${URLUtils.staticURL('/images/logo_mob.png')}"
+						alt="${Resource.msg('global.storename', 'locale', null)}"> <span
+						class="visually-hidden">${Resource.msg('global.storename',
+							'locale', null)}</span>
+					</a>
+				</h1>
+			</div>
 
 
-<div class="col-md-6">
-	<nav id="navigation" role="navigation">
-		<iscomment>INCLUDE: category menu</iscomment>
-		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
-		<iscomment>Multi-Currency Selection</iscomment>
-		<isinclude template="components/header/multicurrency"/>
+			<div class="header-nav pull-left">
+				<nav id="navigation" role="navigation">
+					<iscomment>INCLUDE: category menu</iscomment>
+					<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}" />
+					<iscomment>Multi-Currency Selection</iscomment>
+					<isinclude template="components/header/multicurrency" />
 
-	</nav>
+				</nav>
 
-</div>
-	<div class="col-md-4" id="locate-1">
-		<!--  utility user menu -->
-		<div class="col-md-12 visible-md-block visible-lg-block">
-		<ul class="menu-utility-user">
+			</div>
 
-			<iscomment>Store Locator
-			<li>
-				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('global.header.storelocator', 'locale', null)}">
-					<i class="fa fa-map-marker"></i>
-					<span>${Resource.msg('global.header.storelocator', 'locale', null)}</span>
-				</a>
-			</li></iscomment>
-			<div class="generalnav">				  
-				<a href="${URLUtils.http('CustomerService-ContactUs')}" title="${Resource.msg('header.help','locale',null)}">${Resource.msg('header.help','locale',null)}</a>
-				<span class="phone">${Resource.msg('header.storelocatorphone','locale',null)}</span>
-				<span class="divider">|</span> 
-				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('header.storelocator','locale',null)}">${Resource.msg('header.storelocator','locale',null)}</a>
-  
-		    </div><!-- END: generalnav -->
-			
-			<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
-			<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
+			<div class="pull-right header-right">
 
-		</ul>
+				<div class="header-right-content" id="locate-1">
+					<!--  utility user menu -->
+					<div class="visible-sm-block visible-md-block visible-lg-block">
+						<ul class="menu-utility-user pull-right clearfix">
+
+							<iscomment>Store Locator
+							<li><a href="${URLUtils.http('Stores-Find')}"
+								title="${Resource.msg('global.header.storelocator', 'locale', null)}">
+									<i class="fa fa-map-marker"></i> <span>${Resource.msg('global.header.storelocator',
+										'locale', null)}</span>
+							</a></li>
+							</iscomment>
+							<isinclude
+								url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}" />
+								<li> 
+							<div class="generalnav">
+							 <span class="divider">|</span> 
+								<a href="${URLUtils.http('CustomerService-ContactUs')}"
+									title="${Resource.msg('header.help','locale',null)}">${Resource.msg('header.help','locale',null)}</a>
+								<span class="phone">${Resource.msg('header.storelocatorphone','locale',null)}</span>
+								<iscomment> <span class="divider">|</span> <a
+									href="${URLUtils.http('Stores-Find')}"
+									title="${Resource.msg('header.storelocator','locale',null)}">${Resource.msg('header.storelocator','locale',null)}</a>
+								</iscomment>
+							</div>
+							</li>
+							<!-- END: generalnav -->
+
+							<iscomment>INCLUDE: Customer login information,
+							login, etc. (contains personal information, do not cache)</iscomment>
+
+						</ul>
+					</div>
+					<div class="clearfix header-main-search" id="search-bar">
+						<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
+						<div id="mini-cart">
+							<isinclude url="${URLUtils.url('Cart-MiniCart')}" />
+						</div>
+						<div
+							class="header-search visible-sm-block visible-md-block visible-lg-block">
+							<isinclude template="search/simplesearch" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="col-md-12" id="search-bar">
-	<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
-	<div id="mini-cart">
-		<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
-	</div>
-	<div class="header-search visible-md-block visible-lg-block">
-	  <isinclude template="search/simplesearch"/>
-	</div>
-	</div>	
-  </div>
+	<!-- /Responsive Menu Start -->
+	<div class="top-banner responsive-nav hidden-sm hidden-md hidden-lg "
+		role="banner">
+		<button class="menu-toggle">
+			<i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span>
+		</button>
+		<h1 class="primary-logo">
+			<a class="mobile-logo" href="${URLUtils.url('Home-Show')}"
+				title="${Resource.msg('global.storename', 'locale', null)}  ${Resource.msg('global.home', 'locale', null)}">
+				<img class="hidden-lg"
+				src="${URLUtils.staticURL('/images/logo_mob.png')}"
+				alt="${Resource.msg('global.storename', 'locale', null)}"> <span
+				class="visually-hidden tab-view">${Resource.msg('global.storename',
+					'locale', null)}</span>
+			</a>
+			<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
+			<div id="mini-cart">
+				<isinclude url="${URLUtils.url('Cart-MiniCart')}" />
+			</div>
+		</h1>
 
-</div>
-</div>
-<!-- /Responsive Menu Start -->
-<div class="top-banner responsive-nav hidden-lg hidden-md" role="banner">
-	<button class="menu-toggle"><i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span></button>
-	<h1 class="primary-logo">
-		<a href="${URLUtils.url('Home-Show')}" title="${Resource.msg('global.storename', 'locale', null)}  ${Resource.msg('global.home', 'locale', null)}">
-			<img class="hidden-lg" src="${URLUtils.staticURL('/images/logo_mob.png')}" alt="${Resource.msg('global.storename', 'locale', null)}">
-			<span class="visually-hidden tab-view">${Resource.msg('global.storename', 'locale', null)}</span>
-		</a>
-	<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
-	<div id="mini-cart">
-		<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
-	</div>
-	</h1>
-	
-  <nav id="navigation" role="navigation">
-	<div class="header-search">
-	  <isinclude template="search/simplesearch"/>
-	</div>
-		<iscomment>INCLUDE: category menu</iscomment>
-		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
-		<iscomment>Multi-Currency Selection</iscomment>
-		<isinclude template="components/header/multicurrency"/>
+		<nav id="navigation" role="navigation">
+			<div class="header-search">
+				<isinclude template="search/simplesearch" />
+			</div>
+			<iscomment>INCLUDE: category menu</iscomment>
+			<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}" />
+			<iscomment>Multi-Currency Selection</iscomment>
+			<isinclude template="components/header/multicurrency" />
 
-	</nav>
-	
-</div>
-<!-- /Responsive Menu End -->
-</header><!-- /header -->
+		</nav>
+
+	</div>
+	<!-- /Responsive Menu End -->
+</header>
+<!-- /header -->

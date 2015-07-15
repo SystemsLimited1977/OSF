@@ -1,47 +1,48 @@
-<iscontent type="text/html" charset="UTF-8" compact="true"/>
-<iscomment>
-	This is the footer for all pages. Be careful caching it if it contains
-	user dependent information. Cache its elements instead if necessary (do not forget
-	to change the isinclude into a pipeline include for that).
-</iscomment>
-<isinclude template="util/modules"/>
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<iscomment> This is the footer for all pages. Be careful
+caching it if it contains user dependent information. Cache its elements
+instead if necessary (do not forget to change the isinclude into a
+pipeline include for that). </iscomment>
+<isinclude template="util/modules" />
 
 <footer class="clearfix">
-<div class="logo-div">
- <div class="container"  >
-	<iscontentasset aid="footer-logo-graphic"/>
-  </div>
-</div>
+	<div class="logo-div">
+		<div class="container">
+			<iscontentasset aid="footer-logo-graphic" />
+		</div>
+	</div>
 
-  <div class="footer-container">
-    <div class="container">
-    
-	 <div id="footer-cust" class="col-lg-6">
-		 <iscontentasset aid="footer-customer_service-about"/>
-	  </div>
-	  <div class="col-lg-6">
-		  <iscomment><isslot id="footer-social-email" description = "Content Slot for social icons and email signup" context="global"/></iscomment>
-		  <iscontentasset aid="footer-social-email"/>
-	  </div>
-	</div>	
-  </div>
+	<div class="footer-container footer-up clearfix">
 
-<script>
-	
-</script>
-<div class="footer-container footer-privacy">
- <div class="container">
-<iscontentasset aid="footer-copy-privacy-terms"/>
-</div>
-</div>
+		<div class="col-xs-12 col-sm-3 col-md-5 footer-right pull-right">
+			<iscomment>
+			<isslot id="footer-social-email"
+				description="Content Slot for social icons and email signup"
+				context="global" /></iscomment>
+			<iscontentasset aid="footer-social-email" />
+		</div>
+		<div id="footer-cust" class="col-xs-12 col-sm-9 col-md-7 pull-left">
+			<iscontentasset aid="footer-customer_service-about" />
+		</div>
+
+
+	</div>
+
+	<script>
+		
+	</script>
+	<div class="footer-container footer-privacy">
+
+		<iscontentasset aid="footer-copy-privacy-terms" />
+
+	</div>
 </footer>
-<iscomment>
-	Customer registration can happen everywhere in the page flow. As special tag in the pdict
-	is indicating it. So we have to check on every page, if we have to report this event for
-	the reporting engine.
-</iscomment>
-<isinclude template="util/reporting/ReportUserRegistration.isml"/>
+<iscomment> Customer registration can happen everywhere in
+the page flow. As special tag in the pdict is indicating it. So we have
+to check on every page, if we have to report this event for the
+reporting engine. </iscomment>
+<isinclude template="util/reporting/ReportUserRegistration.isml" />
 
-<isinclude template="components/footer/footer_UI"/>
+<isinclude template="components/footer/footer_UI" />
 <iscomment>Listrak change for rendering javasceipt reference</iscomment>
-<isinclude url="${URLUtils.url('ltkInclude-Start')}"/>
+<isinclude url="${URLUtils.url('ltkInclude-Start')}" />
