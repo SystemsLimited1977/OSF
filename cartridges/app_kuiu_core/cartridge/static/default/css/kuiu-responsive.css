@@ -168,14 +168,31 @@
 		clear: both
 	}
 	#footer-cust {
-		background-color: #1a1a1a;
+		background-color: transparent;
+		color: #2b2b2b;
+		margin-top: 25px;
+		padding: 0 20px;
 		text-align: center;
-		padding: 20px 20px 0 20px;
+	}
+	.footer-container #footer-cust a {
+		color: #2b2b2b;
+	}
+	footer .footer-container .content-asset ul li {
+		display: block;
+		border-right: none;
+		margin-bottom: 10px;
 	}
 	.copyright {
 		margin-left: 0;
-		padding: 0 20px 20px 20px;
+		padding: 15px 20px;
 		text-align: center;
+	}
+	.copyright .copy-text, .copyright .privacy-terms {
+		display: block;
+		line-height:20px;
+	}
+	.privacy-terms .divider:first-child {
+		display: none;
 	}
 	.footer-up {
 		margin-bottom: 0;
@@ -194,7 +211,7 @@
 		float: none;
 		overflow: hidden;
 		padding-left: 0;
-		padding-top: 14px;
+		padding-top: 0;
 		text-align: center;
 	}
 	.footer_email {
@@ -221,6 +238,7 @@
 	}
 	.footer_email #email-alert-address {
 		background-color: #e0e0e0;
+		width: 80%;
 	}
 	footer {
 		background-color: #fff;
@@ -257,8 +275,8 @@
 		display: block;
 		float: none;
 		font-size: 14px;
-		margin-bottom: 10px;
-		padding: 0;
+		margin-bottom: 0;
+		padding: 0 10px;
 		position: static;
 		top: 0;
 		width: 100%;
