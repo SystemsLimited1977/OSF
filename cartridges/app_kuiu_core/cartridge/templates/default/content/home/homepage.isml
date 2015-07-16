@@ -14,7 +14,7 @@
 		  </form>  -->
 	</div> 
 
-	<div class="home-bottom-slots">
+	<div class="home-bottom-slots clearfix">
 		
 		<div class="container">
 			<isslot id="home-main-second" description="Gear and Assecesories" context="global" />

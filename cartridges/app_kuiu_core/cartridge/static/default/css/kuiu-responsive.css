@@ -287,6 +287,60 @@
 	.home-bottom-slots h1.heading-top, .home-bottom-first h1.heading-top {
 		font-size: 20px !important;
 	}
+	.home-bottom-slots .col-xs-12 {
+		margin-bottom: 20px;
+	}
+	.home-bottom-slots {
+		padding-top: 30px;
+		padding-bottom: 0;
+	}
+	.home-bottom-first {
+		background-color: #ffffff;
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 10px;
+	}
+	.home-bottom-first .home-small {
+		bottom: 0;
+		left: 0;
+		margin: 0 15px;
+		position: absolute;
+	}
+	#main h1 {
+		font-size: 20px;
+	}
+	.home-bottom-banner {
+		display: none;
+	}
+	.home-bottom-first {
+		-webkit-box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
+		-moz-box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
+		box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
+	}
+	.home-bottom-first .home-more-kuiu {
+		margin-bottom: 0;
+	}
+	.home-bottom-first img {
+		float: left;
+		width: 120px;
+	}
+	.home-bottom-first .home-small {
+		bottom: 0;
+		float: none;
+		left: 0;
+		margin: 0 0 0 120px;
+		position: relative;
+		padding: 22px 10px;
+	}
+	.home-bottom-slots .home-first p, .home-bottom-first .home-small p {
+		display: none;
+	}
+	.home-bottom-slots .home-first h1, .home-bottom-first .home-small h1 {
+		font-size: 16px !important;
+	}
+	.home-bottom-first .home-small {
+		height: 110px !important;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -350,6 +404,22 @@
 		margin-top: -25px;
 		position: relative;
 		width: 70%;
+	}
+	.home-bottom-slots {
+		padding-top: 30px;
+		padding-bottom: 40px;
+	}
+	.home-bottom-first {
+		background-color: #ffffff;
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 10px;
+	}
+	.home-bottom-first .home-small {
+		bottom: 0;
+		left: 0;
+		margin: 0 15px;
+		position: absolute;
 	}
 }
 
