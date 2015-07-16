@@ -1086,3 +1086,128 @@ span.error {
 	padding:0 !important;
 	}
 	
+	
+/* Email POP-UP Styling */
+.ui-dialog .ui-dialog-content {
+	  overflow: visible;
+	  padding-top: 10px;
+}
+
+.form-caption {
+	  margin: -2% 0 0% 23%;
+}
+
+.ui-dialog input[type="text"] {
+	width:78%;
+	margin-bottom: 22px;
+}
+
+.error-message {
+  border: none;
+  background-color: transparent;
+  padding: 0px;
+  text-indent: 0;
+  width: 49.5966%;
+}
+
+.ui-dialog .ui-widget-header {
+   background-color: #000;
+   height:32px;
+}
+
+.ui-dialog .cancel-button {
+	background-color: #e6e6e6;
+	color:#1d1512;
+	margin-left:18px;
+}
+.ui-dialog .cancel-button#cancelThankYou {
+	margin-left:0px;}
+.ui-dialog .cancel-button:hover {
+	background-color: #fff;
+	border:2px solid #e6e6e6;
+	color:#1d1512;
+}
+.ui-dialog .form-row-button {
+	  margin-left: 22%;
+}
+
+.ui-dialog .ui-icon-closethick {
+ 	background-image: url("../images/popup_close_icon.png");
+	background-repeat: no-repeat;
+}
+
+.ui-dialog h4{
+	  text-align: center;
+	  padding-botton:15px;
+}
+.ui-dialog h1, .ui-dialog h2 {
+	font-family: "Times New Roman";
+	}
+sup {
+  top: -6px;
+  font-size: 60%;
+}
+
+
+/*Home page Styling*/
+.home-bottom-slots,.home-bottom-first {
+	background-color: #f9f9f9;
+	text-align: center;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	
+}
+
+.home-bottom-slots .home-first ,.home-bottom-first .home-small {
+  background-color: #1a1a1a;
+  color: #fff;
+  height:100px;
+}
+
+.home-bottom-slots .home-first h1, .home-bottom-first .home-small h1 {
+	margin-top: 0px !important;
+	padding-top:20px;
+	font-size:22px !important;;
+	font-weight:400;
+	margin-bottom: 0;
+	letter-spacing: 0.5px;
+}
+.home-bottom-slots .home-first p, .home-bottom-first .home-small p {
+	margin-bottom: 0;
+	margin:0px !important;
+	font-family: 'Roboto', sans-serif;
+}
+
+.home-bottom-slots .home-first a,.home-bottom-first .home-small a {
+	  line-height: 22px;
+	  color:#fff;
+	  text-decoration: none;
+	  font-family: 'Roboto', sans-serif; 
+}
+.home-bottom-slots .col-sm-12 p,.home-bottom-first .col-sm-12 p { 
+  margin: 6px 0px;
+  padding-bottom: 20px;
+  color: #1a1a1a;
+  font-family: 'Roboto', sans-serif;
+}
+.home-bottom-slots h1.heading-top,.home-bottom-first  h1.heading-top  {
+	margin:0px !important;
+	padding:0px !important;	
+	line-height: 28px;
+	color: #1a1a1a;
+	letter-spacing: 2px;
+  	font-weight: 400;
+}
+
+.home-bottom-first {
+	background-color: transparent;	
+}
+
+.home-bottom-first .home-small {
+   height:120px !important;
+}
+
+.home-bottom-first .home-small img {
+	with:100%;
+}
+	

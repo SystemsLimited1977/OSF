@@ -189,7 +189,7 @@
 	}
 	.copyright .copy-text, .copyright .privacy-terms {
 		display: block;
-		line-height:20px;
+		line-height: 20px;
 	}
 	.privacy-terms .divider:first-child {
 		display: none;
@@ -284,6 +284,9 @@
 	.mini-cart-link-checkout {
 		height: auto !important;
 	}
+	.home-bottom-slots h1.heading-top, .home-bottom-first h1.heading-top {
+		font-size: 20px !important;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -356,6 +359,10 @@
 	}
 	.menu-category .level-2 {
 		padding-left: 115px;
+	}
+	.home-bottom-first img {
+		width: 100%;
+		letter-spacing: 0;
 	}
 }
 
