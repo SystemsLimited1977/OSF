@@ -25,10 +25,10 @@ caching attributes by the decorated template.</iscomment>
 	<div id="wrapper" class="pt_customer-service">
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}" />
 		<div id="main" role="main" class="page-content clearfix">
-			<iscomment> <isslot id="contact-us-banner"
-				description="Content Slot for Customer Service" context="global" />
+			<iscomment> 
+				<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="folder" context-object="${pdict.ContentSearchResult.folder}" />
 			</iscomment>
-			<iscontentasset aid="contact-us-banner"/>
+			<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="global"/>
 			<iscomment> <isbreadcrumbs
 				bcurl1="${URLUtils.url('CustomerService-Show')}"
 				bctext1="${'Customer Service'}"
