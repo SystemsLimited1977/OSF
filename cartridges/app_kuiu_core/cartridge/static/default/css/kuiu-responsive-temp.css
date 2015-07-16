@@ -1,4 +1,5 @@
 @media ( min-width : 320px) {
+
 }
 
 @media ( min-width : 480px) {
@@ -9,15 +10,20 @@
 }
 
 @media ( min-width : 992px) {
+
 }
 
 @media ( min-width : 1200px) {
 }
 
 @media ( min-width : 320px) and (max-width: 479px) {
+
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
+			.home-bottom-slots h1.heading-top, .home-bottom-first h1.heading-top {
+		font-size:20px!important;
+	}
 	
 }
 
@@ -26,7 +32,8 @@
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
-	
+		
+	.home-bottom-first img{width: 100%;  letter-spacing: 0;}
 }
 
 @media ( min-width : 1200px) and (max-width: 1439px) {
