@@ -1,0 +1,98 @@
+/* Slider Styling */
+
+#homepage-slides .slide {
+   position: relative;
+  }
+#homepage-slides .slide .inner-box {  
+  position: absolute;
+  margin: auto;
+  height: 206px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-transform: uppercase;
+  left: 0;
+  right: 0;
+  Bottom: 0;
+  top: 0;
+  text-align: center;
+  opacity: 0.95;
+  width:60%;
+ }
+#homepage-slides .slide .inner-box h1 {
+  font-size: 40px;
+  letter-spacing:4px;
+  margin-top: 40px;
+  white-space:nowrap;
+  
+ }
+#homepage-slides .slide .inner-box h3 {
+	letter-spacing: 1px;
+	font-size:18px;
+	font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+}
+#homepage-slides .slide .inner-box button{
+	width:135px;
+	height:34px;
+	border-radius:0px;
+	background-color: #fff;
+    line-height: 22px;
+    margin-top: 16px;
+    color:#1a1a1a;
+}
+#homepage-slides .slide .inner-box button:hover {
+	color:#000;
+}
+#homepage-slider .jcarousel-control {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  margin-left:50%;
+  top: 90%;
+}
+#homepage-slider .jcarousel-control a {
+  border-radius: 50%;
+  width: 15px;
+  background-color: transparent;
+  border: 2px solid #808084;
+}
+
+#homepage-slider .jcarousel-control a.active {
+  border: 2px solid #fff;
+  background-color: transparent;
+  
+}
+
+#homepage-slider .jcarousel-control .scroll_top {
+	width:70px;
+	height:42;
+	background-color: #fff;
+	position: absolute;
+}
+
+#homepage-slider .jcarousel-prev,#homepage-slider .jcarousel-next
+{
+	width:39px;
+	height:69px;
+	background-color: #fff;
+	position: absolute;
+    left: 0;
+    right: 0;
+    Bottom: 0;
+    top: 50%;
+    opacity: 0.8;
+}
+
+#homepage-slider .jcarousel-prev {
+	background-image: url("../images/interface/b-prev_arrow.png");
+    background-repeat: no-repeat;
+      background-position: 8px 15px;
+}
+
+#homepage-slider .jcarousel-next {
+	right: 0;
+  	left: inherit;
+	background-image: url("../images/interface/b-next-arrow.png");
+	background-repeat: no-repeat;
+	background-position: 15px 15px;
+}

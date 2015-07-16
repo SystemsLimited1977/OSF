@@ -25,6 +25,14 @@
 
 @media ( min-width : 992px) and (max-width: 1199px) {
 	
+	#homepage-slides .slide .inner-box h1 {
+		font-size:32px;
+		letter-spacing: 2px;
+	}
+	
+	#homepage-slides .slide .inner-box  {
+		width :75%;
+	}
 }
 
 @media ( min-width : 1200px) and (max-width: 1439px) {
