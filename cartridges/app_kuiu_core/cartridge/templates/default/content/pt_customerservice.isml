@@ -25,16 +25,15 @@ caching attributes by the decorated template.</iscomment>
 	<div id="wrapper" class="pt_customer-service">
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 		<div id="main" role="main" class="page-content clearfix">
-			<iscomment> 
-				<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="folder" context-object="${pdict.ContentSearchResult.folder}"/>
-			</iscomment>
-			<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="global"/>
-			<iscomment> 
-				<isbreadcrumbs
+			<iscomment> <isslot id="contact-us-banner"
+				description="Content Slot for Customer Service" context="folder"
+				context-object="${pdict.ContentSearchResult.folder}"/> </iscomment>
+			<isslot id="contact-us-banner"
+				description="Content Slot for Customer Service" context="global"/>
+			<iscomment> <isbreadcrumbs
 				bcurl1="${URLUtils.url('CustomerService-Show')}"
 				bctext1="${'Customer Service'}"
-				bctext2="${empty(pdict.Content) ? null : pdict.Content.name}"/> 
-				</iscomment>
+				bctext2="${empty(pdict.Content) ? null : pdict.Content.name}"/> </iscomment>
 			<div class="container">
 				<div class="text-center">
 					<h1 class="cont-head">Contact Us</h1>
@@ -44,7 +43,8 @@ caching attributes by the decorated template.</iscomment>
 			</div>
 			<div class="container" id="cust-service">
 				<div class="row">
-					<div id="primary" class="primary-content col-xs-12 col-sm-9 col-md-9 pull-right">
+					<div id="primary"
+						class="primary-content col-xs-12 col-sm-9 col-md-9 pull-right">
 						<div class="row">
 							<div class="col-xs-12 col-sm-9 col-md-9">
 								<section>
