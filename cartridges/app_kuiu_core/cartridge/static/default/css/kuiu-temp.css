@@ -2,6 +2,10 @@
 
 #homepage-slides .slide {
    position: relative;
+   background-image: url("https://dev03-shop-kuiu.demandware.net/on/demandware.static/Sites-kuiu_us-Site/Library-Sites-kuiu-contents-lib/default/v1436855499134/images/homepage/banners_homepage_05a.jpg");
+   background-position: right top;
+   background-size: cover;
+   height: 775px;
   }
 #homepage-slides .slide .inner-box {  
   position: absolute;

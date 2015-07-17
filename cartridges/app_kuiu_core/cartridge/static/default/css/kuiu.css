@@ -798,8 +798,11 @@ div {
 	padding: 0px;
 	-webkit-box-shadow: none;
 	box-shadow: none;
-	margin-bottom: 15px;
 	margin-left: 0;
+}
+
+#main .form-caption {
+	margin:0;
 }
 
 .required-indicator {
@@ -1243,7 +1246,12 @@ sup {
 	margin:0; 
 	padding:0;
 }
-
+.home-bottom-banner .home-bottom-banner-img {
+   position:relative;
+   background-position: center center;
+   background-size: cover;
+   height: 325px;
+}
 .home-bottom-first .home-more-kuiu {
 	margin-bottom:16px;	
 }

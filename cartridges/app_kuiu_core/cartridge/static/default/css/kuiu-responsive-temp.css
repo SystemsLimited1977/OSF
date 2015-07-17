@@ -18,12 +18,23 @@
 
 @media ( min-width : 320px) and (max-width: 767px) {
 	
+	#homepage-slides .slide {
+		height: 335px;
+	}
+	
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
+	#homepage-slides .slide {
+		height: 550px;
+	}
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
+	
+	#homepage-slides .slide {
+		height: 650px;
+	}
 	
 	#homepage-slides .slide .inner-box h1 {
 		font-size:32px;

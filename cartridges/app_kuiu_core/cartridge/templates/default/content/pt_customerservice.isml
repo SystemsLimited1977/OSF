@@ -1,4 +1,4 @@
-<iscontent type="text/html" charset="UTF-8" compact="true" />
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
@@ -10,40 +10,41 @@
 
 <isscript> var pageContext = { title: 'Customer Service',
 type: 'customerservice', ns:'account' }; </isscript>
-<isinclude template="util/modules" />
+<isinclude template="util/modules"/>
 
 <iscomment>This page must be cachable. It inherits the
 caching attributes by the decorated template.</iscomment>
 
-<isinclude template="components/header/htmlhead" />
-<isinclude template="content/pt_customerservice_UI" />
+<isinclude template="components/header/htmlhead"/>
+<isinclude template="content/pt_customerservice_UI"/>
 
 <iscomment>Add template-specific header information here.</iscomment>
 
 </head>
 <body>
 	<div id="wrapper" class="pt_customer-service">
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}" />
+		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 		<div id="main" role="main" class="page-content clearfix">
 			<iscomment> 
-				<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="folder" context-object="${pdict.ContentSearchResult.folder}" />
+				<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="folder" context-object="${pdict.ContentSearchResult.folder}"/>
 			</iscomment>
 			<isslot id="contact-us-banner" description="Content Slot for Customer Service" context="global"/>
-			<iscomment> <isbreadcrumbs
+			<iscomment> 
+				<isbreadcrumbs
 				bcurl1="${URLUtils.url('CustomerService-Show')}"
 				bctext1="${'Customer Service'}"
-				bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" /> </iscomment>
+				bctext2="${empty(pdict.Content) ? null : pdict.Content.name}"/> 
+				</iscomment>
 			<div class="container">
 				<div class="text-center">
-					<h1 class="cont-head"">Contact Us</h1>
+					<h1 class="cont-head">Contact Us</h1>
 					<p>Lorem ipsum dolor neque massa amet,consectetur adipiscing
 						elit</p>
 				</div>
 			</div>
 			<div class="container" id="cust-service">
 				<div class="row">
-					<div id="primary"
-						class="primary-content col-xs-12 col-sm-9 col-md-9 pull-right">
+					<div id="primary" class="primary-content col-xs-12 col-sm-9 col-md-9 pull-right">
 						<div class="row">
 							<div class="col-xs-12 col-sm-9 col-md-9">
 								<section>
@@ -73,8 +74,8 @@ caching attributes by the decorated template.</iscomment>
 			</div>
 		</div>
 		<!-- /main -->
-		<isinclude template="components/footer/footer" />
-		<isinclude template="content/pt_customerservice_VARS" />
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="content/pt_customerservice_VARS"/>
 	</div>
 	<!--  /wrapper -->
 </body>
