@@ -17987,15 +17987,22 @@ module.exports = asap;
 //Footer signup popup for listrak
 jQuery(document).ready(function(){
 	
+	jQuery(document).keypress(function(ev) {
+	    if(ev.which == 13) {
+	    	openDialog();
+	    	return false;
+	    }
+	});
+	
 	jQuery('#footer-email').click(function(e){
-		
 		e.preventDefault();
-		if (jQuery('#email-alert-address').val() == null || jQuery('#email-alert-address').val() == "" || jQuery('#email-alert-address').length == 0)
-		 {
-		 	alert('Please enter email address');
-		 	return false;
-		 }
-		var url = jQuery(this).parents('form').attr('action');
+		openDialog();
+	});
+	
+	function openDialog()
+	{
+		//var url = jQuery(this).parents('form').attr('action');
+		var url = jQuery('#email-alert-signup').attr('action');
 		if (!url) { return; }
 
 		var form = jQuery(this).parents('form');
@@ -18008,13 +18015,15 @@ jQuery(document).ready(function(){
 		
 		jQuery.ajax({
 			dataType : "html",
-			url : url
+			type : "POST",
+			url : url,
+			data : {"emailAddress" : jQuery("#email-alert-address").val()}
 		})
 		.done(function (response) {
-			
 			jQuery('<div/>', {'id':'emailsignup','class':'emailsignupclass'}).appendTo('body');
 			jQuery('#emailsignup').css('display','none');
 			jQuery('#emailsignup').empty().html(response);
+			
 			jQuery('#emailsignup').dialog({
 			    modal: true,
 			    draggable: false,
@@ -18030,7 +18039,6 @@ jQuery(document).ready(function(){
 		.always(function () {
 			
 		});
-		
-	});
+	}
 	
 });

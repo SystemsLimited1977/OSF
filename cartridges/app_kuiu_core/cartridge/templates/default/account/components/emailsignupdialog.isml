@@ -4,8 +4,14 @@
 <isdecorate template="util/pt_empty">
 		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm">
 			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
+			<input type="hidden" name="emailAddress" value="${pdict.CurrentHttpParameterMap.emailAddress.stringValue}" />
+			
 			<div class="clearfix">
-				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" name="firstname"  type="input" />
+			<isif condition="${empty(pdict.CurrentHttpParameterMap.emailAddress.stringValue)}">
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.email}"  type="input" />
+			</isif>
+				
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" type="input" />
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.lastname}" type="input" />
 			</div>
 			<div class="clearfix">
