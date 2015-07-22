@@ -83,6 +83,7 @@
 	}
 	.menu-toggle {
 		margin-top: 17px;
+		outline: none;
 	}
 	.responsive-nav ul.menu-category li {
 		height: auto;
@@ -122,7 +123,9 @@
 	.menu-vertical h4 {
 		color: #2b2b2b;
 		padding-left: 20px;
+		margin-top:15px;
 	}
+	
 	.level-1>li .menu-item-toggle:hover {
 		background-color: transparent;
 	}
@@ -340,6 +343,17 @@
 	}
 	.home-bottom-first .home-small {
 		height: 110px !important;
+	}
+	.ui-dialog input[type="text"] {
+		width: 100%;
+	}
+	.ui-dialog .form-row.form-row-button {
+  		padding-bottom: 0px;
+  		width: 80%;
+  		margin-left: 20px;
+	}
+	.ui-dialog .form-row {
+  		padding-bottom: 15px !important;
 	}
 }
 

@@ -35,7 +35,7 @@
 				<isset name="topLevelClass" value="has-sub-menu" scope="page"/>
 			</isif>
 			<a class="${topLevelClass}" href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>">
-				<isprint value="${topCat.getDisplayName()}"/>
+				<span><isprint value="${topCat.getDisplayName()}"/></span>
 			</a>
 
 			<iscategoryflyout category="${topCat}"/>
