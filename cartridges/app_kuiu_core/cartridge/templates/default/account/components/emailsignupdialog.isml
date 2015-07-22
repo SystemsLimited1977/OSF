@@ -1,6 +1,6 @@
 <isinclude template="util/modules"/>
 <div class="emailSignupModal">
-<h4>Subscribe to KUIU Newsletter</h4>
+<h5>Subscribe to the KUIU newsletter to receive news, updates, and special product offers and insights.</h5>
 <isdecorate template="util/pt_empty">
 		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm">
 			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />

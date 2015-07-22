@@ -35,7 +35,7 @@ jQuery(document).ready(function(){
 				    modal: true,
 				    draggable: false,
 				    resizable: false,
-				    width: 400,
+				    width: 720,
 				    dialogClass: 'ui-dialog-osx'
 				}); 
 			});

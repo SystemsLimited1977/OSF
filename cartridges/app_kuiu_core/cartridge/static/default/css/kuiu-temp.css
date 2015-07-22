@@ -93,7 +93,7 @@
 #homepage-slider .jcarousel-prev {
 	background-image: url("../images/interface/b-prev_arrow.png");
     background-repeat: no-repeat;
-      background-position: 8px 15px;
+    background-position: 8px 15px;
 }
 
 #homepage-slider .jcarousel-next {
@@ -102,4 +102,49 @@
 	background-image: url("../images/interface/b-next-arrow.png");
 	background-repeat: no-repeat;
 	background-position: 15px 15px;
+}
+.header-banner .header-promotion a { 
+	color:#fff;
+	font-style: italic;
+}
+
+/*Pop up styling */
+
+.ui-dialog {
+	padding:18px;
+	background-color: #b2b2b2;
+}
+.ui-dialog .ui-widget-header {
+	background-color: #fff;
+	border-bottom:1px solid #e6e6e6;
+	height: 30px;
+	padding:6px;
+}
+
+.ui-dialog .ui-dialog-content,.ui-dialog .ui-dialog-titlebar button {
+	  background-color: #fff;
+}
+
+.ui-dialog .ui-dialog-content h5 {
+	text-align: center;
+}
+
+.ui-dialog h1, .ui-dialog h2 { 
+	width :91%;
+}
+.ui-dialog .ui-dialog-titlebar-close span {
+	background-color: #fff;
+}
+.ui-dialog .form-caption {
+  margin: 0;
+}
+.ui-dialog .form-row  {
+	padding-bottom: 16px;
+	margin:0px;
+}
+
+.ui-dialog .form-row.form-row-button {
+  margin-bottom: 30px;
+  margin-left: 22%;
+  padding: 0px;
 }

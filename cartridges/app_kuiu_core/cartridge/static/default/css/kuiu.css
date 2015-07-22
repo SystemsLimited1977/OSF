@@ -172,7 +172,7 @@ header button:hover, header .button:hover, header .buttonstyle:hover,
 .header-banner .header-promotion {
 	background-color: #000;
 	font-size: 12px;
-	color: #d7d7d7;
+	color: #fff;
 }
 
 header {
@@ -1103,7 +1103,6 @@ span.error {
 
 .ui-dialog input[type="text"] {
 	width: 78%;
-	margin-bottom: 22px;
 }
 
 .error-message {
@@ -1112,11 +1111,6 @@ span.error {
 	padding: 0px;
 	text-indent: 0;
 	width: 49.5966%;
-}
-
-.ui-dialog .ui-widget-header {
-	background-color: #000;
-	height: 32px;
 }
 
 .ui-dialog .cancel-button {
@@ -1135,13 +1129,11 @@ span.error {
 	color: #1d1512;
 }
 
-.ui-dialog .form-row-button {
-	margin-left: 22%;
-}
-
 .ui-dialog .ui-icon-closethick {
 	background-image: url("../images/popup_close_icon.png");
 	background-repeat: no-repeat;
+	background-position: 6px 8px;
+	border-bottom: 1px solid #e6e6e6;
 }
 
 .ui-dialog h4 {
