@@ -73,8 +73,8 @@ footer .footer-container .content-asset ul li {
 	padding: 0px 6px;
 }
 
-footer .footer-container .container #footer-cust ul li:last-child {
-	border: none;
+footer .footer-container .content-asset ul li:last-child {
+	border-right: none;
 }
 
 .footer-container a:hover {
@@ -143,6 +143,9 @@ footer .footer-container .content-asset ul {
 	height: 22px;
 	background-color: #9e9e9e;
 	padding-left: 10px;
+	font-family: "Times New Roman";
+	font-style: italic;
+	font-size: 13px;
 }
 
 footer .footer-container.footer-privacy {
@@ -231,13 +234,19 @@ header {
 	padding: 0 0 0 10px;
 	width: 80%;
 	font-style: italic;
+	font-family: "Times New Roman";
 }
 
 .header-search label {
 	float: right;
-	padding: 0.35rem 0.7rem;
+	padding: 10px 0px;
 	text-align: center;
 	width: 20%;
+	background-image: url("../images/interface/search-icon-head.png");
+	background-repeat: no-repeat;
+    height: 13px;
+    cursor: pointer;
+    background-position: 14px 5px;
 }
 
 ul.menu-category li {
@@ -260,9 +269,8 @@ ul.menu-category li a {
 	padding: 15px 25px;
 }
 
-ul.menu-category li a:hover {
-	border-bottom: none;
-	text-decoration: underline;
+ul.menu-category li a span:hover {
+	border-bottom: 3px solid #2b2b2b;
 }
 
 .mini-cart-total .mini-cart-empty:hover {
