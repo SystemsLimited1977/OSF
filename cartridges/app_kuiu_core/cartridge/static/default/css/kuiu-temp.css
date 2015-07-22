@@ -7,7 +7,7 @@
    background-image: url("https://dev03-shop-kuiu.demandware.net/on/demandware.static/Sites-kuiu_us-Site/Library-Sites-kuiu-contents-lib/default/v1436855499134/images/homepage/banners_homepage_05a.jpg");
    background-position: right top;
    background-size: cover;
-   height: 775px;
+   height: 100%;
    list-style:none;
   }
 #homepage-slides .slide .inner-box {  
@@ -51,11 +51,14 @@
 	color:#000;
 }
 #homepage-slider .jcarousel-control {
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  margin-left:50%;
-  top: 90%;
+  position: relative;
+  left: 0; 
+  top: calc(100vh - 195px);
+  display: table;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  overflow: hidden;
 }
 #homepage-slider .jcarousel-control a {
   border-radius: 50%;
@@ -79,15 +82,16 @@
 
 #homepage-slider .jcarousel-prev,#homepage-slider .jcarousel-next
 {
-	width:39px;
-	height:69px;
+	width:40px;
+	height:70px;
 	background-color: #fff;
 	position: absolute;
     left: 0;
     right: 0;
-    Bottom: 0;
+    bottom: 0;
     top: 50%;
     opacity: 0.8;
+    margin-top:-35px;
 }
 
 #homepage-slider .jcarousel-prev {
@@ -103,6 +107,7 @@
 	background-repeat: no-repeat;
 	background-position: 15px 15px;
 }
+
 .header-banner .header-promotion a { 
 	color:#fff;
 	font-style: italic;
@@ -148,3 +153,39 @@
   margin-left: 22%;
   padding: 0px;
 }
+
+#homepage-slider .jcarousel-scroll {
+	width:40px;
+	height:70px;
+	background-color: #fff;
+	position: absolute;
+    left: 50%;
+    right: 0;
+    bottom: -15px;
+    opacity: 0.8;
+    margin-left:-20px;
+	background-image: url("../images/interface/b-next-arrow.png");
+	background-repeat: no-repeat;
+	background-position: 20px 15px;
+	-ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+#homepage-slider .jcarousel-scroll span{
+	-ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+	  display: block;
+	  width: 100%;
+	  text-align: center;
+	  color: black;
+	  z-index: 5;
+	  position: absolute;
+	  left: 0;
+	  margin-left: -7px;
+	  margin-top: 26px;
+	  font-family: "Times New Roman", Georgia, Serif;
+	  font-size:13px;
+	  font-style:italic;
+	}

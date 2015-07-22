@@ -2,6 +2,10 @@
 @import
 	url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900);
 
+html {
+	-ms-overflow-style: scrollbar;
+}
+
 body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #fff;
@@ -318,8 +322,7 @@ ul.menu-category .level-2 li a:hover {
 }
 
 ul.menu-category li:first-child .level-2 {
-	/*  display: block !important;  */
-	
+
 }
 
 .menu-category .level-2>.menu-vertical {
@@ -330,7 +333,7 @@ ul.menu-category li:first-child .level-2 {
 	margin-top: 15px;
 	border-left: 1px solid #e0e0e0;
 	border-right: none;
-	min-height: 200px;
+	min-height: 212px;
 }
 
 .level-2 .menu-vertical>li>a:first-child {
@@ -345,7 +348,20 @@ ul.menu-category li:first-child .level-2 {
 }
 
 .menu-category .level-2 .banner {
-	padding-top: 15px;
+	padding-top: 0;
+}
+
+.menu-category .level-2 .banner h3 {
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size:14px;
+	line-height:100%;
+	margin:10px 0 6px;
+	text-transform:uppercase;
+}
+
+.menu-category .level-2 .banner p {
+	font-size:12px;
+	line-height:100%;
 }
 
 .menu-category .level-2 .banner a {
@@ -356,6 +372,14 @@ ul.menu-category li:first-child .level-2 {
 }
 
 .menu-category .level-2 .banner a:hover {
+	text-decoration:none;
+}
+.menu-category .level-2 .banner img {
+	border:1px solid #e0e0e0;
+	max-height:160px;
+	width:auto;
+}
+.menu-category .level-2 .banner a:hover {
 	border-bottom: none;
 }
 
@@ -364,7 +388,7 @@ ul.menu-category li:first-child .level-2 {
 	text-transform: capitalize;
 	font-weight: 600;
 	padding-left: 25px;
-	margin-top: 15px;
+	margin-top: 0;
 	margin-bottom: 0;
 }
 
@@ -422,6 +446,7 @@ header .col-md-12 ul {
 
 .header-main-search {
 	margin-top: 15px;
+	clear:both;
 }
 
 .primary-logo {
@@ -451,6 +476,9 @@ header .col-md-12 ul {
 	text-align: center;
 }
 
+.header-right .header-right-content {
+	margin-top:15px;	
+}
 .mini-cart-total .mini-cart-link .minicart-quantity {
 	color: #000;
 	position: static;
@@ -1266,12 +1294,26 @@ sup {
 }
 
 
+/*home slider height issue fixed*/
 
+.home-slider-wrap {
+	height:calc(100vh - 133px);
+}
 
+#homepage-slider {
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    position: relative;
+}
 
-
-
-
+#homepage-slides {
+    display: block;
+    height: 100%;
+    list-style: outside none none;
+    min-height: 100%;
+    position: absolute;
+}
 
 
 
