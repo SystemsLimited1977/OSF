@@ -27,8 +27,8 @@
 <isif condition="${topLevelCategory != null}">
 	<ul class="menu-category level-1">
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
-	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat">
-		<li>
+	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat" status="level1LoopStatus" >
+		<li id="${'menu-space' + '' + level1LoopStatus.count}">
 			<isset name="topLevelClass" value="${''}" scope="page"/>
 			<isif condition="${getSubCategoriesLayout(topCat).hasContent}">
 				<i class="menu-item-toggle fa fa-chevron-right1"></i>
@@ -38,7 +38,7 @@
 				<span><isprint value="${topCat.getDisplayName()}"/></span>
 			</a>
 
-			<iscategoryflyout category="${topCat}"/>
+			<iscategoryflyout category="${topCat}" loopcount="${level1LoopStatus.count}"/>
 		</li>
 	</isloop>
 	</ul>

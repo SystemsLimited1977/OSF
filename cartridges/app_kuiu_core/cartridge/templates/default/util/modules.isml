@@ -29,6 +29,7 @@
 <ismodule template="components/header/categoryflyout.isml"
 	name="categoryflyout"
 	attribute="category"
+	attribute="loopcount"
 />
 
 <iscomment>

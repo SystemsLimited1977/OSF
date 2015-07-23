@@ -10,7 +10,7 @@
 		<div class="level-2">
 			
 				<isloop items="${topCat.custom.categoryGroupLabel}" var="categoryLabel" status="labelIndex">
-					<ul class="${subCatLayout.horizontal ? 'menu-horizontal' : 'menu-vertical'}">
+					<ul class="${subCatLayout.horizontal ? 'menu-horizontal' : 'menu-vertical'}" id="${'menu-spacing-level2-' + '' + labelIndex.count}">
 						<h4><isprint value="${categoryLabel}"/></h4>
 						<isloop items="${subCatLayout.subCategories}" var="subCat" status="stat">
 							<isif condition="${stat.index <= subCatLayout.maxColLength -1 && (subCat.custom.categoryGroupIndex.value.equals(labelIndex.count))}">
@@ -63,7 +63,7 @@
 	<isset name="subCatLayout" value="${getSubCategoriesLayout(topCat)}" scope="page"/>
 	<isif condition="${subCatLayout.hasContent}">
 		<div class="level-2">
-			<ul class="${subCatLayout.horizontal ? 'menu-horizontal' : 'menu-vertical'}">
+			<ul class="${subCatLayout.horizontal ? 'menu-horizontal' : 'menu-vertical'}" id="${'menu-spacing-level2-' + '' + pdict.loopcount}">
 				<isloop items="${subCatLayout.subCategories}" var="subCat" status="stat">
 					<isif condition="${stat.index <= subCatLayout.maxColLength -1}">
 						<li>

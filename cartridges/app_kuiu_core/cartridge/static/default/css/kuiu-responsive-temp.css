@@ -29,6 +29,31 @@
 	#homepage-slider .jcarousel-control {
 	  	top: calc(100vh - 160px);
 	 }
+	 
+	.social-icon ul.social-links li a.fb {
+		background-position: 119px 80px;
+	}
+	.social-icon ul.social-links li a.twitter { 
+		background-position: 89px 80px;
+	}
+	.social-icon ul.social-links li a.youtube { 
+		background-position: 59px 80px;
+	}
+	.social-icon ul.social-links li a.linkedin{ 
+		background-position: 27px 80px;
+	}
+	.social-icon ul.social-links li a.twitter:hover  { 
+		background-position: 89px 109px;
+	}
+	.social-icon ul.social-links li a.youtube:hover  { 
+		background-position: 59px 109px;
+	}
+	.social-icon ul.social-links li a.linkedin:hover  { 
+		background-position: 27px 109px;
+	}
+	.social-icon ul.social-links li a.fb:hover { 
+		background-position: 119px 109px;
+	}
 	
 }
 
