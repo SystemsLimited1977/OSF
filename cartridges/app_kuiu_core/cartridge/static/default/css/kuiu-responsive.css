@@ -30,6 +30,13 @@
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
+	.ui-dialog label {
+		width:100%;
+		float:none;
+		display:block;
+		margin:0 0 5px;
+		padding:0;
+	}
 	.login-box-content label, label, .form-caption, .form-label-text {
 		width: auto;
 	}

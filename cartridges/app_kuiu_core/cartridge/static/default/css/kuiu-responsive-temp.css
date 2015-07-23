@@ -23,11 +23,86 @@
 	}
 	
 	.home-slider-wrap {
-		height:calc(100vh - 98px);
+		height:auto;
 	}
 	
 	#homepage-slider .jcarousel-control {
-	  	top: calc(100vh - 160px);
+	  	bottom: inherit;
+	    clear: both;
+	    display: table;
+	    overflow: hidden;
+	    position: absolute;
+	    top: 300px;
+	    z-index: 5;
+	 }
+	 
+	 #homepage-slider {
+	    min-height: 0;
+	    min-width: 100%;
+	    overflow: hidden;
+	    position: relative;
+	}
+	
+	#homepage-slides {
+		height:auto;
+		min-height:0;
+		overflow:inherit;
+		position:relative;
+		padding:0;
+	}
+	
+	#homepage-slides .slide .inner-box {  
+		bottom: inherit;
+    	margin-top: 330px;
+    	position: relative;
+    	width: 100%;
+    	background-color: transparent;
+    	height: auto;
+    	padding:15px 15px 10px;
+	}
+	
+	#homepage-slides .slide .inner-box h1 {
+		color: #1a1a1a;
+	    font-size: 20px;
+	    letter-spacing: 2px;
+	    padding-top: 25px;
+	    white-space: nowrap;
+	    margin:0 0 5px;
+	}
+	
+	#homepage-slides .slide .inner-box h3 {
+		font-family: "Times New Roman", Georgia, Serif;
+		font-size:13px;
+		margin:0;
+		color:#1a1a1a;
+	}
+	#homepage-slides .slide {
+		min-height:330px;
+		position:relative;
+		background-size:auto 330px;
+		background-position:right top;
+		background-repeat: no-repeat;
+		height:auto;
+		overflow:visible;
+	}
+	
+	#homepage-slides .slide .inner-box button {
+		 background-color: #1a1a1a;
+		 color:#fff;
+		 margin-top:10px;
+	}
+	#homepage-slider .jcarousel-prev, #homepage-slider .jcarousel-next {
+		top:130px;
+		margin-top:0;
+	}
+	
+	#homepage-slider .jcarousel-scroll {
+		display:none;
+	}
+
+	 .ui-dialog .form-row.form-row-button {
+	 	margin-left:0;
+	 	width:100%;
 	 }
 	 
 	.social-icon ul.social-links li a.fb {
@@ -60,6 +135,19 @@
 @media ( min-width : 768px) and (max-width: 991px) {
 	#homepage-slides .slide {
 		/*height: 550px;*/
+	}
+	
+	#homepage-slides .slide .inner-box h1 {
+		font-size:30px;
+		margin-bottom:10px;
+	}
+	
+	#homepage-slides .slide .inner-box h3 {
+		margin-top:0;
+	}
+	
+	#homepage-slides .slide .inner-box {
+		width:80%;
 	}
 }
 

@@ -36,7 +36,7 @@
 	letter-spacing: 1px;
 	font-size:18px;
 	font-weight: 400;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Times New Roman", Georgia, Serif;
 }
 #homepage-slides .slide .inner-box button{
 	width:135px;
@@ -116,13 +116,13 @@
 /*Pop up styling */
 
 .ui-dialog {
-	padding:18px;
-	background-color: #b2b2b2;
+	border: 15px solid #b2b2b2;
+    padding: 5px 20px;
 }
 .ui-dialog .ui-widget-header {
 	background-color: #fff;
 	border-bottom:1px solid #e6e6e6;
-	height: 30px;
+	height: 32px;
 	padding:6px;
 }
 
@@ -132,6 +132,7 @@
 
 .ui-dialog .ui-dialog-content h5 {
 	text-align: center;
+	margin-bottom:20px;
 }
 
 .ui-dialog h1, .ui-dialog h2 { 

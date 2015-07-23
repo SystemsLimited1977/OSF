@@ -658,7 +658,7 @@ header .col-md-12 ul {
 	margin-right: 0;
 }
 
-label {
+.ui-dialog label, #main label {
 	display: block;
 	float: left;
 	font-size: 1.1em;
@@ -668,7 +668,7 @@ label {
 	width: 22%;
 }
 
-.input-text {
+#main .input-text, .ui-dialog .input-text {
 	display: block;
 	width: 100%;
 	height: 34px;
@@ -689,7 +689,7 @@ label {
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.input-text:focus {
+#main .input-text:focus, .ui-dialog .input-text:focus {
 	border-color: #66afe9;
 	outline: 0;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
@@ -1151,7 +1151,7 @@ span.error {
 /* Email POP-UP Styling */
 .ui-dialog .ui-dialog-content {
 	overflow: visible;
-	padding-top: 10px;
+	padding: 10px 0;
 }
 
 .form-caption {
@@ -1189,7 +1189,7 @@ span.error {
 .ui-dialog .ui-icon-closethick {
 	background-image: url("../images/popup_close_icon.png");
 	background-repeat: no-repeat;
-	background-position: 6px 8px;
+	background-position: right 8px;
 	border-bottom: 1px solid #e6e6e6;
 }
 
@@ -1350,6 +1350,5 @@ ul.menu-category.level-1 li#menu-space2 .level-2 {
 ul.menu-category.level-1 li#menu-space3 .level-2 {
 	padding-left: 408px;
 } 
-
 
 
