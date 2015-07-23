@@ -17985,8 +17985,7 @@ module.exports = asap;
 //# sourceMappingURL=app.js.map
 
 //Footer signup popup for listrak
-jQuery(document).ready(function(){
-		
+jQuery(document).ready(function(){	
 	jQuery('#email-alert-address').keypress(function(ev) {
 	    if(ev.which == 13) {
 	    	openDialog();

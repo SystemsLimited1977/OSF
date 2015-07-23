@@ -1,10 +1,8 @@
 jQuery(document).ready(function(){
 	
-	jQuery('#cancel').click(function(e){
+	jQuery("#cancel").click(function(e){
 		e.preventDefault();
-		
-		jQuery('#emailsignup').dialog("close");
-		jQuery('#subscribeIno').dialog("close");
+		jQuery("#emailsignup").dialog("close");
 	});
 	
 	jQuery("#cancelThankYou").click(function(){
@@ -25,19 +23,26 @@ jQuery(document).ready(function(){
 	          cache: false, 
 			  data: form.serialize() + "&"+ jQuery(this).attr("name") + "=submit",
 			}).done(function ( data ) {
-				
-				jQuery('#emailsignup').dialog("close");
-				jQuery('#subscribeIno').dialog("close");
-				jQuery('<div/>', {'id':'thankyou'}).appendTo('body');
-				jQuery('#thankyou').css('display','none');
-				jQuery('#thankyou').empty().html(data);
-				jQuery('#thankyou').dialog({
-				    modal: true,
-				    draggable: false,
-				    resizable: false,
-				    width: 720,
-				    dialogClass: 'ui-dialog-osx'
-				}); 
+				debugger;
+				if(jQuery(data).find('input[name="errorinform"]').length > 0){
+					if(jQuery(data).find('input[name="errorinform"]').val().length > 0){
+						jQuery('#emailsignup').empty().html(data);
+					}
+				}	
+				else{
+					jQuery('#emailsignup').dialog("close");
+					jQuery('<div/>', {'id':'thankyou'}).appendTo('body');
+					var dialogElem = jQuery('#thankyou');
+					jQuery(dialogElem).css('display','none');
+					jQuery(dialogElem).empty().html(data);
+					jQuery(dialogElem).dialog({
+					    modal: true,
+					    draggable: false,
+					    resizable: false,
+					    width: 720,
+					    dialogClass: 'ui-dialog-osx'
+					}); 
+				}
 			});
 	});
 });

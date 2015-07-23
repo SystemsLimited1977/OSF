@@ -1,14 +1,14 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
-<div class="emailSignupModal">
-<h5>Subscribe to the KUIU newsletter to receive news, updates, and special product offers and insights.</h5>
-<isdecorate template="util/pt_empty">
-		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm">
+	<div class="emailSignupModal">
+		<h5>Subscribe to the KUIU newsletter to receive news, updates, and special product offers and insights.</h5>
+		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
 			<input type="hidden" name="emailAddress" value="${pdict.CurrentHttpParameterMap.emailAddress.stringValue}" />
 			
 			<div class="clearfix">
 			<isif condition="${empty(pdict.CurrentHttpParameterMap.emailAddress.stringValue)}">
-				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.email}"  type="input" />
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.email}" type="input" />
 			</isif>
 				
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" type="input" />
@@ -20,11 +20,9 @@
 			
 			<div class="form-row form-row-button clearfix">
 				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>
-				<button class="dialogify cancel-button" id="cancel" name="" type="" value="Cancel"  title="">Cancel</button>
+				<button  id="cancel" >Cancel</button>
 			</div>
-			
 		</form>
-</isdecorate>
-</div>
-
+		<input type="hidden" name="errorinform" value="${pdict.ErrorInForm}" />
+	</div>
 <script src="${URLUtils.staticURL('/lib/jquery/thankyou.js')}" type="text/javascript"></script>
