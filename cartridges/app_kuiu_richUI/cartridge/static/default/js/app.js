@@ -17986,8 +17986,8 @@ module.exports = asap;
 
 //Footer signup popup for listrak
 jQuery(document).ready(function(){
-	
-	jQuery(document).keypress(function(ev) {
+		
+	jQuery('#email-alert-address').keypress(function(ev) {
 	    if(ev.which == 13) {
 	    	openDialog();
 	    	return false;
