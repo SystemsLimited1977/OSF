@@ -120,10 +120,19 @@ footer .footer-container .content-asset ul {
 	width: 118px;
 	height: 25px;
 }
+.social-icon .social-links.links-size {
+  width: 143px;
+  padding:0px;
+}
+.account-nav-asset .social-icon {
+  padding-left:0px;
+  padding-top:0px;
+}
 
 .social-icon ul.social-links li,.social-icon ul.social-links.links-size li {
 	border-right:none !important;
 	padding: 0px !important;
+	list-style: none;
 }
 .social-icon ul.social-links li a,.social-icon ul.social-links.links-size li a  {
 	background-image: url("../images/interface/icon-social-links.png");
@@ -144,6 +153,20 @@ footer .footer-container .content-asset ul {
 .social-icon ul.social-links li a.linkedin { 
 	background-position: 27px 109px;
 }
+
+.social-icon ul.social-links.links-size li a.fb {
+	background-position: 119px 80px;
+}
+.social-icon ul.social-links.links-size li a.twitter {
+	background-position: 89px 80px;
+}
+.social-icon ul.social-links.links-size li a.youtube {
+	background-position: 59px 80px;
+}
+.social-icon ul.social-links.links-size li a.linkedin {
+	background-position: 27px 80px;
+}
+
 /*
 .social-icon ul.social-links li a.fb:hover { 
 	background-position: 119px 80px;
@@ -1232,6 +1255,7 @@ sup {
 	background-color: #1a1a1a;
 	color: #fff;
 	padding-bottom: 15px;
+	height:135px;
 }
 
 .home-bottom-slots .home-first h1, .home-bottom-first .home-small h1 {
