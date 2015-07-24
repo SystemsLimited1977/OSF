@@ -7,9 +7,9 @@
 			<input type="hidden" name="emailAddress" value="${pdict.CurrentHttpParameterMap.emailAddress.stringValue}" />
 			
 			<div class="clearfix">
-			<isif condition="${empty(pdict.CurrentHttpParameterMap.emailAddress.stringValue)}">
+			<iscomment><isif condition="${empty(pdict.CurrentHttpParameterMap.emailAddress.stringValue)}"></iscomment>
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.email}" type="input" />
-			</isif>
+			<iscomment></isif></iscomment>
 				
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" type="input" />
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.lastname}" type="input" />
