@@ -65,20 +65,27 @@
 					<isprint value="${pdict.ProductSearchResult.products.asList().length}" />
 					<isprint value="${'Items'}" />
 				</p>
-				<h1><isprint value="${pdict.ProductSearchResult.category.getDisplayName()}" /></h1><br>
-				<button id="refineby">${Resource.msg('refinements.slider.refineby','search',null)}</button>
+				<h1><isprint value="${pdict.ProductSearchResult.category.getDisplayName()}" /></h1>
+				<button id="refineby" class="btn-refineby">${Resource.msg('refinements.slider.refineby','search',null)}</button>
 				<isproductsortingoptions productsearchmodel="${pdict.ProductSearchResult}" pagingmodel="${pdict.ProductPagingModel}" uniqueid="grid-sort-header"/>
 			</center>		
 		</div>
 		<div id="secondary" class="refinements" style="display: none;">
+		<div class="container">
+		<div class="refinements-wrap">
 			<isinclude template="search/components/productsearchrefinebar"/>
+		</div>
 			<a href="${'#'}"  id="closeslider">${Resource.msg('refinements.slider.close','search',null)}</a>
+		</div>
 		</div>
 	</div>
 	</iscomment>	
 	<iscomment>Breadcrumb for product refinements</iscomment>
+	<div class="refinements-breadcrumb">
+	<div class="container">
 	<isinclude template="search/components/productsearchbreadcrumbs"/>
-	
+	</div>
+	</div>
 	<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
 
 		<div class="search-result-bookmarks">

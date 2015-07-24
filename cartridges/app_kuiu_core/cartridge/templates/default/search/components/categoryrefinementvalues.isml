@@ -64,25 +64,24 @@
 					<ul id="category-level-${CategoryLevel.toFixed()}">
 						<h4><isprint value="${categoryLabel}"/></h4>
 						<isloop items="${Category.onlineSubCategories}" var="SubCategory">
-							<li <isif condition="${SubCategory.onlineSubCategories.size() > 0}">class="expandable fa fa-angle-right<isif condition="${IDPath.contains(SubCategory.ID)}"> active fa-angle-down</isif>"</isif>>
-								<iscomment>render the actual link</iscomment>
-								<isif condition="${SearchModel.categorySearch}">
-									<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show', SubCategory.ID)}" scope="page"/>
-								<iselse/>                        
-									<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', SearchModel.searchPhrase), SubCategory.ID)}" scope="page"/>
-								</isif>
-								<isif condition="${SubCategory.custom.categoryGroupIndex.value.equals(labelIndex.count)}">
-									<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${SubCategory.displayName}" href="${refineLinkUrl}">
-										<isprint value="${SubCategory.displayName}"/>
-									</a>
-								</isif>
-		
-								<iscomment>display the next level refinement values of the category in case it is part of the category path
-								<isif condition="${(CategoryPath != null) && (CategoryPath.size() > 0) && (IDPath.contains(SubCategory.ID))}">
-									<islevel3categoryrefinementvalues searchmodel="${SearchModel}" category="${CategoryPath.get(0)}" categorypath="${CategoryPath}" categorylevel="${CategoryLevel+1}"/>
-								</isif>
-								</iscomment>
-							</li>
+							<isif condition="${SubCategory.custom.categoryGroupIndex.value.equals(labelIndex.count)}">
+								<li <isif condition="${SubCategory.onlineSubCategories.size() > 0}">class="expandable fa fa-angle-right<isif condition="${IDPath.contains(SubCategory.ID)}"> active fa-angle-down</isif>"</isif>>
+									<iscomment>render the actual link</iscomment>
+									<isif condition="${SearchModel.categorySearch}">
+										<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show', SubCategory.ID)}" scope="page"/>
+									<iselse/>                        
+										<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', SearchModel.searchPhrase), SubCategory.ID)}" scope="page"/>
+									</isif>
+										<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${SubCategory.displayName}" href="${refineLinkUrl}">
+											<isprint value="${SubCategory.displayName}"/>
+										</a>
+									<iscomment>display the next level refinement values of the category in case it is part of the category path
+									<isif condition="${(CategoryPath != null) && (CategoryPath.size() > 0) && (IDPath.contains(SubCategory.ID))}">
+										<islevel3categoryrefinementvalues searchmodel="${SearchModel}" category="${CategoryPath.get(0)}" categorypath="${CategoryPath}" categorylevel="${CategoryLevel+1}"/>
+									</isif>
+									</iscomment>
+								</li>
+							</isif>
 						</isloop>
 					</ul>
 				</isif>

@@ -1585,3 +1585,298 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	padding-left:50px;
 }
 
+.pt_product-search-result .primary-content, 
+.pt_content-search-result .primary-content {
+	background:#fff;
+}
+
+#main .categoryheader {
+	padding-top:30px;
+}
+
+#main .categoryheader p {
+	margin:0;
+}
+
+#main .categoryheader h1 {
+	margin:0 0 20px;
+}
+
+#main .categoryheader .sort-by {
+	width:auto;
+	display:inline-block;
+	background:#f9f9f9;
+	border:1px solid #dadad9;
+	vertical-align:top;
+	 color:#2b2b2b;
+	 font-size:13px;
+	 padding:3px 0;
+	 margin-bottom:20px;
+	 float:none;
+	 font-style:normal;
+	 background-position: 92% 11px;
+}
+
+#main .categoryheader .sort-by form label{
+	display:none;
+}
+
+#main .categoryheader .sort-by form select {
+	font-style: normal !important;
+    width: auto;
+    background-color: transparent;
+    border:none;
+    margin:0;
+    font-size:13px;
+    background-position: 92% 11px;
+}
+
+#main .categoryheader .btn-refineby {
+	vertical-align:top;
+	-moz-appearance: none;
+    background-image: url("../images/arrow_down.png");
+    background-position: 92% 11px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin-left: 0;
+    text-align:left;
+    color:#2b2b2b;
+    font-size:13px;
+    margin-bottom:20px;
+    background-color:#f9f9f9;
+	border:1px solid #dadad9;
+	min-width: 114px;
+    padding: 0 5px;
+}
+
+#main .categoryheader .sort-Go-Button {
+	display:none;
+	}
+
+.refinements {
+	background-color: #f9f9f9;
+	border:1px solid #dadad9;
+}
+.refinements .refinements-wrap {
+	margin:0;
+    padding:20px 0;
+    display:table;
+    table-layout: fixed;
+    width:100%;
+    max-width:100%;
+}
+
+.refinements .refinements-wrap .refinement {
+	border-left:1px solid #dcdcdb;
+    padding: 5px 10px;
+    margin:0;
+    overflow:hidden;
+    display:table-cell;
+}
+
+.refinements .refinement.Color .refinement-header,
+.refinements .refinement.Price .refinement-header,
+.refinements .refinement.Size .refinement-header,
+.refinements .refinement.KUIU.System .refinement-header {
+	display:none;
+}
+
+.refinements .refinements-wrap h2.visually-hidden {
+	display:none;
+}
+
+.refinements .refinement-header {
+  background-color: transparent;
+  border-top: none;
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0;
+  margin: 0 0 10px;
+  padding: 0;
+  text-transform: uppercase;
+  text-align:left;
+  font-family: "Times New Roman", Georgia, Serif;
+}
+
+.refinement h3.toggle {
+  background-color: transparent;
+  border-top: none;
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0;
+  margin: 0 0 10px;
+  padding: 0;
+  text-transform: uppercase;
+  text-align:left;
+  font-family: "Times New Roman", Georgia, Serif;
+}
+
+.refinement h3.toggle i.fa {
+	display:none;
+}
+
+.refinement ul {
+	padding:0;
+}
+
+.refinement ul h4 {
+	font-size: 13px;
+  	font-weight: 600;
+  	margin:0;
+}
+
+.refinement ul li {
+	padding:0;
+	margin-top:8px;
+}
+
+.refinements .refinement #category-level-1 li .refinement-link {
+	padding:0;
+}
+
+.refinement ul:first-child {
+	margin-top:25px;
+}
+
+.refinement ul.swatches li {
+  float: left;
+  padding: 0;
+  border: 1px solid #f9f9f9;
+  border-radius: 99px;
+  margin-right: 10px;
+  margin-bottom:10px;
+}
+
+.refinement ul.swatches li.selected {
+  border: 1px solid #c3c3c3
+}
+.refinement ul.swatches li a {
+  border: 1px solid #c3c3c3;
+  border-radius: 99px;
+  display: block;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.refinement ul.swatches li.selected a {
+  border: 2px solid #fff;
+  font-weight: normal;
+}
+
+.refinement .clear-refinement {
+  position: absolute;
+  right: 0.7em;
+  top: 7px;
+  font-style:italic;
+  font-family: "Times New Roman", Georgia, Serif;
+}
+
+
+
+
+.refinement ul.swatches.Color li {
+  float: left;
+  padding: 0;
+  border: 1px solid #c3c3c3;
+  border-radius: 99px;
+  margin-right: 5px;
+}
+
+.refinement ul.swatches.Color li.selected {
+  border: 1px solid #c3c3c3
+}
+.refinement ul.swatches.Color li a {
+  border: 2px solid #fff;
+  border-radius: 99px;
+  display: block;
+  padding: 5px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.refinement ul.swatches.Color li.selected a {
+  border: 2px solid #fff;
+  font-weight: normal;
+  background-image:url("../images/icon-color-cross.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+}
+
+.refinements #closeslider {
+  width: 40px;
+  text-align: center;
+  left: 50%;
+  position: relative;
+  margin-left: -20px;
+  margin-bottom: 15px;
+  display: block;
+  font-style: italic;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.refinements-breadcrumb .breadcrumb {
+	background-color: transparent;
+}
+
+
+.refinements-breadcrumb .breadcrumb-refinement-value {
+	background-color: transparent;
+}
+
+.refinements-breadcrumb .breadcrumb-relax { 
+  background: none;
+  color: #2b2b2b;
+  font-style: normal;
+  padding: 0;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 1px solid #c4c4c4;
+  border-radius: 99px;
+  text-align: center;
+  line-height: 16px;
+  vertical-align: bottom;
+  margin-bottom: -4px;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.refinements-breadcrumb #clearallrefinements {
+  float: right;
+  margin-top: 4px;
+  color: #2b2b2b;
+  font-size: 13px;
+  font-style: italic;
+  display: block;
+  text-align: right;
+  padding-right: 3px;
+  font-family: "Times New Roman", Georgia, Serif;
+}
+
+.refinements-breadcrumb .breadcrumb {
+  padding: 8px 0;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom:1px solid #dadad9;
+}
+
+
+
+
+
+
+
+
+
+
