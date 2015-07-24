@@ -1719,6 +1719,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 .refinement ul {
 	padding:0;
+	margin: 0 0 15px;
 }
 
 .refinement ul h4 {
@@ -1736,8 +1737,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	padding:0;
 }
 
-.refinement ul:first-child {
-	margin-top:25px;
+.refinement ul:first-child{
+	margin-bottom:25px;
 }
 
 .refinement ul.swatches li {
@@ -1871,7 +1872,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   border-bottom:1px solid #dadad9;
 }
 
-
+.refinements-breadcrumb .container {
+	padding-left:0;
+	padding-right:0;
+}
 
 
 

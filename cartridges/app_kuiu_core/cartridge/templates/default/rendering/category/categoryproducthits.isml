@@ -57,7 +57,7 @@
 			</isif>
 		</isif>
 	</div>
-	<iscomment>
+
 	<div>
 		<div class="categoryheader">
 			<center>
@@ -79,7 +79,7 @@
 		</div>
 		</div>
 	</div>
-	</iscomment>	
+		
 	<iscomment>Breadcrumb for product refinements</iscomment>
 	<div class="refinements-breadcrumb">
 	<div class="container">
