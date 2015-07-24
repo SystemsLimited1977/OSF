@@ -10,18 +10,21 @@
 </isscript>
 
 <div class="breadcrumb">
-	<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a>
-
+	<iscomment>
+		<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a>
+	</iscomment>
 	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
 		<isif condition="${empty(pagingModel)}">
 			<isset name="breadcrumbHref" value="${URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase)}" scope="page" />
 		<iselse/>
 			<isset name="breadcrumbHref" value="${pagingModel.appendPaging(URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase), 0)}" scope="page" />
 		</isif>
-		<span class="breadcrumb-element breadcrumb-result-text">
-			${Resource.msg('searchbreadcrumbs.resultstext','search',null)}
-			&quot;<a href="${breadcrumbHref}" title="${pdict.ProductSearchResult.searchPhrase}">${pdict.ProductSearchResult.searchPhrase}</a>&quot;
-		</span>
+		<iscomment>
+			<span class="breadcrumb-element breadcrumb-result-text">
+				${Resource.msg('searchbreadcrumbs.resultstext','search',null)}
+				&quot;<a href="${breadcrumbHref}" title="${pdict.ProductSearchResult.searchPhrase}">${pdict.ProductSearchResult.searchPhrase}</a>&quot;
+			</span>
+		</iscomment>
 	</isif>
 
 	<isif condition="${!empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null}">
@@ -45,16 +48,20 @@
 			<iselse/>
 				<isset name="catLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', pdict.ProductSearchResult.searchPhrase), cat.ID)}" scope="page"/>
 			</isif>
-			<a class="breadcrumb-element" href="${catLinkUrl}" title="${cat.displayName}">${cat.displayName}</a>
+			<iscomment>
+				<a class="breadcrumb-element" href="${catLinkUrl}" title="${cat.displayName}">${cat.displayName}</a>
+			</iscomment>
 		</isloop>
 
 	</isif>
 
 	<iscomment>SORTING INFO </iscomment>
 	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.sortingRule) && (pdict.ProductSearchResult.category != null)}">
-		<isif condition="${pdict.ProductSearchResult.sortingRule.ID}">
-			<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span>
-		</isif>
+		<iscomment>
+			<isif condition="${pdict.ProductSearchResult.sortingRule.ID}">
+				<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span>
+			</isif>
+		</iscomment>
 		<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}" var="sortingOption">
 			<isif condition="${sortingOption.getID() == pdict.ProductSearchResult.sortingRule.ID}">
 				<span class="breadcrumb-refinement">${sortingOption.getDisplayName()}</span>
@@ -64,11 +71,11 @@
 
 	<iscomment>REFINEMENT INFO </iscomment>
 	<isif condition="${!empty(pdict.ProductSearchResult) && (pdict.ProductSearchResult.refinedByPrice || pdict.ProductSearchResult.refinedByAttribute)}">
-
-		<isif condition="${(pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice) || (pdict.ProductSearchResult.refinements.refinementDefinitions.size() > 0)}">
-			<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.refinedby', 'search', null)}</span>
-		</isif>
-
+		<iscomment>
+			<isif condition="${(pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice) || (pdict.ProductSearchResult.refinements.refinementDefinitions.size() > 0)}">
+				<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.refinedby', 'search', null)}</span>
+			</isif>
+		</iscomment>
 		<iscomment>Price</iscomment>
 		<isif condition="${pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice}">
 			<isscript>
@@ -131,6 +138,8 @@
 				</span>
 			</isif>
 		</isloop>
+		
+		<a href="${dw.web.URLUtils.url('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.stringValue)}" id="clearallrefinements">${Resource.msg('refinements.slider.clearall','search',null)}</a>
 	</isif>
 
 	<ispagingcurrentpage pageurl="${pdict.ProductSearchResult.url('Search-Show')}" pagingmodel="${pdict.ProductPagingModel}"/>

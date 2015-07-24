@@ -8,15 +8,12 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-
-	<isinclude template="search/components/productsearchbreadcrumbs"/>
-
+	<iscomment>
+		<isinclude template="search/components/productsearchbreadcrumbs"/>
+	</iscomment>
+	
+	
 	<div id="primary" class="primary-content">
 		<isreplace/>
 	</div>
-	
-	<div id="secondary" class="refinements">
-		<isinclude template="search/components/productsearchrefinebar"/>
-	</div>
-	
 </isdecorate>

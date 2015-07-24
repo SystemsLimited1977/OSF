@@ -3125,6 +3125,13 @@ exports.init = function () {
 	}
 	productTile.init();
 	initializeEvents();
+	$("#refineby").click(function () {
+	   $('#secondary').slideToggle();
+	});
+	$('#closeslider').click(function(e){
+		e.preventDefault();
+		$('#secondary').slideToggle();
+	});
 };
 
 },{"../compare-widget":4,"../product-tile":36,"../progress":37,"../util":48}],33:[function(require,module,exports){

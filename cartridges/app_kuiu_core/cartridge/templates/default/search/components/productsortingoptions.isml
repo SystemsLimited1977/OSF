@@ -49,7 +49,7 @@
 					
 					<select id="${uniqueId}" <isif condition="${empty(sortingRuleID)}"> style="font-style:italic;"</isif> >
 						<isif condition="${empty(sortingRuleID)}">
-							<option style="font-style:italic" selected>${Resource.msg('global.paginginformation.undefined','locale',null)}</option>
+							<option style="font-style:italic" selected>${Resource.msg('global.paginginformation.sortby','locale',null)}</option>
 						</isif>
 						<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}" var="SortingOption" status="Status">
 							<option value="${pdict.pagingmodel.appendPaging(pdict.productsearchmodel.urlSortingRule('Search-Show', SortingOption.getSortingRule()),0)}"<isif condition="${sortingRuleID == SortingOption.getSortingRule().getID()}">selected</isif>>${SortingOption.getDisplayName()}</option>
