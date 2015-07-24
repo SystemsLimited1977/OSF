@@ -204,11 +204,11 @@
 		</isif>
 
 		<iscomment>Rating</iscomment>
-		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		<isif condition="${showrating && !Product.productSet}">
 			<isinclude template="product/components/reviewsmini"/>
 		</isif>
-
+		</iscomment>
 		<iscomment>Swatches</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<isif condition="${showswatches}">

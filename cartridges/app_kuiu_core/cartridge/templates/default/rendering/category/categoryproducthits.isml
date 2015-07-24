@@ -57,7 +57,7 @@
 			</isif>
 		</isif>
 	</div>
-	
+	<iscomment>
 	<div>
 		<div class="categoryheader">
 			<center>
@@ -75,7 +75,7 @@
 			<a href="${'#'}"  id="closeslider">${Resource.msg('refinements.slider.close','search',null)}</a>
 		</div>
 	</div>
-		
+	</iscomment>	
 	<iscomment>Breadcrumb for product refinements</iscomment>
 	<isinclude template="search/components/productsearchbreadcrumbs"/>
 	
@@ -95,7 +95,7 @@ search.producthits.productsfound','search',null)}</a>
 	<isif condition="${!(pdict.ProductPagingModel == null) && !pdict.ProductPagingModel.empty}">
 
 		<div class="search-result-options">
-
+				<div class="container">
 			<iscomment>sort by
 				<isproductsortingoptions productsearchmodel="${pdict.ProductSearchResult}" pagingmodel="${pdict.ProductPagingModel}" uniqueid="grid-sort-header"/>
 			</iscomment>
@@ -109,13 +109,14 @@ search.producthits.productsfound','search',null)}</a>
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.category) && compareEnabled}">
 				<iscomparecontrols category="${pdict.ProductSearchResult.category}"/>
 			</isif>
-
+			</div>
 		</div>
 
 		<div class="search-result-content">
+		<div class="container">
 			<isproductgrid pagingmodel="${pdict.ProductPagingModel}" category="${pdict.ProductSearchResult.category}"/>
 		</div>
-
+		</div>
 		<div class="search-result-options">
 
 			<iscomment>sort by

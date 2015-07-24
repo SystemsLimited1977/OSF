@@ -3,10 +3,10 @@
 	importScript('search/ProductGridUtils.ds');
 </isscript>
 <iscomment><!--Display the remaining products as list--></iscomment>
-
+<div class="row">
 <ul id="search-result-items" class="search-result-items tiles-container clearfix ${ProductGridUtils.getCompareClass(pdict.category)} ${!empty(pdict.CurrentHttpParameterMap.format.value) ? (pdict.CurrentHttpParameterMap.format.value) : ''}">
 	<isloop items="${pdict.pagingmodel.pageElements}" var="LoopProductHit" status="loopstate">
-
+	<div class="col-xs-12 col-sm-4 col-md-3">
 		<li class="grid-tile ${(loopstate.index % 4 == 0) ? 'new-row' : ''}"  data-colors-to-show="${ProductGridUtils.getRepresentedVariationValueIDs(LoopProductHit,'color').join(',')}">
 
 			<iscomment><!--display a tile per product--></iscomment>
@@ -16,8 +16,10 @@
 			</isobject>
 
 		</li>
+	</div>
 	</isloop>
 </ul>
+</div>
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}">
 	<isif condition="${pdict.pagingmodel.currentPage != pdict.pagingmodel.maxPage }">
 		<div class="infinite-scroll-placeholder" data-loading-state="unloaded" data-grid-url="${decodeURI(pdict.pagingmodel.appendPaging ( pdict.ProductSearchResult.url('Search-Show'), (pdict.pagingmodel.currentPage + 1) * pdict.pagingmodel.pageSize).append('format','page-element'))}" ></div>
