@@ -30,6 +30,10 @@
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
+	
+	#wrapper {
+		min-width: 0;
+	}
 	.ui-dialog label {
 		width:100%;
 		float:none;
