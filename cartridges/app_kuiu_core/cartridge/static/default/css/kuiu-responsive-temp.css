@@ -18,159 +18,17 @@
 
 @media ( min-width : 320px) and (max-width: 767px) {
 	
-	#homepage-slides .slide {
-		/*height: 335px;*/
-	}
 	
-	.home-slider-wrap {
-		height:auto;
-	}
-	
-	#homepage-slider .jcarousel-control {
-	  	bottom: inherit;
-	    clear: both;
-	    display: table;
-	    overflow: hidden;
-	    position: absolute;
-	    top: 300px;
-	    z-index: 5;
-	    width: 63px;
-	 }
-	 
-	 #homepage-slider {
-	    min-height: 0;
-	    min-width: 100%;
-	    overflow: hidden;
-	    position: relative;
-	}
-	
-	#homepage-slides {
-		height:auto;
-		min-height:0;
-		overflow:inherit;
-		position:relative;
-		padding:0;
-	}
-	
-	#homepage-slides .slide .slider-image {
-		height:330px;
-	}
-	
-	#homepage-slides .slide .inner-box {  
-		bottom: inherit;
-    	margin-top: 0;
-    	position: relative;
-    	width: 100%;
-    	background-color: transparent;
-    	height: auto;
-    	padding:0px 15px 10px;
-	}
-	
-	#homepage-slides .slide .inner-box h1 {
-		color: #1a1a1a;
-	    font-size: 20px;
-	    letter-spacing: 0;
-	    padding-top: 25px;
-	    white-space: nowrap;
-	    margin:0 0 5px;
-	}
-	
-	#homepage-slides .slide .inner-box h3 {
-		font-family: "Times New Roman", Georgia, Serif;
-		font-size:13px;
-		margin:0;
-		color:#1a1a1a;
-	}
-	#homepage-slides .slide {
-		min-height:330px;
-		position:relative;
-		background-size:auto 330px;
-		background-position:right top;
-		background-repeat: no-repeat;
-		height:auto;
-		overflow:visible;
-		  background-position-x: 50%;
-	}
-	
-	#homepage-slides .slide .inner-box button {
-		 background-color: #1a1a1a;
-		 color:#fff;
-		 margin-top:10px;
-	}
-	#homepage-slider .jcarousel-prev, #homepage-slider .jcarousel-next {
-		top:130px;
-		margin-top:0;
-	}
-	
-	#homepage-slider .jcarousel-scroll {
-		display:none;
-	}
-
-	 .ui-dialog .form-row.form-row-button {
-	 	margin-left:0;
-	 	width:100%;
-	 }
-	 
-	.social-icon ul.social-links li a.fb {
-		background-position: 119px 80px;
-	}
-	.social-icon ul.social-links li a.twitter { 
-		background-position: 89px 80px;
-	}
-	.social-icon ul.social-links li a.youtube { 
-		background-position: 59px 80px;
-	}
-	.social-icon ul.social-links li a.linkedin{ 
-		background-position: 27px 80px;
-	}
-	.social-icon ul.social-links li a.twitter:hover  { 
-		background-position: 89px 109px;
-	}
-	.social-icon ul.social-links li a.youtube:hover  { 
-		background-position: 59px 109px;
-	}
-	.social-icon ul.social-links li a.linkedin:hover  { 
-		background-position: 27px 109px;
-	}
-	.social-icon ul.social-links li a.fb:hover { 
-		background-position: 119px 109px;
-	}
 	
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
-	#homepage-slides .slide {
-		/*height: 550px;*/
-	}
 	
-	#homepage-slides .slide .inner-box h1 {
-		font-size:30px;
-		margin-bottom:10px;
-	}
-	
-	#homepage-slides .slide .inner-box h3 {
-		margin-top:0;
-	}
-	
-	#homepage-slides .slide .inner-box {
-		width:80%;
-	}
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
 	
-	#homepage-slides .slide {
-		/*height: 650px;*/
-	}
 	
-	#homepage-slides .slide .inner-box h1 {
-		font-size:32px;
-		letter-spacing: 2px;
-	}
-	
-	#homepage-slides .slide .inner-box  {
-		width :75%;
-	}
 }
 
 @media ( min-width : 1200px) and (max-width: 1439px) {
