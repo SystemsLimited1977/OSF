@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
 	<div class="emailSignupModal">
-		<h5>Subscribe to the KUIU newsletter to receive news, updates, and special product offers and insights.</h5>
+		<h5>${Resource.msg('global.popupHeading', 'locale', null)}</h5>
 		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
 			<input type="hidden" name="emailAddress" value="${pdict.CurrentHttpParameterMap.emailAddress.stringValue}" />
@@ -20,7 +20,7 @@
 			
 			<div class="form-row form-row-button clearfix">
 				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>
-				<button  id="cancel" >Cancel</button>
+				<button  id="cancel" >${Resource.msg('global.cancel', 'locale', null)}</button>
 			</div>
 		</form>
 		<input type="hidden" name="errorinform" value="${pdict.ErrorInForm}" />

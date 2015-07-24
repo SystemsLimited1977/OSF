@@ -875,6 +875,7 @@ div {
 .pt_customer-service  .primary-content.col-md-9 .col-md-9 {
 	/*min-height: 1100px;*/
 	border-right: 1px solid #e0e0e0;
+	padding-left:50px;
 }
 
 #main input[type="text"], #main input[type="number"], #main input[type="password"],
@@ -948,7 +949,7 @@ span.error {
 	margin-left: 0px;
 	background-image: url("../images/arrow_down.png");
 	background-repeat: no-repeat;
-	background-position: 300px 8px;
+	background-position: 95% 8px;
 	cursor: pointer;
 }
 
