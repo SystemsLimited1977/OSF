@@ -25,9 +25,15 @@
 
 	<h2 class="visually-hidden">Details</h2>
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
-
 	<div class="product-number">
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
+	</div>
+	<div>
+		<p>The merchant must select and assign products to this carousel within Business Manager. 
+		Four products appear at once by default, but the display can hold as many product recommendations 
+		as assigned in the Business Manager. When there are more than 4 products assigned, navigation arrows 
+		display to the left and right of the product display area that allow users to view the next or previous 
+		products in the recommendation set.</p>
 	</div>
 	<isif condition="${isQuickView}">
 		<!-- shown only in quick view -->
@@ -77,7 +83,7 @@
 				</div>
 			</div>
 
-			<isinclude template="product/components/pricing"/>
+			<iscomment><isinclude template="product/components/pricing"/></iscomment>
 
 			<isscript>
 				var updateSources = ["cart", "giftregistry", "wishlist"];
@@ -166,9 +172,9 @@
 		<ul class="menu">
 			<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
 				<li><a class="wl-action" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
-				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
+				<iscomment><li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li></iscomment>
 			</isif>
-			<li><a class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">${Resource.msg('product.sendfriend','product',null)}</a></li>
+			<iscomment><li><a class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">${Resource.msg('product.sendfriend','product',null)}</a></li></iscomment>
 		</ul>
 
 		<div class="addthis_toolbox addthis_default_style"></div>
