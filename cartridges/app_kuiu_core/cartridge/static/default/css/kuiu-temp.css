@@ -3,8 +3,10 @@
 	margin: 0;
   	padding: 0;
   	box-shadow: none;
-  	border-right:1px solid #e6e6e6;
   	background: none;
+  	margin-bottom: 22px;
+  	height: 485px;
+	border-right:1px solid #e6e6e6;
 }
 
 .pt_product-search-result .primary-content, .pt_content-search-result .primary-content {
@@ -43,19 +45,89 @@
 
 .pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3 {
 	border-bottom: 1px solid #dadad9;
-	padding-bottom: 25px;
-  	padding-top: 20px;
     padding-left:0px;
-	padding-right:0px;
-	
+	padding-right:0px;	
+	margin-top:20px;
 }
 .product-tile .product-compare {
 	 padding-left: 14px;
 }
-
+/*
 .search-result-options .container {
-  border-top: 1px solid #e6e6e6;;
-  border-bottom: 1px solid #e6e6e6;;
-	
 }
 
+.compare-items,.search-result-options {
+	margin:0px;
+	padding: 0px;
+}
+*/
+
+.search-result-items .col-md-3:nth-of-type(4n) li.grid-tile {
+	border-right:none;
+	}
+	.search-result-items li.grid-tile
+.product-tile .product-image img {
+	height: 355px;
+  	width: 277px;
+}
+
+.search-result-options {
+	margin:0px;
+}
+
+.product-swatches { 
+  padding-left: 14px;
+}
+.product-tile .product-swatches .swatch {
+   width: 26px;
+   height: 26px;
+   border-radius: 50%;
+}
+
+.product-tile .product-swatches .swatch img {
+  border: 2px solid #c3c3c3;
+  height: 26px;
+  padding: 1px;
+  width: 26px;
+  border-radius: 50%;
+  max-width: none;
+}
+.grid-tile .product-tile .product-swatches {
+	float:left;
+	margin-right: 6px;
+}
+.product-tile .product-swatches li {
+	margin-right: 4px;
+	}
+
+.product-tile .product-swatches ul.swatch-toggle {
+  background: #fff;
+  width: 198px;
+  height: 65px;
+  padding: 20px 8px;
+  border: 1px solid #c3c3c3;
+  z-index: 111;
+    margin-top: -16px;
+}
+
+.product-tile .product-swatches-all,.quickview-container a {
+   color:  #2b2b2b;
+}
+
+.quickview-container {
+  clear: both;
+  text-align: left;
+  padding-left: 14px;
+  padding-top: 8px;
+}
+
+.product-new-tag {
+	width: 48px;
+    height: 29px;
+	background-image: url("../images/interface/new_tag.png");
+	margin-left: 15px;
+	margin-left: 15px;
+  	margin-top: 5px;
+  	position: absolute;
+  	z-index: 111;
+}

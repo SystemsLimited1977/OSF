@@ -27,7 +27,7 @@
 	</isscript>
 	<div class="compare-items" <isif condition="${plen == 0}">style="display:none;" </isif>data-category="${pdict.Category.ID || ''}">
 		<h2>${Resource.msg('productcomparewidget.compareitems', 'search', null)}</h2>
-		<div class="compare-bar">
+		<div class="compare-bar clearfix">
 			<div class="compare-items-panel">
 				<isloop items="${products}" var="item" status="Status">
 					<div class="compare-item<isif condition="${!empty(item.id)}"> active</isif>" <isif condition="${!empty(item.uuid)}">data-uuid="${item.uuid}"</isif> <isif condition="${!empty(item.id)}">data-itemid="${item.id}"</isif>>

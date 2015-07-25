@@ -5,9 +5,11 @@
 }
 
 @media ( min-width : 768px) {
+
 }
 
 @media ( min-width : 992px) {
+	
 }
 
 @media ( min-width : 1200px) {
@@ -17,30 +19,72 @@
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
-	ul.search-result-items .grid-tile {
-		width:100%;
-		margin: 0px;
-	}
-	
-	.search-result-items .grid-tile {
-		border-right:none;
-	}
-	
-	.pt_product-search-result .primary-content .search-result-content .search-result-items .col-sm-4{
+	.pt_product-search-result .primary-content .search-result-content .search-result-items .col-xs-4 {
 		padding-left:0px;
 		padding-right:0px;
+		margin-top:0px;
+	}
+	
+	.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3 {
+		margin-top: 10px;
+	}
+	.product-tile .product-image img {
+  		height: 234px !important;
+  		width:auto;
+	}
+	.search-result-items li.grid-tile {
+		padding-left:0px;
+		padding-right:0px;
+		height: auto;
+		border-right:none;
+		width:100%;
+		margin: 0px;
+		padding-bottom: 20px;
+	}
+	
+	.pt_product-search-result .primary-content .search-result-content  .container .row {
+		margin-left:0px;
+		margin-right:0px;
+	}
+	.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3:last-child {
+		border-bottom:none;
+	}
+	.product-tile .product-swatches ul.swatch-toggle {
+		  position: relative;
+		  background: none;
+  		  border: none;
+  	      padding: 0px;
+  	      display: block;
+  	      margin-top:0px;
+  	      height: auto;
+	}
+	
+	.product-tile .product-swatches-all,.quickview-container {
+		display:none;
 	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
-	ul.search-result-items .grid-tile {
-		width:100%;
-		margin: 0px;
-		
-	}
-	.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3 {
+	.search-result-items li.grid-tile {
 		padding-left:0px;
 		padding-right:0px;
+		height: 400px;
+		border-right:1px solid #e6e6e6;
+		width:100%;
+	}
+	.search-result-items .col-md-3:nth-of-type(3n) li.grid-tile,
+	.search-result-items .col-sm-3:nth-of-type(3n) li.grid-tile  {
+		border-right:none !important;
+	}
+	.search-result-items .col-md-3:nth-of-type(4n) li.grid-tile {
+		border-right:1px solid #e6e6e6;
+	}
+	.product-tile .product-image img {
+  		height: 257px !important;
+  		width: 209px;
+	}
+	.product-new-tag {
+		margin-left: 6px;
 	}
 }
 

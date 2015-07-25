@@ -4,7 +4,25 @@ var imagesLoaded = require('imagesloaded'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
-	$('.tiles-container .product-image').on('mouseenter', function () {
+	$('.tiles-container .product-tile').each(function () {
+		var $qvContainer = $('<div class="quickview-container"></div>');
+		$qvContainer.appendTo(this);
+		var $qvButton = $('<a class="quickviewbtn">' + Resources.QUICK_VIEW + '</a>');
+		var $link = $(this).find('.thumb-link');
+		$qvButton.attr({
+			'href': $link.attr('href'),
+			'title': $link.attr('title')
+		}).appendTo($(this).find('.quickview-container'));
+		$qvButton.on('click', function (e) {
+			e.preventDefault();
+			quickview.show({
+				url: $(this).attr('href'),
+				source: 'quickview'
+			});
+		});
+		
+	});
+	/*$('.tiles-container .product-image').on('mouseenter', function () {
 		var $qvButton = $('#quickviewbutton');
 		if ($qvButton.length === 0) {
 			$qvButton = $('<a id="quickviewbutton" class="quickview">' + Resources.QUICK_VIEW + '<i class="fa fa-arrows-alt"></i></a>');
@@ -21,7 +39,7 @@ function initQuickViewButtons() {
 				source: 'quickview'
 			});
 		});
-	});
+	});*/
 }
 
 function gridViewToggle() {
@@ -94,6 +112,14 @@ function initializeEvents() {
 			alt: data.alt,
 			title: data.title
 		});
+	});
+	//Toggle slide of refinements
+	$("#refineby").click(function () {
+	   $('#secondary').slideToggle();
+	});
+	$('#closeslider').click(function(e){
+		e.preventDefault();
+		$('#secondary').slideToggle();
 	});
 }
 
