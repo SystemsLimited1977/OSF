@@ -3,7 +3,7 @@
 <isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || (pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' && empty(pdict.CurrentHttpParameterMap.format))}" scope="page"/>
 
 <isobject object="${pdict.Product}" view="detail">
-	<div id="pdpMain" class="pdp-main"  itemscope itemtype="http://schema.org/Product">				
+	<div id="pdpMain" class="pdp-main"  itemscope itemtype="http://schema.org/Product">		
 		<iscomment>Image and variation options are part of the include template</iscomment>
 						
 		<isif condition="${pdict.Product.productSet || pdict.Product.bundle}">
@@ -15,29 +15,52 @@
 		<isif condition="${!isQuickView}">
 			<isinclude template="product/components/recommendations"/>
 			<iscomment><isinclude template="product/components/fieldshots"/></iscomment>
-			<div style="width:100%; height:250px;text-align:center; border:1px solid black;">
-				<h1>Product Overview</h1>
-					<div style="float:left; width:40%; margin-left:200px;">
+			<div class="product-overview">
+				<div class="container">
+			      <div class="row">
+					 <div class="col-sm-12">
+						<center><h1>Product Overview</h1>
+						<p>Engineered/designed for the most demanding weather</p></center>
+					</div>	
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<isprint value="${pdict.Product.longDescription}" encoding="off" />
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<img itemprop="image" style="width:100px; height:100px;"  src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+					</div>
+			     </div>
+			   </div> 
+			</div>
+			
+			<div class="product-technology">
+				<div class="container">
+			      <div class="row">
+					 <div class="col-sm-12">
+						<center><h1>Technology</h1>
+						<p>Dermizax® NX Waterproof Breathable Laminates</p></center>
+					</div>	
+					<div class="col-xs-12 col-sm-6 col-md-6">
 						<p>test contents test contents test contents test contents<br/>
 						 test contents test contents test contents test contents<br/>
 						 test contents test contents test contents test contents
 						 </p>
 					</div>
-					<div style="float:right;width:40%; margin-right:200px;">
-						<img itemprop="image" style="width:100px; height:100px;"  src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
-					</div>				
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<img itemprop="image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+					</div>
+			 	  </div>
+			   </div> 
 			</div>
-			<div style="width:100%; height:250px;text-align:center; border:1px solid black;">
-				<h1>technology</h1>
-				<p>Content asset will be added here</p>
-			</div>
-			<div style="width:100%; height:250px;text-align:center; border:1px solid black;">
+		<div class="product-detail-slider-1">	
+			<div>
 				<isinclude template="product/components/fieldshots"/>
 			</div>
-			<div style="width:100%; height:250px;text-align:center; border:1px solid black;">
+		</div>
+		<div class="product-detail-slider-2">
+			<div>
 				<isinclude template="product/components/fieldshots"/>
 			</div>
+		</div>
 		</isif>
-		
 	</div><!--/pdpMain -->
 </isobject>

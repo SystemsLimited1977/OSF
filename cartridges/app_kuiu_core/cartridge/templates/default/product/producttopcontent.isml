@@ -11,17 +11,32 @@
 </isif>
 
 <!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
+<iscomment>
+	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
+</iscomment>
+<div class="col-xs-12 col-sm-6 col-md-7">
+	<div class="product-col-1 product-image-container">
+		<isif condition="${pdict.Product.custom.productBadge.length > 0}">
+			<div class="product-new-tag"></div>
+		</isif>
+		<isinclude template="product/components/productimages" />
 
-<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
-
-<div class="product-col-1 product-image-container">
-	<isinclude template="product/components/productimages"/>
+	</div>
 </div>
-
+<div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-1">
+	<h1 class="product-name pull-left" itemprop="name">
+		<isprint value="${pdict.Product.name}"/>
+	</h1>
+	<isloop items="${pdict.Product.custom.weatherBadge}" var="weatherBadge" >
+		<div class="${weatherBadge.value}"></div>
+	</isloop>
+	<isset name="showTieredPrice" value="${true}" scope="page"/>
+	<isinclude template="product/components/pricing"/>
 <div class="product-col-2  product-detail">
 	<div id="product-content">
 		<isinclude template="product/productcontent"/>
 	</div>
+<iscomment>	
 	<isif condition="${!isQuickView}">
 		<div class="product-tabs">
 
@@ -77,10 +92,10 @@
 			</div>
 		</div>
 	</isif>
-
+ </iscomment>
 </div>
 
-
+</div>
 
 
 

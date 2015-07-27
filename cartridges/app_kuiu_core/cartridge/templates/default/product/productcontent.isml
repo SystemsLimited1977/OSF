@@ -25,15 +25,13 @@
 
 	<h2 class="visually-hidden">Details</h2>
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
+	<iscomment>
 	<div class="product-number">
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
+	</iscomment>
 	<div>
-		<p>The merchant must select and assign products to this carousel within Business Manager. 
-		Four products appear at once by default, but the display can hold as many product recommendations 
-		as assigned in the Business Manager. When there are more than 4 products assigned, navigation arrows 
-		display to the left and right of the product display area that allow users to view the next or previous 
-		products in the recommendation set.</p>
+		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
 	</div>
 	<isif condition="${isQuickView}">
 		<!-- shown only in quick view -->
@@ -43,10 +41,10 @@
 	<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
 	<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>
 	<isinclude template="product/components/group"/>
-
+<iscomment>
 	<isset name="showTieredPrice" value="${true}" scope="page"/>
 	<isinclude template="product/components/pricing"/>
-
+</iscomment>
 	<isif condition="${!isQuickView}">
 		<isinclude template="product/components/reviewsmini"/>
 	</isif>

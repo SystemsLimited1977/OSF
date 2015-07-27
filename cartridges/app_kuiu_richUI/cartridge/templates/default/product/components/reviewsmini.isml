@@ -6,9 +6,10 @@
 		Product = pdict.Product;
 	}
 </isscript>
-
+<iscomment>
 <div class="product-review" data-pid="${Product.ID}">
 	<h5 class="rating-title">${Resource.msg('product.rating','product',null)}</h5>
 	<div class="rating"></div>
 </div>
+</iscomment>
 
