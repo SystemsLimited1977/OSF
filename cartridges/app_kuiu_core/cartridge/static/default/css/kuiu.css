@@ -23,6 +23,32 @@ img {
 	max-width: 100%;
 }
 
+.container {
+  padding-right: 10px;
+  padding-left: 10px;
+ }
+ 
+.row {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, 
+.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, 
+.col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, 
+.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, 
+.col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, 
+.col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, 
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, 
+.col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, 
+.col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, 
+.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, 
+.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, 
+.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
 footer {
 	background-color: none !important;
 }
@@ -1905,22 +1931,22 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	z-index:50;
 }
 
-.cl-section-title h1 {
+#main .cl-section-title {
+	margin:40px 0 0;
+}
+
+#main .cl-section-title h1 {
 	margin:0 0 5px;
 }
 
-.cl-section-title p {
+#main .cl-section-title p {
 	margin:0;
 	font-size:13px;
 	font-weight:500;
 }
 
 .cl-section-categories {
-	margin:0;
-}
-
-.cl-section-categories {
-	margin:35px 0 70px;
+	margin:30px 0 40px;
     padding:0;
     display:table;
     table-layout: fixed;
@@ -1928,10 +1954,15 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     max-width:100%;
 }
 
+.cl-gear-categories {
+	margin:30px 0;
+    padding:0;
+    display:block;
+}
+
 .cl-section-categories .cl-section-category {
 	border-right: 1px solid #dcdcdb;
     padding: 10px 30px 0;
-    margin:0;
     overflow:hidden;
     display:table-cell;
     text-align:center;
@@ -1940,12 +1971,25 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     position:relative;
 }
 
+.cl-gear-categories .cl-gear-category { 
+	border-right: 1px solid #dcdcdb;
+    padding: 10px 0 0;
+    margin: 0 0 30px;
+    display:block;
+    text-align:center;
+    font-weight:500;
+    font-size:13px;
+    position:relative;
+}
+
+.cl-gear-categories .cl-gear-category a,
 .cl-section-categories .cl-section-category a{ 
 	display:block;
 	color:#2b2b2b;
 	padding-bottom:40px;
 }
 
+.cl-gear-categories .cl-gear-category span,
 .cl-section-categories .cl-section-category span{ 
 	bottom: 10px;
     display: block;
@@ -1955,14 +1999,70 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     width: 100%;
     padding: 0 20%;
 }
+
 .by-product-section {
 	background-color:#f9f9f9;
 }
 
 
+/* kuiu story landing page styling */
 
+.story-landing {
+	background-color: #ffffff;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 40px;
+}
 
+.story-landing .row .col-xs-12 {
+	margin-bottom:20px;
+}
 
+.story-landing > .row{
+	margin-left:12%;
+	margin-right:12%;
+}
+
+.story-landing .info-panel {
+	background-color: #1a1a1a;
+	color: #fff;
+	padding-bottom: 15px;
+}
+
+.story-landing .info-panel h1 {
+	margin-top: 0px !important;
+	padding-top: 15px;
+	padding-bottom: 5px; font-size : 22px !important;;
+	font-weight: 400;
+	margin-bottom: 0;
+	letter-spacing: 0.5px;
+	font-size: 22px !important;
+}
+
+.story-landing .info-panel p {
+	margin: 0 0 8px !important;
+	font-family: 'Roboto', sans-serif;
+	padding: 0 20px;
+}
+
+.story-landing .info-panel a {
+	line-height: 22px;
+	color: #fff;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+}
+
+.story-landing .info-panel a:hover {
+	text-decoration: underline;
+}
+
+.story-landing .info-panel {
+	
+}
+
+.story-landing .info-panel img {
+	with: 100%;
+}
 
 
 
