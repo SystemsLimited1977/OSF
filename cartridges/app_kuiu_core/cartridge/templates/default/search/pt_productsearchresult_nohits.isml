@@ -38,13 +38,14 @@
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
 			<isinclude template="search/components/productsearchbreadcrumbs"/>
-
-			<div id="primary" class="primary-content">
-				<isreplace/>
-			</div>
-
-			<div id="secondary">
-				<isinclude template="search/components/productsearchrefinebar"/>
+			<div class="container no-design">
+				<div id="primary" class="primary-content pull-right col-sm-8">
+					<isreplace/>
+				</div>
+	
+				<div id="secondary" class="pull-left col-sm-4">
+					<isinclude template="search/components/productsearchrefinebar"/>
+				</div>
 			</div>
 
 		</div>

@@ -98,13 +98,14 @@
 					
 					<iscomment> Categories Pages </iscomment>
                     <isloop items="${categorySuggestions.getSuggestedCategories()}" alias="suggestedCategory" status="loopstate">
+                    <div class="search-suggestion-left-panel-hitgroup">
                     	<isif condition="${loopstate.first}">
-                     		<div class="search-suggestion-left-panel-hitgroup">
+                     		
 								<div class="search-suggestion-left-panel-hitgroup-header">${Resource.msg('search.suggest.categories','search',null)}</div>
-							</div>
+							
                      	</isif>
                         <isset name="category" value="${suggestedCategory.getCategory()}" scope="page"/>
-                        <div class="search-suggestion-left-panel-hitgroup">
+                      
                             <a class="search-suggestion-left-panel-hitgroup-link" href="${URLUtils.url('Search-Show', 'cgid', category.getID())}">
                                 <isprint value="${category.getDisplayName()}" />
                                 <isif condition="${category.isTopLevel() == false}">
@@ -136,7 +137,8 @@
 	                <isset name="suggestedProducts" value="${productSuggestions.getSuggestedProducts()}" scope="page"/>
 	                <isset name="suggestedPhrases" value="${productSuggestions.getSuggestedPhrases()}" scope="page"/>
 	                <isset name="suggestedProductTerms" value="${productSuggestions.getSuggestedTerms()}" scope="page"/>
-
+				 
+				 <iscomment> commented to hide the search phrase from search suggestion popup to meet design requirements
                     <isif condition="${suggestedPhrases.hasNext()}">
 						<div class="search-phrase-suggestion">	
 							${Resource.msg('search.suggest.searchfor','search',null)} 
@@ -157,7 +159,8 @@
 								</isloop>
 							</a>" ?
 						</div>
-                  	</isif>				
+                  	</isif>	
+                  </iscomment>			
 
                     	<isif condition="${suggestedProducts.hasNext()}">
 
@@ -176,7 +179,7 @@
                                         </div>
                                    		<div class="search-suggestion-right-panel-product-details">
                                         	<div class="search-suggestion-right-panel-product-name"><a class="search-suggestion-normal-link" href="${URLUtils.url('Product-Show', 'pid', product.getID())}"><isprint value="${product.name}" /></a></div>
-                                           	<div class="search-suggestion-right-panel-product-price">${Resource.msg('search.suggest.from','search',null)} <isprint value="${productSearchHit.getMinPrice()}" /></div>
+                                           	<div class="search-suggestion-right-panel-product-price"> <iscomment> ${Resource.msg('search.suggest.from','search',null)} </iscomment> <isprint value="${productSearchHit.getMinPrice()}" /></div>
                                      	</div>
                           		</div>
                         	</isloop>
