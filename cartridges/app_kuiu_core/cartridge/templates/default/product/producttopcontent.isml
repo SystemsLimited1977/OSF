@@ -3,12 +3,14 @@
 
 <isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 
+<iscomment>
 <isif condition="${isQuickView && pdict.CurrentHttpParameterMap.source.stringValue != 'cart'}">
 	<div class="quickview-nav">
 		<button class="quickview-prev">< ${Resource.msg('global.previous', 'locale', null)}</button>
 		<button class="quickview-next">${Resource.msg('global.next', 'locale', null)} ></button>
 	</div>
 </isif>
+</iscomment>
 
 <!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
 <iscomment>

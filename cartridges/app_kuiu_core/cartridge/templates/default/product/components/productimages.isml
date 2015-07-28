@@ -115,7 +115,7 @@
 				</isif>
 				<isif condition="${!empty(pdict.Product.custom.videoStorage)}">
 					<li class="thumb">
-						<div class="youtubevideo" id="${pdict.Product.custom.productVideo2}" thumb-id="${pdict.Product.custom.videoStorage.split('src=')[1].split(' ')[0].replace(/['"]+/g, '')}" style="width:100px;height:100px;"></div>
+						<div class="youtubevideo" thumb-id="${pdict.Product.custom.videoStorage.split('src=')[1].split(' ')[0].replace(/['"]+/g, '')}" style="width:100px;height:100px;"></div>
 					</li>
 				</isif>
 			</ul>
