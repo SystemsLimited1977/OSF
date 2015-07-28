@@ -644,6 +644,18 @@
 		width:100%;
 		float:none;
 	}
+	
+	.no-design #secondary {
+		border-right:none;
+	}
+	
+	#primary {
+		padding-left:inherit;
+	}
+
+	#secondary {
+		padding-right:inherit;
+	}
 
 }
 

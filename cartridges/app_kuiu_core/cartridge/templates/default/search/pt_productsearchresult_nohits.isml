@@ -39,11 +39,11 @@
 			<isinclude template="components/browsertoolscheck"/>
 			<isinclude template="search/components/productsearchbreadcrumbs"/>
 			<div class="container no-design">
-				<div id="primary" class="primary-content pull-right col-sm-8">
+				<div id="primary" class="primary-content pull-right col-xs-12 col-sm-8">
 					<isreplace/>
 				</div>
 	
-				<div id="secondary" class="pull-left col-sm-4">
+				<div id="secondary" class="pull-left col-xs-12 col-sm-4">
 					<isinclude template="search/components/productsearchrefinebar"/>
 				</div>
 			</div>
