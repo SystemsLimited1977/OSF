@@ -14,6 +14,7 @@
 <iscomment>
 	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
 </iscomment>
+<div class="container">
 <div class="col-xs-12 col-sm-6 col-md-7">
 	<div class="product-col-1 product-image-container">
 		<isif condition="${pdict.Product.custom.productBadge.length > 0}">
@@ -24,14 +25,20 @@
 	</div>
 </div>
 <div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-1">
-	<h1 class="product-name pull-left" itemprop="name">
-		<isprint value="${pdict.Product.name}"/>
-	</h1>
-	<isloop items="${pdict.Product.custom.weatherBadge}" var="weatherBadge" >
-		<div class="${weatherBadge.value}"></div>
-	</isloop>
-	<isset name="showTieredPrice" value="${true}" scope="page"/>
-	<isinclude template="product/components/pricing"/>
+ <div class="head-content">
+ 	<div class="top-section">
+		<h1 class="product-name pull-left" itemprop="name">
+			<isprint value="${pdict.Product.name}"/>
+		</h1>
+			<isset name="showTieredPrice" value="${true}" scope="page"/>
+			<isinclude template="product/components/pricing"/>
+	 </div>
+		<div class="weather_badage">
+	 		<isloop items="${pdict.Product.custom.weatherBadge}" var="weatherBadge" >
+				<div class="weather_badage_icon ${weatherBadge.value}"></div>
+			</isloop>
+  		</div>
+</div>
 <div class="product-col-2  product-detail">
 	<div id="product-content">
 		<isinclude template="product/productcontent"/>
@@ -94,7 +101,7 @@
 	</isif>
  </iscomment>
 </div>
-
+</div>
 </div>
 
 

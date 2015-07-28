@@ -19,6 +19,7 @@ function initQuickViewButtons() {
 				url: $(this).attr('href'),
 				source: 'quickview'
 			});
+			return false;
 		});
 		
 	});

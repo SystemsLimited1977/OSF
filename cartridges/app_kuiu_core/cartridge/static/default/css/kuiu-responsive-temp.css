@@ -102,6 +102,21 @@
 	.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3:nth-last-child(-n+4) {
 		border-bottom:1px solid #e6e6e6;
 	}
+	.weather_badage {
+		float:left;
+		width:100%;
+		margin-top: 0px;
+		border-left:none;
+	}
+	.pdp-main .top-section,.product-variations .attribute .value {
+		width:100%;
+	}
+	.pdp-main h1.product-name {
+		font-size: 26px;
+	}
+	.weather_badage_icon {
+		margin-left:0px;
+	}
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {

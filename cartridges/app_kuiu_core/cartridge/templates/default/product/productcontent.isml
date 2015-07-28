@@ -70,13 +70,31 @@
 		<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm">
 			<fieldset>
 
+           <div class="availability-block">
+				<div class="availability">
+				<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
+					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
+					<span class="value"><isinclude template="product/components/availability"/></span>
+					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
+						<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
+							<div id="${pdict.Product.ID}" class="availability-results store-stock">
+							<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
+						<iselse/>
+							<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock">
+						</isif>
+							</div>
+					</isif>
+				</isif>
+				</div>
+			</div>
+			
 			<legend class="visually-hidden">Add to cart options</legend>
 
 			<isinclude template="product/components/options"/>
 
 			<div class="inventory">
 				<div class="quantity">
-					<label for="Quantity">${isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.quantity','locale',null) }</label>
+					<label for="Quantity">${isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.qty','locale',null) }</label>
 					<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 				</div>
 			</div>
@@ -139,23 +157,7 @@
 				<button id="add-to-cart" type="button" title="${buttonTitleDisabledSelectVariation}" value="${buttonTitleDisabledSelectVariation}" class="button-fancy-large add-to-cart-disabled"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
 			</isif>
 
-			<div class="availability-block">
-				<div class="availability">
-				<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
-					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
-					<span class="value"><isinclude template="product/components/availability"/></span>
-					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
-						<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
-							<div id="${pdict.Product.ID}" class="availability-results store-stock">
-							<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
-						<iselse/>
-							<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock">
-						</isif>
-							</div>
-					</isif>
-				</isif>
-				</div>
-			</div>
+			
 
 			</fieldset>
 		</form>
@@ -167,7 +169,7 @@
 	</iscomment>
 
 	<div class="product-actions">
-		<ul class="menu">
+		<ul class="menu pull-right">
 			<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
 				<li><a class="wl-action" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
 				<iscomment><li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li></iscomment>
@@ -175,7 +177,7 @@
 			<iscomment><li><a class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">${Resource.msg('product.sendfriend','product',null)}</a></li></iscomment>
 		</ul>
 
-		<div class="addthis_toolbox addthis_default_style"></div>
+		<div class="addthis_toolbox addthis_default_style pull-left"></div>
 
 	</div><!--  end details block -->
 	<iscomment>This is ugly, but it works until we can get a better solution</iscomment>
