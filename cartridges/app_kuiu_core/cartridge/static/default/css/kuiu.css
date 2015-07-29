@@ -2236,7 +2236,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   margin-left: 1px; }
   
   .search-suggestion-right-panel-product-image img {
-  	border:1px solid #e0e0e0;
+  	border:1px solid #f2f2f2;
     width: 100px;
     height: 110px; }
     
@@ -2278,11 +2278,11 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	background:none;
 }
 
-#primary {
+#main .no-design #primary {
 	padding-left:15px;
 }
 
-#secondary {
+#main .no-design #secondary {
 	padding-right:15px;
 }
 
