@@ -66,12 +66,16 @@
 	#main select {
 		background-position: 95% 8px;
 	}
+	.pt_customer-service #primary {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
 	.pt_customer-service #secondary {
 		border-right: none;
 		width: 100%;
 		margin-left: 0;
-		padding-left: 15px;
-		padding-right: 15px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	#secondary nav {
 		padding-left: 15px;
@@ -97,7 +101,7 @@
 		height: 75px;
 	}
 	.top-banner.responsive-nav #mini-cart {
-		margin-top: 24px;
+		margin-top: 30px;
 	}
 	.menu-toggle {
 		margin-top: 17px;
@@ -649,12 +653,19 @@
 		border-right:none;
 	}
 	
-	#primary {
+	#main .no-design #primary {
 		padding-left:inherit;
 	}
 
-	#secondary {
+	#main .no-design #secondary {
 		padding-right:inherit;
+	}
+	.pt_customer-service .primary-content.col-md-9 .col-md-9 {
+		padding-left:10px;
+	}
+	
+	#main form .form-row-button {
+		margin-left:0;
 	}
 
 }
@@ -820,6 +831,14 @@
 		margin-left:116px;
 	}
 	
+	.menu-utility-user .phone {
+		display:none;
+	}
+	
+	.ui-dialog label, #main form label {
+		width:100%;
+	}
+	
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
@@ -876,6 +895,14 @@
 	
 	.top-banner .header-nav {
 		margin-left:116px;
+	}
+	
+	.pt_customer-service #secondary {
+		padding-left:50px;
+	}
+	
+	.pt_customer-service .primary-content.col-md-9 .col-md-9 {
+    	padding-left: 50px;
 	}
 	
 }
