@@ -2413,7 +2413,7 @@ footer {
     width: 2000em; }
   .pdp-main .recommendations li {
     float: left;
-    width: 100px; }
+    /*width: 100px;*/ }
   .pdp-main .recommendations .product-tile {
     padding: 0 0.5em; }
   .pdp-main .recommendations .product-image {

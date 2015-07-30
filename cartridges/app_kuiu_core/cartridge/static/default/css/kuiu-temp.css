@@ -120,7 +120,7 @@
 	padding-top:5px;
 }
 
-.quickview-container {
+.pt_product-search-result .quickview-container {
   clear: both;
   text-align: left;
   padding-left: 18px;
@@ -141,9 +141,10 @@
 	border-bottom:none;
 }*/
 
-.pdp-main .product-col-1,.pdp-main .product-col-2,.pdp-main .recommendations,.pdp-main .recommendations #carousel-recommendations {
+.pdp-main .product-col-1,.pdp-main .product-col-2,.pdp-main .recommendations {
 	width:100%;
 	margin:0px;
+	text-align: left;
 }
 
 .pdp-main .top-section {
@@ -154,6 +155,7 @@
 	margin:0px;
 	font-style: normal;
     width: initial;
+    text-align: left;
 }
 
 .pdp-main .product-price {
@@ -215,14 +217,21 @@
 .pdp-main .product-variations .attribute .value {
 	float:left;
 	margin-top: 7px;
+	width:100%;
 }
 .pdp-main .product-variations .attribute .label {
-	clear:both;
 	color:#000000;
 	font-size:13px;
-	width: 30%;
+	width: 100%;
     padding: 0px;
-    text-align: left;  
+    text-align: left;
+    float: none;
+    font-weight: 500;
+    text-transform: none;
+}
+.pdp-main .product-variations .attribute .value-color ,.pdp-main .product-variations .attribute .value-size{
+	font-size:14px;
+	font-weight: 600;
 }
 .pdp-main .product-variations,.pdp-main .availability-block .availability span.label{
 	margin-left:0px;
@@ -248,7 +257,7 @@
 .product-variations .attribute .selected-value,.pdp-main .availability-block .availability span.label {
 	font-size:14px;
     font-family: 'Roboto', sans-serif;
-    font-weight:600;
+    font-weight:400;
     color:#000;
     float: left;
 }
@@ -292,9 +301,106 @@
 	display:none;
 }
 .addthis_toolbox.addthis_default_style {
-	margin-left:50px;
+	margin-left:66px;
 }
 .at4-icon.aticon-facebook,.at4-icon.aticon-twitter{
 	background-color:#000 !important;
 	border-radius: 50%;
+}
+
+.pdp-main .product-primary-image img.primary-image {
+	width: 585px;
+    height: 749px;
+}
+.product-thumbnails .productthumbnail {
+    border: 1px solid #e6e6e6;	
+}
+.pdp-main .product-thumbnails .thumb {
+	border-top:none;
+	border-bottom:2px solid #fff;
+	margin: 0px 10px 0 0;
+	width: 53px;
+	padding-bottom: 5px;
+}
+.pdp-main .product-thumbnails .thumb.selected {
+	border-color: #000;
+	padding-bottom: 4px;
+}
+
+.pdp-main .product-thumbnails .productthumbnail {
+	width: 53px;
+    height: 64px;
+}
+.youtubevideo {
+	width: 53px !important;
+    height: 64px !important;
+    margin:0px;
+    background-size: 88% 87%;
+    border: 1px solid #000;
+    background-position: center center;
+    border: 1px solid #e6e6e6;
+}
+
+.youtubevideo .play {
+	background: url("../images/interface/play_icon.png") no-repeat center center;
+}
+.pdp-main .product-add-to-cart .inventory label {
+	clear: both;
+	float:none !important;
+}
+
+.pdp-main  .product-overview {
+	background-color: #fafafa;
+ 	-moz-box-shadow:    inset  0  8px 8px -8px #696868, 
+                        inset  0 -8px 8px -8px #696868;
+    -webkit-box-shadow: inset  0  8px 8px -8px #696868, 
+                        inset  0 -8px 8px -8px #696868;
+     box-shadow:        inset  0  8px 8px -8px #696868, 
+                        inset  0 -8px 8px -8px #696868;
+
+}
+.pdp-main .product-overview .overview-top h1 {
+	margin:0px;
+	margin-top:0px !important;
+	color:#2b2b2b;
+	padding-top:40px;
+}
+.pdp-main .product-overview .overview-top p {
+	text-transform: uppercase;
+    font-size:18px;
+    font-family: "Times New Roman", Georgia, Serif;
+	margin:0px;
+	color:#2b2b2b;
+}
+
+.pdp-main .product-overview .pdp-overview-content p {
+	font-size:15px;
+	line-height: 22px;
+	margin:0px;
+	font-family: "Times New Roman", Georgia, Serif;
+    padding:  35px 22px 20px 0;
+}
+.pdp-main .product-overview .pdp-overview-content ul {
+	list-style: initial;
+    padding-left: 15px;
+    line-height: 24px;
+}
+
+.pdp-main .product-overview .pdp-overview-content h4 {
+	font-size:16px;	
+}
+
+.pdp-main .product-overview .overview-img {
+	padding-top:45px;
+}
+.pdp-main .product-details {
+	padding-bottom:23px;
+}
+.product-tile.tooltip {
+	opacity: 1;
+}
+
+.pdp-main .recommendations .jcarousel-nav {
+	z-index: 22;
+	position: static;
 }

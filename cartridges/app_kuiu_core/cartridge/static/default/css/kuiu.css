@@ -1370,9 +1370,9 @@ sup {
 	background-color: transparent;
 }
 
-.home-bottom-first .home-small {
+/*.home-bottom-first .home-small {
 	height: 170px !important;
-}
+}*/
 
 .home-bottom-first .home-small img {
 	with: 100%;
@@ -2277,7 +2277,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .no-hits-footer {
 	background:none;
 }
-
+/*
 #primary {
 	padding-left:15px;
 }
@@ -2285,7 +2285,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 #secondary {
 	padding-right:15px;
 }
-
+*/
 
 
 

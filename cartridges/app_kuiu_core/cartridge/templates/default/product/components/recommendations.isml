@@ -25,6 +25,7 @@
 		}
 	</isscript>
 	<div class="recommendations cross-sell">
+	 <div class="container" >
 
 		<isif condition="${recProducts.size() > 0}">
 			<h2>
@@ -41,8 +42,9 @@
 					<isloop items="${recProducts}" var="rec" end="19">
 						<isset name="Product" value="${rec}" scope="pdict"/>
 						<isset name="pName" value="${pdict.Product.name}" scope="page"/>
+					 <div class="col-xs-12 col-sm-4 col-md-3">
 						<li class="recommendation-item">
-							<div class="product-tile tooltip">
+							<div class="product-tile">
 								<div class="analytics capture-product-id"><isprint value="${pdict.Product.ID}"/></div>
 								<div class="product-image recommendation_image">
 									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}">
@@ -51,8 +53,9 @@
 											<img src="${pdict.Product.getImage('small',0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}" title="${pdict.Product.getImage('small',0).title}"/>
 									</iscomment>
 									<iscomment>DIS changes</iscomment>
-									<isif condition="${!empty(new ProductImage('small',pdict.Product, 0).getURL())}">
-											<img src="${new ProductImage('small',pdict.Product, 0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}" title="${pdict.Product.getImage('small',0).title}"/>
+									<isset name="recomendationImage" value="${new ProductImage('small', rec, 0)}" scope="page" />
+									<isif condition="${!empty(recomendationImage)}">
+											<img src="${recomendationImage.getURL()}" alt="${recomendationImage.getAlt()}" title="${recomendationImage.getTitle()}"/>
 										<iselse/>
 											<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${pName}" title="${pName}"/>
 										</isif>
@@ -119,6 +122,7 @@
 								</div>
 							</div>
 						</li>
+					  </div>
 					</isloop>
 					<iscomment>Restore the Product instance</iscomment>
 					<isset name="Product" value="${pdict.mainProduct}" scope="pdict"/>
@@ -127,5 +131,6 @@
 				<a class="jcarousel-nav jcarousel-next" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
 			</div>
 		</isif>
+	  </div>
 	</div>
 </isif>

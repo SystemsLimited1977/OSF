@@ -74,7 +74,7 @@
  
 	<isif condition="${imageProduct.getImages('hi-res').length > 0}">
 		<div id="thumbnails" class="product-thumbnails">
-			<h2>${Resource.msg('product.productthumbnails.title','product',null)}</h2>
+			<iscomment><h2>${Resource.msg('product.productthumbnails.title','product',null)}</h2></iscomment>
 			<ul>
 				<isloop begin="0" end="${imageProduct.getImages('hi-res').length-1}" step="1" status="imgSmStatus">
 					<iscomment><isif condition="${imgSmStatus.count > noOfImages}">

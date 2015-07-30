@@ -2768,6 +2768,10 @@ var updateContent = function (href) {
 		url: util.appendParamsToUrl(href, params),
 		target: $('#product-content'),
 		callback: function () {
+			$('.swatches.color .selected-value').parent().parent().parent().find('span').after('<span class="value-color">' + $('.swatches.color .selected-value').text() + '</span>');
+			$('.swatches.color .selected-value').remove();
+			$('.swatches.size .selected-value').parent().parent().parent().find('span').after('<span class="value-size">' + $('.swatches.size .selected-value').text() + '</span>');
+			$('.swatches.size .selected-value').remove();
 			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
@@ -2781,6 +2785,9 @@ var updateContent = function (href) {
 
 module.exports = function () {
 	var $pdpMain = $('#pdpMain');
+	$(function() {
+		$( "#accordion" ).accordion();
+	});
 	// hover on swatch - should update main image with swatch image
 	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),

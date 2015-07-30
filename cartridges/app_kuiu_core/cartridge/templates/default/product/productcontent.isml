@@ -30,7 +30,7 @@
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
 	</iscomment>
-	<div>
+	<div class="hidden-xs">
 		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
 	</div>
 	<isif condition="${isQuickView}">
