@@ -3481,6 +3481,7 @@ var quickview = {
 				width: 920,
 				title: 'Product Quickview',
 				open: function () {
+					$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('quickview-popup');
 					this.setup(url);
 					if (typeof options.callback === 'function') { options.callback(); }
 				}.bind(this)

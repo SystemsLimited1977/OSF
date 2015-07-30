@@ -243,7 +243,7 @@ footer .footer-container .content-asset ul {
 	height: 22px;
 	background-color: #9e9e9e;
 	padding-left: 10px;
-	font-family: "Times New Roman";
+	font-family: "Times New Roman", Georgia, Serif;
 	font-style: italic;
 	font-size: 13px;
 }
@@ -341,7 +341,7 @@ header {
 	padding: 0 0 0 10px;
 	width: 80%;
 	font-style: italic;
-	font-family: "Times New Roman";
+	font-family: "Times New Roman", Georgia, Serif;
 }
 
 .header-search button {
@@ -881,7 +881,7 @@ div {
 /*Contact us Page */
 .pt_customer-service #secondary .secondary-navigation .toggle {
 	font-size: 16px;
-	font-family: "Times New Roman";
+	font-family: "Times New Roman", Georgia, Serif;
 }
 
 .pt_customer-service #secondary nav .secondary-navigation .toggle {
@@ -933,7 +933,7 @@ div {
 #main h1 {
 	font-size: 32px;
 	line-height: 20px;
-	font-family: "Times New Roman";
+	font-family: "Times New Roman", Georgia, Serif;
 	text-transform: uppercase;
 	margin-top: 29px;
 	line-height:100%;
@@ -1290,7 +1290,7 @@ span.error {
 }
 
 .ui-dialog h1, .ui-dialog h2 {
-	font-family: "Times New Roman";
+	font-family: "Times New Roman", Georgia, Serif;
 }
 
 sup {
@@ -2389,7 +2389,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 .grid-tile .product-tile .product-swatches {
 	float:left;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 .product-tile .product-swatches li {
 	margin-right: 4px;
@@ -2429,7 +2429,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	margin-left: 15px;
   	margin-top: 5px;
   	position: absolute;
-  	z-index: 111;
+  	z-index: 100;
 }
 
 /*.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3:nth-last-child(-n+4) {
@@ -2514,7 +2514,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	margin-top: 7px;
 	width:100%;
 }
-.pdp-main .product-variations .attribute .label {
+.pdp-main .product-variations .attribute .label,
+.pdp-main .product-add-to-cart .quantity label {
 	color:#000000;
 	font-size:13px;
 	width: 100%;
@@ -2572,6 +2573,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	text-align: center;
 	width: 100%;
 	height: 50px;
+	margin-top:6px;
 }
 .pdp-main p.in-stock-msg,.pdp-main p.is-in-stock, [data-status="store-in-stock"] {
     color: #81031b;
@@ -2713,8 +2715,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .product-tile .quickview-container {
     padding-left: 18px;
     float: left;
-    clear: none;
-    padding-top: 0;
+    clear: both;
+    padding-top: 10px;
 }
 
 #main .product-compare label {
@@ -2732,10 +2734,127 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	display:block;
 }
 
-
 #main form .form-row-button {
     margin-left: 22%;
 }
+
+.quickview-popup {
+	top:50% !important; 
+	margin-top:-300px;
+	position:fixed;
+	border:none;
+	padding:10px;
+	height:600px !important;
+} 
+.quickview-popup .ui-dialog-content {
+	overflow-y: auto !important;
+	height:100% !important;
+}
+.quickview-popup .ui-dialog-content .product-col-1 {
+    padding: 0;
+    width: 100%;
+}
+
+.quickview-popup .pdp-main .product-primary-image img.primary-image {
+	width:inherit;
+	height:inherit;
+}
+ 
+.quickview-popup.ui-dialog .ui-widget-header {
+    background-color: #fff;
+    border-bottom: none;
+    height: auto;
+    padding: 0;
+}
+
+.quickview-popup.ui-dialog .ui-dialog-title {
+	display:none;
+}
+
+.quickview-popup.ui-dialog .ui-dialog-titlebar-close {
+	z-index: 100;
+}
+
+.quickview-popup.ui-dialog .ui-icon-closethick {
+    background-image: url("../images/qw_popup_close.jpg");
+    background-repeat: no-repeat;
+    background-position: right center;
+    border-bottom: none;
+    width: 100%;
+}
+
+.quickview-popup  .qw-p-desc {
+	padding-top:50px;
+}
+
+.quickview-popup .ui-dialog-content .pdp-main h1.product-name {
+	width:100%;
+}
+
+.quickview-popup .weather_badage {
+	margin-top:0;
+}
+
+.quickview-popup .ui-dialog-content .product-col-2 {
+	width:100%;
+	padding:0;
+}
+
+.quickview-popup .link-viewdetails a{
+	font-style: italic;
+    font-size: 13px;
+    color: #000;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+.quickview-popup .pdp-main .product-variations {
+	float:none;
+}
+
+.quickview-popup.ui-dialog .ui-dialog-content {
+	padding:0;
+}
+
+.quickview-popup .pdp-main input[type="text"] {
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 8px;
+    margin-left:0;
+}
+
+.quickview-popup .pdp-main .product-add-to-cart button {
+	float: left;
+    width: 81%;
+    margin-left: 10px;
+    height: 50px;
+    margin-top: 30px;
+}
+
+.quickview-popup .pdp-main .product-add-to-cart {
+	margin:0;
+}
+
+.quickview-popup .pdp-main .product-add-to-cart form {
+	margin:0 0 5px;
+}
+
+.quickview-popup .addthis_toolbox.addthis_default_style {
+    margin-left: 72px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
