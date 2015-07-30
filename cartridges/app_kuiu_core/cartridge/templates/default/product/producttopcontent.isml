@@ -16,7 +16,7 @@
 <iscomment>
 	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
 </iscomment>
-<div class="container">
+<div class="${!isQuickView? 'container' : 'quickview-wrap'}">
 <div class="col-xs-12 col-sm-6 col-md-7">
 	<div class="product-col-1 product-image-container">
 		<isif condition="${pdict.Product.custom.productBadge.length > 0}">
@@ -26,7 +26,7 @@
 
 	</div>
 </div>
-<div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-1">
+<div class="${!isQuickView? 'col-xs-12 col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-1' : 'col-xs-12 col-sm-5 col-md-4'}">
  <div class="head-content">
  	<div class="top-section">
 		<h1 class="product-name pull-left" itemprop="name">
