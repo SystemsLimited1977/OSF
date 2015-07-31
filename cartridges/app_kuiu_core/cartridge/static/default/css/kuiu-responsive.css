@@ -31,12 +31,42 @@
 	.cl-gear-categories .cl-gear-category:nth-child(4n) {
 		border-right:none;
 	}
+	
+	.pt_giftcert #main .no-design label {
+		float:left;
+		width:42%;
+		font-size:12px;
+	}
+	
+	.pt_giftcert #main .no-design.full-fields input[type="text"], 
+	.pt_giftcert #main .no-design.full-fields input[type="number"], 
+	.pt_giftcert #main .no-design.full-fields input[type="password"], 
+	.pt_giftcert #main .no-design.full-fields select,
+	.pt_giftcert #main .no-design.full-fields textarea {
+		width:58%;
+		float:left;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance input[type="text"] {
+		height:30px;
+		width:100%;
+	}
+	
 }
 
 @media ( min-width : 1200px) {
+	
+	
+
 }
 
 @media ( min-width : 0px) and (max-width: 767px) {
+	
+	#main  {
+	/*	-webkit-box-shadow: inset 0px 1px 3px 0px rgba(50, 50, 50, 0.3);
+		-moz-box-shadow: inset 0px 1px 3px 0px rgba(50, 50, 50, 0.3);
+		box-shadow: inset 0px 1px 3px 0px rgba(50, 50, 50, 0.3); */
+	}
 	
 	#wrapper {
 		min-width: 0;
@@ -643,8 +673,10 @@
 	
 	#main .no-design #primary {
 		padding-left:inherit;
+		border-left: none;
+	    left: 0;
 	}
-
+	
 	#main .no-design #secondary {
 		padding-right:inherit;
 	}
@@ -716,6 +748,77 @@
 	}
 	.pdp-main .product-price {
 		font-size:20px;
+	}
+	
+	.col-1 {
+	width:100%;
+	}
+	
+	.col-2 {
+		width:100%;
+	}
+	
+	.login-box-content {
+    padding: 0;
+	}
+	
+	.pt_giftcert #main .no-design {
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+	
+	.gift-certificate-purchase .content-asset {
+		padding-top:70px;
+		padding-bottom:70px;
+	}
+	
+	.pt_giftcert #main .form-row {
+		margin-bottom:10px;
+	}
+	
+	.pt_giftcert .char-count {
+		margin-left:0;
+	}
+	
+	#main .no-design.full-fields form .form-row-button {
+		margin-top:10px;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap {
+		margin-top:30px;
+	}
+	
+	.gift-certificate-purchase .content-asset {
+		
+	}
+	
+	.gift-certificate-purchase .content-asset img {
+		max-width:90%;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap form fieldset {
+		width:300px;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance {
+		width:190px;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance-submit {
+		width:100px; 
+		
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance-submit button {
+		padding: 0 0;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap .balance-status {
+		padding-top:10px;
+	}
+	
+	.pt_giftcert #main .no-design #primary {
+		padding:0;
 	}
 
 }
@@ -974,6 +1077,36 @@
 		margin-left: 55px;
 	}
 	
+	.pt_giftcert #main .no-design {
+		margin-top:35px;
+		margin-bottom:25px;
+	}
+	
+	.pt_giftcert #main .form-row {
+		margin-bottom:10px;
+	}
+	
+	.pt_giftcert .char-count {
+		margin-left:0;
+	}
+	
+	#main .no-design.full-fields form .form-row-button {
+		margin-top:10px;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap {
+		margin-top:30px;
+	}
+	
+	.gift-certificate-purchase .content-asset {
+		text-align:left;
+	}
+	
+	.gift-certificate-purchase .content-asset img {
+		max-width:90%;
+	}
+	
+	
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
@@ -1038,6 +1171,10 @@
 	
 	.pt_customer-service .primary-content.col-md-9 .col-md-9 {
     	padding-left: 50px;
+	}
+	
+	.gift-certificate-purchase .content-asset img {
+		max-width:80%;
 	}
 	
 }

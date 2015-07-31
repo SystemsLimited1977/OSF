@@ -29,6 +29,10 @@ var updateContent = function (href) {
 		url: util.appendParamsToUrl(href, params),
 		target: $('#product-content'),
 		callback: function () {
+			$('.swatches.color .selected-value').parent().parent().parent().find('span').after('<span class="value-color">' + $('.swatches.color .selected-value').text() + '</span>');
+			$('.swatches.color .selected-value').remove();
+			$('.swatches.size .selected-value').parent().parent().parent().find('span').after('<span class="value-size">' + $('.swatches.size .selected-value').text() + '</span>');
+			$('.swatches.size .selected-value').remove();
 			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
@@ -71,5 +75,10 @@ module.exports = function () {
 	$pdpMain.on('change', '.variation-select', function () {
 		if ($(this).val().length === 0) { return; }
 		updateContent($(this).val());
+	});
+	
+	// product overview and technology content accordion for mobile devices
+	$(function() {
+		$( "#accordion" ).accordion();
 	});
 };

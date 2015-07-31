@@ -8,7 +8,7 @@
 <isscript>
 
     importPackage( dw.suggest );
-
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
     // instantiate and configure the SuggestModel
 
     // create new SuggestModel instance
@@ -169,10 +169,11 @@
                                 <isset name="product" value="${productSearchHit.getProduct()}" scope="page"/>
                              	<div class="search-suggestion-right-panel-product<isif condition="${loopstate.last}">-last</isif>">
                                 	<iscomment><isset name="productImage" value="${product.getImage('small')}" scope="page"/></iscomment>
-                                	<isset name="productImgae" value="${new ProductImage('small', Product, 0)}">
+                                	<isset name="imageProduct" value="${dw.catalog.ProductMgr.getProduct(product.ID)}" scope="page" />
+									<isset name="suggestedProductImage" value="${new ProductImage('small', imageProduct, 0)}" scope="page" />
                                 		<div class="search-suggestion-right-panel-product-image">
-                                        	<isif condition="${productImage != null}">
-                                          		<img src="${productImage.getURL()}" alt="${productImage.alt}" title="${productImage.title}" />
+                                        	<isif condition="${!empty(suggestedProductImage.getURL())}">
+                                          		<img src="${suggestedProductImage.getURL()}" alt="${suggestedProductImage.getAlt()}" title="${suggestedProductImage.getTitle()}" />
                                           	<iselse/>
                                          		<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${product.name}" title="${product.name}" />
                                         	</isif>

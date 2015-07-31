@@ -30,13 +30,14 @@
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
 	</iscomment>
+	<isif condition="${isQuickView}">
+		<!-- shown only in quick view -->
+	<div class="link-viewdetails"><a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a> </div>
+	</isif>
 	<div class="hidden-xs">
 		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
 	</div>
-	<isif condition="${isQuickView}">
-		<!-- shown only in quick view -->
-		<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
-	</isif>
+
 
 	<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
 	<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>

@@ -16,6 +16,7 @@ var dialog = require('./dialog'),
 	searchsuggest = require('./searchsuggest'),
 	searchsuggestbeta = require('./searchsuggest-beta'),
 	tooltip = require('./tooltip'),
+	emailSignUp = require('./email-signup'),
 	util = require('./util'),
 	validator = require('./validator');
 
@@ -183,6 +184,8 @@ var app = {
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}
+		//Email Sign Up
+		emailSignUp.init();
 	}
 };
 
