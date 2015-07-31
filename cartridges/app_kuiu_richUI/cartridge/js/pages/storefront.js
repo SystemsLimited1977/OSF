@@ -25,6 +25,28 @@ exports.init = function () {
 				return '<a href="#' + page + '">' + page + '</a>';
 			}
 		});
+	
+	$('#homepage-slider .jcarousel-prev')
+	    .on('jcarouselcontrol:active', function() {
+	        $(this).removeClass('inactive');
+	    })
+	    .on('jcarouselcontrol:inactive', function() {
+	        $(this).addClass('inactive');
+	    })
+	    .jcarouselControl({
+	        target: '-=1'
+	    });
+
+	$('#homepage-slider .jcarousel-next')
+	    .on('jcarouselcontrol:active', function() {
+	        $(this).removeClass('inactive');
+	    })
+	    .on('jcarouselcontrol:inactive', function() {
+	        $(this).addClass('inactive');
+	    })
+	    .jcarouselControl({
+	        target: '+=1'
+	    });
 
 	$('#vertical-carousel')
 		.jcarousel({
