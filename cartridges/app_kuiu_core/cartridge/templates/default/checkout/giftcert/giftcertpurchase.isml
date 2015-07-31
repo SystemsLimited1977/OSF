@@ -35,8 +35,23 @@
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.confirmRecipientEmail}" type="input" rowClass="label-above"/>
 					
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.message}" type="textarea" attribute1="rows" value1="5" attribute2="cols" value2="50" rowClass="label-above"  attribute3="data-character-limit" value3="250"/>
-		
-					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.amount}" type="input" xhtmlclass="gift-cert-amount" rowClass="label-above cert-amount"/>
+					<iscomment>
+						<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.amount}" type="input" xhtmlclass="gift-cert-amount" rowClass="label-above cert-amount"/>
+					</iscomment>
+					
+					<div class="form-row label-above required c1">
+						<label for="dwfrm_giftcert_purchase_amount">
+							<span class="required-indicator">&#8226;</span>
+							<span>${Resource.msg('giftcertpurchase.amount','checkout',null)}:</span>
+						</label>
+						<div class="custom-select">
+							<select name="dwfrm_giftcert_purchase_amount" id="dwfrm_giftcert_purchase_amount" class="input-select gc-amt required">
+								<isloop items="${dw.system.Site.getCurrent().getCustomPreferenceValue('gift-certificate-amounts')}" var="amount" >
+									<option value="${amount}" class="select-option">&#36;<isprint value="${amount}" /></option>
+								</isloop>
+							</select>
+						</div>
+					</div>
 					
 					<div class="form-row form-row-button">
 						<button type="submit" class="button-fancy-medium" id="AddToBasketButton">
