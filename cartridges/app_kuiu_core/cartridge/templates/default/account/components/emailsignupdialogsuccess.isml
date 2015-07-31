@@ -2,7 +2,7 @@
 <isinclude template="util/modules"/>
 <div id="thankYou">
 	<isdecorate template="util/pt_empty">
-		<isif condition="${!pdict.IsError}">
+		<isif condition="${pdict.IsError != null}">
 			<h2>${Resource.msg('global.errorInRegidtration','locale',null)}</h2>
 			<div>
 				<p>${Resource.msg('global.errorDescription','locale',null)}</p>
