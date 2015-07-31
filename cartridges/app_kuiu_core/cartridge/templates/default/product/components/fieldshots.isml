@@ -1,36 +1,47 @@
-<iscontent type="text/html" charset="UTF-8" compact="true"/>
-
+<iscontent type="text/html" charset="UTF-8" compact="true" />
 <isif condition="${!empty(pdict.Product)}">
-<isscript>
-	// TODO: Externalize this to a site pref!!!
-	var scale = {
-        "scaleWidth": 556,
-        "scaleHeight": 680,
-        "scaleMode": "fit" };
-</isscript>
-
-<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
-<isset name="group" value="${pam.getAttributeGroup('FieldShots')}" scope="page"/>
-	<div class="recommendations cross-sell">
-		<isif condition="${pam.getAttributeDefinitions(group).size() > 0}">
-			<h2>
-				Field Shots
-			</h2>
-			<div id="carousel-recommendations">
-				<ul>
-					<isloop items="${pam.getAttributeDefinitions(group)}" var="Definition" status="loopstate1">
-						<li class="recommendation-item">
-							<div class="product-tile">
-								<div class="product-image recommendation_image">
-									<img src="${(pam.getValue(Definition)).getImageURL(scale)}" alt="${''}" title="${''}"/>
-								</div>
-							</div>
-						</li>
-					</isloop>
-				</ul>
-				<a class="jcarousel-nav jcarousel-prev" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
-				<a class="jcarousel-nav jcarousel-next" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
-			</div>
-		</isif>
+<div id="owl-demo">
+	<isif condition="${!empty(pdict.Product.custom.fieldShotImg1)}">
+	<div class="item">
+		<img src="${pdict.Product.custom.fieldShotImg1.getURL()}"
+			alt="${pdict.Product.custom.fieldShotImg1.getAlt()}"
+			title="${pdict.Product.custom.fieldShotImg1.getTitle()}" />
 	</div>
+	</isif>
+	<isif condition="${!empty(pdict.Product.custom.fieldShotImg2)}">
+	<div class="item">
+		<img src="${pdict.Product.custom.fieldShotImg2.getURL()}"
+			alt="${pdict.Product.custom.fieldShotImg2.getAlt()}"
+			title="${pdict.Product.custom.fieldShotImg2.getTitle()}" />
+	</div>
+	</isif>
+	<isif condition="${!empty(pdict.Product.custom.fieldShotImg3)}">
+	<div class="item">
+		<img src="${pdict.Product.custom.fieldShotImg3.getURL()}"
+			alt="${pdict.Product.custom.fieldShotImg3.getAlt()}"
+			title="${pdict.Product.custom.fieldShotImg3.getTitle()}" />
+	</div>
+	</isif>
+	<isif condition="${!empty(pdict.Product.custom.fieldShotImg4)}">
+	<div class="item">
+		<img src="${pdict.Product.custom.fieldShotImg4.getURL()}"
+			alt="${pdict.Product.custom.fieldShotImg4.getAlt()}"
+			title="${pdict.Product.custom.fieldShotImg4.getTitle()}" />
+	</div>
+	</isif>
+	<isif condition="${!empty(pdict.Product.custom.fieldShotImg5)}">
+	<div class="item">
+		<img src="${pdict.Product.custom.fieldShotImg5.getURL()}"
+			alt="${pdict.Product.custom.fieldShotImg5.getAlt()}"
+			title="${pdict.Product.custom.fieldShotImg5.getTitle()}" />
+	</div>
+	</isif>
+	<isif condition="${!empty(pdict.Product.custom.fieldShotImg6)}">
+	<div class="item">
+		<img src="${pdict.Product.custom.fieldShotImg6.getURL()}"
+			alt="${pdict.Product.custom.fieldShotImg6.getAlt()}"
+			title="${pdict.Product.custom.fieldShotImg6.getTitle()}" />
+	</div>
+	</isif>
+</div>
 </isif>

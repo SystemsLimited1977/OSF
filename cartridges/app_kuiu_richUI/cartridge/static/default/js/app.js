@@ -2788,6 +2788,20 @@ module.exports = function () {
 	$(function() {
 		$( "#accordion" ).accordion();
 	});
+	$("#owl-demo").owlCarousel({
+		 
+	      autoPlay: 2000, //Set AutoPlay to 3 seconds
+	 
+	      items : 3,
+	      itemsDesktop : [1199,3],
+	      itemsTablet : [979,2],
+	      itemsMobile : [320,1],
+	      navigation : true,
+	      navigationText : ["",""],
+			
+	 
+	  });
+		 
 	// hover on swatch - should update main image with swatch image
 	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),

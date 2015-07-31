@@ -20,6 +20,7 @@
 <iscomment>third-party add-ons</iscomment>
 <script src="${URLUtils.staticURL('/lib/jquery/jquery.jcarousel.min.js')}" type="text/javascript"></script>
 <script src="${URLUtils.staticURL('/lib/jquery/jquery.validate.min.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/jquery/owl.carousel.min.js')}" type="text/javascript"></script>
 <script src="${URLUtils.staticURL('/lib/jquery/jquery.zoom.min.js')}" ></script>
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('addThisConnectEnabled')}">
 	<isset name="addThisPubID" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('addThisPubID')}" scope="page" />
