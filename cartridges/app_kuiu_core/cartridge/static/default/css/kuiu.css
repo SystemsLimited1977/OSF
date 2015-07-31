@@ -2114,6 +2114,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 #main .no-design {
 	margin-top:30px;
+	margin-bottom:30px;
 }
 	
 #main .no-design h1 {
@@ -2285,6 +2286,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 #main .no-design #primary {
 	padding-left:15px;
+    border-left: 1px solid #e0e0e0;
+    left: -1px;
 }
 
 #main .no-design #secondary {
@@ -2846,9 +2849,172 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin-left: 72px;
 }
 
+.account-nav-asset {
+	background:none;
+}
+
+.col-1 {
+	width:50%;
+}
+.col-2 {
+	width:50%;
+}
+
+#main .no-design.full-fields input[type="text"], 
+#main .no-design.full-fields input[type="number"], 
+#main .no-design.full-fields input[type="password"],
+#main .no-design.full-fields select {
+	width:100%;
+	margin-left:0;	
+}
+
+#main .no-design.full-fields form .form-row-button {
+	margin-left:0
+}
 
 
+/*Gift certificate page styling*/
 
+.login-oauth {
+	margin-top:25px;
+}
+
+.pt_giftcert #main .no-design #primary {
+	padding-left:10px;
+    border-left: none;
+    left: 0;
+}
+
+.gift-certificate-purchase {
+    background: #fff;
+    margin-bottom: 1em;
+    padding: 0;
+}
+
+.gift-certificate-purchase form {
+	width:100%;
+	padding:0;
+}
+
+.pt_giftcert .gc-left h2{
+	display:none;
+}
+
+.gift-certificate-purchase .content-asset {
+	width:100%;
+	text-align:center;
+	padding-top:100px;
+}
+
+.pt_giftcert #main .no-design {
+	margin-top:60px;
+	margin-bottom:60px;
+}
+
+.gift-certificate-purchase form .dialog-required {
+	display:none;
+}
+
+.pt_giftcert .char-count {
+	margin-left:42%;
+	padding-top:6px;
+	font-weight:600;
+	clear:both;
+}
+
+.pt_giftcert #main .form-row {
+	overflow:hidden;
+	margin-bottom:20px;
+}
+
+.gift-certificate-purchase form .form-row-button {
+	width:100%;
+	margin:0 0 20px;
+}
+
+.gift-certificate-purchase form#GiftCertificateForm .form-row-button button {
+	width:100%;
+	display:block;
+	height:50px;
+	font-size:16px;
+	margin-top:0;
+}
+
+.pt_giftcert .gc-check-balance-wrap {
+	border-top:1px solid #e0e0e0;
+}
+
+.pt_giftcert .check-balance {
+	border-bottom:none;
+	margin:0;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap {
+	margin-top:50px;
+	padding-top:25px;
+	text-align:center;
+	overflow:hidden;
+}
+.pt_giftcert #main .gc-check-balance-wrap h1 {
+	margin-bottom:5px;
+}
+.pt_giftcert #main .gc-check-balance-wrap p.sub-title {
+	font-size:16px;
+	margin-top:0;
+	margin-bottom:20px;
+	text-transform:uppercase;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-weight: 500;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap form .gift-cert-balance > label {
+	display:none;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap form fieldset {
+	width:420px;
+	display:block;
+	margin:0 auto;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance {
+	width:260px;
+	margin-bottom:0;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance input[type="text"] {
+	height:30px;
+	width:100%;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance-submit {
+	width:140px;
+	float:right;
+	margin-bottom:0;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance-submit button {
+	margin-top:0;
+	width:100%;
+	padding:0 20px;
+	height:30px;
+}
+
+.pt_giftcert #main .gc-check-balance-wrap .balance-status {
+	padding-top:20px;
+	font-size:12px;
+	font-weight:600;
+	clear:both;
+	margin-bottom:0;
+}
+
+.gift-certificate-purchase {
+	margin-bottom:0;
+}
+
+.pt_giftcert #main select {
+	background-position:98% 8px;
+}
 
 
 
