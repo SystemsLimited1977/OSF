@@ -25,24 +25,28 @@
 		}
 	</isscript>
 	<div class="recommendations cross-sell">
-
-		<isif condition="${recProducts.size() > 0}">
-			<h2>
-				<isif condition="${pdict.Product.productSet}">
-					${Resource.msg('product.recommendations.productsets','product',null)}
-				<iselse/>
-					${Resource.msg('product.recommendations.products','product',null)}
-				</isif>
-			</h2>
+		<div class="container">
+		 	<div class="xs-col-12">
+				<isif condition="${recProducts.size() > 0}">
+					<h2>
+						<isif condition="${pdict.Product.productSet}">
+							${Resource.msg('product.recommendations.productsets','product',null)}
+						<iselse/>
+							${Resource.msg('product.recommendations.products','product',null)}
+						</isif>
+					</h2>
+			</div>
+		</div>
 			<div id="carousel-recommendations">
-				<ul>
+			<div class="container">
+				<div id="owl-demo1">
 					<iscomment>Preserve the Product instance</iscomment>
 					<isset name="mainProduct" value="${pdict.Product}" scope="pdict"/>
 					<isloop items="${recProducts}" var="rec" end="19">
 						<isset name="Product" value="${rec}" scope="pdict"/>
 						<isset name="pName" value="${pdict.Product.name}" scope="page"/>
-						<li class="recommendation-item">
-							<div class="product-tile tooltip">
+						<div class="item">
+							<div class="product-tile">
 								<div class="analytics capture-product-id"><isprint value="${pdict.Product.ID}"/></div>
 								<div class="product-image recommendation_image">
 									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}">
@@ -119,14 +123,13 @@
 									</isif>
 								</div>
 							</div>
-						</li>
+						</div>
 					</isloop>
 					<iscomment>Restore the Product instance</iscomment>
 					<isset name="Product" value="${pdict.mainProduct}" scope="pdict"/>
-				</ul>
-				<a class="jcarousel-nav jcarousel-prev" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
-				<a class="jcarousel-nav jcarousel-next" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
+				</div>
 			</div>
+		  </div>
 		</isif>
 	</div>
 </isif>

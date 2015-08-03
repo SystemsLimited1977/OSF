@@ -31,6 +31,38 @@
     width: 0;
 }
 
+.pdp-main .recommendations #carousel-recommendations {
+	width:100%;
+	
+}
+
+.pdp-main .recommendations .product-tile {
+	height:465px;
+	border-right:1px solid #e6e6e6;
+	padding:0px;
+}
+
+.pdp-main #owl-demo1 .product-image.recommendation_image a img {
+	width:277px;
+	height:355px;
+}
+.pdp-main .recommendations .product-image {
+	height:auto;
+	    padding-bottom: 40px;
+}
+
+.pdp-main .recommendations .product-name {
+	font-size: 13px;
+    font-style: normal;
+    font-family: "Times New Roman", Georgia, Serif;
+
+}
+.pdp-main .recommendations .product-price {
+	font-size: 12px;
+	padding-left: 18px;
+	float:left;
+}
+/* Carousel Code Start */
 .owl-carousel .owl-wrapper:after {
 	content: ".";
 	display: block;
@@ -100,7 +132,7 @@
 }
 
 
-#owl-demo .owl-prev, #owl-demo  .owl-next{
+#owl-demo .owl-prev, #owl-demo  .owl-next,#owl-demo1 .owl-prev, #owl-demo1 .owl-next{
     width: 40px;
     height: 70px;
     background-color: #fff;
@@ -114,16 +146,24 @@
     z-index: 10;
 }
 
-#owl-demo .owl-prev {
+#owl-demo .owl-prev, #owl-demo1 .owl-prev {
     background-image: url("../images/interface/b-prev_arrow.png");
     background-repeat: no-repeat;
     background-position: 8px 15px;
 }
 
-#owl-demo .owl-next {
+#owl-demo .owl-next, #owl-demo1  .owl-next {
     right: 0;
     left: inherit;
     background-image: url("../images/interface/b-next-arrow.png");
     background-repeat: no-repeat;
     background-position: 15px 15px;
 }
+
+.pdp-main .recommendations h2 {
+	font-size:26px;
+	font-style: normal;
+    font-family: "Times New Roman", Georgia, Serif;
+    color:#2b2b2b;
+    text-align: center;
+} 

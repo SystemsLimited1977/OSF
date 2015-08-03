@@ -63,19 +63,6 @@
 				</div>
 			 </div>
 			</isif>
-	
-		<div class="product-detail-slider-1">	
-			<div>
-				<isinclude template="product/components/fieldshots"/>
-			</div>
-		</div>
-	  	<iscomment>
-		<div class="product-detail-slider-2">
-			<div>
-				<isinclude template="product/components/recommendations"/>
-			</div>
-		</div>
-		</iscomment>
  </div>
 		</isif>
 	
@@ -108,7 +95,10 @@
 			  </div>
 		  </isif>
 		</div>
-  	<iscomment>
+	  </div>
+	 </div>
+	</div>
+		
 		<div class="product-detail-slider-1">	
 			<div>
 				<isinclude template="product/components/fieldshots"/>
@@ -119,9 +109,5 @@
 				<isinclude template="product/components/recommendations"/>
 			</div>
 		</div>
-	</iscomment>
-	  </div>
-	 </div>
-	</div>
 	</div><!--/pdpMain -->
 </isobject>

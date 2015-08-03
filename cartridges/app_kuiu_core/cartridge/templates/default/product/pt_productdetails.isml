@@ -34,11 +34,11 @@
 			<isinclude template="components/productbreadcrumbs"/>
 			</iscomment>
 			<div id="primary" class="primary-content">
-
+			<iscomment>
 				<div id="product-nav-container">
 					<isinclude template="search/productnav"/>
 				</div> <!-- /product-nav-container -->
-
+			</iscomment>
 				<isreplace/>
 			</div><!-- /primary-content -->
 
