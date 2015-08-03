@@ -90,7 +90,11 @@ footer {
 	font-size: 11px;
 	margin-left: 20px;
 }
-
+.copyright .divider {
+	color:#3c3c3c;
+	font-size:13px;
+	line-height:13px;
+}
 footer > .logo-div {
 	height: 203px;
 	background-color: #fff;
@@ -117,6 +121,7 @@ footer .footer-container .content-asset ul li {
 	font-size: 12px;
 	border-right: 1px solid #3c3c3c;
 	padding: 0px 6px;
+	line-height:16px;
 }
 
 footer .footer-container .content-asset ul li:last-child {
@@ -224,7 +229,7 @@ footer .footer-container .content-asset ul {
 }
 */
 .footer-up {
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 
 #email-alert-signup button {
