@@ -7,7 +7,8 @@ var addThis = require('./addThis'),
 	progress = require('../../progress'),
 	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
-	util = require('../../util');
+	util = require('../../util'),
+	owlCarousel = require('../../owl-carouse');
 
 
 /**
@@ -81,4 +82,7 @@ module.exports = function () {
 	$(function() {
 		$( "#accordion" ).accordion();
 	});
+	
+	//initialize Fieldshoot and Recomendations carousel on PDP
+	owlCarousel.init();
 };
