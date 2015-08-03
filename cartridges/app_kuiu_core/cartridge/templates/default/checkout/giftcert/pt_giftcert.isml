@@ -21,7 +21,7 @@
 
 <body>
 
-	<div id="wrapper" class="pt_account">
+	<div id="wrapper" class="pt_giftcert">
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}" />
 
@@ -36,21 +36,25 @@
 			<iselse /> <isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}"
 				bctext1="${Resource.msg('account.header','account',null)}" /> </isif> </isif>
 			<div class="container no-design full-fields">
-				<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9">
+			
+				<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-12">
 					<isreplace/>
 				</div>
-
-				<div id="secondary" class="nav pull-left col-xs-12 col-sm-3">
-					<nav>
-						<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
-						<div class="secondary-navigation">
-							<isinclude url="${URLUtils.url('Account-IncludeNavigation')}"/>
+				
+				<iscomment>
+						<div id="secondary" class="nav pull-left col-xs-12 col-sm-3">
+							<nav>
+								<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
+								<div class="secondary-navigation">
+									<isinclude url="${URLUtils.url('Account-IncludeNavigation')}"/>
+								</div>
+							</nav>
+							<div class="account-nav-asset">
+								<iscontentasset aid="account-nav-text"/>
+							</div>
 						</div>
-					</nav>
-					<div class="account-nav-asset">
-						<iscontentasset aid="account-nav-text"/>
-					</div>
-				</div>
+				</iscomment>
+		
 			</div>
 		</div>
 		<!-- /main -->

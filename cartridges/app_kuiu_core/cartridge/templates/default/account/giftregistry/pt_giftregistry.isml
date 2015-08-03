@@ -32,13 +32,16 @@
 
 		<div id="main" role="main" class="clearfix page-content">
 			<isinclude template="components/browsertoolscheck"/>
+			<iscomment>
 			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${Resource.msg('account.giftregistry.title','account',null)}"/>
-
-			<div id="primary" class="primary-content">
+			</iscomment>
+			
+	<div class="container no-design full-fields">
+			<div id="primary" class="primary-content pull-right col-xs-12 col-sm-9">
 				<isreplace/>
 			</div>
 
-			<div id="secondary" class="nav">
+			<div id="secondary" class="nav pull-left col-xs-12 col-sm-3">
 				<nav>
 					<h1 class="visually-hidden">Secondary Navigation</h1>
 					<div class="secondary-navigation">
@@ -53,7 +56,7 @@
 					<iscontentasset aid="account-nav-text"/>
 				</div>
 			</div>
-
+	</div>
 		</div><!-- /main -->
 
 		<isinclude template="components/footer/footer"/>

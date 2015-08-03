@@ -16,8 +16,20 @@
 <iscomment>
 	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
 </iscomment>
+
+<div class="product-details">
+
 <div class="${!isQuickView? 'container' : 'quickview-wrap'}">
+
 <div class="${!isQuickView? 'col-xs-12 col-sm-6 col-md-7' : 'col-xs-12 col-sm-6 col-md-6'}">
+ 	<div class="top-section visible-xs-block">
+		<h1 class="product-name pull-left " itemprop="name">
+			<isprint value="${pdict.Product.name}"/>
+		</h1>
+			<isset name="showTieredPrice" value="${true}" scope="page"/>
+			<isinclude template="product/components/pricing"/>
+	 </div>
+
 	<div class="product-col-1 product-image-container">
 		<isif condition="${pdict.Product.custom.productBadge.length > 0}">
 			<div class="product-new-tag"></div>
@@ -27,14 +39,14 @@
 </div>
 <div class="${!isQuickView? 'col-xs-12 col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-1' : 'col-xs-12 col-sm-6 col-md-6 qw-p-desc'}">
  <div class="head-content">
- 	<div class="top-section">
+ 	<div class="top-section hidden-xs">
 		<h1 class="product-name pull-left" itemprop="name">
 			<isprint value="${pdict.Product.name}"/>
 		</h1>
 			<isset name="showTieredPrice" value="${true}" scope="page"/>
 			<isinclude template="product/components/pricing"/>
 	 </div>
-		<div class="weather_badage">
+		<div class="weather_badage hidden-xs">
 	 		<isloop items="${pdict.Product.custom.weatherBadge}" var="weatherBadge" >
 				<div class="weather_badage_icon ${weatherBadge.value}"></div>
 			</isloop>
@@ -102,9 +114,12 @@
 	</isif>
  </iscomment>
 </div>
+	<div class="mobile-short-description visible-xs-block">
+		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
+	</div>
 </div>
 </div>
-
+</div>
 
 
 
