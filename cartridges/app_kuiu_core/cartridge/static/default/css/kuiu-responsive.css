@@ -753,10 +753,9 @@
 	}
 	.pdp-main .product-primary-image img.primary-image {
     	width: 300px;
-    	height: 384px;
+    	height: auto;
 	}
 	#main .pdp-main .product-add-to-cart button {
-		margin-top: 35px;
 		float: none;
 	}	
 	.addthis_toolbox.addthis_default_style {
@@ -1066,7 +1065,7 @@
 	}
 	.pdp-main .product-primary-image img.primary-image {
 		width:410px;
-		height:525px;
+		height:auto;
 	}
 	.pdp-main .product-overview .container-with-image .col-sm-6 .pdp-overview-content {
 		overflow-y: scroll;

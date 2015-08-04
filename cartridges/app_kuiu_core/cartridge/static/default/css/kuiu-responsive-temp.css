@@ -53,6 +53,7 @@
     	border-bottom: 2px solid;
     	text-align: center;
     	font-size: 16px;
+    	margin:-2px 0 0;
 	}
 	.pdp-main .accordion-main .ui-accordion .ui-accordion-icons {
 		padding-left:0px;
@@ -69,6 +70,11 @@
 		height: 500px;
 		overflow: auto;
 		overflow-x: hidden;
+		margin:10px 0;
+	}
+	.pdp-main .accordion-main .ui-accordion .ui-accordion-content .technology-container {
+		padding:15px 0;
+		overflow:hidden;
 	}
 	
 	.pdp-main .accordion-main .ui-accordion.accordin-content .pdp-overview-content p {
@@ -88,6 +94,26 @@
 	.pdp-main .product-technology2 .overview-img,
 	.pdp-main .product-technology3 .overview-img {
 		text-align: center;
+	}
+	
+	.pdp-main .product-image-container {
+		position:relative;
+	}
+	.product-new-tag {
+		top:0;
+		margin-left:0
+	}
+	
+	.pt_product-details .primary-content {
+		padding-bottom:0;
+	}
+	
+	.pdp-main .recommendations {
+		padding:20px 0;
+	}
+	
+	.pdp-main .recommendations h2 {
+		margin:0 0 10px;
 	}
 }
 
@@ -113,6 +139,14 @@
 	.header-search button {
 		background-position: 5px 5px;
 	}
+	
+	.pdp-main .product-overview .pdp-overview-content p, 
+	.pdp-main .product-technology p.pdp-overview-content, 
+	.pdp-main .product-technology2 p.pdp-overview-content, 
+	.pdp-main .product-technology3 p.pdp-overview-content {
+		padding:0 0 20px;
+	}
+	
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
