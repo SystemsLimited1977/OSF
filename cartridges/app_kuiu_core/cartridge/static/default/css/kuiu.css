@@ -1862,6 +1862,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   border: 1px solid #c3c3c3;
   border-radius: 99px;
   margin-right: 5px;
+  width:32px;
+  height:32px;
 }
 
 .refinement ul.swatches.Color li.selected {
@@ -1872,8 +1874,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   border-radius: 99px;
   display: block;
   padding: 5px;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   text-align: center;
   background-color: #fff;
 }
@@ -1974,7 +1976,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .refinement a:hover,
 .refinement a:focus {
 	text-decoration:none;
-	color:#000;
+	color:#7f7f7f !important;
 }
 
 .page-banner-main {
