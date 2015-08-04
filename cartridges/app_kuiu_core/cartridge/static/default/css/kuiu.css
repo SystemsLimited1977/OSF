@@ -342,6 +342,7 @@ header {
 	width: 80%;
 	font-style: italic;
 	font-family: "Times New Roman", Georgia, Serif;
+	outline: none;
 }
 
 .header-search button {
@@ -2242,7 +2243,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   margin-left: 1px; }
   
   .search-suggestion-right-panel-product-image img {
-  	border:1px solid #f2f2f2;
+  	/*border:1px solid #f2f2f2;*/
     width: 100px;
     height: 110px; }
     
@@ -2259,8 +2260,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	font-family: "Times New Roman", Georgia, Serif; }
 	
 .search-suggestion-right-panel-product-price {
-	font-size:13px;	
-	font-weight: 500;
+	font-size:12px;	
+	font-weight: 400;
 }
 
 .search-phrase-suggestion {

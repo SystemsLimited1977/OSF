@@ -1,12 +1,15 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
 	var avm = pdict.Product.availabilityModel;
 	pdict.available = avm.availabilityStatus==dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK
 					&& avm.inventoryRecord != null
 					&& avm.inventoryRecord.stockLevel.available;
 </isscript>
+
 	<div class="product-set-image">
-		<isset name="smImg" value="${pdict.Product.getImages('small')[0]}" scope="page" />
+		<iscomment><isset name="smImg" value="${pdict.Product.getImages('small')[0]}" scope="page" /></iscomment>
+		<isset name="smImg" value="${new ProductImage('small', pdict.Product, 0)[0]}" scope="page" />
 		<img class="product-thumbnail" src="${smImg.getURL()}" alt="${smImg.alt}" title="${smImg.title}" />
 	</div>
 

@@ -22,6 +22,16 @@
 	.pdp-main .recommendations .product-tile {
 		border-right: none;
 	}
+	.cl-gear-categories .cl-gear-category span,
+	.cl-section-categories .cl-section-category span{
+		padding:0px;
+		margin-top: 10px;
+		bottom:0px;
+		position: static;
+	} 
+	.cl-section-categories .cl-section-category {
+		padding: 10px 20px 0;
+	}
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
@@ -99,6 +109,9 @@
 	}
 	.pdp-main #owl-demo .owl-item img{
 		width:100%;
+	}
+	.header-search button {
+		background-position: 5px 5px;
 	}
 }
 

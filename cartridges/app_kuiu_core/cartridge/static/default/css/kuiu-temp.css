@@ -33,7 +33,6 @@
 
 .pdp-main .recommendations #carousel-recommendations {
 	width:100%;
-	
 }
 
 .pdp-main .recommendations .product-tile {
@@ -167,3 +166,7 @@
     color:#2b2b2b;
     text-align: center;
 } 
+
+.refinements-breadcrumb .breadcrumb {
+	border-bottom:none;
+}
