@@ -391,7 +391,7 @@ ul.menu-category li a {
 	padding: 15px 25px;
 }
 
-ul.menu-category li a span:hover {
+ul.menu-category li a:hover span {
 	border-bottom: 3px solid #2b2b2b;
 }
 
