@@ -2705,7 +2705,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 .pdp-main .product-primary-image img.primary-image {
 	width: 585px;
-    height: 749px;
+    height: auto;
 }
 .product-thumbnails .productthumbnail {
     border: 1px solid #e6e6e6;	
@@ -2860,9 +2860,13 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	height:600px !important;
 } 
 
-.quickview-popup .recommendations {
+.quickview-popup .recommendations,
+.quickview-popup .product-detail-slider-1,
+.quickview-popup .product-detail-slider-2 {
 	display:none;
 }
+
+
 
 .quickview-popup .ui-dialog-content {
 	overflow-y: auto !important;
