@@ -71,9 +71,10 @@
 		<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm">
 			<fieldset>
 
+		<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
            <div class="availability-block">
 				<div class="availability">
-				<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
+				
 					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
 					<span class="value"><isinclude template="product/components/availability"/></span>
 					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
@@ -83,12 +84,13 @@
 						<iselse/>
 							<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock">
 						</isif>
-							</div>
+				</div>
 					</isif>
-				</isif>
+				
 				</div>
 			</div>
-			
+		</isif>	
+		
 			<legend class="visually-hidden">Add to cart options</legend>
 
 			<isinclude template="product/components/options"/>
