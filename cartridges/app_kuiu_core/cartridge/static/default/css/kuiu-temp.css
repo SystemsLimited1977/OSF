@@ -14,9 +14,11 @@
     margin-bottom: 8px;
 }
 
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology2 .overview-top p,
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology3 .overview-top p {
-	padding: 30px 0;
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology2 .overview-top p,
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology3 .overview-top p {
+	padding: 0 0 30px;
 }
 
 .pdp-main .accordion-main .ui-accordion .ui-accordion-header.ui-accordion-header-active.ui-state-active:after {
