@@ -391,7 +391,7 @@ ul.menu-category li a {
 	padding: 15px 25px;
 }
 
-ul.menu-category li a span:hover {
+ul.menu-category li a:hover span {
 	border-bottom: 3px solid #2b2b2b;
 }
 
@@ -1862,6 +1862,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   border: 1px solid #c3c3c3;
   border-radius: 99px;
   margin-right: 5px;
+  width:32px;
+  height:32px;
 }
 
 .refinement ul.swatches.Color li.selected {
@@ -1872,8 +1874,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   border-radius: 99px;
   display: block;
   padding: 5px;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   text-align: center;
   background-color: #fff;
 }
@@ -1905,6 +1907,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   font-style: italic;
   text-decoration: underline;
   font-size: 13px;
+  font-family: "Times New Roman", Georgia, Serif;
+  font-weight:600;
 }
 
 .refinements-breadcrumb .breadcrumb {
@@ -1967,6 +1971,12 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .refinements-breadcrumb .container {
 	padding-left:0;
 	padding-right:0;
+}
+
+.refinement a:hover,
+.refinement a:focus {
+	text-decoration:none;
+	color:#7f7f7f !important;
 }
 
 .page-banner-main {
@@ -2461,6 +2471,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	text-align: left;
 }
 
+.pdp-main .recommendations {
+	padding:40px 0;
+}
+
 .pdp-main .top-section {
 	width:75%;
 	float: left;
@@ -2505,7 +2519,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	background-position: 64px -2px;
 }
 .pdp-main .pdp-des-content {
-	border-bottom: 1px solid #e6e6e6;
+	/*border-bottom: 1px solid #e6e6e6;*/
 	padding-bottom: 25px;
 }
 .pdp-main .pdp-des-content ul {
@@ -2704,7 +2718,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 .pdp-main .product-primary-image img.primary-image {
 	width: 585px;
-    height: 749px;
+    height: auto;
 }
 .product-thumbnails .productthumbnail {
     border: 1px solid #e6e6e6;	
@@ -2757,15 +2771,21 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
                         inset  0 -8px 8px -8px #696868;
 
 }
-.pdp-main .product-overview .overview-top h1,.pdp-main  .product-technology .overview-top h1 {
+.pdp-main .product-overview .overview-top h1,
+.pdp-main  .product-technology .overview-top h1,
+.pdp-main  .product-technology2 .overview-top h1,
+.pdp-main  .product-technology3 .overview-top h1 {
 	margin:0px;
 	margin-top:0px !important;
 	color:#2b2b2b;
 	padding-top:40px;
 }
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology .overview-top p,
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology2 .overview-top p,
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology3 .overview-top p{
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology .overview-top p,
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology2 .overview-top p,
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology3 .overview-top p{
 	text-transform: uppercase;
     font-size:18px;
     font-family: "Times New Roman", Georgia, Serif;
@@ -2853,12 +2873,17 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	height:600px !important;
 } 
 
-.quickview-popup .recommendations {
+.quickview-popup .recommendations,
+.quickview-popup .product-detail-slider-1,
+.quickview-popup .product-detail-slider-2 {
 	display:none;
 }
 
+
+
 .quickview-popup .ui-dialog-content {
 	overflow-y: auto !important;
+	overflow-x:hidden;
 	height:100% !important;
 }
 .quickview-popup .ui-dialog-content .product-col-1 {
@@ -2957,6 +2982,9 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin-left: 72px;
 }
 
+.quickview-popup .pdp-main .product-primary-image {
+	min-height: 490px;
+}
 .account-nav-asset {
 	background:none;
 }
@@ -3124,10 +3152,33 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	background-position:98% 8px;
 }
 
+.fa-square-o {
+	background:url("../images/icon-uncheck.png") no-repeat center center;
+	width:14px;
+	height:14px;
+	background-size:14px 14px;
+	content:"";
+	top:1px;
+	position:relative;
+}
 
+.fa-square-o:before {
+	content:"";
+}
 
+.fa-check-square-o {
+	background:url("../images/icon-checked.png") no-repeat center center;
+	width:14px;
+	height:14px;
+	background-size:14px 14px;
+	content:"";
+	top:1px;
+	position:relative;
+}
 
-
+.fa-check-square-o:before {
+	content:"";
+}
 
 
 

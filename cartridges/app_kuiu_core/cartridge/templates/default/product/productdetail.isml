@@ -7,9 +7,9 @@
 		<iscomment>Image and variation options are part of the include template</iscomment>
 						
 		<isif condition="${pdict.Product.productSet || pdict.Product.bundle}">
-			<isinclude template="product/producttopcontentPS" />
+			<isinclude template="product/producttopcontentPS"/>
 		<iselse/>
-			<isinclude template="product/producttopcontent" />
+			<isinclude template="product/producttopcontent"/>
 		</isif>
 		
 		<isif condition="${!isQuickView && !pdict.Product.productSet && !pdict.Product.bundle}">
@@ -20,22 +20,24 @@
 		<div class="container">
 			    <div class="row">
 					<div class="col-sm-12 overview-top">
-						<center><h1>Product Overview</h1>
-						<p class="hidden-xs">Engineered/designed for the most demanding weather</p></center>
+						<center>
+						<h1>Product Overview</h1>
+						<p class="hidden-xs">Engineered/designed for the most demanding weather</p>
+						</center>
 					</div>
 					<isif condition="${!empty(pdict.Product.custom.productviewimage)}">
 						<div class="container-with-image">
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<isprint value="${pdict.Product.longDescription}" encoding="off" />
+								<isprint value="${pdict.Product.longDescription}" encoding="off"/>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<isprint value="${pdict.Product.custom.productviewimage}" encoding="off" />
+								<isprint value="${pdict.Product.custom.productviewimage}" encoding="off"/>
 							</div>
 						</div>
 					<iselse>
 						<div class="container-with-empty-image">
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<isprint value="${pdict.Product.longDescription}" encoding="off" />
+								<isprint value="${pdict.Product.longDescription}" encoding="off"/>
 							</div>
 						</div>
 					</isif>	
@@ -45,25 +47,25 @@
 			
 			<div class="product-technology">
 				<div class="container">
-				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"  />
+				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"/>
 				</div>
 			</div>
 			
 			 <isif condition="${!empty(pdict.Product.custom.technologyAsset2)}">
 			  <div class="product-technology2">
 				<div class="container">
-				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset2).custom.body}" encoding="off"  />
+				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset2).custom.body}" encoding="off"/>
 				</div>
-			 </div>
+			  </div>
 			</isif>
 			<isif condition="${!empty(pdict.Product.custom.technologyAsset3)}">
 			  <div class="product-technology3">
 				<div class="container">
-				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset3).custom.body}" encoding="off"  />
+				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset3).custom.body}" encoding="off"/>
 				</div>
 			 </div>
 			</isif>
- </div>
+ 	</div>
 		</isif>
 <isif condition="${!isQuickView && !pdict.Product.productSet && !pdict.Product.bundle}">	
 	<div class="accordion-main visible-xs">
@@ -73,25 +75,25 @@
 		  <h2>Product Overview</h2>
 		  <div class="accordin-content">
 		    <h4>Engineered/designed for the most demanding weather</h4>
-		    <isprint value="${pdict.Product.longDescription}" encoding="off" />
-		    <isprint value="${pdict.Product.custom.productviewimage}" encoding="off" />
+		    <isprint value="${pdict.Product.longDescription}" encoding="off"/>
+		    <isprint value="${pdict.Product.custom.productviewimage}" encoding="off"/>
 		  </div>
 		  <isif condition="${!empty(pdict.Product.custom.technologyAsset1)}">
 			  <h2>Technology</h2>
 			  <div class="techonology-msection">
-			  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"  />
+			  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"/>
 			  </div>
 		  </isif>
 		  <isif condition="${!empty(pdict.Product.custom.technologyAsset2)}">
 			  <h2>Technology Asset2</h2>
 			  <div class="techonology-msection">
-			   	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset2).custom.body}" encoding="off"  />
+			   	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset2).custom.body}" encoding="off"/>
 			  </div>
 		  </isif>
 		  <isif condition="${!empty(pdict.Product.custom.technologyAsset3)}">
 			  <h2>Technology Asset3</h2>
 			  <div class="techonology-msection">
-			   	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset3).custom.body}" encoding="off"  />
+			   	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset3).custom.body}" encoding="off"/>
 			  </div>
 		  </isif>
 		</div>

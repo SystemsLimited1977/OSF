@@ -14,9 +14,12 @@
     margin-bottom: 8px;
 }
 
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology2 .overview-top p,
-.pdp-main .product-overview .overview-top p,.pdp-main  .product-technology3 .overview-top p {
-	padding: 30px 0;
+.pdp-main  .product-technology .overview-top p,
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology2 .overview-top p,
+.pdp-main .product-overview .overview-top p,
+.pdp-main  .product-technology3 .overview-top p {
+	padding: 0 0 30px;
 }
 
 .pdp-main .accordion-main .ui-accordion .ui-accordion-header.ui-accordion-header-active.ui-state-active:after {
@@ -165,11 +168,13 @@
     font-family: "Times New Roman", Georgia, Serif;
     color:#2b2b2b;
     text-align: center;
+    margin:0 0 40px;
 } 
 
 .refinements-breadcrumb .breadcrumb {
 	border-bottom:none;
 }
+
 .pdp-main .product-set-main .product-set-list {
 	border-top:none;
 	margin:0px;
@@ -248,3 +253,4 @@
      width: 26%;
      float:left;
 }
+
