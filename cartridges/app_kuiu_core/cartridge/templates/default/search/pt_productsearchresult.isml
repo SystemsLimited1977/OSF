@@ -22,7 +22,7 @@
 	<isinclude template="components/header/htmlhead"/>
 
 	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
-		<link rel="canonical" href="${URLUtils.url('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
+		<link rel="canonical" href="${URLUtils.url('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}"/>
 	</isif>
 
 	<iscomment>Add  template-specific header information here.</iscomment>
@@ -36,7 +36,9 @@
 
 		<div id="main" role="main" class="clearfix">
 			<isinclude template="components/browsertoolscheck"/>
+			
 			<isreplace/>
+			
 		</div>
 
 		<isinclude template="components/footer/footer"/>

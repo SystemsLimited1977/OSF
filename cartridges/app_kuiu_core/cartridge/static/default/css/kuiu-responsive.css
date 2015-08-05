@@ -1286,6 +1286,14 @@
 		padding: 0 0 20px;
 	}
 	
+	.pdp-main .product-set-main .product-set-list .availability span.label {
+		width:35%;
+	}
+	
+	.pdp-main .product-set-main .product-set-list .block-add-to-cart button {
+		width:65%;
+	}
+	
 	
 }
 

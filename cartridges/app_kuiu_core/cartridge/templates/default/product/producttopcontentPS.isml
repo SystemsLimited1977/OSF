@@ -49,10 +49,10 @@
 </iscomment>
 <div class="product-set-main">
 
-	<div class="container">
+	<div class="${!isQuickView? 'container' : 'quickview-wrap'}">
 	
 	  <h1 class="product-name pull-left visible-xs"  itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
-		<div class="col-xs-12 col-sm-6 col-md-7">
+		<div class="${!isQuickView? 'col-xs-12 col-sm-6 col-md-7' : 'col-xs-12 col-sm-6 col-md-6'}">
 			<div class="product-col-1 product-set"><!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
 				
 				<isset name="FirstProductInSet" value="${pdict.ProductSetList[0]}" scope="pdict" />
@@ -122,7 +122,7 @@
 				</div>
 			</div>
 		</div>
-	<div class="col-xs-12 col-sm-5 col-md-5"> 	
+	<div class="${!isQuickView? 'col-xs-12 col-sm-6 col-md-5' : 'col-xs-12 col-sm-6 col-md-6'}"> 	
 		<div class="product-col-2  product-set">
 		<h1 class="product-name pull-left hidden-xs"  itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
 			<iscomment>
@@ -138,7 +138,7 @@
 		
 			<isif condition="${isQuickView}">
 				<!-- shown only in quick view -->
-				<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
+				<a class="link-viewdetails" href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
 			</isif>
 		
 			<isset name="psProduct" value="${pdict.Product}" scope="page"/>
