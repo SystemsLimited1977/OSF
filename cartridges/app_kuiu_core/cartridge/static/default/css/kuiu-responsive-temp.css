@@ -89,6 +89,36 @@
 	.pdp-main .product-technology3 .overview-img {
 		text-align: center;
 	}
+	.pdp-main .product-set-list .product-set-image,
+	.pdp-main .product-set-list .product-set-details{
+		width:100%;
+	}
+	.pdp-main .product-set-list .product-set-image img {
+	        width: 277px;
+    		height: 355px;
+	}
+	.pdp-main .product-set-main .product-set-list .block-add-to-cart button {
+		width:72% !important;
+	}
+	.pdp-main .product-set-main .product-set-list .product-set-image {
+		padding-top:0px;
+	}
+	.pdp-main .product-set-main .product-primary-image {
+		border-bottom:none;
+	}
+	.pdp-main .product-set-main .product-set-list .product-set-details {
+		padding-left:0px;
+	}
+	#main .product-set-main .product-set-details h1.product-name {
+		margin-top: 0px;
+	}
+	.pdp-main .product-set-main .product-variations > ul {
+		margin-top:0px
+	}
+	.pdp-main .product-set-main .product-set-image {
+		text-align: center;
+    	float: none;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {

@@ -2537,7 +2537,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	width:100%;
 }
 .pdp-main .product-variations .attribute .label,
-.pdp-main .product-add-to-cart .quantity label {
+.pdp-main .product-add-to-cart .quantity label,
+.pdp-main .availability-block .availability span.label,
+.pdp-main .product-set-main .product-set-list .availability span.label
+ {
 	color:#000000;
 	font-size:13px;
 	width: 100%;
@@ -2639,10 +2642,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .pdp-main .product-add-to-cart {
 	margin:0;
 }
-.product-variations .attribute .selected-value,.pdp-main .availability-block .availability span.label {
+.product-variations .attribute .selected-value {
 	font-size:14px;
     font-family: 'Roboto', sans-serif;
-    font-weight:400;
+    font-weight:500;
     color:#000;
     float: left;
 }
@@ -2669,7 +2672,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .pdp-main p.in-stock-msg,.pdp-main p.is-in-stock, [data-status="store-in-stock"] {
     color: #81031b;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     margin-top: 0px;
     line-height: 14px;
 }
