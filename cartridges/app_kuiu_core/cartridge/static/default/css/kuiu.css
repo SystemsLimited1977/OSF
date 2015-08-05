@@ -2880,6 +2880,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 .quickview-popup .ui-dialog-content {
 	overflow-y: auto !important;
+	overflow-x:hidden;
 	height:100% !important;
 }
 .quickview-popup .ui-dialog-content .product-col-1 {
@@ -2978,6 +2979,9 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin-left: 72px;
 }
 
+.quickview-popup .pdp-main .product-primary-image {
+	min-height: 490px;
+}
 .account-nav-asset {
 	background:none;
 }
