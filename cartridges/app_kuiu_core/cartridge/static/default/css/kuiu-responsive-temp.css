@@ -18,12 +18,36 @@
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
-
+	.pt_product-search-result .search-promo,
+	.ui-dialog.bonus-product-popup button {
+		padding:0px;
+	}
+	#main .categoryheader .btn-refineby,
+	.pt_product-search-result #main .categoryheader .sort-by {
+		width:46%;
+	}
+	.js .ui-dialog-content .product-col-1,
+	.js .ui-dialog-content .product-col-2,
+	.bonus-product-list .bonus-product-list-footer .add-to-cart-bonus{
+		width:100%;
+	}
+	.ui-dialog.bonus-product-popup .ui-dialog-title,
+    .ui-dialog.bonusproduct-quickview-container .ui-dialog-title {
+		font-size: 22px;
+	}
+	.ui-dialog.bonus-product-popup {
+		width:100% !important;
+	}
+	.bonus-product-list .product-add-to-cart button {
+		margin-top:26px;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
-	
-}
+	.ui-dialog.bonus-product-popup {
+		width: 54% !important;
+	}
+}	
 
 @media ( min-width : 992px) and (max-width: 1199px) {
 	

@@ -569,12 +569,12 @@
 		z-index: 10;
 	}
 	
-	#main .categoryheader .sort-by form select {
+	/*#main .categoryheader .sort-by form select {
 		background-position:95% 11px;
-	}
+	}*/
 	
 	#main .categoryheader .sort-by {
-		margin:0 0 0 10px;
+		margin:0 0 0 8px;
 	}
 	
 	.refinements-breadcrumb .breadcrumb {

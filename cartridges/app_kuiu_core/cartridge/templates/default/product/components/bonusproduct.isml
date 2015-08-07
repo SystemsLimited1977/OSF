@@ -53,10 +53,7 @@
 
 <div class="product-col-2  product-detail">
 	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
-
-	<div class="product-number">
-		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${pdict.Product.ID}"/></span>
-	</div>
+	<isinclude template="product/components/pricing"/>
 
 	<isif condition="${pdict.Product.bundle && pdict.Product.getBundledProducts().size() > 0}">
 		<iscomment>Display bundle Individual Products</iscomment>

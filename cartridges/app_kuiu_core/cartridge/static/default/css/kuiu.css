@@ -1020,7 +1020,7 @@ span.error {
 	-moz-appearance: none; /* Firefox */
 	-webkit-appearance: none; /* Safari and Chrome */
 	margin-left: 0px;
-	background-image: url("../images/arrow_down.png");
+	background-image: url("../images/drop-down_arrow.png");
 	background-repeat: no-repeat;
 	background-position: 95% 8px;
 	cursor: pointer;
@@ -1674,18 +1674,19 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 #main .categoryheader .sort-by {
-	width:160px;
+	min-width: 114px;
+    height: 27px;
+    padding: 0px;
+    width: auto;
 	display:inline-block;
 	background:#f9f9f9;
 	border:1px solid #dadad9;
 	vertical-align:top;
 	 color:#2b2b2b;
 	 font-size:13px;
-	 padding:3px 0;
 	 margin-bottom:20px;
 	 float:none;
 	 font-style:normal;
-	 background-position: 92% 11px;
 }
 
 #main .categoryheader .sort-by form{
@@ -1703,15 +1704,16 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     border:none;
     margin:0;
     font-size:13px;
-    background-position: 95% 11px;
-    padding-right: 20%;
+    background-position: 92% 2px;
+    padding-right: 0px;
+    outline: none;
 }
 
 #main .categoryheader .btn-refineby {
 	vertical-align:top;
 	-moz-appearance: none;
-    background-image: url("../images/arrow_down.png");
-    background-position: 92% 11px;
+    background-image: url("../images/drop-down_arrow.png");
+    background-position: 92% 2px;
     background-repeat: no-repeat;
     cursor: pointer;
     margin-left: 0;
@@ -1723,6 +1725,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	border:1px solid #dadad9;
 	min-width: 114px;
     padding: 0 5px;
+    height: 27px;
+    outline: none;
 }
 
 #main .categoryheader .sort-Go-Button {
@@ -2468,10 +2472,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   	z-index: 100;
 }
 
-.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3:nth-last-child(-n+4) {
+/*.pt_product-search-result .primary-content .search-result-content .search-result-items .col-md-3:nth-last-child(-n+4) {
 	border-bottom:1px solid #fff;
 }
-
+*/
 .pdp-main .product-col-1,.pdp-main .product-col-2,.pdp-main .recommendations {
 	width:100%;
 	margin:0px;

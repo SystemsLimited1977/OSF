@@ -21,7 +21,7 @@
 
 	</isscript>
 	<div id="bonus-product-list" class="bonus-product-list pdp-main" data-line-item-detail='<isprint value="${JSON.stringify(lidata)}" encoding="off"/>'>
-
+		<iscomment>
 		<div class="promotion">
 			<isprint value="${pdict.BonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
 			<a class="tooltip" href="#">
@@ -31,7 +31,7 @@
 				</div>
 			</a>
 		</div>
-
+		</iscomment>
 		<iscomment>Display the list of bonus products</iscomment>
 		<isif condition="${pdict.BonusDiscountLineItem.bonusProducts.size() == 1}"><!-- one item --></isif>
 
@@ -85,7 +85,7 @@
 					</li>
 				</ul>
 			</div>
-			<button type="button" class="add-to-cart-bonus button-fancy-medium" value="${Resource.msg('global.addtocart','locale',null)}">
+			<button type="button" class="add-to-cart-bonus button-fancy-medium pull-left" value="${Resource.msg('global.addtocart','locale',null)}">
 				${Resource.msg('global.addtocart','locale',null)}
 			</button>
 		</div>
