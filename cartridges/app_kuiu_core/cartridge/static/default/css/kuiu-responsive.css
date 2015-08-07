@@ -759,7 +759,7 @@
 		float: none;
 	}	
 	.addthis_toolbox.addthis_default_style {
-		margin-left:0px;
+		margin-left:18%;
 	}
 	.pdp-main .product-price {
 		font-size:20px;
@@ -963,7 +963,10 @@
 	.cl-section-categories .cl-section-category {
 		padding: 10px 20px 0;
 	}
-
+	
+	.mobile-short-description {
+		margin:20px 0;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {

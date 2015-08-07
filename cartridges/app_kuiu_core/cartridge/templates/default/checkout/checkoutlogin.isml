@@ -5,7 +5,7 @@
 <iscomment>Report this checkout step</iscomment>
 
 <isreportcheckout checkoutstep="${1}" checkoutname="${'CheckoutMethod'}"/>
-<div class="checkoutlogin">
+<div class="checkoutlogin clearfix">
 	<div class="col-1">
 	
 		<div class="login-box">
@@ -24,6 +24,8 @@
 				</fieldset>
 				</form>
 				</isif>
+				
+				<div class="new-customer">
 				<iscomment>new customer</iscomment>
 				<p>${Resource.msg('globalaccount.createmessage','locale',null)}</p>
 				<form action="${URLUtils.httpsContinue()}" method="post">
@@ -34,7 +36,7 @@
 						<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 					</fieldset>
 				</form>
-				
+				</div>
 				<a class="tooltip">
    					${Resource.msg('checkoutlogin.registerbenefits','checkout',null)}
     				<div class="tooltip-content" data-layout="large tooltip-whyaccount">

@@ -3,7 +3,7 @@
 <div class="login-box login-account">
 
 	<h2>${Resource.msg('account.login.logininclude.customersheader','account',null)}
-	<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+	<div class="dialog-required"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 	</h2>
 
 	<div class="login-box-content returning-customers clearfix">
