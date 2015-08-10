@@ -1980,8 +1980,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .refinements-breadcrumb .breadcrumb {
-  padding: 8px 0;
-  margin-bottom: 20px;
+  /*padding: 8px 0;
+  margin-bottom: 20px;*/
+  padding: 0;
+  margin-bottom: 0;
   list-style: none;
   background-color: transparent;
   border-radius: 0;
@@ -2398,7 +2400,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	border-bottom: 1px solid #dadad9;
     padding-left:0px;
 	padding-right:0px;	
-	margin-top:20px;
+	margin-top:5px;
+	margin-bottom:15px;
 }
 /*.product-tile .product-compare {
 	 padding-left: 1px;
@@ -2484,7 +2487,9 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
    font-family: 'Roboto', sans-serif;
    float: left;
 }
-
+.quickview-container a {
+	line-height:20px;
+}
 .product-tile .product-swatches-all {
 	padding-top:5px;
 }
@@ -2524,19 +2529,24 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .pdp-main .top-section {
-	width:75%;
-	float: left;
+	width:auto;
+	overflow:hidden;
 }
 .pdp-main h1.product-name {
 	margin:0px;
 	font-style: normal;
-    width: initial;
+    width: 100%;
     text-align: left;
+    display:block;
 }
 
 .pdp-main .product-price {
 	font-size:22px;
 	color:#1d1512;
+	clear:both;
+}
+.pdp-main .head-content {
+	overflow:hidden;
 }
 .weather_badage{
     float: right;
@@ -3311,6 +3321,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 .quickview-popup .ui-dialog-content .pdp-main h1.product-name {
 	width:100%;
+	display:block;
 }
 
 .quickview-popup .weather_badage {

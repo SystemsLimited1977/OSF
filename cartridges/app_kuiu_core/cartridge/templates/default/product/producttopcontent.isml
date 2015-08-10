@@ -39,18 +39,22 @@
 </div>
 <div class="${!isQuickView? 'col-xs-12 col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-1' : 'col-xs-12 col-sm-6 col-md-6 qw-p-desc'}">
  <div class="head-content">
- 	<div class="top-section hidden-xs">
-		<h1 class="product-name pull-left" itemprop="name">
-			<isprint value="${pdict.Product.name}"/>
-		</h1>
-			<isset name="showTieredPrice" value="${true}" scope="page"/>
-			<isinclude template="product/components/pricing"/>
-	 </div>
-		<div class="weather_badage hidden-xs">
-	 		<isloop items="${pdict.Product.custom.weatherBadge}" var="weatherBadge" >
-				<div class="weather_badage_icon ${weatherBadge.value}"></div>
-			</isloop>
-  		</div>
+ 		<isif condition="${!empty(pdict.Product.custom.weatherBadge)}">
+	 		<div class="weather_badage hidden-xs">
+		 		<isloop items="${pdict.Product.custom.weatherBadge}" var="weatherBadge" >
+					<div class="weather_badage_icon ${weatherBadge.value}"></div>
+				</isloop>
+	  		</div>
+  		</isif>
+  		
+ 		<div class="top-section hidden-xs">
+			<h1 class="product-name pull-left" itemprop="name">
+				<isprint value="${pdict.Product.name}"/>
+			</h1>
+				<isset name="showTieredPrice" value="${true}" scope="page"/>
+				<isinclude template="product/components/pricing"/>
+	 	</div>
+		
 </div>
 <div class="product-col-2  product-detail">
 	<div id="product-content">
