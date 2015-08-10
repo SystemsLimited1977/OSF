@@ -21,7 +21,22 @@ a {
 
 a:active, 
 a:hover,
-a:focus {
+a:focus,
+button:active,
+button:hover,
+button:focus,
+input:active,
+input:hover,
+input:focus {
+	outline:none;
+}
+
+.btn:focus, 
+.btn:active:focus, 
+.btn.active:focus, 
+.btn.focus, 
+.btn.focus:active, 
+.btn.active.focus {
 	outline:none;
 }
 
@@ -2532,8 +2547,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	background-position: 64px -2px;
 }
 .pdp-main .pdp-des-content {
-	/*border-bottom: 1px solid #e6e6e6;*/
-	padding-bottom: 25px;
+
 }
 .pdp-main .pdp-des-content ul {
 	line-height: 24px;
@@ -2571,18 +2585,22 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
  {
 	color:#000000;
 	font-size:13px;
-	width: 100%;
-    padding: 0px;
+	width: auto;
+    padding: 0 5px 0 0;
     text-align: left;
     float: none;
     font-weight: 500;
     text-transform: none;
     margin-top:0;
+    display:inline-block;
+    line-height:20px;
 }
 
 .pdp-main .product-variations .attribute .value-color ,.pdp-main .product-variations .attribute .value-size{
 	font-size:14px;
 	font-weight: 600;
+	display:inline-block;
+	line-height:20px;
 }
 
 .pdp-main .product-variations,
@@ -2795,30 +2813,41 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     height: auto;
 }*/
 .product-thumbnails .productthumbnail {
-    border: 1px solid #e6e6e6;	
+	border:none;
+	max-width:inherit;
 }
 .pdp-main .product-thumbnails .thumb {
 	border-top:none;
 	border-bottom:2px solid #fff;
-	margin: 0px 10px 0 0;
-	width: 53px;
-	padding-bottom: 5px;
+	margin: 0px 10px 10px 0;
+	padding-bottom: 5px;	
+	width:auto;
 }
+
+.pdp-main .product-thumbnails .thumb a{
+	border: 1px solid #e6e6e6;	
+	display:block;
+	height:100%;
+	padding:4px;
+	width: 80px;
+	height:100px;
+}
+
 .pdp-main .product-thumbnails .thumb.selected {
 	border-color: #000;
 	padding-bottom: 4px;
 }
 
 .pdp-main .product-thumbnails .productthumbnail {
-	width: 53px;
-    height: 64px;
+	width: 70px;
+    height: 90px;
 }
+
 .youtubevideo {
-	width: 53px !important;
-    height: 64px !important;
+	width: 80px !important;
+    height: 100px !important;
     margin:0px;
-    background-size: 88% 87%;
-    border: 1px solid #000;
+    background-size: 88% 90%;
     background-position: center center;
     border: 1px solid #e6e6e6;
 }
@@ -3282,6 +3311,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     font-family: "Times New Roman", Georgia, Serif;
 }
 
+.quickview-popup .pdp-main .pdp-description-wrap {
+	border-bottom:1px solid #e0e0e0;
+	padding-bottom:20px;
+}
 .quickview-popup .pdp-main .product-variations {
 	float:none;
 }
