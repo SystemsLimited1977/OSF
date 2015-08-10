@@ -87,7 +87,7 @@
 	</div>
 	</div>
 	<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
-
+	<div class="container no-design">
 		<div class="search-result-bookmarks">
 			${Resource.msg('topcontenthits.yoursearch','search',null)}
 			<a href="${'#results-products'}" class="first">${Resource.msg('search.nohits.didyoumeanex=Did you mean to search for:
@@ -96,7 +96,7 @@ search.producthits.productsfound','search',null)}</a>
 		</div>
 
 		<h1 class="content-header" id="results-products">${Resource.msgf('search.producthits.productsfoundcount','search',null,pdict.ProductSearchResult.count)}</h1>
-
+	</div>
 	</isif>
 
 	<isif condition="${!(pdict.ProductPagingModel == null) && !pdict.ProductPagingModel.empty}">
@@ -139,13 +139,13 @@ search.producthits.productsfound','search',null)}</a>
 
 		<iscomment>show top content hits</iscomment>
 		<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
-
+	<div class="container no-design">
 			<h1 class="content-header" id="results-content">${Resource.msgf('topcontenthits.articlesfound','search',null,pdict.ContentSearchResult.count)}</h1>
 
 			<div class="search-results-content">
 				<isinclude template="search/topcontenthits"/>
 			</div>
-
+	</div>
 		</isif>
 
 	<iselse/>

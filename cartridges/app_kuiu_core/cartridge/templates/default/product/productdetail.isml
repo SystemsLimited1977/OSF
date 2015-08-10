@@ -12,7 +12,7 @@
 			<isinclude template="product/producttopcontent"/>
 		</isif>
 		
-		<isif condition="${!isQuickView}">
+		<isif condition="${!isQuickView && !pdict.Product.productSet && !pdict.Product.bundle}">
 			
 			<iscomment><isinclude template="product/components/fieldshots"/></iscomment>
 <div class="product-detail-section hidden-xs">
@@ -67,7 +67,7 @@
 			</isif>
  	</div>
 		</isif>
-	
+<isif condition="${!isQuickView && !pdict.Product.productSet && !pdict.Product.bundle}">	
 	<div class="accordion-main visible-xs">
 	 <div class="container">
 	  <div class="col-xs-12">
@@ -100,16 +100,22 @@
 	  </div>
 	 </div>
 	</div>
-		
+</isif>	
+	
+	
+	<isif condition="${!isQuickView && !pdict.Product.bundle}">	
 		<div class="product-detail-slider-1">	
 			<div>
 				<isinclude template="product/components/fieldshots"/>
 			</div>
 		</div>
+	</isif>
+	<isif condition="${!isQuickView && !pdict.Product.productSet && !pdict.Product.bundle}">	
 		<div class="product-detail-slider-2">
 			<div>
 				<isinclude template="product/components/recommendations"/>
 			</div>
 		</div>
+	</isif>	
 	</div><!--/pdpMain -->
 </isobject>

@@ -256,7 +256,7 @@ var bonusProductsView = {
 					at: 'top',
 					of: window
 				},
-				width: 795,
+				width: 510,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
 			},
@@ -265,6 +265,7 @@ var bonusProductsView = {
 				hideSwatches();
 			}
 		});
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.quickview').addClass('bonusproduct-quickview-container');
 	},
 	/**
 	 * @function
@@ -302,6 +303,7 @@ var bonusProductsView = {
 				}]
 			}
 		});
+		 $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons').addClass('bonus-product-popup');
 	}
 };
 

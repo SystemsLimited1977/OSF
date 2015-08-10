@@ -23,6 +23,7 @@
 	        var thumbid = reg.exec($(videos[i]).attr('thumb-id'))[1];
 	        //videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos[i].id + '/sddefault.jpg)';
 	        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + thumbid + '/sddefault.jpg)';
+	        $(videos[i]).attr('id', thumbid);
 
 	        // Overlay the Play icon to make it look like a video player
 	        var play = document.createElement("div");
@@ -39,8 +40,8 @@
 	            $(iframe).attr("frameborder",'0');
 
 	            // The height and width of the iFrame should be the same as parent
-	            $(iframe).width(400);
-        		$(iframe).height(400);
+	            $(iframe).width(630);
+        		$(iframe).height(460);
 
 	            // Replace the YouTube thumbnail with YouTube Player
 	            //this.parentNode.replaceChild(iframe, this);
@@ -50,8 +51,8 @@
 	                draggable: false,
 	                resizable: false,
 	                //position: ['center', 'center'],
-	                width: 500,
-	                height:550,
+	                width: 700,
+	                height:547,
 	                dialogClass: 'ui-dialog-osx',
 	                close: function(event, ui){
 	                	$('#youtube-video-container').dialog('close');
