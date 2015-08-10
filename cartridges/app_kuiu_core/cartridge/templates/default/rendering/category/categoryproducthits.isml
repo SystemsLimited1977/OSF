@@ -81,11 +81,13 @@
 	</div>
 		
 	<iscomment>Breadcrumb for product refinements</iscomment>
+	
 	<div class="refinements-breadcrumb">
 	<div class="container">
 	<isinclude template="search/components/productsearchbreadcrumbs"/>
 	</div>
 	</div>
+	
 	<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
 	<div class="container no-design">
 		<div class="search-result-bookmarks">

@@ -52,6 +52,14 @@
 		width:100%;
 	}
 	
+	.pt_customer-service #secondary {
+		
+	}
+	
+	.pt_customer-service #primary {
+    	padding-left: 50px;
+	}
+	
 }
 
 @media ( min-width : 1200px) {
@@ -1350,10 +1358,6 @@
 		
 	}
 	
-	/*.menu-category .level-2 {
-		padding-left: 115px;
-	}*/
-	
 	.home-bottom-first img {
 		width: 100%;
 		letter-spacing: 0;
@@ -1398,14 +1402,6 @@
 	
 	.top-banner .header-nav {
 		margin-left:116px;
-	}
-	
-	.pt_customer-service #secondary {
-		padding-left:50px;
-	}
-	
-	.pt_customer-service .primary-content.col-md-9 .col-md-9 {
-    	padding-left: 50px;
 	}
 	
 	.gift-certificate-purchase .content-asset img {
