@@ -51,15 +51,15 @@
 								<div class="product-image recommendation_image">
 									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}">
 									<iscomment>Origional code
-										<isif condition="${!empty(pdict.Product.getImage('small',0))}">
-											<img src="${pdict.Product.getImage('small',0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}" title="${pdict.Product.getImage('small',0).title}"/>
+										<isif condition="${!empty(pdict.Product.getImage('medium',0))}">
+											<img src="${pdict.Product.getImage('small',0).getURL()}" alt="${pdict.Product.getImage('medium',0).alt}" title="${pdict.Product.getImage('medium',0).title}"/>
 									</iscomment>
 									<iscomment>DIS changes</iscomment>
-									<isset name="recomendationImage" value="${new ProductImage('small', rec, 0)}" scope="page" />
+									<isset name="recomendationImage" value="${new ProductImage('medium', rec, 0)}" scope="page" />
 									<isif condition="${!empty(recomendationImage)}">
 											<img src="${recomendationImage.getURL()}" alt="${recomendationImage.getAlt()}" title="${recomendationImage.getTitle()}"/>
 										<iselse/>
-											<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${pName}" title="${pName}"/>
+											<img src="${URLUtils.staticURL('/images/noimagemedium.png')}" alt="${pName}" title="${pName}"/>
 										</isif>
 									</a>
 								</div>

@@ -947,9 +947,9 @@
 		margin: 0 0 10px;
 	}
 	
-	.pdp-main #owl-demo1 .product-image.recommendation_image a img {
+	/*.pdp-main #owl-demo1 .product-image.recommendation_image a img {
 		height: 290px;
-	}
+	}*/
 	.pdp-main .recommendations .product-tile {
 		border-right: none;
 	}
@@ -1269,10 +1269,14 @@
 		{
 		boder-bottom: 1px solid #fff;
 	}
-	.pdp-main #owl-demo1 .product-image.recommendation_image a img {
-		width: 383px;
+	/*.pdp-main #owl-demo1 .product-image.recommendation_image a img {
+		/*width: 383px;
 		height: 275px;
-	}
+	    max-width: 100%;
+    	height: auto;
+    	max-height: 100%;
+		
+	}*/
 	.pdp-main .recommendations .product-tile {
 		height: 340px;
 	}
@@ -1379,10 +1383,13 @@
 	.weather_badage_icon {
 		margin-left: 6px;
 	}
-	.pdp-main #owl-demo1 .product-image.recommendation_image a img {
-		width: 383px;
+	/*.pdp-main #owl-demo1 .product-image.recommendation_image a img {
+		/*width: 383px;
 		height: 275px;
-	}
+		max-width: 100%;
+    	height: auto;
+    	max-height: 100%;
+	}*/
 	
 }
 
