@@ -85,4 +85,13 @@ module.exports = function () {
 	
 	//initialize Fieldshoot and Recomendations carousel on PDP
 	owlCarousel.init();
+	
+	//Initialize magnifik Zoom
+    $('a.z1').magnifik({
+		classPrefix: 'm-',
+		ratio: 1,
+		seekImage: true,
+		clickCloses: true,
+		activationEvent: "click"
+	});
 };
