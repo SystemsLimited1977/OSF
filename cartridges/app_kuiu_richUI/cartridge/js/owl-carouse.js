@@ -28,6 +28,13 @@ var owlCarousel = {
 		       navigationText : ["",""],
 		   
 		   });
+		 $("#owl-demo3").owlCarousel({     
+		     navigation : true, // Show next and prev buttons
+		        navigationText : ["",""],
+		        singleItem:true,
+		        autoPlay : false,
+		     
+		      });
 	}
 };
  
