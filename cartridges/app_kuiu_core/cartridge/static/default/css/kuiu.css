@@ -21,7 +21,22 @@ a {
 
 a:active, 
 a:hover,
-a:focus {
+a:focus,
+button:active,
+button:hover,
+button:focus,
+input:active,
+input:hover,
+input:focus {
+	outline:none;
+}
+
+.btn:focus, 
+.btn:active:focus, 
+.btn.active:focus, 
+.btn.focus, 
+.btn.focus:active, 
+.btn.active.focus {
 	outline:none;
 }
 
@@ -2532,8 +2547,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	background-position: 64px -2px;
 }
 .pdp-main .pdp-des-content {
-	/*border-bottom: 1px solid #e6e6e6;*/
-	padding-bottom: 25px;
+
 }
 .pdp-main .pdp-des-content ul {
 	line-height: 24px;
@@ -2571,18 +2585,22 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
  {
 	color:#000000;
 	font-size:13px;
-	width: 100%;
-    padding: 0px;
+	width: auto;
+    padding: 0 5px 0 0;
     text-align: left;
     float: none;
     font-weight: 500;
     text-transform: none;
     margin-top:0;
+    display:inline-block;
+    line-height:20px;
 }
 
 .pdp-main .product-variations .attribute .value-color ,.pdp-main .product-variations .attribute .value-size{
 	font-size:14px;
 	font-weight: 600;
+	display:inline-block;
+	line-height:20px;
 }
 
 .pdp-main .product-variations,
@@ -2790,35 +2808,46 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .availability-block {
 	margin-bottom:20px;
 }
-.pdp-main .product-primary-image img.primary-image {
+/*.pdp-main .product-primary-image img.primary-image {
 	width: 585px;
     height: auto;
-}
+}*/
 .product-thumbnails .productthumbnail {
-    border: 1px solid #e6e6e6;	
+	border:none;
+	max-width:inherit;
 }
 .pdp-main .product-thumbnails .thumb {
 	border-top:none;
 	border-bottom:2px solid #fff;
-	margin: 0px 10px 0 0;
-	width: 53px;
-	padding-bottom: 5px;
+	margin: 0px 10px 10px 0;
+	padding-bottom: 5px;	
+	width:auto;
 }
+
+.pdp-main .product-thumbnails .thumb a{
+	border: 1px solid #e6e6e6;	
+	display:block;
+	height:100%;
+	padding:4px;
+	width: 80px;
+	height:100px;
+}
+
 .pdp-main .product-thumbnails .thumb.selected {
 	border-color: #000;
 	padding-bottom: 4px;
 }
 
 .pdp-main .product-thumbnails .productthumbnail {
-	width: 53px;
-    height: 64px;
+	width: 70px;
+    height: 90px;
 }
+
 .youtubevideo {
-	width: 53px !important;
-    height: 64px !important;
+	width: 80px !important;
+    height: 100px !important;
     margin:0px;
-    background-size: 88% 87%;
-    border: 1px solid #000;
+    background-size: 88% 90%;
     background-position: center center;
     border: 1px solid #e6e6e6;
 }
@@ -2938,18 +2967,19 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .pdp-main .recommendations .product-tile {
-	height:465px;
+	height:420px;
 	border-right:1px solid #e6e6e6;
 	padding:0px;
 }
 
 .pdp-main #owl-demo1 .product-image.recommendation_image a img {
-	width:277px;
-	height:355px;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
 }
 .pdp-main .recommendations .product-image {
-	height:auto;
-	    padding-bottom: 40px;
+	height:355px;
+	padding-bottom: 40px;
 }
 
 .pdp-main .recommendations .product-name {
@@ -3281,6 +3311,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     font-family: "Times New Roman", Georgia, Serif;
 }
 
+.quickview-popup .pdp-main .pdp-description-wrap {
+	border-bottom:1px solid #e0e0e0;
+	padding-bottom:20px;
+}
 .quickview-popup .pdp-main .product-variations {
 	float:none;
 }
@@ -3695,6 +3729,157 @@ a#password-reset {
 .level-1 li:target .level-2  {
         display: block; 
 }
+
+
+/*Bonus Product*/
+
+.pt_product-search-result #main  .categoryheader .sort-by {
+	min-width: 114px;
+    height: 27px;
+    padding: 0px;
+    width: auto;
+}
+
+#bonus-product-dialog .product-primary-image {
+	border-bottom:none;
+}
+.js #bonus-product-dialog.ui-dialog-content .pdp-main h1.product-name {
+	width:100%;
+	font-size: 13px;
+}
+ .js #bonus-product-dialog.ui-dialog-content .product-variations > ul {
+ 	margin-top:0px;
+ }
+ 
+.js #bonus-product-dialog.ui-dialog-content .product-add-to-cart .inventory input {
+	height: 36px;
+    width: 47px;
+    margin:0px;
+    padding:0px;
+    text-align: center;
+}
+.bonus-product-list .product-add-to-cart .inventory {
+	width:auto;
+}
+.bonus-product-list .product-add-to-cart button {
+	width: 75%;
+    margin-left: 10px;
+    float:left;
+    margin-top: 18px;
+    clear:none;
+}
+.bonus-product-item .product-variations .attribute {
+	margin-bottom:0px;
+}
+
+.bonus-product-list-footer.promotion {    
+	background: none;
+    padding-top: 0;
+    padding-bottom: 0px;
+}
+.bonus-product-list-footer.promotion .bonus-product-summary h2  {
+	font-size:12px;
+	font-style: normal;
+	font-family: 'Roboto', sans-serif;
+}
+.bonus-product-list .selected-bonus-item .remove-link {
+	color: white;
+    left: -16px;
+    background-color: #000;
+    border-radius: 32px;
+    padding: 2px 3px;
+    height: 16px;
+    width: 16px;
+}
+.bonus-product-list .selected-bonus-item .item-name,
+.bonus-product-list .product-price {
+	font-size:13px;
+	font-family: "Times New Roman", Georgia, Serif;
+}
+.bonus-product-list li.selected-bonus-item {
+	padding-left:10px;	
+}
+.bonus-product-list .bonus-product-list-footer .add-to-cart-bonus {
+	width:53%;
+}
+
+.ui-dialog.bonus-product-popup {
+	border: none;
+    padding: 29px 29px;
+}
+
+.ui-dialog.bonus-product-popup .ui-widget-header,
+.ui-dialog.bonusproduct-quickview-container .ui-widget-header {
+    border-bottom:none;
+    height: auto;
+    padding: 0px;
+}
+
+.ui-dialog.bonus-product-popup .ui-dialog-title,
+.ui-dialog.bonusproduct-quickview-container .ui-dialog-title {
+	font-size:32px;
+	font-family: "Times New Roman", Georgia, Serif;
+}
+.ui-dialog.bonus-product-popup .ui-icon-closethick,
+.ui-dialog.bonusproduct-quickview-container .ui-icon-closethick {
+	background-image: url("../images/interface/cross_black.png");
+	border-bottom: none;
+    margin-top: 18px;
+    background-position: right top;
+}
+.ui-dialog .ui-dialog-content, 
+.ui-dialog .ui-dialog-titlebar button {
+	outline:none;
+}
+
+.ui-dialog.bonus-product-popup .ui-dialog-buttonpane,
+.ui-dialog.bonus-product-popup .ui-dialog-content {
+	float:left;
+	margin:0;
+	padding:0;
+	clear: both;
+}
+.ui-dialog.bonusproduct-quickview-container {
+	border:none;
+}
+.ui-dialog.bonus-product-popup a.tooltip {
+	display:none;
+}
+
+.ui-dialog.bonus-product-popup .ui-dialog-buttonset > button {
+	margin-right:20px;
+}
+
+.ui-dialog.bonus-product-popup button {
+	padding:0 15px;
+}
+
+.ui-dialog.bonusproduct-quickview-container .pdp-main .product-add-to-cart {
+	padding:12px 0 0;
+}
+
+.ui-tooltip {
+	padding:0;
+}
+
+.ui-tooltip-content {
+	padding:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

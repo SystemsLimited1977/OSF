@@ -34,7 +34,7 @@
 		<!-- shown only in quick view -->
 	<div class="link-viewdetails"><a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a> </div>
 	</isif>
-	<div class="hidden-xs">
+	<div class="hidden-xs pdp-description-wrap">
 		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
 	</div>
 

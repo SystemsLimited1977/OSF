@@ -40,6 +40,7 @@ var setMainImage = function (atts) {
 		alt: atts.alt,
 		title: atts.title
 	});
+	$('.magnifik-example.basic a').attr('href', atts.hires);
 	if (!dialog.isActive() && !util.isMobile()) {
 		$('#pdpMain .main-image').attr('href', atts.hires);
 	}

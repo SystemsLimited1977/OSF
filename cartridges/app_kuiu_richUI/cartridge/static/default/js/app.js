@@ -2606,6 +2606,7 @@ var setMainImage = function (atts) {
 		alt: atts.alt,
 		title: atts.title
 	});
+	$('.magnifik-example.basic a').attr('href', atts.hires);
 	if (!dialog.isActive() && !util.isMobile()) {
 		$('#pdpMain .main-image').attr('href', atts.hires);
 	}
@@ -2934,6 +2935,15 @@ module.exports = function () {
 	
 	//initialize Fieldshoot and Recomendations carousel on PDP
 	owlCarousel.init();
+	
+	//Initialize magnifik Zoom
+    $('a.z1').magnifik({
+		classPrefix: 'm-',
+		ratio: 1,
+		seekImage: true,
+		clickCloses: true,
+		activationEvent: "click"
+	});
 };
 
 },{"../../ajax":1,"../../owl-carouse":13,"../../progress":39,"../../storeinventory/product":48,"../../tooltip":49,"../../util":50,"./addThis":24,"./addToCart":25,"./image":27}],33:[function(require,module,exports){
