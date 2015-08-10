@@ -95,7 +95,7 @@ if ( pdict.Product.variationGroup )
 				<div class="pricerange"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductMinPrice, pdict.CurrencyCode))}" /> - <isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductMaxPrice, pdict.CurrencyCode))}" /></div>
 			<iselseif condition="${pdict.ProductSetSalesPrice > pdict.ProductSetStandardPrice}">
 				<div class="standardprice"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductSetStandardPrice, pdict.CurrencyCode))}" /></div>
-			<iselseif condition="${pdict.ProductSetStandardPrice > pdict.ProductSetSalesPrice}">
+			<iselseif condition="${pdict.ProductSetStandardPrice >= pdict.ProductSetSalesPrice}">
 				<div class="salesprice"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductSetSalesPrice, pdict.CurrencyCode))}" /></div>
 			</isif>
 			
