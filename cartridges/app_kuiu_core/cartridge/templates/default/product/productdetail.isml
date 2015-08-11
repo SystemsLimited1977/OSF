@@ -16,7 +16,7 @@
 			
 			<iscomment><isinclude template="product/components/fieldshots"/></iscomment>
 <div class="product-detail-section hidden-xs">
-	<div class="product-overview">
+	<div id="product-overview" class="product-overview">
 		<div class="container">
 			    <div class="row">
 					<div class="col-sm-12 overview-top">

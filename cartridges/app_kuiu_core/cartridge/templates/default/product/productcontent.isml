@@ -1,4 +1,4 @@
-<isif condition="${false&&pdict.resetAttributes}">
+R<isif condition="${false&&pdict.resetAttributes}">
 	<isscript>
 		importScript("product/ProductUtils.ds");
 		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
@@ -36,6 +36,7 @@
 	</isif>
 	<div class="hidden-xs pdp-description-wrap">
 		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
+		<a href="#product-overview">See More</a>
 	</div>
 
 

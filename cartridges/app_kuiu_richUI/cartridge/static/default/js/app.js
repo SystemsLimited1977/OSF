@@ -1121,7 +1121,7 @@ var emailSignUp = {
 		    	return false;
 		    }
 		});
-
+		
 		$('#footer-email').click(function(e){
 			e.preventDefault();
 			emailSignUp.openEmailSignUpDialog();
@@ -1416,6 +1416,13 @@ var owlCarousel = {
 		       navigationText : ["",""],
 		   
 		   });
+		 $("#owl-demo3").owlCarousel({     
+		     navigation : true, // Show next and prev buttons
+		        navigationText : ["",""],
+		        singleItem:true,
+		        autoPlay : false,
+		     
+		      });
 	}
 };
  
