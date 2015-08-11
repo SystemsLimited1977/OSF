@@ -52,6 +52,10 @@
 		width:100%;
 	}
 	
+	.gift-certificate-purchase span.error {
+		margin-left:42%;
+	}
+	
 	.pt_customer-service #secondary {
 		
 	}
@@ -830,12 +834,12 @@
 	}
 	
 	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance {
-		width:190px;
+		width:100%;
 	}
 	
 	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance-submit {
-		width:100px; 
-		
+		width:100%;
+		margin-top:10px; 
 	}
 	
 	.pt_giftcert #main .gc-check-balance-wrap .gift-cert-balance-submit button {
@@ -848,6 +852,10 @@
 	
 	.pt_giftcert #main .no-design #primary {
 		padding:0;
+	}
+	
+	.pt_giftcert #main .gc-check-balance-wrap p.sub-title {
+		margin-bottom:10px;
 	}
 	
 	/*Product detail page styling*/

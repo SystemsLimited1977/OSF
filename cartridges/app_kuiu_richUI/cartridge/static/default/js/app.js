@@ -1425,7 +1425,12 @@ var owlCarousel = {
 		      });
 	}
 };
- 
+
+// code fore placeholder compatible with IE9
+$('input, textarea').placeholder({
+    customClass: 'my-placeholder'
+});
+
 module.exports = owlCarousel;
 
 },{}],14:[function(require,module,exports){
