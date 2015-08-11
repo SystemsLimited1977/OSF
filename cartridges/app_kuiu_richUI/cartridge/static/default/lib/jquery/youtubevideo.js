@@ -38,7 +38,10 @@
 	            if (this.getAttribute("data-params")) iframe_url+='&'+this.getAttribute("data-params");
 	            $(iframe).attr("src",iframe_url);
 	            $(iframe).attr("frameborder",'0');
-
+	            $(iframe).attr("allowfullscreen",'1');
+	            $(iframe).attr("webkitallowfullscreen","");
+	            $(iframe).attr("mozallowfullscreen","");
+	            
 	            // The height and width of the iFrame should be the same as parent
 	            $(iframe).width(630);
         		$(iframe).height(460);
