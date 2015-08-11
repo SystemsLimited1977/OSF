@@ -256,7 +256,7 @@ footer .footer-container .content-asset ul {
 	width: 0px;
 }
 
-footer .footer_email #email-alert-address {
+footer .footer_email #email-alert-address, #main footer .footer_email #email-alert-address {
 	border: none;
 	border-radius: 8px;
 	width: 200px;
