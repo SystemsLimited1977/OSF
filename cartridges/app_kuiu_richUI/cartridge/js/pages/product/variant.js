@@ -88,10 +88,18 @@ module.exports = function () {
 	
 	//Initialize magnifik Zoom
     $('a.z1').magnifik({
-		classPrefix: 'm-',
-		ratio: 1,
-		seekImage: true,
-		clickCloses: true,
-		activationEvent: "click"
+	  classPrefix: 'm-',
+	  ratio: 1,
+	  seekImage: false,
+	  clickCloses: true,
+	  activationEvent: "click"
 	});
+    $('a.z2').magnifik({
+	  classPrefix: 'm-',
+	  ratio: 1,
+	  seekImage: false,
+	  clickCloses: true,
+	  activationEvent: "click"
+	});
+    
 };

@@ -18,6 +18,13 @@ function setCCFields(data) {
 	$creditCard.find('[name$="_month"]').val(data.expirationMonth).trigger('change');
 	$creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
 	$creditCard.find('input[name$="_cvn"]').val('').trigger('change');
+	
+	//Cybersource integration changes for Tokenization service
+	$creditCard.find('[name$="creditCard_isSubscription"]').val(data.isSubscription).trigger('change');
+	$creditCard.find('[name$="creditCard_maskedFourDigit"]').val(data.maskedFourDigit).trigger('change');
+	$creditCard.find("input[name$='creditCard_maskedFourDigit']").parent().show();
+	$creditCard.find("input[name$='_number']").hide();
+	$creditCard.find("input[name$='_cvn']").val('');
 }
 
 /**
@@ -74,7 +81,28 @@ exports.init = function () {
 	var $couponCode = $('input[name$="_couponCode"]');
 	var $selectPaymentMethod = $('.payment-method-options');
 	var selectedPaymentMethod = $selectPaymentMethod.find(':checked').val();
+	
+	//Cybersource integration changes for Tokenization service
+	var $ccContainer = $($checkoutForm).find(".payment-method").filter(function(){
+		return $(this).data("method")=="CREDIT_CARD";	
+	});
+	var $ccNum = $ccContainer.find("input[name$='_number']");
+	var $ccSubscription = $ccContainer.find("input[name$='creditCard_isSubscription']");
+	$ccSubscription.val(false);
+	var $ccMaskedFourDigit = $ccContainer.find("input[name$='creditCard_maskedFourDigit']");
+	$ccMaskedFourDigit.parent().hide();
+	if($ccMaskedFourDigit.val()== undefined || $ccMaskedFourDigit.val()=="") 
+	{
+		$ccMaskedFourDigit.parent().hide();
+	}
+	else
+	{
+		$ccMaskedFourDigit.parent().show();
+		$ccNum.parent().hide();
+		$ccSubscription.val(true);
+	}
 
+	
 	formPrepare.init({
 		formSelector: 'form[id$="billing"]',
 		continueSelector: '[name$="billing_save"]'

@@ -12,8 +12,7 @@ var owlCarousel = {
 		       itemsTabletSmall : [480,1],
 		       itemsMobile : [320,1],
 		       navigation : true,
-		       navigationText : ["",""],
-		  
+		       navigationText : ["",""]
 		   });
 		 $("#owl-demo1").owlCarousel({
 		   
@@ -25,16 +24,18 @@ var owlCarousel = {
 		       itemsTabletSmall : [480,1],
 		       itemsMobile : [320,1],
 		       navigation : true,
-		       navigationText : ["",""],
-		   
+		       navigationText : ["",""]
 		   });
 		 $("#owl-demo3").owlCarousel({     
 		     navigation : true, // Show next and prev buttons
-		        navigationText : ["",""],
-		        singleItem:true,
-		        autoPlay : false,
-		     
-		      });
+	        navigationText : ["",""],
+	        singleItem:true,
+	        autoPlay : false
+	      });
+		// code fore placeholder compatible with IE9
+		 $('input, textarea').placeholder({
+		     customClass: 'my-placeholder'
+		 });
 	}
 };
  

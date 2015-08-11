@@ -1400,8 +1400,7 @@ var owlCarousel = {
 		       itemsTabletSmall : [480,1],
 		       itemsMobile : [320,1],
 		       navigation : true,
-		       navigationText : ["",""],
-		  
+		       navigationText : ["",""]
 		   });
 		 $("#owl-demo1").owlCarousel({
 		   
@@ -1413,24 +1412,21 @@ var owlCarousel = {
 		       itemsTabletSmall : [480,1],
 		       itemsMobile : [320,1],
 		       navigation : true,
-		       navigationText : ["",""],
-		   
+		       navigationText : ["",""]
 		   });
 		 $("#owl-demo3").owlCarousel({     
 		     navigation : true, // Show next and prev buttons
-		        navigationText : ["",""],
-		        singleItem:true,
-		        autoPlay : false,
-		     
-		      });
+	        navigationText : ["",""],
+	        singleItem:true,
+	        autoPlay : false
+	      });
+		// code fore placeholder compatible with IE9
+		 $('input, textarea').placeholder({
+		     customClass: 'my-placeholder'
+		 });
 	}
 };
-
-// code fore placeholder compatible with IE9
-$('input, textarea').placeholder({
-    customClass: 'my-placeholder'
-});
-
+ 
 module.exports = owlCarousel;
 
 },{}],14:[function(require,module,exports){
@@ -1786,6 +1782,7 @@ function setCCFields(data) {
 	$creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
 	$creditCard.find('input[name$="_cvn"]').val('').trigger('change');
 	
+	//Cybersource integration changes for Tokenization service
 	$creditCard.find('[name$="creditCard_isSubscription"]').val(data.isSubscription).trigger('change');
 	$creditCard.find('[name$="creditCard_maskedFourDigit"]').val(data.maskedFourDigit).trigger('change');
 	$creditCard.find("input[name$='creditCard_maskedFourDigit']").parent().show();
@@ -1847,14 +1844,15 @@ exports.init = function () {
 	var $couponCode = $('input[name$="_couponCode"]');
 	var $selectPaymentMethod = $('.payment-method-options');
 	var selectedPaymentMethod = $selectPaymentMethod.find(':checked').val();
-
+	
+	//Cybersource integration changes for Tokenization service
 	var $ccContainer = $($checkoutForm).find(".payment-method").filter(function(){
 		return $(this).data("method")=="CREDIT_CARD";	
 	});
 	var $ccNum = $ccContainer.find("input[name$='_number']");
 	var $ccSubscription = $ccContainer.find("input[name$='creditCard_isSubscription']");
 	$ccSubscription.val(false);
-    var $ccMaskedFourDigit = $ccContainer.find("input[name$='creditCard_maskedFourDigit']");
+	var $ccMaskedFourDigit = $ccContainer.find("input[name$='creditCard_maskedFourDigit']");
 	$ccMaskedFourDigit.parent().hide();
 	if($ccMaskedFourDigit.val()== undefined || $ccMaskedFourDigit.val()=="") 
 	{
@@ -1867,6 +1865,7 @@ exports.init = function () {
 		$ccSubscription.val(true);
 	}
 
+	
 	formPrepare.init({
 		formSelector: 'form[id$="billing"]',
 		continueSelector: '[name$="billing_save"]'
@@ -2968,12 +2967,20 @@ module.exports = function () {
 	
 	//Initialize magnifik Zoom
     $('a.z1').magnifik({
-		classPrefix: 'm-',
-		ratio: 1,
-		seekImage: true,
-		clickCloses: true,
-		activationEvent: "click"
+	  classPrefix: 'm-',
+	  ratio: 1,
+	  seekImage: false,
+	  clickCloses: true,
+	  activationEvent: "click"
 	});
+    $('a.z2').magnifik({
+	  classPrefix: 'm-',
+	  ratio: 1,
+	  seekImage: false,
+	  clickCloses: true,
+	  activationEvent: "click"
+	});
+    
 };
 
 },{"../../ajax":1,"../../owl-carouse":13,"../../progress":39,"../../storeinventory/product":48,"../../tooltip":49,"../../util":50,"./addThis":24,"./addToCart":25,"./image":27}],33:[function(require,module,exports){
@@ -5957,7 +5964,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -5970,7 +5977,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
