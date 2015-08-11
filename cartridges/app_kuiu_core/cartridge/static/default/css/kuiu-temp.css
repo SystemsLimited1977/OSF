@@ -1,0 +1,64 @@
+.pdp-main .product-primary-image .pdp-alternateimg-mobile .product-thumbnails .thumb {
+	border-bottom:none;
+	margin-bottom:0px;
+	width: 100%;
+    margin: 0px;
+    padding-bottom: 0px;
+}
+.pdp-main .product-primary-image .pdp-alternateimg-mobile .product-thumbnails .productthumbnail,
+.pdp-main .product-primary-image .pdp-alternateimg-mobile .product-thumbnails .thumb a {
+	border:none;
+	max-width: 100%;
+    height: 100%;
+    width:100%;
+}
+
+.pdp-main .product-primary-image .pdp-alternateimg-mobile .product-thumbnails .thumb.selected {
+	 border-color: #fff;
+     padding-bottom: 0px;
+}
+
+.pdp-main .product-primary-image .pdp-alternateimg-mobile .owl-carousel .owl-wrapper-outer {
+	height:auto;
+}
+.pdp-main .product-primary-image .pdp-alternateimg-mobile .youtubevideo {
+	width: 100% !important;
+    height: 40px !important;
+    background-image: none !important;
+    border:1px solid #000;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    line-height:38px;
+}
+
+.mobile-youtube-video .youtubevideo .play{
+	display:none;
+}
+
+.zoom_button {
+	/*background-image: url("../images/interface/zoom_icon.png");
+	width:50px;
+	height:13px;
+	background-repeat:no-repeat;*/
+	margin-left: -602px;
+    margin-top: -17px;
+    margin-bottom: 8px;
+}
+.zoom_button span {
+	margin-left: 3px;
+	font-size: 12px;
+    font-weight: 600;
+	
+}
+.zoom_button .fa-lg {
+    line-height: 4px;
+    font-size: 14px;
+    vertical-align: -15%;
+}
+
+.product-tile .product-image {
+	min-height: 355px;
+    width: 100%;
+    max-width: 100%;
+}

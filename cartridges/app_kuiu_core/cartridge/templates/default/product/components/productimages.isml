@@ -35,7 +35,66 @@
 	<isset name="imageUrlHiRes" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 </isif>
 
-<div class="product-primary-image">
+<div class="product-primary-image alternate-mobile">
+<iscomment>Alternate Images Carousel for Mobile devices</iscomment>
+<div class="pdp-alternateimg-mobile visible-xs-block">
+<isif condition="${imageProduct.getImages('hi-res').length > 0}">
+ <div id="thumbnails" class="product-thumbnails" style="display:block;">
+  <iscomment><h2>${Resource.msg('product.productthumbnails.title','product',null)}</h2></iscomment>
+  <div class="owl-carousel-mobile-wrapper" id="owl-demo3">
+   <isloop begin="0" end="${imageProduct.getImages('hi-res').length-1}" step="1" status="imgSmStatus">
+    <iscomment><isif condition="${imgSmStatus.count > noOfImages}">
+     <isbreak/>
+    </isif></iscomment>
+    <isset name="lgImage" value="${imageProduct.getImages('large')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
+    <isif condition="${!empty(imageProduct.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>imgSmStatus.index}">
+     <isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)].getURL()}" />
+     <isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
+    <iselse/>
+     <isset name="hi_res" scope="page" value="${''}" />
+     <isset name="href" scope="page" value="${'name=product_detail_image'}" />
+    </isif>
+
+    
+    <isset name="imageTitle" value="${img.title}" scope="page"/>
+    <isif condition="${imageTitle.charAt(0) == ','}">
+     <isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
+    </isif>
+    
+    <isset name="mediumImage" value="${new ProductImage('medium', imageProduct, imgSmStatus.index)}" scope="page"/>
+    <isset name="smImage" value="${new ProductImage('small', imageProduct, imgSmStatus.index)}" scope="page"/>
+    <div class="owl-carousel-mobile-item thumb${imgSmStatus.first ? ' selected' : ''}">
+     
+     <div class="magnifik-example basic">
+		<a class="z2" href="${mediumImage.getURL()}">
+		
+	<!-- <a ${href} class="product-image main-image" title="${imageTitle}"> -->
+		<img src="${mediumImage.getURL()}" alt="${mediumImage.alt}" title="${mediumImage.title}" />
+		<!--div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div-->
+	<!-- </a> -->
+        </a>
+    </div>
+ 
+    </div>
+   </isloop>
+  </div>
+ </div>
+</isif>
+<isif condition="${!empty(pdict.Product.custom.productVideo1) || !empty(pdict.Product.custom.productVideo2)}">
+	<div class="mobile-youtube-video">
+		<isif condition="${empty(pdict.Product.custom.productVideo1)}">
+			<a href="#" class="youtubevideo" id="${pdict.Product.custom.productVideo2}" thumb-id="${pdict.Product.custom.productVideo2}">
+			 	Play Video  <i class="fa fa-play-circle-o"></i>
+			</a>
+		<iselseif condition="${empty(pdict.Product.custom.productVideo2)}">
+			<a href="#" class="youtubevideo" id="${pdict.Product.custom.productVideo1}" thumb-id="${pdict.Product.custom.productVideo1}">
+			 	Play Video  <i class="fa fa-play-circle-o"></i>
+			</a>
+		</isif>
+	</div>
+</isif>
+</div>
+<div class="hidden-xs">
 	<h2 class="visually-hidden">Images</h2>
 	<iscomment>Origional Code
 		<isif condition="${!empty(imageProduct.getImages('hi-res')) && imageProduct.getImages('hi-res').length>0}">
@@ -60,14 +119,16 @@
 	</isif>
 	<div class="magnifik-example basic">
 		<a class="z1" href="${imageUrlHiRes}">
+		
 	<!-- <a ${href} class="product-image main-image" title="${imageTitle}"> -->
-		<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+		<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+		<div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div>
 	<!-- </a> -->
         </a>
     </div>
     
 </div>
-
+</div>
 <iscomment>
 	<isset name="largeImagesSize" value="${imageProduct.getImages('large').size()}" scope="page"/>
 	<isset name="smallImagesSize" value="${imageProduct.getImages('small').size()}" scope="page"/>
@@ -116,14 +177,10 @@
 				</isif>
 				<isif condition="${!empty(pdict.Product.custom.productVideo2)}">
 					<li class="thumb">
-						<div class="youtubevideo" id="${pdict.Product.custom.productVideo2}" thumb-id="${pdict.Product.custom.productVideo1}" style="width:100px;height:100px;"></div>
-					</li>
-				</isif>
-				<isif condition="${!empty(pdict.Product.custom.videoStorage)}">
-					<li class="thumb">
-						<div class="youtubevideo" thumb-id="${pdict.Product.custom.videoStorage.split('src=')[1].split(' ')[0].replace(/['"]+/g, '')}" style="width:100px;height:100px;"></div>
+						<div class="youtubevideo" id="${pdict.Product.custom.productVideo2}" thumb-id="${pdict.Product.custom.productVideo2}" style="width:100px;height:100px;"></div>
 					</li>
 				</isif>
 			</ul>
 		</div>
 	</isif>
+

@@ -1,7 +1,8 @@
 "use strict";
 	function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
 	r(function(){
-	    if(!document.getElementsByClassName) {
+	    
+		if(!document.getElementsByClassName) {
 	        // IE8 support
 	        var getElementsByClassName = function(node, classname) {
 	            var a = [];
@@ -33,7 +34,7 @@
 	        videos[i].onclick = function() {
 	        	$("body").append('<div id="youtube-video-container" style="display:none;"></div>');
 	            // Create an iFrame with autoplay set to true
-	            var iframe = $("<iframe></iframe>");//document.createElement("iframe");
+	            var iframe = $("<iframe class='size'></iframe>");//document.createElement("iframe");
 	            var iframe_url = "https://www.youtube.com/embed/" + this.id + "?autoplay=1&autohide=1";
 	            if (this.getAttribute("data-params")) iframe_url+='&'+this.getAttribute("data-params");
 	            $(iframe).attr("src",iframe_url);

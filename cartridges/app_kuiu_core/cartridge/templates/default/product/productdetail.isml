@@ -44,13 +44,13 @@
 			     </div>
 			   </div> 
 			</div>
-			
-			<div class="product-technology">
-				<div class="container">
-				  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"/>
+			<isif condition="${!empty(pdict.Product.custom.technologyAsset1)}">
+				<div class="product-technology">
+					<div class="container">
+					  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"/>
+					</div>
 				</div>
-			</div>
-			
+			</isif>
 			 <isif condition="${!empty(pdict.Product.custom.technologyAsset2)}">
 			  <div class="product-technology2">
 				<div class="container">
@@ -111,11 +111,13 @@
 		</div>
 	</isif>
 	<isif condition="${!isQuickView && !pdict.Product.productSet && !pdict.Product.bundle}">	
-		<div class="product-detail-slider-2">
-			<div>
-				<isinclude template="product/components/recommendations"/>
+		<isif condition="${pdict.Product.getOrderableRecommendations(1).iterator().asList().length > 0}">
+			<div class="product-detail-slider-2">
+				<div>
+					<isinclude template="product/components/recommendations"/>
+				</div>
 			</div>
-		</div>
+		</isif>
 	</isif>	
 	</div>
 	<!--/pdpMain -->
