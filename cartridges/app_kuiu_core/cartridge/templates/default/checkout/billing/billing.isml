@@ -13,16 +13,6 @@
 	<iscomment>Report this checkout step</iscomment>
 	<isreportcheckout checkoutstep="4" checkoutname="${'Billing'}"/>
 
-	<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		checkout progress indicator
-	 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
-
-	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
-		<ischeckoutprogressindicator step="2" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
-	<iselse/>
-		<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
-	</isif>
-
 	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address">
 
 	<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -18,55 +18,7 @@
         <text-node>
           <description>Starting point for billing. After a successful shipping setup both COShipping and COShippingMultiple jump to this node.</description>
         </text-node>
-        <node-display x="2" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_3">
-    <segment>
-      <node>
-        <text-node>
-          <description>Initializes all forms of the billing page including:
-- address form
-- email address
-- coupon form</description>
-        </text-node>
-        <node-display x="6" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_4">
-    <segment>
-      <node>
-        <text-node>
-          <description>Initializes the address form:
-- if customer chose option &quot;use as billing address&quot; on single shipping page the form is prepopulated with the shipping address, otherwise
-- prepopulate with already set billing address, otherwise
-- prepopulate with default address of authenticated customer</description>
-        </text-node>
-        <node-display width="3" x="9" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_5">
-    <segment>
-      <node>
-        <text-node>
-          <description>initializes the email address form field:
-- if there's already a customer email set at the basket this email address is taken, otherwise
-- if the current customer is authenticated the email address of the customer's profile is taken</description>
-        </text-node>
-        <node-display width="2" x="13" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_6">
-    <segment>
-      <node>
-        <text-node>
-          <description>Initializes the credit card list by determining the saved customer payment instruments of type credit card.</description>
-        </text-node>
-        <node-display x="17" y="3"/>
+        <node-display x="2" y="2"/>
       </node>
     </segment>
   </branch>
@@ -74,7 +26,34 @@
     <segment>
       <node>
         <start-node call-mode="public" name="Start" secure="true"/>
-        <node-display x="2" y="4"/>
+        <node-display x="2" y="3"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node custom-name="SetCheckoutProgressControl" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="false" key="From_0"/>
+          <key-binding alias="IsShipping" key="To_0"/>
+          <key-binding alias="true" key="From_1"/>
+          <key-binding alias="IsBilling" key="To_1"/>
+          <key-binding alias="false" key="From_2"/>
+          <key-binding alias="IsSummary" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -480,6 +459,54 @@
         <node-display x="2" y="0"/>
       </node>
       <transition target-connector="in1" target-path="./-2"/>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_4">
+    <segment>
+      <node>
+        <text-node>
+          <description>Initializes all forms of the billing page including:
+- address form
+- email address
+- coupon form</description>
+        </text-node>
+        <node-display x="6" y="3"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_5">
+    <segment>
+      <node>
+        <text-node>
+          <description>Initializes the address form:
+- if customer chose option &quot;use as billing address&quot; on single shipping page the form is prepopulated with the shipping address, otherwise
+- prepopulate with already set billing address, otherwise
+- prepopulate with default address of authenticated customer</description>
+        </text-node>
+        <node-display width="3" x="9" y="3"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_6">
+    <segment>
+      <node>
+        <text-node>
+          <description>initializes the email address form field:
+- if there's already a customer email set at the basket this email address is taken, otherwise
+- if the current customer is authenticated the email address of the customer's profile is taken</description>
+        </text-node>
+        <node-display width="2" x="13" y="3"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
+          <description>Initializes the credit card list by determining the saved customer payment instruments of type credit card.</description>
+        </text-node>
+        <node-display x="17" y="3"/>
+      </node>
     </segment>
   </branch>
   <branch basename="UpdateAddress">

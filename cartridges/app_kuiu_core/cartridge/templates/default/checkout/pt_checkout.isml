@@ -32,8 +32,26 @@
 		<div id="main" role="main" class="clearfix">
 			<div class="container full-fields">
 
-				<center><h1>Shipping</h1></center>
-				
+	<iscomment>checkout progress indicator</iscomment>
+	
+	<isif condition="${pdict.IsShipping}">
+	   	<center><h1> ${Resource.msg('checkout.shipping','account',null)}</h1></center>
+		<center><ischeckoutprogressindicator step="1" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/></center>
+	<iselseif condition="${pdict.IsBilling}" >
+		<center><h1> ${Resource.msg('checkout.billing','account',null)}</h1></center>
+		<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
+			<center><ischeckoutprogressindicator step="2" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/></center>
+		<iselse/>
+			<center><ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/></center>
+		</isif>
+	<iselseif condition="${pdict.IsSummary}" >
+	    <center><h1> ${Resource.msg('checkout.placeorder','account',null)}</h1></center>
+		<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
+			<center><ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/></center>
+		<iselse/>
+			<center><ischeckoutprogressindicator step="4" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/></center>
+		</isif>
+	</isif>
 
 				<div id="primary" class="primary-content col-xs-12 col-sm-8 col-md-8 col-lg-9">
 					<isreplace/>

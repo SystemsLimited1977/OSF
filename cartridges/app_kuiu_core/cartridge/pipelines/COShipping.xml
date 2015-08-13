@@ -20,49 +20,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
         <text-node>
           <description>Starting point for single shipping scenario</description>
         </text-node>
-        <node-display x="2" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_3">
-    <segment>
-      <node>
-        <text-node>
-          <description>Initializes the address and shipping method form:
-- prepopulates form with shipping address of default shipment if address exists, otherwise
-- preselects shipping method in list if set at shipment</description>
-        </text-node>
-        <node-display width="2" x="7" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_4">
-    <segment>
-      <node>
-        <text-node>
-          <description>Select a shipping method for the default shipment. Sets the shipping method and returns the result as JSON response.</description>
-        </text-node>
-        <node-display x="11" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_5">
-    <segment>
-      <node>
-        <text-node>
-          <description>Determine the list of applicable shipping methods for the default shipment of the current  basket.  The applicable shipping methods are based on the merchandise in the cart and the address parameters included in the request (if any).  Change the shipping method of this shipment if the current method is no longer applicable.  Pre-calculate the shipping cost for each applicable shipping method by simulating the shipping selection i.e. explicitly add each shipping method and then calculate cart (to get cost and discounts/promotions).  The simulation is done so that shipping cost along with discounts and promotions can be shown to the user before making a selection.</description>
-        </text-node>
-        <node-display height="2" width="2" x="15" y="2"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_6">
-    <segment>
-      <node>
-        <text-node>
-          <description>Determine the list of applicable shipping methods for the default shipment of the current customer's basket and return the response as a JSON array.  The applicable shipping methods are based on the merchandise in the cart and any address parameters included in the request parameters.</description>
-        </text-node>
-        <node-display width="2" x="19" y="3"/>
+        <node-display x="2" y="2"/>
       </node>
     </segment>
   </branch>
@@ -70,7 +28,34 @@ This pipeline implements the logic for the default (single) shipping scenario. I
     <segment>
       <node>
         <start-node call-mode="public" name="Start" secure="true"/>
-        <node-display x="2" y="4"/>
+        <node-display x="2" y="3"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node custom-name="SetCheckoutProgressControl" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="true" key="From_0"/>
+          <key-binding alias="IsShipping" key="To_0"/>
+          <key-binding alias="false" key="From_1"/>
+          <key-binding alias="IsBilling" key="To_1"/>
+          <key-binding alias="false" key="From_2"/>
+          <key-binding alias="IsSummary" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -289,6 +274,48 @@ This pipeline implements the logic for the default (single) shipping scenario. I
             </node>
           </segment>
         </branch>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_4">
+    <segment>
+      <node>
+        <text-node>
+          <description>Initializes the address and shipping method form:
+- prepopulates form with shipping address of default shipment if address exists, otherwise
+- preselects shipping method in list if set at shipment</description>
+        </text-node>
+        <node-display width="2" x="7" y="3"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_5">
+    <segment>
+      <node>
+        <text-node>
+          <description>Select a shipping method for the default shipment. Sets the shipping method and returns the result as JSON response.</description>
+        </text-node>
+        <node-display x="11" y="3"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_6">
+    <segment>
+      <node>
+        <text-node>
+          <description>Determine the list of applicable shipping methods for the default shipment of the current  basket.  The applicable shipping methods are based on the merchandise in the cart and the address parameters included in the request (if any).  Change the shipping method of this shipment if the current method is no longer applicable.  Pre-calculate the shipping cost for each applicable shipping method by simulating the shipping selection i.e. explicitly add each shipping method and then calculate cart (to get cost and discounts/promotions).  The simulation is done so that shipping cost along with discounts and promotions can be shown to the user before making a selection.</description>
+        </text-node>
+        <node-display height="2" width="2" x="15" y="2"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
+          <description>Determine the list of applicable shipping methods for the default shipment of the current customer's basket and return the response as a JSON array.  The applicable shipping methods are based on the merchandise in the cart and any address parameters included in the request parameters.</description>
+        </text-node>
+        <node-display width="2" x="19" y="3"/>
       </node>
     </segment>
   </branch>
