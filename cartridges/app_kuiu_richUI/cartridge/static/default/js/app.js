@@ -3396,22 +3396,24 @@ var imagesLoaded = require('imagesloaded'),
 
 function initQuickViewButtons() {
 	$('.tiles-container .product-tile').each(function () {
-		var $qvContainer = $('<div class="quickview-container"></div>');
-		$qvContainer.appendTo(this);
-		var $qvButton = $('<a class="quickviewbtn">' + Resources.QUICK_VIEW + '</a>');
-		var $link = $(this).find('.thumb-link');
-		$qvButton.attr({
-			'href': $link.attr('href'),
-			'title': $link.attr('title')
-		}).appendTo($(this).find('.quickview-container'));
-		$qvButton.on('click', function (e) {
-			e.preventDefault();
-			quickview.show({
-				url: $(this).attr('href'),
-				source: 'quickview'
+		if($(this).find('.quickview-container').length === 0){
+			var $qvContainer = $('<div class="quickview-container"></div>');
+			$qvContainer.appendTo(this);
+			var $qvButton = $('<a class="quickviewbtn">' + Resources.QUICK_VIEW + '</a>');
+			var $link = $(this).find('.thumb-link');
+			$qvButton.attr({
+				'href': $link.attr('href'),
+				'title': $link.attr('title')
+			}).appendTo($(this).find('.quickview-container'));
+			$qvButton.on('click', function (e) {
+				e.preventDefault();
+				quickview.show({
+					url: $(this).attr('href'),
+					source: 'quickview'
+				});
+				return false;
 			});
-			return false;
-		});
+		}
 		
 	});
 	/*$('.tiles-container .product-image').on('mouseenter', function () {
