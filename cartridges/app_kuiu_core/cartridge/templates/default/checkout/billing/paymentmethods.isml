@@ -2,29 +2,32 @@
 <iscomment> TEMPLATENAME: paymentmethods.isml </iscomment>
 <isinclude template="util/modules"/>
 <isif condition="${pdict.OrderTotal > 0}">
+<div class="payment-methods-wrap">
 	<fieldset>
 
 		<legend>
 			${Resource.msg('billing.paymentheader','checkout',null)}
-			<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+			<div class="dialog-required pull-right"> *<span class="required-indicator">${Resource.msg('global.requiredfield','locale',null)}</span></div>
 		</legend>
 
-		<div class="payment-method-options">
+		<iscomment><div class="payment-method-options"></iscomment>
 			<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
 
 				<iscomment>Ignore GIFT_CERTIFICATE method, GCs are handled separately before other payment methods.</iscomment>
 				<isif condition="${paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE)}"><iscontinue/></isif>
 
-				<div class="form-row">
-					<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
-					<label for="is-${radioID}"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/>:</label>
-
-					<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" 
-						<isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> />
+				<div class="form-row fld-checkbox">
+					<div class="form-row">
+						<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
+						<label for="is-${radioID}"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/>:</label>
+	
+						<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" 
+							<isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> />
+					</div>
 				</div>
 
 			</isloop>
-		</div>
+		<iscomment></div></iscomment>
 
 		<div class="form-row form-row-button">
 			<button id="payment-select-go" name="${pdict.CurrentForms.billing.paymentSelect.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
@@ -83,26 +86,28 @@
 			
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attribute1="autocomplete" value1="off"/>
 
-			<span class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate','checkout',null)}</span>
-
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.month}" type="select" rowclass="month label-removed"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year label-removed"/>
-
+			<div class="form-row required">
+						<span class="form-label-text">${Resource.msg('billing.creditcardlistexpdate','checkout',null)}<span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span></span>
+			
+						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.month}" type="select" rowclass="month label-removed"/>
+			
+						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year label-removed"/>
+			</div>
+			<div class="hidden">
             <isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.isSubscription}" type="hidden" />
-
+			</div>
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off"/>
 			<isif condition="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn.error == null}">
 			<div class="form-field-tooltip cvn-tip">
 			<iselse/>
 			<div class="form-field-tooltip cvn-tip-error">
 			</isif>
-				(<a href="${URLUtils.url('Page-Show', 'cid', 'checkout-security-code')}" class="tooltip">
+				<a href="${URLUtils.url('Page-Show', 'cid', 'checkout-security-code')}" class="tooltip">
 					${Resource.msg('billing.linkcvn','checkout',null)}
 					<div class="tooltip-content" data-layout="small tooltip-cvn">
 						<iscontentasset aid="checkout-security-code">
 					</div>
-				</a>)
+				</a>
 			</div>
 
 			<isif condition="${pdict.CurrentCustomer.authenticated}">
@@ -149,6 +154,7 @@
 			${Resource.msg('billing.custompaymentmethod','checkout',null)}
 		</div>
 	</fieldset>
+	</div>
 <iselse/>
 	<div class="gift-cert-used form-indent">
 		<isif condition="${pdict.gcPITotal>0}">${Resource.msg('billing.giftcertnomethod','checkout',null)}<iselse/>${Resource.msg('billing.zerobalance','checkout',null)}</isif>

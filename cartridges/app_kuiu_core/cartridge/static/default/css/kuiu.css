@@ -973,7 +973,7 @@ div {
 	height: 28px;
 	border: 1px solid #e1e1e1;
 	border-radius: 0px;
-	padding: 0px;
+	padding: 0 5px;
 	-webkit-appearance: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
@@ -3974,9 +3974,21 @@ a.tooltip {
 
 .shipping-page #main .form-row {
 	margin:0 0 20px;
+	overflow:hidden;
 }
 
-.shipping-page #main .form-row  .form-caption {
+.shipping-page #main .form-row.fld-checkbox .form-row {
+	float:left;
+}
+
+.shipping-page #main .form-row a.privacy-policy {
+	float:left;
+	padding-left:2px;
+	text-decoration:underline;	
+}
+
+.shipping-page #main .form-row .form-caption,
+.shipping-page #main .form-row .char-count {
 	margin:0 0 0 15%;
 	clear:both;
 }
@@ -3986,6 +3998,7 @@ a.tooltip {
     margin-bottom: 0;
     margin-left: 0;
     padding-left:15%;
+    float:left;
 }
 
 .shipping-page #main form .fld-checkbox label {
@@ -3996,11 +4009,17 @@ a.tooltip {
     margin-bottom: 0;
     padding: 0 0 0 10px;
     width: auto;
+    font-size:12px;
 }
 
 .shipping-page #main form .fld-checkbox input[type="checkbox"] {
     float: left;
     margin-top: 3px;
+}
+
+.shipping-page #main form .fld-checkbox input[type="radio"] {
+    float: left;
+    margin: 1px 0 0 0; 
 }
 
 .shipping-page #main form input[type="radio"] {
@@ -4018,9 +4037,6 @@ a.tooltip {
 
 .shipping-page #shipping-method-list {
 	margin-top:30px;
-	margin-bottom:20px;
-	padding-bottom:20px;
-	border-bottom:1px solid #e0e0e0;
 }
 
 .shipping-page #shipping-method-list legend {
@@ -4060,9 +4076,12 @@ a.tooltip {
 }
 
 .shipping-page #main .form-row-button {
-	width:100%;
+	width:96%;
 	overflow:hidden;
 	margin-bottom:60px;
+	border-top:1px solid #e0e0e0;
+	margin-top:0;
+	padding-top:20px;
 }
 
 .shipping-page #secondary {
@@ -4155,4 +4174,151 @@ legend .required-indicator  {
 
 .mini-cart-product .mini-cart-toggle {
 	display:none;
+}
+
+.shipping-page #main .gift-discount-codes-wrap {
+	margin-top:20px;
+	padding-bottom:50px;
+}
+
+.shipping-page #main .gift-discount-codes-wrap legend{
+	margin-bottom:0;
+}
+
+.shipping-page #main .gift-discount-codes-wrap label {
+	width:100%;
+	float:none;
+	margin-bottom:10px;
+}
+
+.shipping-page #main .gift-discount-codes-wrap .form-row {
+	margin:0;
+}
+
+.shipping-page #main .gift-discount-codes-wrap .form-row.label-above {
+	margin-top:20px;
+}
+
+.shipping-page #main .gift-discount-codes-wrap .form-row .form-row {
+	float:left;
+	margin-right:10px;
+}
+
+.shipping-page #main .gift-discount-codes-wrap .form-row button {
+	height: 28px;
+    margin-top: 55px;
+    float:left;
+}
+
+.shipping-page #main .gift-discount-codes-wrap .form-row button#check-giftcert {
+	background-color: transparent;
+    color: #2b2b2b;
+    text-decoration: underline;
+}
+
+
+.shipping-page #main .payment-method-options {
+	padding-left:0;
+}
+
+.shipping-page #main .payment-methods-wrap .simple-submit {
+	display:block !important;
+}
+
+.shipping-page #main .payment-methods-wrap .form-row-button {
+	margin-left:15%;
+	margin-bottom:20px;
+	padding-top:0;
+	border-top:none;
+}
+
+.shipping-page #main span.error {
+	margin:1% 2% 0 15%;
+}
+
+.shipping-page #main .payment-methods-wrap .form-label-text {
+    display: block;
+    float: left;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 0.5em 0.5em 0 0;
+    text-align: left;
+    width: 15%;
+}
+
+.shipping-page #main .form-row.month {
+	width:18%;
+	margin-right:3%;
+	margin-bottom:0;
+}
+.shipping-page #main .form-row.year {
+	width:18%;
+	margin-bottom:0;
+}
+.shipping-page #main .form-row.month select,
+.shipping-page #main .form-row.year select {
+	max-width:100%;	
+}
+
+.shipping-page #main .form-row.cvn input {
+	width:18% !important;
+}
+
+.form-field-tooltip.cvn-tip {
+	width:65%;
+}
+
+.mini-shipment {
+	margin-top:50px;
+}
+
+.mini-shipment .section-header {
+	border:1px solid #e0e0e0;
+	padding:12px 15px;
+}
+
+.mini-shipment .section-header-note {
+	right:15px;
+}
+
+.order-component-block .details {
+	background:none;
+	border:1px solid #e0e0e0;
+	border-top:none;
+	padding:15px;
+	color:#2b2b2b;
+}
+
+.checkout-progress-indicator div {
+	border-right:1px solid #e0e0e0;
+	height:25px;
+	padding:3px 25px 3px 0;
+	margin-right:25px;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size:14px;
+	text-transform:uppercase;
+	display:inline-block;
+}
+
+.checkout-progress-indicator div:last-child {
+	border-right:none;
+	margin-right:0;
+	padding:4px 0 4px 0;
+}
+.checkout-progress-indicator i {
+	display:none;
+}
+
+.checkout-progress-indicator .active span {
+	color:#2b2b2b;
+	font-weight:500px;
+	border-bottom:2px solid #2b2b2b;
+}
+
+.shipping-page #main h1 {
+	margin:30px 0 15px;
+}
+
+.checkout-progress-indicator {
+	padding-bottom:35px;
 }

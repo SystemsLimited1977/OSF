@@ -1063,7 +1063,8 @@
 		width:100%;
 	}
 
-	.shipping-page #main .form-row  .form-caption {
+	.shipping-page #main .form-row .form-caption,
+	.shipping-page #main .form-row .char-count {
 		margin:0 0 0 0;
 		clear:both;
 	}
@@ -1100,6 +1101,7 @@
 	
 	.shipping-page #main form .fld-checkbox {
 		width:auto;
+		margin-bottom:10px;
 	}
 	
 	.shipping-page #main .form-row-button {
@@ -1121,9 +1123,103 @@
 	}
 	
 	.checkout-order-totals {
-		margin-bottom:50px;
+		margin-bottom:25px;
 	}
 	
+	.shipping-page #main .form-row a.privacy-policy {
+		display:inline;
+		margin:0 0 0 26px;
+	}
+	
+	.shipping-page #main .gift-discount-codes-wrap .form-row .form-row {
+		float:left;
+		margin-right:2%;
+		width:68%;
+	}
+
+	.shipping-page #main .gift-discount-codes-wrap .form-row button {
+		height: 28px;
+	    margin-top: 55px;
+	    float:left;
+	    width:30%;
+	    padding:0;
+	}
+	
+	.shipping-page #main form .fld-checkbox label {
+		max-width:93%;
+		height:auto;
+	}
+	
+	.shipping-page #main .form-row.fld-checkbox.privacy-check .form-row {
+		position:relative;
+	}
+	
+	.shipping-page #main form .fld-checkbox.privacy-check input[type="checkbox"] {
+		 left: 0;
+    	position: absolute;
+    	top: 0;
+	}
+	
+	.shipping-page #main form .fld-checkbox.privacy-check label {
+		max-width:none;
+		float: left;
+    	margin-left: 18px;
+	}
+	
+	.shipping-page #main .gift-discount-codes-wrap .form-row button#check-giftcert {
+	    clear: both;
+	    float: left;
+	    margin: 0;
+	    padding: 0;
+	    text-align: left;
+	    width: auto;
+	}
+	
+	.shipping-page #main .payment-methods-wrap .form-row-button {
+		margin-left:0;
+		margin-bottom:10px;
+	}
+	
+	.shipping-page #main .payment-methods-wrap .form-label-text {
+		width:100%;
+	}
+	
+	.shipping-page #main .form-row.month {
+    	margin-right: 6%;
+    	width: 47%;
+	}
+	
+	.shipping-page #main .form-row.year {
+		width: 47%;
+	}
+	
+	.shipping-page #main .form-row.cvn input {
+    	width: 47% !important;
+	}
+	
+	.form-field-tooltip.cvn-tip {
+		width:45%;
+		margin:-27px 0 20px 52%;
+	}
+	
+	.shipping-page #main .gift-discount-codes-wrap {
+		padding-bottom:25px;
+	}
+	
+	.dialog-required.pull-right {
+		float:none !important;
+		clear:both;
+		display:block;
+	}
+	
+	.mini-shipment {
+		margin-top:25px;
+		margin-bottom:25px;
+	}
+	
+	.shipping-page #main #secondary {
+		padding-bottom:25px;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -1483,13 +1579,15 @@
 		width:100%;
 	}
 
-	.shipping-page #main .form-row  .form-caption {
+	.shipping-page #main .form-row .form-caption,
+	.shipping-page #main .form-row .char-count  {
 		margin:0 0 0 0;
 		clear:both;
 	}
 
 	.shipping-page #main form .fld-checkbox {
 	    padding-left:0;
+	    margin-bottom:10px;
 	}
 	
 	.shipping-page #main .form-row {
@@ -1518,7 +1616,65 @@
 	
 	.shipping-page #main .form-row-button {
 		width:100%;
-		margin:0 0 30px;
+		margin:20px 0 30px;
+	}
+	
+	.shipping-page #main .form-row a.privacy-policy {
+		display:inline;
+		margin:-27px 0 0 112px;
+	}
+	
+	.shipping-page #main .gift-discount-codes-wrap .form-row .form-row {
+		float:left;
+		margin-right:2%;
+		width:68%;
+	}
+
+	.shipping-page #main .gift-discount-codes-wrap .form-row button {
+		height: 28px;
+	    margin-top: 55px;
+	    float:left;
+	    width:30%;
+	}
+	
+	.shipping-page #main form .fld-checkbox label {
+		max-width:96%;
+		height:auto;
+	}
+	
+	.shipping-page #main .gift-discount-codes-wrap .form-row button#check-giftcert {
+	    clear: both;
+	    float: left;
+	    margin: 0;
+	    padding: 0;
+	    text-align: left;
+	    width: auto;
+	}
+	
+	.shipping-page #main .payment-methods-wrap .form-row-button {
+		margin-left:0
+	}
+	
+	.shipping-page #main .payment-methods-wrap .form-label-text {
+		width:100%;
+	}
+	
+	.shipping-page #main .form-row.month {
+    	margin-right: 4%;
+    	width: 35%;
+	}
+	
+	.shipping-page #main .form-row.year {
+		width: 35%;
+	}
+	
+	.shipping-page #main .form-row.cvn input {
+    	width: 35% !important;
+	}
+	
+	.form-field-tooltip.cvn-tip {
+		width:35%;
+		margin:-33px 0 0 35%;
 	}
 	
 }
@@ -1615,6 +1771,40 @@
 	    padding-left:20%;
 	}
 	
+	.shipping-page #main form .fld-checkbox label {
+		max-width:96%;
+		height:auto;
+	}
+	
+	.shipping-page #main .form-row a.privacy-policy {
+		display:inline;
+		margin:-37px 0 0 112px;
+	}
+	
+	.shipping-page #main .payment-methods-wrap .form-row-button {
+		margin-left:20%;
+	}
+	
+	.shipping-page #main .payment-methods-wrap .form-label-text {
+		width:20%;
+	}
+	
+	.shipping-page #main .form-row.month {
+    	margin-right: 4%;
+    	width: 25%;
+	}
+	
+	.shipping-page #main .form-row.year {
+		width: 25%;
+	}
+	
+	.shipping-page #main .form-row.cvn input {
+    	width: 25% !important;
+	}
+	
+	.form-field-tooltip.cvn-tip {
+		width:53%;
+	}
 }
 
 @media ( min-width : 1200px) and (max-width: 1439px) {
