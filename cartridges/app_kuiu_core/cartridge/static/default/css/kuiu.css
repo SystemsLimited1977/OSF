@@ -2758,7 +2758,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
   top:0;
   width:30px;
   height:30px;
-  z-index:700;
+  z-index:100;
   content: " ";
 }
 
@@ -3733,6 +3733,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     padding:9px 0 0 10px;
     height:36px;
     margin-bottom:0;
+    font-weight:400;
 }
 
 #main .checkoutlogin .login-box .login-rememberme input[type="checkbox"] {
@@ -3930,16 +3931,228 @@ a#password-reset {
 	margin-left: 0;
 }
 
+/* Shipping page styling */
+.shipping-page {
+	
+}
 
+.shipping-page .checkout-progress-indicator {
+	
+}
 
+legend {
+	background:none;
+	border-top:1px solid #e0e0e0;
+	border-bottom:1px solid #e0e0e0;
+	margin-bottom:30px;
+	padding:12px 0;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size:16px;
+	font-weight:500;
+}
 
+a.tooltip {
+	opacity:1;
+	text-decoration:underline;
+	margin-top:0;
+	display:inline-block !important;
+}
 
+.form-field-tooltip {
+    float: right;
+    margin: -44px 0 0;
+    width: 44%;
+}
 
+.with-helper-text {
+    margin-top: -61px;
+}
 
+.shipping-page #main form label {
+	width:15%;
+}
 
+.shipping-page #main .form-row {
+	margin:0 0 20px;
+}
 
+.shipping-page #main .form-row  .form-caption {
+	margin:0 0 0 15%;
+	clear:both;
+}
 
+.shipping-page #main form .fld-checkbox {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left:15%;
+}
 
+.shipping-page #main form .fld-checkbox label {
+    display: inline;
+    float: right;
+    font-weight: 400;
+    height: 25px;
+    margin-bottom: 0;
+    padding: 0 0 0 10px;
+    width: auto;
+}
 
+.shipping-page #main form .fld-checkbox input[type="checkbox"] {
+    float: left;
+    margin-top: 3px;
+}
 
+.shipping-page #main form input[type="radio"] {
+    margin: 7px 15px;
+}
 
+.shipping-page #main form input#is-gift-yes {
+	margin-left:0;
+}
+
+.shipping-page #main form .input-radio {
+	position:relative;
+	top:2px;
+}
+
+.shipping-page #shipping-method-list {
+	margin-top:30px;
+	margin-bottom:20px;
+	padding-bottom:20px;
+	border-bottom:1px solid #e0e0e0;
+}
+
+.shipping-page #shipping-method-list legend {
+	margin-bottom:15px;
+}
+
+.shipping-page #main form #shipping-method-list input[type="radio"] {
+	margin: 7px 15px 7px 0;
+	height:16px;
+}
+
+.shipping-page #main form #shipping-method-list label {
+	width:auto;
+	float:none;
+}
+
+.shipping-page #main #shipping-method-list .form-row .form-caption {
+	margin:0 0 0 28px;
+}
+
+.shipping-page #main #shipping-method-list a.tooltip {
+	top:3px;
+	line-height:100%;
+	font-weight:600;
+}
+
+.shipping-page #main #shipping-method-list .form-row {
+	margin:0 0 15px;
+}
+
+.label {
+	color:#000;
+}
+
+.shipping-page #main button {
+	text-transform:capitalize;
+}
+
+.shipping-page #main .form-row-button {
+	width:100%;
+	overflow:hidden;
+	margin-bottom:60px;
+}
+
+.shipping-page #secondary {
+	border-right:none;
+}
+
+.section-header {
+	background:none;
+	border-top:1px solid #e0e0e0;
+	border-bottom:1px solid #e0e0e0;
+	margin-bottom:0;
+	padding:12px 0;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size:16px !important;
+	font-weight:500;
+}
+
+.checkout-mini-cart {
+	background:none;
+	max-height:none;
+}
+
+.checkout-mini-cart .mini-cart-name {
+	margin-right:0;
+	margin-left:110px;
+}
+
+.checkout-mini-cart .mini-cart-attributes, 
+.checkout-mini-cart .mini-cart-product .product-availability-list, 
+.checkout-mini-cart .mini-cart-pricing {
+	margin-right:0;
+	margin-left:110px;
+}
+
+.checkout-mini-cart .mini-cart-product {
+	border-bottom:1px solid #e0e0e0;
+}
+
+.checkout-mini-cart .label {
+	font-size: 12px;
+    font-weight: 400;
+    padding: 0;
+}
+
+.checkout-mini-cart .mini-cart-product .mc-item-price {
+	text-align:right;
+}
+
+.checkout-order-totals {
+	background:none;
+	padding:10px 0;
+}
+
+.text-left,
+.order-totals-table td.text-left {
+	text-align: left !important;
+}
+.checkout-order-totals .order-totals-table td {
+	font-size:13px;
+	font-weight:400;
+}
+.checkout-order-totals .order-totals-table {
+	width:100%;
+}
+
+.checkout-order-totals .order-totals-table tr.order-total td {
+	font-size:16px;
+	font-weight:500;
+}
+
+.checkout-order-totals .order-totals-table .order-total td {
+    padding: 0.83em 0 0 0;
+  }
+    
+.section-header-note {
+    font-size: 11px;
+    font-weight: 400;
+    right: 0;
+    text-transform: none;
+    font-family: 'Roboto', sans-serif;
+    text-decoration:underline;
+    top:16px;
+}    
+    
+legend .required-indicator  {
+	 font-family: 'Roboto', sans-serif;
+	 font-size:11px;
+	 text-transform:capitalize;
+} 
+
+.mini-cart-product .mini-cart-toggle {
+	display:none;
+}

@@ -18,7 +18,7 @@
 
 		<thead>
 			<tr>
-				<th class="order-totals-item">Item</th>
+				<th class="text-left order-totals-item">Item</th>
 				<th class="order-totals-value">Value</th>
 			</tr>
 		</thead>
@@ -30,7 +30,7 @@
 				(product line item prices including product level promotions plus gift certificate line items prices)
 			</iscomment>
 			<tr class="order-subtotal">
-				<td>${Resource.msg('order.ordersummary.subtotal','order',null)}</td>
+				<td class="text-left">${Resource.msg('order.ordersummary.subtotal','order',null)}</td>
 				<td><isprint value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(false).add(LineItemCtnr.giftCertificateTotalPrice)}"/></td>
 			</tr>
 			
@@ -42,7 +42,7 @@
 			</isscript>
 			<isif condition="${!empty(orderDiscount) && orderDiscount.value > 0.0}">
 				<tr class="order-discount discount">
-					<td>${Resource.msg('order.ordersummary.orderdiscount','order',null)}</td>
+					<td class="text-left">${Resource.msg('order.ordersummary.orderdiscount','order',null)}</td>
 					<td>- <isprint value="${orderDiscount}"/></td>
 				</tr>
 			</isif>
@@ -58,7 +58,7 @@
 					<iscomment>show shipping cost per shipment only if it's a physical shipment containing product line items</iscomment>
 					<isif condition="${Shipment.productLineItems.size() > 0}">
 					<tr class="order-shipping <isif condition="${loopstatus.first}"> first <iselseif condition="${loopstatus.last}"> last</isif>">
-						<td>
+						<td class="text-left">
 							<isif condition="${pdict.p_shipmenteditable}">
 								<a href="${editUrl}" title="${Resource.msg('order.ordersummary.ordershipping.edit','order',null)}">${Resource.msg('order.ordersummary.ordershipping.edit','order',null)}</a>
 							</isif>
@@ -79,7 +79,7 @@
 				</isloop>
 			<iselse/>
 				<tr class="order-shipping">
-					<td>
+					<td class="text-left">
 						${Resource.msg('order.ordersummary.ordershipping','order',null)}
 						<!-- Display Shipping Method -->
 						<isset name="Shipment" value="${LineItemCtnr.shipments.iterator().next()}" scope="page"/>
@@ -106,12 +106,12 @@
 			<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}">
 				<isif condition="${pdict.p_showshipmentinfo}">
 					<tr class="order-shipping-discount discount">
-						<td>${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
+						<td class="text-left">${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
 						<td>- <isprint value="${shippingDiscount}"/></td>
 					</tr>
 				<iselse/>
 					<tr class="order-shipping-discount discount">
-						<td>${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
+						<td class="text-left">${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
 						<td>- <isprint value="${shippingDiscount}"/></td>
 					</tr>
 				</isif>
@@ -119,7 +119,7 @@
 		
 			<iscomment>tax amount</iscomment>
 			<tr class="order-sales-tax">
-				<td>${Resource.msg('order.ordersummary.ordertax','order',null)}</td>
+				<td class="text-left">${Resource.msg('order.ordersummary.ordertax','order',null)}</td>
 				<td>
 					<isif condition="${LineItemCtnr.totalTax.available}">
 						<isprint value="${LineItemCtnr.totalTax}"/>
@@ -137,7 +137,7 @@
 					<isset name="orderTotalValue" value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).add(LineItemCtnr.giftCertificateTotalPrice)}" scope="page"/>
 				</isif>
 	
-				<td><isprint value="${pdict.p_totallabel}"/></td>
+				<td class="text-left"><isprint value="${pdict.p_totallabel}"/></td>
 				<td><isprint value="${orderTotalValue}"/></td>
 			</tr>
 

@@ -29,7 +29,7 @@
 
 					<legend>
 						${Resource.msg('singleshipping.enteraddress','checkout',null)}
-						<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+						<div class="dialog-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 					</legend>
 
 					<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
@@ -96,17 +96,18 @@
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.lastName}" type="input"/>
 
-					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address1}" type="input"/>
-
-					<div class="form-field-tooltip">
-						(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
-							${Resource.msg('singleshipping.apofpo','checkout',null)}
-							<div class="tooltip-content"  data-layout="small">
-									<iscontentasset aid="apo-fpo"/>
+					<div class="form-row required">
+							<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address1}" type="input"/>
+		
+							<div class="form-field-tooltip">
+								<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
+									${Resource.msg('singleshipping.apofpo','checkout',null)}
+									<div class="tooltip-content"  data-layout="small">
+										<iscontentasset aid="apo-fpo"/>
+									</div>
+								</a>
 							</div>
-						</a>)
 					</div>
-
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address2}" type="input"/>
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.country}" type="select"/>
@@ -126,26 +127,30 @@
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
-
+				
+				<div class="form-row required">
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 
 					<div class="form-field-tooltip with-helper-text">
-						(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
+						<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
 							${Resource.msg('singleshipping.phonerequired','checkout',null)}
 							<div class="tooltip-content"  data-layout="small">
 								<iscontentasset aid="help-telephone"/>
 							</div>
-						</a>)
+						</a>
 					</div>
-
+				</div>
+				
 					<iscomment>Add address to Address Book</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated}">
 						<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
 					</isif>
 
+				<div class="form-row required fld-checkbox">
 					<iscomment>Use address for Billing Address</iscomment>
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox" rowclass="form-indent label-inline"/>
-
+				</div>
+				
 					<iscomment>Is this a gift</iscomment>
 					<div class="form-row">
 						<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
@@ -177,7 +182,7 @@
 				<div class="form-row form-row-button">
 			</isif>
 
-				<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
+				<button class="button-fancy-large pull-right" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 			</div>
 
 			<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>

@@ -36,6 +36,8 @@
 		<isset name="shippingCost" value="${pdict.ShippingCosts.get(shippingMethod.ID)}" scope="page"/>
 			
 			<div class="form-row form-indent label-inline">
+			
+			<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.htmlName}" id="shipping-method-${shippingMethod.ID}" value="${shippingMethod.ID}" <isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">checked="checked"</isif> />
 				    			
     			<label for="shipping-method-${shippingMethod.ID}">
     			
@@ -58,9 +60,7 @@
 	
 	    				<isif condition="${shippingCost.productShippingCosts.length > 0}">
 	    				
-		    				<a class="tooltip">(
-		    					${Resource.msg('singleshipping.details','checkout',null)}
-			    				<div class="tooltip-content" data-layout="small tooltip-shipping">
+		    				(<a class="tooltip">${Resource.msg('singleshipping.details','checkout',null)}<div class="tooltip-content" data-layout="small tooltip-shipping">
 			    					<isset name="productShipCost" value="${new dw.value.Money(0.0, session.getCurrency().getCurrencyCode())}" scope="page"/>
 					    			<isloop items="${shippingCost.productShippingCosts}" var="productShipping" status="loopstate">
 					    				<isif condition="${productShipping.shippingCost != null && productShipping.shippingCost.amount != null && productShipping.shippingCost.amount > 0}">
@@ -119,16 +119,15 @@
 					    				<span class="value"><isprint value="${shippingCost.shippingInclDiscounts}"/></span>
 					    			</div>
 					    			
-				    			</div>
-				    		)</a>
+				    			</div></a>)
 		    			</isif>
 	    			
 	    			</label>
     			
-    				<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.htmlName}" id="shipping-method-${shippingMethod.ID}" value="${shippingMethod.ID}" <isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">checked="checked"</isif> /> 
+    				 
     			
 	    			<isif condition="${!empty(shippingMethod.description)}">
-	    				<div class="form-caption">(<isprint value="${shippingMethod.description}"/>)</div>
+	    				<div class="form-caption"><isprint value="${shippingMethod.description}"/></div>
 	    			</isif>				    			
     			
 					<iscomment>  Display approaching shipping promotional discounts. </iscomment>

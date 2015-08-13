@@ -1,4 +1,4 @@
-<iscontent type="text/html" charset="UTF-8" compact="true" />
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
@@ -10,10 +10,10 @@
 <head>
 <isscript> var pageContext = { title: 'My Account', type:
 'MyAccount', ns: 'account' }; </isscript>
-<isinclude template="util/modules" />
+<isinclude template="util/modules"/>
 
-<isinclude template="components/header/htmlhead" />
-<isinclude template="account/pt_account_UI" />
+<isinclude template="components/header/htmlhead"/>
+<isinclude template="account/pt_account_UI"/>
 
 <iscomment>Add template-specific header information here.</iscomment>
 
@@ -23,18 +23,18 @@
 
 	<div id="wrapper" class="pt_account">
 
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}" />
+		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="page-content clearfix">
-			<isinclude template="components/browsertoolscheck" />
+			<isinclude template="components/browsertoolscheck"/>
 			<isif condition="${!empty(pdict.bctext2)}"> <isbreadcrumbs
 				bcurl1="${URLUtils.https('Account-Show')}"
 				bctext1="${Resource.msg('account.header','account',null)}"
-				bctext2="${pdict.bctext2}" /> <iselse /> <isif
+				bctext2="${pdict.bctext2}"/> <iselse/> <isif
 				condition="${pdict.bctext1 == 'gc'}"> <isbreadcrumbs
-				bctext1="${Resource.msg('global.giftcertificates','locale',null)}" />
-			<iselse /> <isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}"
-				bctext1="${Resource.msg('account.header','account',null)}" /> </isif> </isif>
+				bctext1="${Resource.msg('global.giftcertificates','locale',null)}"/>
+			<iselse/> <isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}"
+				bctext1="${Resource.msg('account.header','account',null)}"/> </isif> </isif>
 			<div class="container no-design full-fields">
 				<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9">
 					<isreplace/>
@@ -55,8 +55,8 @@
 		</div>
 		<!-- /main -->
 
-		<isinclude template="components/footer/footer" />
-		<isinclude template="account/pt_account_VARS" />
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="account/pt_account_VARS"/>
 	</div>
 
 </body>

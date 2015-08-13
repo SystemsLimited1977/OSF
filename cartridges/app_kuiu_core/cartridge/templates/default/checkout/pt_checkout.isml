@@ -25,18 +25,24 @@
 
 <body>
 
-	<div id="wrapper" class="pt_checkout">
+	<div id="wrapper" class="pt_checkout shipping-page">
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
-		<div id="main" role="main" class="primary-focus clearfix">
+		<div id="main" role="main" class="clearfix">
+			<div class="container full-fields">
 
-			<div id="primary" class="primary-content">
-				<isreplace/>
-			</div>
+				<center><h1>Shipping</h1></center>
+				
 
-			<div id="secondary" class="nav summary">
-				<isinclude template="checkout/minisummary"/>
+				<div id="primary" class="primary-content col-xs-12 col-sm-8 col-md-8 col-lg-9">
+					<isreplace/>
+				</div>
+	
+				<div id="secondary" class="nav summary col-xs-12 col-sm-4 col-md-4 col-lg-3">
+					<isinclude template="checkout/minisummary"/>
+				</div>
+			
 			</div>
 
 		</div>
