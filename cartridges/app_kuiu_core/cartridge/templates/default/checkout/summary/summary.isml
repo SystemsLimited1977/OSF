@@ -71,7 +71,7 @@
 							</td>
 
 							<td class="item-quantity">
-								<isprint value="${productLineItem.quantity}" />
+								<span class="visible-xs-inline">${Resource.msg('global.qty','locale',null)}:</span> <isprint value="${productLineItem.quantity}" />
 							</td>
 
 							<td class="item-quantity-details">
@@ -215,12 +215,13 @@
 			<form action="${URLUtils.https('COSummary-Submit')}" method="post" class="submit-order">
 				<fieldset>
 					<div class="form-row">
-						<a class="back-to-cart" href="${URLUtils.url('Cart-Show')}">
-							<isprint value="${Resource.msg('summary.editcart','checkout',null)}" encoding="off" />
-						</a>
+						
 						<button class="button-fancy-large" type="submit" name="submit" value="${Resource.msg('global.submitorder','locale',null)}">
 							${Resource.msg('global.submitorder','locale',null)}
 						</button>
+						<a class="back-to-cart" href="${URLUtils.url('Cart-Show')}">
+							<isprint value="${Resource.msg('summary.editcart','checkout',null)}" encoding="off" />
+						</a>
 					</div>
 				</fieldset>
 			</form>
