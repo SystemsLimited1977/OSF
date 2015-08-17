@@ -1721,6 +1721,31 @@ function initializeEvents() {
 	$('form input[name$="_couponCode"]').on('keydown', function (e) {
 		if (e.which === 13 && $(this).val().length === 0) { return false; }
 	});
+	
+	 //Last Visted Product Carousel
+	 $("#owl-last-visted-products").owlCarousel({     
+	        autoPlay: 3000, 
+	        items : 4,
+	        itemsDesktop : [1170,4],
+	        itemsDesktopSmall: [992,3],
+	        itemsTablet : [767,3],
+	        itemsTabletSmall : [480,1],
+	        itemsMobile : [320,1],
+	        navigation : true,
+	        navigationText : ["",""]
+	    });
+	 //Featured Product Carousel
+	 $("#owl-featured-products").owlCarousel({     
+	        autoPlay: 3000, 
+	        items : 4,
+	        itemsDesktop : [1170,4],
+	        itemsDesktopSmall: [992,3],
+	        itemsTablet : [767,3],
+	        itemsTabletSmall : [480,1],
+	        itemsMobile : [320,1],
+	        navigation : true,
+	        navigationText : ["",""]
+	    });
 }
 
 exports.init = function () {
