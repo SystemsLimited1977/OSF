@@ -18,6 +18,7 @@
     width: 300px !important;
     height: 367px !important;
 }
+
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
@@ -35,6 +36,64 @@
 .zoom_button {
     margin-left: -471px;
 }
+footer h6 {
+    font-size: 12px;
+    font-weight: 400;
+    }
+/*#cart-table .item-image,
+#cart-table.item-list td.item-details {
+ 	width:50%;
+ 	padding: 22px 8px;
+ }
+ #cart-table .item-edit-details {
+ 	padding-top:0px;
+ }
+ .cart-actions-top {
+ 	border-bottom:1px solid #e6e6e6;
+ }
+.cart-action-checkout,
+.cart-actions-top .cart-action-continue-shopping,
+#cart-table .item-quantity {
+	width:50%;
+	padding:0px;
+}
+ #main .cart-actions-top .cart-action-continue-shopping button, 
+ #main .cart-actions .cart-action-continue-shopping button {
+ 	padding:0px;
+ 	line-height: 22px;
+ }
+ #cart-table .item-quantity {
+ 	float:right;
+ }
+ #cart-table tr td {
+ 	padding:0px;
+ }
+ .cart-order-totals,
+ .cart-actions.cart-action-footer .cart-action-checkout,
+ .cart-actions.cart-action-footer .cart-action-checkout,
+  #main .cart-coupon-code label {
+ 	width:100%;
+ 	margin:0px;
+ }
+ .cart-footer {
+ 	border-bottom:none;
+ }
+ .cart-action-continue-shopping {
+ 	float:left;
+ }
+ #main .cart-footer .cart-coupon-code .coupon-input input[type="text"] {
+ 	width:30%;
+ 	float:left;
+ }
+ #main .cart-footer .cart-coupon-code input.coupon-input {
+ 	width:68% !important;
+ }
+  #main .cart-footer .cart-coupon-code button#add-coupon {
+  	width:28%;
+  }
+  .cart-footer {
+  	padding:20px 0px;
+  }*/
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -61,4 +120,9 @@
 }
 
 @media ( min-width : 1440px) {
+	
+	.story-landing img {
+		width:100%;
+		height:auto;
+	}
 }

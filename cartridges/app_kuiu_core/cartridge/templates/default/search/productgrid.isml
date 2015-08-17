@@ -3,6 +3,7 @@
 	importScript('search/ProductGridUtils.ds');
 </isscript>
 <iscomment><!--Display the remaining products as list--></iscomment>
+<div class="container">
 <div class="row">
 <ul id="search-result-items" class="search-result-items tiles-container clearfix ${ProductGridUtils.getCompareClass(pdict.category)} ${!empty(pdict.CurrentHttpParameterMap.format.value) ? (pdict.CurrentHttpParameterMap.format.value) : ''}">
 	<isloop items="${pdict.pagingmodel.pageElements}" var="LoopProductHit" status="loopstate">
@@ -19,6 +20,7 @@
 	</div>
 	</isloop>
 </ul>
+</div>
 </div>
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}">
 	<isif condition="${pdict.pagingmodel.currentPage != pdict.pagingmodel.maxPage }">

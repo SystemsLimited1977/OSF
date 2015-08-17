@@ -1281,7 +1281,7 @@ formatted prices as json</description>
       <simple-transition/>
       <node>
         <pipelet-node pipelet-name="GetLastVisitedProducts" pipelet-set-identifier="bc_api">
-          <key-binding alias="3" key="MaxLength"/>
+          <key-binding alias="6" key="MaxLength"/>
           <key-binding alias="LastVisitedProducts" key="Products"/>
         </pipelet-node>
         <node-display x="0" y="1"/>

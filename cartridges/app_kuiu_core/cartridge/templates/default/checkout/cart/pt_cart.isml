@@ -34,7 +34,9 @@
 			<center><h1>Checkout</h1></center>
 			
 			<div id="primary" class="primary-content">
+			<div class="container">
 				<isreplace/>
+			</div>
 			</div>
 
 		</div>

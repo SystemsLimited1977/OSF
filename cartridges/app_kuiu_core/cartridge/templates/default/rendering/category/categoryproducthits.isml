@@ -122,9 +122,7 @@ search.producthits.productsfound','search',null)}</a>
 		</div>
 
 		<div class="search-result-content">
-		<div class="container">
 			<isproductgrid pagingmodel="${pdict.ProductPagingModel}" category="${pdict.ProductSearchResult.category}"/>
-		</div>
 		</div>
 		<div class="search-result-options">
 

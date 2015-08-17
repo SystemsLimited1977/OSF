@@ -1,0 +1,19 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscache type="relative" minute="30" varyby="price_promotion"/>
+
+<isinclude template="util/modules"/>
+
+<div id="carousel-recommendations">
+<div class="container">
+	<h2><isprint value="${slotcontent.calloutMsg}"/></h2>
+	<div id="owl-featured-products">
+		<isloop items="${slotcontent.content}" var="product" begin="0" end="${slotcontent.content.length}">
+			<isobject object="${product}" view="recommendation">
+				<div class="item">
+					<isproducttile product="${product}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${true}"/>
+				</div>
+			</isobject>
+		</isloop>
+	</div>
+</div>
+</div>

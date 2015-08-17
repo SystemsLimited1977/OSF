@@ -3,14 +3,16 @@
 <isinclude template="util/modules"/>
 
 <isif condition="${!empty(pdict.LastVisitedProducts)}">
-	<div class="product-listing last-visited">
-		<h2>${Resource.msg('cart.lastvisited.header','checkout',null)}</h2>
-		<ul class="search-result-items tiles-container">
-			<isloop items="${pdict.LastVisitedProducts}" var="product" begin="0" end="2">
-				<li class="grid-tile">
-					<isproducttile product="${product}" showswatches="${false}" showpricing="${true}" showpromotion="${true}" showrating="${false}"/>
-				</li>
-			</isloop>
-		</ul>
+	<div id="carousel-recommendations">
+		<div class="container">
+			<h2>${Resource.msg('cart.lastvisited.header','checkout',null)}</h2>
+			<div id="owl-last-visted-products">
+				<isloop items="${pdict.LastVisitedProducts}" var="product" begin="0" end="${pdict.LastVisitedProducts.length}">
+					<div class="item">
+						<isproducttile product="${product}" showswatches="${false}" showpricing="${true}" showpromotion="${true}" showrating="${false}"/>
+					</div>
+				</isloop>
+			</div>
+		</div>
 	</div>	
 </isif>

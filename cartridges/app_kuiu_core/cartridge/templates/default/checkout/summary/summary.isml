@@ -107,7 +107,7 @@
 						<tr  class="cart-row <isif condition="${gcliloopstate.first}"> first <iselseif condition="${gcliloopstate.last}"> last</isif>">
 
 							<td class="item-image">
-								<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="<isprint value="${giftCertificateLineItem.lineItemText}"/>" />
+								<img src="${URLUtils.staticURL('/images/gift_cert.png')}" alt="<isprint value="${giftCertificateLineItem.lineItemText}"/>" />
 							</td>
 
 							<td class="item-details">

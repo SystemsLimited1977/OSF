@@ -125,7 +125,7 @@
 				<iscomment>Gift certificate line items</iscomment>
 				<isloop items="${pdict.Basket.giftCertificateLineItems}" var="gcLI">
 					<tr class="rowgiftcert">
-						<td class="item-image"><img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${GiftCertificate.object.lineItemText}" /></td>
+						<td class="item-image"><img src="${URLUtils.staticURL('/images/gift_cert.png')}" alt="${GiftCertificate.object.lineItemText}" /></td>
 						<td class="detailscolumn"><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - <isprint value="${gcLI.price}"/> ${Resource.msg('global.deliveredviaemail','locale',null)}</td>
 						<td class="quantitycolumn">1</td>
 						<td class="shippingaddress">${gcLI.recipientEmail}</td>

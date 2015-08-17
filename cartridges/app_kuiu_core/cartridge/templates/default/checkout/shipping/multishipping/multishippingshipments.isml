@@ -43,7 +43,7 @@
 							<tr class="cart-row">
 								<isloop items="${shipment.giftCertificateLineItems}" var="giftCertLI">
 									<td class="item-image">
-										<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${GiftCertificate.object.lineItemText}" />
+										<img src="${URLUtils.staticURL('/images/gift_cert.png')}" alt="${GiftCertificate.object.lineItemText}" />
 									</td>
 									<td class="detailscolumn">
 										<div><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - (<isprint value="${giftCertLI.getPrice()}"/>)</div>

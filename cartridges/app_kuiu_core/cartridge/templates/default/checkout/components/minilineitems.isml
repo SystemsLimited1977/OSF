@@ -55,7 +55,7 @@
 
 		<div class="mini-cart-product">
 			<div class="mini-cart-image">
-				<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="<isprint value="${pdict.p_giftcertlineitem.lineItemText}"/>" />
+				<img src="${URLUtils.staticURL('/images/gift_cert.png')}" alt="<isprint value="${pdict.p_giftcertlineitem.lineItemText}"/>" />
 			</div>
 
 			<div class="mini-cart-name">
@@ -144,7 +144,7 @@
 				<div class="mini-cart-product <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 
 					<div class="mini-cart-image">
-						<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="<isprint value="${gcLI.lineItemText}"/>" />
+						<img src="${URLUtils.staticURL('/images/gift_cert.png')}" alt="<isprint value="${gcLI.lineItemText}"/>" />
 					</div>
 
 					<div class="mini-cart-name">
