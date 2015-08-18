@@ -1264,7 +1264,7 @@
     	margin-bottom:0;
     }
     
-    .pt_checkout #main, .pt_cart #main, .pt_order-confirmation #main {
+    .pt_checkout #main, .pt_cart #main {
     	padding:0;
     }
     
@@ -1277,6 +1277,98 @@
     	padding: 3px 7px 3px 0;
     }
     
+    .pt_order-confirmation table tr .section-header {	
+		 border: medium none;
+	    font-size: 16px !important;
+	    padding: 0;
+	}
+	
+	.pt_order-confirmation .item-list td {
+		border-top: 1px solid #e0e0e0;
+		border-right:none;
+    	padding: 12px 0;
+    	width:100%;
+	}
+	
+	.pt_order-confirmation address {
+		margin-bottom:0;
+	}
+	
+	.pt_order-confirmation .item-list td.order-information {
+		border-right:none;
+		border-bottom:none;
+	}
+	.pt_order-confirmation .item-list td .order-totals-table td {
+		border-right:none;
+		border-top:none;
+		padding: 0;
+		width:50%;
+		font-size:12px !important;
+	}
+	.pt_order-confirmation .item-list td .order-totals-table .order-total td {
+	    font-size: 16px !important;
+	    font-weight: 600;
+	    padding-top: 10px;
+	}
+	
+	.pt_order-confirmation .content-header {
+    
+   }
+   .pt_order-confirmation table.order-shipment-table td {
+   	padding:10px 0;
+   }
+   .pt_order-confirmation table.order-shipment-table td.line-item-details {
+   	width:100%;
+   	border-top: 1px solid #e0e0e0;
+   } 
+   
+   .pt_order-confirmation .order-shipment-table .order-shipment-details {
+    border-left: none;
+    border-right: none;
+    min-width: 0;
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+	}
+	
+	.pt_order-confirmation .items-header-products {
+		border-bottom: medium none;
+    	padding: 5px 0;	
+	}
+	
+	.pt_order-confirmation .order-confirmation-details .content-header {
+    	margin: 5px 0 !important;
+	}
+	
+	.pt_order-confirmation h1,
+	.pt_order-confirmation center p {
+		padding-left:10px;
+		padding-right:10px;
+	}
+	
+	.pt_order-confirmation #main #primary {
+	    border-right: none;
+	    padding-right:10px;
+	}
+
+	.pt_order-confirmation #main #secondary {
+		left: 0;
+		border-left: none;
+		border-right:none;
+		padding-left:10px;
+		margin-top:35px;
+	}
+	.pt_order-confirmation #main #primary .actions a.continue { 
+		display:block;
+	}
+	
+	.pt_order-confirmation #main {
+		padding:0 0 60px;
+	}
+	
+	.pt_order-confirmation #main .actions {
+		 border-top: 1px solid #e0e0e0;
+	}
+   
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {

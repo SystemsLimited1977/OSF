@@ -19,7 +19,7 @@
 		<thead>
 			<tr>
 				<th class="text-left order-totals-item">Item</th>
-				<th class="order-totals-value">Value</th>
+				<th class="text-right order-totals-value">Value</th>
 			</tr>
 		</thead>
 
@@ -31,7 +31,7 @@
 			</iscomment>
 			<tr class="order-subtotal">
 				<td class="text-left">${Resource.msg('order.ordersummary.subtotal','order',null)}</td>
-				<td><isprint value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(false).add(LineItemCtnr.giftCertificateTotalPrice)}"/></td>
+				<td class="text-right"><isprint value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(false).add(LineItemCtnr.giftCertificateTotalPrice)}"/></td>
 			</tr>
 			
 			<iscomment>calculate order level discounts</iscomment>
@@ -43,7 +43,7 @@
 			<isif condition="${!empty(orderDiscount) && orderDiscount.value > 0.0}">
 				<tr class="order-discount discount">
 					<td class="text-left">${Resource.msg('order.ordersummary.orderdiscount','order',null)}</td>
-					<td>- <isprint value="${orderDiscount}"/></td>
+					<td class="text-right">- <isprint value="${orderDiscount}"/></td>
 				</tr>
 			</isif>
 		
@@ -67,7 +67,7 @@
                                 <isprint value="${Shipment.shippingMethod.displayName}"/>
                             </isif>
                         </td>
-						<td>
+						<td class="text-right">
 							<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 								<isprint value="${Shipment.shippingTotalPrice}"/>
 							<iselse/>
@@ -87,7 +87,7 @@
 							<isprint value="${Shipment.shippingMethod.displayName}"/>
 						</isif>
 					</td>
-					<td>
+					<td class="text-right">
 						<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 							<isprint value="${LineItemCtnr.shippingTotalPrice}"/>
 						<iselse/>
@@ -107,12 +107,12 @@
 				<isif condition="${pdict.p_showshipmentinfo}">
 					<tr class="order-shipping-discount discount">
 						<td class="text-left">${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
-						<td>- <isprint value="${shippingDiscount}"/></td>
+						<td class="text-right">- <isprint value="${shippingDiscount}"/></td>
 					</tr>
 				<iselse/>
 					<tr class="order-shipping-discount discount">
 						<td class="text-left">${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
-						<td>- <isprint value="${shippingDiscount}"/></td>
+						<td class="text-right">- <isprint value="${shippingDiscount}"/></td>
 					</tr>
 				</isif>
 			</isif>
@@ -120,7 +120,7 @@
 			<iscomment>tax amount</iscomment>
 			<tr class="order-sales-tax">
 				<td class="text-left">${Resource.msg('order.ordersummary.ordertax','order',null)}</td>
-				<td>
+				<td class="text-right">
 					<isif condition="${LineItemCtnr.totalTax.available}">
 						<isprint value="${LineItemCtnr.totalTax}"/>
 					<iselse/>
@@ -138,7 +138,7 @@
 				</isif>
 	
 				<td class="text-left"><isprint value="${pdict.p_totallabel}"/></td>
-				<td><isprint value="${orderTotalValue}"/></td>
+				<td class="text-right"><isprint value="${orderTotalValue}"/></td>
 			</tr>
 
 		</tbody>

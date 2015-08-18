@@ -4433,4 +4433,225 @@ table .section-header {
     border-bottom: 1px solid #e0e0e0;
 }
 
+/*Order Confirmation page styling*/
+
+.pt_order-confirmation h1 {
+	margin-bottom:0;
+}
+
+.pt_order-confirmation p.sub-title {
+	font-size:12px;
+	margin-top:0;
+	margin-bottom:20px;
+	font-weight: 400;
+}
+
+.confirmation-message {
+    border-bottom: medium none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.pt_order-confirmation #primary h2.content-header {
+	display:none;
+}
+
+.pt_order-confirmation .item-list td {
+    padding: 10px 0;
+    vertical-align: top;
+}
+
+.pt_order-confirmation table td {
+	padding: 10px 0;
+}
+
+
+.pt_order-confirmation .label {
+	color:#000000;
+	font-size:13px;
+	width: auto;
+    padding: 0 5px 0 0;
+    text-align: left;
+    float: left;
+    font-weight: 400;
+    text-transform: none;
+    margin-top:0;
+    display:inline-block;
+    line-height:20px;
+    clear:both;
+}
+
+.pt_order-confirmation .value {
+	float:left;
+	margin-top: 0;
+	font-size:14px;
+	font-weight: 400;
+	display:inline-block;
+	line-height:20px;
+}
+
+.pt_order-confirmation .item-list tr {
+    border-bottom: medium none;
+}
+
+.pt_order-confirmation table tr th.section-header {
+	border:none;
+	padding:0 0 0 15px;
+	font-weight:500;
+	font-size: 16px !important
+}
+
+.pt_order-confirmation table tr th.section-header:first-child {
+	padding-left:0;
+}
+
+.pt_order-confirmation table.item-list tr th.section-header {
+	border-right:1px solid #e0e0e0;
+}
+
+.pt_order-confirmation table.item-list tr th.section-header:last-child {
+	border-right:none;
+}
+.pt_order-confirmation .item-list td {
+	border-right: 1px solid #e0e0e0;
+    padding: 5px 0 5px 15px;
+    width:33.33%;
+}
+
+.pt_order-confirmation .item-list td.order-information {
+	border-right:none;
+}
+
+.pt_order-confirmation .item-list td:first-child {
+	padding-left:0;
+} 
+.pt_order-confirmation .item-list td:last-child {
+	border-right:none;
+}
+
+.pt_order-confirmation .item-list td .order-totals-table td {
+	border-right:none;
+	padding: 0;
+	width:auto;
+}
+
+.pt_order-confirmation .item-list td .order-totals-table .order-total td {
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 10px;
+}
+
+.pt_order-confirmation .content-header {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0 0 14px !important;
+    font-family: "Times New Roman", Georgia, Serif;
+    text-transform:uppercase;
+}
+
+.pt_order-confirmation table.order-shipment-table tr th.section-header {
+	border-bottom:1px solid #e0e0e0;
+}
+
+.pt_order-confirmation table.order-shipment-table td {
+	padding-left:15px;
+}
+
+.pt_order-confirmation table.order-shipment-table td:first-child {
+	padding-left:0;
+}
+
+.pt_order-confirmation .order-shipment-table .order-shipment-details {
+    border-left: 1px solid #e0e0e0;
+    border-right:none;
+    min-width: 0;
+    width:33.33%;
+}
+
+.pt_order-confirmation #main #primary {
+    border-right: 1px solid #e0e0e0;
+    padding-right:15px;
+}
+
+.pt_order-confirmation #main #secondary {
+	left: -1px;
+	border-left: 1px solid #e0e0e0;
+	border-right:none;
+	padding-left:15px;
+}
+
+.pt_order-confirmation #main button.print-page {
+	background-color: transparent;
+    color: #2b2b2b;
+    text-decoration: underline;
+    text-align:right;
+    padding:0;
+}
+
+.pt_order-confirmation #main #secondary .section-header {
+	padding:0;
+	border:none;
+}
+
+.pt_order-confirmation #main #secondary .login-box-content {
+    padding: 0;
+}
+
+.pt_order-confirmation #main #secondary form label {
+	width:100%;
+}
+
+.pt_order-confirmation #main #secondary .input-text {
+	width: 100%;
+}
+
+.pt_order-confirmation #main #secondary .form-row {
+    clear: both;
+    margin: 0 0 5px;
+    overflow: hidden;
+}
+
+.pt_order-confirmation #main #secondary #RegistrationForm button {
+	margin-top: 15px;
+    width: 100%;
+}
+
+.pt_order-confirmation #main {
+	padding-bottom:60px;
+}
+
+.pt_order-confirmation #main #primary .actions a.continue {
+	display:none;
+	background-color: #000;
+    border: 0 none transparent;
+    border-radius: 0;
+    font-size: 12px;
+    height: 36px;
+    padding: 0 30px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    margin-top: 15px;
+    width: 100%;
+    line-height:36px;
+}
+
+.item-list td {
+	padding:10px 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

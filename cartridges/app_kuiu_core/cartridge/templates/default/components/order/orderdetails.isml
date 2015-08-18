@@ -19,23 +19,11 @@
 </h2>
 
 <table class="item-list">
-
-	<tr>
-		<th class="section-header">${Resource.msg('order.orderdetails.orderinformation','order',null)}</th>
-		<th class="section-header">${Resource.msg('order.orderdetails.billingaddress','order',null)}</th>
-		<th class="section-header">
-			<isif condition="${Order.paymentInstruments.length == 1}">
-				${Resource.msg('order.orderdetails.paymentmethod','order',null)}
-			<iselse/>
-				${Resource.msg('order.orderdetails.paymentmethods','order',null)}
-			</isif>
-		</th>
-		<th class="section-header">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</th>
+	<tr class="hidden">
+		<th colspan="3" class="section-header">${Resource.msg('order.orderdetails.orderinformation','order',null)}</th>
 	</tr>
-
 	<tr>
-
-		<td class="order-information">
+		<td colspan="2" class="order-information">
 			<div class="order-date ">
 				<span class="label">${Resource.msg('order.orderdetails.orderplaced','order',null)}</span>
 				<span class="value"><isprint value="${Order.creationDate}" style="DATE_LONG"/></span>
@@ -50,10 +38,39 @@
 				<span class="value"><isprint value="${Order.orderNo}"/></span>
 			</div>
 		</td>
+		<td class="hidden-xs">
+			<div class="pull-right"><button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button></div>
+		</td>
+	</tr>
+
+	<tr class="hidden-xs">
+		
+		<th class="section-header">${Resource.msg('order.orderdetails.billingaddress','order',null)}</th>
+		<th class="section-header">
+			<isif condition="${Order.paymentInstruments.length == 1}">
+				${Resource.msg('order.orderdetails.paymentmethod','order',null)}
+			<iselse/>
+				${Resource.msg('order.orderdetails.paymentmethods','order',null)}
+			</isif>
+		</th>
+		<th class="section-header">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</th>
+	</tr>
+
+	<tr>
+
+		
 		<td class="order-billing">
+			<div class="section-header visible-xs-block">${Resource.msg('order.orderdetails.billingaddress','order',null)}</div>
 			<isminiaddress p_address="${Order.billingAddress}"/>
 		</td>
 		<td class="order-payment-instruments">
+		<div class="section-header visible-xs-block">
+			<isif condition="${Order.paymentInstruments.length == 1}">
+				${Resource.msg('order.orderdetails.paymentmethod','order',null)}
+			<iselse/>
+				${Resource.msg('order.orderdetails.paymentmethods','order',null)}
+			</isif>
+		</div>
 			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<div class="orderpaymentinstrumentsgc">
@@ -75,6 +92,7 @@
 			</isloop>
 		</td>
 		<td class="order-payment-summary">
+		<div class="section-header visible-xs-block">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</div>
 			<div class="order-detail-summary">
 			<isif condition="${Order.shipments.length > 1}">
 				<isordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${true}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
@@ -97,19 +115,43 @@
 			<table class="order-shipment-table">
 				<thead>
 					<tr>
+						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
+						<th class="section-header">${Resource.msg('global.quantity','locale',null)}</th>
+						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
 						<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
 							<th class="section-header">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
 						<iselse/>
 							<th class="section-header">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 						</isif>
-						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
-						<th class="section-header">${Resource.msg('global.quantity','locale',null)}</th>
-						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
 					</tr>
 				</thead>
+				
 				<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
-					<tr>
+					<tr class="hidden-xs">
 						<iscomment>only show shipping address for first pli in shipment</iscomment>
+						
+						<td class="line-item-details">
+							<iscomment>Display product line and product using module</iscomment>
+							<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
+						</td>
+
+						<td class="line-item-quantity">
+							<span class="visible-xs-inline">Qty: </span><isprint value="${productLineItem.quantity}"/>
+						</td>
+
+						<td class="line-item-price">
+							<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
+							<isif condition="${productLineItem.bonusProductLineItem}">
+								<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
+							<iselse/>
+								<isprint value="${productLineItem.adjustedPrice}"/>
+								<isif condition="${productLineItem.optionProductLineItems.size() > 0}">
+									<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
+										<p>+ <isprint value="${optionLI.adjustedPrice}"/></p>
+									</isloop>
+								</isif>
+							</isif>
+						</td>
 						<isif condition="${pliloopstate.first}">
 							<isset name="rowSpan" value="${shipment.productLineItems.size()}" scope="page"/>
 							<td rowspan="${rowSpan.toFixed()}" class="order-shipment-details">
@@ -144,14 +186,56 @@
 								</isif>
 							</td>
 						</isif>
-
+					</tr>
+					
+					<tr class="visible-xs-block">
+					<iscomment>only show shipping address for first pli in shipment</iscomment>
+					
+						<isif condition="${pliloopstate.first}">
+							<isset name="rowSpan" value="${shipment.productLineItems.size()}" scope="page"/>
+							<td rowspan="${rowSpan.toFixed()}" class="order-shipment-details">
+								<div class="order-shipment-address">
+									<isminishippingaddress p_shipment="${shipment}" p_editable="${false}" p_showmethod="${false}" p_showpromos="${false}"/>
+								</div>
+								<div class="shipping-method">
+									<span class="label">${Resource.msg('order.orderdetails.shippingmethod','order',null)}</span>
+									<isif condition="${!empty(shipment.shippingMethod)}">
+										<span class="value"><isprint value="${shipment.shippingMethod.displayName}"/></span>
+									<iselse/>
+										<span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
+									</isif>
+								</div>
+								<isif condition="${shipment.custom.shipmentType != 'instore'}">
+								<div class="shipping-status">
+									<span class="label">${Resource.msg('order.orderdetails.shippingstatus','order',null)}</span>
+									<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
+										<span class="value">${Resource.msg('order.orderdetails.notshipped','order',null)}</span>
+									<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}">
+										<span class="value">${Resource.msg('order.orderdetails.shipped','order',null)}</span>
+									<iselse/>
+										<span class="value">${Resource.msg('order.orderdetails.notknown','order',null)}</span>
+									</isif>
+								</div>
+								</isif>
+								<isif condition="${!empty(shipment.trackingNumber)}">
+									<div class="trackingnumber">
+										<span class="label">${Resource.msg('order.orderdetails.tracking','order',null)}</span>
+										<span class="value"><!-- Tracking Number --><isprint value="${shipment.trackingNumber}"/></span>
+									</div>
+								</isif>
+							</td>
+							<td>
+								<div class="section-header visible-xs-block items-header-products">${Resource.msg('global.item','locale',null)}</div>
+							</td>
+						</isif>
+						
 						<td class="line-item-details">
 							<iscomment>Display product line and product using module</iscomment>
 							<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
 						</td>
 
 						<td class="line-item-quantity">
-							<isprint value="${productLineItem.quantity}"/>
+							<span class="visible-xs-inline">Qty: </span><isprint value="${productLineItem.quantity}"/>
 						</td>
 
 						<td class="line-item-price">
@@ -167,7 +251,7 @@
 								</isif>
 							</isif>
 						</td>
-
+					
 					</tr>
 				</isloop>
 			<iscomment>Shipment Gift Message</iscomment>
