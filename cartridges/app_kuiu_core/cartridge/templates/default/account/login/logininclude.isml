@@ -31,10 +31,10 @@
 				<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" xhtmlclass="password-input" requiredtext="${Resource.msg('login.password.missing-error','forms',null)}" attribute1="autocomplete" value1="off"/>
 
 				<div class="form-row form-row-button">
+					<isinputfield formfield="${pdict.CurrentForms.login.rememberme}" type="checkbox" rowclass="label-inline login-rememberme"/>
 					<button type="submit" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}">
 						${Resource.msg('global.login','locale',null)}
 					</button>
-					<isinputfield formfield="${pdict.CurrentForms.login.rememberme}" type="checkbox" rowclass="label-inline login-rememberme"/>
 				</div>
 
 				<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('account.login.logininclude.forgotpassword','account',null)}" data-dlg-action='{"test":100}' data-dlg-options='{"width":700,"height":250}'>

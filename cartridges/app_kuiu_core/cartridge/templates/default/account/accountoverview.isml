@@ -4,12 +4,17 @@
 
 	<isslot id="account-banner" description="Banner for My Account pages" context="global" />
 
+	<center> 
 	<h1>
-		${Resource.msg('account.header','account',null)} | 
+		${Resource.msg('account.header','account',null)} 
+		<div class="al-profilename"> 
 		<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>&nbsp;<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>
 		<span class="account-logout">(<a title="Logout" href="${URLUtils.https('Login-Logout')}">${Resource.msg('global.logout','locale',null)}</a>)</span>
+		</div>
 	</h1>
+	</center> 
 	
+	<div id="primary" class="primary-content pull-right col-xs-12 col-sm-9 account-landing">
 	<iscontentasset aid="account-landing"/>
-		
+	</div>	
 </isdecorate>

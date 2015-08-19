@@ -761,11 +761,39 @@ header .col-md-12 ul {
 	padding: 0;
 }
 
-.account-nav-asset h2 {
+.account-nav-asset h2,
+.login-box h2 {
 	margin: 0;
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 500;
 	font-style: normal;
+	font-family: "Times New Roman", Georgia, Serif;
+	text-transform: uppercase;
+}
+
+.login-box .dialog-required {
+	font-size:12px;
+	text-transform:capitalize;
+	font-family: 'Roboto', sans-serif;
+	float:right;
+	padding-right:2em;
+}
+
+.login-box-content {
+    padding: 2px 2em 1em 0;
+}
+
+.login-box p {
+    margin: 4px 0 1em;
+}
+
+.col-1,
+.col-2 {
+	margin:0;	
+}
+
+.account-nav-asset .content-asset p {
+	margin: 5px 0 1em;
 }
 
 .breadcrumb {
@@ -3724,13 +3752,19 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	float:left;
 }
 
-#main .checkoutlogin .login-box .login-rememberme {
+#main .checkoutlogin .login-box .login-rememberme,
+.pt_account #main .login-box .login-rememberme {
 	display:inline-block;
 	margin-left:20px;
 	margin-bottom:0;
 }
 
-#main .checkoutlogin .login-box .login-rememberme label {
+.pt_account #main .login-box .login-rememberme {
+	margin-left:0;
+}
+
+#main .checkoutlogin .login-box .login-rememberme label,
+.pt_account #main .login-box .login-rememberme label {
 	display: inline;
     float: right;
     width: auto;
@@ -3740,12 +3774,29 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     font-weight:400;
 }
 
-#main .checkoutlogin .login-box .login-rememberme input[type="checkbox"] {
+.pt_account #main .login-box .login-rememberme label {
+	 padding:0 0 0 10px;
+	 height:26px;
+}
+
+#main .checkoutlogin .login-box .login-rememberme input[type="checkbox"],
+.pt_account #main .login-box .login-rememberme input[type="checkbox"]{
 	float: left;
     margin-top: 12px;
 }
 
-#main .checkoutlogin .login-box .login-oauth {
+.pt_account #main .login-box .login-rememberme input[type="checkbox"] {
+	margin-top: 3px;
+}
+
+.pt_account #main .login-box button {
+	display:block;
+	float:none;
+	clear:both;
+}
+
+#main .checkoutlogin .login-box .login-oauth,
+.pt_account #main .login-box .login-oauth {
 	display:none;
 }
 
@@ -3754,6 +3805,11 @@ a#password-reset {
 	margin-top:12px;
 	clear:both;
 	display:inline-block;
+}
+
+.pt_account #main .login-box  a#password-reset {
+	margin-top:0;
+	font-style:italic;
 }
 
 #main .checkoutlogin .login-box .dialog-required {
@@ -4642,6 +4698,80 @@ table .section-header {
 .item-list td {
 	padding:10px 3px;
 }
+
+.pt_account  #main .no-design.full-fields input[type="text"], 
+.pt_account  #main .no-design.full-fields input[type="password"],
+#main .login-box input[type="text"], 
+#main .login-box input[type="password"]  {
+	width:70%;
+}
+
+.pt_account .login-order-track {
+	margin-top:30px;
+}
+
+.pt_account .login-box a.tooltip {
+	font-style:italic;
+}
+
+/*Account landing page styling*/
+
+.account-landing .content-asset .account-options {
+	margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.account-landing .content-asset .account-options li {
+	list-style:none;
+	width:47%;
+	float:left;
+	border-bottom:1px solid #e0e0e0;
+	padding:35px 0;
+	margin-left:2%;
+	margin-right:1%;
+}
+
+.account-landing .content-asset .account-options li:nth-last-child(2),
+.account-landing .content-asset .account-options li:last-child {
+	border-bottom:none;	
+}
+
+
+.account-landing .content-asset .account-options li img {
+	display:none;
+}
+
+.account-landing .content-asset .account-options li a {
+    display: block;
+    font-size: 16px;
+    line-height: 100%;
+    padding: 0;
+    font-family: "Times New Roman", Georgia, Serif;
+    text-transform:uppercase;
+}
+
+.account-landing .content-asset .account-options li p {
+    margin: 0;
+    padding-left: 0;
+}
+
+.pt_account .al-profilename {
+	display:block;
+	text-align:center;
+	font-size:13px;
+	font-family: 'Roboto', sans-serif;
+	text-transform:capitalize;
+}
+
+.pt_account h1 .account-logout {
+    float: none;
+    font-size:13px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+
 
 
 

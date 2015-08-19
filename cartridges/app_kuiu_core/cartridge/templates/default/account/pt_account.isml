@@ -27,18 +27,36 @@
 
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
-			<isif condition="${!empty(pdict.bctext2)}"> <isbreadcrumbs
+			
+			<iscomment>
+			<isif condition="${!empty(pdict.bctext2)}"> 
+			<isbreadcrumbs
 				bcurl1="${URLUtils.https('Account-Show')}"
 				bctext1="${Resource.msg('account.header','account',null)}"
-				bctext2="${pdict.bctext2}"/> <iselse/> <isif
-				condition="${pdict.bctext1 == 'gc'}"> <isbreadcrumbs
+				bctext2="${pdict.bctext2}"/> 
+			<iselse/> 
+			<isif
+				condition="${pdict.bctext1 == 'gc'}"> 
+			<isbreadcrumbs
 				bctext1="${Resource.msg('global.giftcertificates','locale',null)}"/>
-			<iselse/> <isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}"
-				bctext1="${Resource.msg('account.header','account',null)}"/> </isif> </isif>
+			<iselse/> 
+			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}"
+				bctext1="${Resource.msg('account.header','account',null)}"/> 
+			</isif> 
+			</isif>
+			</iscomment>
+			
+			<iscomment>
+			<center>
+				<h1>${Resource.msg('account.header','account',null)} Login</h1>
+			</center>
+			</iscomment>
+			
 			<div class="container no-design full-fields">
-				<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9">
-					<isreplace/>
-				</div>
+				
+				
+				<isreplace/>
+				
 
 				<div id="secondary" class="nav pull-left col-xs-12 col-sm-3">
 					<nav>

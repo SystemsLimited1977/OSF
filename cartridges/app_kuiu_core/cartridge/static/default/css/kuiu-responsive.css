@@ -1033,9 +1033,9 @@
 	}
 	
 	a#password-reset {
-		position: absolute;
-		right:0;
-		bottom:19px;
+		position: relative;
+		left:0;
+		bottom:0;
 	}
 	
 	#main .checkoutlogin .login-box .login-rememberme {
@@ -1367,6 +1367,41 @@
 	
 	.pt_order-confirmation #main .actions {
 		 border-top: 1px solid #e0e0e0;
+	}
+	
+	.login-box .dialog-required {
+    	float:none !important;
+    	clear:both;
+    	display:block;
+    }
+    .pt_account #main .login-box .login-rememberme label {
+    	padding:5px 0 0 10px;
+    }
+    .pt_account #main .login-box  a#password-reset {
+    	position:relative;
+    	bottom:0;	
+    }
+    
+    .pt_account #main .login-create-account {
+    	margin-top:30px;
+    }
+    
+     .pt_account #main #secondary {
+     	margin-top:30px;
+     }
+     
+     .account-landing .content-asset .account-options li {
+		float:none;
+		width:100%;
+		border-bottom:1px solid #e0e0e0;
+		padding:25px 0;
+		margin-left:0;
+		margin-right:0;
+	}
+	
+	.account-landing .content-asset .account-options li:nth-last-child(2),
+	.account-landing .content-asset .account-options li:last-child {
+		border-bottom:1px solid #e0e0e0;
 	}
    
 }
@@ -1837,7 +1872,34 @@
     #cart-table .item-quantity-details {
     	min-width:55px;
     }
+    
+    .login-box .dialog-required {
+    	float:none !important;
+    	clear:both;
+    	display:block;
+    }
+    
+    .pt_account #main #secondary .social-icon {
+    	float:none;
+    }
+    
+    .account-landing .content-asset .account-options li {
+		float:none;
+		width:98%;
+		border-bottom:1px solid #e0e0e0;
+		padding:30px 0;
+		margin-left:2%;
+		margin-right:0;
+	}
 	
+	.account-landing .content-asset .account-options li:nth-last-child(2) {
+		border-bottom:1px solid #e0e0e0;
+	}
+
+	.account-landing .content-asset .account-options li:last-child {
+		border-bottom:none;
+	}
+
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
