@@ -25,23 +25,27 @@
 </head>
 
 <body>
-	<div id="wrapper" class="pt_order">
+	<div id="wrapper" class="pt_order pt_account">
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="page-content clearfix">
-
+		
+		<iscomment>
 			<isif condition="${empty(pdict.Order)}">
 				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${Resource.msg('account.orders.orderhistory','account',null)}"/>
 			<iselse/>
 				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bcurl2="${URLUtils.https('Order-History')}" bctext2="${Resource.msg('account.orders.orderhistory','account',null)}" bctext3="${pdict.Order.orderNo}"/>
 			</isif>
+		</iscomment>
+		
+		<div class="container no-design full-fields">
+		
+			
+			<isreplace/>
+			
 
-			<div id="primary" class="primary-content">
-				<isreplace/>
-			</div>
-
-			<div id="secondary" class="nav">
+			<div id="secondary" class="nav pull-left col-xs-12 col-sm-3">
 				<nav>
 					<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
 					<div class="secondary-navigation">
@@ -52,7 +56,7 @@
 					<iscontentasset aid="account-nav-text"/>
 				</div>
 			</div>
-
+		</div>
 		</div><!-- /main -->
 
 		<isinclude template="components/footer/footer"/>

@@ -7,7 +7,7 @@
 	<iscomment>Builds a registration page for the user. It provides all input fields for names and address</iscomment>
 
 		<isif condition="${!empty(pdict.Action) && pdict.Action == 'edit'}">
-			<center> <h1>${Resource.msg('account.user.registration.editaccount','account',null)}</h1> </center> 
+			<center> <h1>${Resource.msg('account.user.registration.personaldata','account',null)}</h1> </center> 
 		<iselse/>
 			<center> <h1>${Resource.msg('account.user.registration.createnew','account',null)}</h1> </center> 
 		</isif>
@@ -66,9 +66,22 @@
 				</div>
 
 				<div class="form-row form-row-button">
+				
+				<isif condition="${!empty(pdict.Action) && pdict.Action == 'edit'}">
+				
+					<button type="submit" value="${Resource.msg('global.apply','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}">
+						${Resource.msg('global.apply','locale',null)}
+					</button>
+					
+				<iselse/>
+				
 					<button type="submit" value="${Resource.msg('global.createaccount','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}">
 						${Resource.msg('global.createaccount','locale',null)}
 					</button>
+					
+				</isif>
+		
+					
 				</div>
 
 				<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
