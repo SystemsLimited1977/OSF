@@ -157,5 +157,9 @@
 			</isscript>
 			<a href="${liUrl}" title="${productLineItem.productName}">${Resource.msg('global.editdetails', 'locale', null)}</a>
 		</isif>
+		<iscomment>Update Cart</iscomment>
+		  <button class="simple visible-xs-block" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
+			${Resource.msg('global.updatecart','locale',null)}
+		  </button><br/>
 	</div>
 </isif>

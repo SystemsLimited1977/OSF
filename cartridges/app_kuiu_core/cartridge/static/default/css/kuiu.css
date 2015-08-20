@@ -3143,7 +3143,9 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 
 #owl-demo .owl-prev, #owl-demo  .owl-next,#owl-demo1 .owl-prev, #owl-demo1 .owl-next,
-#owl-demo3 .owl-prev, #owl-demo3 .owl-next{
+#owl-demo3 .owl-prev, #owl-demo3 .owl-next,
+#owl-last-visted-products .owl-prev, #owl-last-visted-products .owl-next,
+#owl-featured-products .owl-prev, #owl-featured-products .owl-next{
     width: 40px;
     height: 70px;
     background-color: #fff;
@@ -3157,13 +3159,13 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     z-index: 10;
 }
 
-#owl-demo .owl-prev, #owl-demo1 .owl-prev,#owl-demo3 .owl-prev {
+#owl-demo .owl-prev, #owl-demo1 .owl-prev,#owl-demo3 .owl-prev,#owl-featured-products .owl-prev,#owl-last-visted-products .owl-prev {
     background-image: url("../images/interface/b-prev_arrow.png");
     background-repeat: no-repeat;
     background-position: 8px 15px;
 }
 
-#owl-demo .owl-next, #owl-demo1  .owl-next,#owl-demo3  .owl-next {
+#owl-demo .owl-next, #owl-demo1  .owl-next,#owl-demo3  .owl-next,#owl-featured-products .owl-next, #owl-last-visted-products .owl-next {
     right: 0;
     left: inherit;
     background-image: url("../images/interface/b-next-arrow.png");

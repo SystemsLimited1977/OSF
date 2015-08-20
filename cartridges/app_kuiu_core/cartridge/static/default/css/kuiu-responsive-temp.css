@@ -40,20 +40,22 @@ footer h6 {
     font-size: 12px;
     font-weight: 400;
     }
-/*#cart-table .item-image,
+ #cart-table .item-image {
+ 	width:40%;
+ 	}
+
 #cart-table.item-list td.item-details {
- 	width:50%;
- 	padding: 22px 8px;
- }
- #cart-table .item-edit-details {
- 	padding-top:0px;
- }
+    padding: 22px 0px 0px 10px;
+}
+ 
+#cart-items-form .item-details {
+	width:60%;
+}
  .cart-actions-top {
  	border-bottom:1px solid #e6e6e6;
  }
 .cart-action-checkout,
-.cart-actions-top .cart-action-continue-shopping,
-#cart-table .item-quantity {
+.cart-actions-top .cart-action-continue-shopping {
 	width:50%;
 	padding:0px;
 }
@@ -62,12 +64,9 @@ footer h6 {
  	padding:0px;
  	line-height: 22px;
  }
- #cart-table .item-quantity {
- 	float:right;
- }
- #cart-table tr td {
- 	padding:0px;
- }
+ #cart-items-form .item-list td {
+    padding: 0px 10px;
+}
  .cart-order-totals,
  .cart-actions.cart-action-footer .cart-action-checkout,
  .cart-actions.cart-action-footer .cart-action-checkout,
@@ -93,7 +92,55 @@ footer h6 {
   }
   .cart-footer {
   	padding:20px 0px;
-  }*/
+  }
+  #main .cart-row .item-quantity select {
+    width: 50% !important;
+  }
+  .cart-footer .cart-coupon-code label {
+  	  width: 20%;
+  }
+  .item-total label.total-price-mob  {
+  	width: 50% !important;
+    color:#2b2b2b;
+    font-size:12px !important;
+  }
+  #cart-table .item-total .price-total {
+  	line-height: 27px;
+  }
+  .rowgiftcert .item-quantity {
+  	clear:both;
+  }
+  #cart-table .item-edit-details,
+  .cart-row .item-quantity .item-user-actions {
+  	padding-top:0px;
+  }
+  #cart-table .item-edit-details button {
+  	text-align: left;
+    padding-top: 15px;
+  }
+  #cart-table .item-price {
+  	margin-left:40%;
+  }
+  
+  #cart-items-form #cart-table .item-user-actions .mobile-wish-item button {
+    float: left;
+    width: 44%;
+    margin-left: 10px;
+    margin-top: -3px;
+  }
+  
+  #cart-items-form #cart-table .item-user-actions .mobile-wish-item .add-to-wishlist {
+  	width:48%;
+  	float:left;
+  }
+  
+  #cart-items-form .item-list .item-image {
+  	padding-top:20px;
+  }
+  
+  .giftreg-edit {
+    padding-top: 12px;
+  }
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -108,12 +155,31 @@ footer h6 {
 }
 .zoom_button {
     margin-left: -290px;
-}	
+}
+#cart-items-form  .item-quantity{
+	width:20%;
+}
+#main .cart-row .item-quantity select {
+	    width: 52%;
+}
+#cart-table tr td {
+	padding:40px 0px;
+}
+#cart-table.item-list td.item-details {
+	padding-left:15px;
+}
+.cart-coupon-code {
+	width:100%;
+}
 }
 @media ( min-width : 992px) and (max-width: 1199px) {
 .zoom_button {
     margin-left: -471px;
-}	
+}
+.cart-coupon-code {
+	width:70%;
+}
+
 }
 
 @media ( min-width : 1200px) and (max-width: 1439px) {

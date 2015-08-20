@@ -184,6 +184,7 @@
 												<iscomment>
 													<input type="number" min="0" name="${FormLi.quantity.htmlName}" maxlength="6" value="${lineItem.quantity.value.toFixed()}" class="input-text" />
 												</iscomment>
+												<label class="qty-text visible-xs-block">Qty</label>
 												<select name="${FormLi.quantity.htmlName}" class="quantity-box">
 													<isloop begin="1" end="10" step="1" status="qntyStat">
 														<isif condition="${lineItem.quantity.value.toFixed() == qntyStat.count}">
@@ -209,9 +210,10 @@
 
 											<div class="item-user-actions">
 												<iscomment>Update Cart</iscomment>
-												<button class="simple" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
+												<button class="simple hidden-xs" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
 													${Resource.msg('global.updatecart','locale',null)}
 												</button><br/>
+												<div class="wish-desktop hidden-xs">
 												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
 													<isif condition="${!isInWishList && !empty(lineItem.product)}">
 														<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addtowishlist','locale',null)}">
@@ -227,6 +229,27 @@
 												<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
 													<button class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span>${Resource.msg('global.remove','locale',null)}</span></button>
 												</isif>
+												</div>
+												<div class="mobile-wish-item visible-xs-block">
+												
+												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
+													<isif condition="${!isInWishList && !empty(lineItem.product)}">
+														<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addtowishlist','locale',null)}">
+															${Resource.msg('global.addtowishlist','locale',null)}
+														</a>
+													</isif>
+												<iselse/>
+												
+													<div class="in-wishlist">
+														${Resource.msg('global.iteminwishlist','locale',null)}
+													</div>
+												</isif>
+												<div class="pull-left"> | </div>
+												<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
+													<button class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span>${Resource.msg('global.remove','locale',null)}</span></button>
+												</isif>
+												
+												</div>
 											</div>
 										</td>
 										<td class="item-quantity-details">
@@ -304,6 +327,7 @@
 												<iselse/>
 
 													<iscomment>Display non-adjusted item total.</iscomment>
+													<label class="total-price-mob visible-xs-block" >Total Price</label>
 													<span class="price-total">
 														<isprint value="${lineItem.getAdjustedPrice()}" />
 													</span>
@@ -475,7 +499,7 @@
 												</span>
 											</isif>
 										</div>
-
+										
 
 										<iscomment>product list info</iscomment>
 										<isif condition="${GiftCertificate.object.productListItem != null}">
