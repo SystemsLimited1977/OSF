@@ -7,12 +7,14 @@
 	<iscomment>Builds a registration page for the user. It provides all input fields for names and address</iscomment>
 
 		<isif condition="${!empty(pdict.Action) && pdict.Action == 'edit'}">
-			<h1>${Resource.msg('account.user.registration.editaccount','account',null)}</h1>
+			<center> <h1>${Resource.msg('account.user.registration.editaccount','account',null)}</h1> </center> 
 		<iselse/>
-			<h1>${Resource.msg('account.user.registration.createnew','account',null)}</h1>
+			<center> <h1>${Resource.msg('account.user.registration.createnew','account',null)}</h1> </center> 
 		</isif>
 
 		<iscomment>Only enable the facebook registration if the customer isn't authenticated</iscomment>
+		
+		<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9 new-account">
 		<isif condition="${!pdict.CurrentCustomer.authenticated &&
 							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookConnectEnabled')) &&
 							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookAppID') != null) &&
@@ -23,11 +25,11 @@
 
 		<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 
-			<fieldset>
+			<fieldset class="full-name">
 
 				<legend>
 					${Resource.msg('account.user.registration.name','account',null)}
-					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+					<div class="dialog-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 				</legend>
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
@@ -43,7 +45,7 @@
 
 				<legend>
 					${Resource.msg('account.user.registration.logininfo','account',null)}
-					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+					<div class="dialog-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 				</legend>
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
@@ -53,16 +55,19 @@
 				<iselse/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
-
+				
+				<div class="form-row fld-checkbox">
+				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="label-inline"/>
+				</div>
+				
 				<div class="form-caption">
 					<span>${Resource.msg('global.email.policy','locale',null)}</span>
 					<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" class="privacy-policy" title="${Resource.msg('global.privacypolicy','locale',null)}">${Resource.msg('global.privacypolicy','locale',null)}</a>
 				</div>
 
 				<div class="form-row form-row-button">
-					<button type="submit" value="${Resource.msg('global.apply','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}">
-						${Resource.msg('global.apply','locale',null)}
+					<button type="submit" value="${Resource.msg('global.createaccount','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}">
+						${Resource.msg('global.createaccount','locale',null)}
 					</button>
 				</div>
 
@@ -71,5 +76,7 @@
 			</fieldset>
 
 		</form>
-
+		
+		</div>
+		
 </isdecorate>

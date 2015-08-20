@@ -5015,6 +5015,87 @@ tr.order-sales-tax {
 	padding:20px 10px;
 }
 
+/*Create new account page styling*/
+
+#main .new-account legend {
+	border:none;
+	margin-bottom:10px;
+	padding:0;
+	line-height:110%
+}
+
+#main .new-account #RegistrationForm {
+	width:70%;
+	padding-left:10px;
+}
+
+#main .new-account label {
+	width:25%;
+	float:left;
+}
+
+#main .new-account .form-caption {
+	margin-left:25%;
+	clear:both;
+	display:block;
+}
+
+#main .new-account .form-row-button {
+	width:100%;
+}
+
+#main .new-account .form-row-button button {
+	margin-left:25%;
+}
+
+#main .new-account .full-name {
+	margin-bottom:50px;
+}
+
+#main .new-account .form-row.fld-checkbox .form-row {
+	float:left;
+}
+
+#main .new-account form .fld-checkbox {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left:25%;
+    float:left;
+}
+
+#main .new-account form .fld-checkbox .form-row {
+	margin-bottom:0;
+}
+
+#main .new-account form .fld-checkbox label {
+    display: inline;
+    float: right;
+    font-weight: 400;
+    height: 25px;
+    margin-bottom: 0;
+    padding: 0 0 0 10px;
+    width: auto;
+    font-size:12px;
+}
+
+#main .new-account form .fld-checkbox input[type="checkbox"] {
+    float: left;
+    margin-top: 3px;
+}
+
+#main .new-account a.privacy-policy {
+	padding-left:2px;
+	text-decoration:underline;	
+}
+
+
+
+
+
+
+
+
 
 
 

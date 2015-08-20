@@ -1525,7 +1525,43 @@ footer h6 {
   .giftreg-edit {
     padding-top: 12px;
   }
-   
+  
+  #main .new-account #RegistrationForm {
+	width:100%;
+	padding-left:0;
+  	}
+  
+   #main .new-account label {
+		width:100%;
+		float:none;
+   }
+
+	#main .new-account .form-caption {
+		margin-left:0;
+		clear:both;
+		display:block;
+	}
+	
+	#main .new-account .form-row-button {
+		width:100%;
+	}
+	
+	#main .new-account .form-row-button button {
+		margin-left:0;
+	}
+	
+	#main .new-account form .fld-checkbox {
+	    display: inline-block;
+	    margin-bottom: 0;
+	    margin-left: 0;
+	    padding-left:0;
+	    float:left;
+	}
+	
+	#main .new-account form .fld-checkbox label {
+		padding: 5px 0 0 10px;
+	}
+	   
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -2049,7 +2085,45 @@ footer h6 {
 	.cart-coupon-code {
 		width:100%;
 	}
+	
+	 #main .new-account #RegistrationForm {
+	width:100%;
+  	}
+  
+   #main .new-account label {
+		width:25%;
+		float:left;
+   }
 
+	#main .new-account .form-caption {
+		margin-left:25%;
+		clear:both;
+		display:block;
+	}
+	
+	#main .new-account .form-row-button {
+		width:100%;
+	}
+	
+	#main .new-account .form-row-button button {
+		margin-left:25%;
+	}
+	
+	#main .new-account form .fld-checkbox {
+	    display: inline-block;
+	    margin-bottom: 0;
+	    margin-left: 0;
+	    padding-left:25%;
+	    float:left;
+	}
+	
+	#main .new-account input[type="text"], 
+	#main .new-account input[type="number"], 
+	#main .new-account input[type="password"], 
+	#main .new-account select, #main textarea {
+		clear:none;
+	}
+	
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
@@ -2194,6 +2268,10 @@ footer h6 {
 	.cart-coupon-code {
 		width:70%;
 	}
+	
+	 #main .new-account #RegistrationForm {
+		width:90%;
+  	}
 
 }
 
