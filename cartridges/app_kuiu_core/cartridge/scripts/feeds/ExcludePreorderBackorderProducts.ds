@@ -1,0 +1,22 @@
+/**
+* Demandware Script File
+*
+*-   @input ExampleIn : String This is a sample comment.
+*-   @output ExampleOut : Number
+*
+*/
+importPackage( dw.system );
+importPackage( dw.object );
+importPackage( dw.util );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var productsToBeExcludedList : SeekableIterator = CustomObjectMgr.getAllCustomObjects("PreorderBackorderProducts");
+	var product : dw.catalog.Product;
+	for each (var customObject : CustomObject in productsToBeExcludedList){
+		product = dw.catalog.ProductMgr.getProduct(customObject.custom.pid);
+		product.custom.preorderOrBackorder = true;
+		CustomObjectMgr.remove(customObject);
+	}
+   return PIPELET_NEXT;
+}

@@ -1,0 +1,31 @@
+/**
+* Demandware Script File that creates a custom object against each line item if this line item has been on backorder or preorder.
+*   @input Order : dw.order.Order
+*   @output IsPreorderBackorder : Boolean
+*
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.order );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var order : dw.order.Order = pdict.Order;
+	pdict.IsPreorderBackorder = false;
+	var basketProduct : Product;
+	var product : Product;
+	var availabilityStatus : String;
+	var customObject : dw.object.CustomObject;
+	for each (var productLineItem : ProductLineItem in order.productLineItems){
+		basketProduct = productLineItem.product;
+		product = dw.catalog.ProductMgr.getProduct(basketProduct.ID);
+		availabilityStatus = product.availabilityModel.availabilityStatus;
+		if (availabilityStatus == ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER || availabilityStatus == ProductAvailabilityModel.AVAILABILITY_STATUS_PREORDER){
+		      customObject = dw.object.CustomObjectMgr.createCustomObject("PreorderBackorderProducts", dw.util.UUIDUtils.createUUID());
+		      customObject.custom.pid = product.ID;
+		      pdict.IsPreorderBackorder = true;
+		}
+	}
+	
+   return PIPELET_NEXT;
+}

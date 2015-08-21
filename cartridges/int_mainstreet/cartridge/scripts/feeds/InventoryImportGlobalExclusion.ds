@@ -1,0 +1,47 @@
+/**
+* Demandware Script File
+* 	@input File : String
+*   @output ProductsList : dw.util.ArrayList
+*
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.order );
+importPackage( dw.io );
+importPackage( dw.util );
+
+function execute( pdict : PipelineDictionary ) : Number {
+	
+	var sourceFile : File = new File(File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + pdict.File);
+	var folder : File = new File(File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + "catalog");
+	sourceFile.gunzip(folder);
+	
+	var xmlFile : File = new File(File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + (pdict.File.replace(".gz", "")));
+	var reader : FileReader = new FileReader(xmlFile, 'UTF-8');
+	var xmlreader : XMLStreamReader = new XMLStreamReader(reader);
+	var productsList : ArrayList = new ArrayList();
+	
+	while (xmlreader.hasNext()) {
+	    var event = xmlreader.next();
+	    
+	    if (event == XMLStreamConstants.START_ELEMENT) {
+	        var localElementName : String = xmlreader.getLocalName();
+	
+	        // An inventory record starts with <record product-id="...">        
+	        if (localElementName == "record"){
+	           // Read the single inventory record as an XML object
+	           var inventoryRecord : XML = xmlreader.getXMLObject();
+	           // Get the product ID to which this inventory record applies
+	           var productID : String = inventoryRecord.attribute('product-id').toString();
+	           productsList.add(productID);
+	           
+	        }
+	    }
+	}
+	
+	pdict.ProductsList = productsList;
+	xmlreader.close();
+	reader.close();
+	xmlFile.remove();
+   return PIPELET_NEXT;
+}
