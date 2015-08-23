@@ -1,0 +1,87 @@
+#main .no-design #primary.account-address-landing {
+    padding-left:15px;
+}
+
+.account-address-landing .section-header,
+.account-payment-details .section-header {
+    border-top:none;
+    border-bottom:none;
+    padding: 0px;
+}
+
+.account-address-landing .address-list h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+.account-address-landing .address-list .mini-address-title {
+     font-style: normal;
+     font-weight: bold;
+}
+
+.account-address-landing  .address-list li,
+.account-payment-details .payment-list li {
+    width:25%;
+    padding: 0px;
+    border-right:1px solid #e6e6e6;
+    min-height: 184px;
+    padding-left: 15px;
+    margin-top: 30px;
+}
+
+.account-address-landing .address-list li.default {
+    width:auto;
+    border-right:none;
+    margin-left:0px;
+}
+
+.account-address-landing .address-make-default,
+.account-address-landing .address-edit,
+.account-address-landing .address-delete.delete {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.account-address-landing .address-list span {
+    font-style: italic;
+    margin:0 2px;
+}
+.account-address-landing a.section-header-note.address-create,
+.account-payment-details a.section-header-note.add-card {
+    font-size:12px;
+    top: initial;
+}
+.account-payment-details .payment-button {
+    background-color: transparent !important;
+    padding: 0 !important;
+    font-style: italic;
+    color: #2b2b2b;
+    text-decoration: underline;
+    margin-top: 0px !important;
+    height: auto;
+    font-size: 12px;
+}
+.account-payment-details .payment-button:hover {
+    color:#2b2b2b !important;
+    background-color: transparent !important;
+}
+.password-reset-section span.error {
+     margin: 4px 0px;
+}
+.password-reset-section label
+ {
+    font-weight: 600;
+}
+
+#main .password-reset-section .form-caption {
+    font-style: italic;
+    font-weight: 500;
+    line-height: 20px;
+}
+#main #primary.password-reset-section {
+    padding-left:30px;
+}
+#main #primary.password-reset-section input[type="password"] {
+    width:38%;
+}

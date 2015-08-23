@@ -15,10 +15,10 @@
 	
 	
 	<center> <h1>${Resource.msg('account.addressbook.addresslist.header','account',null)}</h1> </center>
-	<div id="primary" class="primary-content pull-right col-xs-12 col-sm-9 account-landing">	
-	<div id="addresses">
+  <div id="primary" class="primary-content pull-right col-xs-12 col-sm-9 account-landing account-address-landing">    	
+	 <div class="section-header address-create">
 		<div class="section-header">
-			${Resource.msg('account.addressbook.addresslist.header','account',null)}
+			<iscomment>${Resource.msg('account.addressbook.addresslist.header','account',null)}</iscomment>
 			<a class="section-header-note address-create" title="${Resource.msg('account.addressbook.addresslist.create','account',null)}" href="${URLUtils.url('Address-Add')}" >
 				${Resource.msg('account.addressbook.addresslist.create','account',null)}
 			</a>

@@ -15,20 +15,73 @@
 }
 
 @media ( min-width : 1200px) {
-	
+
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
 
+    .account-address-landing  .address-list li,
+    #main .account-payment-details button.payment-button,
+    .account-payment-details .payment-list li {
+        width:auto;
+    }
+    #main .no-design #primary.account-address-landing,
+    #main #primary.password-reset-section,
+    #main #primary.account-payment-details {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .account-address-landing .address-list span {
+        margin:0 7px;
+    }
+    .account-address-landing .address-list li,
+    .account-payment-details .payment-list li {
+        border-right:none;
+        margin-top:0px;
+        min-height:155px;
+        padding-left: 0px;
+    }
+    .account-payment-details .payment-list li {
+        min-height:130px;
+    }
+    .account-address-landing .address-list li.last,
+    #main #primary.account-payment-details li,
+     .account-payment-details .section-header  {
+        border-bottom:1px solid #e6e6e6;
+        padding-bottom:20px;
+    }
+    .account-address-landing .address-list li.first.default,
+    .account-payment-details .section-header  {
+        padding-bottom:20px;
+        margin-bottom:20px;
+    }
+    .account-address-landing .section-header,
+    .account-payment-details .section-header  {
+        text-align: center;
+    }
+    .account-address-landing a.section-header-note.address-create,
+    .account-payment-details a.section-header-note.add-card {
+        position: initial;
+        text-align: center;
+    }
+    #main #primary.account-payment-details li {
+        padding-bottom:10px;
+        padding-top:10px;
+    }
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
-	
+    
+    .account-address-landing .address-list li,
+    .account-payment-details .payment-list li {
+        width: 50%;
+    }
+    #main #primary.password-reset-section input[type="password"] {
+        width: 62%;
+}
 
 }
 @media ( min-width : 992px) and (max-width: 1199px) {
-	
-}
 
 @media ( min-width : 1200px) and (max-width: 1439px) {
 }
