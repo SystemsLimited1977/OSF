@@ -38,7 +38,8 @@
 
 .account-address-landing .address-make-default,
 .account-address-landing .address-edit,
-.account-address-landing .address-delete.delete {
+.account-address-landing .address-delete.delete,
+.account-address-landing .address-button {
     font-style: italic;
     text-decoration: underline;
 }
@@ -46,6 +47,7 @@
 .account-address-landing .address-list span {
     font-style: italic;
     margin:0 2px;
+    text-decoration: none;
 }
 .account-address-landing a.section-header-note.address-create,
 .account-payment-details a.section-header-note.add-card {

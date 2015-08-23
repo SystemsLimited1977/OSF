@@ -1,15 +1,11 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="account/wishlist/pt_wishlist">
 	<isinclude template="util/modules"/>
-
-	<isslot id="wishlist-banner" description="Banner on Wish List pages" context="global" />
-
-	<h1>${Resource.msg('wishlist.searchheader','account',null)}:</h1>
-
+<iscomment>
 	<div class="form-inline">
 		<isinclude template="account/wishlist/wishlistsearch"/>
 	</div>
-
+</iscomment>
 	<isset name="formID" value="${pdict.CurrentForms.wishlist.htmlName + '_items'}" scope="page"/>
 
 	<iscomment>wishlist items form</iscomment>

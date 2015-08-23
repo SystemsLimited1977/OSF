@@ -16,12 +16,10 @@
 
 	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
 		<fieldset>
-		<iscomment>
 			<legend>
 				Address Details
 				<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</legend>
-		</iscomment>
 
 			<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 				<!-- Use the error code value to build an appropriate error message -->
