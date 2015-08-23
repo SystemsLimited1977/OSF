@@ -8,11 +8,6 @@
 
 <isdecorate template="${DecoratorTemplate}">
 
-	<isif condition="${pdict.Action == 'add'}">
-		<h1>${Resource.msg('account.addressbook.editaddress.addaddress','account',null)}</h1>
-	<iselse/>
-		<h1>${Resource.msg('account.addressbook.editaddress.editaddress','account',null)}</h1>
-	</isif>
 
 	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
 		<fieldset>
@@ -49,12 +44,12 @@
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.phone}" type="input"/>
 
 			<div class="form-field-tooltip" >
-				(<a class="tooltip" href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}">
+				<a class="tooltip" href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}">
 					${Resource.msg('singleshipping.phonerequired','checkout',null)}
 					<div class="tooltip-content" data-layout="small">
 						<iscontentasset aid="help-telephone"/>
 					</div>
-				</a>)
+				</a>
 			</div>
 
 			<div class="form-row form-row-button">

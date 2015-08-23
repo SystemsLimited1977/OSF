@@ -1698,6 +1698,106 @@ footer h6 {
 		padding:20px 0;
 		text-align:center;
 	}
+	
+	.ui-dialog.password-forget .ui-widget-header {
+	    height: auto;	    
+	}
+	
+	.ui-dialog.password-forget label{
+		width:100%;
+		padding-right:0;
+	}
+
+	.ui-dialog.password-forget .form-row {
+		display: block;
+	    float: none;
+	    width: 100%;
+	    padding-right:0;
+	}
+	
+	.ui-dialog.password-forget input {
+		width:100%;
+	}
+
+	.ui-dialog.password-forget #PasswordResetForm button {
+		float: none;
+	    left: 0;
+	    position: relative;
+	    top: 0;
+	    width: 100%;
+	    height:34px;
+	    padding:0;
+	}
+
+	.ui-dialog.password-forget span.error {
+	    margin: 1% 2% 0 0;
+	}
+	 
+	.ui-dialog.create-new-address input[type="text"],
+	.ui-dialog.create-new-address select,
+	.ui-dialog.edit-address input[type="text"],
+	.ui-dialog.edit-address select,
+	.ui-dialog.add-cc-details input[type="text"],
+	.ui-dialog.add-cc-details select {
+	    width: 100%;
+	}
+
+	.ui-dialog.create-new-address .form-caption,
+	.ui-dialog.edit-address .form-caption,
+	.ui-dialog.add-cc-details .form-caption {
+		margin: 0;
+	}
+	
+	.ui-dialog.create-new-address .form-field-tooltip,
+	.ui-dialog.edit-address .form-field-tooltip,
+	.ui-dialog.add-cc-details .form-field-tooltip {
+	    float: left;
+	    margin: 0 0 15px;
+	    width: 100%;
+	}
+	
+	#main button, 
+	#main .button, 
+	#main .buttonstyle, 
+	#main input[type="button"], 
+	.ui-dialog button, 
+	.ui-dialog .button, 
+	.ui-dialog .buttonstyle, 
+	.ui-dialog input[type="button"] {
+		padding:0 22px;
+	}
+	
+	.ui-dialog .cancel-button,
+	.ui-dialog .delete-button {
+		margin-left:8px;
+	}
+	
+	.ui-dialog.add-cc-details .form-label-text {
+	    display: block;
+	    float: none;
+	    font-size: 1.1em;
+	    font-weight: 500;
+	    padding: 0.5em 0.5em 0 0;
+	    text-align: left;
+	    width: 100%;
+	}
+
+	.ui-dialog.add-cc-details .form-row.month {
+		width:48%;
+		margin-right:4%;
+		margin-bottom:0;
+	}
+	.ui-dialog.add-cc-details .form-row.year {
+		width:48%;
+		margin-bottom:0;
+	}
+	.ui-dialog.add-cc-details .form-row.month select,
+	.ui-dialog.add-cc-details .form-row.year select {
+		max-width:100%;	
+		width:100%;
+	}
+
+
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -2258,6 +2358,12 @@ footer h6 {
 	#main .new-account input[type="password"], 
 	#main .new-account select, #main textarea {
 		clear:none;
+	}
+	
+	.ui-dialog.create-new-address label,
+	.ui-dialog.edit-address label,
+	.ui-dialog.add-cc-details label {
+		width:22%;
 	}
 	
 }

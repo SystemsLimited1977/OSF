@@ -13,7 +13,7 @@
    <div id="cc-payment-details">     
 	<div class="section-header">
 	  <iscomment>${Resource.msg('account.paymentinstrumentlist.header','account',null)}</iscomment>
-		<a class="section-header-note add-card" href="${URLUtils.url('PaymentInstruments-Add')}" title="${Resource.msg('account.paymentinstrumentlist.addcard','account',null)}">
+		<a class="section-header-note add-card" data="create-new" href="${URLUtils.url('PaymentInstruments-Add')}" title="${Resource.msg('account.paymentinstrumentlist.addcard','account',null)}">
 			${Resource.msg('account.paymentinstrumentlist.addcard','account',null)}
 		</a>
 	</div>

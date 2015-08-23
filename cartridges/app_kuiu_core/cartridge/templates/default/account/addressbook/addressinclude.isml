@@ -29,7 +29,7 @@
 			</isif>
 			
 			<isminiaddress p_address="${address}"/>
-		<div class="address-button"
+		<div class="address-button">
 			<isif condition="${!isDefault}">
 				<a href="${URLUtils.url('Address-SetDefault','AddressID', encodeURIComponent(address.ID))}" class="address-make-default"> 
 					${Resource.msg('account.addressbook.editaddress.makedefaultaddress','account',null)} 

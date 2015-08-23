@@ -997,7 +997,8 @@ div {
 	padding-left:10px;
 }
 
-#main input[type="text"], #main input[type="number"], #main input[type="password"],
+#main input[type="text"], 
+#main input[type="number"], #main input[type="password"],
 	.ui-dialog input[type="text"], .ui-dialog input[type="number"],
 	.ui-dialog input[type="password"], .ui-dialog select, .ui-dialog textarea,
 	#main select, #main textarea {
@@ -1010,6 +1011,17 @@ div {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	margin-left: 0;
+}
+
+.ui-dialog select{
+	-webkit-appearance: none;
+      -moz-appearance: none;
+           appearance: none;
+	background-image: url("../images/drop-down_arrow.png");
+	background-repeat: no-repeat;
+	background-position: right 3px;
+	cursor: pointer;
+	padding-left:3px;
 }
 
 #main .form-caption {
@@ -1329,7 +1341,12 @@ span.error {
 
 .ui-dialog .cancel-button {
 	background-color: #e6e6e6;
+	border:2px solid #e6e6e6;
 	color: #1d1512;
+	margin-left: 18px;
+}
+
+.ui-dialog .delete-button {
 	margin-left: 18px;
 }
 
@@ -1673,7 +1690,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .ui-dialog .form-row.form-row-button {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-left: 22%;
   padding: 0px;
 }
@@ -4018,6 +4035,7 @@ a.tooltip {
 	text-decoration:underline;
 	margin-top:0;
 	display:inline-block !important;
+	z-index: 100;
 }
 
 .form-field-tooltip {
@@ -5343,6 +5361,189 @@ tr.order-sales-tax {
     border-right: none;
     padding-right: 10px;
 }
+
+
+.ui-dialog.password-forget {
+    border: none;
+    padding: 20px;
+}
+
+.ui-dialog.password-forget .ui-widget-header {
+    background-color: #fff;
+    border-bottom: none;
+    font-size:26px;
+    height: auto;
+    line-height: 100%;
+    padding: 0;
+}
+
+.ui-dialog.password-forget .ui-widget-header h1{
+	font-size:26px;
+	font-style:normal;
+	color:#1a1a1a;
+}
+
+.ui-dialog.password-forget .dialog-content h2{
+	font-size:16px;
+	font-style:normal;
+	color:#1a1a1a;
+	text-transform: uppercase;
+}
+.ui-dialog.password-forget .ui-icon-closethick {
+	border-bottom:none;
+}
+
+.ui-dialog.password-forget label{
+	width:20%;
+	padding-right:10px;
+}
+
+.ui-dialog.password-forget .form-row {
+	display: block;
+    float: left;
+    width: 80%;
+    padding-right:10px;
+}
+
+.ui-dialog.password-forget input {
+	height:34px;	
+	width:80%;
+}
+
+.ui-dialog.password-forget #PasswordResetForm button {
+	float: right;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 20%;
+    height:34px;
+    padding:0;
+}
+
+.ui-dialog.password-forget span.error {
+    margin: 1% 2% 0 20%;
+}
+
+.ui-dialog.password-forget p {
+    margin: 0 0 20px;
+}
+
+.ui-dialog.password-forget .ui-dialog-content {
+    overflow: visible;
+    padding: 20px 0 0;
+}
+
+.ui-dialog.password-forget .form-row {
+	padding-bottom:0;
+}
+
+.ui-dialog .ui-dialog-title {
+	white-space: normal;
+}
+
+.ui-dialog.create-new-address fieldset,
+.ui-dialog.edit-address fieldset,
+.ui-dialog.add-cc-details fieldset  {
+	clear:both;
+}
+
+.ui-dialog.create-new-address,
+.ui-dialog.edit-address,
+.ui-dialog.add-cc-details {
+    border: none;
+    padding: 20px;
+}
+
+.ui-dialog.create-new-address .ui-widget-header,
+.ui-dialog.edit-address .ui-widget-header,
+.ui-dialog.add-cc-details .ui-widget-header {
+    background-color: #fff;
+    border-bottom: none;
+    font-size:26px;
+    height: auto;
+    line-height: 100%;
+    padding: 0;
+}
+
+.ui-dialog.create-new-address .ui-widget-header h1,
+.ui-dialog.edit-address .ui-widget-header h1,
+.ui-dialog.add-cc-details .ui-widget-header h1 {
+	font-size:26px;
+	font-style:normal;
+	color:#1a1a1a;
+}
+
+.ui-dialog.create-new-address legend,
+.ui-dialog.edit-address legend,
+.ui-dialog.add-cc-details legend  {
+	display:none;
+}
+
+.ui-dialog.create-new-address input[type="text"],
+.ui-dialog.create-new-address select,
+.ui-dialog.edit-address input[type="text"],
+.ui-dialog.edit-address select,
+.ui-dialog.add-cc-details input[type="text"],
+.ui-dialog.add-cc-details select  {
+    width: 50%;
+}
+
+.ui-dialog.create-new-address .form-caption,
+.ui-dialog.edit-address .form-caption,
+.ui-dialog.add-cc-details .form-caption {
+	margin: 0 0 0 22%;
+}
+
+.ui-dialog.create-new-address .ui-icon-closethick,
+.ui-dialog.edit-address .ui-icon-closethick,
+.ui-dialog.add-cc-details .ui-icon-closethick {
+	border-bottom:none;
+}
+
+.ui-dialog.create-new-address .form-field-tooltip,
+.ui-dialog.edit-address .form-field-tooltip,
+.ui-dialog.add-cc-details .form-field-tooltip {
+    float: right;
+    margin: -57px 0 0;
+    width: 26%;
+}
+
+.ui-dialog.create-new-address .ui-dialog-content,
+.ui-dialog.edit-address .ui-dialog-content,
+.ui-dialog.add-cc-details .ui-dialog-content {
+    overflow: visible;
+    padding: 20px 0 0;
+}
+
+
+
+.ui-dialog.add-cc-details .form-label-text {
+    display: block;
+    float: left;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 0.5em 0.5em 0 0;
+    text-align: left;
+    width: 22%;
+}
+
+.ui-dialog.add-cc-details .form-row.month {
+	width:24%;
+	margin-right:2%;
+	margin-bottom:0;
+}
+.ui-dialog.add-cc-details .form-row.year {
+	width:24%;
+	margin-bottom:0;
+}
+.ui-dialog.add-cc-details .form-row.month select,
+.ui-dialog.add-cc-details .form-row.year select {
+	max-width:100%;	
+	width:100%;
+}
+
+
+
 
 
 

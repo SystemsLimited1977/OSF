@@ -19,7 +19,7 @@
 	<div id="addresses">
 		<div class="section-header">
 			<iscomment>${Resource.msg('account.addressbook.addresslist.header','account',null)}</iscomment>
-			<a class="section-header-note address-create" title="${Resource.msg('account.addressbook.addresslist.create','account',null)}" href="${URLUtils.url('Address-Add')}" >
+			<a class="section-header-note address-create" data="create-new" title="${Resource.msg('account.addressbook.addresslist.create','account',null)}" href="${URLUtils.url('Address-Add')}" >
 				${Resource.msg('account.addressbook.addresslist.create','account',null)}
 			</a>
 		</div>
