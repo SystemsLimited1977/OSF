@@ -8,7 +8,6 @@
 <head>
 
 	<isinclude template="util/modules"/>
-
 	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
 	<isscript>
 		var pageContext = {
@@ -19,9 +18,8 @@
 	</isscript>
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="checkout/pt_orderconfirmation_UI"/>
-
 	<iscomment>Add template-specific header information here.</iscomment>
-
+	
 </head>
 
 <body>
@@ -32,21 +30,33 @@
 		<div id="main" role="main" class="clearfix">
 <div class="container full-fields">
 <div class="row">
+
 		<center>
 			<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
 			<p>If you have questions about your order, we&#39;re happy to take your call (888-555-XXXX) Monday - Friday, 8AM - 8PM</p>
 			<div class="confirmation-message">
-						<iscontentasset aid="confirmation-message" />
+					<iscontentasset aid="confirmation-message" />
 			</div>
 		</center>
 
+			<isif condition="${pdict.CurrentCustomer.authenticated}"> 
+			
+			<div id="primary" class="primary-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<isreplace/>
+			</div>
+			
+			<iselse>
+			
 			<div id="primary" class="primary-content col-xs-12 col-sm-9 col-md-9 col-lg-9">
 				<isreplace/>
 			</div>
+			
+			</isif>
 
 			<div id="secondary" class="nav summary col-xs-12 col-sm-3 col-md-3 col-lg-3">
 				<isinclude template="checkout/confirmation/confirmationregister"/>
 			</div>
+			
 			</div>
 </div>
 		</div>

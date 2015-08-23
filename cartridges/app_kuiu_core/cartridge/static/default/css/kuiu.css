@@ -5090,12 +5090,259 @@ tr.order-sales-tax {
 }
 
 
+#secondary.nav .content-asset > span.toggle {
+    font-family: "Times New Roman",Georgia,serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    padding:0;
+    line-height: 100%;
+}
+
+#secondary nav {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#secondary nav a {
+	margin-left:0;
+	 line-height: 100%;
+}
+
+#secondary nav ul li {
+	margin:0 0 5px !important;
+}
+
+#secondary nav .secondary-navigation ul {
+    margin: 0 0 35px;
+    padding: 0;
+}
+
+.order-history-header {
+    background: none;
+    overflow: hidden;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top:20px;
+}
+
+.pt_order .order-history-header .label,
+.pt_order .order-history-table .label {
+	color:#000000;
+	font-size:13px;
+	width: auto;
+    padding: 0 5px 0 0;
+    text-align: left;
+    float: left;
+    font-weight: 500;
+    text-transform: none;
+    margin-top:0;
+    display:inline-block;
+    line-height:20px;
+    clear:both;
+}
+
+.pt_order .order-history-header .value {
+	display:inline-block;
+    line-height:20px;
+}
+
+.order-history-table th {
+	padding:0 10px;
+	font-size:13px;
+	font-weight: 500;
+}
+
+.order-history-table th, 
+.order-history-table td {
+	border-right: 1px solid #e0e0e0;
+}
+
+.order-history-table th:first-child, 
+.order-history-table td:first-child {
+	padding-left:0;
+}
+
+.order-history-table th:last-child, 
+.order-history-table td:last-child {
+	border-right:none;
+}
+
+.toggle-grid {
+	display:none;
+}
+
+.pt_order .orders-list .pagination {
+	margin:0;
+}
+
+.pt_order .orders-list .pagination ul li{
+	border-left:1px solid #e0e0e0;
+	border-right:1px solid #e0e0e0;
+	margin-left:-1px;
+	position:relative;
+}
+
+.pagination .results-hits {
+	color:#2b2b2b;
+	padding-right:11px;
+}
+
+.pagination ul li a {
+	color:#2b2b2b;
+}
 
 
+.pt_account .order-details .summary-title {
+	display:none;
+}
+
+.pt_account .order-details .label  {
+	color:#000000;
+	font-size:13px;
+	width: auto;
+    padding: 0 5px 0 0;
+    text-align: left;
+    float: left;
+    font-weight: 400;
+    text-transform: none;
+    margin-top:0;
+    display:inline-block;
+    line-height:20px;
+    clear:both;
+}
+
+.pt_account .order-details .value {
+	display:inline-block;
+    line-height:20px;
+}
+
+.pt_account .order-details button.print-page {
+	display:none;
+}
+
+.pt_account .order-details table .section-header {
+    font-size: 14px !important;
+    padding: 0 10px;
+    border-top:none;
+    border-bottom:none;
+    border-right:1px solid #e0e0e0;
+}
+
+.pt_account .order-details table tr .section-header:first-child {
+	padding-left:0;
+}
+
+.pt_account .order-details table tr .section-header:last-child {
+	border-right:none;
+}
+
+.pt_account .order-details .item-list tr {
+	 border-bottom:none;
+}
+
+.pt_account .order-details .item-list .order-billing,
+.pt_account .order-details .item-list .order-payment-instruments {
+	 border-right:1px solid #e0e0e0;
+}
+
+.pt_account .order-details .item-list td {
+    padding: 10px 0;
+}
+
+.pt_account .order-details .item-list .order-payment-instruments,
+.pt_account .order-details .item-list .order-payment-summary {
+	padding:0 10px;
+	width:33.33%;
+}
+
+.pt_account .order-details  .order-information {
+	padding-bottom:30px;
+}
+
+.pt_account .order-details td.text-left {
+	text-align: left !important;
+}
+
+.pt_account .order-details .order-totals-table td {
+	font-size:13px;
+	font-weight:400;
+	padding: 5px 0 0 0;
+}
+
+.pt_account .order-details .order-totals-table {
+	width:100%;
+}
+
+.pt_account .order-details .order-totals-table tr.order-total td {
+	font-size:13px;
+	font-weight:400;
+}
+
+.pt_account .order-details .order-totals-table .order-total td {
+    padding: 0.83em 0 0 0;
+ }
+    
+.pt_account .order-details .content-header {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0 0 14px !important;
+    font-family: "Times New Roman", Georgia, Serif;
+    text-transform:uppercase;
+}
+
+.pt_account .order-details table.order-shipment-table tr th.section-header {
+	border-bottom:1px solid #e0e0e0;
+}
+
+.pt_account .order-details table.order-shipment-table td {
+	padding-left:15px;
+}
+
+.pt_account .order-details table.order-shipment-table td:first-child {
+	padding-left:0;
+}
+
+.pt_account .order-details .order-shipment-table .order-shipment-details {
+    border-left: 1px solid #e0e0e0;
+    border-right:none;
+    min-width: 0;
+    width:33.33%;
+}
+
+.pt_account .order-details .order-shipment-table .section-header {
+	border-right:none;
+}
+
+.pt_account .order-details .order-shipment-table .line-item-details {
+	width:35%;
+}
+
+.pt_account .order-details .order-shipment-table .line-item-details,
+.pt_account .order-details .order-shipment-table .line-item-quantity,
+.pt_account .order-details .order-shipment-table .line-item-price {
+	border-top: 1px solid #e0e0e0;
+}
 
 
+.order-detail-options {
+    border-top: none;
+    margin: 10px 0 0;
+    padding: 0;
+    text-align: right;
+}
 
+.order-detail-options a{
+	text-decoration:underline;
+}
 
+.pt_order-confirmation #main #primary.col-md-12 {
+    border-right: none;
+    padding-right: 10px;
+}
 
 
 

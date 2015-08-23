@@ -6,13 +6,13 @@
 	
 		<isif condition="${pdict.OrderPagingModel.empty}">
 		
-			<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9 new-account">
+			<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9 orders-list">
 				<div class="no_orders">${Resource.msg('account.orders.noorders','account',null)}</div>
 			</div>
 		
 		<iselse/>
 		
-			<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9 new-account">
+			<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9 orders-list">
 				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.orders.htmlName}">
 				
 				<div class="search-result-options">
@@ -26,7 +26,7 @@
 					<li>
 						<div class="order-history-header">
 						
-							<button type="submit"  value="${Resource.msg('account.orders.orderdetail','account',null)}" name="${order.show.htmlName}">
+							<button class="hidden-xs" type="submit"  value="${Resource.msg('account.orders.orderdetail','account',null)}" name="${order.show.htmlName}">
 								${Resource.msg('account.orders.orderdetail','account',null)}
 							</button>
 							
@@ -42,6 +42,10 @@
 								<span class="label">${Resource.msg('account.orders.numberlabel','account',null)}</span>
 								<span class="value"><isprint value="${order.object.orderNo}" /></span>
 							</div>
+							
+							<button class="visible-xs-block" type="submit"  value="${Resource.msg('account.orders.orderdetail','account',null)}" name="${order.show.htmlName}">
+								${Resource.msg('account.orders.orderdetail','account',null)}
+							</button>
 		
 						</div>
 						
@@ -77,6 +81,11 @@
 									<tr>
 									
 										<td>
+										
+										<isif condition="${shipmentloopstate.first}">
+										<span class="label visible-xs-block">${Resource.msg('account.orders.shippedto','account',null)}</span>
+										</isif>
+										
 											<iscomment>Gift Certificates are in there own shipment. So if we have a shipment that contains
 												just a Gift Certificate, we want to render the email address of the recipient</iscomment>
 											<isif condition="${Shipment.giftCertificateLineItems.size() == 1}">
@@ -89,8 +98,14 @@
 										</td>
 										
 										<td class="order-items">
+											<isif condition="${shipmentloopstate.first}">
+												<span class="label visible-xs-block">${Resource.msg('account.orders.items','account',null)}</span>
+											</isif>
+												
 											<ul>								
 												<isloop items="${Shipment.productLineItems}" var="PLI" status="pliloopstate">
+												
+												
 	
 													<iscomment>if we have more product line items than the max page size, display view all link and create hidden div</iscomment>
 													<isif condition="${ ( pliloopstate.count - 1 ) >= pdict.OrderPagingModel.pageSize }">														
@@ -113,6 +128,11 @@
 										</td>
 										
 										<td>
+										
+										<isif condition="${shipmentloopstate.first}">
+										<span class="label visible-xs-block">${Resource.msg('account.orders.ordertotal','account',null)}</span>
+										</isif>
+										
 											<iscomment>Display total price for order</iscomment>
 											<isif condition="${shipmentloopstate.first}">
 												<span class="value"><isprint value="${order.object.totalGrossPrice}"/></span>
