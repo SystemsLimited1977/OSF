@@ -44,7 +44,8 @@
     text-decoration: underline;
 }
 
-.account-address-landing .address-list span {
+.account-address-landing .address-list span,
+ #main .account-landing.wishlist-details-section .item-option.option-update span{
     font-style: italic;
     margin:0 2px;
     text-decoration: none;
@@ -54,7 +55,9 @@
     font-size:12px;
     top: initial;
 }
-.account-payment-details .payment-button {
+.account-payment-details .payment-button,
+#main .account-landing.wishlist-details-section .item-option.option-update .button-text.update-item,
+#main .account-landing.wishlist-details-section .item-option.option-update .button-text.delete-item {
     background-color: transparent !important;
     padding: 0 !important;
     font-style: italic;
@@ -87,3 +90,103 @@
 #main #primary.password-reset-section input[type="password"] {
     width:38%;
 }
+
+#main .account-landing.wishlist-details-section form .form-row.label-above label {
+	width:100%;
+	font-size: 12px;
+    padding-bottom: 4px;
+}
+
+#main .account-landing.wishlist-details-section form .form-row {
+	    margin: 0 0 20px;
+}
+
+#main .account-landing.wishlist-details-section form .form-row p,
+#main .account-landing.wishlist-details-section form.list-share .share-option {
+	margin-top:20px;
+	color: #2b2b2b;
+	margin-bottom: 20px;
+}
+#main .account-landing.wishlist-details-section form.list-share {
+	background-color: transparent;
+    border-top: none;
+    padding: 0px;
+}
+#main .account-landing.wishlist-details-section .buttonstyle a {
+    padding:0px;
+    line-height: 36px;
+}
+#main .account-landing.wishlist-details-section .buttonstyle a:hover {
+	color:#2b2b2b;
+}
+
+#main .account-landing.wishlist-details-section form.list-share .share-option a {
+    display: block;
+    margin-top: 10px;
+}
+#main .account-landing.wishlist-details-section .item-list .item-image {
+	width:15%;
+}
+#main .account-landing.wishlist-details-section .item-list tr {
+	border-top:1px solid #e6e6e6;
+}
+
+#main .account-landing.wishlist-details-section .price {
+	clear:both;
+}
+#main .account-landing.wishlist-details-section .price .label {
+	display:none;
+}
+
+#main .account-landing.wishlist-details-section .item-option.option-date-added,
+#main .account-landing.wishlist-details-section .item-option.option-date-added .label,
+#main .account-landing.wishlist-details-section .item-option.option-quantity-desired,
+#main .account-landing.wishlist-details-section .item-option.option-priority {
+	font-size:12px;
+	clear:both;
+	font-weight: 500;
+	color:#2b2b2b;
+	padding:0px;
+	
+}
+#main .account-landing.wishlist-details-section .item-option.option-quantity-desired input {
+	width:18%;
+	float:right;
+}
+#main .account-landing.wishlist-details-section .item-option.option-quantity-desired label,
+#main .account-landing.wishlist-details-section .item-option.option-priority label {
+	width: 80%;
+    float: left;
+    text-align: right;
+    color: #2b2b2b;
+    font-size: 12px;
+}
+#main .account-landing.wishlist-details-section .item-option.option-priority select {
+	width: 35%;
+	float:right;
+}
+#main .account-landing.wishlist-details-section .item-option.option-priority label { 
+	width:60%;
+}
+#main .account-landing.wishlist-details-section .item-option.option-update {
+	clear: both;
+    float: right;
+    margin-top: 10px;
+}
+#main .account-landing.wishlist-details-section .item-option.option-add-to-cart input {
+	width: 22%;
+    margin-top: 5px;
+}
+#main .account-landing.wishlist-details-section .item-option.option-add-to-cart label {
+	text-align: right;
+}
+
+#main .wishlist-details-section {
+ 	padding-left:22px;
+}
+#main .account-landing.wishlist-details-section .item-details .product-list-item .value {
+	font-weight:400;
+	font-size: 12px;
+}
+
+#main .account-landing.wishlist-details-section .item-image img { max-width:180px}
