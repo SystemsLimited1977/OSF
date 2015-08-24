@@ -40,6 +40,8 @@
 * @output StandardizedAddress : Object Contains any 'corrections' made to the address from standards point of view
 * @output SubscriptionIDToken :String Token
 *
+* @output DecisionManager : String Decision Manager XML response. Order Center support for Decision Manager requires this data in custom.bfDecisionManager attribute of exported order payment instruments.
+*
 * @output Temp : Object;
 * Author: Danny Gehl
 */
@@ -177,6 +179,82 @@ function execute( pdict : PipelineDictionary ) : Number
 		pdict.AuthorizationCode = response.ccAuthReply.authorizationCode;
 		//pdict.AuthorizationReasonCode = response.ccAuthReply.reasonCode.get();
 		pdict.AuthorizationReasonCode = response.reasonCode.get();
+		
+		// Capture Decision Manager response XML. Demandware Order Center support 
+		// for Decision Manager requires this data in custom.bfDecisionManager 
+		// attribute of exported order payment instruments.
+		var strDecMangager : String;
+		var cdatawrap : String = "<![CDATA[{0}]]>";
+		
+		
+		strDecMangager = "<CyberSourceDecisionManagerResponse>\n";
+		strDecMangager = strDecMangager + "<MerchantReferenceCode>" + response.merchantReferenceCode + "</MerchantReferenceCode>\n";
+		strDecMangager = strDecMangager + "<RequestId>" + response.requestID + "</RequestId>\n";
+		
+		strDecMangager = strDecMangager + "<ReasonCode>" + response.reasonCode.get() + "</ReasonCode>\n";
+		strDecMangager = strDecMangager + "<Decision>" + response.decision + "</Decision>\n"; 
+		
+		//AFS CALL
+		
+		if(null != response.afsReply)
+		{
+		strDecMangager = strDecMangager + "<AfsResult>" + response.afsReply.afsResult.get() + "</AfsResult>\n";
+		
+		if(response.afsReply.afsFactorCode == null){
+		strDecMangager = strDecMangager + "<AfsFactorCode></AfsFactorCode>\n";
+		}
+		else{
+		strDecMangager = strDecMangager + "<AfsFactorCode>" + response.afsReply.afsFactorCode + "</AfsFactorCode>\n";
+		}
+		strDecMangager = strDecMangager + "<BinCountry></BinCountry>\n";
+		strDecMangager = strDecMangager + "<IpCountry>" + response.afsReply.ipCountry + "</IpCountry>\n";
+		strDecMangager = strDecMangager + "<IpCity>" + response.afsReply.ipCity + "</IpCity>\n";
+		strDecMangager = strDecMangager + "<IpState>" + response.afsReply.ipState + "</IpState>\n";
+		strDecMangager = strDecMangager + "<IpRoutingMethod>" + response.afsReply.ipRoutingMethod + "</IpRoutingMethod>\n";
+		}
+		else{
+		strDecMangager = strDecMangager + "<AfsResult></AfsResult>\n";
+		strDecMangager = strDecMangager + "<AfsFactorCode></AfsFactorCode>\n";
+		strDecMangager = strDecMangager + "<BinCountry></BinCountry>\n";
+		strDecMangager = strDecMangager + "<IpCountry></IpCountry>\n";
+		strDecMangager = strDecMangager + "<IpCity></IpCity>\n";
+		strDecMangager = strDecMangager + "<IpState></IpState>\n";
+		strDecMangager = strDecMangager + "<IpRoutingMethod></IpRoutingMethod>\n";
+		}
+
+		//NOTHING FOR NOW
+		strDecMangager = strDecMangager + "<DeviceFingerprint>\n";
+		strDecMangager = strDecMangager + "<CookiesEnabled></CookiesEnabled>\n";
+		strDecMangager = strDecMangager + "<FlashEnabled></FlashEnabled>\n";
+		strDecMangager = strDecMangager + "<Hash></Hash>\n";
+		strDecMangager = strDecMangager + "<ImagesEnabled></ImagesEnabled>\n";
+		strDecMangager = strDecMangager + "<JavascriptEnabled></JavascriptEnabled>\n";
+		strDecMangager = strDecMangager + "<ProxyIPAddress></ProxyIPAddress>\n";
+		strDecMangager = strDecMangager + "<ProxyIPAddressActivities></ProxyIPAddressActivities>\n";
+		strDecMangager = strDecMangager + "<ProxyIPAddressAttributes></ProxyIPAddressAttributes>\n";
+		strDecMangager = strDecMangager + "<ProxyServerType></ProxyServerType>\n";
+		strDecMangager = strDecMangager + "<TrueIPAddress></TrueIPAddress>\n";
+		strDecMangager = strDecMangager + "<TrueIPAddressActivities></TrueIPAddressActivities>\n";
+		strDecMangager = strDecMangager + "<TrueIPAddressAttributes></TrueIPAddressAttributes>\n";
+		strDecMangager = strDecMangager + "<TrueIPAddressCity></TrueIPAddressCity>\n";
+		strDecMangager = strDecMangager + "<TrueIPAddressCountry></TrueIPAddressCountry>\n";
+		strDecMangager = strDecMangager + "</DeviceFingerprint>\n";
+		
+		
+		//DecisionReply.activeProfileReply.name
+		
+		strDecMangager = strDecMangager + "<RulesTriggered>\n";
+		strDecMangager = strDecMangager + "<RuleResultItem>\n";
+		strDecMangager = strDecMangager + "<Name></Name>\n";
+		strDecMangager = strDecMangager + "<Decision>"+ response.decision +"</Decision>\n";
+		strDecMangager = strDecMangager + "<Evaluation>T</Evaluation>\n";
+		strDecMangager = strDecMangager + "<RuleID></RuleID>\n";
+		strDecMangager = strDecMangager + "</RuleResultItem>\n";
+		strDecMangager = strDecMangager + "</RulesTriggered>\n";
+		strDecMangager = strDecMangager + "</CyberSourceDecisionManagerResponse>";
+		
+		var strDecMagXML : XML = new XML(strDecMangager.toString());
+		pdict.DecisionManager = StringUtils.format(cdatawrap, strDecMagXML.toXMLString());
 	}
 	if ( null != response.paySubscriptionCreateReply )
 	{
