@@ -4192,6 +4192,9 @@ var sendToFriend = {
 						util.limitCharacters();
 					}
 				});
+				if($(e.target).hasClass('preview-button')){
+				    $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').removeClass('send-to-friend-main').addClass('send-to-friend-review');
+				}
 			})
 			.on('click', '.cancel-button, .close-button', function (e) {
 				e.preventDefault();
