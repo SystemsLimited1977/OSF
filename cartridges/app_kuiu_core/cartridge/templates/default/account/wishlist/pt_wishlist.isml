@@ -26,14 +26,20 @@
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="page-content clearfix">
-
+		<div class="container">
+		<iscomment>
 			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${Resource.msg('account.wishlist.breadcrumb','account',null)}"/>
-
-			<div id="primary" class="primary-content">
+		</iscomment>
+		<isslot id="wishlist-banner" description="Banner on Wish List pages" context="global" />
+		<center><h1>${Resource.msg('wishlist.wishlistHeading','account',null)}</h1></center>
+		
+		    <div id="primary" class="primary-content pull-right col-xs-12 col-sm-12 col-md-9 account-landing wishlist-details-section">
+			   <div class="wishlist-details">
 				<isreplace/>
+			   </div>
 			</div>
 
-			<div id="secondary" class="nav">
+			 <div id="secondary" class="nav pull-left col-xs-12 col-sm-12 col-md-3 wishlist-secondary">
 				<nav>
 					<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
 					<div class="secondary-navigation">
@@ -53,7 +59,7 @@
 
 		<isinclude template="components/footer/footer"/>
 		<isinclude template="account/wishlist/pt_wishlist_VARS"/>
-
+	</div>
 	</div>
 
 </body>

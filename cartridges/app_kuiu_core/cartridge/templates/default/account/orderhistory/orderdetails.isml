@@ -2,6 +2,13 @@
 <isdecorate template="account/orderhistory/pt_orderhistory">
 <isinclude template="util/modules"/>
 
+<center>
+<h1>
+	<isprint value="${Resource.msg('summary.title','checkout',null)}" />
+</h1>
+</center>
+
+<div id="primary" class="primary-content  pull-right col-xs-12 col-sm-9 order-details">
 	<isif condition="${!empty(pdict.Order)}">
 	
 		<isorderdetails order="${pdict.Order}" orderstatus="true"/>
@@ -31,6 +38,6 @@
 		</div>
 	
 	</isif>
-
+</div>
 
 </isdecorate>

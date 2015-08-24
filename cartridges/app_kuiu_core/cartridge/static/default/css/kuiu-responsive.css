@@ -125,8 +125,8 @@
 		padding-right: 10px;
 	}
 	#secondary nav {
-		padding-left: 15px;
-		padding-right: 15px;
+		padding-left: 0;
+		padding-right: 0;
 	}
 	#homepage-slider {
 		-webkit-box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
@@ -1561,7 +1561,243 @@ footer h6 {
 	#main .new-account form .fld-checkbox label {
 		padding: 5px 0 0 10px;
 	}
-	   
+	
+	.pt_order .orders-list .search-result-options {
+		text-align:center;
+	}
+	
+	.search-result-options .pagination .results-hits {
+		display:block;
+		float:none;
+		margin-bottom:8px;
+	}
+	
+	.search-result-options .pagination ul {
+		display:inline-block;
+		float:none;
+	}
+	
+	.pt_order .orders-list .search-result-options .pagination {
+		float:none;
+		text-align:center;
+	}
+	
+	.order-history-table th.order-shipped-to, 
+	.order-history-table th.order-items, 
+	.order-history-table th.order-total-price {
+		border-right: none;
+		width:100%;
+		display:none;
+	}
+	
+	.order-history-table th {
+		
+	}
+	
+	.order-history-table th, 
+	.order-history-table td {
+		border-right: none;
+		width:100%;
+		display:block;
+		padding:0 0 15px;
+	}
+
+	.pt_order .order-history-table .label {
+		display:block;
+		float:none;
+	}   
+	
+	.pt_order .orders-list #dwfrm_orders {
+		border-bottom:1px solid #e0e0e0;
+		padding-bottom: 25px;
+	}
+	
+	.pt_account .order-details .item-list td {
+		width:100%;
+		display:block;
+		border-top:1px solid #e0e0e0;
+		border-right:none;
+		padding:10px 0;
+		overflow:hidden;
+	}
+	
+	.pt_account .order-details .item-list .order-billing, 
+	.pt_account .order-details .item-list .order-payment-instruments {
+		border-right:none;
+	}
+	
+	.pt_account .order-details .item-list .order-payment-instruments, 
+	.pt_account .order-details .item-list .order-payment-summary {
+		width:100%;
+		padding:10px 0;
+	}
+	
+	.pt_account .order-details .order-totals-table td {
+		border-top:none;
+		padding:5px 0 0;
+		width:49%;
+		display:inline-block;
+	}
+	
+	.pt_account .order-details table .section-header {
+		border-right:none;
+	}
+	
+	.pt_account .order-details .order-totals-table tr.order-total td {
+		font-size:16px !important;
+		font-weight:500;
+	}
+	
+	.pt_account .order-details .content-header {
+		border-bottom:1px solid #e0e0e0;
+	}
+	
+	.pt_account .order-details table.order-shipment-table tr th.section-header {
+		display:none;
+	}
+	
+	.pt_account .order-details table.order-shipment-table td {
+		display:block;
+		width:100%;
+		padding:5px 0 0;
+		border:none;
+	}
+	
+	.pt_account .order-details .order-shipment-table .order-shipment-details {
+		border-left:none;
+		width:100%;
+	}
+	
+	.pt_account .order-details .order-shipment-table .line-item-details, 
+	.pt_account .order-details .order-shipment-table .line-item-quantity, 
+	.pt_account .order-details .order-shipment-table .line-item-price {
+		border:none;
+	}
+	
+	.pt_account .order-details table.order-shipment-table tr td .section-header {
+		border-bottom:1px solid #e0e0e0;
+	}
+	
+	.pt_account .order-details .order-shipment-details {
+		padding-bottom:20px !important;
+	}
+	
+	.pt_account .order-details .order-shipment-table .line-item-details {
+		padding-top:10px;
+		border-top:1px solid #e0e0e0;
+		width:100%;
+	}
+	
+	.pt_account .order-details .order-shipment-table .line-item-price {
+		padding-bottom:10px;
+	}
+	
+	.pt_account .order-details .order-detail-options {
+		border-top:1px solid #e0e0e0;
+		border-bottom:1px solid #e0e0e0;
+		padding:20px 0;
+		text-align:center;
+	}
+	
+	.ui-dialog.password-forget .ui-widget-header {
+	    height: auto;	    
+	}
+	
+	.ui-dialog.password-forget label{
+		width:100%;
+		padding-right:0;
+	}
+
+	.ui-dialog.password-forget .form-row {
+		display: block;
+	    float: none;
+	    width: 100%;
+	    padding-right:0;
+	}
+	
+	.ui-dialog.password-forget input {
+		width:100%;
+	}
+
+	.ui-dialog.password-forget #PasswordResetForm button {
+		float: none;
+	    left: 0;
+	    position: relative;
+	    top: 0;
+	    width: 100%;
+	    height:34px;
+	    padding:0;
+	}
+
+	.ui-dialog.password-forget span.error {
+	    margin: 1% 2% 0 0;
+	}
+	 
+	.ui-dialog.create-new-address input[type="text"],
+	.ui-dialog.create-new-address select,
+	.ui-dialog.edit-address input[type="text"],
+	.ui-dialog.edit-address select,
+	.ui-dialog.add-cc-details input[type="text"],
+	.ui-dialog.add-cc-details select {
+	    width: 100%;
+	}
+
+	.ui-dialog.create-new-address .form-caption,
+	.ui-dialog.edit-address .form-caption,
+	.ui-dialog.add-cc-details .form-caption {
+		margin: 0;
+	}
+	
+	.ui-dialog.create-new-address .form-field-tooltip,
+	.ui-dialog.edit-address .form-field-tooltip,
+	.ui-dialog.add-cc-details .form-field-tooltip {
+	    float: left;
+	    margin: 0 0 15px;
+	    width: 100%;
+	}
+	
+	#main button, 
+	#main .button, 
+	#main .buttonstyle, 
+	#main input[type="button"], 
+	.ui-dialog button, 
+	.ui-dialog .button, 
+	.ui-dialog .buttonstyle, 
+	.ui-dialog input[type="button"] {
+		padding:0 22px;
+	}
+	
+	.ui-dialog .cancel-button,
+	.ui-dialog .delete-button {
+		margin-left:8px;
+	}
+	
+	.ui-dialog.add-cc-details .form-label-text {
+	    display: block;
+	    float: none;
+	    font-size: 1.1em;
+	    font-weight: 500;
+	    padding: 0.5em 0.5em 0 0;
+	    text-align: left;
+	    width: 100%;
+	}
+
+	.ui-dialog.add-cc-details .form-row.month {
+		width:48%;
+		margin-right:4%;
+		margin-bottom:0;
+	}
+	.ui-dialog.add-cc-details .form-row.year {
+		width:48%;
+		margin-bottom:0;
+	}
+	.ui-dialog.add-cc-details .form-row.month select,
+	.ui-dialog.add-cc-details .form-row.year select {
+		max-width:100%;	
+		width:100%;
+	}
+
+
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -2122,6 +2358,12 @@ footer h6 {
 	#main .new-account input[type="password"], 
 	#main .new-account select, #main textarea {
 		clear:none;
+	}
+	
+	.ui-dialog.create-new-address label,
+	.ui-dialog.edit-address label,
+	.ui-dialog.add-cc-details label {
+		width:22%;
 	}
 	
 }

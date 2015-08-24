@@ -997,7 +997,8 @@ div {
 	padding-left:10px;
 }
 
-#main input[type="text"], #main input[type="number"], #main input[type="password"],
+#main input[type="text"], 
+#main input[type="number"], #main input[type="password"],
 	.ui-dialog input[type="text"], .ui-dialog input[type="number"],
 	.ui-dialog input[type="password"], .ui-dialog select, .ui-dialog textarea,
 	#main select, #main textarea {
@@ -1010,6 +1011,17 @@ div {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	margin-left: 0;
+}
+
+.ui-dialog select{
+	-webkit-appearance: none;
+      -moz-appearance: none;
+           appearance: none;
+	background-image: url("../images/drop-down_arrow.png");
+	background-repeat: no-repeat;
+	background-position: right 3px;
+	cursor: pointer;
+	padding-left:3px;
 }
 
 #main .form-caption {
@@ -1329,7 +1341,12 @@ span.error {
 
 .ui-dialog .cancel-button {
 	background-color: #e6e6e6;
+	border:2px solid #e6e6e6;
 	color: #1d1512;
+	margin-left: 18px;
+}
+
+.ui-dialog .delete-button {
 	margin-left: 18px;
 }
 
@@ -1673,7 +1690,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .ui-dialog .form-row.form-row-button {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-left: 22%;
   padding: 0px;
 }
@@ -4018,6 +4035,7 @@ a.tooltip {
 	text-decoration:underline;
 	margin-top:0;
 	display:inline-block !important;
+	z-index: 100;
 }
 
 .form-field-tooltip {
@@ -5090,9 +5108,439 @@ tr.order-sales-tax {
 }
 
 
+#secondary.nav .content-asset > span.toggle {
+    font-family: "Times New Roman",Georgia,serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    padding:0;
+    line-height: 100%;
+}
+
+#secondary nav {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#secondary nav a {
+	margin-left:0;
+	 line-height: 100%;
+}
+
+#secondary nav ul li {
+	margin:0 0 5px !important;
+}
+
+#secondary nav .secondary-navigation ul {
+    margin: 0 0 35px;
+    padding: 0;
+}
+
+.order-history-header {
+    background: none;
+    overflow: hidden;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top:20px;
+}
+
+.pt_order .order-history-header .label,
+.pt_order .order-history-table .label {
+	color:#000000;
+	font-size:13px;
+	width: auto;
+    padding: 0 5px 0 0;
+    text-align: left;
+    float: left;
+    font-weight: 500;
+    text-transform: none;
+    margin-top:0;
+    display:inline-block;
+    line-height:20px;
+    clear:both;
+}
+
+.pt_order .order-history-header .value {
+	display:inline-block;
+    line-height:20px;
+}
+
+.order-history-table th {
+	padding:0 10px;
+	font-size:13px;
+	font-weight: 500;
+}
+
+.order-history-table th, 
+.order-history-table td {
+	border-right: 1px solid #e0e0e0;
+}
+
+.order-history-table th:first-child, 
+.order-history-table td:first-child {
+	padding-left:0;
+}
+
+.order-history-table th:last-child, 
+.order-history-table td:last-child {
+	border-right:none;
+}
+
+.toggle-grid {
+	display:none;
+}
+
+.pt_order .orders-list .pagination {
+	margin:0;
+}
+
+.pt_order .orders-list .pagination ul li{
+	border-left:1px solid #e0e0e0;
+	border-right:1px solid #e0e0e0;
+	margin-left:-1px;
+	position:relative;
+}
+
+.pagination .results-hits {
+	color:#2b2b2b;
+	padding-right:11px;
+}
+
+.pagination ul li a {
+	color:#2b2b2b;
+}
+
+
+.pt_account .order-details .summary-title {
+	display:none;
+}
+
+.pt_account .order-details .label  {
+	color:#000000;
+	font-size:13px;
+	width: auto;
+    padding: 0 5px 0 0;
+    text-align: left;
+    float: left;
+    font-weight: 400;
+    text-transform: none;
+    margin-top:0;
+    display:inline-block;
+    line-height:20px;
+    clear:both;
+}
+
+.pt_account .order-details .value {
+	display:inline-block;
+    line-height:20px;
+}
+
+.pt_account .order-details button.print-page {
+	display:none;
+}
+
+.pt_account .order-details table .section-header {
+    font-size: 14px !important;
+    padding: 0 10px;
+    border-top:none;
+    border-bottom:none;
+    border-right:1px solid #e0e0e0;
+}
+
+.pt_account .order-details table tr .section-header:first-child {
+	padding-left:0;
+}
+
+.pt_account .order-details table tr .section-header:last-child {
+	border-right:none;
+}
+
+.pt_account .order-details .item-list tr {
+	 border-bottom:none;
+}
+
+.pt_account .order-details .item-list .order-billing,
+.pt_account .order-details .item-list .order-payment-instruments {
+	 border-right:1px solid #e0e0e0;
+}
+
+.pt_account .order-details .item-list td {
+    padding: 10px 0;
+}
+
+.pt_account .order-details .item-list .order-payment-instruments,
+.pt_account .order-details .item-list .order-payment-summary {
+	padding:0 10px;
+	width:33.33%;
+}
+
+.pt_account .order-details  .order-information {
+	padding-bottom:30px;
+}
+
+.pt_account .order-details td.text-left {
+	text-align: left !important;
+}
+
+.pt_account .order-details .order-totals-table td {
+	font-size:13px;
+	font-weight:400;
+	padding: 5px 0 0 0;
+}
+
+.pt_account .order-details .order-totals-table {
+	width:100%;
+}
+
+.pt_account .order-details .order-totals-table tr.order-total td {
+	font-size:13px;
+	font-weight:400;
+}
+
+.pt_account .order-details .order-totals-table .order-total td {
+    padding: 0.83em 0 0 0;
+ }
+    
+.pt_account .order-details .content-header {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0 0 14px !important;
+    font-family: "Times New Roman", Georgia, Serif;
+    text-transform:uppercase;
+}
+
+.pt_account .order-details table.order-shipment-table tr th.section-header {
+	border-bottom:1px solid #e0e0e0;
+}
+
+.pt_account .order-details table.order-shipment-table td {
+	padding-left:15px;
+}
+
+.pt_account .order-details table.order-shipment-table td:first-child {
+	padding-left:0;
+}
+
+.pt_account .order-details .order-shipment-table .order-shipment-details {
+    border-left: 1px solid #e0e0e0;
+    border-right:none;
+    min-width: 0;
+    width:33.33%;
+}
+
+.pt_account .order-details .order-shipment-table .section-header {
+	border-right:none;
+}
+
+.pt_account .order-details .order-shipment-table .line-item-details {
+	width:35%;
+}
+
+.pt_account .order-details .order-shipment-table .line-item-details,
+.pt_account .order-details .order-shipment-table .line-item-quantity,
+.pt_account .order-details .order-shipment-table .line-item-price {
+	border-top: 1px solid #e0e0e0;
+}
+
+
+.order-detail-options {
+    border-top: none;
+    margin: 10px 0 0;
+    padding: 0;
+    text-align: right;
+}
+
+.order-detail-options a{
+	text-decoration:underline;
+}
+
+.pt_order-confirmation #main #primary.col-md-12 {
+    border-right: none;
+    padding-right: 10px;
+}
+
+
+.ui-dialog.password-forget {
+    border: none;
+    padding: 20px;
+}
+
+.ui-dialog.password-forget .ui-widget-header {
+    background-color: #fff;
+    border-bottom: none;
+    font-size:26px;
+    height: auto;
+    line-height: 100%;
+    padding: 0;
+}
+
+.ui-dialog.password-forget .ui-widget-header h1{
+	font-size:26px;
+	font-style:normal;
+	color:#1a1a1a;
+}
+
+.ui-dialog.password-forget .dialog-content h2{
+	font-size:16px;
+	font-style:normal;
+	color:#1a1a1a;
+	text-transform: uppercase;
+}
+.ui-dialog.password-forget .ui-icon-closethick {
+	border-bottom:none;
+}
+
+.ui-dialog.password-forget label{
+	width:20%;
+	padding-right:10px;
+}
+
+.ui-dialog.password-forget .form-row {
+	display: block;
+    float: left;
+    width: 80%;
+    padding-right:10px;
+}
+
+.ui-dialog.password-forget input {
+	height:34px;	
+	width:80%;
+}
+
+.ui-dialog.password-forget #PasswordResetForm button {
+	float: right;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 20%;
+    height:34px;
+    padding:0;
+}
+
+.ui-dialog.password-forget span.error {
+    margin: 1% 2% 0 20%;
+}
+
+.ui-dialog.password-forget p {
+    margin: 0 0 20px;
+}
+
+.ui-dialog.password-forget .ui-dialog-content {
+    overflow: visible;
+    padding: 20px 0 0;
+}
+
+.ui-dialog.password-forget .form-row {
+	padding-bottom:0;
+}
+
+.ui-dialog .ui-dialog-title {
+	white-space: normal;
+}
+
+.ui-dialog.create-new-address fieldset,
+.ui-dialog.edit-address fieldset,
+.ui-dialog.add-cc-details fieldset  {
+	clear:both;
+}
+
+.ui-dialog.create-new-address,
+.ui-dialog.edit-address,
+.ui-dialog.add-cc-details {
+    border: none;
+    padding: 20px;
+}
+
+.ui-dialog.create-new-address .ui-widget-header,
+.ui-dialog.edit-address .ui-widget-header,
+.ui-dialog.add-cc-details .ui-widget-header {
+    background-color: #fff;
+    border-bottom: none;
+    font-size:26px;
+    height: auto;
+    line-height: 100%;
+    padding: 0;
+}
+
+.ui-dialog.create-new-address .ui-widget-header h1,
+.ui-dialog.edit-address .ui-widget-header h1,
+.ui-dialog.add-cc-details .ui-widget-header h1 {
+	font-size:26px;
+	font-style:normal;
+	color:#1a1a1a;
+}
+
+.ui-dialog.create-new-address legend,
+.ui-dialog.edit-address legend,
+.ui-dialog.add-cc-details legend  {
+	display:none;
+}
+
+.ui-dialog.create-new-address input[type="text"],
+.ui-dialog.create-new-address select,
+.ui-dialog.edit-address input[type="text"],
+.ui-dialog.edit-address select,
+.ui-dialog.add-cc-details input[type="text"],
+.ui-dialog.add-cc-details select  {
+    width: 50%;
+}
+
+.ui-dialog.create-new-address .form-caption,
+.ui-dialog.edit-address .form-caption,
+.ui-dialog.add-cc-details .form-caption {
+	margin: 0 0 0 22%;
+}
+
+.ui-dialog.create-new-address .ui-icon-closethick,
+.ui-dialog.edit-address .ui-icon-closethick,
+.ui-dialog.add-cc-details .ui-icon-closethick {
+	border-bottom:none;
+}
+
+.ui-dialog.create-new-address .form-field-tooltip,
+.ui-dialog.edit-address .form-field-tooltip,
+.ui-dialog.add-cc-details .form-field-tooltip {
+    float: right;
+    margin: -57px 0 0;
+    width: 26%;
+}
+
+.ui-dialog.create-new-address .ui-dialog-content,
+.ui-dialog.edit-address .ui-dialog-content,
+.ui-dialog.add-cc-details .ui-dialog-content {
+    overflow: visible;
+    padding: 20px 0 0;
+}
 
 
 
+.ui-dialog.add-cc-details .form-label-text {
+    display: block;
+    float: left;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 0.5em 0.5em 0 0;
+    text-align: left;
+    width: 22%;
+}
+
+.ui-dialog.add-cc-details .form-row.month {
+	width:24%;
+	margin-right:2%;
+	margin-bottom:0;
+}
+.ui-dialog.add-cc-details .form-row.year {
+	width:24%;
+	margin-bottom:0;
+}
+.ui-dialog.add-cc-details .form-row.month select,
+.ui-dialog.add-cc-details .form-row.year select {
+	max-width:100%;	
+	width:100%;
+}
 
 
 
