@@ -166,7 +166,7 @@
                               </transition>
                             </segment>
                           </branch>
-                          <branch basename="b5" source-connector="not_supported">
+                          <branch basename="b5" source-connector="declined">
                             <transition target-connector="in">
                               <transition-display>
                                 <bend-point relative-to="target" x="0" y="-1"/>
