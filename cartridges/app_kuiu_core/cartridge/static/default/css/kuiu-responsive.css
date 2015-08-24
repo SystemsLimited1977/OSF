@@ -1738,13 +1738,16 @@ footer h6 {
 	.ui-dialog.edit-address input[type="text"],
 	.ui-dialog.edit-address select,
 	.ui-dialog.add-cc-details input[type="text"],
-	.ui-dialog.add-cc-details select {
+	.ui-dialog.add-cc-details select,
+	.ui-dialog.send-to-friend-main input[type="text"],
+	.ui-dialog.send-to-friend-main select {
 	    width: 100%;
 	}
 
 	.ui-dialog.create-new-address .form-caption,
 	.ui-dialog.edit-address .form-caption,
-	.ui-dialog.add-cc-details .form-caption {
+	.ui-dialog.add-cc-details .form-caption,
+	.ui-dialog.send-to-friend-main .form-caption {
 		margin: 0;
 	}
 	
@@ -2362,7 +2365,8 @@ footer h6 {
 	
 	.ui-dialog.create-new-address label,
 	.ui-dialog.edit-address label,
-	.ui-dialog.add-cc-details label {
+	.ui-dialog.add-cc-details label,
+	 .ui-dialog.send-to-friend-main label {
 		width:22%;
 	}
 	

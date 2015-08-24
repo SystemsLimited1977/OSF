@@ -183,10 +183,62 @@
 
 #main .wishlist-details-section {
  	padding-left:22px;
+ 	border-left: 1px solid #e0e0e0;
+    left: -1px;
 }
 #main .account-landing.wishlist-details-section .item-details .product-list-item .value {
 	font-weight:400;
 	font-size: 12px;
 }
 
-#main .account-landing.wishlist-details-section .item-image img { max-width:180px}
+#main .account-landing.wishlist-details-section .item-image img { 
+	max-width:180px;
+}
+
+.ui-dialog.send-to-friend-main .ui-widget-header {
+	border-bottom:1px solid #e6e6e6;
+}
+.ui-dialog.send-to-friend-main {
+	width: 48% !important;
+}
+.ui-dialog.send-to-friend-main .dialog-required {
+	float:right;
+	font-size: 10px;
+}
+#send-to-friend-main .send-to-friend-sender {
+	padding:0px;
+	margin:0px;
+}
+
+.ui-dialog.send-to-friend-main .input-checkbox {
+	width: 25%;
+    margin-left: 62px;
+    margin-top: -33px;
+} 
+.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline  {
+	clear: both;
+    width: 100%;
+}
+
+.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline label{ 
+	float: right;
+    width: 75%;
+ }
+ .ui-dialog.send-to-friend-main .form-caption {
+    clear: both;
+    padding-left: 19px;
+    font-size: 12px;
+    text-decoration: underline;
+ }
+ 
+ .ui-dialog.send-to-friend-main textarea {
+ 	min-height:110px;
+ }
+ 
+ .ui-dialog.send-to-friend-main dt {
+    width: 10%;
+    float: left;
+}
+ .ui-dialog.send-to-friend-main dd {
+ 	margin-left:10%;
+ }

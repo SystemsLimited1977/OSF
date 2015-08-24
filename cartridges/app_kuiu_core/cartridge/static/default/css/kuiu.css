@@ -5393,7 +5393,7 @@ tr.order-sales-tax {
 	border-bottom:none;
 }
 
-.ui-dialog.password-forget label{
+.ui-dialog.password-forget label {
 	width:20%;
 	padding-right:10px;
 }
@@ -5443,26 +5443,30 @@ tr.order-sales-tax {
 
 .ui-dialog.create-new-address fieldset,
 .ui-dialog.edit-address fieldset,
-.ui-dialog.add-cc-details fieldset  {
+.ui-dialog.add-cc-details fieldset,
+.ui-dialog.send-to-friend-main fieldset  {
 	clear:both;
 }
 
 .ui-dialog.create-new-address,
 .ui-dialog.edit-address,
-.ui-dialog.add-cc-details {
+.ui-dialog.add-cc-details,
+.ui-dialog.send-to-friend-main {
     border: none;
     padding: 20px;
 }
 
 .ui-dialog.create-new-address .ui-widget-header,
 .ui-dialog.edit-address .ui-widget-header,
-.ui-dialog.add-cc-details .ui-widget-header {
+.ui-dialog.add-cc-details .ui-widget-header,
+.ui-dialog.send-to-friend-main .ui-widget-header {
     background-color: #fff;
     border-bottom: none;
     font-size:26px;
     height: auto;
     line-height: 100%;
     padding: 0;
+    font-family: "Times New Roman", Georgia, Serif;
 }
 
 .ui-dialog.create-new-address .ui-widget-header h1,
@@ -5475,7 +5479,8 @@ tr.order-sales-tax {
 
 .ui-dialog.create-new-address legend,
 .ui-dialog.edit-address legend,
-.ui-dialog.add-cc-details legend  {
+.ui-dialog.add-cc-details legend,
+.ui-dialog.send-to-friend-main legend   {
 	display:none;
 }
 
@@ -5484,13 +5489,16 @@ tr.order-sales-tax {
 .ui-dialog.edit-address input[type="text"],
 .ui-dialog.edit-address select,
 .ui-dialog.add-cc-details input[type="text"],
-.ui-dialog.add-cc-details select  {
+.ui-dialog.add-cc-details select,
+.ui-dialog.send-to-friend-main input[type="text"],
+.ui-dialog.send-to-friend-main select {
     width: 50%;
 }
 
 .ui-dialog.create-new-address .form-caption,
 .ui-dialog.edit-address .form-caption,
-.ui-dialog.add-cc-details .form-caption {
+.ui-dialog.add-cc-details .form-caption,
+.ui-dialog.send-to-friend-main .form-caption {
 	margin: 0 0 0 22%;
 }
 
@@ -5502,7 +5510,8 @@ tr.order-sales-tax {
 
 .ui-dialog.create-new-address .form-field-tooltip,
 .ui-dialog.edit-address .form-field-tooltip,
-.ui-dialog.add-cc-details .form-field-tooltip {
+.ui-dialog.add-cc-details .form-field-tooltip,
+.ui-dialog.send-to-friend-main .form-field-tooltip  {
     float: right;
     margin: -57px 0 0;
     width: 26%;
@@ -5510,14 +5519,16 @@ tr.order-sales-tax {
 
 .ui-dialog.create-new-address .ui-dialog-content,
 .ui-dialog.edit-address .ui-dialog-content,
-.ui-dialog.add-cc-details .ui-dialog-content {
+.ui-dialog.add-cc-details .ui-dialog-content,
+.ui-dialog.send-to-friend-main .ui-dialog-content {
     overflow: visible;
     padding: 20px 0 0;
 }
 
 
 
-.ui-dialog.add-cc-details .form-label-text {
+.ui-dialog.add-cc-details .form-label-text,
+.ui-dialog.send-to-friend-main .form-label-text {
     display: block;
     float: left;
     font-size: 1.1em;

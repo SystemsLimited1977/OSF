@@ -74,7 +74,7 @@
 				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 
 				<div class="form-caption">
-					${Resource.msg('global.email.policy','locale',null)}
+					<iscomment>${Resource.msg('global.email.policy','locale',null)}</iscomment>
 					<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" title="${Resource.msg('global.privacypolicy','locale',null)}" class="privacy-policy" >
 						${Resource.msg('global.privacypolicy','locale',null)}
 					</a>
