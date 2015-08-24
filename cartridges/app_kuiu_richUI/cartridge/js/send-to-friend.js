@@ -37,6 +37,7 @@ var sendToFriend = {
 				e.preventDefault();
 				dialog.close();
 			});
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('send-to-friend-main');
 	},
 	initializeDialog: function (eventDelegate) {
 		// detect withCredentials support to do CORS from HTTP to HTTPS

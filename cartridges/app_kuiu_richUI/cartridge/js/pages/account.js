@@ -116,6 +116,14 @@ function initAddressEvents() {
 				open: initializeAddressForm
 			}
 		});
+		if($(e.target).attr('data') === "create-new"){
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('create-new-address');
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>Add Address</h1>');
+		}
+		else{
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('edit-address');
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>EDIT ADDRESS</h1>');
+		}
 	}).on('click', '.delete', function (e) {
 		e.preventDefault();
 		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
@@ -145,6 +153,15 @@ function initPaymentEvents() {
 		dialog.open({
 			url: $(e.target).attr('href')
 		});
+		if($(e.target).attr('data') === "create-new"){
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('add-cc-details');
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>Add a Credit Card</h1>');
+		}
+		else{
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('edit-cc-details');
+			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>Edit Credit Card</h1>');
+
+		}
 	});
 
 	var paymentList = $('.payment-list');
@@ -210,6 +227,8 @@ function initLoginPage() {
 				}
 			}
 		});
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('password-forget');
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>Forgot Password?</h1>');
 	});
 }
 /**
