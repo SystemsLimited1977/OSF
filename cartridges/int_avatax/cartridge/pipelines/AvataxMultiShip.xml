@@ -82,9 +82,7 @@
           </transition>
           <segment>
             <node>
-              <interaction-node transaction-required="false">
-                <template buffered="true" dynamic="false" name="custom/scripterror"/>
-              </interaction-node>
+              <end-node name="ERROR"/>
               <node-display x="1" y="1"/>
             </node>
           </segment>
@@ -160,9 +158,7 @@
           </transition>
           <segment>
             <node>
-              <interaction-node transaction-required="false">
-                <template buffered="true" dynamic="false" name="custom/scripterror"/>
-              </interaction-node>
+              <end-node name="ERROR"/>
               <node-display x="1" y="1"/>
             </node>
           </segment>
