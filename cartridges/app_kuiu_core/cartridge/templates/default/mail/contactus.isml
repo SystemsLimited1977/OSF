@@ -12,31 +12,41 @@
 
 <table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
-		<td align="center" style="background:#e0e0e0;padding:50px 0;">
+		<td align="center">
 			<center>
 				<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
-					<tr class="emailtemplateHeader">
-						<td>KUIU Logo</td>
-						<td>Address</td>
+					<tr style="display: table;">
+						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;width: 78%;">
+							<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">
+								<img src="${URLUtils.httpStatic('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
+							</a>
+						</td>
+						<td style="font-size:12px;font-family:arial;padding:0px;vertical-align:top;float: right;padding-top: 15px;">
+							<strong>${Resource.msg('global.storename','locale',null)}</strong><br />
+							${Resource.msg('order.orderconfirmation-email.storeaddress','order',null)}<br />
+							${Resource.msg('order.orderconfirmation-email.storelocation','order',null)}<br />
+							<a href="${URLUtils.httpHome()}" title="${Resource.msg('order.orderconfirmation-email.jumptostore','order',null)}">${Resource.msg('global.storenameurl','locale',null)}</a><br />
+							${Resource.msg('order.orderconfirmation-email.storephone','order',null)}
+						</td>
 					</tr>
 					<tr>
-						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
+						<td style="font-size:12px;font-family:arial;padding:0px;vertical-align:top;">
 						
-							<p style="font-family:georgia;font-size:20px; background:brown; text-align:center;">Thank you for your inquiry!</p>
+							<p style="font-family:georgia;font-size:20px; background:#000;color:#fff; text-align:center;padding: 6px;">Thank you for your inquiry!</p>
 							
-							<p>This email confirms we received your message. We will contact you shortly if your message requires a response.</p>
+							<p style="padding-left:10px;">This email confirms we received your message. We will contact you shortly if your message requires a response.</p>
 							
-							<p>${Resource.msg('contactus.name','email',null)} <isprint value="${pdict.CurrentForms.contactus.firstname.value}"/> <isprint value="${pdict.CurrentForms.contactus.lastname.value}"/></p>
+							<p><b style="padding-left:10px;">${Resource.msg('contactus.name','email',null)}</b> <isprint value="${pdict.CurrentForms.contactus.firstname.value}"/> <isprint value="${pdict.CurrentForms.contactus.lastname.value}"/></p>
 							
-							<p>${Resource.msg('contactus.email','email',null)} <isprint value="${pdict.CurrentForms.contactus.email.value}"/></p>	
+							<p><b style="padding-left:10px;">${Resource.msg('contactus.email','email',null)}</b> <isprint value="${pdict.CurrentForms.contactus.email.value}"/></p>	
 							
-							<p>${Resource.msg('contactus.phone','email',null)} <isprint value="${pdict.CurrentForms.contactus.phone.value}"/></p>	
+							<p><b style="padding-left:10px;">${Resource.msg('contactus.phone','email',null)}</b> <isprint value="${pdict.CurrentForms.contactus.phone.value}"/></p>	
 							
-							<p>${Resource.msg('contactus.ordernumber','email',null)}<isprint value="${pdict.CurrentForms.contactus.ordernumber.value}"/></p>
+							<p><b style="padding-left:10px;">${Resource.msg('contactus.ordernumber','email',null)}</b><isprint value="${pdict.CurrentForms.contactus.ordernumber.value}"/></p>
 							
-							<p>${Resource.msg('contactus.myquestion','email',null)}<isprint value="${pdict.CurrentForms.contactus.myquestion.value}"/></p>
+							<p><b style="padding-left:10px;">${Resource.msg('contactus.myquestion','email',null)}</b><isprint value="${pdict.CurrentForms.contactus.myquestion.value}"/></p>
 							
-							<p>${Resource.msg('contactus.comment','email',null)}<isprint value="${pdict.CurrentForms.contactus.comment.value}"/></p>
+							<p><b style="padding-left:10px;">${Resource.msg('contactus.comment','email',null)}</b><isprint value="${pdict.CurrentForms.contactus.comment.value}"/></p>
 
 						</td>
 					</tr>

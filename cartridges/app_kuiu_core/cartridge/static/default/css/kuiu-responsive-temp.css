@@ -74,7 +74,8 @@
      #main .account-landing.wishlist-details-section .item-option.option-add-to-cart label,
      #main .account-landing.wishlist-details-section .item-dashboard,
      .ui-dialog.send-to-friend-main,
-     .ui-dialog.send-to-friend-main textarea {
+     .ui-dialog.send-to-friend-main textarea,
+     .ui-dialog.send-to-friend-review {
  	   width:100% !important;
 	 }
 	 #main .account-landing.wishlist-details-section .item-list .item-image {
@@ -149,12 +150,30 @@
 		margin-left:0px;
 	}
 	.ui-dialog.send-to-friend-main .input-checkbox {
-    	width: 25%;
-    	margin-left: -22px;
-    	margin-top: -44px;
+	    width: 25%;
+	    margin-left: -24px;
+	    margin-top: -39px;
+	    height: auto;
 	}
 	 .ui-dialog.send-to-friend-main .ui-icon-closethick {
  		border-bottom:none;
+ 	}
+ 	.ui-dialog.send-to-friend-review dd {
+    	margin-left: 25%;
+ 	}
+ 	
+ 	 .ui-dialog.send-to-friend-review .edit-button,
+ 	 .ui-dialog.send-to-friend-review .send-button {
+    	width: 45%;
+ 	}
+ 	.ui-dialog.send-to-friend-review .cancel.cancel-button {
+   		background-color: transparent;
+    	border: none;
+    	color: #2b2b2b;
+		margin-left: 0px;
+    	text-decoration: underline;
+    	text-align: center;
+    	width: 100%;
  	}
 }
 
@@ -206,7 +225,8 @@
 	 #main .wishlist-details-section {
 	 	border-left:none;
 	 }
-	 .ui-dialog.send-to-friend-main {
+	 .ui-dialog.send-to-friend-main,
+	 .ui-dialog.send-to-friend-review {
 	 	width:75% !important;
 	 }
 }

@@ -6,11 +6,11 @@
 	
 	<iscomment>create reporting event</iscomment>
 	<isinclude template="util/reporting/ReportSearch.isml"/>
-	
+	<iscomment>
 	<div class="no-hits-banner">
 		<isslot id="noresult-banner" description="Banner for searches with no hits" context="global"/>
 	</div>
-
+	</iscomment>
 	<h1>${Resource.msg('search.nohits.header','search',null)}</h1>
 
 	<div class="section-header">

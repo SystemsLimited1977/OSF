@@ -5451,7 +5451,8 @@ tr.order-sales-tax {
 .ui-dialog.create-new-address,
 .ui-dialog.edit-address,
 .ui-dialog.add-cc-details,
-.ui-dialog.send-to-friend-main {
+.ui-dialog.send-to-friend-main,
+.ui-dialog.send-to-friend-review {
     border: none;
     padding: 20px;
 }
@@ -5459,7 +5460,8 @@ tr.order-sales-tax {
 .ui-dialog.create-new-address .ui-widget-header,
 .ui-dialog.edit-address .ui-widget-header,
 .ui-dialog.add-cc-details .ui-widget-header,
-.ui-dialog.send-to-friend-main .ui-widget-header {
+.ui-dialog.send-to-friend-main .ui-widget-header,
+.ui-dialog.send-to-friend-review .ui-widget-header  {
     background-color: #fff;
     border-bottom: none;
     font-size:26px;

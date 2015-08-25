@@ -56,11 +56,11 @@
 			<div class="error-page-footer-asset">
 				<iscontentasset aid="error-service"/>
 			</div>
-			
+			<iscomment>
 			<div class="error-page-footer-slot">
 				<isslot id="error-promo" description="Banner for general error" context="global" />
 			</div>
-			
+			</iscomment>
 		</div>
 
 

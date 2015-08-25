@@ -20,20 +20,23 @@ ul li.onorder {color:red;}
 <body>
 <div class="previewpanel" id="previewPanel">
 <table style="width:100%">
-	<tr>
-		<td style="vertical-align:top;">
-			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}"><img src="${URLUtils.httpStatic('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/></a>
-		</td>
-		<td style="text-align:right;">
-			<b>${Resource.msg('global.storename','locale',null)}</b><br />
-			${Resource.msg('global.storeaddress','locale',null)}<br />
-			${Resource.msg('global.storecitystate','locale',null)}<br />
-			${Resource.msg('global.storephone','locale',null)}<br />
-		</td>
-	</tr>
+					<tr>
+						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
+							<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">
+								<img src="${URLUtils.httpStatic('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
+							</a>
+						</td>
+						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;float: right;">
+							<strong>${Resource.msg('global.storename','locale',null)}</strong><br />
+							${Resource.msg('order.orderconfirmation-email.storeaddress','order',null)}<br />
+							${Resource.msg('order.orderconfirmation-email.storelocation','order',null)}<br />
+							<a href="${URLUtils.httpHome()}" title="${Resource.msg('order.orderconfirmation-email.jumptostore','order',null)}">${Resource.msg('global.storenameurl','locale',null)}</a><br />
+							${Resource.msg('order.orderconfirmation-email.storephone','order',null)}
+						</td>
+					</tr>
 </table>
 <div style="border:1px solid #CCCCCC;margin:0;padding:0;">
-	<h3 style="background-color:#CCCCCC;color:black;font-size:1.3em;font-weight:bold;margin:0;padding:5px 0;text-align:center;">
+	<h3 style="background-color:#000;color:#fff;font-size:1.3em;font-weight:bold;margin:0;padding:5px 0;text-align:center;">
 		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}"> 			<isprint value="${pdict.ProductList.name}"/>
 		<iselseif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 			${Resource.msg('productlist.wishlistemailheader','account',null)}
@@ -91,7 +94,7 @@ ul li.onorder {color:red;}
 		<isif condition="${item.public}">
 			<tr <isif condition="${loopstate.first}">class="first"<iselseif condition="${loopstate.last}">class="last"</isif>>
 				<td style="margin:auto;text-align:center;width:113px;">
-					<isdisplayproductimage p_productli="${item}" p_email="${true}"/>
+					<isdisplayproductimage p_productli="${item}" p_email="${true}" />
 				</td>
 				<td>
 					<isdisplayproductlistitem p_productli="${item}"/>

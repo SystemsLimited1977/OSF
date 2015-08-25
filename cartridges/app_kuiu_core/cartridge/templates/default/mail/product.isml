@@ -19,7 +19,7 @@
 					<tr>
 						<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 							<p><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></p>
-							<p><a href='<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${pdict.CurrentForms.sendtofriend.messagelinktext.htmlValue}"/></a></p>
+							<p><a href='<isprint value="${pdistyle="margin:auto;text-align:center;width:113px"ct.CurrentForms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${pdict.CurrentForms.sendtofriend.messagelinktext.htmlValue}"/></a></p>
 						</td>
 					</tr>
 					<tr>
@@ -44,7 +44,7 @@
 								<isset name="imageTitle" value="${p_productli.product.name}" scope="page"/>
 								<isset name="imageAlt" value="${p_productli.product.name}" scope="page"/>
 							</isif>
-							<img src="${thumbnailUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+							<img src="${thumbnailUrl}" alt="${imageAlt}" title="${imageTitle}" style="width:100;" />
 						</td>
 						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 							<h1 style="font-size:20px;font-family:georgia;font-weight:normal;"><isprint value="${pdict.Product.name}" encoding="off"/></h1>

@@ -2,6 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
+<isinclude template="util/modules"/>
+<isinclude template="components/header/htmlhead"/>
+<isinclude template="content/home/pt_storefront_UI"/>
+
+
 <iscomment>This page must be cached to prevent performance problems</iscomment>
 <iscache type="relative" hour="24"/>
 
@@ -16,6 +21,23 @@
 </head>
 
 <body>
-	${Resource.msg('global.redirect_error.message','locale',null)} <a href="/">${Resource.msg('global.redirect_error.home','locale',null)}</a>
+	<div id="wrapper" class="pt_product-search-noresult">
+
+		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+
+		<div id="main" role="main" class="page-content clearfix">
+			<div class="container no-design">
+				<div id="primary" class="primary-content col-xs-12 redirect-error-pt">
+				<h1>${Resource.msg('notfound.pagenotfound','error',null)}</h1>
+					<p>${Resource.msg('global.redirect_error.message','locale',null)} <a href="${URLUtils.url('Home-Show')}"><span>${Resource.msg('global.redirect_error.home','locale',null)}</span></a></p>
+				</div>
+			</div>
+
+		</div>
+
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="search/pt_productsearchresult_VARS"/>
+
+	</div>
 </body>
 </html>
