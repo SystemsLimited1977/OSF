@@ -6,14 +6,14 @@
 		<isif condition="${pdict.CurrentCustomer.registered}">
 	        <span class="welcomemessage">${Resource.msg('headercustomerinfo.welcomecol','locale',null)}</span>
 	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink','locale',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" class="username">
-	        	<span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></span>
+			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
 	        </a>
 	        
 	        <isif condition="${!pdict.CurrentCustomer.authenticated}">
 				<span class="unauthenticated">(<a title="${Resource.msg('global.login','locale',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" class="userlogin">${Resource.msg('headercustomerinfo.pleaselogin','locale',null)}</a>)</span>
 				<span class="divider">|</span>
 	        </isif>
-	        <a title="${Resource.msg('headercustomerinfo.not','locale',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}" class="usernot">(${Resource.msg('headercustomerinfo.not','locale',null)} ${pdict.CurrentCustomer.profile.firstName}?)</a>
+	        (<span class="user-logout">${Resource.msg('headercustomerinfo.not','locale',null)}</span>&nbsp;<a title="${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}" class="usernot">${pdict.CurrentCustomer.profile.firstName}</a>?)
     	<iselse>
 	        
 	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login','locale',null)}" class="userlogin">${Resource.msg('headercustomerinfo.welcome','locale',null)}</a>

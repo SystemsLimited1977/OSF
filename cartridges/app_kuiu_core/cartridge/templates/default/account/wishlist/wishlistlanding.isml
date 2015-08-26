@@ -7,7 +7,7 @@
 	<div class="col-1">
 
 		<isinclude template="account/login/logininclude"/>
-
+	<iscomment>
 		<div class="login-box login-general clearfix">
 
 			<h2>${Resource.msg('wishlist.searchheader','account',null)}</h2>
@@ -21,7 +21,7 @@
 			</div>
 
 		</div>
-
+	</iscomment>
 	</div><!-- END: page column -->
 
 	<div class="col-2">

@@ -93,10 +93,9 @@
 					</div>
 				<iselseif condition="${pdict.GiftCertificate != null}">
 					<div class="form-row error">
-						${Resource.msg('giftcertpurchase.balancealert', 'checkout', null)} <isprint value="${pdict.GiftCertificate.balance}"/>
+						<p class="balance-status">${Resource.msg('giftcertpurchase.balancealert', 'checkout', null)} <isprint value="${pdict.GiftCertificate.balance}"/></p>
 					</div>
 				</isif>
-				<p class="balance-status">Your current gift certificiate balance is: $XX.XX</p>
 			</fieldset>
 			
 		</form>

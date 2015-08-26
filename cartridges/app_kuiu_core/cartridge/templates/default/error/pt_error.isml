@@ -29,11 +29,11 @@
 
 	<div id="main" role="main" class="page-content clearfix">
 		<div class="container">
-		<div id="primary" class="primary-content pull-right col-xs-12 col-sm-12 col-md-9 error-landing-page">
+		<div id="primary" class="primary-content pull-right col-xs-12 col-sm-8 col-md-9 error-landing-page">
 			<isreplace/>
 		</div>
 
-		<div id="secondary" class="nav pull-left col-xs-12 col-sm-3 ">
+		<div id="secondary" class="nav pull-left col-xs-12 col-sm-4 col-md-3 error-landing-page-secondary ">
 			<nav>
 				<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
 				<div class="secondary-navigation">

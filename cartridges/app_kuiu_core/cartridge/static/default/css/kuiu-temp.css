@@ -303,3 +303,47 @@
 .pt_product-search-noresult #main .no-design #primary.redirect-error-pt p span {
 	    text-decoration: underline;
 }
+.ui-dialog.email-sigup-popup-main {
+    width: 650px!important;
+    height: auto!important;
+}
+.user-info .welcomemessage,.user-logout,
+.cart-empty h1 {
+	text-transform: capitalize !important;
+}
+
+.error-landing-page {
+	padding-left:30px;
+}
+.pt_error #main {
+	padding:30px 0px;
+}
+
+.pt_error #main .error-landing-page h1 {
+	margin-top:0px !important;
+}
+
+.pt_error #main .error-landing-page .form-row.label-above button {
+	margin-left: 140px;
+    margin-top: 22px;
+    width: 13%;
+}
+
+.pt_error #main .error-landing-page-secondary#secondary nav .secondary-navigation ul {
+    margin: 0 15px 0px;
+    padding: 0;
+}
+.pt_error #main .error-landing-page form label {
+	width:17%;
+}
+
+.cart-empty .button-text {
+	color:#fff;
+}
+
+#main .categoryheader .sort-by form select {
+	 width: 152px;
+}
+.wishlist-details-section h1 {
+	margin-top:0px !important;
+}

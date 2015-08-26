@@ -62,7 +62,7 @@
 			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
-						&#171; ${Resource.msg('global.continueshopping','locale',null)}
+					  ${Resource.msg('global.continueshopping','locale',null)}
 					</button>
 				</fieldset>
 			</form>
@@ -464,12 +464,12 @@
 										</div>
 
 										<p class="gift-cert-delivery">
-											${Resource.msg('cart.giftcertdelivery','checkout',null)}
+											&nbsp;${Resource.msg('cart.giftcertdelivery','checkout',null)}
 										</p>
 
 										<div class="giftcertamount clearfix">
 											<span class="label">
-												${Resource.msg('global.price','locale',null)}:
+												&nbsp;${Resource.msg('global.price','locale',null)}:
 											</span>
 											<span class="value">
 												<isprint value="${GiftCertificate.object.basePrice}" />
@@ -480,7 +480,7 @@
 											<isif condition="${GiftCertificate.object.recipientName!=null}">
 
 												<span class="label">
-													${Resource.msg('global.to','locale',null)}:
+													&nbsp;${Resource.msg('global.to','locale',null)}:
 												</span>
 												<span class="value">
 													<isprint value="${GiftCertificate.object.recipientName}" />,
@@ -492,7 +492,7 @@
 										<div class="attribute">
 											<isif condition="${GiftCertificate.object.senderName!=null}">
 												<span class="label">
-													${Resource.msg('global.from','locale',null)}:
+													&nbsp;${Resource.msg('global.from','locale',null)}:
 												</span>
 												<span class="value">
 													<isprint value="${GiftCertificate.object.senderName}" />
@@ -506,11 +506,11 @@
 											<span class="product-list-item">
 												<isif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 													<a href="${URLUtils.url('Wishlist-ShowOther','WishListID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.wishlistitem','checkout',null)}">
-														${Resource.msg('product.display.wishlistitem','product',null)}
+														&nbsp;${Resource.msg('product.display.wishlistitem','product',null)}
 													</a>
 												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
 													<a href="${URLUtils.https('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
-														${Resource.msg('cart.registryitem','checkout',null)}
+														&nbsp;${Resource.msg('cart.registryitem','checkout',null)}
 													</a>
 												</isif>
 											</span>
@@ -558,7 +558,7 @@
 
 								<td class="item-details">
 
-									<div class="name">${Resource.msg('cart.coupon','checkout',null)}</div>
+									<div class="name">&nbsp;${Resource.msg('cart.coupon','checkout',null)}</div>
 									<div class="cartcoupon clearfix">
 										<span class="label">${Resource.msg('cart.couponcode','checkout',null)}</span>
 										<span class="value">
@@ -805,11 +805,11 @@
 													</td>
 													</isif>
 													<td class="item-quantity">
-														<isprint value="${bli.quantity}" />
+														&nbsp;<isprint value="${bli.quantity}" />
 													</td>
 
 													<td class="item-quantity-details">
-														${Resource.msg('global.included','locale',null)}
+														&nbsp;${Resource.msg('global.included','locale',null)}
 
 														<iscomment>Product Existence and Product Availability</iscomment>
 														<isif condition="${!bli.bonusProductLineItem}">

@@ -175,12 +175,32 @@
     	text-align: center;
     	width: 100%;
  	}
+ 	.pt_error #main .error-landing-page-secondary#secondary {
+ 		border-right:none;
+ 	}
+ 	.pt_error #main .error-landing-page form label,
+ 	.pt_error #main .error-landing-page .form-row.label-above button  {
+		width:100%;
+	}
+	.pt_error #main .error-landing-page .form-row.label-above button {
+		margin-left: 0px;
+    	margin-top: 15px;
+	}
+	.error-landing-page {
+		padding-left:0px;
+	}
+	.pt_error #main .error-landing-page-secondary#secondary nav .secondary-navigation ul,
+	.pt_error #main .error-landing-page-secondary#secondary nav .secondary-navigation .toggle {
+		margin:0px;
+		padding:0px;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
     
     .account-address-landing .address-list li,
-    .account-payment-details .payment-list li {
+    .account-payment-details .payment-list li,
+	.pt_error #main .error-landing-page form label  {
         width: 50%;
     }
     #main #primary.password-reset-section input[type="password"] {
@@ -228,6 +248,11 @@
 	 .ui-dialog.send-to-friend-main,
 	 .ui-dialog.send-to-friend-review {
 	 	width:75% !important;
+	 }
+	 .pt_error #main .error-landing-page .form-row.label-above button {
+    	margin-left: 0px;
+    	margin-top: 22px;
+    	width: 25%;
 	 }
 }
 @media ( min-width : 992px) and (max-width: 1199px) {

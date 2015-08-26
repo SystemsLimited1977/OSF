@@ -67,9 +67,15 @@
 				<isloop items="${subCatLayout.subCategories}" var="subCat" status="stat">
 					<isif condition="${stat.index <= subCatLayout.maxColLength -1}">
 						<li>
-							<a href="<isprint value="${getCategoryUrl(subCat)}" encoding="off"/>">
-								<isprint value="${subCat.getDisplayName()}"/>
-							</a>
+							<isif condition="${!empty(subCat.custom.alternativeUrl)}">
+								<a target="_blank" href="<isprint value="${getCategoryUrl(subCat)}" encoding="off"/>">
+									<isprint value="${subCat.getDisplayName()}"/>
+								</a>
+							<iselse>
+								<a href="<isprint value="${getCategoryUrl(subCat)}" encoding="off"/>">
+									<isprint value="${subCat.getDisplayName()}"/>
+								</a>
+							</isif>
 							<isset name="thirdLevelCategories" value="${getSubcategoriesInMenuForCategory(subCat)}" scope="page"/>
 							<isif condition="${thirdLevelCategories.length > 0}">
 								<ul class="level-3">

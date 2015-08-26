@@ -61,7 +61,7 @@ of a customer using call center application <isif
 											<li> 
 										<div class="generalnav">
 										 <span class="divider">|</span> 
-											<a href="${URLUtils.http('CustomerService-ContactUs')}"
+											<a href="${URLUtils.https('CustomerService-ContactUs')}"
 												title="${Resource.msg('header.help','locale',null)}">${Resource.msg('header.help','locale',null)}</a>
 											<span class="phone">(${Resource.msg('header.storelocatorphone','locale',null)})</span>
 											<iscomment> <span class="divider">|</span> <a

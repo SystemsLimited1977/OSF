@@ -47,11 +47,11 @@
 
 		</form>
 		</isif>
-
+	<iscomment>
 		<div class="login-oauth">
 			<isinclude template="account/login/oauthlogininclude"/>
 		</div>
-
+	</iscomment>
 	</div>
 
 </div>

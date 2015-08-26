@@ -9,7 +9,7 @@
 	importScript('product/ProductUtils.ds');
 </isscript>
 
-<div class="breadcrumb">
+<div >
 	<iscomment>
 		<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a>
 	</iscomment>
@@ -62,11 +62,13 @@
 				<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span>
 			</isif>
 		</iscomment>
+		<div class="breadcrumb">
 		<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}" var="sortingOption">
 			<isif condition="${sortingOption.getID() == pdict.ProductSearchResult.sortingRule.ID}">
 				<span class="breadcrumb-refinement">${sortingOption.getDisplayName()}</span>
 			</isif>
 		</isloop>
+		</div>
 	</isif>
 
 	<iscomment>REFINEMENT INFO </iscomment>
@@ -78,6 +80,7 @@
 		</iscomment>
 		<iscomment>Price</iscomment>
 		<isif condition="${pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice}">
+			<div class="breadcrumb">
 			<isscript>
 				// for price refinements, we use the display value of the price refinement definition's value
 				var breadcrumbLabel = null
@@ -110,10 +113,11 @@
 					<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 				</span>
 			</span>
-
+			</div>
 		</isif>
 
 		<iscomment>attributes</iscomment>
+		<div class="breadcrumb">
 		<isset name="hasAttributes" value="${false}" scope="page" />
 		<isloop items="${pdict.ProductSearchResult.refinements.refinementDefinitions}" var="definition" status="attributes">
 			<isif condition="${definition.isAttributeRefinement() && pdict.ProductSearchResult.isRefinedByAttribute(definition.attributeID)}">
@@ -138,7 +142,7 @@
 				</span>
 			</isif>
 		</isloop>
-		
+		</div>
 		<a href="${dw.web.URLUtils.url('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.stringValue)}" id="clearallrefinements">${Resource.msg('refinements.slider.clearall','search',null)}</a>
 	</isif>
 
