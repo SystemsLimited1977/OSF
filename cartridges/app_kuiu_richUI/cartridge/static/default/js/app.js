@@ -317,6 +317,13 @@ $(document).ready(function () {
 	app.init();
 });
 
+//Placeholder for IE
+$(function() {
+    $('input, textarea').placeholder({
+        customClass: 'my-placeholder'
+    });
+});
+
 },{"./cookieprivacy":5,"./dialog":6,"./email-signup":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":14,"./pages/account":15,"./pages/cart":16,"./pages/checkout":20,"./pages/compare":23,"./pages/product":28,"./pages/registry":33,"./pages/search":34,"./pages/storefront":35,"./pages/storelocator":36,"./pages/wishlist":37,"./rating":41,"./searchplaceholder":42,"./searchsuggest":44,"./searchsuggest-beta":43,"./tooltip":49,"./util":50,"./validator":51}],3:[function(require,module,exports){
 'use strict';
 
@@ -1156,7 +1163,7 @@ var emailSignUp = {
 			    draggable: false,
 			    resizable: false,
 			    width: 720,
-			    dialogClass: 'ui-dialog-osx'
+			    dialogClass: 'ui-dialog-osx email-sigup-popup-main'
 			});
 			
 		})

@@ -206,3 +206,10 @@ var app = {
 $(document).ready(function () {
 	app.init();
 });
+
+//Placeholder for IE
+$(function() {
+    $('input, textarea').placeholder({
+        customClass: 'my-placeholder'
+    });
+});

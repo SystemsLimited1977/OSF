@@ -44,7 +44,7 @@ var emailSignUp = {
 			    draggable: false,
 			    resizable: false,
 			    width: 720,
-			    dialogClass: 'ui-dialog-osx'
+			    dialogClass: 'ui-dialog-osx email-sigup-popup-main'
 			});
 			
 		})
