@@ -207,6 +207,10 @@ footer .footer-container .content-asset ul {
 	cursor: pointer;
 	float: left;
 }
+#secondary .social-icon ul.social-links li a,
+#secondary .social-icon ul.social-links.links-size li a  {
+	background-image: url("../images/interface/icon-social-links-sidebar.png");
+}
 .social-icon ul.social-links li a.fb {
 	background-position: 120px 116px;
 }
@@ -784,7 +788,7 @@ header .col-md-12 ul {
 }
 
 .login-box p {
-    margin: 4px 0 1em;
+    margin: 4px 0 5px;
 }
 
 .col-1,
@@ -3796,7 +3800,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .pt_account #main .login-box .login-rememberme label {
-	 padding:0 0 0 10px;
+	 padding:0 0 0 5px;
 	 height:26px;
 }
 
@@ -3814,6 +3818,11 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 	display:block;
 	float:none;
 	clear:both;
+}
+
+.pt_account #main .login-box.login-account button,
+.pt_account #main .login-box.login-order-track button {
+	width:150px;
 }
 
 #main .checkoutlogin .login-box .login-oauth,
@@ -4740,11 +4749,15 @@ table .section-header {
 }
 
 .pt_account .login-order-track {
-	margin-top:30px;
+	margin-top:20px;
 }
 
 .pt_account .login-box a.tooltip {
 	font-style:italic;
+}
+
+.pt_account .login-box .form-row {
+	margin:0 0 5px;	
 }
 
 /*Account landing page styling*/
@@ -5569,10 +5582,20 @@ tr.order-sales-tax {
 }
 
 
+.login-box.login-order-track .login-box-content {
+    padding: 2px 2em 0 0;
+}
 
+.login-box.login-order-track .login-box-content .form-row-button {
+	margin-bottom:0;
+}
 
-
-
+.error-form {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #990000;
+    margin: 1em 0;
+    padding: 0.5em 0 0;
+}
 
 
 

@@ -60,7 +60,7 @@
 						<fieldset>
 							<div class="form-row form-row-button">
 								<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}">
-									${Resource.msg('global.createnowbutton','locale',null)}
+									${Resource.msg('global.createbutton','locale',null)}
 								</button>
 							</div>
 							<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
