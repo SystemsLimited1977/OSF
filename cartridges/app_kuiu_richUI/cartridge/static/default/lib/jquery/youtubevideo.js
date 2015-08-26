@@ -57,7 +57,7 @@
 	                //position: ['center', 'center'],
 	                width: 700,
 	                height:547,
-	                dialogClass: 'ui-dialog-osx',
+	                dialogClass: 'ui-dialog-osx video-popup',
 	                close: function(event, ui){
 	                	$('#youtube-video-container').dialog('close');
 	                	$('#youtube-video-container').remove();

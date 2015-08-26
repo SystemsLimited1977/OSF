@@ -993,6 +993,7 @@ div {
 	text-transform: uppercase;
 	margin-top: 29px;
 	line-height:100%;
+	margin-bottom:25px;
 }
 
 .pt_customer-service  .primary-content.col-md-9 .col-md-9 {
@@ -5649,8 +5650,50 @@ ul.product-availability-list li {
     text-transform:capitalize;
 }
 
+.pt_account .new-account .form-row {
+	margin:0 0 20px;
+}
 
+.pt_account .form-row span.error {
+	margin: 1% 2% 0 25%;
+}
 
+.ui-dialog.video-popup {
+	border: none;
+    padding: 0;
+}
+
+.ui-dialog.video-popup .ui-widget-header {
+    background-color: #fff;
+    border-bottom: none;
+    height: auto;
+    padding: 0;
+}
+
+.ui-dialog.video-popup .ui-dialog-title {
+	display:none;
+}
+
+.ui-dialog.video-popup .ui-dialog-titlebar-close {
+	z-index: 100;
+}
+
+.ui-dialog.video-popup .ui-icon-closethick {
+    background-image: url("../images/qw_popup_close.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-bottom: none;
+    width: 100%;
+}
+
+#youtube-video-container {
+    height: auto !important;
+    padding: 15px !important;
+}
+
+#youtube-video-container iframe {
+	width:100% !important;
+}
 
 
 
