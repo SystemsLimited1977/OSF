@@ -2168,7 +2168,7 @@ footer h6 {
 
 	.checkout-steps #main form .fld-checkbox {
 	    padding-left:0;
-	    margin-bottom:10px;
+	    margin-bottom:0;
 	}
 	
 	.checkout-steps #main .form-row {
@@ -2178,6 +2178,7 @@ footer h6 {
 	
 	.checkout-steps #main .form-row .form-row {
 		width:100%;
+		margin:0 0 20px;
 	}
 	
 	legend {
@@ -2448,20 +2449,20 @@ footer h6 {
 	}*/
 	
 	.form-field-tooltip {
-    	width: 25%;
+    	width: 20%;
 	}
 	
 	.checkout-steps #main form label {
-		width:20%;
+		width:25%;
 	}
 
 	.checkout-steps #main .form-row  .form-caption {
-		margin:0 0 0 20%;
+		margin:0 0 0 25%;
 		clear:both;
 	}
 
 	.checkout-steps #main form .fld-checkbox {
-	    padding-left:20%;
+	    padding-left:25%;
 	}
 	
 	.checkout-steps #main form .fld-checkbox label {
@@ -2475,11 +2476,11 @@ footer h6 {
 	}
 	
 	.checkout-steps #main .payment-methods-wrap .form-row-button {
-		margin-left:20%;
+		margin-left:25%;
 	}
 	
 	.checkout-steps #main .payment-methods-wrap .form-label-text {
-		width:20%;
+		width:25%;
 	}
 	
 	.checkout-steps #main .form-row.month {

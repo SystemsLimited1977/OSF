@@ -2962,13 +2962,11 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 .pdp-main  .product-overview {
 	background-color: #fafafa;
- 	-moz-box-shadow:    inset  0  8px 8px -8px #696868, 
-                        inset  0 -8px 8px -8px #696868;
-    -webkit-box-shadow: inset  0  8px 8px -8px #696868, 
-                        inset  0 -8px 8px -8px #696868;
-     box-shadow:        inset  0  8px 8px -8px #696868, 
-                        inset  0 -8px 8px -8px #696868;
-
+ 	-moz-box-shadow:    inset  0  8px 8px -8px #696868, inset  0 -8px 8px -8px #696868;
+    -webkit-box-shadow: inset  0  8px 8px -8px #696868, inset  0 -8px 8px -8px #696868;
+     box-shadow:        inset  0  8px 8px -8px #696868, inset  0 -8px 8px -8px #696868;
+     max-height:550px;
+     overflow:auto;
 }
 .pdp-main .product-overview .overview-top h1,
 .pdp-main  .product-technology .overview-top h1,
@@ -3491,6 +3489,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .quickview-popup .product-set .link-viewdetails {
+	display:none;
+}
+
+.quickview-popup .pdp-description-wrap a {
 	display:none;
 }
 
@@ -4040,16 +4042,16 @@ a.tooltip {
 
 .form-field-tooltip {
     float: right;
-    margin: -44px 0 0;
-    width: 44%;
+    margin: -22px 0 0;
+    width: 40%;
 }
 
 .with-helper-text {
-    margin-top: -61px;
+  	margin: -40px 0 0;
 }
 
 .checkout-steps #main form label {
-	width:15%;
+	width:20%;
 }
 
 .checkout-steps #main .form-row {
@@ -4069,15 +4071,15 @@ a.tooltip {
 
 .checkout-steps #main .form-row .form-caption,
 .checkout-steps #main .form-row .char-count {
-	margin:0 0 0 15%;
+	margin:0 0 0 20%;
 	clear:both;
 }
 
 .checkout-steps #main form .fld-checkbox {
     display: inline-block;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     margin-left: 0;
-    padding-left:15%;
+    padding-left:20%;
     float:left;
 }
 
@@ -4145,6 +4147,10 @@ a.tooltip {
 
 .checkout-steps #main #shipping-method-list .form-row {
 	margin:0 0 15px;
+}
+
+.checkout-steps #main .select-address .form-row-button {
+	display:none;
 }
 
 .label {
@@ -4296,6 +4302,9 @@ legend .required-indicator  {
     text-decoration: underline;
 }
 
+.checkout-steps #main .form-row .form-row {
+	margin:0;
+}
 
 .checkout-steps #main .payment-method-options {
 	padding-left:0;
@@ -4367,6 +4376,10 @@ legend .required-indicator  {
 	/*border-top:none;*/
 	padding:10px 0;
 	color:#2b2b2b;
+}
+
+.checkout-progress-indicator a:hover {
+    text-decoration:none;
 }
 
 .checkout-progress-indicator div {
