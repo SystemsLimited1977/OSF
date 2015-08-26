@@ -1110,9 +1110,13 @@ span.error {
 .contact_us_img {
 	background-image: url("../images/contact_us_ban.png");
 	background-size: cover;
+	background-position: center center;
 	height: 360px;
 }
 
+.category_browse_img {
+	background-position: center center;
+}
 .social-links.links-size ul li {
 	  list-style: none;
 }
@@ -1546,7 +1550,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
    height:100%;
    display:block;
    position: relative;
-   background-position: right top;
+   background-position: center center;
    background-size: cover;
    z-index:1;
  }
@@ -1662,6 +1666,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .ui-dialog {
 	border: 15px solid #b2b2b2;
     padding: 5px 20px;
+    Overflow:auto;
 }
 .ui-dialog .ui-widget-header {
 	background-color: #fff;
@@ -4055,6 +4060,10 @@ a.tooltip {
     width: 40%;
 }
 
+.form-field-tooltip.cvn-tip {
+	margin: -42px 0 0;	
+}
+
 .with-helper-text {
   	margin: -40px 0 0;
 }
@@ -4080,7 +4089,7 @@ a.tooltip {
 
 .checkout-steps #main .form-row .form-caption,
 .checkout-steps #main .form-row .char-count {
-	margin:0 0 0 20%;
+	margin:6px 0 0 20%;
 	clear:both;
 }
 
@@ -4158,7 +4167,9 @@ a.tooltip {
 	margin:0 0 15px;
 }
 
-.checkout-steps #main .select-address .form-row-button {
+.checkout-steps #main .select-address .form-row-button,
+.checkout-steps #main .form-row-button.payment-select,
+.checkout-steps #main .form-row-button.credit-card-select {
 	display:none;
 }
 
@@ -4331,7 +4342,11 @@ legend .required-indicator  {
 }
 
 .checkout-steps #main span.error {
-	margin:1% 2% 0 15%;
+	margin:1% 2% 0 20%;
+}
+
+.checkout-steps #main .gift-discount-codes-wrap span.error {
+    margin: 1% 2% 0 0;
 }
 
 .checkout-steps #main .payment-methods-wrap .form-label-text {
@@ -4341,7 +4356,7 @@ legend .required-indicator  {
     font-weight: 500;
     padding: 0.5em 0.5em 0 0;
     text-align: left;
-    width: 15%;
+    width: 20%;
 }
 
 .checkout-steps #main .form-row.month {
@@ -4363,7 +4378,7 @@ legend .required-indicator  {
 }
 
 .form-field-tooltip.cvn-tip {
-	width:65%;
+	width:60%;
 }
 
 .mini-shipment {
@@ -4387,9 +4402,7 @@ legend .required-indicator  {
 	color:#2b2b2b;
 }
 
-.checkout-progress-indicator a:hover {
-    text-decoration:none;
-}
+
 
 .checkout-progress-indicator div {
 	border-right:1px solid #e0e0e0;
@@ -4415,6 +4428,10 @@ legend .required-indicator  {
 	color:#2b2b2b;
 	font-weight:500;
 	border-bottom:2px solid #2b2b2b;
+}
+
+.checkout-progress-indicator a:hover {
+    text-decoration:none;
 }
 
 .checkout-steps #main h1 {
@@ -5596,6 +5613,30 @@ tr.order-sales-tax {
     margin: 1em 0;
     padding: 0.5em 0 0;
 }
+
+.ui-dialog .ui-dialog-titlebar {
+	font-size: 24px;
+    line-height: 100%;
+    font-weight:500;
+    padding: 0;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+span.form-caption:empty {
+   display: none;
+}
+
+div.form-row:empty {
+   display: none;
+}
+
+
+
+
+
+
+
+
 
 
 

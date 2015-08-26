@@ -2472,7 +2472,7 @@ footer h6 {
 	
 	.checkout-steps #main .form-row a.privacy-policy {
 		display:inline;
-		margin:-37px 0 0 112px;
+		margin:5px 0 0 24px;
 	}
 	
 	.checkout-steps #main .payment-methods-wrap .form-row-button {
@@ -2497,7 +2497,7 @@ footer h6 {
 	}
 	
 	.form-field-tooltip.cvn-tip {
-		width:53%;
+		width:47%;
 	}
 	
 	.place-order-totals .order-totals-table {

@@ -138,11 +138,13 @@
 				</div>
 				
 					<iscomment>Add address to Address Book</iscomment>
-					<div class="form-row fld-checkbox">
+					
 						<isif condition="${pdict.CurrentCustomer.authenticated}">
+						<div class="form-row fld-checkbox">
 							<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
+						</div>
 						</isif>
-					</div>
+					
 
 				<div class="form-row required fld-checkbox">
 					<iscomment>Use address for Billing Address</iscomment>
