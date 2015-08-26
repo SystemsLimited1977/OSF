@@ -4,7 +4,9 @@
 
 	<li class="user-info">
 		<isif condition="${pdict.CurrentCustomer.registered}">
-	        <span class="welcomemessage">${Resource.msg('headercustomerinfo.welcomecol','locale',null)}</span>
+	        <span class="welcomemessage">${Resource.msg('headercustomerinfo.welcomecol','locale',null)} 
+	        ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}
+	       </span>
 	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink','locale',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" class="username">
 	        	<span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></span>
 	        </a>
