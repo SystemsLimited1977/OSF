@@ -111,12 +111,12 @@
 					<span class="value"><isprint value="${productLineItem.quantity}"/></span>
 
 					<isif condition="${productLineItem.bonusProductLineItem}">
-						${Resource.msg('global.bonus','locale',null)}
+					<span class="pull-right">${Resource.msg('global.bonus','locale',null)}</span>
 					<iselse/>
-						<isset name="productTotal" value="${productLineItem.adjustedPrice}" scope="page"/>
+						<span class="pull-right"><isset name="productTotal" value="${productLineItem.adjustedPrice}" scope="page"/> </span>
 						<isif condition="${productLineItem.optionProductLineItems.size() > 0}">
 							<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
-								<isset name="productTotal" value="${productTotal.add(optionLI.adjustedPrice)}" scope="page"/>
+								<span class="pull-right"><isset name="productTotal" value="${productTotal.add(optionLI.adjustedPrice)}" scope="page"/></span>
 							</isloop>
 						</isif>
 						
@@ -153,7 +153,7 @@
 
 					<div class="mini-cart-pricing">
 						<span class="label">${Resource.msg('global.qty','locale',null)}: 1</span>
-						<span class="value"><isprint value="${gcLI.price}"/></span>
+						<span class="value pull-right"><isprint value="${gcLI.price}"/></span>
 					</div>
 
 				</div>

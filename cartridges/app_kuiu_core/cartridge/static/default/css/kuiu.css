@@ -5274,11 +5274,17 @@ table .section-header {
 #cart-table .rowgiftcert .product-list-item,
 .rowcoupons .cartcoupon .label,
 .rowcoupons .cartcoupon .value,
-#cart-table .item-total .bonus-item {
+#cart-table .item-total .bonus-item,
+#cart-table .cart-row .label,
+#cart-table .cart-row .value {
     font-size: 13px;
     font-style: normal;
     padding: 0px;
     font-weight: normal;
+}
+
+#cart-table td.item-image img {
+	max-width:200px;	
 }
 
 #cart-table .item-user-actions button,
@@ -6412,3 +6418,48 @@ ul.product-availability-list li {
 .wishlist-details-section h1 {
     margin-top: 0px !important;
 }
+
+.item-list tr.shipment-heading {
+    border-bottom: none;
+}
+
+.pt_checkout #cart-table .cart-row .shipment-label {
+    font-weight: 500;
+    margin-top: 15px;
+    font-family: "Times New Roman",Georgia,serif;
+    font-size: 16px;
+    text-transform:uppercase; 
+}
+
+.cart-promo {
+    background: #dcdcdc;
+    color: #1a1a1a;
+    font-style: italic;
+    margin: 0.3em 0;
+    padding: 1em;
+}
+
+.gift-discount-codes-wrap .redemption {
+	padding-top:5px;
+}
+
+.gift-discount-codes-wrap .redemption .success {
+	display: block;
+    padding-top: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

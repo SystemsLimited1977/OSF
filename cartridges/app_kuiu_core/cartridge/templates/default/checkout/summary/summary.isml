@@ -36,7 +36,7 @@
 
 					<isset name="shipmentCount" value="${shipmentCount+1}" scope="page"/>
 					<isif condition="${pdict.Basket.shipments.size() > 1}">
-						<tr class="cart-row">
+						<tr class="cart-row shipment-heading">
 							<td colspan="5">
 								<div class="shipment-label">Shipment ${'#' + shipmentCount}</div>
 							</td>

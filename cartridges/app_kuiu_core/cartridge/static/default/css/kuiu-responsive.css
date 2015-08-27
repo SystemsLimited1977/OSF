@@ -1832,9 +1832,8 @@
         clear: both;
         display: block;
         float: left;
-        margin-top: -25px;
         position: relative;
-        width: 70%;
+        width: 100%;
     }
     .home-bottom-slots {
         padding-top: 30px;

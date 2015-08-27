@@ -15,8 +15,15 @@ pipeline include for that). </iscomment>
 	<div class="footer-container footer-up clearfix">
 	
 		<div id="footer-cust" class="col-xs-12 col-sm-9 col-md-7 pull-left">
+		
 			<iscontentasset aid="footer-customer_service-about"/>
+			
+			<div class="footer-container footer-privacy">
+				<iscontentasset aid="footer-copy-privacy-terms"/>
+			</div>
+			
 		</div>
+		
 
 		<div class="col-xs-12 col-sm-3 col-md-5 footer-right pull-right">
 			<iscomment>
@@ -31,11 +38,7 @@ pipeline include for that). </iscomment>
 	<script>
 		
 	</script>
-	<div class="footer-container footer-privacy">
-
-		<iscontentasset aid="footer-copy-privacy-terms"/>
-
-	</div>
+	
 </footer>
 <iscomment> Customer registration can happen everywhere in
 the page flow. As special tag in the pdict is indicating it. So we have
