@@ -3429,7 +3429,9 @@ exports.init = function () {
 var addProductToCart = require('./product/addToCart'),
 	page = require('../page'),
 	sendToFriend = require('../send-to-friend'),
-	util = require('../util');
+	util = require('../util'),
+	dialog = require('../dialog'),
+	validator = require('../validator');
 
 exports.init = function () {
 	addProductToCart();
@@ -3442,9 +3444,33 @@ exports.init = function () {
 	$('.option-quantity-desired input').on('focusout', function () {
 		$(this).val($(this).val().replace(',', ''));
 	});
+	
+	//password reset link when user is not logged in and tries to add some item to wish list
+	$('#password-reset').on('click', function (e) {
+		e.preventDefault();
+		dialog.open({
+			url: $(e.target).attr('href'),
+			options: {
+				open: function () {
+					validator.init();
+					var $requestPasswordForm = $('[name$="_requestpassword"]'),
+						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
+					$($submit).on('click', function (e) {
+						if (!$requestPasswordForm.valid()) {
+							return;
+						}
+						e.preventDefault();
+						dialog.submit($submit.attr('name'));
+					});
+				}
+			}
+		});
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('password-forget');
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>Forgot Password?</h1>');
+	});
 };
 
-},{"../page":14,"../send-to-friend":45,"../util":50,"./product/addToCart":25}],38:[function(require,module,exports){
+},{"../dialog":6,"../page":14,"../send-to-friend":45,"../util":50,"../validator":51,"./product/addToCart":25}],38:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
