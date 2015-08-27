@@ -19,11 +19,19 @@
 }
 
 @media ( min-width : 320px) and (max-width: 767px) {
-
+	.pdp-main .promotion .promotion-title {
+		font-size:14px;
+	}
+	.pdp-main .promotion {
+		border-bottom: 1px solid #e6e6e6;
+	}
+	.pdp-main .promotion .promotion-callout {
+	    line-height: 15px;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
-    
+
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {

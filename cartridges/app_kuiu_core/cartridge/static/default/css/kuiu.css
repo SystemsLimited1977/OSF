@@ -1058,7 +1058,10 @@ div {
     text-transform: uppercase;
     margin-top: 29px;
     line-height: 100%;
-    margin-bottom: 25px;
+}
+
+.pt_account #main h1 {
+	margin-bottom: 25px;
 }
 
 .pt_customer-service .primary-content.col-md-9 .col-md-9 {
@@ -2594,7 +2597,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     box-shadow: none;
     background: none;
     margin-bottom: 16px;
-    height: 485px;
+    height: 500px;
     border-right: 1px solid #e6e6e6;
 }
 
@@ -5090,7 +5093,6 @@ table .section-header {
     margin-right: 1%;
 }
 
-.account-landing .content-asset .account-options li:nth-last-child(2),
 .account-landing .content-asset .account-options li:last-child {
     border-bottom: none;
 }

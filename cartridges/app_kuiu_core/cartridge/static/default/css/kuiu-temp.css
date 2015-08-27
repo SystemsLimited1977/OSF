@@ -1,0 +1,62 @@
+.pt_content.pt_customer-service h1 {
+	font-size: 32px;
+    text-transform: uppercase;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+.pt_product-search-result .product-price .price-standard { 
+	text-decoration: line-through; 
+}
+
+#wrapper.pt_content.pt_customer-service {
+	 background: transparent;
+	 padding-bottom:40px;
+}
+.content-page-section h2 {
+	font-size:12px;
+	font-weight:600;
+}
+.content-page-section p {
+	font-size:12px;
+	font-weight:400;
+}
+.pt_product-search-result .product-tile .product-promo {
+	font-size: 10px;
+    color: #2b2b2b;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 18px;
+    margin:0px;
+    text-align: left;
+    text-transform: capitalize;
+}
+.pdp-main .promotion {
+	background: transparent;
+	border-bottom: 1px solid #e6e6e6;
+	margin:0px;
+	padding: 3%;
+}
+.pdp-main .promotion .promotion-title {
+	color: #2b2b2b;
+	font-size: 15px;
+}
+.pdp-main .promotion .promotion-callout {
+	line-height: 30px;
+	padding-left:10px;
+}
+
+#wrapper.pt_content.pt_customer-service .content-heading-section {
+	margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+/*.footer_email #email-alert-address-error {
+    margin: 0;
+    position: absolute;
+    right: 15px;
+    text-align: left;
+    top: 38px;
+    width: 200px;
+}*/
+#email-alert-address-error {
+	margin-left:10px;
+}

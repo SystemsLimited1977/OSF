@@ -1,0 +1,110 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+<head>
+
+	<isinclude template="util/modules"/>
+	
+	<isinclude template="components/header/htmlhead"/>
+	<isinclude template="content/content/pt_content_UI"/>
+
+	<iscomment>Add template-specific header information here.</iscomment>	
+		
+</head>
+
+<body>
+
+	<div id="wrapper" class="pt_content pt_customer-service">
+	
+		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+		<div class="content-heading-section">
+		<center><h1><isprint value="${pdict.Content.name}" /></h1></center>
+		</div>
+		<div id="main" role="main">
+			 <div class="container">
+				<isinclude template="components/browsertoolscheck"/>
+				<iscomment>		
+					<isinclude template="components/contentbreadcrumbs"/>
+				</iscomment>
+					<div id="primary" class="primary-content col-xs-12 col-sm-8 col-md-9 pull-right content-page-section">	
+					
+
+						<iscomment>
+						Use the decorator template based on the page context. If
+						the content page was requested from a search result the
+						decorator search/pt_contentsearchresult is used. The default 
+						decorator for the content page is content/content/pt_content.
+					</iscomment>
+					<iscache type="relative" hour="24"/>
+					
+					<iscomment>
+						If content was found through a search build the list
+						of folders with the custom customCSSFile attribute to be
+						used in loading dynamic CSS.
+					</iscomment>
+					
+					<isscript>
+						var folder : dw.content.Folder = null;
+						var folderCustomCSS : dw.util.Collection = new dw.util.ArrayList();
+						
+						// get folder from search context
+						if( !empty(pdict.ContentSearchResult) )
+						{
+							folder = pdict.ContentSearchResult.folder;
+							
+							if (folder != null)
+							{
+								while( folder.parent != null )
+								{
+									if( folder.online && ('customCSSFile' in folder.custom) && !empty(folder.custom.customCSSFile)) 
+									{
+										folderCustomCSS.addAt( 0, folder );
+									}
+									folder = folder.parent;
+								}
+							}
+						}
+					</isscript>
+					
+					<iscomment>Render a "back" link and the article title based on the page context.</iscomment>
+					<isif condition="${!empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
+						<div class="back">
+							<a href="${pdict.ContentSearchResult.url('Search-ShowContent')}">
+								${Resource.msg('rendering.foldercontenthits.backtoresults','rendering',null)}
+							</a>
+						</div>
+					</isif>
+					
+					<iscomment>This content piece must deliver a valid wrapping div!</iscomment>
+					<isinclude template="content/content/htmlcontentasset"/>
+
+
+				</div>
+				
+					<div id="secondary" class="nav col-xs-12 col-sm-4 col-md-3  pull-left">
+						<div class="row">
+							<nav>
+								<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
+								<div class="secondary-navigation">
+									<isinclude url="${URLUtils.url('CustomerService-LeftNav')}"/>
+								</div>
+								<div class="account-nav-asset">
+									<iscontentasset aid="account-nav-text"/>
+								</div>
+							</nav>
+						</div>
+				
+				</div>
+			</div>
+		</div>
+		</div>
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="content/content/pt_content_VARS"/>
+		
+	</div>
+</body>
+</html>

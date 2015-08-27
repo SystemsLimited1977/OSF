@@ -121,7 +121,7 @@
 		<a class="z1" href="${imageUrlHiRes}">
 		
 	<!-- <a ${href} class="product-image main-image" title="${imageTitle}"> -->
-		<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+		<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
 		<div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div>
 	<!-- </a> -->
         </a>
