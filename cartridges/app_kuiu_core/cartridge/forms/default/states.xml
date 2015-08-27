@@ -281,14 +281,396 @@
 			
 		</options>	
 	</field>
-	<field formid="stateDE" label="resource.state.other" type="string" mandatory="false" binding="stateCodeDE" missing-error="address.state.missing" value-error="address.field.invalid">
-		<options>
-			
-			<option optionid="" 	label="resource.select" 		value=""/>					
-			
-			<!-- Other -->
-			<option optionid="OTHER" label="state.us.other" 	value="OTHER"/>
-		</options>	
-	</field>
 	
+	<field formid="stateDE" label="resource.state" type="string" mandatory="false" binding="stateCodeDE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateDZ" label="resource.province" type="string" mandatory="false" binding="stateCodeDZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAO" label="resource.province" type="string" mandatory="false" binding="stateCodeAO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAR" label="resource.province" type="string" mandatory="false" binding="stateCodeAR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAM" label="resource.region" type="string" mandatory="false" binding="stateCodeAM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAU" label="resource.state" type="string" mandatory="false" binding="stateCodeAU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAT" label="resource.state" type="string" mandatory="false" binding="stateCodeAT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAZ" label="resource.province" type="string" mandatory="false" binding="stateCodeAZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateAzores" label="resource.island" type="string" mandatory="false" binding="stateCodeAzores" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateBS" label="resource.region" type="string" mandatory="false" binding="stateCodeBS" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBD" label="resource.division" type="string" mandatory="false" binding="stateCodeBD" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBY" label="resource.province" type="string" mandatory="false" binding="stateCodeBY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBE" label="resource.region" type="string" mandatory="false" binding="stateCodeBE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBZ" label="resource.district" type="string" mandatory="false" binding="stateCodeBZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBJ" label="resource.department" type="string" mandatory="false" binding="stateCodeBJ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBT" label="resource.district" type="string" mandatory="false" binding="stateCodeBT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBO" label="resource.department" type="string" mandatory="false" binding="stateCodeBO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBA" label="resource.canton" type="string" mandatory="false" binding="stateCodeBA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBW" label="resource.district" type="string" mandatory="false" binding="stateCodeBW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBR" label="resource.estado" type="string" mandatory="false" binding="stateCodeBR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statebritishvirginisles" label="resource.district" type="string" mandatory="false" binding="stateCodebritishvirginisles" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateBN" label="resource.district" type="string" mandatory="false" binding="stateCodeBN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBG" label="resource.province" type="string" mandatory="false" binding="stateCodeBG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBF" label="resource.region" type="string" mandatory="false" binding="stateCodeBF" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateBI" label="resource.province" type="string" mandatory="false" binding="stateCodeBI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKH" label="resource.province" type="string" mandatory="false" binding="stateCodeKH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCM" label="resource.province" type="string" mandatory="false" binding="stateCodeCM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateKY" label="resource.island" type="string" mandatory="false" binding="stateCodeKY" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateCV" label="resource.county" type="string" mandatory="false" binding="stateCodeCV" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKY" label="resource.district" type="string" mandatory="false" binding="stateCodeKY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCF" label="resource.prefecture" type="string" mandatory="false" binding="stateCodeCF" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTD" label="resource.region" type="string" mandatory="false" binding="stateCodeTD" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCL" label="resource.region" type="string" mandatory="false" binding="stateCodeCL" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCN" label="resource.province" type="string" mandatory="false" binding="stateCodeCN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCO" label="resource.department" type="string" mandatory="false" binding="stateCodeCO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCC" label="resource.island" type="string" mandatory="false" binding="stateCodeCC" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCI" label="resource.region" type="string" mandatory="false" binding="stateCodeCI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateHR" label="resource.county" type="string" mandatory="false" binding="stateCodeHR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCY" label="resource.district" type="string" mandatory="false" binding="stateCodeCY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCZ" label="resource.region" type="string" mandatory="false" binding="stateCodeCZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateDK" label="resource.region" type="string" mandatory="false" binding="stateCodeDK" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateDJ" label="resource.region" type="string" mandatory="false" binding="stateCodeDJ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateDO" label="resource.province" type="string" mandatory="false" binding="stateCodeDO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateEC" label="resource.province" type="string" mandatory="false" binding="stateCodeEC" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateEG" label="resource.governarates" type="string" mandatory="false" binding="stateCodeEG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSV" label="resource.department" type="string" mandatory="false" binding="stateCodeSV" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateengland" label="resource.county" type="string" mandatory="false" binding="stateCodeengland" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateGQ" label="resource.province" type="string" mandatory="false" binding="stateCodeGQ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateER" label="resource.region" type="string" mandatory="false" binding="stateCodeER" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateEE" label="resource.county" type="string" mandatory="false" binding="stateCodeEE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateET" label="resource.region" type="string" mandatory="false" binding="stateCodeET" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateFO" label="resource.region" type="string" mandatory="false" binding="stateCodeFO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateFJ" label="resource.island" type="string" mandatory="false" binding="stateCodeFJ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateFI" label="resource.province" type="string" mandatory="false" binding="stateCodeFI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateFR" label="resource.region" type="string" mandatory="false" binding="stateCodeFR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGF" label="resource.canton" type="string" mandatory="false" binding="stateCodeGF" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePF" label="resource.island" type="string" mandatory="false" binding="stateCodePF" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGA" label="resource.province" type="string" mandatory="false" binding="stateCodeGA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGM" label="resource.division" type="string" mandatory="false" binding="stateCodeGM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGE" label="resource.state" type="string" mandatory="false" binding="stateCodeGE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGH" label="resource.region" type="string" mandatory="false" binding="stateCodeGH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGR" label="resource.periphery" type="string" mandatory="false" binding="stateCodeGR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGD" label="resource.parish" type="string" mandatory="false" binding="stateCodeGD" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGT" label="resource.department" type="string" mandatory="false" binding="stateCodeGT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGN" label="resource.region" type="string" mandatory="false" binding="stateCodeGN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGW" label="resource.region" type="string" mandatory="false" binding="stateCodeGW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateGY" label="resource.region" type="string" mandatory="false" binding="stateCodeGY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateHT" label="resource.department" type="string" mandatory="false" binding="stateCodeHT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateholland" label="resource.county" type="string" mandatory="false" binding="stateCodeholland" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateHN" label="resource.department" type="string" mandatory="false" binding="stateCodeHN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateHK" label="resource.district" type="string" mandatory="false" binding="stateCodeHK" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateHU" label="resource.county" type="string" mandatory="false" binding="stateCodeHU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateIS" label="resource.region" type="string" mandatory="false" binding="stateCodeIS" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateIN" label="resource.state" type="string" mandatory="false" binding="stateCodeIN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateID" label="resource.province" type="string" mandatory="false" binding="stateCodeID" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateIQ" label="resource.governarates" type="string" mandatory="false" binding="stateCodeIQ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateIL" label="resource.district" type="string" mandatory="false" binding="stateCodeIL" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateIT" label="resource.region" type="string" mandatory="false" binding="stateCodeIT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateINivorycoast" label="resource.state" type="string" mandatory="false" binding="stateCodeINivorycoast" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateJM" label="resource.parish" type="string" mandatory="false" binding="stateCodeJM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateJP" label="resource.prefecture" type="string" mandatory="false" binding="stateCodeJP" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateJO" label="resource.governarates" type="string" mandatory="false" binding="stateCodeJO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKZ" label="resource.province" type="string" mandatory="false" binding="stateCodeKZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKE" label="resource.province" type="string" mandatory="false" binding="stateCodeKE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKI" label="resource.island" type="string" mandatory="false" binding="stateCodeKI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKW" label="resource.governarates" type="string" mandatory="false" binding="stateCodeKW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateKG" label="resource.province" type="string" mandatory="false" binding="stateCodeKG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLA" label="resource.province" type="string" mandatory="false" binding="stateCodeLA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLV" label="resource.district" type="string" mandatory="false" binding="stateCodeLV" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLB" label="resource.governarates" type="string" mandatory="false" binding="stateCodeLB" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLS" label="resource.district" type="string" mandatory="false" binding="stateCodeLS" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLR" label="resource.county" type="string" mandatory="false" binding="stateCodeLR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLY" label="resource.governarates" type="string" mandatory="false" binding="stateCodeLY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLT" label="resource.county" type="string" mandatory="false" binding="stateCodeLT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLU" label="resource.province" type="string" mandatory="false" binding="stateCodeLU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMO" label="resource.municipality" type="string" mandatory="false" binding="stateCodeMO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMG" label="resource.province" type="string" mandatory="false" binding="stateCodeMG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statemadeira" label="resource.state" type="string" mandatory="false" binding="stateCodemadeira" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateMW" label="resource.district" type="string" mandatory="false" binding="stateCodeMW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMY" label="resource.region" type="string" mandatory="false" binding="stateCodeMY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateML" label="resource.region" type="string" mandatory="false" binding="stateCodeML" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMT" label="resource.island" type="string" mandatory="false" binding="stateCodeMT" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMH" label="resource.district" type="string" mandatory="false" binding="stateCodeMH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMQ" label="resource.canton" type="string" mandatory="false" binding="stateCodeMQ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMR" label="resource.region" type="string" mandatory="false" binding="stateCodeMR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMU" label="resource.district" type="string" mandatory="false" binding="stateCodeMU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMX" label="resource.estado" type="string" mandatory="false" binding="stateCodeMX" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateFM" label="resource.island" type="string" mandatory="false" binding="stateCodeFM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMD" label="resource.district" type="string" mandatory="false" binding="stateCodeMD" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMC" label="resource.ward" type="string" mandatory="false" binding="stateCodeMC" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMN" label="resource.province" type="string" mandatory="false" binding="stateCodeMN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMA" label="resource.region" type="string" mandatory="false" binding="stateCodeMA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMZ" label="resource.province" type="string" mandatory="false" binding="stateCodeMZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMM" label="resource.state" type="string" mandatory="false" binding="stateCodeMM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statenmarianaislands" label="resource.district" type="string" mandatory="false" binding="stateCodenmarianaislands" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateNR" label="resource.district" type="string" mandatory="false" binding="stateCodeNR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNP" label="resource.zone" type="string" mandatory="false" binding="stateCodeNP" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNL" label="resource.province" type="string" mandatory="false" binding="stateCodeNL" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAN" label="resource.island" type="string" mandatory="false" binding="stateCodeAN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNC" label="resource.province" type="string" mandatory="false" binding="stateCodeNC" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNZ" label="resource.region" type="string" mandatory="false" binding="stateCodeNZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNI" label="resource.department" type="string" mandatory="false" binding="stateCodeNI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNE" label="resource.department" type="string" mandatory="false" binding="stateCodeNE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNG" label="resource.state" type="string" mandatory="false" binding="stateCodeNG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateMP" label="resource.county" type="string" mandatory="false" binding="stateCodeMP" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateNO" label="resource.region" type="string" mandatory="false" binding="stateCodeNO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateOM" label="resource.governarates" type="string" mandatory="false" binding="stateCodeOM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePK" label="resource.province" type="string" mandatory="false" binding="stateCodePK" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePW" label="resource.state" type="string" mandatory="false" binding="stateCodePW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePA" label="resource.province" type="string" mandatory="false" binding="stateCodePA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePG" label="resource.department" type="string" mandatory="false" binding="stateCodePG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePY" label="resource.department" type="string" mandatory="false" binding="stateCodePY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statepeoplesrepofchina" label="resource.state" type="string" mandatory="false" binding="stateCodepeoplesrepofchina" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="statePE" label="resource.region" type="string" mandatory="false" binding="stateCodePE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePH" label="resource.province" type="string" mandatory="false" binding="stateCodePH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePN" label="resource.island" type="string" mandatory="false" binding="stateCodePN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="statePL" label="resource.province" type="string" mandatory="false" binding="stateCodePL" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateponape" label="resource.state" type="string" mandatory="false" binding="stateCodeponape" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="statePR" label="resource.municipality" type="string" mandatory="false" binding="stateCodePR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateQA" label="resource.municipality" type="string" mandatory="false" binding="stateCodeQA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="staterepublicofcongo" label="resource.state" type="string" mandatory="false" binding="stateCoderepublicofcongo" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<!-- <field formid="staterepublicofireland" label="resource.state" type="string" mandatory="false" binding="stateCoderepublicofireland" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateYE" label="resource.governarates" type="string" mandatory="false" binding="stateCodeYE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateRO" label="resource.county" type="string" mandatory="false" binding="stateCodeRO" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateRU" label="resource.federalsubject" type="string" mandatory="false" binding="stateCodeRU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateRW" label="resource.province" type="string" mandatory="false" binding="stateCodeRW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSM" label="resource.municipality" type="string" mandatory="false" binding="stateCodeSM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statescotland" label="resource.state" type="string" mandatory="false" binding="stateCodescotland" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateSN" label="resource.region" type="string" mandatory="false" binding="stateCodeSN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSN" label="resource.region" type="string" mandatory="false" binding="stateCodeSN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSC" label="resource.district" type="string" mandatory="false" binding="stateCodeSC" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSL" label="resource.province" type="string" mandatory="false" binding="stateCodeSL" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSG" label="resource.region" type="string" mandatory="false" binding="stateCodeSG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSK" label="resource.region" type="string" mandatory="false" binding="stateCodeSK" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSI" label="resource.region" type="string" mandatory="false" binding="stateCodeSI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSB" label="resource.province" type="string" mandatory="false" binding="stateCodeSB" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateZA" label="resource.province" type="string" mandatory="false" binding="stateCodeZA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statesouthkorea" label="resource.region" type="string" mandatory="false" binding="stateCodesouthkorea" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateES" label="resource.province" type="string" mandatory="false" binding="stateCodeES" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateLK" label="resource.province" type="string" mandatory="false" binding="stateCodeLK" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateSN" label="resource.region" type="string" mandatory="false" binding="stateCodeSN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSN" label="resource.region" type="string" mandatory="false" binding="stateCodeSN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSN" label="resource.region" type="string" mandatory="false" binding="stateCodeSN" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateSD" label="resource.state" type="string" mandatory="false" binding="stateCodeSD" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSR" label="resource.district" type="string" mandatory="false" binding="stateCodeSR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSZ" label="resource.canton" type="string" mandatory="false" binding="stateCodeSZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSE" label="resource.county" type="string" mandatory="false" binding="stateCodeSE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateCH" label="resource.canton" type="string" mandatory="false" binding="stateCodeCH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateSY" label="resource.governarates" type="string" mandatory="false" binding="stateCodeSY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTJ" label="resource.province" type="string" mandatory="false" binding="stateCodeTJ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTZ" label="resource.region" type="string" mandatory="false" binding="stateCodeTZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTH" label="resource.province" type="string" mandatory="false" binding="stateCodeTH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTG" label="resource.region" type="string" mandatory="false" binding="stateCodeTG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="statetruk" label="resource.region" type="string" mandatory="false" binding="stateCodeSN" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateTN" label="resource.governarates" type="string" mandatory="false" binding="stateCodeTN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTR" label="resource.region" type="string" mandatory="false" binding="stateCodeTR" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTM" label="resource.province" type="string" mandatory="false" binding="stateCodeTM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTC" label="resource.island" type="string" mandatory="false" binding="stateCodeTC" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateTV" label="resource.island" type="string" mandatory="false" binding="stateCodeTV" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateVI" label="resource.district" type="string" mandatory="false" binding="stateCodeVI" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateUG" label="resource.district" type="string" mandatory="false" binding="stateCodeUG" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateUA" label="resource.province" type="string" mandatory="false" binding="stateCodeUA" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateAE" label="resource.emirate" type="string" mandatory="false" binding="stateCodeAE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateUK" label="resource.county" type="string" mandatory="false" binding="stateCodeUK" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateUY" label="resource.department" type="string" mandatory="false" binding="stateCodeUY" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateUZ" label="resource.province" type="string" mandatory="false" binding="stateCodeUZ" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateVU" label="resource.province" type="string" mandatory="false" binding="stateCodeVU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateVE" label="resource.estado" type="string" mandatory="false" binding="stateCodeVE" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateVN" label="resource.province" type="string" mandatory="false" binding="stateCodeVN" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateWF" label="resource.county" type="string" mandatory="false" binding="stateCodeWF" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateEH" label="resource.district" type="string" mandatory="false" binding="stateCodeEH" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<!-- <field formid="stateyap" label="resource.region" type="string" mandatory="false" binding="stateCodeTG" missing-error="address.state.missing" value-error="address.field.invalid"/> -->
+	
+	<field formid="stateYU" label="resource.province" type="string" mandatory="false" binding="stateCodeYU" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateZM" label="resource.province" type="string" mandatory="false" binding="stateCodeZM" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+	<field formid="stateZW" label="resource.province" type="string" mandatory="false" binding="stateCodeZW" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	
+		
 </form>

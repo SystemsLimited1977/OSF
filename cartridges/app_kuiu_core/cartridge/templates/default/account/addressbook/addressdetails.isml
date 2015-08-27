@@ -36,6 +36,8 @@
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.country}" type="select"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.states.state}" type="select"/>
+			
+			<isinputfield formfield="${pdict.CurrentForms.profile.address.states.state}" type="input"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.city}" type="input"/>
 

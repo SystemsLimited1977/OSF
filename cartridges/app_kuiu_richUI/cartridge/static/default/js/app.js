@@ -1539,6 +1539,9 @@ function initializeAddressForm() {
 		}
 	});
 
+	//select countries for international shipping
+	util.updateStateLabel();
+	
 	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
 	});
@@ -1804,7 +1807,9 @@ exports.init = function () {
 		// re-validate the form
 		$form.validate().form();
 	});
-
+	
+	util.updateStateLabel();
+	
 	// update state options in case the country changes
 	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
@@ -4815,7 +4820,7 @@ var util = {
 	 * @description Updates the states options to a given country
 	 * @param {String} countrySelect The selected country
 	 */
-	updateStateOptions: function (form) {
+updateStateOptions: function (form) {
 		var $form = $(form),
 			$country = $form.find('select[id$="_country"]'),
 			country = Countries[$country.val()];
@@ -4837,19 +4842,60 @@ var util = {
 		} else {
 			return;
 		}
+		
 		var s;
-		for (s in country.regions) {
-			arrHtml.push('<option value="' + s + '">' + country.regions[s] + '</option>');
-		}
-		// clone the empty option item and add to stateSelect
-		var o1 = $stateField.children().first().clone();
-		$stateField.html(arrHtml.join('')).removeAttr('disabled').children().first().before(o1);
+		//select countries for international shipping
+		if($country.val() == "CA" || $country.val() == "US")
+			{
+				$stateLabel.first().show();
+				$stateLabel.last().hide();
+				$("select[name$='_state']").parent().show();
+				$("input[name$='_state']").parent().hide();
+				
+				for (s in country.regions) {
+					arrHtml.push('<option value="' + s + '">' + country.regions[s] + '</option>');
+				}
+				// clone the empty option item and add to stateSelect
+				var o1 = $stateField.children().first().clone();
+				$stateField.html(arrHtml.join('')).removeAttr('disabled').children().first().before(o1);
+			}
+		else
+			{
+				$stateLabel.first().hide();
+				$stateLabel.last().show();
+				$("select[name$='_state']").parent().hide();
+				$("select[name$='_state']").attr("disabled","disabled");
+				$("input[name$='_state']").parent().show();
+				$("span[id$='_state-error']").hide();
+			}
 		// if a state was selected previously, save that selection
 		if (prevStateValue && $.inArray(prevStateValue, country.regions)) {
 			$stateField.val(prevStateValue);
 		} else {
 			$stateField[0].selectedIndex = 0;
 		}
+	},
+	
+	/**
+	 * @function
+	 * @description Update stetes label for international shipping
+	 */
+	
+	updateStateLabel: function()
+	{
+		//select countries for international shipping
+		var selectedCountry = $("select[name$='_country']").val();
+		if(selectedCountry == "US" || selectedCountry == "CA")
+			{
+				$("select[name$='_state']").parent().show();
+				$("input[name$='_state']").parent().hide();
+			}
+		else
+			{
+				$("select[name$='_state']").parent().hide();
+				$("select[name$='_state']").attr("disabled","disabled");
+				$("input[name$='_state']").parent().show();
+			}
 	},
 	/**
 	 * @function
@@ -6021,7 +6067,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.0 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6034,7 +6080,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.0';
+  var VERSION = '3.10.1';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,

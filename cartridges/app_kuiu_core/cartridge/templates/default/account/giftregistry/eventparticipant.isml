@@ -36,6 +36,8 @@
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.eventaddress.country}" type="select"/>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.eventaddress.states.state}" type="select"/>
+				
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.eventaddress.states.state}" type="input"/>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.town}" type="input"/>
 

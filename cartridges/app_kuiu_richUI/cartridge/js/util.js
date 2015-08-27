@@ -188,7 +188,7 @@ var util = {
 	 * @description Updates the states options to a given country
 	 * @param {String} countrySelect The selected country
 	 */
-	updateStateOptions: function (form) {
+updateStateOptions: function (form) {
 		var $form = $(form),
 			$country = $form.find('select[id$="_country"]'),
 			country = Countries[$country.val()];
@@ -210,19 +210,60 @@ var util = {
 		} else {
 			return;
 		}
+		
 		var s;
-		for (s in country.regions) {
-			arrHtml.push('<option value="' + s + '">' + country.regions[s] + '</option>');
-		}
-		// clone the empty option item and add to stateSelect
-		var o1 = $stateField.children().first().clone();
-		$stateField.html(arrHtml.join('')).removeAttr('disabled').children().first().before(o1);
+		//select countries for international shipping
+		if($country.val() == "CA" || $country.val() == "US")
+			{
+				$stateLabel.first().show();
+				$stateLabel.last().hide();
+				$("select[name$='_state']").parent().show();
+				$("input[name$='_state']").parent().hide();
+				
+				for (s in country.regions) {
+					arrHtml.push('<option value="' + s + '">' + country.regions[s] + '</option>');
+				}
+				// clone the empty option item and add to stateSelect
+				var o1 = $stateField.children().first().clone();
+				$stateField.html(arrHtml.join('')).removeAttr('disabled').children().first().before(o1);
+			}
+		else
+			{
+				$stateLabel.first().hide();
+				$stateLabel.last().show();
+				$("select[name$='_state']").parent().hide();
+				$("select[name$='_state']").attr("disabled","disabled");
+				$("input[name$='_state']").parent().show();
+				$("span[id$='_state-error']").hide();
+			}
 		// if a state was selected previously, save that selection
 		if (prevStateValue && $.inArray(prevStateValue, country.regions)) {
 			$stateField.val(prevStateValue);
 		} else {
 			$stateField[0].selectedIndex = 0;
 		}
+	},
+	
+	/**
+	 * @function
+	 * @description Update stetes label for international shipping
+	 */
+	
+	updateStateLabel: function()
+	{
+		//select countries for international shipping
+		var selectedCountry = $("select[name$='_country']").val();
+		if(selectedCountry == "US" || selectedCountry == "CA")
+			{
+				$("select[name$='_state']").parent().show();
+				$("input[name$='_state']").parent().hide();
+			}
+		else
+			{
+				$("select[name$='_state']").parent().hide();
+				$("select[name$='_state']").attr("disabled","disabled");
+				$("input[name$='_state']").parent().show();
+			}
 	},
 	/**
 	 * @function

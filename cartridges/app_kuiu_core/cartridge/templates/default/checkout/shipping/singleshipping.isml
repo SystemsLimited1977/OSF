@@ -109,6 +109,8 @@
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.country}" type="select"/>
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.state}" type="select"/>
+					
+					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.state}" type="input"/>
 
 					<iscomment>
 						States will be populated via javascript in rich ui.

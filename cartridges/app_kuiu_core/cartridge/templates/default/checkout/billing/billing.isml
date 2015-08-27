@@ -64,6 +64,8 @@
 		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.country}" type="select"/>
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.state}" type="select"/>
+		
+		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.state}" type="input"/>
 
 		<iscomment>
 			States will be populated via javascript in rich ui.
@@ -215,7 +217,6 @@
 		<div class="form-row form-row-button">
 			<button class="button-fancy-large pull-right" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 		</div>
-
 </form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
