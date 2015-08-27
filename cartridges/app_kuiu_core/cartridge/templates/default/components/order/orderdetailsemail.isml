@@ -81,7 +81,7 @@
 				<thead>
 					<tr>
 						<th style="background:#000;color:#fff;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.item','locale',null)}</th>
-						<th style="background:#000;color:#fff;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.quantity','locale',null)}</th>
+						<th style="background:#000;color:#fff;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.qty','locale',null)}</th>
 						<th style="background:#000;color:#fff;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.price','locale',null)}</th>
 						<isif condition="${empty(shipment.custom.shipmentType) || shipment.custom.shipmentType != 'instore'}"/>
 							<th style="background:#000;color:#fff;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>

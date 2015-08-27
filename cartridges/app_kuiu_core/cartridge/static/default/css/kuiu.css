@@ -4873,6 +4873,10 @@ table .section-header {
 }
 
 .pt_order-confirmation table td {
+    padding: 10px 15px;
+}
+
+.pt_order-confirmation table td:first-child {
     padding: 10px 0;
 }
 
@@ -4906,7 +4910,7 @@ table .section-header {
 
 .pt_order-confirmation table tr th.section-header {
     border: none;
-    padding: 0 0 0 15px;
+    padding: 0;
     font-weight: 500;
     font-size: 16px !important
 }
@@ -4931,6 +4935,7 @@ table .section-header {
 
 .pt_order-confirmation .item-list td.order-information {
     border-right: none;
+    padding-bottom: 20px;
 }
 
 .pt_order-confirmation .item-list td:first-child {
@@ -4948,8 +4953,6 @@ table .section-header {
 }
 
 .pt_order-confirmation .item-list td .order-totals-table .order-total td {
-    font-size: 14px;
-    font-weight: 400;
     padding-top: 10px;
 }
 
@@ -5414,9 +5417,12 @@ tr.order-sales-tax {
 }
 
 #cart-items-form .item-list td {
-    padding: 20px 10px;
+    padding: 20px 0;
 }
 
+#cart-items-form .item-list .cart-promo td {
+	padding: 20px 10px;
+}
 
 /*Create new account page styling*/
 
@@ -6450,11 +6456,22 @@ ul.product-availability-list li {
     padding-top: 0;
 }
 
+#cart-table .price-adjusted-total span {
+	color:inherit;
+}
 
+.order-shipment-gift-message-header {
+	font-size: 16px;
+    font-weight: 500;
+    padding: 20px 0 0 !important;
+    text-transform: uppercase;
+    font-family: "Times New Roman",Georgia,serif;
+}
 
-
-
-
+.order-shipment-gift-message {
+	font-size: 1.1em;
+    padding: 0 !important;
+}
 
 
 

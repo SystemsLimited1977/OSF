@@ -37,7 +37,7 @@
 							</tr>
 							<tr class="cart-row">
 								<td colspan="2">${Resource.msg('global.product','locale',null)}</td>
-								<td>${Resource.msg('global.quantity','locale',null)}</td>
+								<td>${Resource.msg('global.qty','locale',null)}</td>
 								<td>${Resource.msg('multishippingshipments.shippingdetails','checkout',null)}</td>
 							</tr>
 							<tr class="cart-row">

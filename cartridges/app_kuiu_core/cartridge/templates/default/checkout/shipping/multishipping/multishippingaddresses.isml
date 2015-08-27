@@ -22,7 +22,7 @@
 			<thead>
 				<tr>
 					<th class="section-header"  colspan="2">${Resource.msg('global.product','locale',null)}</th>
-					<th class="section-header">${Resource.msg('global.quantity','locale',null)}</th>
+					<th class="section-header">${Resource.msg('global.qty','locale',null)}</th>
 					<th class="section-header">${Resource.msg('multishippingaddresses.locationheader','checkout',null)}</th>
 				</tr>
 			</thead>
