@@ -2809,6 +2809,7 @@ function initializeEvents() {
 		dialog.open({
 			url: $(e.target).attr('href')
 		});
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('size-chart-popup');
 	});
 }
 

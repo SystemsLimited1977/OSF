@@ -40,7 +40,7 @@ jQuery(document).ready(function(){
 					    draggable: false,
 					    resizable: false,
 					    width: 720,
-					    dialogClass: 'ui-dialog-osx'
+					    dialogClass: 'ui-dialog-osx thankyou-popup'
 					}); 
 				}
 			});
