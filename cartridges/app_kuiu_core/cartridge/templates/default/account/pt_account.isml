@@ -28,6 +28,10 @@
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
 			
+			<isif condition="${pdict.CurrentCustomer.anonymous}">
+					<isslot id="un-registered-account-banner" description="Banner for My Account pages" context="global" />
+			</isif>
+	
 			<iscomment>
 			<isif condition="${!empty(pdict.bctext2)}"> 
 			<isbreadcrumbs
