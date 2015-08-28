@@ -2577,7 +2577,9 @@ module.exports = function (target) {
 		$('.add-to-cart').on('click', addToCart);
 	}
 
-	$('#add-all-to-cart').on('click', addAllToCart);
+	//hack for fixing product set bugs
+	//$('#add-all-to-cart').on('click', addAllToCart);
+	$('#add-all-to-cart').unbind("click").bind('click', addAllToCart);
 };
 
 },{"../../dialog":6,"../../minicart":11,"../../page":14,"../../util":50,"lodash":56,"promise":57}],26:[function(require,module,exports){
@@ -6093,7 +6095,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6106,7 +6108,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,

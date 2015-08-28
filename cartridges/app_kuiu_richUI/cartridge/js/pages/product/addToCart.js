@@ -75,5 +75,7 @@ module.exports = function (target) {
 		$('.add-to-cart').on('click', addToCart);
 	}
 
-	$('#add-all-to-cart').on('click', addAllToCart);
+	//hack for fixing product set bugs
+	//$('#add-all-to-cart').on('click', addAllToCart);
+	$('#add-all-to-cart').unbind("click").bind('click', addAllToCart);
 };
