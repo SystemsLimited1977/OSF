@@ -2,29 +2,27 @@
 <isinclude template="util/modules"/>
 	<div class="emailSignupModal">
 	
-	<div>
+	<div class="email-popup-img pull-left">
 	
-	<img src="">
+	<iscomment><img src="${URLUtils.staticURL('/images/bg-1.jpg')}" /></iscomment>
 	</div>
-	<div>
+	<div class="pull-left email-form-section">
+	
+		<h1>${Resource.msg('global.popupHeadingT', 'locale', null)}</h1>
 		<h5>${Resource.msg('global.popupHeading', 'locale', null)}</h5>
 		<form action="${URLUtils.continueURL()}" method="post" name="EmailSignUpForm" id="EmailSignUpForm" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 			<input type="hidden" name="ltkSubscriptionCode" value="emailSignup" />
 			<input type="hidden" name="emailAddress" value="${pdict.CurrentHttpParameterMap.emailAddress.stringValue}" />
 			
-			<div class="clearfix">
 			<iscomment><isif condition="${empty(pdict.CurrentHttpParameterMap.emailAddress.stringValue)}"></iscomment>
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.email}" type="input" />
 			<iscomment></isif></iscomment>
 				
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" type="input" />
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.lastname}" type="input" />
-			</div>
-			<div class="clearfix">
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.zipcode}" type="input"  rowclass="zcode" />
-			</div>
 			
-			<div class="form-row form-row-button clearfix">
+			<div class="form-row form-row-button">
 				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>
 				<button  id="cancel" >${Resource.msg('global.cancel', 'locale', null)}</button>
 			</div>

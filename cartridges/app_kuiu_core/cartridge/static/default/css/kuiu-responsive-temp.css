@@ -28,14 +28,104 @@
 	.pdp-main .promotion .promotion-callout {
 	    line-height: 15px;
 	}
+	.ui-dialog.email-sigup-popup-main .email-popup-img  {
+    	width: 100%;
+    	height: 135px;
+    	background-position: 0 -72px;
+    	background-repeat: no-repeat;
+    	float: none;
+	}
+	.ui-dialog.thankyou-popup .email-popup-img {
+		 width: 100%;
+    	height: 135px;
+    	background-position: 0 -72px;
+    	background-repeat: no-repeat;
+    	float: none;
+	}
+	.ui-dialog.email-sigup-popup-main .email-form-section,
+	.ui-dialog.thankyou-popup .email-form-section {
+		width:100%;
+		padding-left: 20px;
+    	padding-right: 20px;
+	}
+	.ui-dialog.email-sigup-popup-main input[type="text"],
+	 {
+   		width: 96%;
+	}
+	.ui-dialog.email-sigup-popup-main .form-row,
+	 {
+		padding-bottom:0px;
+	}
+	.u i-dialog.email-sigup-popup-main .ui-dialog-content h5 {
+		 padding: 5px 10px;
+	}
+	.ui-dialog.email-sigup-popup-main .email-form-section {
+		margin-left:0px;
+	}
+	.ui-dialog.email-sigup-popup-main .ui-dialog-titlebar button {
+		display:block;
+	}
+	 .ui-dialog.email-sigup-popup-main .ui-widget-header,
+	 .ui-dialog.thankyou-popup .ui-widget-header  {
+    	float: right;
+    	border-bottom: none;
+    	/* margin-right: 27px; */
+    	/* margin-top: 10px; */
+    	position: absolute;
+    	left: 0px;
+    	z-index: 1000;
+    	background-color: transparent;
+    	float: right;
+    	right: 0;
+    	top: 0;
+    	bottom: 0;
+	 }
+	 .ui-dialog.email-sigup-popup-main .ui-dialog-content h5 {
+	 	    padding-top: 0px;
+	 	    padding-bottom: 10px;
+	 }
+	 .ui-dialog.email-sigup-popup-main .form-row {
+    	padding-bottom: 10px !important;
+	}
+	.ui-dialog.email-sigup-popup-main #EmailSignUpForm {
+    	padding-left: 10px;
+	}
+	.ui-dialog.thankyou-popup .email-form-section {
+		margin-top: 18px;
+	}
+	.thankyou-button {
+    	padding-top: 28px;
+    	padding-bottom: 25px;
+	}
+	.thankyou-msg p {
+		padding-top: 20px;
+	}
+	 .ui-dialog.email-sigup-popup-main .ui-dialog-titlebar button,
+	 .ui-dialog.email-sigup-popup-main .ui-dialog-titlebar-close span {
+    	background-color: transparent;
+	}
+	.ui-dialog.email-sigup-popup-main input[type="text"] {
+    	width: 95%;
+	}
+	.ui-dialog.email-sigup-popup-main .ui-icon-closethick {
+    	background-image: url("../images/qw_popup_close-new.png");
+    	background-repeat: no-repeat;
+    	background-position: right 8px;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
-
+	.ui-dialog.email-sigup-popup-main input[type="text"] {
+    	width: 95%;
+    	clear: both;
+	}
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
-	
+	.ui-dialog.email-sigup-popup-main input[type="text"] {
+    	width: 95%;
+    	clear: both;
+	}
 }
 
 @media ( min-width : 1200px) and (max-width: 1439px) {

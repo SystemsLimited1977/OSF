@@ -1,9 +1,13 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
 <div id="thankYou">
+	<div class="email-popup-img pull-left">
+	
+	</div>
+	<div class="pull-left email-form-section">
 	<isdecorate template="util/pt_empty">
 		<isif condition="${pdict.IsError != null}">
-			<h2>${Resource.msg('global.errorInRegidtration','locale',null)}</h2>
+			<h1>${Resource.msg('global.errorInRegidtration','locale',null)}</h1>
 			<div>
 				<p>${Resource.msg('global.errorDescription','locale',null)}</p>
 			</div>
@@ -11,16 +15,18 @@
 				<button id="cancelThankYou">${Resource.msg('global.close', 'locale', null)}</button>
 			</div>
 		<iselse>
-			<h2>${Resource.msg('global.thanks','locale',null)}</h2>
-			<div>
+			<h1>${Resource.msg('global.thankslistrik','locale',null)}</h1>
+			<h1>${Resource.msg('global.thankslistrik1','locale',null)}</h1>
+			<div class="thankyou-msg">
 				<p>
-					${Resource.msg('global.successfulSignUp','locale',null)}
+					${Resource.msg('global.successfulSignUplistrik','locale',null)}
 				</p>
 			</div>
-			 <div>
-				<button id="cancelThankYou"  >${Resource.msg('global.close', 'locale', null)}</button>
+			 <div class="thankyou-button">
+				<button id="cancelThankYou">${Resource.msg('global.goshopping', 'locale', null)}</button>
 			</div> 
 		</isif>
 	</isdecorate>
+  </div>
 </div>
 <script src="${URLUtils.staticURL('/lib/jquery/thankyou.js')}" type="text/javascript"></script>

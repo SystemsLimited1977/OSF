@@ -48,15 +48,106 @@
 	margin-top: 30px;
     margin-bottom: 40px;
 }
+.ui-dialog.email-sigup-popup-main .email-popup-img
+{
+    width: 300px;
+    height: 477px;
+    background-image: url("../images/bg-1.jpg");
+    background-repeat: no-repeat;
+    background-size: 421px;
+}
+.ui-dialog.thankyou-popup .email-popup-img  {
+    width: 300px;
+    height: 477px;
+    background-size: 421px;
+    background-image: url("../images/bg-2.jpg");
+}
+.ui-dialog.email-sigup-popup-main  .email-form-section {
+	width:55%;
+	margin-left: 10px;
+}
+.ui-dialog.email-sigup-popup-main .ui-icon-closethick,
+.ui-dialog.email-sigup-popup-main .ui-widget-header,
+.ui-dialog.thankyou-popup .ui-icon-closethick,
+.ui-dialog.thankyou-popup .ui-widget-header {
+	float:right;
+	border-bottom:none;
+    margin-right: 15px;
+    margin-top: 4px;
+}
+.ui-dialog.email-sigup-popup-main .ui-dialog-content,
+.ui-dialog.thankyou-popup .ui-dialog-content {
+	padding:0px;
+}
+.ui-dialog.email-sigup-popup-main label {
+	width:100%;
+	clear: both;
+	font-weight:400;
+} 
+.ui-dialog.email-sigup-popup-main input[type="text"] {
+	width: 85%;
+	clear: both;
+}
+.ui-dialog.email-sigup-popup-main #EmailSignUpForm {
+	padding-left: 45px;
+}
+.ui-dialog.email-sigup-popup-main #EmailSignUpForm .form-row {
+	padding-bottom:2px;
+}
+.ui-dialog.email-sigup-popup-main .ui-dialog-content h5 {
+	margin-bottom:0px;
+	font-weight: 400;
+	padding-top:10px;
+}
+.ui-dialog.email-sigup-popup-main .ui-dialog-content h1,
+.ui-dialog.thankyou-popup .ui-dialog-content h1 {  
+    width: 100%;
+    text-align: center;
+    font-style: normal;
+    text-transform: uppercase;
+    padding-top: 0px;
+    font-size: 32px;
+    font-weight: 500;
+}
 
-/*.footer_email #email-alert-address-error {
-    margin: 0;
+.ui-dialog.email-sigup-popup-main #EmailSignUpForm .form-row.form-row-button {
+	padding-top:10px;
+	margin-left: 15%;
+}
+.ui-dialog.thankyou-popup .email-form-section {
+    width: 58%;
+    margin-top: 68px;
+}
+.thankyou-msg p {
+	text-align: center;
+    font-size: 17px;
+    padding-top: 65px;
+}
+.thankyou-button {
+	 text-align: center;
+	 padding-top: 65px;
+}
+.product-variations .attribute .size-chart-link {
+	float: left;
+    clear: none;
     position: absolute;
-    right: 15px;
-    text-align: left;
-    top: 38px;
-    width: 200px;
-}*/
-#email-alert-address-error {
-	margin-left:10px;
+    left: 80px;
+    top: 0;
+}
+.ui-dialog.size-chart-popup {
+	top: 40px;
+}
+
+.ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+.ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li,
+.ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li a,
+.ui-dialog.size-chart-popup h2 {
+	font-style: normal;
+    color: #2b2b2b;
+}
+.ui-dialog.size-chart-popup .ui-dialog .ui-widget-header {
+	border-bottom:none;
+}
+.ui-dialog.size-chart-popup  .ui-tabs .ui-tabs-panel {
+	box-shadow:none;
 }

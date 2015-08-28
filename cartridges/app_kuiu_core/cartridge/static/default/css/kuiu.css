@@ -6377,9 +6377,12 @@ ul.product-availability-list li {
     text-decoration: underline;
 }
 
-.ui-dialog.email-sigup-popup-main {
-    width: 650px!important;
-    height: auto!important;
+.ui-dialog.email-sigup-popup-main,
+.ui-dialog.thankyou-popup,
+.ui-dialog.size-chart-popup {
+    border: none;
+    padding: 0;
+    overflow: hidden;
 }
 
 .user-info .welcomemessage,
@@ -6405,6 +6408,7 @@ ul.product-availability-list li {
     margin-top: 22px;
     width: 13%;
 }
+
 
 .pt_error #main .error-landing-page-secondary#secondary nav .secondary-navigation ul {
     margin: 0 15px 0px;

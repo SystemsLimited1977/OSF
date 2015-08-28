@@ -33,7 +33,7 @@
 
 		<center>
 			<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
-			<p>If you have questions about your order, we&#39;re happy to take your call (888-555-XXXX) Monday - Friday, 8AM - 8PM</p>
+			<p>If you have questions about your order, we&#39;re happy to take your call (855-367-5848) Monday - Friday, 8AM - 8PM</p>
 			<div class="confirmation-message">
 					<iscontentasset aid="confirmation-message" />
 			</div>
