@@ -49,6 +49,13 @@ var updateContent = function (href) {
 					autoPlay : false
 				});
 			}
+			$('a.z1').magnifik({
+				classPrefix: 'm-',
+				ratio: 1,
+				seekImage: false,
+				clickCloses: true,
+				activationEvent: "click"
+			});
 		}
 	});
 };
