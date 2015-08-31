@@ -41,6 +41,14 @@ var updateContent = function (href) {
 			}
 			image.replaceImages();
 			tooltip.init();
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+				$("#owl-demo3").owlCarousel({     
+					navigation : true, // Show next and prev buttons
+					navigationText : ["",""],
+					singleItem:true,
+					autoPlay : false
+				});
+			}
 		}
 	});
 };
