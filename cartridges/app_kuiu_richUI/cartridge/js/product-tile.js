@@ -117,7 +117,7 @@ function initializeEvents() {
 		});
 	});
 	//Toggle slide of refinements
-	$("#refineby").click(function () {
+	$("#refineby").unbind('click').bind('click', function () {
 	   $('#secondary').slideToggle();
 	});
 	$('#closeslider').click(function(e){
