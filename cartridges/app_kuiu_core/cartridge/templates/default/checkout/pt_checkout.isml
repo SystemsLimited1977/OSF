@@ -35,7 +35,7 @@
 	<iscomment>checkout progress indicator</iscomment>
 	
 	<isif condition="${pdict.IsShipping}">
-	   	<center><h1> ${Resource.msg('checkout.shipping','account',null)}</h1></center>
+	   	<center><h1> ${Resource.msg('checkout.shippingCheckout','account',null)}</h1></center>
 		<center><ischeckoutprogressindicator step="1" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/></center>
 	<iselseif condition="${pdict.IsBilling}" >
 		<center><h1> ${Resource.msg('checkout.billing','account',null)}</h1></center>

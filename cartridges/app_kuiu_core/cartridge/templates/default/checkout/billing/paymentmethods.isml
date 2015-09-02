@@ -7,7 +7,7 @@
 
 		<legend>
 			${Resource.msg('billing.paymentheader','checkout',null)}
-			<div class="dialog-required pull-right"> *<span class="required-indicator">${Resource.msg('global.requiredfield','locale',null)}</span></div>
+			<iscomment><div class="dialog-required pull-right"> *<span class="required-indicator">${Resource.msg('global.requiredfield','locale',null)}</span></div></iscomment>
 		</legend>
 
 		<iscomment><div class="payment-method-options"></iscomment>

@@ -719,7 +719,8 @@
         float: none;
     }
     .addthis_toolbox.addthis_default_style {
-        margin-left: 18%;
+        margin-left: 0px;
+        margin-top:6px;
     }
     .pdp-main .product-price {
         font-size: 20px;
@@ -1006,11 +1007,12 @@
     }
     .with-helper-text.form-field-tooltip {
         text-align: right;
-        margin: -20px 0 0;
+        margin: -17px 0 0;
     }
     .checkout-mini-cart .mini-cart-image {
         width: 120px;
         float: left;
+        margin-right: 35px;
     }
     .checkout-order-totals {
         margin-bottom: 25px;
@@ -1103,19 +1105,22 @@
         text-align: left;
         width: 60%;
         font-size: 12px !important;
+        padding: 5px 0px;
+        
     }
     #cart-table .item-quantity-details {
         float: right;
         font-size: 12px !important;
         width: 60%;
-        padding: 5px;
+        padding: 5px 0px;
     }
     #cart-table .item-total {
         float: right;
         font-size: 12px !important;
         text-align: left !important;
         width: 60%;
-        padding-bottom: 15px;
+        padding:5px 0 15px 0;
+        padding: 0;
     }
     .place-order-totals .order-totals-table {
         width: 100%;
@@ -1762,6 +1767,40 @@
         margin: 0px;
         padding: 0px;
     }
+    .pt_account #main .new-account #RegistrationForm input[type="text"],
+    .pt_account #main .new-account #RegistrationForm input[type="password"],
+    .pt_account #main .new-account #RegistrationForm select {
+    	width:100% !important;
+    }
+   .pt_account #main .new-account #RegistrationForm .dialog-required {
+   		float: right !important;
+    	padding-top: 35px;
+    	margin-right: -50px;
+   }
+   .pt_account #main .new-account #RegistrationForm a.privacy-policy {
+		float: left;
+    	margin-left: 155px;
+    	margin-top: -5px;
+   }
+    .pt_account #main .new-account #RegistrationForm .fld-checkbox label {
+    	padding: 5px 0 0 18px;
+    	font-size: 11px;
+	}
+	.pt_account #main .new-account #RegistrationForm  .fld-checkbox input[type="checkbox"] {
+		 margin-top: -24px;
+	}
+	#main .pdp-main input[type="text"] {
+	    font-weight: bold;	
+	}
+	.pdp-main .product-actions li {
+		margin: 6px 3px 0 0px;
+	}
+	.checkout-steps #main .form-row-button {
+		border-top:none;
+	}
+	.pt_checkout.checkout-steps .dialog-required.pull-right {
+		float: right !important;
+	}
 }
 
 @media ( min-width: 768px) and (max-width: 991px) {
@@ -2310,6 +2349,26 @@
         margin-top: 22px;
         width: 25%;
     }
+    .pt_account #main .new-account #RegistrationForm a.privacy-policy {
+		float: left;
+    	margin-left: 84px;
+    	margin-top: -5px;
+   }
+    .pt_account #main .new-account #RegistrationForm .fld-checkbox label {
+    	padding: 5px 0 0 18px;
+	}
+	.pt_account #main .new-account #RegistrationForm  .fld-checkbox input[type="checkbox"] {
+		 margin-top: -18px;
+	}
+	.checkout-steps #main form .fld-checkbox input[type="checkbox"],
+	.checkout-steps #main form input#is-gift-yes,
+	.checkout-steps #main form #shipping-method-list input[type="radio"],
+	.checkout-steps #main form .fld-checkbox input[type="radio"] {
+		margin-left:5px;
+ 	}
+ 	.checkout-steps #main form .form-row.required.fld-checkbox.privacy-check input[type="checkbox"] {
+ 		margin-left:3px;
+ 	}
 }
 
 @media ( min-width: 992px) and (max-width: 1199px) {

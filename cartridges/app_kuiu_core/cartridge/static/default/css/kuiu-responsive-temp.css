@@ -48,11 +48,11 @@
 		padding-left: 20px;
     	padding-right: 20px;
 	}
-	.ui-dialog.email-sigup-popup-main input[type="text"],
+	.ui-dialog.email-sigup-popup-main input[type="text"]
 	 {
    		width: 96%;
 	}
-	.ui-dialog.email-sigup-popup-main .form-row,
+	.ui-dialog.email-sigup-popup-main .form-row
 	 {
 		padding-bottom:0px;
 	}
@@ -112,6 +112,45 @@
     	background-repeat: no-repeat;
     	background-position: right 8px;
 	}
+	.pdp-main .product-primary-image {
+		border-bottom: none;
+    	margin-bottom: 0px; 
+	}
+     #main {
+       -moz-box-shadow: inset 0 8px 8px -8px #696868;
+       -webkit-box-shadow: inset 0 8px 8px -8px #696868;
+        box-shadow: inset 0 8px 8px -8px #696868;
+	}
+	.checkout-steps #main .gift-discount-codes-wrap .form-row button {
+    	margin-top: 59px;
+	}
+	.pt_checkout.checkout-steps #cart-table td.item-image img {
+		 max-width: 100%;
+	}
+	.pt_checkout.checkout-steps #cart-table.item-list td.item-details {
+		padding:0px;
+	}
+	.pt_checkout.checkout-steps #main .form-row .form-caption {
+		margin: 5px 0 0 0;
+	}
+	.pt_checkout.checkout-steps label.gift-reg {
+		width:30% !important;
+	}
+	.pt_checkout.checkout-steps .form-row.fld-checkbox.add-check {
+		margin-top:10px;
+	}
+	.checkout-mini-cart .mini-cart-product .mc-item-price {
+		 margin-top: -15px;
+	}
+	.checkout-mini-cart .mini-cart-image {
+		margin-bottom:0px;
+	}
+	.checkout-progress-indicator {
+    	padding-bottom: 20px;
+	}
+	.pt_cart #cart-table td.item-image img {
+		max-width:100%;	
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -119,12 +158,32 @@
     	width: 95%;
     	clear: both;
 	}
+	.zoom_button .fa-lg {
+		line-height: 0px;
+	}
+	.product-set-main .promotion .promotion-callout {
+    	line-height: 18px;
+    	padding-left: 36px;
+	}
+	.cart-actions.cart-action-footer .cart-action-continue-shopping {
+    	margin-right: 20px;
+	}
 }
 
 @media ( min-width : 992px) and (max-width: 1199px) {
 	.ui-dialog.email-sigup-popup-main input[type="text"] {
     	width: 95%;
     	clear: both;
+	}
+	.product-set-main .promotion .promotion-callout {
+    	line-height: 18px;
+    	padding-left: 22px;
+	}
+	.pdp-main .product-set-main .product-set-list .availability span.label {
+   		 width: 31%;
+	}
+	.pdp-main .product-set-main .product-set-list .block-add-to-cart button {
+    	width: 70%;
 	}
 }
 

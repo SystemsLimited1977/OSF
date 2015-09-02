@@ -22,7 +22,7 @@
 
 	<iselse/>
 
-		<span class="label">${Resource.msg('account.orderstatusinclude.ordercontact','account',null)}</span>
+		<iscomment><span class="label">${Resource.msg('account.orderstatusinclude.ordercontact','account',null)}</span></iscomment>
 		<span class="value clearfix"><isprint value="${Order.status}"/></span>
 
 	</isif>

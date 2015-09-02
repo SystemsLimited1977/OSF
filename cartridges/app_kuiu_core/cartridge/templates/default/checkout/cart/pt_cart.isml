@@ -31,7 +31,7 @@
 
 		<div id="main" role="main" class="full-width clearfix">
 			<isif condition="${!(pdict.Basket == null || (empty(pdict.Basket.productLineItems) && empty(pdict.Basket.giftCertificateLineItems)))}">
-				<center><h1>Checkout</h1></center>
+				<center><h1>${Resource.msg('global.ShoppingCartheading','locale',null)}</h1></center>
 			</isif>
 			
 			<div class="container">

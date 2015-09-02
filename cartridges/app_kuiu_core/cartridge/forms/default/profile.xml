@@ -24,23 +24,23 @@
 			parse-error="profile.usernameerror"
 			value-error="profile.usernametaken" />
 			   
-		<field formid="password" label="label.password" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
-			   range-error="resource.8_255characters" />	
+		<field formid="password" label="label.password" description="resource.8_25characters" type="string" mandatory="true" min-length="8" max-length="255"
+			   range-error="resource.8_25characters" />	
 		
 		<field formid="passwordconfirm" label="profile.passwordconfirm" type="string" mandatory="true" min-length="8" max-length="255"
-			   range-error="resource.8_255characters"	
+			   range-error="resource.8_25characters"	
 			   value-error="profile.passwordnomatch"/>
 			   
-		<field formid="question" label="profile.accountquestion" type="string" mandatory="true" binding="passwordQuestion">
-			<options>
-				<option optionid="MothersMaidenName" value="Mother's Maiden Name" label="profile.question1"/>
-				<option optionid="MakeOfFirstCar" value="Make of First Car" label="profile.question2"/>
-				<option optionid="FavouritePetsName" value="Favourite Pet's Name" label="profile.question3"/>
-				<option optionid="FathersFirstName" value="Father's First Name" label="profile.question4"/>
-				<option optionid="PlaceOfBirth" value="Place of Birth" label="profile.question5"/>
-			</options>	
-		</field>
-		
+		<field formid="question" label="profile.accountquestion" type="string" mandatory="true" binding="custom.referrals">
+		   <options>
+		    <option optionid="" value="" label="profile.option"/>
+		    <option optionid="Website" value="Website" label="profile.website"/>
+		    <option optionid="Ad" value="An  Advertisement" label="profile.ad"/>
+		    <option optionid="Fried" value="A friend or relative" label="profile.friend"/>
+		    <option optionid="Other" value="Other" label="profile.other"/>
+		   </options> 
+		  </field>
+				
 		<field formid="answer" label="profile.accountanswer" type="string" mandatory="true" binding="passwordAnswer" max-length="50"/>
 		
 		<field formid="rememberme" label="profile.remember" type="boolean" mandatory="false" />

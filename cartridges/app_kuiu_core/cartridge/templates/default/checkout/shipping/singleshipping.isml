@@ -25,7 +25,7 @@
 
 					<legend>
 						${Resource.msg('singleshipping.enteraddress','checkout',null)}
-						<div class="dialog-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
+						<div class="dialog-required pull-right hidden-xs"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 					</legend>
 
 					<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
@@ -57,7 +57,9 @@
 							<div class="form-row">
 
 								<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
-									${Resource.msg('global.selectaddressmessage','locale',null)}:
+									${Resource.msg('global.selectaddressmessage','locale',null)}
+									<div class="dialog-required pull-right visible-xs-block"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
+									
 								</label>
 								<isaddressselectlist p_listId="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
 							</div>
@@ -65,7 +67,7 @@
 							<div class="form-row form-row-button">
 								<button id="addressSelectGoButton" class="select" name="${pdict.CurrentForms.singleshipping.shippingAddress.selectAddress.htmlName}" type="submit" value="Go" >${Resource.msg('singleshipping.select','checkout',null)}</button>
 							</div>
-
+						
 						</div>
 
 					<iselse/>
@@ -77,7 +79,7 @@
 							<div class="form-row">
 
 								<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
-									${Resource.msg('global.selectaddressmessage','locale',null)}:
+									${Resource.msg('global.selectaddressmessage','locale',null)}
 								</label>
 								<isaddressselectlist p_listid="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
 							</div>
@@ -126,7 +128,7 @@
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
 				
-				<div class="form-row required">
+				<div class="form-row required foon-text">
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 
 					<div class="form-field-tooltip with-helper-text">
@@ -142,7 +144,7 @@
 					<iscomment>Add address to Address Book</iscomment>
 					
 						<isif condition="${pdict.CurrentCustomer.authenticated}">
-						<div class="form-row fld-checkbox">
+						<div class="form-row fld-checkbox add-check">
 							<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
 						</div>
 						</isif>
@@ -155,7 +157,7 @@
 				
 					<iscomment>Is this a gift</iscomment>
 					<div class="form-row">
-						<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
+						<label class="gift-reg" for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
 						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.yes', 'locale', null)}
 						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.no', 'locale', null)}
 					</div>

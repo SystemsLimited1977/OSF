@@ -3538,7 +3538,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .pdp-main .product-set-main .product-set-list .block-add-to-cart button {
     width: 72%;
     float: left;
-    margin-top: 24px;
+    margin-top: 25px;
     height: 50px !important;
 }
 
@@ -3695,7 +3695,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     text-align: center;
     width: 100%;
     height: 50px;
-    margin-top: 11px;
+    margin-top: 0px;
     margin-left: 0;
 }
 
@@ -3704,7 +3704,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     width: 81%;
     margin-left: 10px;
     height: 50px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .quickview-popup .pdp-main .product-add-to-cart {
@@ -3721,6 +3721,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 .quickview-popup .pdp-main .product-primary-image {
     min-height: 490px;
+    margin-bottom:16px;
 }
 
 .js .ui-dialog-content .pdp-main .product-set-list {
@@ -4359,6 +4360,7 @@ a.tooltip {
 
 .checkout-steps #main form label {
     width: 20%;
+    padding-bottom: 5px;
 }
 
 .checkout-steps #main .form-row {
@@ -4399,6 +4401,7 @@ a.tooltip {
     padding: 0 0 0 10px;
     width: auto;
     font-size: 12px;
+    line-height: 20px;
 }
 
 .checkout-steps #main form .fld-checkbox input[type="checkbox"] {
@@ -4605,7 +4608,7 @@ legend .required-indicator {
 
 .checkout-steps #main .gift-discount-codes-wrap .form-row button {
     height: 28px;
-    margin-top: 55px;
+    margin-top: 59px;
     float: left;
 }
 
@@ -5223,6 +5226,7 @@ table .section-header {
     background-color: transparent;
     font-size: 14px;
     color: #000;
+    text-decoration: underline;
 }
 
 #main .cart-actions-top .cart-action-continue-shopping button:hover {
@@ -5239,6 +5243,9 @@ table .section-header {
 
 .cart-action-checkout button.button-fancy-large {
     width: 100%;
+    height:50px !important;
+    font-size: 16px !important;
+    text-transform: capitalize;
 }
 
 #cart-table .section-header {
@@ -5469,8 +5476,9 @@ tr.order-sales-tax {
     display: inline-block;
     margin-bottom: 0;
     margin-left: 0;
-    padding-left: 25%;
+    margin-left: 25%;
     float: left;
+    width:100%;
 }
 
 #main .new-account form .fld-checkbox .form-row {
@@ -5490,7 +5498,7 @@ tr.order-sales-tax {
 
 #main .new-account form .fld-checkbox input[type="checkbox"] {
     float: left;
-    margin-top: 3px;
+    margin-top: 1px;
 }
 
 #main .new-account a.privacy-policy {
@@ -5752,7 +5760,8 @@ tr.order-sales-tax {
 
 .ui-dialog.password-forget {
     border: none;
-    padding: 20px;
+    padding: 30px 20px;
+    width:616px !important;
 }
 
 .ui-dialog.password-forget .ui-widget-header {
@@ -5782,7 +5791,7 @@ tr.order-sales-tax {
 }
 
 .ui-dialog.password-forget label {
-    width: 20%;
+    width: 25%;
     padding-right: 10px;
 }
 
@@ -5795,7 +5804,7 @@ tr.order-sales-tax {
 
 .ui-dialog.password-forget input {
     height: 34px;
-    width: 80%;
+    width: 75%;
 }
 
 .ui-dialog.password-forget #PasswordResetForm button {
@@ -5809,7 +5818,7 @@ tr.order-sales-tax {
 }
 
 .ui-dialog.password-forget span.error {
-    margin: 1% 2% 0 20%;
+    margin: 1% 2% 0 25%;
 }
 
 .ui-dialog.password-forget p {
@@ -5881,7 +5890,9 @@ tr.order-sales-tax {
 .ui-dialog.add-cc-details input[type="text"],
 .ui-dialog.add-cc-details select,
 .ui-dialog.send-to-friend-main input[type="text"],
-.ui-dialog.send-to-friend-main select {
+.ui-dialog.send-to-friend-main select,
+.ui-dialog.send-to-friend-review input[type="text"],
+.ui-dialog.send-to-friend-review select{
     width: 50%;
 }
 
@@ -6073,10 +6084,10 @@ ul.product-availability-list li {
     margin-left: 0px;
 }
 
-.account-address-landing .address-make-default,
-.account-address-landing .address-edit,
-.account-address-landing .address-delete.delete,
-.account-address-landing .address-button {
+.account-address-landing .address-button .address-make-default,
+.account-address-landing .address-button .address-edit,
+.account-address-landing .address-button .address-delete.delete
+/*.account-address-landing .address-button */{
     font-style: italic;
     text-decoration: underline;
 }
@@ -6132,6 +6143,7 @@ ul.product-availability-list li {
 
 #main #primary.password-reset-section input[type="password"] {
     width: 38%;
+    margin-top:8px;
 }
 
 #main .account-landing.wishlist-details-section form .form-row.label-above label {
@@ -6141,7 +6153,7 @@ ul.product-availability-list li {
 }
 
 #main .account-landing.wishlist-details-section form .form-row {
-    margin: 0 0 20px;
+    margin: 0 0 10px;
 }
 
 #main .account-landing.wishlist-details-section form .form-row p,
@@ -6253,6 +6265,8 @@ ul.product-availability-list li {
 
 .ui-dialog.send-to-friend-main .ui-widget-header {
     border-bottom: 1px solid #e6e6e6;
+    padding-bottom:10px;
+    font-size:26px;
 }
 
 .ui-dialog.send-to-friend-main,
@@ -6260,7 +6274,8 @@ ul.product-availability-list li {
     width: 48% !important;
 }
 
-.ui-dialog.send-to-friend-main .dialog-required {
+.ui-dialog.send-to-friend-main .dialog-required,
+.ui-dialog.send-to-friend-review .dialog-required  {
     float: right;
     font-size: 10px;
 }
@@ -6270,18 +6285,21 @@ ul.product-availability-list li {
     margin: 0px;
 }
 
-.ui-dialog.send-to-friend-main .input-checkbox {
+.ui-dialog.send-to-friend-main .input-checkbox,
+.ui-dialog.send-to-friend-review  .input-checkbox {
     width: 25%;
     margin-left: 62px;
     margin-top: -33px;
 }
 
-.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline {
+.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline,
+.ui-dialog.send-to-friend-review .form-row.form-indent.label-inline {
     clear: both;
     width: 100%;
 }
 
-.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline label {
+.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline label,
+.ui-dialog.send-to-friend-review .form-row.form-indent.label-inline label {
     float: right;
     width: 75%;
 }
@@ -6293,7 +6311,8 @@ ul.product-availability-list li {
     text-decoration: underline;
 }
 
-.ui-dialog.send-to-friend-main textarea {
+.ui-dialog.send-to-friend-main textarea,
+.ui-dialog.send-to-friend-review textarea  {
     min-height: 110px;
 }
 
@@ -6478,11 +6497,173 @@ ul.product-availability-list li {
 }
 
 
+.pt_content.pt_customer-service h1 {
+	font-size: 32px;
+    text-transform: uppercase;
+    font-family: "Times New Roman", Georgia, Serif;
+}
 
+.pt_product-search-result .product-price .price-standard { 
+	text-decoration: line-through; 
+}
 
+#wrapper.pt_content.pt_customer-service {
+	 background: transparent;
+	 padding-bottom:40px;
+}
+.content-page-section h2 {
+	font-size:12px;
+	font-weight:600;
+}
+.content-page-section p {
+	font-size:12px;
+	font-weight:400;
+}
+.pt_product-search-result .product-tile .product-promo {
+	font-size: 10px;
+    color: #2b2b2b;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 18px;
+    margin:0px;
+    text-align: left;
+    text-transform: capitalize;
+}
+.pdp-main .promotion {
+	background: transparent;
+	border-bottom: 1px solid #e6e6e6;
+	margin:0px;
+	padding: 3%;
+}
+.pdp-main .promotion .promotion-title {
+	color: #2b2b2b;
+	font-size: 15px;
+}
+.pdp-main .promotion .promotion-callout {
+	line-height: 30px;
+	padding-left:10px;
+}
 
+#wrapper.pt_content.pt_customer-service .content-heading-section {
+	margin-top: 30px;
+    margin-bottom: 40px;
+}
+.ui-dialog.email-sigup-popup-main .email-popup-img
+{
+    width: 300px;
+    height: 477px;
+    background-image: url("../images/bg-1.jpg");
+    background-repeat: no-repeat;
+    background-size: 421px;
+}
+.ui-dialog.thankyou-popup .email-popup-img  {
+    width: 300px;
+    height: 477px;
+    background-size: 421px;
+    background-image: url("../images/bg-2.jpg");
+}
+.ui-dialog.email-sigup-popup-main  .email-form-section {
+	width:55%;
+	margin-left: 10px;
+}
+.ui-dialog.email-sigup-popup-main .ui-icon-closethick,
+.ui-dialog.email-sigup-popup-main .ui-widget-header,
+.ui-dialog.thankyou-popup .ui-icon-closethick,
+.ui-dialog.thankyou-popup .ui-widget-header {
+	float:right;
+	border-bottom:none;
+    margin-right: 15px;
+    margin-top: 4px;
+}
+.ui-dialog.email-sigup-popup-main .ui-dialog-content,
+.ui-dialog.thankyou-popup .ui-dialog-content {
+	padding:0px;
+}
+.ui-dialog.email-sigup-popup-main label {
+	width:100%;
+	clear: both;
+	font-weight:400;
+} 
+.ui-dialog.email-sigup-popup-main input[type="text"] {
+	width: 85%;
+	clear: both;
+}
+.ui-dialog.email-sigup-popup-main #EmailSignUpForm {
+	padding-left: 45px;
+}
+.ui-dialog.email-sigup-popup-main #EmailSignUpForm .form-row {
+	padding-bottom:2px;
+}
+.ui-dialog.email-sigup-popup-main .ui-dialog-content h5 {
+	margin-bottom:0px;
+	font-weight: 400;
+	padding-top:10px;
+}
+.ui-dialog.email-sigup-popup-main .ui-dialog-content h1,
+.ui-dialog.thankyou-popup .ui-dialog-content h1 {  
+    width: 100%;
+    text-align: center;
+    font-style: normal;
+    text-transform: uppercase;
+    padding-top: 0px;
+    font-size: 32px;
+    font-weight: 500;
+}
 
+.ui-dialog.email-sigup-popup-main #EmailSignUpForm .form-row.form-row-button {
+	padding-top:10px;
+	margin-left: 15%;
+}
+.ui-dialog.thankyou-popup .email-form-section {
+    width: 58%;
+    margin-top: 68px;
+}
+.thankyou-msg p {
+	text-align: center;
+    font-size: 17px;
+    padding-top: 65px;
+}
+.thankyou-button {
+	 text-align: center;
+	 padding-top: 65px;
+}
+.product-variations .attribute .size-chart-link {
+	float: left;
+    clear: none;
+    position: absolute;
+    left: 80px;
+    top: 0;
+}
+.ui-dialog.size-chart-popup {
+	top: 40px;
+}
 
+.ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+.ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li,
+.ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li a,
+.ui-dialog.size-chart-popup h2 {
+	font-style: normal;
+    color: #2b2b2b;
+}
+.ui-dialog.size-chart-popup .ui-dialog .ui-widget-header {
+	border-bottom:none;
+}
+.ui-dialog.size-chart-popup  .ui-tabs .ui-tabs-panel {
+	box-shadow:none;
+}
+#main .new-account #RegistrationForm .form-caption {
+	font-style: italic;
+}
 
+#main .new-account #RegistrationForm fieldset legend {
+	 width: 84%
+}
 
-
+.pt_account #main .new-account #RegistrationForm input[type="text"],
+.pt_account #main .new-account #RegistrationForm input[type="password"],
+.pt_account #main .new-account #RegistrationForm select{
+	 width:58% !important;
+}
+#main select {
+	  outline: none;
+	  background-color:white;
+}

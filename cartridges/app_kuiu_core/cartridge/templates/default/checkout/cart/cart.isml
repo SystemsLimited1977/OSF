@@ -128,7 +128,7 @@
 							<th class="section-header">${Resource.msg('global.qty','locale',null)}</th>
 							<th class="section-header"></th>
 							<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
-							<th class="section-header header-total-price">${Resource.msg('global.totalprice','locale',null)}</th>
+							<th class="section-header header-total-price">${Resource.msg('global.totalprice1','locale',null)}</th>
 						</tr>
 					</thead>
 

@@ -22,9 +22,10 @@
 					<isprint value="${Resource.msg('addressdetails.' + pdict.Status.code, 'account',null)}"/>
 				</span>
 			</isif>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.addressid}" type="input"/>
-
+			
+			<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+			<isinputfield formfield="${pdict.CurrentForms.profile.address.addressid}" type="input" />
+			
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.firstname}" type="input"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.lastname}" type="input"/>

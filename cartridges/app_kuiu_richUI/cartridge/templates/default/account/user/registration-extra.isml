@@ -58,13 +58,15 @@
 				
 				<div class="form-row fld-checkbox">
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="label-inline"/>
+			    <a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" class="privacy-policy" title="${Resource.msg('global.privacypolicy','locale',null)}">${Resource.msg('global.privacypolicy','locale',null)}</a>
 				</div>
 				
+				<iscomment>
 				<div class="form-caption">
 					<span>${Resource.msg('global.email.policy','locale',null)}</span>
 					<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" class="privacy-policy" title="${Resource.msg('global.privacypolicy','locale',null)}">${Resource.msg('global.privacypolicy','locale',null)}</a>
 				</div>
-
+				</iscomment>
 				<div class="form-row form-row-button">
 				
 				<isif condition="${!empty(pdict.Action) && pdict.Action == 'edit'}">

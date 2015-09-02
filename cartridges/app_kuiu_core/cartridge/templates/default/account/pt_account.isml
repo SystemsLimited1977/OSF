@@ -28,7 +28,7 @@
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
 			
-			<isif condition="${pdict.CurrentCustomer.anonymous}">
+			<isif condition="${!empty(pdict.IsAccountRegisterationPage) && pdict.IsAccountRegisterationPage}">
 					<isslot id="un-registered-account-banner" description="Banner for My Account pages" context="global" />
 			</isif>
 	

@@ -28,7 +28,7 @@
 
 		<legend>
 			${Resource.msg('billing.addressheader','checkout',null)}
-			<div class="dialog-required pull-right"> *<span class="required-indicator">${Resource.msg('global.requiredfield','locale',null)}</span></div>
+			<div class="dialog-required pull-right hidden-xs"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 		</legend>
 
 		<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
@@ -37,6 +37,7 @@
 				<div class="form-row">
 					<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
 						Choose an Address
+						<div class="dialog-required pull-right visible-xs-block"> *<span class="required-indicator">${Resource.msg('global.requiredfield','locale',null)}</span></div>	
 					</label>
 					<isscript>
 						importScript("cart/CartUtils.ds");
@@ -87,7 +88,7 @@
 
 		<iscomment>provide option to add address to address book if customer is authenticated</iscomment>
 		
-		<div class="form-row required fld-checkbox">
+		<div class="form-row required fld-checkbox address-billing">
 		<isif condition="${pdict.CurrentCustomer.authenticated}">
 			<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
 		</isif>
