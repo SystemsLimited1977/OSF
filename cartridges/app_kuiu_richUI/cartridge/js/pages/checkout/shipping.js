@@ -151,7 +151,7 @@ exports.init = function () {
 	});
 
 	$('.address').on('change',
-		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
+		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], select[name$="_addressFields_country"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
 		updateShippingMethodList
 	);
 
