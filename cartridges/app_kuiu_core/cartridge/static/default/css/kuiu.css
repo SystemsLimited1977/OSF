@@ -1,6 +1,6 @@
 /*Header footer styling*/
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900);
 html {
     -ms-overflow-style: scrollbar;
 }
@@ -4195,7 +4195,7 @@ a#password-reset {
     width: 75%;
     margin-left: 10px;
     float: left;
-    margin-top: 18px;
+    margin-top: 20px;
     clear: none;
 }
 
@@ -4248,7 +4248,7 @@ a#password-reset {
 .ui-dialog.bonusproduct-quickview-container .ui-widget-header {
     border-bottom: none;
     height: auto;
-    padding: 0px;
+    padding: 15px 0px;
 }
 
 .ui-dialog.bonus-product-popup .ui-dialog-title,
@@ -4261,7 +4261,7 @@ a#password-reset {
 .ui-dialog.bonusproduct-quickview-container .ui-icon-closethick {
     background-image: url("../images/interface/cross_black.png");
     border-bottom: none;
-    margin-top: 18px;
+    margin-top: 20px;
     background-position: right top;
 }
 
@@ -4280,6 +4280,8 @@ a#password-reset {
 
 .ui-dialog.bonusproduct-quickview-container {
     border: none;
+    top:3% !important;
+    overflow-x: hidden;
 }
 
 .ui-dialog.bonus-product-popup a.tooltip {
@@ -4428,7 +4430,7 @@ a.tooltip {
 }
 
 .checkout-steps #shipping-method-list {
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .checkout-steps #shipping-method-list legend {
@@ -4450,13 +4452,13 @@ a.tooltip {
 }
 
 .checkout-steps #main #shipping-method-list a.tooltip {
-    top: 3px;
+    top: 2px;
     line-height: 100%;
     font-weight: 600;
 }
 
 .checkout-steps #main #shipping-method-list .form-row {
-    margin: 0 0 15px;
+    margin: 0 0 5px;
 }
 
 .checkout-steps #main .select-address .form-row-button,
@@ -4471,6 +4473,7 @@ a.tooltip {
 
 .checkout-steps #main button {
     text-transform: capitalize;
+    width:16%;
 }
 
 .checkout-steps #main .form-row-button {
@@ -4528,6 +4531,7 @@ a.tooltip {
 
 .checkout-mini-cart .mini-cart-product .mc-item-price {
     text-align: right;
+    margin-top: -16px;
 }
 
 .checkout-order-totals {
@@ -5302,7 +5306,8 @@ table .section-header {
 #cart-table .item-user-actions button,
 #cart-table .item-edit-details button,
 #cart-table .item-user-actions .add-to-wishlist,
-#cart-table .item-edit-details a {
+#cart-table .item-edit-details a,
+.rowcoupons .item-quantity button {
     background-color: transparent;
     color: #000;
     font-size: 12px;
@@ -5315,7 +5320,7 @@ table .section-header {
 #cart-table .item-edit-details,
 .giftreg-edit {
     padding-top: 28px;
-    text-decoration: underline;
+   /* text-decoration: underline;*/
     clear: both;
 }
 
@@ -5429,6 +5434,7 @@ tr.order-sales-tax {
 
 #cart-items-form .item-list .cart-promo td {
 	padding: 20px 10px;
+	font-style: normal;
 }
 
 /*Create new account page styling*/
@@ -6116,6 +6122,7 @@ ul.product-availability-list li {
     margin-top: 0px !important;
     height: auto;
     font-size: 12px;
+    
 }
 
 .account-payment-details .payment-button:hover {
@@ -6153,7 +6160,7 @@ ul.product-availability-list li {
 }
 
 #main .account-landing.wishlist-details-section form .form-row {
-    margin: 0 0 10px;
+    margin: 0 0 20px;
 }
 
 #main .account-landing.wishlist-details-section form .form-row p,
@@ -6161,6 +6168,7 @@ ul.product-availability-list li {
     margin-top: 20px;
     color: #2b2b2b;
     margin-bottom: 20px;
+    width:80%;
 }
 
 #main .account-landing.wishlist-details-section form.list-share {
@@ -6217,7 +6225,7 @@ ul.product-availability-list li {
 
 #main .account-landing.wishlist-details-section .item-option.option-quantity-desired label,
 #main .account-landing.wishlist-details-section .item-option.option-priority label {
-    width: 80%;
+    width: 72%;
     float: left;
     text-align: right;
     color: #2b2b2b;
@@ -6259,9 +6267,10 @@ ul.product-availability-list li {
     font-size: 12px;
 }
 
-#main .account-landing.wishlist-details-section .item-image img {
-    max-width: 180px;
-}
+/*#main .account-landing.wishlist-details-section .item-image img {
+    width: 100px;
+    height: 125px;
+}*/
 
 .ui-dialog.send-to-friend-main .ui-widget-header {
     border-bottom: 1px solid #e6e6e6;
@@ -6355,7 +6364,7 @@ ul.product-availability-list li {
 }
 
 .ui-dialog.send-to-friend-review button.send-button {
-    margin-left: 18px;
+    margin-left: 15px;
 }
 
 .ui-dialog.send-to-friend-review .form-row.form-row-button {
@@ -6539,7 +6548,6 @@ ul.product-availability-list li {
 	font-size: 15px;
 }
 .pdp-main .promotion .promotion-callout {
-	line-height: 30px;
 	padding-left:10px;
 }
 
@@ -6666,4 +6674,175 @@ ul.product-availability-list li {
 #main select {
 	  outline: none;
 	  background-color:white;
+}
+/*.foon-text span.form-caption  {
+	font-style: italic;	
+}*/
+.required-indicator,
+#main .account-landing.wishlist-details-section .option-add-to-cart label {
+	 text-transform: capitalize;
+}
+.address-billing {
+	padding-top:12px;
+}
+.mini-shipment.order-component-block.first .name {
+	display:none;
+}
+
+#main #primary.password-reset-section button {
+	margin-top: 0px;
+	text-transform: uppercase;
+}
+.pt_account #main h1 {
+    margin-bottom: 60px;
+}
+
+.mini-address-location {
+	min-height:70px;
+}
+.ui-dialog.create-new-address {
+	width:650px !important;
+}
+.ui-dialog.create-new-address .form-row span.form-caption {
+	font-style: italic;
+    margin-top: 3px;
+}  
+.ui-dialog.create-new-address  .dialog-required {
+	margin-left:63%;
+}
+ #main .no-design .orders-list button {
+ 	 font-weight: 500;
+ }
+.pt_order #main .no-design {
+	margin-bottom:60px;
+}
+
+.product-set-main .promotion {
+	padding: 2%;
+    border-top: 1px solid #e6e6e6;
+    margin: 10px 0;
+}
+
+.pdp-main .product-set .product-add-to-cart .product-price {
+	width:100%;
+	text-align: right;
+	padding-top:10px;
+}
+#cart-table  .rowgiftcert td.item-image img {
+	max-width:150px;
+}
+
+#cart-items-form  tr.rowcoupons td {
+	padding:35px 0;
+}
+.cart-actions.cart-action-footer .cart-action-continue-shopping {
+	margin-right:125px;
+}
+#cart-table .rowgiftcert td.item-quantity {
+	text-align: left;
+}
+#main .account-landing.wishlist-details-section .form-row .label-inline.login-rememberme {
+	margin: 0 0 5px;
+}
+.pt_wish-list .wishlist-details-section {
+	padding-bottom:30px;
+}
+.ui-dialog .send-to-friend-main .ui-dialog-title {
+	font-size: 26px;
+    padding-bottom: 9px;
+}
+.ui-dialog.send-to-friend-main .ui-icon-closethick {
+	border-bottom:none;
+}
+.ui-dialog.send-to-friend-main label {
+	width:25%;
+}
+.ui-dialog.send-to-friend-main textarea ,
+.ui-dialog.send-to-friend-review textarea {
+	resize:none;
+	}
+.ui-dialog.send-to-friend-main .form-row.form-row-button {
+	  margin-left: 26%;
+}
+.ui-dialog.send-to-friend-main .send-button {
+	margin-left:18px;
+}
+.ui-dialog.send-to-friend-main  span.error {
+    margin: 0% 2% 0% 25%;
+}
+	
+.ui-dialog.send-to-friend-main .form-indent {
+    margin-left: 25%;
+}
+.ui-dialog.send-to-friend-review dd.send-to-friend-message {
+	width:80%;
+    word-break: break-all;
+}
+.ui-dialog.send-to-friend-review #send-to-friend-main fieldset p {
+	    margin: 0 0 15px;
+}
+.ui-dialog.send-to-friend-review .send-to-friend-subject,
+.wishlist-details-section .list-share .share-option a,
+.wishlist-edit-btn,
+.giftreg-edit a  {
+	    text-decoration: underline;
+}
+.ui-dialog.send-to-friend-review #send-to-friend-dialog button {
+	margin-top:15px;
+}
+.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline {
+	margin-left:0 !important;
+}
+ #main .account-landing.wishlist-details-section form.list-share .share-option {
+ 	margin-bottom: 34px;	
+ }
+ .ui-dialog.send-to-friend-main .char-count {
+ 	margin-left: 25%;
+ }
+ 
+ .wishlist-details-section button.sendtofrd-btn,
+ .wishlist-details-section span.sendtofrd-btn {
+    background-color: #e6e6e6 !important;
+    border: 2px solid #e6e6e6!important;
+    color: #1d1512 !important;
+    width: 200px;
+    line-height: 32px;
+}
+
+ .wishlist-details-section button.sendtofrd-btn:hover,
+ .wishlist-details-section span.sendtofrd-btn:hover {
+ 	background-color: #fff !important;
+    border: 2px solid #e6e6e6;
+    color: #1d1512 !important;
+    text-decoration: underline;
+ }
+ .order-discount,
+ .wishlist-details-section span.sendtofrd-btn a,
+ .item-details .product-list-item .price-standard {
+ 	color:#2b2b2b;
+ }
+ 
+ .pt_wish-list .container {
+ 	padding-bottom:30px;
+ }
+
+.pt_wish-list #main select.quantity-box.wishlist  {
+	width:28%;
+}
+
+.pt_wish-list #main select.quantity-box.wishlist.wishlist-qty-dropdown {
+    color:#2b2b2b;
+    width: 25%;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+#main .account-landing.wishlist-details-section .item-option.option-update span {
+	 font-style: normal;
+}
+
+#main .account-landing.wishlist-details-section .item-option.option-update .button-text.update-item,
+#main .account-landing.wishlist-details-section .item-option.option-update .button-text.delete-item,
+#main .account-landing.wishlist-details-section .item-option.option-date-added span.value {
+	    font-style: normal;
+	    font-weight:400;
 }

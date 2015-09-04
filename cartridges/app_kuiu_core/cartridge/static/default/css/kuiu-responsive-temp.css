@@ -151,6 +151,40 @@
 	.pt_cart #cart-table td.item-image img {
 		max-width:100%;	
 	}
+	.ui-dialog.send-to-friend-main label {
+		width:100%;
+	}
+	
+	.ui-dialog.send-to-friend-main .send-button {
+		margin-left:8px;
+	}
+	.ui-dialog.send-to-friend-review dd.send-to-friend-message {
+		width:auto;
+	}
+	.ui-dialog.send-to-friend-main .form-row.form-row-button {
+		margin-left:0px;
+	}
+	 .ui-dialog.send-to-friend-review .form-caption {
+    	margin: 0;
+    	clear: both;
+    	margin-left: 23px;
+    	text-decoration: underline;
+	 }
+	.ui-dialog.send-to-friend-review  .span.error {
+		margin: 1% 2% 2% 0%;
+	}
+	.pt_wish-list #main select.quantity-box.wishlist {
+    	width: 23% !important;
+	}
+	#main .account-landing.wishlist-details-section .item-option.option-add-to-cart button.add-to-cart {
+		width: 72%;
+    	margin-left: 6px;
+    	margin-top: 4px;
+	}
+	.pt_wish-list #main select.quantity-box.wishlist.wishlist-qty-dropdown {
+    	height: 36px;
+    	background-position: right 6px;
+	}
 }
 
 @media ( min-width : 768px) and (max-width: 991px) {
@@ -167,6 +201,25 @@
 	}
 	.cart-actions.cart-action-footer .cart-action-continue-shopping {
     	margin-right: 20px;
+	}
+	.ui-dialog.send-to-friend-main .form-indent {
+		 margin-left: 22%;
+	}
+	.ui-dialog.send-to-friend-main .char-count {
+		 margin-left: 25%;
+	}
+	.ui-dialog.send-to-friend-main .form-row.form-indent.label-inline {
+		margin-left:0 !important;
+	}
+	.ui-dialog.send-to-friend-main label,
+	.pt_wish-list #main select.quantity-box.wishlist {
+    	width: 23%;
+	}
+	#main .account-landing.wishlist-details-section form.list-share .share-option {
+		width:100%;
+	}
+	.pt_wish-list #main select.quantity-box.wishlist {
+    	width: 28%;
 	}
 }
 

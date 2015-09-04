@@ -23,7 +23,7 @@
 				<tr>
 					<th class="section-header"  colspan="2">${Resource.msg('global.product','locale',null)}</th>
 					<th class="section-header"  colspan="2">${Resource.msg('global.qty','locale',null)}</th>
-					<th class="section-header header-total-price">${Resource.msg('global.totalprice','locale',null)}</th>
+					<th class="section-header header-total-price">${Resource.msg('global.totalprice1','locale',null)}</th>
 				</tr>
 			</thead>
 

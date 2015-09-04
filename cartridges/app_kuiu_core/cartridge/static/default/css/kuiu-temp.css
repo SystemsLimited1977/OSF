@@ -1,91 +1,52 @@
-.foon-text span.form-caption  {
-	font-style: italic;	
+.ui-dialog.bonus-product-popup .bonus-product-alert,
+.ui-dialog.bonus-product-popup .bonus-product-promo {
+	    padding-bottom: 15px;
+	    padding-top: 5px;
 }
-.required-indicator {
-	 text-transform: capitalize;
+.ui-dialog.bonusproduct-quickview-container .product-add-to-cart .inventory label,
+.ui-dialog.bonusproduct-quickview-container .quantity-error  {
+		width:100%;
 }
-.address-billing {
-	padding-top:12px;
-}
-.mini-shipment.order-component-block.first .name {
-	display:none;
-}
-
-#main #primary.password-reset-section button {
-	margin-top: 0px;
-	text-transform: uppercase;
-}
-.pt_account #main h1 {
-    margin-bottom: 60px;
+.ui-dialog.bonusproduct-quickview-container .bonus-product-list .product-add-to-cart button {
+		width:56%;
 }
 
-.mini-address-location {
-	min-height:70px;
+.pt_cart .bonusproducts {
+	clear:both;
 }
-.ui-dialog.create-new-address {
-	width:650px !important;
+.pt_cart .rowcoupons .item-details .discount .label {
+	margin-left:-2px;
 }
-.ui-dialog.create-new-address .form-row span.form-caption {
-	font-style: italic;
-    margin-top: 3px;
-}  
-.ui-dialog.create-new-address  .dialog-required {
-	margin-left:63%;
+.pt_cart tr.cart-promo,.pt_cart  td.cart-promo {
+	background: transparent;
+	font-size: 12px;
+    font-weight: 500;
+    padding: 25px 0;
 }
- #main .no-design .orders-list button {
- 	 font-weight: 500;
- }
-.pt_order #main .no-design {
-	margin-bottom:60px;
+.ui-tooltip.ui-widget-content {
+	border:2px solid #e6e6e6;
+	padding:10px 20px;
+	margin:0px;
 }
-
-.product-set-main .promotion {
-	padding: 2%;
-    border-top: 1px solid #e6e6e6;
-    margin: 10px 0;
+.pt_cart .rowcoupons .item-details .cartcoupon {
+    padding-top: 10px;
+    padding-left: 4px;
 }
-
-.pdp-main .product-set .product-add-to-cart .product-price {
-	width:100%;
-	text-align: right;
-	padding-top:10px;
+.pt_cart .rowcoupons .item-details .cartcoupon .label,
+.pt_cart .rowcoupons .item-details .discount .label {
+	font-size: 12px;
+    font-weight: 400;
 }
-#cart-table  .rowgiftcert td.item-image img {
-	max-width:150px;
+.pt_cart .giftreg-edit {
+	margin-left:5px;
 }
-
-#cart-items-form  tr.rowcoupons td {
-	padding:35px 0;
+.pt_cart #cart-items-form td.cart-promo .label {
+	font-size: 13px;
+    font-weight: 500;
+    font-style: normal;
 }
-.cart-actions.cart-action-footer .cart-action-continue-shopping {
-	margin-right:125px;
-}
-#cart-table .rowgiftcert td.item-quantity {
-	text-align: left;
-}
-#main .account-landing.wishlist-details-section .form-row .label-inline.login-rememberme {
-	margin: 0 0 5px;
-}
-.pt_wish-list .wishlist-details-section {
-	padding-bottom:30px;
-}
-.ui-dialog .send-to-friend-main .ui-dialog-title {
-	font-size: 26px;
-    padding-bottom: 9px;
-}
-.ui-dialog.send-to-friend-main .ui-icon-closethick {
-	border-bottom:none;
-}
-.ui-dialog.send-to-friend-main label {
-	width:25%;
-}
-.ui-dialog.send-to-friend-main textarea ,
-.ui-dialog.send-to-friend-review textarea {
-	resize:none;
-	}
-.ui-dialog.send-to-friend-main .form-row.form-row-button {
-	  margin-left: 26%;
-}
-.ui-dialog.send-to-friend-main .send-button {
-	margin-left:18px;
+.pt_cart #cart-items-form td.cart-promo .value {
+	font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
 }

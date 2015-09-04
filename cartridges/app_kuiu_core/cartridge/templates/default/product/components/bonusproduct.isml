@@ -88,10 +88,10 @@
 						<label for="qty-${pdict.Product.UUID}">${Resource.msg('global.qty','locale',null)}:</label>
 						<input type="text" class="input-text" name="Quantity" id="qty-${pdict.Product.UUID}" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"/>
 					</div>
-					<label class="quantity-error"/></label>
 				</div>
 
 				<button type="submit" class="select-bonus-item"><span>${Resource.msg('global.select','locale',null)}</span></button>
+				<label class="quantity-error"/></label>
 			</fieldset>
 		</form>
 	</div>

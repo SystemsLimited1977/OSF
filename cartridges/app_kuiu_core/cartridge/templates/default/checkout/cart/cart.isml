@@ -581,13 +581,13 @@
 
 								</td>
 
-								<td class="item-quantity"/>
-
-								<td class="item-quantity-details">
-
-									<button class="textbutton" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormCoupon.deleteCoupon.htmlName}">
+								<td class="item-quantity">
+									<button  type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormCoupon.deleteCoupon.htmlName}">
 										${Resource.msg('global.remove','locale',null)}
 									</button>
+								</td>
+								
+								<td class="item-quantity-details">
 
 								</td>
 
@@ -725,11 +725,11 @@
 														${Resource.msg('global.remove','locale',null)}
 													</button>
 
-													<iscomment>Add to registry	**************************** </iscomment>
+													<iscomment>Add to registry	**************************** 
 													<a class="add-to-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', lineItem.productID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">
 														${Resource.msg('global.addtogiftregistry','locale',null)}
 													</a>
-
+													</iscomment>
 
 													<iscomment>Item Availability **************************** </iscomment>
 

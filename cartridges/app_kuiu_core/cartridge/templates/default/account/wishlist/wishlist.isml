@@ -29,11 +29,11 @@
 						</option>
 					</isloop>
 				</select>
-
+				<iscomment>
 				<button class="simple-submit" name="${pdict.CurrentForms.wishlist.selectAddressWishlist.htmlName}" type="submit" value="Go" >
 					Select
 				</button>
-
+				</iscomment>
 			</div>
 
 
@@ -42,7 +42,7 @@
 
 		<isif condition="${pdict.ProductList.giftCertificateItem == null}">
 			<div class="form-row">
-				<button type="submit" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${pdict.CurrentForms.wishlist.addGiftCertificate.htmlName}">
+				<button type="submit" class="sendtofrd-btn" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${pdict.CurrentForms.wishlist.addGiftCertificate.htmlName}">
 					${Resource.msg('giftregistry.addgiftcertificate', 'forms', null)}
 				</button>
 				<p>${Resource.msg('wishlist.addgiftcertmessage','account',null)}</p>
@@ -69,7 +69,7 @@
 				</button>
 			</isif>
 			</iscomment>
-			<span class="buttonstyle">
+			<span class="buttonstyle sendtofrd-btn">
 				<a id="send-to-friend" class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.UUID, 'source','wishlist')}">
 					${Resource.msg('wishlist.sendwishlist','account',null)}
 				</a>
@@ -112,7 +112,7 @@
 
 								<isif condition="${item.object.type != item.object.TYPE_GIFT_CERTIFICATE && item.object.product != null}">
 									<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
-										<a name="${item.object.ID}" href="${URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed(), 'uuid',item.object.ID)}" title="" >
+										<a class="wishlist-edit-btn" name="${item.object.ID}" href="${URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed(), 'uuid',item.object.ID)}" title="" >
 											${Resource.msg('global.editdetails','locale',null)}
 										</a>
 									</isif>
@@ -137,7 +137,15 @@
 											<div class="item-option option-quantity-desired clearfix">
 												<label for="${item.quantity.htmlName}">${Resource.msg('productlist.qtydesired','account',null)}</label>
 												<isif condition="${isListOwner}">
-													<input type="number" min="0" name="${item.quantity.htmlName}" value="<isprint value="${item.quantity.value}" style="INTEGER"/>"/>
+													<select name="${item.quantity.htmlName}" class="quantity-box wishlist">
+														<isloop begin="1" end="10" step="1" status="qntyStat">
+															<isif condition="${item.quantity.value == qntyStat.count}">
+																<option value="${qntyStat.count}" selected="selected"><isprint value="${qntyStat.count}"/></option>
+															<iselse>
+																<option value="${qntyStat.count}"><isprint value="${qntyStat.count}"/></option>
+															</isif>
+														</isloop>
+													</select>
 												<iselse/>
 													<span class="value"><isprint value="${item.quantity.value}"/></span>
 												</isif>
@@ -156,13 +164,13 @@
 												</isif>
 											</isloop>
 										</isif>
-
+									<iscomment>
 										<isif condition="${isListOwner && pdict.ProductList.public}">
 											<div class="item-option option-toggle-public">
-												<isinputfield formfield="${item.public}" type="checkbox"/>
+												<isinputfield formfield="${item.public}" type="checkbox" xhtmlclass=""  />
 											</div>
 										</isif>
-
+									</iscomment>
 										<isif condition="${isListOwner}">
 											<div class="item-option option-update">
 												<button name="${item.updateItem.htmlName}" class="button-text update-item" type="submit" >${Resource.msg('global.update','locale',null)}</button><span>|</span>
@@ -170,15 +178,23 @@
 											</div>
 										</isif>
 									</fieldset>
-									<fieldset>
+									<fieldset class="wishlist-addcart">
 										<div class="item-option option-add-to-cart">
 											<isif condition="${item.object.product != null && item.object.product.availabilityModel.inStock}">
 												<isset name="isGiftCert" value="${item.object.type == item.object.TYPE_GIFT_CERTIFICATE}" scope="page"/>
 												<input type="hidden" name="itemid" value="${item.object.ID}"/>
 												<input type="hidden" name="plid" value="${pdict.ProductList.UUID}"/>
 												<isif condition="${!isGiftCert}">
-													<label for="Quantity" class="pull-left">${Resource.msg('global.qty','locale',null)}:</label>
-													<input class="input-text pull-left" type="number" min="0" step="1" name="Quantity" value="<isprint value="${item.quantity.value}" formatter="#"/>"/>
+													<label for="Quantity" class="pull-left">${Resource.msg('global.qty','locale',null)}</label>
+													<select name="Quantity" class="quantity-box wishlist pull-left wishlist-qty-dropdown">
+														<isloop begin="1" end="10" step="1" status="qntyStat">
+															<isif condition="${item.quantity.value == qntyStat.count}">
+																<option value="${qntyStat.count}" selected="selected"><isprint value="${qntyStat.count}"/></option>
+															<iselse>
+																<option value="${qntyStat.count}"><isprint value="${qntyStat.count}"/></option>
+															</isif>
+														</isloop>
+													</select>
 												</isif>
 												<button type="submit" name="${item.addToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small pull-left <isif condition="${!isGiftCert}">add-to-cart</isif>">
 													${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}

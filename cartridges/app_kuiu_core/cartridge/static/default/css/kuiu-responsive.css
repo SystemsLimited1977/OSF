@@ -1539,13 +1539,18 @@
     .ui-dialog.add-cc-details input[type="text"],
     .ui-dialog.add-cc-details select,
     .ui-dialog.send-to-friend-main input[type="text"],
-    .ui-dialog.send-to-friend-main select {
+    .ui-dialog.send-to-friend-main select,
+    .ui-dialog.send-to-friend-review input[type="text"],
+    .ui-dialog.send-to-friend-review select
+     {
         width: 100%;
     }
     .ui-dialog.create-new-address .form-caption,
     .ui-dialog.edit-address .form-caption,
     .ui-dialog.add-cc-details .form-caption,
-    .ui-dialog.send-to-friend-main .form-caption {
+    .ui-dialog.send-to-friend-main .form-caption,
+    .ui-dialog.send-to-friend-review .form-caption
+     {
         margin: 0;
     }
     .ui-dialog.create-new-address .form-field-tooltip,
@@ -1650,7 +1655,8 @@
     #main .account-landing.wishlist-details-section .item-dashboard,
     .ui-dialog.send-to-friend-main,
     .ui-dialog.send-to-friend-main textarea,
-    .ui-dialog.send-to-friend-review {
+    .ui-dialog.send-to-friend-review,
+    .ui-dialog.send-to-friend-review textarea {
         width: 100% !important;
     }
     #main .account-landing.wishlist-details-section .item-list .item-image {
@@ -1693,7 +1699,6 @@
         width: 14%;
         font-style: normal;
     }
-    #main .account-landing.wishlist-details-section .item-option.option-add-to-cart button.add-to-cart,
     .ui-dialog .ui-dialog-title {
         width: 73%;
     }
@@ -1712,24 +1717,29 @@
     #main .wishlist-details-section {
         border-left: none;
     }
-    .ui-dialog.send-to-friend-main .form-row.form-indent.label-inline label {
+    .ui-dialog.send-to-friend-main .form-row.form-indent.label-inline label,
+    .ui-dialog.send-to-friend-review .form-row.form-indent.label-inline label {
         width: 92%;
     }
-    .ui-dialog.send-to-friend-main .send-to-friend-product.form-indent {
+    .ui-dialog.send-to-friend-main .send-to-friend-product.form-indent,
+    .ui-dialog.send-to-friend-review .send-to-friend-product.form-indent {
         text-align: center;
         margin-left: 0px;
         margin-right: 0px;
     }
-    .ui-dialog.send-to-friend-main .char-count {
+    .ui-dialog.send-to-friend-main .char-count ,
+    .ui-dialog.send-to-friend-review .char-count {
         margin-left: 0px;
     }
-    .ui-dialog.send-to-friend-main .input-checkbox {
+    .ui-dialog.send-to-friend-main .input-checkbox,
+    .ui-dialog.send-to-friend-review .input-checkbox  {
         width: 25%;
         margin-left: -24px;
         margin-top: -39px;
         height: auto;
     }
-    .ui-dialog.send-to-friend-main .ui-icon-closethick {
+    .ui-dialog.send-to-friend-main .ui-icon-closethick,
+    .ui-dialog.send-to-friend-review .ui-icon-closethick  {
         border-bottom: none;
     }
     .ui-dialog.send-to-friend-review dd {

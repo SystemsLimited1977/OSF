@@ -271,10 +271,10 @@
 					</dd>
 
 					<dt>${Resource.msg('account.components.sendtoafrienddialog.subject','account',null)}</dt>
-					<dd><isprint value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].subject}"/></dd>
+					<dd class="send-to-friend-subject"><isprint value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].subject}"/></dd>
 
 					<dt>${Resource.msg('account.components.sendtoafrienddialog.message','account',null)}</dt>
-					<dd><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></dd>
+					<dd class="send-to-friend-message"><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></dd>
 
 					</dl>
 					<input type="hidden" name="pid" value="${pdict.CurrentHttpParameterMap.pid.stringValue}" />
