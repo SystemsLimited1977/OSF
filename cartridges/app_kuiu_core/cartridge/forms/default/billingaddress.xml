@@ -8,8 +8,7 @@
 	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50" missing-error="address.city.missing" range-error="address.field.invalid" />
 
 	<!--  postal code -->
-	<field formid="postal" label="resource.zipcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode"
-		missing-error="resource.errorzip"/>
+	<field formid="postal" label="resource.zipcode" type="string" mandatory="true" min-length="2" max-length="10" binding="postalCode" missing-error="resource.errorzip" range-error="address.field.invalid"/>
 	<field formid="postalUS" label="resource.zipcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode"
 		missing-error="resource.errorzip"/>
 	<field formid="postalCA" label="resource.postalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$)" binding="postalCode"

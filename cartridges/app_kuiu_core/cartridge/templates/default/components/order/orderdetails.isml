@@ -71,7 +71,10 @@
 				${Resource.msg('order.orderdetails.paymentmethods','order',null)}
 			</isif>
 		</div>
-			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
+			<isscript>
+				var mainStretOrderPaymentInstrument : dw.util.ArrayList = new dw.util.ArrayList(Order.paymentInstruments);
+			</isscript>
+			<isloop items="${mainStretOrderPaymentInstrument}" var="paymentInstr" status="piloopstate">
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<div class="orderpaymentinstrumentsgc">
 						<span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>
@@ -80,6 +83,14 @@
 							<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
 							<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
 						</span>
+						<span class="payment-amount">
+							<span class="label">${Resource.msg('global.creditcardtype','locale',null)}:</span>
+							<span class="value"><isprint value="${paymentInstr.creditCardType}"/></span>
+						</span>
+						<span class="payment-amount">
+							<span class="label">${Resource.msg('global.maskedcreditcardnumber','locale',null)}:</span>
+							<span class="value"><isprint value="${paymentInstr.maskedCreditCardNumber}"/></span>
+						</span>
 					</div>
 				<iselse/>
 					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
@@ -87,6 +98,14 @@
 					<div class="payment-amount">
 						<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
 						<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+					</div>
+					<div class="payment-amount">
+						<span class="label">${Resource.msg('global.creditcardtype','locale',null)}:</span>
+						<span class="value"><isprint value="${paymentInstr.creditCardType}"/></span>
+					</div>
+					<div class="payment-amount">
+						<span class="label">${Resource.msg('global.maskedcreditcardnumber','locale',null)}:</span>
+						<span class="value"><isprint value="${paymentInstr.maskedCreditCardNumber}"/></span>
 					</div><!-- END: payment-amount -->
 				</isif>
 			</isloop>
