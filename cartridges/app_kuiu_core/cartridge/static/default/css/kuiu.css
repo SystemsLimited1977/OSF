@@ -3049,6 +3049,11 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     font-weight: 500;
     color: #000;
     float: left;
+    position: absolute;
+    top: -13px;
+    right: 0;
+    left: 30px;
+    bottom: 0;
 }
 
 .pdp-main .product-variations .color li a,
@@ -4127,6 +4132,7 @@ a#password-reset {
 #main .wishlist-details-section .login-box a#password-reset {
     margin-top: 0;
     font-style: italic;
+    width:100px;
 }
 
 #main .checkoutlogin .login-box .dialog-required {
