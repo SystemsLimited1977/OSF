@@ -4569,4 +4569,22 @@ h1 .account-logout {
     opacity: 1;
     filter: alpha(opacity=100);
 }
-    
+.ie7 .menu-category a {
+	    display: initial;
+}
+.ie7 .header-search {
+	width:122px;
+}
+.ie7 .header-search button {
+	width:19%;
+	background-position-x:6px;
+	background-position-y:4px;
+}
+.ie7  ul.menu-category li {
+	width:100px;
+}
+
+.ie7 .level-1.menu-category > li > a {
+	text-align:left;l
+	
+}
