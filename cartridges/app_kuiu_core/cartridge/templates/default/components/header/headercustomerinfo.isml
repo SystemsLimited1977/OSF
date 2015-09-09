@@ -1,14 +1,10 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
 	<isset name="customer" value="${pdict.CurrentCustomer}" scope="page"/>
-
 	<li class="user-info">
 		<isif condition="${pdict.CurrentCustomer.registered}">
 	        <span class="welcomemessage">${Resource.msg('headercustomerinfo.welcomecol','locale',null)}</span>
-	        <a href="${URLUtils.https('Account-Show')}" title="${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" class="username">
-			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
-	        </a>
-	        
+	        <a href="${URLUtils.https('Account-Show')}" title="${pdict.CurrentCustomer.profile.firstName}${pdict.CurrentCustomer.profile.lastName}" class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></a>
 	        <isif condition="${!pdict.CurrentCustomer.authenticated}">
 				<span class="unauthenticated">(<a title="${Resource.msg('global.login','locale',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" class="userlogin">${Resource.msg('headercustomerinfo.pleaselogin','locale',null)}</a>)</span>
 				<span class="divider">|</span>

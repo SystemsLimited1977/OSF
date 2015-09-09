@@ -1,52 +1,109 @@
-.ui-dialog.bonus-product-popup .bonus-product-alert,
-.ui-dialog.bonus-product-popup .bonus-product-promo {
-	    padding-bottom: 15px;
-	    padding-top: 5px;
+.shipping-chart {
+	margin:0px;padding:0px;
+	width:100%;
+	border:1px solid #e6e6e6;
+	
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+	
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+	
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+	
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
 }
-.ui-dialog.bonusproduct-quickview-container .product-add-to-cart .inventory label,
-.ui-dialog.bonusproduct-quickview-container .quantity-error  {
-		width:100%;
+.shipping-chart table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
 }
-.ui-dialog.bonusproduct-quickview-container .bonus-product-list .product-add-to-cart button {
-		width:56%;
+.shipping-chart tr:last-child td:last-child {
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.shipping-chart table tr:first-child td:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+.shipping-chart table tr:first-child td:last-child {
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+}
+.shipping-chart tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+}
+.shipping-chart tr:hover td{
+	background-color:#ffffff;
+		
+
+}
+.shipping-chart td{
+	vertical-align:middle;
+	
+	background-color:#fff;
+
+	border:1px solid #e6e6e6;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:7px;
+	font-size:12px;
+	font-family:Comic Sans MS;
+	font-weight:normal;
+	color:#000000;
+}
+.shipping-chart tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}
+.shipping-chart tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}
+.shipping-chart tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.shipping-chart tr:first-child td{
+		background:-o-linear-gradient(bottom, #000000 5%, #000000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #000000) );
+	background:-moz-linear-gradient( center top, #000000 5%, #000000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#000000");	background: -o-linear-gradient(top,#000000,000000);
+
+	background-color:#000000;
+	border:0px solid #000000;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Times New Roman;
+	font-weight:bold;
+	color:#ffffff;
+	width:100px;
+}
+.shipping-chart tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #000000 5%, #000000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #000000) );
+	background:-moz-linear-gradient( center top, #000000 5%, #000000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#000000");	background: -o-linear-gradient(top,#000000,000000);
+
+	background-color:#000000;
+}
+.shipping-chart tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.shipping-chart tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
 }
 
-.pt_cart .bonusproducts {
-	clear:both;
-}
-.pt_cart .rowcoupons .item-details .discount .label {
-	margin-left:-2px;
-}
-.pt_cart tr.cart-promo,.pt_cart  td.cart-promo {
-	background: transparent;
-	font-size: 12px;
-    font-weight: 500;
-    padding: 25px 0;
-}
-.ui-tooltip.ui-widget-content {
-	border:2px solid #e6e6e6;
-	padding:10px 20px;
-	margin:0px;
-}
-.pt_cart .rowcoupons .item-details .cartcoupon {
-    padding-top: 10px;
-    padding-left: 4px;
-}
-.pt_cart .rowcoupons .item-details .cartcoupon .label,
-.pt_cart .rowcoupons .item-details .discount .label {
-	font-size: 12px;
-    font-weight: 400;
-}
-.pt_cart .giftreg-edit {
-	margin-left:5px;
-}
-.pt_cart #cart-items-form td.cart-promo .label {
-	font-size: 13px;
-    font-weight: 500;
-    font-style: normal;
-}
-.pt_cart #cart-items-form td.cart-promo .value {
-	font-size: 12px;
-    font-weight: 400;
-    font-style: normal;
+.shipping-chart h2 {
+	text-align: center;
+    font-size: 14px;
 }
