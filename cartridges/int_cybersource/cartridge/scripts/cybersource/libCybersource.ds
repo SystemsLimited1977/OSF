@@ -75,6 +75,10 @@ var CybersourceHelper = {
 		return Site.getCurrent().getCustomPreferenceValue("CsAvsIgnoreResult");
 	},
 	
+	getEnableAVSForUSAndCanada : function() {
+		return Site.getCurrent().getCustomPreferenceValue("enableAVSForUSAndCanada");
+	},
+	
 	getAvsDeclineFlags : function() {
 		return Site.getCurrent().getCustomPreferenceValue("CsAvsDeclineFlags");
 	},

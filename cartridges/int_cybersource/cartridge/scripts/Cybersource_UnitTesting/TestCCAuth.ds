@@ -80,6 +80,14 @@ function execute( pdict : PipelineDictionary ) : Number
 	var ignoreAVSResult : Boolean = CybersourceHelper.getAvsIgnoreResult();
 	var declineAVSFlags : String = CybersourceHelper.getAvsDeclineFlags();
 	
+	/* Enable AVS Service for USA & Canada only */
+	if(CybersourceHelper.getEnableAVSForUSAndCanada() && (billToObject.country.value == "US" || billToObject.country.value == "CA")){
+		ignoreAVSResult = false;
+	}
+	else{
+		ignoreAVSResult = true;
+	}
+	
 	CybersourceHelper.addAVSRequestInfo(request,ignoreAVSResult,declineAVSFlags);
 	/* End of AVS Service setup */
 	
