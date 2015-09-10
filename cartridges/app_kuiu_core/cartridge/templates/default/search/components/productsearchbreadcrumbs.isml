@@ -9,7 +9,7 @@
 	importScript('product/ProductUtils.ds');
 </isscript>
 
-<div >
+<div class="breadcrumb">
 	<iscomment>
 		<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a>
 	</iscomment>
@@ -62,7 +62,7 @@
 				<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span>
 			</isif>
 		</iscomment>
-		<div class="breadcrumb">
+		<div >
 		<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}" var="sortingOption">
 			<isif condition="${sortingOption.getID() == pdict.ProductSearchResult.sortingRule.ID}">
 				<span class="breadcrumb-refinement">${sortingOption.getDisplayName()}</span>
@@ -80,7 +80,7 @@
 		</iscomment>
 		<iscomment>Price</iscomment>
 		<isif condition="${pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice}">
-			<div class="breadcrumb">
+			<div class="pull-left" >
 			<isscript>
 				// for price refinements, we use the display value of the price refinement definition's value
 				var breadcrumbLabel = null
@@ -117,7 +117,7 @@
 		</isif>
 
 		<iscomment>attributes</iscomment>
-		<div class="breadcrumb">
+		<div >
 		<isset name="hasAttributes" value="${false}" scope="page" />
 		<isloop items="${pdict.ProductSearchResult.refinements.refinementDefinitions}" var="definition" status="attributes">
 			<isif condition="${definition.isAttributeRefinement() && pdict.ProductSearchResult.isRefinedByAttribute(definition.attributeID)}">
