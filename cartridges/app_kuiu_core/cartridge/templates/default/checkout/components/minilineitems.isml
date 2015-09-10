@@ -148,12 +148,12 @@
 					</div>
 
 					<div class="mini-cart-name">
-						<isprint value="${gcLI.lineItemText}"/>
+						<span><isprint value="${gcLI.lineItemText}"/></span>
 					</div><!-- END: name -->
 
 					<div class="mini-cart-pricing">
-						<span class="label">${Resource.msg('global.qty','locale',null)}: 1</span>
-						<span class="value pull-right"><isprint value="${gcLI.price}"/></span>
+						${Resource.msg('global.qty','locale',null)}: 1
+						<isprint value="${gcLI.price}"/>
 					</div>
 
 				</div>
