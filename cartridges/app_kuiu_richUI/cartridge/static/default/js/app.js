@@ -891,7 +891,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":14,"./util":50,"promise":57}],5:[function(require,module,exports){
+},{"./page":14,"./util":50,"promise":58}],5:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -1116,7 +1116,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":1,"./util":50,"imagesloaded":53,"lodash":56}],7:[function(require,module,exports){
+},{"./ajax":1,"./util":50,"imagesloaded":54,"lodash":57}],7:[function(require,module,exports){
 'use strict';
  
 // Define namespace for exported properties and functions
@@ -2101,7 +2101,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":56}],20:[function(require,module,exports){
+},{"lodash":57}],20:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2582,7 +2582,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').unbind("click").bind('click', addAllToCart);
 };
 
-},{"../../dialog":6,"../../minicart":11,"../../page":14,"../../util":50,"lodash":56,"promise":57}],26:[function(require,module,exports){
+},{"../../dialog":6,"../../minicart":11,"../../page":14,"../../util":50,"lodash":57,"promise":58}],26:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2946,6 +2946,7 @@ var addThis = require('./addThis'),
 	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
+	youtube = require('../../youtube'),
 	owlCarousel = require('../../owl-carouse');
 
 
@@ -2994,6 +2995,9 @@ var updateContent = function (href) {
 				clickCloses: true,
 				activationEvent: "click"
 			});
+			
+			//Update Youtube video contents
+			youtube.init();
 		}
 	});
 };
@@ -3055,9 +3059,12 @@ module.exports = function () {
 	  activationEvent: "click"
 	});
     
+  //Update Youtube video contents
+	youtube.init();
+    
 };
 
-},{"../../ajax":1,"../../owl-carouse":13,"../../progress":39,"../../storeinventory/product":48,"../../tooltip":49,"../../util":50,"./addThis":24,"./addToCart":25,"./image":27}],33:[function(require,module,exports){
+},{"../../ajax":1,"../../owl-carouse":13,"../../progress":39,"../../storeinventory/product":48,"../../tooltip":49,"../../util":50,"../../youtube":52,"./addThis":24,"./addToCart":25,"./image":27}],33:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3629,7 +3636,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":40,"imagesloaded":53}],39:[function(require,module,exports){
+},{"./quickview":40,"imagesloaded":54}],39:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3787,7 +3794,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":6,"./pages/product":28,"./util":50,"lodash":56}],41:[function(require,module,exports){
+},{"./dialog":6,"./pages/product":28,"./util":50,"lodash":57}],41:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4565,7 +4572,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":6,"../util":50,"lodash":56,"promise":57}],48:[function(require,module,exports){
+},{"../dialog":6,"../util":50,"lodash":57,"promise":58}],48:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4661,7 +4668,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":47,"lodash":56}],49:[function(require,module,exports){
+},{"./":47,"lodash":57}],49:[function(require,module,exports){
 'use strict';
 
 /**
@@ -5003,7 +5010,7 @@ updateStateOptions: function (form) {
 
 module.exports = util;
 
-},{"lodash":56}],51:[function(require,module,exports){
+},{"lodash":57}],51:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -5126,6 +5133,80 @@ var validator = {
 module.exports = validator;
 
 },{}],52:[function(require,module,exports){
+'use strict';
+ 
+// Define namespace for exported properties and functions
+var youtube = {
+	init: function () {
+		if(!document.getElementsByClassName) {
+	        // IE8 support
+	        var getElementsByClassName = function(node, classname) {
+	            var a = [];
+	            var re = new RegExp('(^| )'+classname+'( |$)');
+	            var els = node.getElementsByTagName("*");
+	            for(var i=0,j=els.length; i<j; i++)
+	                if(re.test(els[i].className))a.push(els[i]);
+	            return a;
+	        }
+	        var videos = getElementsByClassName(document.body,"youtubevideo");
+	    }
+	    else {
+	        var videos = document.getElementsByClassName("youtubevideo");
+	    }
+	    var nb_videos = videos.length;
+	    for (var i=0; i<nb_videos; i++) {
+	        // Based on the YouTube ID, we can easily find the thumbnail image
+	        var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
+	        var thumbid = reg.exec($(videos[i]).attr('thumb-id'))[1];
+	        //videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos[i].id + '/sddefault.jpg)';
+	        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + thumbid + '/sddefault.jpg)';
+	        $(videos[i]).attr('id', thumbid);
+
+	        // Overlay the Play icon to make it look like a video player
+	        var play = document.createElement("div");
+	        play.setAttribute("class","play");
+	        videos[i].appendChild(play);
+
+	        videos[i].onclick = function() {
+	        	$("body").append('<div id="youtube-video-container" style="display:none;"></div>');
+	            // Create an iFrame with autoplay set to true
+	            var iframe = $("<iframe class='size'></iframe>");//document.createElement("iframe");
+	            var iframe_url = "https://www.youtube.com/embed/" + this.id + "?autoplay=1&autohide=1";
+	            if (this.getAttribute("data-params")) iframe_url+='&'+this.getAttribute("data-params");
+	            $(iframe).attr("src",iframe_url);
+	            $(iframe).attr("frameborder",'0');
+	            $(iframe).attr("allowfullscreen",'1');
+	            $(iframe).attr("webkitallowfullscreen","");
+	            $(iframe).attr("mozallowfullscreen","");
+	            
+	            // The height and width of the iFrame should be the same as parent
+	            $(iframe).width(630);
+        		$(iframe).height(460);
+
+	            // Replace the YouTube thumbnail with YouTube Player
+	            //this.parentNode.replaceChild(iframe, this);
+	            $('#youtube-video-container').html(iframe);
+	            $('#youtube-video-container').dialog({
+	                modal: true,
+	                draggable: false,
+	                resizable: false,
+	                //position: ['center', 'center'],
+	                width: 700,
+	                height:547,
+	                dialogClass: 'ui-dialog-osx video-popup',
+	                close: function(event, ui){
+	                	$('#youtube-video-container').dialog('close');
+	                	$('#youtube-video-container').remove();
+	                }
+	            });
+	        }
+	    }
+	}
+};
+ 
+module.exports = youtube;
+
+},{}],53:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -5217,7 +5298,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5554,7 +5635,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":54,"wolfy87-eventemitter":55}],54:[function(require,module,exports){
+},{"eventie":55,"wolfy87-eventemitter":56}],55:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -5638,7 +5719,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -6112,11 +6193,11 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6129,7 +6210,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
@@ -18467,14 +18548,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":58,"./lib/done.js":59,"./lib/es6-extensions.js":60,"./lib/node-extensions.js":61}],58:[function(require,module,exports){
+},{"./lib/core.js":59,"./lib/done.js":60,"./lib/es6-extensions.js":61,"./lib/node-extensions.js":62}],59:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -18581,7 +18662,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":62}],59:[function(require,module,exports){
+},{"asap":63}],60:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -18596,7 +18677,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":58,"asap":62}],60:[function(require,module,exports){
+},{"./core.js":59,"asap":63}],61:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -18706,7 +18787,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":58,"asap":62}],61:[function(require,module,exports){
+},{"./core.js":59,"asap":63}],62:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -18771,7 +18852,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":58,"asap":62}],62:[function(require,module,exports){
+},{"./core.js":59,"asap":63}],63:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -18888,4 +18969,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":52}]},{},[2]);
+},{"_process":53}]},{},[2]);

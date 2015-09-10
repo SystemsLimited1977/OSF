@@ -8,6 +8,7 @@ var addThis = require('./addThis'),
 	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
+	youtube = require('../../youtube'),
 	owlCarousel = require('../../owl-carouse');
 
 
@@ -56,6 +57,9 @@ var updateContent = function (href) {
 				clickCloses: true,
 				activationEvent: "click"
 			});
+			
+			//Update Youtube video contents
+			youtube.init();
 		}
 	});
 };
@@ -116,5 +120,8 @@ module.exports = function () {
 	  clickCloses: true,
 	  activationEvent: "click"
 	});
+    
+  //Update Youtube video contents
+	youtube.init();
     
 };
