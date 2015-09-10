@@ -22,7 +22,7 @@
 					<div class="col-sm-12 overview-top">
 						<center>
 						<h1>Product Overview</h1>
-						<p class="hidden-xs">Engineered/designed for the most demanding weather</p>
+						<p class="hidden-xs"><isprint value="${pdict.Product.custom.productviewheading}" /></p>
 						</center>
 					</div>
 					<isif condition="${!empty(pdict.Product.custom.productviewimage)}">
@@ -74,7 +74,7 @@
 		<div id="accordion">
 		  <h2>Product Overview</h2>
 		  <div class="accordin-content">
-		    <h4>Engineered/designed for the most demanding weather</h4>
+		    <h4><isprint value="${pdict.Product.custom.productviewheading}" /></h4>
 		    <isprint value="${pdict.Product.longDescription}" encoding="off"/>
 		    <isprint value="${pdict.Product.custom.productviewimage}" encoding="off"/>
 		  </div>
