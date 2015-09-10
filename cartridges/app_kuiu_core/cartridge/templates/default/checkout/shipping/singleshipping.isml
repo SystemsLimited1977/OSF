@@ -131,14 +131,14 @@
 				<div class="form-row required foon-text">
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 
-					<div class="form-field-tooltip with-helper-text">
+					<iscomment><div class="form-field-tooltip with-helper-text">
 						<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
 							${Resource.msg('singleshipping.phonerequired','checkout',null)}
 							<div class="tooltip-content"  data-layout="small">
 								<iscontentasset aid="help-telephone"/>
 							</div>
 						</a>
-					</div>
+					</div></iscomment>
 				</div>
 				
 					<iscomment>Add address to Address Book</iscomment>

@@ -33,8 +33,9 @@
 							<isset name="bonusButtonText" value="${Resource.msg('cart.selectbonusproduct','checkout',null)}" scope="page" />
 						</isif>
 					</isif>
+					</iscomment>
 					<div class="bonus-item-details">
-						<isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
+						<iscomment><isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
 						<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
 						<a class="tooltip" href="#">
 							${Resource.msg('product.promotiondetails','product',null)}
@@ -327,7 +328,7 @@
 												<iselse/>
 
 													<iscomment>Display non-adjusted item total.</iscomment>
-													<label class="total-price-mob visible-xs-block" >Total Price</label>
+													<label class="total-price-mob visible-xs-block" >Total Price:</label>
 													<span class="price-total">
 														<isprint value="${lineItem.getAdjustedPrice()}" />
 													</span>
@@ -628,10 +629,10 @@
 							<tr class="cart-promo">
 
 								<td colspan="3" class="bonus-item-details">
-									<isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
+									<iscomment><isprint value="${bonusDiscountLineItem.getPromotion().getName()}" /></iscomment>
 									<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
-									<a class="tooltip" href="#">
-										${Resource.msg('product.promotiondetails','product',null)}
+									<a class="tooltip  bonus-new" href="#">
+										<span>${Resource.msg('product.promotiondetails','product',null)}</span>
 										<div class="tooltip-content" data-layout="small">
 											<isprint value="${bonusDiscountLineItem.getPromotion().getDetails()}" />
 											<br />

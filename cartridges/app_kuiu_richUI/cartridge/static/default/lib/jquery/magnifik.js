@@ -54,7 +54,7 @@ Mobify.UI.Magnifik = (function() {
             // Generator for HTML of zoomed in view. If overriding, you can call 
             // the old function via Mobify.UI.Magnifik.defaults.stageHTML.call(this)
           , stageHTML: function() {
-                return '<div class="' + this._getClass('canvas') + '"><div class="crossicon" style="position: absolute;z-index: 1000;width: 100px;height: 100px;border-style: solid;border-width: 5px;float: right;"></div>' + '<img class="'
+                return '<div class="' + this._getClass('canvas') + '"><div class="crossicon" id="zoom-cross-icon"></div>' + '<img class="'
                     + this._getClass('thumb') + '"><img class="'
                     + this._getClass('full') + '"></div>';
           }

@@ -102,7 +102,7 @@
 					<iscomment>
 						<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 					</iscomment>
-					<select name="Quantity" id="Quantity" class="quantity-box" data-available="${availableCount}" style="width: 100%;">
+					<select name="Quantity" id="Quantity" class="quantity-box pdp-qty-box" data-available="${availableCount}">
 						<isloop begin="1" end="10" step="1" status="qntyStat">
 							<isif condition="${pdict.CurrentHttpParameterMap.Quantity.stringValue.equals(qntyStat.count)}">
 								<option value="${qntyStat.count}" selected="selected"><isprint value="${qntyStat.count}"/></option>

@@ -54,9 +54,9 @@
 
 @media ( min-width: 0px) and (max-width: 767px) {
     #main {
-        /*	-webkit-box-shadow: inset 0px 1px 3px 0px rgba(50, 50, 50, 0.3);
-		-moz-box-shadow: inset 0px 1px 3px 0px rgba(50, 50, 50, 0.3);
-		box-shadow: inset 0px 1px 3px 0px rgba(50, 50, 50, 0.3); */
+          -webkit-box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
+    box-shadow: inset 0px 3px 3px 0px rgba(50, 50, 50, 0.3);
     }
     #wrapper {
         min-width: 0;
@@ -92,9 +92,6 @@
     #main button,
     #main input[type="button"] {
         width: 100%;
-    }
-    #main select {
-        background-position: right 3px;
     }
     .pt_customer-service #primary {
         padding-left: 10px;
@@ -525,16 +522,16 @@
         width: 100%;
     }
     .social-icon ul.social-links li a.fb {
-        background-position: 120px 116px;
+        background-position: 120px 89px;
     }
     .social-icon ul.social-links li a.twitter {
-        background-position: 90px 116px;
+        background-position: 90px 89px;
     }
     .social-icon ul.social-links li a.youtube {
-        background-position: 60px 116px;
+        background-position: 60px 89px;
     }
     .social-icon ul.social-links li a.linkedin {
-        background-position: 30px 116px;
+        background-position: 30px 89px;
     }
     #main .categoryheader .btn-refineby {
         width: auto;
@@ -1318,6 +1315,7 @@
     }
     #main .cart-footer .cart-coupon-code button#add-coupon {
         width: 28%;
+        margin-left: 7px;
     }
     .cart-footer {
         padding: 20px 0px;
@@ -1345,7 +1343,7 @@
     }
     #cart-table .item-edit-details button {
         text-align: left;
-        padding-top: 15px;
+        padding-top: 8px;
     }
     #cart-table .item-price {
         margin-left: 40%;
@@ -1818,6 +1816,7 @@
 	}
 	.pdp-main .promotion {
 		border-bottom: 1px solid #e6e6e6;
+		border-top: 1px solid #e6e6e6;
 	}
 	.pdp-main .promotion .promotion-callout {
 	    line-height: 15px;
@@ -2036,6 +2035,33 @@
     	margin: 1% 2% 0% -14%;
     	position: static;
 	}
+	.refinement.Boot.Size ul li {
+		width:auto;
+	}
+	.mobile-youtube-video {
+		padding-bottom:15px;
+	}
+	#zoom-cross-icon {
+		margin-left: 60%;
+		margin-top: 4px;
+	}
+	#main .pdp-main .product-add-to-cart button {
+		width:70%;
+	}
+	.pdp-main .product-add-to-cart .inventory {
+		width:25%;
+	}
+	.checkout-steps #main button {
+	 	width:100%;
+	}
+
+	.pt_checkout.checkout-steps #cart-table td.cart-promo {
+    	display: block;
+    	padding: 5px;
+    	background-color: transparent;
+    	font-style: normal;
+    	font-size: 12px;
+	}
 }
 
 @media ( min-width: 768px) and (max-width: 991px) {
@@ -2223,10 +2249,13 @@
         border-bottom: 1px solid #e6e6e6;
     }
     .weather_badage {
-        float: left;
-        width: 100%;
-        margin-top: 0px;
-        border-left: none;
+     	float: none;
+    	width: 100%;
+    	margin-top: 0px;
+    	border-left: none;
+    	clear: both;
+    	position: absolute;
+    	top: 128px;
     }
     .pdp-main .top-section,
     .product-variations .attribute .value {
@@ -2272,7 +2301,7 @@
         padding-bottom: 40px;
     }
     .addthis_toolbox.addthis_default_style {
-        margin-left: 55px;
+        margin-left: 78px;
     }
     .pt_giftcert #main .no-design {
         margin-top: 35px;
@@ -2650,6 +2679,35 @@
      .home-bottom-first .home-small p {
      	min-height: 28px;
     }
+    .refinement.Boot.Size ul li {
+    	width: 78px;
+    	float: left;
+	}
+	.pdp-main .top-section {
+		padding-bottom:25px;
+	}
+
+	.copyright {
+    	float: left;
+    	margin-top: -35px;
+	}
+	
+	footer .footer_email span.error {
+		position: absolute;
+    	top: 36px;
+	}
+	#main .pdp-main .product-add-to-cart button {
+		width:70%;
+	}
+	.pdp-main .product-add-to-cart .inventory {
+		width:25%;
+	}
+	.bonus-item-actions a.select-bonus {
+    	padding: 10px 3px;
+	}
+	.checkout-steps #main button {
+		width:100%;
+	}
 }
 
 @media ( min-width: 992px) and (max-width: 1199px) {
@@ -2787,8 +2845,9 @@
     .container {
         width: 1340px;
     }
-    .story-landing img {
+    .story-landing img,.product-detail-slider-1 img {
         width: 100%;
         height: auto;
     }
+    
 }
