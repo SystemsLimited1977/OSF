@@ -65,7 +65,18 @@
 				<div class="inventory">
 					<div class="quantity">
 					    <label for="${uniqueFormID}-quantity">${Resource.msg('global.qty','locale',null)}</label>
-						<input type="text" name="Quantity" id="${uniqueFormID}-quantity" maxlength="3" class="input-text" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" size="2" maxlength="6" />
+						<iscomment>
+							<input type="text" name="Quantity" id="${uniqueFormID}-quantity" maxlength="3" class="input-text" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" size="2" maxlength="6" />
+						</iscomment>
+						<select name="Quantity" id="${uniqueFormID}-quantity" class="quantity-box" data-available="${availableCount}" style="width: 100%;">
+							<isloop begin="1" end="10" step="1" status="qntyStat">
+								<isif condition="${pdict.CurrentHttpParameterMap.Quantity.stringValue.equals(qntyStat.count)}">
+									<option value="${qntyStat.count}" selected="selected"><isprint value="${qntyStat.count}"/></option>
+								<iselse>
+									<option value="${qntyStat.count}"><isprint value="${qntyStat.count}"/></option>
+								</isif>
+							</isloop>
+						</select>
 					</div>
 				</div>
 				

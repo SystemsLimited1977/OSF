@@ -55,7 +55,11 @@
 							<div class="custom-select">
 								<select name="dwfrm_giftcert_purchase_amount" id="dwfrm_giftcert_purchase_amount" class="input-select gc-amt required">
 									<isloop items="${dw.system.Site.getCurrent().getCustomPreferenceValue('gift-certificate-amounts')}" var="amount" >
-										<option value="${amount}" class="select-option">&#36;<isprint value="${amount}" /></option>
+										<isif condition="${pdict.GiftCertificateLineItem.price.value == amount}">
+											<option selected="selected" value="${amount}" class="select-option">&#36;<isprint value="${amount}" /></option>
+										<iselse>
+											<option value="${amount}" class="select-option">&#36;<isprint value="${amount}" /></option>
+										</isif>
 									</isloop>
 								</select>
 							</div>
