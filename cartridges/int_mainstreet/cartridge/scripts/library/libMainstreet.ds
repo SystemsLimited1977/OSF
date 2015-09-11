@@ -164,7 +164,7 @@ MainStreet.prototype = {
 	},
 	GetListOrdersByCustomer: function(customerId) {
 		// create request body
-		var request = new this.mainstreetReference.ListOrders();
+		var request = new this.mainstreetReference.GetOrders();
 		request.request = new this.mainstreetReference.ListOrdersRequest();
 		request.request.credentials = this.getCredentials();
 		request.request.customerId = customerId;	
@@ -186,7 +186,7 @@ MainStreet.prototype = {
 		// create request body
 
 		Logger.debug("MS: GetListOrdersByOrderId: "+orderIds);
-		var request = new this.mainstreetReference.ListOrders();
+		var request = new this.mainstreetReference.GetOrders();
 		request.request = new this.mainstreetReference.ListOrdersRequest();
 		request.request.credentials = this.getCredentials();
 		request.request.orderIds = orderIds;
