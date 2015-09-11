@@ -55,6 +55,7 @@ var minicart = {
 		this.init();
 		this.slide();
 		bonusProductsView.loadBonusOption();
+		$('.mini-cart-total:eq(1)').html($('.mini-cart-total:eq(0)').find('a'));
 	},
 	/**
 	 * @function

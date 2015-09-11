@@ -10,7 +10,6 @@ jQuery(document).ready(function(){
 	});
 	
 	jQuery('button[name="dwfrm_emailsignupdetails_submit"]').click(function(event) {	
-		
 		event.preventDefault();
 		jQuery('#email-alert-address').val('');
 		var form = jQuery(this).parents('form');
@@ -23,7 +22,6 @@ jQuery(document).ready(function(){
 	          cache: false, 
 			  data: form.serialize() + "&"+ jQuery(this).attr("name") + "=submit",
 			}).done(function ( data ) {
-				debugger;
 				if(jQuery(data).find('input[name="errorinform"]').length > 0){
 					if(jQuery(data).find('input[name="errorinform"]').val().length > 0){
 						jQuery('#emailsignup').empty().html(data);
