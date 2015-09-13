@@ -36,9 +36,19 @@ function execute( pdict : PipelineDictionary ) : Number
 		
 		switch( item.code )
 		{
+			//SiteGenesis Security Bug Fix – Action Recommended
+			
+			//Old Code
+			//case PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
+			//	creditCardForm.number.invalidateFormElement();
+			//	continue;
+			
+			//New Code
 			case PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
-				creditCardForm.number.invalidateFormElement();
-				continue;
+        		creditCardForm.number.setValue(creditCardForm.number.htmlValue);
+        		creditCardForm.number.invalidateFormElement();
+        		continue;
+			
 
 			case PaymentStatusCodes.CREDITCARD_INVALID_EXPIRATION_DATE:
 				creditCardForm.month.invalidateFormElement();
