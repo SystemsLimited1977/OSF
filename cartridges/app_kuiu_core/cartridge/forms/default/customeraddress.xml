@@ -214,7 +214,7 @@
 	
 	<!-- email field is contained in separate form group to enable binding to customer profile -->
     <group formid="email">
-	 <field formid="emailAddress" label="profile.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" binding="email" max-length="50" missing-error="forms.address.email.invalid" range-error="forms.address.email.invalid" parse-error="forms.address.email.invalid" value-error="forms.address.email.invalid"/>
+	 <field formid="emailAddress" label="profile.email" type="string" mandatory="true" regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$" binding="email" max-length="50" missing-error="forms.address.email.invalid" range-error="forms.address.email.invalid" parse-error="forms.address.email.invalid" value-error="forms.address.email.invalid"/>
     </group>
 	
 	<!-- all possible actions performed on an address -->

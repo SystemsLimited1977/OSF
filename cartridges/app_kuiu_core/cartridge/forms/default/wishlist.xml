@@ -54,7 +54,7 @@
 	</group>
 
 	<group formid="send">
-		<field formid="email" label="wishlist.sendto.email" type="string" mandatory="true" regexp="^[a-zA-Z0-9_\-\.]+@([a-zA-Z0-9_\-]+\.)+[a-zA-Z][a-zA-Z]+(\s*[,;]\s*([a-zA-Z0-9_\-\.]+@([a-zA-Z0-9_\-]+\.)+[a-zA-Z][a-zA-Z]+))*$"
+		<field formid="email" label="wishlist.sendto.email" type="string" mandatory="true" regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
 			   parse-error="wishlist.validemail"
 			   value-error="wishlist.check.emailaddress"
 			   missing-error="wishlist.enter.validemail"/>

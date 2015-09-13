@@ -49,7 +49,7 @@
 				missing-error="giftregistry.registrantLastName.missing-error" max-length="60" />
 
 			<field formid="email" label="resource.email" type="string" mandatory="true" binding="email"
-					regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
+					regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
 					parse-error="giftregistry.registrantEmail.parse-error"
 					missing-error="giftregistry.registrantEmail.missing-error"
 					value-error="giftregistry.registrantEmail.parse-error" max-length="60" />
@@ -76,7 +76,7 @@
 				missing-error="giftregistry.registrantLastName.missing-error" max-length="60" />
 
 			<field formid="email" label="resource.email" type="string" mandatory="false" binding="email"
-				regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
+				regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
 				parse-error="giftregistry.registrantEmail.parse-error"
 				missing-error="giftregistry.registrantEmail.missing-error"
 				value-error="giftregistry.registrantEmail.parse-error" max-length="60" />
@@ -191,7 +191,7 @@
 
 	<group formid="send">
 		<field formid="email" label="giftregistry.send.label" type="string"
-			mandatory="true" regexp="^[a-zA-Z0-9_\-\.]+@([a-zA-Z0-9_\-]+\.)+[a-zA-Z][a-zA-Z]+(\s*[,;]\s*([a-zA-Z0-9_\-\.]+@([a-zA-Z0-9_\-]+\.)+[a-zA-Z][a-zA-Z]+))*$"
+			mandatory="true" regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
 			parse-error="giftregistry.send.format"
 			value-error="giftregistry.send.check"
 			missing-error="giftregistry.send.invalid"/>

@@ -3,7 +3,7 @@
 	
 	<field formid="firstname" label="contactus.firstname.label" type="string" mandatory="true" binding="firstName" max-length="50"/>
 	<field formid="lastname" label="contactus.lastname.label" type="string" mandatory="true" binding="lastName" max-length="50"/>
-	<field formid="email" label="contactus.email.label" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" parse-error="contactus.email.parse-error" binding="email" max-length="50"/>	
+	<field formid="email" label="contactus.email.label" type="string" mandatory="true" regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$" parse-error="contactus.email.parse-error" binding="email" max-length="50"/>	
 	<field formid="phone" label="contactus.phone.label" type="string" mandatory="true" binding="phoneHome" max-length="50"/>		
  	<field formid="ordernumber" label="contactus.ordernumber.label" type="string" mandatory="true" binding="orderNumber" missing-error="ordertrack.orderNumber.missing-error"/>
 

@@ -13,14 +13,14 @@
 			binding="recipient"/>
 		<field formid="recipientEmail" label="giftcert.purchase.recipientemail.label" type="string" mandatory="true"
 			description=""
-			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" 
+			regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$" 
 			binding="recipientEmail"
 			parse-error="giftcert.purchase.recipientemail.parse-error"
 			missing-error="giftcert.purchase.recipientemail.missing-error"
 			value-error="giftcert.purchase.recipientemail.value-error"/>
 		<field formid="confirmRecipientEmail" label="giftcert.purchase.confirmrecipientemail.label" type="string" mandatory="true"
 			description=""
-			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" 
+			regexp="^([A-Za-z0-9]+(?:[\.||\-||\_][A-Za-z0-9]+)*)@([\da-zA-Z]{1,}\.){1,}[\da-zA-Z-]{2,3}$" 
 			binding="confirmRecipientEmail"
 			parse-error="giftcert.confirmrecipientemailparseerror"
 			missing-error="giftcert.confirmrecipientemailmissingerror"
