@@ -1945,6 +1945,8 @@ exports.init = function () {
 		if (!cardUUID) {return;}
 		populateCreditCardForm(cardUUID);
 
+		$(".payment-method").find("input[name$='_number']").parent().hide(); // This line is for hiding number label on payment info section.
+		
 		// remove server side error
 		$('.required.error').removeClass('error');
 		$('.error-message').remove();
@@ -6208,7 +6210,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.0 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6221,7 +6223,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.0';
+  var VERSION = '3.10.1';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,

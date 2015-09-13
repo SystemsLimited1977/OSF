@@ -120,6 +120,8 @@ exports.init = function () {
 		if (!cardUUID) {return;}
 		populateCreditCardForm(cardUUID);
 
+		$(".payment-method").find("input[name$='_number']").parent().hide(); // This line is for hiding number label on payment info section.
+		
 		// remove server side error
 		$('.required.error').removeClass('error');
 		$('.error-message').remove();
