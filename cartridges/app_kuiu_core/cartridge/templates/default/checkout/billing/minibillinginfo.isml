@@ -47,7 +47,8 @@
 					<div>${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}: <isprint value="${paymentInstr.maskedGiftCertificateCode}"/></div>
 				<iselse/>	
 					<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
-					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>						
+					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>
+					<div><isprint value="${paymentInstr.maskedCreditCardNumber}"/></div>						
 					<div>
 						${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/>
 					</div><!-- END: payment-amount -->

@@ -19,9 +19,9 @@
 					${Resource.msg('account.orderdetails.returnorder','account',null)}
 				</a>
 			</isif>
-			<a href="${URLUtils.httpHome()}" title="${Resource.msg('account.orderdetails.returnshopping','account',null)}">
+			<iscomment><a href="${URLUtils.httpHome()}" title="${Resource.msg('account.orderdetails.returnshopping','account',null)}">
 				${Resource.msg('account.orderdetails.returnshopping','account',null)}
-			</a>	
+			</a></iscomment>	
 		</div>
 		
 	<iselse/>
