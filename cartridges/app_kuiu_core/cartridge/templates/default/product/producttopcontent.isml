@@ -51,8 +51,6 @@
 			<h1 class="product-name pull-left" itemprop="name">
 				<isprint value="${pdict.Product.name}"/>
 			</h1>
-				<isset name="showTieredPrice" value="${true}" scope="page"/>
-				<isinclude template="product/components/pricing"/>
 	 	</div>
 		
 </div>

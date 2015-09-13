@@ -34,6 +34,10 @@
 		<!-- shown only in quick view -->
 	<div class="link-viewdetails"><a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a> </div>
 	</isif>
+	
+	<isset name="showTieredPrice" value="${true}" scope="page"/>
+	<isinclude template="product/components/pricing"/>
+	
 	<div class="hidden-xs pdp-description-wrap">
 		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
 		<a href="#product-overview">See More</a>
@@ -43,10 +47,8 @@
 	<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
 	<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>
 	<isinclude template="product/components/group"/>
-<iscomment>
-	<isset name="showTieredPrice" value="${true}" scope="page"/>
-	<isinclude template="product/components/pricing"/>
-</iscomment>
+	
+
 	<isif condition="${!isQuickView}">
 		<isinclude template="product/components/reviewsmini"/>
 	</isif>
