@@ -12,11 +12,16 @@ var account = require('./account'),
  */
 function initializeEvents() {
 	$('#cart-table').on('click', '.item-edit-details a', function (e) {
-		e.preventDefault();
-		quickview.show({
-			url: e.target.href,
-			source: 'cart'
-		});
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+			window.location.href = e.target.href;
+		}
+		else{
+			e.preventDefault();
+			quickview.show({
+				url: e.target.href,
+				source: 'cart'
+			});
+		}
 	})
 	.on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
 		e.preventDefault();

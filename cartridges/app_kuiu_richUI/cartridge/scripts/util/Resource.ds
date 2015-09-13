@@ -176,7 +176,8 @@ function ResourceHelper() {}
 			currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
 			addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),
 			cookieHint 					: URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString(),
-			emailSignUp					: URLUtils.url('EmailSignUp-Start').toString()
+			emailSignUp					: URLUtils.url('EmailSignUp-Start').toString(),
+			cartredirect				: URLUtils.url('Cart-Show').toString()
 		};
 		return urls;
 

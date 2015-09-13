@@ -1736,11 +1736,16 @@ var account = require('./account'),
  */
 function initializeEvents() {
 	$('#cart-table').on('click', '.item-edit-details a', function (e) {
-		e.preventDefault();
-		quickview.show({
-			url: e.target.href,
-			source: 'cart'
-		});
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+			window.location.href = e.target.href;
+		}
+		else{
+			e.preventDefault();
+			quickview.show({
+				url: e.target.href,
+				source: 'cart'
+			});
+		}
 	})
 	.on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
 		e.preventDefault();
@@ -2538,7 +2543,12 @@ var addToCart = function (e) {
 	addItemToCart($form).then(function (response) {
 		var $uuid = $form.find('input[name="uuid"]');
 		if ($uuid.length > 0 && $uuid.val().length > 0) {
-			page.refresh();
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+				window.location.href = Urls.cartredirect;
+			}
+			else{
+				page.refresh();
+			}
 		} else {
 			// do not close quickview if adding individual item that is part of product set
 			// @TODO should notify the user some other way that the add action has completed successfully
@@ -6198,7 +6208,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6211,7 +6221,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
