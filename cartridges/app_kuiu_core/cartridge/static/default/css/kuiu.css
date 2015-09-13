@@ -1199,7 +1199,13 @@ span.error {
     background-repeat: no-repeat;
     background-position: right 0px;
     cursor: pointer;
-    padding-left: 3px;
+    padding-left: 0px;
+    padding-right: 35px;
+    overflow: hidden;
+    display: flex;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
 }
 
 #main textarea {
@@ -1495,6 +1501,7 @@ span.error {
 .ui-dialog h1,
 .ui-dialog h2 {
     font-family: "Times New Roman", Georgia, Serif;
+    font-style: normal;
 }
 
 sup {
@@ -4409,6 +4416,7 @@ a.tooltip {
 .checkout-steps #main .form-row .char-count {
     margin: 6px 0 0 20%;
     clear: both;
+    width:100%;
 }
 
 .checkout-steps #main form .fld-checkbox {
@@ -4953,6 +4961,7 @@ table .section-header {
 
 .pt_order-confirmation table.item-list tr th.section-header {
     border-right: 1px solid #e0e0e0;
+    padding-left:5px;
 }
 
 .pt_order-confirmation table.item-list tr th.section-header:last-child {
@@ -5023,9 +5032,10 @@ table .section-header {
 
 .pt_order-confirmation #main #secondary {
     left: -1px;
-    border-left: 1px solid #e0e0e0;
+   /* border-left: 1px solid #e0e0e0;*/
     border-right: none;
     padding-left: 15px;
+    padding-bottom:40px;
 }
 
 .pt_order-confirmation #main button.print-page {
@@ -5344,7 +5354,7 @@ table .section-header {
 
 #cart-table .item-edit-details,
 .giftreg-edit {
-    padding-top: 28px;
+    padding-top: 20px;
    /* text-decoration: underline;*/
     clear: both;
 }
@@ -5423,7 +5433,7 @@ tr.order-sales-tax {
     font-size: 11px;
     color: #2b2b2b;
     font-size: 11px;
-    margin: 0 0 35px 0;
+    margin: 0 0 22px 0;
 }
 
 #main .cart-row .item-quantity select {
@@ -6114,6 +6124,7 @@ ul.product-availability-list li {
     width: auto;
     border-right: none;
     margin-left: 0px;
+    padding-bottom:15px;
 }
 
 .account-address-landing .address-button .address-make-default,
@@ -6498,11 +6509,12 @@ ul.product-availability-list li {
 }
 
 .cart-promo {
-    background: #dcdcdc;
+    background: transparent;
     color: #1a1a1a;
-    font-style: italic;
+    font-style: normal;
     margin: 0.3em 0;
     padding: 1em;
+    font-size:12px;
 }
 
 .gift-discount-codes-wrap .redemption {
@@ -7095,7 +7107,7 @@ footer .footer_email span.error {
 }
 
 .product-variations .attribute .selected-value {
-	width:50% !important;	
+	width:100% !important;	
 }
 
 .refinement.Boot.Size  ul li {
@@ -7157,4 +7169,85 @@ a.tooltip.bonus-new span {
 }
 .pt_checkout.checkout-steps .mini-cart-pricing span.pull-right {
 	float:none !important;
+}
+
+.backorder-msg {
+    color: #0167af;
+    margin:  0 0 0;
+    line-height: 21px;
+    height: 10px;
+}
+
+.pt_cart ul.product-availability-list .on-order,.pt_cart  ul.product-availability-list .not-available {
+    color: #990000;
+    font-size: 12px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.pt_account .order-details .order-details .value {
+	 display: block;
+}
+.pt_order.pt_account #main .no-design .orders-list .order-history-header button {
+	margin-top:28px;
+} 
+.mini-cart-pricing span.bonus-gift {
+	margin-left:115px;
+}
+
+.maintaince-wrap .logo-maintaince {
+	text-align: center;
+}
+.pt_checkout.checkout-steps .cart-promo .label {
+	 padding: 0px;
+     font-size: 13px; 
+}
+.item-details.summary-details .name {
+	padding-top: 25px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+.item-total.summary-apply {
+	 padding-top: 60px;
+}
+
+.item-details.summary-certi-details,
+tr th.order-confirm-shipping {
+	padding-left:10px !important;
+}
+.order-shipment-table tr { border-bottom:1px solid #e6e6e6;}
+
+.order-shipment-table tr.gift-certi-summary,
+.order-confirm-price {
+	border-bottom:none !important;
+	margin-left:10px;
+}
+tr.gift-certi-summary td.order-shipment-gift-message {
+	  word-break: break-all;
+}
+
+.dialog-required.login-required {
+    position: absolute;
+    left: 0;
+    right: 0;
+    float: right;
+    padding-left: 28%;
+    line-height: 28px;
+    width: 38%;
+
+}
+
+.summary-paymentmethod {
+	padding-left: 16px;
+}
+
+
+.pt_account .password-reset-section .form-row span.error {
+	margin: 1% 2% 0 0%;
+}
+.payment-method.payment-method-expanded .form-caption.error-message {
+	    margin: 6px 0 0 1% !important;
+}
+.order-shipment-details .label, .order-shipment-details .firstname, .order-shipment-details .lastname {
+	font-size:12px;
 }

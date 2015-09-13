@@ -628,7 +628,7 @@
 
 							<tr class="cart-promo">
 
-								<td colspan="3" class="bonus-item-details">
+								<td colspan="2" class="bonus-item-details">
 									<iscomment><isprint value="${bonusDiscountLineItem.getPromotion().getName()}" /></iscomment>
 									<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
 									<a class="tooltip  bonus-new" href="#">
@@ -687,11 +687,13 @@
 
 												<iscomment>Call module to render product</iscomment>
 												<isdisplayliproduct p_productli="${lineItem}" p_formli="${FormLi}" p_editable="${false}" p_hideprice="${true}" p_hidepromo="${true}" />
+												<iscomment>
 												<div class="bonusproducts">
 													<a href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID)}" title="${bonusButtonText}">
 														${bonusButtonText}
 													</a>
 												</div>
+												</iscomment>
 											</td>
 											<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 											<td class="item-delivery-options">

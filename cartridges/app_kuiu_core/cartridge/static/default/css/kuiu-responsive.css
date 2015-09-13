@@ -1789,8 +1789,9 @@
    }
    .pt_account #main .new-account #RegistrationForm a.privacy-policy {
 		float: left;
-    	margin-left: 155px;
-    	margin-top: -5px;
+		margin-left: 17px;
+		margin-top: 10px;
+		clear: both;
    }
     .pt_account #main .new-account #RegistrationForm .fld-checkbox label {
     	padding: 5px 0 0 18px;
@@ -2051,7 +2052,8 @@
 	.pdp-main .product-add-to-cart .inventory {
 		width:25%;
 	}
-	.checkout-steps #main button {
+	.checkout-steps #main button,
+	.pt_account #main .login-box.login-account button, .pt_account #main .login-box.login-order-track button{
 	 	width:100%;
 	}
 
@@ -2061,6 +2063,31 @@
     	background-color: transparent;
     	font-style: normal;
     	font-size: 12px;
+	}
+	#cart-items-form .item-list .cart-promo td {
+    	padding: 11px 10px;
+    	font-style: normal;
+    	text-align: center;
+	}
+	.ui-dialog.bonusproduct-quickview-container .product-add-to-cart .inventory {
+		width:20%;
+	}
+    .mini-cart-pricing span.bonus-gift {
+		margin-left:100px;
+	}
+	.dialog-required.login-required {
+	    position: absolute;
+	    right: 0;
+	    line-height: 22px;
+	    width: 100%;
+	    padding-left: 77%;
+	}
+	.login-box.login-order-track .login-box-content {
+		padding:0px;
+	}
+	
+	.pt_account #main h1 {
+		 margin-bottom: 30px;
 	}
 }
 
@@ -2705,8 +2732,49 @@
 	.bonus-item-actions a.select-bonus {
     	padding: 10px 3px;
 	}
-	.checkout-steps #main button {
+	.checkout-steps #main button,
+	.ui-dialog.bonusproduct-quickview-container .bonus-product-list .product-add-to-cart button {
 		width:100%;
+	}
+	.pt_cart ul.product-availability-list .on-order,.pt_cart  ul.product-availability-list .not-available { 
+		margin-left: 5px;
+	}
+	.ui-dialog.bonusproduct-quickview-container .product-add-to-cart .inventory {
+		width:22%;
+	}
+	.mini-cart-pricing span.bonus-gift {
+		margin-left:70px;
+	}
+	.pt_checkout.checkout-steps #cart-table tr td {
+		padding: 10px 0px;
+	}
+	.pt_checkout.checkout-steps #cart-table .item-image {
+    	width: 21%;
+	}
+	
+	.pt_checkout.checkout-steps #cart-table.item-list td.item-details {
+    	padding-left: 15px;
+    	width: 20%;
+	}
+	.pt_checkout.checkout-steps #cart-table td.item-image img {
+		max-width:100%;
+	}
+	.pt_checkout.checkout-steps #cart-table ul.product-availability-list {
+    	float: right;
+    	text-align: right;
+	}
+	.pt_account #main .no-design.full-fields  input[type="text"] {
+		width:85% !important;
+	}
+	.dialog-required.login-required {
+		width:45%;
+		padding-left: 30%;
+	}
+	fieldset.wishlist-addcart {
+		margin-left: 54px;
+	}
+	.pt_wish-list #main select.quantity-box.wishlist.wishlist-qty-dropdown {
+		width:30%;
 	}
 }
 
@@ -2836,6 +2904,10 @@
 	}
 	.pdp-main .product-set-main .product-set-list .block-add-to-cart button {
     	width: 70%;
+	}
+	.dialog-required.login-required {
+		width:45%;
+		padding-left: 29%;
 	}
 }
 

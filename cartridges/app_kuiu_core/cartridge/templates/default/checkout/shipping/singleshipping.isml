@@ -98,7 +98,7 @@
 							<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address1}" type="input"/>
 		
 							<div class="form-field-tooltip">
-								<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
+								<a class="tooltip">
 									${Resource.msg('singleshipping.apofpo','checkout',null)}
 									<div class="tooltip-content"  data-layout="small">
 										<iscontentasset aid="apo-fpo"/>

@@ -3,7 +3,6 @@
 <div class="login-box login-account">
 
 	<h2>${Resource.msg('account.login.logininclude.customersheader','account',null)}
-	<div class="dialog-required"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 	</h2>
 
 	<div class="login-box-content returning-customers clearfix">
@@ -25,8 +24,10 @@
 			</isif>
 
 			<fieldset>
+		        <div class="dialog-required login-required"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 
-				<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" xhtmlclass="email" p_dynamic="true" requiredtext="${Resource.msg('login.username.missing-error','forms',null)}"/>
+				<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" xhtmlclass="email login-email-req" p_dynamic="true" requiredtext="${Resource.msg('login.username.missing-error','forms',null)}"/>
+				
 
 				<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" xhtmlclass="password-input" requiredtext="${Resource.msg('login.password.missing-error','forms',null)}" attribute1="autocomplete" value1="off"/>
 

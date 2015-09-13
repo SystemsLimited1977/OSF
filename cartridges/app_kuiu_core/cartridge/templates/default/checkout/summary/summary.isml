@@ -23,7 +23,7 @@
 				<tr>
 					<th class="section-header"  colspan="2">${Resource.msg('global.product','locale',null)}</th>
 					<th class="section-header"  colspan="2">${Resource.msg('global.qty','locale',null)}</th>
-					<th class="section-header header-total-price">${Resource.msg('global.totalprice1','locale',null)}</th>
+					<th class="section-header header-total-price">${Resource.msg('global.price','locale',null)}</th>
 				</tr>
 			</thead>
 
@@ -106,16 +106,27 @@
 
 						<tr  class="cart-row <isif condition="${gcliloopstate.first}"> first <iselseif condition="${gcliloopstate.last}"> last</isif>">
 
-							<td class="item-image">
+							<td class="item-image certificate-img">
 								<img src="${URLUtils.staticURL('/images/gift_cert.png')}" alt="<isprint value="${giftCertificateLineItem.lineItemText}"/>" />
 							</td>
 
-							<td class="item-details">
+							<td class="item-details summary-certi-details ">
 								<div class="gift-certificate-to">
+										<div class="name">
+											${Resource.msg('global.giftcertificate','locale',null)}
+										</div>
+										<div class="giftcertamount clearfix">
+											<span class="label">
+												${Resource.msg('global.price','locale',null)}:
+											</span>
+											<span class="value">
+												<isprint value="${giftCertificateLineItem.price}"/>
+											</span>
+										</div>
 									<span class="label">${Resource.msg('global.to','locale',null)}:</span>
 									<span class="value">
-										<isprint value="${giftCertificateLineItem.recipientName}"/>
-										(<isprint value="${giftCertificateLineItem.recipientEmail}"/>)
+										<isprint value="${giftCertificateLineItem.recipientName}"/>,
+										<isprint value="${giftCertificateLineItem.recipientEmail}"/>
 									</span>
 								</div>
 								<div class="gift-certificate-from">
@@ -149,7 +160,7 @@
 
 						<td class="item-image"><!-- BLANK IMAGE CELL --></td>
 
-						<td  class="item-details">
+						<td  class="item-details summary-details">
 							<div class="name">${Resource.msg('summary.coupon','checkout',null)}</div>
 							<div class="cart-coupon">
 								<span class="label">${Resource.msg('summary.couponnumber','checkout',null)}</span>
@@ -161,17 +172,18 @@
 									<span class="value">(<isprint value="${Promo.price}"/>)</span>
 								</div>
 							</isloop>
-						</td>
-
-						<td class="item-quantity">&nbsp;</td>
-
-						<td class="item-quantity-details">
 							<div class="item-edit-details">
 								<a href="${URLUtils.url('Cart-Show')}">${Resource.msg('global.editdetails','locale',null)}</a>
 							</div>
 						</td>
 
-						<td class="item-total">
+						<td class="item-quantity">&nbsp;</td>
+
+						<td class="item-quantity-details">
+
+						</td>
+
+						<td class="item-total summary-apply">
 							<isif condition="${couponLineItem.applied}">
 								<span class="coupon-applied">${Resource.msg('summary.applied','checkout',null)}</span>
 							<iselse/>

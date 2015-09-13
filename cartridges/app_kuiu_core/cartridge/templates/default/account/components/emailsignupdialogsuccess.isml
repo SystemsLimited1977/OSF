@@ -8,10 +8,10 @@
 	<isdecorate template="util/pt_empty">
 		<isif condition="${pdict.IsError != null}">
 			<h1>${Resource.msg('global.errorInRegidtration','locale',null)}</h1>
-			<div>
+			<div class="thankyou-msg">
 				<p>${Resource.msg('global.errorDescription','locale',null)}</p>
 			</div>
-			 <div>
+			 <div class="thankyou-button">
 				<button id="cancelThankYou">${Resource.msg('global.close', 'locale', null)}</button>
 			</div>
 		<iselse>

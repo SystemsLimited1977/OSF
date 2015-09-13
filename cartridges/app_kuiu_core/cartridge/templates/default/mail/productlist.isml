@@ -89,6 +89,9 @@ ul li.onorder {color:red;}
      		</div>
 		</isif>
  	</div>
+ 	
+ 	
+ 	<iscomment>
 <table style="width:100%">
 	<isloop items="${pdict.ProductList.items}" var="item" status="loopstate">
 		<isif condition="${item.public}">
@@ -136,6 +139,7 @@ ul li.onorder {color:red;}
 		</isif>
 	</isloop>
 </table>
+ 	</iscomment>
 </div>
 </div>
 </body>

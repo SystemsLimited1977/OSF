@@ -46,14 +46,14 @@
 	<tr class="hidden-xs">
 		
 		<th class="section-header">${Resource.msg('order.orderdetails.billingaddress','order',null)}</th>
-		<th class="section-header">
+		<th class="section-header summary-paymentmethod">
 			<isif condition="${Order.paymentInstruments.length == 1}">
 				${Resource.msg('order.orderdetails.paymentmethod','order',null)}
 			<iselse/>
 				${Resource.msg('order.orderdetails.paymentmethods','order',null)}
 			</isif>
 		</th>
-		<th class="section-header">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</th>
+		<th class="section-header summary-paymentmethod">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</th>
 	</tr>
 
 	<tr>
@@ -119,11 +119,11 @@
 					<tr>
 						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
 						<th class="section-header">${Resource.msg('global.qty','locale',null)}</th>
-						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
+						<th class="section-header pull-right order-confirm-price">${Resource.msg('global.price','locale',null)}</th>
 						<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
-							<th class="section-header">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
+							<th class="section-header order-confirm-shipping">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
 						<iselse/>
-							<th class="section-header">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
+							<th class="section-header order-confirm-shipping">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 						</isif>
 					</tr>
 				</thead>
@@ -141,7 +141,7 @@
 							<span class="visible-xs-inline">Qty: </span><isprint value="${productLineItem.quantity}"/>
 						</td>
 
-						<td class="line-item-price">
+						<td class="line-item-price pull-right">
 							<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
 							<isif condition="${productLineItem.bonusProductLineItem}">
 								<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
@@ -186,6 +186,9 @@
 										<span class="value"><!-- Tracking Number --><isprint value="${shipment.trackingNumber}"/></span>
 									</div>
 								</isif>
+							</td>
+							<td class="visible-xs-block">
+								<div class="section-header items-header-products">${Resource.msg('global.item','locale',null)}</div>
 							</td>
 						</isif>
 					</tr>
@@ -226,8 +229,8 @@
 									</div>
 								</isif>
 							</td>
-							<td>
-								<div class="section-header visible-xs-block items-header-products">${Resource.msg('global.item','locale',null)}</div>
+							<td class="visible-xs-block">
+								<div class="section-header items-header-products">${Resource.msg('global.item','locale',null)}</div>
 							</td>
 						</isif>
 						
@@ -240,7 +243,7 @@
 							<span class="visible-xs-inline">Qty: </span><isprint value="${productLineItem.quantity}"/>
 						</td>
 
-						<td class="line-item-price">
+						<td class="line-item-price pull-right">
 							<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
 							<isif condition="${productLineItem.bonusProductLineItem}">
 								<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
@@ -258,12 +261,12 @@
 				</isloop>
 			<iscomment>Shipment Gift Message</iscomment>
 			<isif condition="${shipment.gift}">
-				<tr>
+				<tr class="gift-certi-summary">
 					<td colspan="4" class="order-shipment-gift-message-header">
 						${Resource.msg('order.orderdetails.giftmessage','order',null)}
 					</td>
 				</tr>
-				<tr>
+				<tr class="gift-certi-summary">
 					<td colspan="4" class="order-shipment-gift-message">
 						<isif condition="${!empty(shipment.giftMessage)}">
 							<isprint value="${shipment.giftMessage}"/>
@@ -280,42 +283,46 @@
 		<isif condition="${shipment.giftCertificateLineItems.size() > 0}">
 
 			<iscomment>Shipment Gift Certificate</iscomment>
-			<table >
+			<table class="order-shipment-table" >
 				<thead>
 					<tr>
 						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
-						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
-						<th class="section-header">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
+						<th class="section-header pull-right order-confirm-price">${Resource.msg('global.price','locale',null)}</th>
+						<th class="section-header order-confirm-shipping">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 					</tr>
 				</thead>
 				<isloop items="${shipment.giftCertificateLineItems}" var="giftCertificateLineItem" status="gcliloopstate">
+				
+				
 					<tr>
+							<td class="visible-xs-block">
+								<div class="section-header items-header-products">${Resource.msg('global.item','locale',null)}</div>
+							</td>
 						<td class="order-gift-cert-attributes">
 							<span class="label">${Resource.msg('global.giftcertificate','locale',null)}</span>
 							<div class="order-gift-cert-to">
 								<span class="label">${Resource.msg('order.orderdetails.giftcertto','order',null)}</span>
 								<span class="value">
-									<isprint value="${giftCertificateLineItem.recipientName}"/><br />
-									<isprint value="${giftCertificateLineItem.recipientEmail}"/>
+									<isprint value="${giftCertificateLineItem.recipientName}"/>,&nbsp;&nbsp;<isprint value="${giftCertificateLineItem.recipientEmail}"/>
 								</span>
 							</div>
 							<div class="order-gift-cert-from">
 								<span class="label">${Resource.msg('order.orderdetails.giftcertfrom','order',null)}</span>
 								<span class="value">
-									<isprint value="${giftCertificateLineItem.senderName}"/><br />
-									<isprint value="${Order.customerEmail}"/>
+									<isprint value="${giftCertificateLineItem.senderName}"/>,&nbsp;&nbsp;<isprint value="${Order.customerEmail}"/>
 								</span>
 							</div>
 						</td>
-						<td>
+						<td class="pull-right">
 							<isprint value="${giftCertificateLineItem.price}"/>
 						</td>
 						<td class="order-shipment-details">
 							<div class="order-shipment-address">
 								<span class="label">${Resource.msg('order.orderdetails.giftcertshippingaddress','order',null)}</span>
 								<div class="order-gift-cert-to">
-									<span class="value"><isprint value="${giftCertificateLineItem.recipientName}"/></span>
-									<span class="value"><isprint value="${giftCertificateLineItem.recipientEmail}"/></span>
+									<span class="value">
+										<isprint value="${giftCertificateLineItem.recipientName}"/>,&nbsp;&nbsp;<isprint value="${giftCertificateLineItem.recipientEmail}"/>
+									</span>
 								</div>
 							</div>
 							<div class="shipping-method">
@@ -327,14 +334,14 @@
 				</isloop>
 
 				<iscomment>if shipment is marked as gift</iscomment>
-				<tr>
+				<tr class="gift-certi-summary" >
 					<td colspan="4" class="order-shipment-gift-message-header">
 						${Resource.msg('order.orderdetails.giftmessage','order',null)}
 					</td>
 				</tr>
 
 				<isif condition="${shipment.gift}">
-					<tr>
+					<tr class="gift-certi-summary">
 						<td colspan="4" class="order-shipment-gift-message">
 							<isif condition="${!empty(shipment.giftMessage)}">
 								<isprint value="${shipment.giftMessage}"/>
@@ -344,7 +351,7 @@
 						</td>
 					</tr>
 				<iselse/>
-					<tr>
+					<tr class="gift-certi-summary">
 						<td colspan="4" class="order-shipment-gift-message">
 							<isset name="theGiftCert" value="${shipment.giftCertificateLineItems.iterator().next()}" scope="page"/>
 							<isif condition="${!empty(theGiftCert.message)}">
@@ -353,6 +360,7 @@
 								&nbsp;
 							</isif>
 						</td>
+						
 					</tr>
 				</isif>
 			</table>

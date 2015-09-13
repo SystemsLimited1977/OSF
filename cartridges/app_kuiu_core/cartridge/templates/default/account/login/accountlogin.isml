@@ -13,7 +13,6 @@
 			<div class="login-box login-order-track">
 	
 				<h2>${Resource.msg('account.login.orderheader','account',null)}
-				<div class="dialog-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 				</h2>
 	
 				<div class="login-box-content clearfix">
@@ -27,7 +26,8 @@
 	
 					<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.ordertrack.htmlName}">
 						<fieldset>
-	
+							<div class="dialog-required login-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
+						
 							<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderNumber}" type="input"/>
 	
 							<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderEmail}" xhtmlclass="email" type="input"/>
@@ -54,7 +54,7 @@
 				<h2>${Resource.msg('globalaccount.createheader','locale',null)}</h2>
 	
 				<div class="login-box-content clearfix">
-					<p>${Resource.msg('globalaccount.createmessage','locale',null)}</p>
+					<p>${Resource.msg('globalaccount.createmessage1','locale',null)}</p>
 	
 					<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.login.htmlName}_register">
 						<fieldset>

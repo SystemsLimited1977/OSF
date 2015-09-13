@@ -7,34 +7,37 @@
 </head>
 
 <body>
-<table width="100%" cellpadding="0" cellspacing="0">
-	<tr>
-		<td align="center">
-			<center>
-				<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
-				<tr style="display: table;">
-						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;width: 79%;">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td style="background:#e0e0e0;padding:50px 0" align="center">
+<center>
+<table style="background:#ffffff;border:1px solid #999999;width:680px">
+<tbody>
+<tr>
+<td style="font-size:12px;font-family:arial;padding:20px 20px 0 20px;vertical-align:top">
 							<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">
 								<img src="${URLUtils.httpStatic('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
-							</a>
-						</td>
-						<td style="font-size:12px;font-family:arial;padding:0px;vertical-align:top;float: right;padding-top: 15px;">
-							<strong>${Resource.msg('global.storename','locale',null)}</strong><br />
-							${Resource.msg('order.orderconfirmation-email.storeaddress','order',null)}<br />
-							${Resource.msg('order.orderconfirmation-email.storelocation','order',null)}<br />
-							<a href="${URLUtils.httpHome()}" title="${Resource.msg('order.orderconfirmation-email.jumptostore','order',null)}">${Resource.msg('global.storenameurl','locale',null)}</a><br />
-							${Resource.msg('order.orderconfirmation-email.storephone','order',null)}
-						</td>
-					</tr>
-					<tr>
-						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
-	
-							<isif condition="${empty(pdict.GiftCertificate.recipientName)}">
-								<h1 style="font-size:20px;font-family:georgia;font-weight:normal;">${Resource.msg('giftcert.dearcustomer','email',null)}</h1>
-							<iselse/>
-								<h1 style="font-size:20px;font-family:georgia;font-weight:normal;">${StringUtils.format(Resource.msg('giftcert.dear','email', null), pdict.GiftCertificate.recipientName)}</h1>
-							</isif>
-				
+							</a></td>
+<td style="font-size:12px;font-family:arial;padding:35px 20px;vertical-align:top;border-left:1px solid #b2b6b5;">
+
+<b>${Resource.msg('global.storename','locale',null)}</b><br>
+${Resource.msg('order.orderconfirmation-email.storeaddress','order',null)}<br>
+${Resource.msg('order.orderconfirmation-email.storelocation','order',null)}<br>
+<a href="${URLUtils.httpHome()}" title="${Resource.msg('order.orderconfirmation-email.jumptostore','order',null)}" target="_blank">${Resource.msg('global.storenameurl','locale',null)}</a><br>
+${Resource.msg('order.orderconfirmation-email.storephone','order',null)}</td>
+</tr>
+<tr >
+<th colspan="2" style="background:#333;padding:7px 20px;;font-size:14px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.giftcertificateGift','locale',null)}</th>
+</tr>
+<tr>
+<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 20px;vertical-align:top">
+
+<isif condition="${empty(pdict.GiftCertificate.recipientName)}">
+	<h1 style="font-size:20px;font-family:georgia;font-weight:normal;">${Resource.msg('giftcert.dearcustomer','email',null)}</h1>
+	<iselse/>
+	<h1 style="font-size:20px;font-family:georgia;font-weight:normal;">${StringUtils.format(Resource.msg('giftcert.dear','email', null), pdict.GiftCertificate.recipientName)}</h1>
+	</isif>
 							<p>
 								<isif condition="${empty(pdict.GiftCertificate.senderName)}">
 									${Resource.msg('giftcert.someone','email',null)}
@@ -43,7 +46,7 @@
 								</isif>
 								${StringUtils.format(Resource.msg('giftcert.paysattention','email', null), pdict.GiftCertificate.amount)}<a href="${URLUtils.httpHome()}">${Resource.msg('giftcert.dwonlinestore','email',null)}</a>${Resource.msg('giftcert.period','email',null)}
 							</p>
-				
+
 							<isif condition="${!empty(pdict.GiftCertificate.message)}">
 								<isif condition="${empty(pdict.GiftCertificate.senderName)}">
 									<p>${Resource.msg('giftcert.msgleftforyou','email',null)}</p>
@@ -53,18 +56,19 @@
 								
 								<p><isprint value="${pdict.GiftCertificate.message}"/></p>	
 							</isif>
-				
+
 							<p>
 								${Resource.msg('giftcert.toredeem','email',null)}
 								<b><isprint value="${pdict.GiftCertificate.getGiftCertificateCode()}"/></b>
 							</p>
-	
-						</td>
-					</tr>
-				</table>						
-			</center>
-		</td>
-	</tr>
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+</td>
+</tr>
+</tbody>
 </table>
 	
 </body>

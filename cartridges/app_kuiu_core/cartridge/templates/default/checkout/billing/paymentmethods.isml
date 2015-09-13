@@ -103,7 +103,7 @@
 			<iselse/>
 			<div class="form-field-tooltip cvn-tip-error">
 			</isif>
-				<a href="${URLUtils.url('Page-Show', 'cid', 'checkout-security-code')}" class="tooltip">
+				<a class="tooltip">
 					${Resource.msg('billing.linkcvn','checkout',null)}
 					<div class="tooltip-content" data-layout="small tooltip-cvn">
 						<iscontentasset aid="checkout-security-code">
