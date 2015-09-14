@@ -166,7 +166,20 @@
                               </transition>
                             </segment>
                           </branch>
-                          <branch basename="b5" source-connector="declined">
+                          <branch basename="b5" source-connector="AVSreview">
+                            <transition target-connector="in">
+                              <transition-display>
+                                <bend-point relative-to="target" x="0" y="-1"/>
+                              </transition-display>
+                            </transition>
+                            <segment>
+                              <node>
+                                <end-node name="error"/>
+                                <node-display x="-1" y="2"/>
+                              </node>
+                            </segment>
+                          </branch>
+                          <branch basename="b6" source-connector="declined">
                             <transition target-connector="in">
                               <transition-display>
                                 <bend-point relative-to="target" x="0" y="-1"/>
@@ -178,6 +191,13 @@
                                 <node-display x="0" y="2"/>
                               </node>
                             </segment>
+                          </branch>
+                          <branch basename="b7" source-connector="review">
+                            <transition target-connector="in1" target-path="./b4.1">
+                              <transition-display>
+                                <bend-point relative-to="source" x="-2" y="1"/>
+                              </transition-display>
+                            </transition>
                           </branch>
                         </node>
                       </segment>
