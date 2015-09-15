@@ -5,6 +5,9 @@
 * @input Basket : dw.order.LineItemCtnr The basket used for Authorization
 * @input Amount : dw.value.Money The amount to authorize
 * @input OrderNo : String The order no
+*
+* @input Order : dw.order.Order The current order
+*
 * @input CreditCardForm : dw.web.FormElement The form containing the credit card data
 * @input CreditCardData : Object
 * @input IPAddress : String The client's IP address
@@ -64,7 +67,10 @@ function execute( pdict : PipelineDictionary ) : Number
 	//**************************************************************************//    
 	var ccdata : CreditCardInfoHelper = pdict.CreditCardData;
     var basket : LineItemCtnr = pdict.Basket;
-    var orderNo : String = pdict.OrderNo;
+    
+    //var orderNo : String = pdict.OrderNo;
+   	var orderNo : String = pdict.Order.getOrderNo();
+   	
    	var billToObject: BillTo_Object = pdict.billTo;
 	var shipToObject: ShipTo_Object = pdict.shipTo;
 	var cardObject: Card_Object = pdict.card;
