@@ -231,7 +231,7 @@ function initLoginPage() {
 			}
 		});
 		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('password-forget');
-		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span#ui-id-1').html('<h1>Forgot Password?</h1>');
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span').html('<h1>Forgot Password?</h1>');
 	});
 }
 /**
