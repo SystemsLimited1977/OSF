@@ -1337,9 +1337,14 @@ var minicart = {
 		this.$el.html(html);
 		util.scrollBrowser(0);
 		this.init();
-		this.slide();
 		bonusProductsView.loadBonusOption();
-		$('.mini-cart-total:eq(1)').html($('.mini-cart-total:eq(0)').find('a'));
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+			$('.mini-cart-total:eq(1)').html($('.mini-cart-total:eq(0)').find('a'));
+		}
+		else
+		{
+			this.slide();
+		}
 	},
 	/**
 	 * @function
