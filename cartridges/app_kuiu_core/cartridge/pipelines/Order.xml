@@ -384,24 +384,35 @@
         <decision-node condition-key="!empty(CurrentForms.ordertrack.orderNumber.value) &amp;&amp; !empty(CurrentForms.ordertrack.postalCode.value) &amp;&amp; !empty(CurrentForms.ordertrack.orderEmail.value)" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
-              <pipelet-node custom-name="Determine single order by its order number" pipelet-name="SearchSystemObject" pipelet-set-identifier="bc_api">
-                <config-property key="ObjectType" value="Order"/>
-                <config-property key="SearchExpression" value="orderNo={1} AND status!={2}"/>
-                <key-binding alias="Orders" key="SearchResult"/>
-                <key-binding alias="null" key="Search4Key"/>
-                <key-binding alias="null" key="Search4Value"/>
-                <key-binding alias="null" key="Search5Key"/>
-                <key-binding alias="null" key="Search5Value"/>
-                <key-binding alias="null" key="SortBy2"/>
-                <key-binding alias="null" key="SortBy2Direction"/>
-                <key-binding alias="null" key="SortBy3"/>
-                <key-binding alias="null" key="SortBy3Direction"/>
-                <key-binding alias="CurrentForms.ordertrack.orderNumber.value" key="Search1Value"/>
-                <key-binding alias="null" key="Search1Key"/>
-                <key-binding alias="dw.order.Order.ORDER_STATUS_REPLACED" key="Search2Value"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="OrderNo" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+                <key-binding alias="CurrentForms.ordertrack.orderNumber.value" key="From_0"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
@@ -411,15 +422,41 @@
               </transition-display>
             </simple-transition>
             <node>
-              <decision-node condition-key="!empty(Orders)" condition-operator="expr"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="dw.order.OrderMgr.getOrder(OrderNo)" key="From_0"/>
+                <key-binding alias="FoundOrder" key="To_0"/>
+                <key-binding alias="OrderNotFound" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <decision-node condition-key="FoundOrder.billingAddress.postalCode.toUpperCase().equals(CurrentForms.ordertrack.postalCode.value.toUpperCase())" condition-operator="expr"/>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in"/>
                 <segment>
                   <node>
                     <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                      <key-binding alias="Orders.next()" key="From_0"/>
-                      <key-binding alias="FoundOrder" key="To_0"/>
+                      <key-binding alias="FoundOrder" key="From_0"/>
+                      <key-binding alias="Order" key="To_0"/>
                       <key-binding alias="null" key="From_1"/>
                       <key-binding alias="null" key="To_1"/>
                       <key-binding alias="null" key="From_2"/>
@@ -443,79 +480,43 @@
                   </node>
                   <simple-transition/>
                   <node>
-                    <decision-node condition-key="FoundOrder.billingAddress.postalCode.toUpperCase().equals(CurrentForms.ordertrack.postalCode.value.toUpperCase())" condition-operator="expr"/>
+                    <decision-node condition-key="Order.customerEmail == CurrentForms.ordertrack.orderEmail.value" condition-operator="expr"/>
                     <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="yes">
                       <transition target-connector="in"/>
                       <segment>
                         <node>
-                          <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                            <key-binding alias="FoundOrder" key="From_0"/>
-                            <key-binding alias="Order" key="To_0"/>
-                            <key-binding alias="null" key="From_1"/>
-                            <key-binding alias="null" key="To_1"/>
-                            <key-binding alias="null" key="From_2"/>
-                            <key-binding alias="null" key="To_2"/>
-                            <key-binding alias="null" key="From_3"/>
-                            <key-binding alias="null" key="To_3"/>
-                            <key-binding alias="null" key="From_4"/>
-                            <key-binding alias="null" key="To_4"/>
-                            <key-binding alias="null" key="From_5"/>
-                            <key-binding alias="null" key="To_5"/>
-                            <key-binding alias="null" key="From_6"/>
-                            <key-binding alias="null" key="To_6"/>
-                            <key-binding alias="null" key="From_7"/>
-                            <key-binding alias="null" key="To_7"/>
-                            <key-binding alias="null" key="From_8"/>
-                            <key-binding alias="null" key="To_8"/>
-                            <key-binding alias="null" key="From_9"/>
-                            <key-binding alias="null" key="To_9"/>
+                          <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="false"/>
+                            <config-property key="OnError" value="PIPELET_ERROR"/>
+                            <config-property key="ScriptFile" value="int_mainstreet:GetOrderDetails.ds"/>
+                            <config-property key="Timeout" value="90"/>
+                            <key-binding alias="ScriptLog" key="ScriptLog"/>
+                            <key-binding alias="CurrentForms.ordertrack.orderNumber.value" key="OrderNo"/>
+                            <key-binding alias="Order" key="Order"/>
                           </pipelet-node>
                           <node-display x="0" y="1"/>
-                        </node>
-                        <simple-transition/>
-                        <node>
-                          <decision-node condition-key="Order.customerEmail == CurrentForms.ordertrack.orderEmail.value" condition-operator="expr"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="yes">
-                            <transition target-connector="in"/>
-                            <segment>
-                              <node>
-                                <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                                  <config-property key="Transactional" value="false"/>
-                                  <config-property key="OnError" value="PIPELET_ERROR"/>
-                                  <config-property key="ScriptFile" value="int_mainstreet:GetOrderDetails.ds"/>
-                                  <config-property key="Timeout" value="90"/>
-                                  <key-binding alias="ScriptLog" key="ScriptLog"/>
-                                  <key-binding alias="CurrentForms.ordertrack.orderNumber.value" key="OrderNo"/>
-                                  <key-binding alias="Order" key="Order"/>
-                                </pipelet-node>
-                                <node-display x="0" y="1"/>
-                                <branch basename="b2" source-connector="error">
-                                  <transition target-connector="in1" target-path="../../../../+4"/>
-                                </branch>
-                              </node>
-                              <simple-transition>
-                                <transition-display>
-                                  <bend-point relative-to="source" x="0" y="1"/>
-                                </transition-display>
-                              </simple-transition>
-                              <node>
-                                <end-node name="ok"/>
-                                <node-display x="0" y="1"/>
-                              </node>
-                            </segment>
+                          <branch basename="b2" source-connector="error">
+                            <transition target-connector="in1" target-path="../../../+4"/>
                           </branch>
                         </node>
-                        <transition target-connector="in2" target-path="../../../+3"/>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <end-node name="ok"/>
+                          <node-display x="0" y="1"/>
+                        </node>
                       </segment>
                     </branch>
                   </node>
-                  <transition target-connector="in2" target-path="../../+2"/>
+                  <transition target-connector="in2" target-path="../../+3"/>
                 </segment>
               </branch>
             </node>
-            <transition target-connector="in1" target-path="../+1"/>
+            <transition target-connector="in2" target-path="../+2"/>
           </segment>
         </branch>
       </node>
@@ -535,7 +536,7 @@
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="2"/>
+        <node-display x="0" y="1"/>
       </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
@@ -557,7 +558,7 @@
         </transition-display>
       </simple-transition>
       <node>
-        <end-node name="error"/>
+        <end-node name="ok"/>
         <node-display x="0" y="1"/>
       </node>
     </segment>
