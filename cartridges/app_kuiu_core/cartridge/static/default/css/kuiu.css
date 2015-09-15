@@ -7256,12 +7256,12 @@ tr.gift-certi-summary td.order-shipment-gift-message {
 
 .offline-text-slot {
 	position: absolute;
-    z-index: 10000;
+    z-index: 10005;
     background-color: #000;
     width: 100%;
     height: 120px;
     opacity: 0.8;
-        color: #f2f2f2;
+    color: #f2f2f2;
 
 
 }
@@ -7282,20 +7282,19 @@ tr.gift-certi-summary td.order-shipment-gift-message {
 	background-size: cover;
     width: 100%;
   	background-image: url("../images/splash_56.jpg");
-    position: relative;
-    font-weight: 600;
+    position: absolute;
     z-index: 100;
-        height: 575px;
+    height:100%;
 }
 
 .offline-site-text {
-	color: #000;
     font-size: 12px;
     position: absolute;
-    z-index: 10000;
+    z-index: 10020;
     background-color: #000;
     width: 100%;
-    height: 50px;
+    height: 58px;
     color: #fff;
-    padding: 8px;
+    padding: 14px;
+    top: 91%;
 }
