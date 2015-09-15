@@ -54,7 +54,7 @@ ${Resource.msg('order.orderconfirmation-email.storephone','order',null)}</td>
 									<p><isprint value="${pdict.GiftCertificate.senderName}"/>${Resource.msg('giftcert.msghasbeenleftforyou','email',null)}</p>
 								</isif>
 								
-								<p><isprint value="${pdict.GiftCertificate.message}"/></p>	
+								<p style="word-break: break-word;"><isprint value="${pdict.GiftCertificate.message}"/></p>	
 							</isif>
 
 							<p>

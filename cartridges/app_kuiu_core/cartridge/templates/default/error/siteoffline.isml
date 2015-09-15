@@ -4,10 +4,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>${Resource.msg('siteoffline.header','error',null)}</title>
+<isinclude template="components/header/htmlhead"/>
 </head>
 <body>
 <div class="site-offline">
-	<h1>${Resource.msg('siteoffline.header','error',null)}</h1>
-	<p>${Resource.msg('siteoffline.message','error',null)}</p>	
+
+<div class="maintaince-wrap">	
+	<div class="offline-text-section">
+	
+	  	<div class="offline-text-slot"><center><h2>KUIU Will be back Soon</h2>
+	  	<p>KUIU is temporarily down for systems upgrades.<br/>Thank you for your patience  while we work to bring you <br/> a better shopping experience.</p></center>
+	  	</div>
+		<div class="offline-img"></div>
+  <div>
+	<center>
+	<p class="offline-site-text">Kuiu.com will be back soon. Thank you for your patience while we work to bring you a better shopping experience.<br/>
+	 For questions about existing orders, please contact customer service at service@kuiu.com or 855-367-5848.</p>
+	</div>
+	</center>
+	</div>
+
+</div>
 </div>
 </body>
+</html>
