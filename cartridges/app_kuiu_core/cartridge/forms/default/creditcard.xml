@@ -53,7 +53,7 @@
      	missing-error="creditcard.ownermissingerror"/>
 
 	<!-- field for credit card security code -->
-    <field formid="cvn" label="creditcard.cvnlabel" type="string" mandatory="true" masked="0"
+    <field formid="cvn" label="creditcard.cvnlabel" max-length="4" type="string" mandatory="true" masked="0"
      	missing-error="creditcard.cvnmissingerror" value-error="creditcard.cvnrangeerror"/>
  
 	<!-- optional flags -->
