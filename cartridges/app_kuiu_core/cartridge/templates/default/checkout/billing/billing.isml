@@ -96,10 +96,9 @@
 
 		<div class="form-row required fld-checkbox privacy-check">
 		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox" rowclass="form-indent label-inline"/>
-		<div class="form-caption">
-					<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy1" >${Resource.msg('global.privacypolicy','locale',null)}</a>
+		
+		<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
 			
-		</div>
 		</div>
 
 	</fieldset>
