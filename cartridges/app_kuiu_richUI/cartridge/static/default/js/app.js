@@ -227,6 +227,8 @@ function initializeEvents() {
 				height: 600
 			}
 		});
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('password-forget');
+		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span').html('<h1>Privacy Policy</h1>');
 	});
 
 	// main menu toggle
