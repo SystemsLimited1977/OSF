@@ -1200,9 +1200,9 @@ span.error {
     background-position: right 0px;
     cursor: pointer;
     padding-left: 0px;
-    padding-right: 35px;
+    padding-right: 36px;
     overflow: hidden;
-    display: flex;
+    /*display: flex;*/
     -webkit-appearance: none;
     -moz-appearance: none;
     
@@ -7262,8 +7262,6 @@ tr.gift-certi-summary td.order-shipment-gift-message {
     height: 120px;
     opacity: 0.8;
     color: #f2f2f2;
-
-
 }
 
 .offline-text-slot h2{
@@ -7271,12 +7269,12 @@ tr.gift-certi-summary td.order-shipment-gift-message {
     font-weight: 400;
     text-transform: uppercase;
     opacity: 1;
-        z-index: 10001;
+     z-index: 10001;
 }
 .offline-text-slot p {
     color: #f2f2f2;
-        z-index: 10001;
-        font-size:12px;
+    z-index: 10001;
+    font-size:12px;
 }
 .offline-img {
 	background-size: cover;
