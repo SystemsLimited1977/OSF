@@ -118,7 +118,7 @@
           <key-binding alias="null" key="DefaultDescription"/>
           <key-binding alias="null" key="Product"/>
           <key-binding alias="null" key="Category"/>
-          <key-binding alias="&quot;SiteGenesis Checkout&quot;" key="DefaultTitle"/>
+          <key-binding alias="&quot;KUIU Checkout&quot;" key="DefaultTitle"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>

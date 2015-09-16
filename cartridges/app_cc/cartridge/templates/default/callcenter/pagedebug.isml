@@ -89,7 +89,7 @@
                }
             }
    
-            return propTable + "</table></br>" + functList;
+            return propTable + "</table><br />" + functList;
         }       
 
         /* 
@@ -290,9 +290,9 @@
 
 <div class="pagedebuginfo" id="pagedebuginfo">
   <div class="header"> Page Debug </div>
-  </br>&nbsp;</br>&nbsp;
+  <br />&nbsp;<br />&nbsp;
   <div class="subheader"> Basic Page Data </div>
-  </br>&nbsp;
+  <br />&nbsp;
     <table width="100%">
       <tr>
         <td class="tableDataTitle">Last Page Submission</td>
@@ -327,9 +327,9 @@
       </tr>
     </table>    
     
-  </br>&nbsp;</br>&nbsp;
+  <br/>&nbsp;<br/>&nbsp;
   <div class="subheader"> Error and Tracing Information </div>
-  </br>&nbsp;
+  <br/>&nbsp;
       
     <table width="100%">
       <tr>

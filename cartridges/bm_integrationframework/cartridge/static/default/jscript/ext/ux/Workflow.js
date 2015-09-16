@@ -20,7 +20,7 @@ function initWorkflowDefintionOverview(configs) {
 		var siteIds = record.get('siteIds');
 		var result = '';
 		for (var i=0; i<siteIds.length; i++) {
-			result += siteIds[i] + '</br>';
+			result += siteIds[i] + '<br/>';
 		}
 		return result;
     };

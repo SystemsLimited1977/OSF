@@ -7296,3 +7296,15 @@ tr.gift-certi-summary td.order-shipment-gift-message {
     padding: 14px;
     top: 91%;
 }
+.power-by-text {
+	color: #fff;
+    float: left;
+    position: absolute;
+    top: 48px;
+    left: 142px;
+}
+.power-by-text img {
+	width: 100px;
+    line-height: 26px;
+    margin-top: -5px;
+}

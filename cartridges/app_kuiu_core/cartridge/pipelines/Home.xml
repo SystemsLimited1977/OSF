@@ -32,8 +32,8 @@
       <node>
         <pipelet-node pipelet-name="UpdatePageMetaData" pipelet-set-identifier="bc_api">
           <key-binding alias="dw.system.Site.getCurrent().name" key="DefaultTitle"/>
-          <key-binding alias="&quot;SiteGenesis, Reference Application&quot;" key="DefaultKeywords"/>
-          <key-binding alias="&quot;SiteGenesis&quot;" key="DefaultDescription"/>
+          <key-binding alias="&quot;KUIU&quot;" key="DefaultKeywords"/>
+          <key-binding alias="&quot;KUIU&quot;" key="DefaultDescription"/>
           <key-binding alias="null" key="Product"/>
           <key-binding alias="null" key="Category"/>
           <key-binding alias="null" key="Content"/>

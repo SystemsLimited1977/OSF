@@ -2089,6 +2089,14 @@
 	.pt_account #main h1 {
 		 margin-bottom: 30px;
 	}
+	.power-by-text {
+	color: #fff;
+    position: static;
+    text-align: center;
+    float: none;
+    margin-top: 10px;
+	}
+
 }
 
 @media ( min-width: 768px) and (max-width: 991px) {
@@ -2776,6 +2784,12 @@
 	.pt_wish-list #main select.quantity-box.wishlist.wishlist-qty-dropdown {
 		width:30%;
 	}
+	.power-by-text {
+    	margin-top: 10px;
+    	position: static;
+    	float: none;
+    	margin-left: 2px;
+	}
 }
 
 @media ( min-width: 992px) and (max-width: 1199px) {
@@ -2908,6 +2922,9 @@
 	.dialog-required.login-required {
 		width:45%;
 		padding-left: 29%;
+	}
+	.power-by-text {
+		left: 5px;
 	}
 }
 
