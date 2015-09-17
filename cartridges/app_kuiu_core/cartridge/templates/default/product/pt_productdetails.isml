@@ -42,7 +42,6 @@
 			</div><!-- /primary-content -->
 
 		</div>
-		</div></div> <!-- /main -->
 
 		<isinclude template="components/footer/footer"/>
 		<isinclude template="product/pt_productdetails_VARS"/>

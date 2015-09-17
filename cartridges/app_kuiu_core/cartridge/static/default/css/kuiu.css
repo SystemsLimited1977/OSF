@@ -7117,8 +7117,8 @@ footer .footer_email span.error {
 #zoom-cross-icon {
     position: absolute;
     z-index: 1000;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 52px;
     margin-left: 96%;
     background-image: url("../images/zoom_cross.png");
     background-repeat: no-repeat;

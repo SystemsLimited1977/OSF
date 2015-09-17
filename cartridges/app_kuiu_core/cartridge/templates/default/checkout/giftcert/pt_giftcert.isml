@@ -57,6 +57,7 @@
 		
 			</div>
 		</div>
+	 </div>
 		<!-- /main -->
 
 		<isinclude template="components/footer/footer" />

@@ -87,7 +87,7 @@
 						<iselse/>
 							<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock">
 						</isif>
-				</div>
+							</div>
 					</isif>
 				
 				</div>

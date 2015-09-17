@@ -101,7 +101,6 @@
 				</div>
 			</div>
 		</div>
-		</div>
 		<isinclude template="components/footer/footer"/>
 		<isinclude template="content/content/pt_content_VARS"/>
 		

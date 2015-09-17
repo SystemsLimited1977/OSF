@@ -66,11 +66,7 @@
      
      <div class="magnifik-example basic">
 		<a class="z2" href="${mediumImage.getURL()}">
-		
-	<!-- <a ${href} class="product-image main-image" title="${imageTitle}"> -->
 		<img src="${mediumImage.getURL()}" alt="${mediumImage.alt}" title="${mediumImage.title}" />
-		<!--div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div-->
-	<!-- </a> -->
         </a>
     </div>
  
@@ -99,6 +95,8 @@
  </div>
 </isif>
 </div>
+
+
 <div class="hidden-xs">
 	<h2 class="visually-hidden">Images</h2>
 	<iscomment>Origional Code
@@ -124,11 +122,8 @@
 	</isif>
 	<div class="magnifik-example basic">
 		<a class="z1" href="${imageUrlHiRes}">
-		
-	<!-- <a ${href} class="product-image main-image" title="${imageTitle}"> -->
 		<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
 		<div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div>
-	<!-- </a> -->
         </a>
     </div>
     
