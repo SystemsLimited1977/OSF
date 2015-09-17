@@ -106,14 +106,7 @@ module.exports = function () {
 	owlCarousel.init();
 	
 	//Initialize magnifik Zoom
-    $('a.z1').magnifik({
-	  classPrefix: 'm-',
-	  ratio: 1,
-	  seekImage: false,
-	  clickCloses: true,
-	  activationEvent: "click"
-	});
-    $('a.z2').magnifik({
+    $('a.z1, a.z2, a.z3').magnifik({
 	  classPrefix: 'm-',
 	  ratio: 1,
 	  seekImage: false,

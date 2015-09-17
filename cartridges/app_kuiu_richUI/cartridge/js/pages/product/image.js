@@ -44,7 +44,9 @@ var setMainImage = function (atts) {
 	if (!dialog.isActive() && !util.isMobile()) {
 		$('#pdpMain .main-image').attr('href', atts.hires);
 	}
-	loadZoom();
+	
+	//Commenting the out of the box Site Genesis Product main image zoom
+	//loadZoom();
 };
 
 /**

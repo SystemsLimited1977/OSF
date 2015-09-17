@@ -2717,7 +2717,9 @@ var setMainImage = function (atts) {
 	if (!dialog.isActive() && !util.isMobile()) {
 		$('#pdpMain .main-image').attr('href', atts.hires);
 	}
-	loadZoom();
+	
+	//Commenting the out of the box Site Genesis Product main image zoom
+	//loadZoom();
 };
 
 /**
@@ -3064,14 +3066,7 @@ module.exports = function () {
 	owlCarousel.init();
 	
 	//Initialize magnifik Zoom
-    $('a.z1').magnifik({
-	  classPrefix: 'm-',
-	  ratio: 1,
-	  seekImage: false,
-	  clickCloses: true,
-	  activationEvent: "click"
-	});
-    $('a.z2').magnifik({
+    $('a.z1, a.z2, a.z3').magnifik({
 	  classPrefix: 'm-',
 	  ratio: 1,
 	  seekImage: false,
@@ -6217,7 +6212,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6230,7 +6225,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
