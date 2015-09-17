@@ -10,7 +10,7 @@
 		<isloop items="${slotcontent.content}" var="product" begin="0" end="${slotcontent.content.length}">
 			<isobject object="${product}" view="recommendation">
 				<div class="item">
-					<isproducttile product="${product}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${true}"/>
+					<isproducttile product="${product}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${false}"/>
 				</div>
 			</isobject>
 		</isloop>

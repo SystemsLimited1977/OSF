@@ -125,74 +125,75 @@
 
 		<iscomment>Pricing</iscomment>
 		<iscomment>Incuding pricing isml instead of below code to handle promotional prices on PLP JI 28-8-2015</iscomment>
-		<isif condition="${showpricing}">
+		
+		<isif condition="${showpricing && showrating}">
 			<div class="product-pricing">
-			  <iscomment> 
-					<isscript>
-						var currencyCode = session.getCurrency().getCurrencyCode(),
-							price = {},
-							PriceModelSource = Product,
-							PriceModel;
-						if (Product.productSet) {
-							price.class = 'product-set-price';
-							price.value = Resource.msg('global.buyall', 'locale', null);
-						} else if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true') {
-							// Product master or variation group price range depending on the represented variants
-							price.class = 'product-sales-price';
-							price.value = dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode)) + ' - ' + dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode));
-						} else {
-							// For product master or variation group without a price range get the pricing from first variant
-							if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
-								PriceModelSource = Product.variants[0];
-							}
-							// Regular pricing through price model of the product. If the product is an option product, we have to initialize the product price model with the option model.
-							if (Product.optionProduct) {
-								PriceModel = PriceModelSource.getPriceModel(Product.getOptionModel());
-							} else {
-								PriceModel = PriceModelSource.getPriceModel();
-							}
-						}
-					</isscript>
-					
-					<isinclude template="product/components/standardprice"/>
-					<isscript>
-						var prices = [];
-						var SalesPrice, ShowStandardPrice, extraPrice;
-						// simulate the same if else block from before the template include break
-						if (!Product.productSet && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
-							SalesPrice = PriceModel.getPrice();
-							ShowStandardPrice = StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1;
-							if (ShowStandardPrice) {
-								price.class = 'product-standard-price';
-								price.title = 'Regular Price';
-								price.value = StandardPrice;
-								extraPrice = {};
-								extraPrice.class = 'product-sales-price';
-								extraPrice.title = 'Sale Price';
-								extraPrice.value = SalesPrice;
-							} else {
-								price.class = 'product-sales-price';
-								price.title = 'Sale Price';
-								price.value = SalesPrice;
-							}
-						}
-						prices.push(price);
-						if (extraPrice) {prices.push(extraPrice);}
-					</isscript>
-	
-					<isloop items="${prices}" var="productPrice">
-						<span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
-					</isloop>
-				</iscomment>	
-				
 				<isinclude template="product/components/pricing"/>
 			</div>
+			
+		<iselseif condition="${showpricing}">
+			<isscript>
+					var currencyCode = session.getCurrency().getCurrencyCode(),
+						price = {},
+						PriceModelSource = Product,
+						PriceModel;
+					if (Product.productSet) {
+						price.class = 'product-set-price';
+						price.value = Resource.msg('global.buyall', 'locale', null);
+					} else if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true') {
+						// Product master or variation group price range depending on the represented variants
+						price.class = 'product-sales-price';
+						price.value = dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode)) + ' - ' + dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode));
+					} else {
+						// For product master or variation group without a price range get the pricing from first variant
+						if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
+							PriceModelSource = Product.variants[0];
+						}
+						// Regular pricing through price model of the product. If the product is an option product, we have to initialize the product price model with the option model.
+						if (Product.optionProduct) {
+							PriceModel = PriceModelSource.getPriceModel(Product.getOptionModel());
+						} else {
+							PriceModel = PriceModelSource.getPriceModel();
+						}
+					}
+				</isscript>
+					
+				<isinclude template="product/components/standardprice"/>
+				<isscript>
+					var prices = [];
+					var SalesPrice, ShowStandardPrice, extraPrice;
+					// simulate the same if else block from before the template include break
+					if (!Product.productSet && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
+						SalesPrice = PriceModel.getPrice();
+						ShowStandardPrice = StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1;
+						if (ShowStandardPrice) {
+							price.class = 'product-standard-price';
+							price.title = 'Regular Price';
+							price.value = StandardPrice;
+							extraPrice = {};
+							extraPrice.class = 'product-sales-price';
+							extraPrice.title = 'Sale Price';
+							extraPrice.value = SalesPrice;
+						} else {
+							price.class = 'product-sales-price';
+							price.title = 'Sale Price';
+							price.value = SalesPrice;
+						}
+					}
+					prices.push(price);
+					//if (extraPrice) {prices.push(extraPrice);}
+				</isscript>
+	
+				<isloop items="${prices}" var="productPrice">
+					<div class="product-pricing" title="${productPrice.title}"><isprint value="${productPrice.value}"/></div>
+				</isloop>
 		</isif>
 
 		<iscomment>Promotion</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<isif condition="${showpromotion}">
-			<div class="product-promo">
+			<iscomment><div class="product-promo"></iscomment>
+			<div class="product-pricing">
 				<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(Product)}" scope="page"/>
 				<isif condition="${!empty(promos)}">
 					<isloop items="${promos}" alias="promo" status="promoloopstate">
