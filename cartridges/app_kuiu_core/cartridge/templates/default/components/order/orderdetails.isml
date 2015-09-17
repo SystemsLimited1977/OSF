@@ -87,7 +87,7 @@
 			<isloop items="${PaymentInstruments}" var="paymentInstr" status="piloopstate">
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<div class="orderpaymentinstrumentsgc">
-						<span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>
+						<iscomment><span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span></iscomment>
 						<span class="value"><isprint value="${paymentInstr.maskedGiftCertificateCode}"/></span>
 						<span class="payment-amount">
 							<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
@@ -95,7 +95,7 @@
 						</span>
 					</div>
 				<iselse/>
-					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
+					<iscomment><span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span></iscomment>
 					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>
 					<div><isprint value="${paymentInstr.maskedCreditCardNumber}"/></div>
 					<div class="payment-amount">
