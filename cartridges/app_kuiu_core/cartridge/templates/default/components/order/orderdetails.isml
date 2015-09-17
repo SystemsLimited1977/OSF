@@ -37,6 +37,14 @@
 				<span class="label">${Resource.msg('order.orderdetails.ordernumber','order',null)}</span>
 				<span class="value"><isprint value="${Order.orderNo}"/></span>
 			</div>
+			
+			<isif condition="${!empty(Order.trackNo)}">
+				<div class="order-number ">
+					<span class="label">${Resource.msg('order.orderdetails.trackingnumber','order',null)}</span>
+					<span class="value"><isprint value="${Order.trackNo}"/></span>
+				</div>
+			</isif>
+			
 		</td>
 		<td class="hidden-xs">
 			<div class="pull-right"><button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button></div>
@@ -71,7 +79,12 @@
 				${Resource.msg('order.orderdetails.paymentmethods','order',null)}
 			</isif>
 		</div>
-			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
+			<isif condition="${empty(Order.getPaymentInstruments())}">
+				<isset name="PaymentInstruments" value="${!empty(dw.order.OrderMgr.getOrder(Order.orderNo)) ? dw.order.OrderMgr.getOrder(Order.orderNo).getPaymentInstruments() : Order.getPaymentInstruments()}" scope="page" />
+			<iselse>
+				<isset name="PaymentInstruments" value="${Order.getPaymentInstruments()}" scope="page" />
+			</isif>
+			<isloop items="${PaymentInstruments}" var="paymentInstr" status="piloopstate">
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<div class="orderpaymentinstrumentsgc">
 						<span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>

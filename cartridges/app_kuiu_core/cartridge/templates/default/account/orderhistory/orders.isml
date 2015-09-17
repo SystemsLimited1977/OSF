@@ -50,10 +50,10 @@
 						</div>
 						
 						<div class="order-history-items">
-						
+							<isset name="Shipments" value="${!empty(dw.order.OrderMgr.getOrder(order.object.orderNo)) ? dw.order.OrderMgr.getOrder(order.object.orderNo).getShipments() : order.object.shipments}" scope="page" />
 							<table class="order-history-table">
 								<iscomment>For each shipment, render shipped to, items and order total </iscomment>
-								<isloop items="${order.object.shipments}" var="Shipment" status="shipmentloopstate">
+								<isloop items="${Shipments}" var="Shipment" status="shipmentloopstate">
 									
 									<iscomment>display order total in first row only</iscomment>						
 									<isif condition="${shipmentloopstate.first}">
