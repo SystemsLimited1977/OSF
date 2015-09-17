@@ -1015,7 +1015,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
           <config-property key="CreateCustomerNo" value="true"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="Order" key="Order"/>
-          <key-binding alias="null" key="OrderNo"/>
+          <key-binding alias="OrderNo" key="OrderNo"/>
         </pipelet-node>
         <node-display x="1" y="1"/>
         <branch basename="b3" source-connector="error">
