@@ -30,13 +30,18 @@
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="full-width clearfix">
-			<isif condition="${!(pdict.Basket == null || (empty(pdict.Basket.productLineItems) && empty(pdict.Basket.giftCertificateLineItems)))}">
+			<isif condition="${pdict.IsCheckoutLogin == true}">
+				<center><h1>Checkout</h1></center>
+			<iselseif condition="${!(pdict.Basket == null || (empty(pdict.Basket.productLineItems) && empty(pdict.Basket.giftCertificateLineItems)))}">
 				<center><h1>${Resource.msg('global.ShoppingCartheading','locale',null)}</h1></center>
 			</isif>
 			
 			<div class="container">
-	
-				<div id="primary" class="primary-content col-xs-12">
+				<isif condition="${pdict.IsCheckoutLogin == true}">
+					<div id="primary" class="primary-content col-xs-12 checkoutlogin">
+				<iselse>
+					<div id="primary" class="primary-content col-xs-12">
+				</isif>
 					<isreplace/>
 				</div>
 				

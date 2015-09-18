@@ -28,7 +28,9 @@
 					<isif condition="${!empty(pdict.Product.custom.productviewimage)}">
 						<div class="container-with-image">
 							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="product-overview-text">
 								<isprint value="${pdict.Product.longDescription}" encoding="off"/>
+								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<isprint value="${pdict.Product.custom.productviewimage}" encoding="off"/>
@@ -37,7 +39,9 @@
 					<iselse>
 						<div class="container-with-empty-image">
 							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="product-overview-text">
 								<isprint value="${pdict.Product.longDescription}" encoding="off"/>
+								</div>
 							</div>
 						</div>
 					</isif>	

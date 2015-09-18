@@ -3,7 +3,7 @@
 <!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
+<!--[if gt IE 8]><html class="ie" lang="en"><![endif]-->
 <html lang="en">
 <!--<![endif]-->
 
