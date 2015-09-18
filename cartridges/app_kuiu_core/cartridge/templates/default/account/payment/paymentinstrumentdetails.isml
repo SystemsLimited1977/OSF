@@ -48,7 +48,7 @@
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.address2}" type="input"/>
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.country}" type="select"/>
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.states.state}" type="select"/>
-				
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.states.state}" type="input"/>
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.city}" type="input"/>
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.postal}" type="input"/>
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.address.phone}" type="input"/>
@@ -77,5 +77,11 @@
 		<div class="error-form">${Resource.msg('account.paymentinstruments.forbidden','account',null)}</div>
 		<button type="button">${Resource.msg('global.close','locale',null)}</button>			
 	</div>
-
+<isscript>
+	importScript("util/ViewHelpers.ds");
+	var addressForm = pdict.CurrentForms.profile.address;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
+	var json = JSON.stringify(countries);
+</isscript>
+<script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
 </isdecorate>

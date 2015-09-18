@@ -43,7 +43,14 @@ function initializePaymentForm() {
 			}
 		});
 	});
-
+	
+	//select countries for international shipping
+	util.updateStateLabel();
+	
+	$('select[id$="_country"]', $form).on('change', function () {
+		util.updateStateOptions($form);
+	});
+	
 	validator.init();
 }
 
