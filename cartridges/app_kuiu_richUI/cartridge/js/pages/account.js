@@ -9,6 +9,47 @@ var giftcert = require('../giftcert'),
 
 /**
  * @function
+ * @description Initializes the events on the payments form (apply)
+ * @param {Element} form The form which will be initialized
+ */
+function initializePaymentForm() {
+	var $form = $('#newcreditcard');
+
+	$form.on('click', '.applyBtn', function (e) {
+		e.preventDefault();
+		if (!$form.valid()) {
+			return false;
+		}
+		var url = util.appendParamToURL($form.attr('action'), 'format', 'ajax');
+		var applyName = $form.find('.applyBtn').attr('name');
+		var options = {
+			url: url,
+			data: $form.serialize() + '&' + applyName + '=x',
+			type: 'POST'
+		};
+		$.ajax(options).done(function (data) {
+			if (typeof(data) !== 'string') {
+				if (data.success) {
+					dialog.close();
+					page.refresh();
+				} else {
+					window.alert(data.message);
+					return false;
+				}
+			} else {
+				$('#dialog-container').html(data);
+				account.init();
+				tooltip.init();
+			}
+		});
+	});
+
+	validator.init();
+}
+
+
+/**
+ * @function
  * @description Initializes the events on the address form (apply, cancel, delete)
  * @param {Element} form The form which will be initialized
  */
@@ -154,7 +195,10 @@ function initPaymentEvents() {
 	$('.add-card').on('click', function (e) {
 		e.preventDefault();
 		dialog.open({
-			url: $(e.target).attr('href')
+			url: $(e.target).attr('href'),
+			options: {
+				open: initializePaymentForm
+			}
 		});
 		if($(e.target).attr('data') === "create-new"){
 			$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('add-cc-details');

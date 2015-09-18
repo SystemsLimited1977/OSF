@@ -19,7 +19,7 @@
             	     
 	</h1>
 
-		<form id="CreditCardForm" name="CreditCardForm" action="${URLUtils.httpsContinue()}"  method="post" id="newcreditcard">
+		<form   action="${URLUtils.httpsContinue()}"  method="post" id="newcreditcard">
 			
 			<fieldset>
 			
@@ -56,7 +56,7 @@
 				<!-- end code changes for billing fields. -->
 				
 				<div class="form-row form-row-button">	
-					<button id="applyBtn" type="submit" value="${Resource.msg('global.apply','locale',null)}">
+					<button id="applyBtn" class="applyBtn" type="submit" value="${Resource.msg('global.apply','locale',null)}">
 						${Resource.msg('global.apply','locale',null)}
 					</button>	
 					
