@@ -1512,6 +1512,9 @@ function initializePaymentForm() {
 				tooltip.init();
 			}
 		});
+	}).on('click', '.cancel-button', function (e) {
+		e.preventDefault();
+		dialog.close();
 	});
 	
 	//select countries for international shipping
