@@ -842,7 +842,7 @@
                 <key-binding alias="Order.customerEmail" key="From_3"/>
                 <key-binding alias="MailTo" key="To_3"/>
                 <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="CurrentSession.custom.ignoreLocalTaxCalculation" key="To_4"/>
                 <key-binding alias="null" key="From_5"/>
                 <key-binding alias="null" key="To_5"/>
                 <key-binding alias="null" key="From_6"/>
@@ -1794,13 +1794,23 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <text-node>
+          <description>empty Ignore Local Tax Calculation session level variable to null</description>
+        </text-node>
+        <node-display x="1" y="32"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_38">
+    <segment>
+      <node>
+        <text-node>
           <description>Send order confirmation and clear used forms within the checkout process.</description>
         </text-node>
         <node-display x="1" y="33"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_38">
+  <branch basename="_ANONYMOUS_BRANCH_39">
     <segment>
       <node>
         <text-node>
@@ -1810,7 +1820,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_39">
+  <branch basename="_ANONYMOUS_BRANCH_40">
     <segment>
       <node>
         <text-node>
@@ -1820,7 +1830,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_40">
+  <branch basename="_ANONYMOUS_BRANCH_41">
     <segment>
       <node>
         <text-node>

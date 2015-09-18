@@ -201,10 +201,12 @@ function execute( pdict : PipelineDictionary ) : Number
 /************************************************************************************************************************/
 /************************************** IF SUCCESSFUL RESPONSE, UPDATE BASKET *******************************************/
 /************************************************************************************************************************/ 
-
 		// in case of success update basket
 		if(pdict.ReasonCode  == "Success")
 		{
+			//set session level variable for disabeling calculateTax() in calculate.js when tax service already calculated tax
+			session.custom.ignoreLocalTaxCalculation = true;
+			
 			var lineItem = null,
 				rate = 0,
 				taxable = null;
@@ -225,6 +227,9 @@ function execute( pdict : PipelineDictionary ) : Number
 		} 
 		else 
 		{
+			//set session level variable for enabeling calculateTax() in calculate.js if Tax service fails
+			session.custom.ignoreLocalTaxCalculation = false;
+			
 			//Tax service failure, set all lineItems to 0 tax rate
 			var lineItems = basket.getAllLineItems(),
 				rate = 0;

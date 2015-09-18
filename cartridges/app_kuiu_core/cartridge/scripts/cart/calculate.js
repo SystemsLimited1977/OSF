@@ -74,7 +74,10 @@ exports.calculate = function(basket)
 	// =====         CALCULATE TAX                   =====
     // ===================================================
 
-	calculateTax(basket);
+	//restrict to calculate tax if Avalara already calculated it
+	if(empty(session.custom.ignoreLocalTaxCalculation) ||  session.custom.ignoreLocalTaxCalculation == false){
+		calculateTax(basket);
+	}
 
     // ===================================================
 	// =====         CALCULATE BASKET TOTALS         =====

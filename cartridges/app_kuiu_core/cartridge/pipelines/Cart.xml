@@ -1795,8 +1795,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
           <config-property key="Transactional" value="false"/>
           <key-binding alias="null" key="From_0"/>
           <key-binding alias="BasketStatus" key="To_0"/>
-          <key-binding alias="null" key="From_1"/>
-          <key-binding alias="null" key="To_1"/>
           <key-binding alias="null" key="From_2"/>
           <key-binding alias="null" key="To_2"/>
           <key-binding alias="null" key="From_3"/>
