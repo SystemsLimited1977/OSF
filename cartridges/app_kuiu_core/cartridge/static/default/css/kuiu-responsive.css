@@ -2075,12 +2075,12 @@
     .mini-cart-pricing span.bonus-gift {
 		margin-left:100px;
 	}
-	.dialog-required.login-required {
+	.pt_account .dialog-required.login-required {
 	    position: absolute;
 	    right: 0;
 	    line-height: 22px;
 	    width: 100%;
-	    padding-left: 77%;
+	    padding-left: 78%;
 	}
 	.login-box.login-order-track .login-box-content {
 		padding:0px;
@@ -2290,7 +2290,7 @@
     	border-left: none;
     	clear: both;
     	position: absolute;
-    	top: 128px;
+    	top: 94px;
     }
     .pdp-main .top-section,
     .product-variations .attribute .value {
@@ -2771,10 +2771,11 @@
     	float: right;
     	text-align: right;
 	}
-	.pt_account #main .no-design.full-fields  input[type="text"] {
+	.pt_account #main .no-design.full-fields  input[type="text"],
+	.pt_account #main .no-design.full-fields input[type="password"] {
 		width:85% !important;
 	}
-	.dialog-required.login-required {
+	.pt_account .dialog-required.login-required {
 		width:45%;
 		padding-left: 30%;
 	}
@@ -2789,6 +2790,12 @@
     	position: static;
     	float: none;
     	margin-left: 2px;
+	}
+	.pdp-main .product-thumbnails .thumb.selected {
+		padding-bottom: 5px;
+	}
+	.product-variations .attribute .size-chart-link {
+		display:none;
 	}
 }
 

@@ -4961,7 +4961,6 @@ table .section-header {
 
 .pt_order-confirmation table.item-list tr th.section-header {
     border-right: 1px solid #e0e0e0;
-    padding-left:5px;
 }
 
 .pt_order-confirmation table.item-list tr th.section-header:last-child {
@@ -7175,7 +7174,7 @@ a.tooltip.bonus-new span {
     color: #0167af;
     margin:  0 0 0;
     line-height: 21px;
-    height: 10px;
+    height: auto;
 }
 
 .pt_cart ul.product-availability-list .on-order,.pt_cart  ul.product-availability-list .not-available {
@@ -7239,7 +7238,7 @@ tr.gift-certi-summary td.order-shipment-gift-message {
 
 }
 
-.summary-paymentmethod {
+.pt_order-confirmation table tr th.section-header.summary-paymentmethod {
 	padding-left: 16px;
 }
 
@@ -7307,4 +7306,42 @@ tr.gift-certi-summary td.order-shipment-gift-message {
 	width: 100px;
     line-height: 26px;
     margin-top: -5px;
+}
+
+ .pt_order-confirmation table tr th.section-header.order-confirm-price {
+ 	margin-right:10px;
+ }
+
+.login-box.login-account .form-row span.error {
+    margin: 1% 2% 0 0%;
+}
+.not-available-msg, .in-stock-date-msg, .not-available, .out-of-stock, .store-error {
+	margin:0px;
+}
+.container-with-image .product-overview-text,
+.container-with-empty-image .product-overview-text {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow: auto;
+}
+
+@-moz-document url-prefix() {
+    .pt_account .dialog-required.login-required {
+		padding-left: 27.5%;
+}
+}
+
+.ie .pt_account .dialog-required.login-required {
+	padding-left: 27.5%;
+}
+
+.pt_cart .checkoutlogin .login-box.login-account .dialog-required.login-required{
+	position: absolute;
+    left: 82%;
+    right: 0;
+    float: right;
+}
+.preorder-msg {
+	line-height:21px;
 }

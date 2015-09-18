@@ -119,6 +119,33 @@
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="true" key="From_0"/>
+          <key-binding alias="IsCheckoutLogin" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
     <segment>
@@ -154,18 +181,13 @@
               </pipelet-node>
               <node-display x="-1" y="2"/>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="target" x="0" y="-1"/>
-              </transition-display>
-            </simple-transition>
+            <simple-transition/>
             <node>
               <call-node start-name-ref="Login-Process"/>
-              <node-display x="0" y="3"/>
+              <node-display x="0" y="2"/>
               <branch basename="b2" source-connector="login_failed">
                 <transition target-connector="in1" target-path="../+1">
                   <transition-display>
-                    <bend-point relative-to="source" x="1" y="2"/>
                     <bend-point relative-to="source" x="8" y="2"/>
                   </transition-display>
                 </transition>
@@ -277,7 +299,6 @@
         <branch basename="b4" source-connector="unregistered">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="4" y="3"/>
               <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
@@ -296,11 +317,7 @@
         <join-node/>
         <node-display x="3" y="0"/>
       </node>
-      <transition target-connector="in1" target-path="./-1">
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="-2"/>
-        </transition-display>
-      </transition>
+      <transition target-connector="in1" target-path="./-1"/>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_3">
