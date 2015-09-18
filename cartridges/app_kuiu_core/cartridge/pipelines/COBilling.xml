@@ -3798,7 +3798,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
                 <transition target-connector="in"/>
                 <segment>
                   <node>
-                    <decision-node condition-key="(creditcard.maskedCreditCardNumber == NewCreditCard.maskedCreditCardNumber &amp;&amp; creditcard.creditCardType == NewCreditCard.creditCardType)" condition-operator="expr"/>
+                    <decision-node condition-key="(creditcard.custom.maskedFourDigit == NewCreditCard.custom.maskedFourDigit &amp;&amp; creditcard.creditCardType == NewCreditCard.creditCardType &amp;&amp; creditcard.creditCardHolder == NewCreditCard.creditCardHolder)" condition-operator="expr"/>
                     <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="yes">
                       <transition target-connector="in">
