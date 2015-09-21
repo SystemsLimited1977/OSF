@@ -18,7 +18,7 @@
 
 <table style="background:#ffffff;border-bottom:1px solid #b2b6b5;width:680px">
 	<tr>
-		<th style="background:#666;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;" colspan="3">${Resource.msg('order.orderdetails.paymentinfo','order',null)}</th>
+		<th style="background:#000;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;" colspan="3">${Resource.msg('order.orderdetails.paymentinfo','order',null)}</th>
 	</tr>
 	<tr>
 		<td style="font-size:12px;font-family:arial;padding:20px 20px;vertical-align:top;border-right:1px solid #b2b6b5;line-height:1.45;">
@@ -72,13 +72,13 @@
 			<table style="background:#ffffff;width:680px;">
 				<thead>
 					<tr>
-						<th style="background:#666;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.item','locale',null)}</th>
-						<th style="background:#666;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.qty','locale',null)}</th>
-						<th style="background:#666;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.price','locale',null)}</th>
+						<th style="background:#000;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.item','locale',null)}</th>
+						<th style="background:#000;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.qty','locale',null)}</th>
+						<th style="background:#000;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('global.price','locale',null)}</th>
 						<isif condition="${empty(shipment.custom.shipmentType) || shipment.custom.shipmentType != 'instore'}"/>
-							<th style="background:#666;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
+							<th style="background:#000;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 						<iselse/>
-							<th style="background:#666;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>		
+							<th style="background:#000;color:#fff;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>		
 						</isif>
 					</tr>
 				</thead>
@@ -170,9 +170,9 @@
 			<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
 				<thead>
 					<tr>
-						<th style="background:#666;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.item','locale',null)}</th>
-						<th style="background:#666;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.price','locale',null)}</th>
-						<th style="background:#666;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
+						<th style="background:#000;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.item','locale',null)}</th>
+						<th style="background:#000;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.price','locale',null)}</th>
+						<th style="background:#000;padding:7px 20px;font-size:12px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 					</tr>
 				</thead>
 				<isloop items="${shipment.giftCertificateLineItems}" var="giftCertificateLineItem" status="gcliloopstate">
