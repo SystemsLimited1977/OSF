@@ -41,7 +41,7 @@
 	</isif>
 	<isif condition="${pdict.CurrentCustomer.registered}">
 		var gender = '${pdict.CurrentCustomer.profile.gender}';
-		var zipCode = '${pdict.CurrentCustomer.profile.custom.zipCode}';
+		var zipCode = '${pdict.CurrentCustomer.profile.addressBook.preferredAddress.postalCode}';
 		var birthday = new Date('${pdict.CurrentCustomer.profile.birthday}');
 		var today = new Date();
 		var age = today.getFullYear()- birthday.getFullYear();
@@ -49,7 +49,7 @@
 			age--;
 		}
 		ga('set','dimension4','registered');
-		<isif condition="${!empty(pdict.CurrentCustomer.profile.custom.zipCode)}">
+		<isif condition="${!empty(pdict.CurrentCustomer.profile.addressBook.preferredAddress.postalCode)}">
 			ga('set','dimension6',zipCode);
 		</isif>
 		<isif condition="${!empty(pdict.CurrentCustomer.profile.gender) && pdict.CurrentCustomer.profile.gender !='0'}">
