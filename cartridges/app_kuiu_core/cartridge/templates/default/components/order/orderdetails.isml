@@ -37,14 +37,14 @@
 				<span class="label">${Resource.msg('order.orderdetails.ordernumber','order',null)}</span>
 				<span class="value"><isprint value="${Order.orderNo}"/></span>
 			</div>
-			
-			<isif condition="${!empty(Order.trackNo)}">
-				<div class="order-number ">
-					<span class="label">${Resource.msg('order.orderdetails.trackingnumber','order',null)}</span>
-					<span class="value"><isprint value="${Order.trackNo}"/></span>
-				</div>
+			<isif condition="${Order.hasOwnProperty('trackNo')}">
+				<isif condition="${!empty(Order.trackNo)}">
+					<div class="order-number ">
+						<span class="label">${Resource.msg('order.orderdetails.trackingnumber','order',null)}</span>
+						<span class="value"><isprint value="${Order.trackNo}"/></span>
+					</div>
+				</isif>
 			</isif>
-			
 		</td>
 		<td class="hidden-xs">
 			<div class="pull-right"><button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button></div>
