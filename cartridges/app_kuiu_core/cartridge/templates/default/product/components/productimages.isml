@@ -45,21 +45,26 @@
     <iscomment><isif condition="${imgSmStatus.count > noOfImages}">
      <isbreak/>
     </isif></iscomment>
-    <isset name="lgImage" value="${imageProduct.getImages('large')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
-    <isif condition="${!empty(imageProduct.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>imgSmStatus.index}">
-     <isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)].getURL()}" />
+    <iscomment>
+	    <isset name="lgImage" value="${imageProduct.getImages('large')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
+	    <isif condition="${!empty(imageProduct.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>imgSmStatus.index}">
+	     <isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)].getURL()}" />
+     </iscomment>
+     <isset name="lgImage" value="${new ProductImage('large', imageProduct, 0)[imgSmStatus.index.toFixed(0)]}" scope="page"/>
+	  <isif condition="${!empty(new ProductImage('hi-res', imageProduct, 0)) && new ProductImage('hi-res', pdict.Product, 0).length>imgSmStatus.index}">
+	    <isset name="hi_res" scope="page" value="${new ProductImage('hi-res', pdict.Product)[imgSmStatus.index.toFixed(0)].getURL()}" />
      <isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
     <iselse/>
      <isset name="hi_res" scope="page" value="${''}" />
      <isset name="href" scope="page" value="${'name=product_detail_image'}" />
     </isif>
 
-    
+    <iscomment>
     <isset name="imageTitle" value="${img.title}" scope="page"/>
     <isif condition="${imageTitle.charAt(0) == ','}">
      <isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
     </isif>
-    
+     </iscomment>
     <isset name="mediumImage" value="${new ProductImage('medium', imageProduct, imgSmStatus.index)}" scope="page"/>
     <isset name="smImage" value="${new ProductImage('small', imageProduct, imgSmStatus.index)}" scope="page"/>
     <div class="owl-carousel-mobile-item thumb${imgSmStatus.first ? ' selected' : ''}">
@@ -116,10 +121,11 @@
 		<isset name="hi_res" scope="page" value="${''}" />
 		<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 	</isif>
-	<iscomment>RAP-2997, if the product name is missing from the image title, add it in</iscomment>
+	<iscomment>RAP-2997, if the product name is missing from the image title, add it in
 	<isif condition="${imageTitle.charAt(0) == ','}">
 		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
 	</isif>
+	</iscomment>
 	<div class="magnifik-example basic">
 		<a class="z1" href="${imageUrlHiRes}">
 		<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
@@ -133,12 +139,12 @@
 	<isset name="largeImagesSize" value="${imageProduct.getImages('large').size()}" scope="page"/>
 	<isset name="smallImagesSize" value="${imageProduct.getImages('small').size()}" scope="page"/>
 	<isset name="noOfImages" value="${largeImagesSize > smallImagesSize ? smallImagesSize : largeImagesSize}" scope="page"/>
- </iscomment>
- 
-	 <isset name="largeImagesSize" value="${new ProductImage('large', imageProduct, 0).size()}" scope="page"/>
-	 <isset name="smallImagesSize" value="${new ProductImage('small', imageProduct, 0).size()}" scope="page"/>
+  </iscomment>
+
+	 <isset name="largeImagesSize" value="${new ProductImage('large', imageProduct, 0)}" scope="page"/>
+	 <isset name="smallImagesSize" value="${new ProductImage('small', imageProduct, 0)}" scope="page"/>
 	 <isset name="noOfImages" value="${largeImagesSize > smallImagesSize ? smallImagesSize : largeImagesSize}" scope="page"/>
- 
+
 	<isif condition="${imageProduct.getImages('hi-res').length > 0}">
 		<div id="thumbnails" class="product-thumbnails">
 			<iscomment><h2>${Resource.msg('product.productthumbnails.title','product',null)}</h2></iscomment>
@@ -147,7 +153,7 @@
 					<iscomment><isif condition="${imgSmStatus.count > noOfImages}">
 						<isbreak/>
 					</isif></iscomment>
-					<isset name="lgImage" value="${imageProduct.getImages('large')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
+					<isset name="lgImage" value="${new ProductImage('large', imageProduct, 0)[imgSmStatus.index.toFixed(0)]}" scope="page"/>
 					<isif condition="${!empty(imageProduct.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>imgSmStatus.index}">
 						<isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)].getURL()}" />
 						<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
@@ -156,12 +162,12 @@
 						<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 					</isif>
 	
-					
-					<isset name="imageTitle" value="${img.title}" scope="page"/>
-					<isif condition="${imageTitle.charAt(0) == ','}">
-						<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
-					</isif>
-					
+					<iscomment>
+						<isset name="imageTitle" value="${img.title}" scope="page"/>
+						<isif condition="${imageTitle.charAt(0) == ','}">
+							<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
+						</isif>
+					</iscomment>
 					<isset name="lgImage" value="${new ProductImage('large', imageProduct, imgSmStatus.index)}" scope="page"/>
 					<isset name="smImage" value="${new ProductImage('small', imageProduct, imgSmStatus.index)}" scope="page"/>
 					<li class="thumb${imgSmStatus.first ? ' selected' : ''}">

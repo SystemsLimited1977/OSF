@@ -65,7 +65,9 @@
 					<isprint value="${pdict.ProductSearchResult.products.asList().length}" />
 					<isprint value="${'Items'}" />
 				</p>
-				<h1><isprint value="${pdict.ProductSearchResult.category.getDisplayName()}" /></h1>
+				<isif condition="${!empty(pdict.ProductSearchResult.category)}">
+					<h1><isprint value="${pdict.ProductSearchResult.category.getDisplayName()}" /></h1>
+				</isif>
 				<button id="refineby" class="btn-refineby">${Resource.msg('refinements.slider.refineby','search',null)}</button>
 				<isproductsortingoptions productsearchmodel="${pdict.ProductSearchResult}" pagingmodel="${pdict.ProductPagingModel}" uniqueid="grid-sort-header"/>
 			</center>		
