@@ -4,7 +4,7 @@
 var owlCarousel = {
 	init: function () {
 		$("#owl-demo").owlCarousel({		   
-		       autoPlay: 3000, //Set AutoPlay to 3 seconds
+		       autoPlay: false, //Set AutoPlay to 3 seconds
 		       items : 3,
 		       itemsDesktop : [1170,3],
 		       itemsDesktopSmall: [992,2],
@@ -16,7 +16,7 @@ var owlCarousel = {
 		   });
 		 $("#owl-demo1").owlCarousel({
 		   
-		       autoPlay: 5000, //Set AutoPlay to 3 seconds
+		       autoPlay: false, //Set AutoPlay to 3 seconds
 		       items : 4,
 		       itemsDesktop : [1170,4],
 		       itemsDesktopSmall: [992,3],

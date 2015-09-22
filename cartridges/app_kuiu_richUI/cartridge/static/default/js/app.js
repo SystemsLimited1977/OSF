@@ -1407,7 +1407,7 @@ exports.init = function () {
 var owlCarousel = {
 	init: function () {
 		$("#owl-demo").owlCarousel({		   
-		       autoPlay: 3000, //Set AutoPlay to 3 seconds
+		       autoPlay: false, //Set AutoPlay to 3 seconds
 		       items : 3,
 		       itemsDesktop : [1170,3],
 		       itemsDesktopSmall: [992,2],
@@ -1419,7 +1419,7 @@ var owlCarousel = {
 		   });
 		 $("#owl-demo1").owlCarousel({
 		   
-		       autoPlay: 5000, //Set AutoPlay to 3 seconds
+		       autoPlay: false, //Set AutoPlay to 3 seconds
 		       items : 4,
 		       itemsDesktop : [1170,4],
 		       itemsDesktopSmall: [992,3],
@@ -1820,7 +1820,7 @@ function initializeEvents() {
 	
 	 //Last Visted Product Carousel
 	 $("#owl-last-visted-products").owlCarousel({     
-	        autoPlay: 3000, 
+	        autoPlay: false, 
 	        items : 4,
 	        itemsDesktop : [1170,4],
 	        itemsDesktopSmall: [992,3],
@@ -1832,7 +1832,7 @@ function initializeEvents() {
 	    });
 	 //Featured Product Carousel
 	 $("#owl-featured-products").owlCarousel({     
-	        autoPlay: 3000, 
+	        autoPlay: false, 
 	        items : 4,
 	        itemsDesktop : [1170,4],
 	        itemsDesktopSmall: [992,3],

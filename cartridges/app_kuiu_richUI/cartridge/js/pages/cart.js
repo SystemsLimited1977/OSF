@@ -35,7 +35,7 @@ function initializeEvents() {
 	
 	 //Last Visted Product Carousel
 	 $("#owl-last-visted-products").owlCarousel({     
-	        autoPlay: 3000, 
+	        autoPlay: false, 
 	        items : 4,
 	        itemsDesktop : [1170,4],
 	        itemsDesktopSmall: [992,3],
@@ -47,7 +47,7 @@ function initializeEvents() {
 	    });
 	 //Featured Product Carousel
 	 $("#owl-featured-products").owlCarousel({     
-	        autoPlay: 3000, 
+	        autoPlay: false, 
 	        items : 4,
 	        itemsDesktop : [1170,4],
 	        itemsDesktopSmall: [992,3],
