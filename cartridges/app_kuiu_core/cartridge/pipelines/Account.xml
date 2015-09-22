@@ -136,21 +136,41 @@
                     </pipelet-node>
                     <node-display orientation="horizontal" x="0" y="1"/>
                     <branch basename="b2" source-connector="error">
-                      <transition target-connector="in" transaction-control="begin"/>
+                      <transition target-connector="in" transaction-control="begin">
+                        <transition-display>
+                          <bend-point relative-to="target" x="0" y="-1"/>
+                        </transition-display>
+                      </transition>
                       <segment>
                         <node>
-                          <pipelet-node pipelet-name="CreateCustomer" pipelet-set-identifier="bc_api">
-                            <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
-                            <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
-                            <key-binding alias="Customer" key="Customer"/>
-                          </pipelet-node>
-                          <node-display x="0" y="2"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in1" target-path="./b3.1">
+                          <decision-node condition-key="!empty(Order)" condition-operator="expr"/>
+                          <node-display orientation="horizontal" x="0" y="2"/>
+                          <branch basename="b2" source-connector="yes">
+                            <transition target-connector="in">
                               <transition-display>
-                                <bend-point relative-to="source" x="2" y="0"/>
+                                <bend-point relative-to="source" x="1" y="0"/>
                               </transition-display>
                             </transition>
+                            <segment>
+                              <node>
+                                <pipelet-node pipelet-name="CreateCustomer" pipelet-set-identifier="bc_api">
+                                  <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
+                                  <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
+                                  <key-binding alias="Customer" key="Customer"/>
+                                  <key-binding alias="Order.customerNo" key="CustomerNo"/>
+                                </pipelet-node>
+                                <node-display orientation="horizontal" x="1" y="0"/>
+                                <branch basename="b2" source-connector="error">
+                                  <transition target-connector="in1" target-path="../b3.1"/>
+                                </branch>
+                              </node>
+                              <transition target-connector="in1" target-path="../+1">
+                                <transition-display>
+                                  <bend-point relative-to="source" x="1" y="0"/>
+                                  <bend-point relative-to="target" x="3" y="0"/>
+                                </transition-display>
+                              </transition>
+                            </segment>
                           </branch>
                         </node>
                         <simple-transition>
@@ -159,19 +179,45 @@
                           </transition-display>
                         </simple-transition>
                         <node>
+                          <pipelet-node pipelet-name="CreateCustomer" pipelet-set-identifier="bc_api">
+                            <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
+                            <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
+                            <key-binding alias="Customer" key="Customer"/>
+                          </pipelet-node>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b3" source-connector="error">
+                            <transition target-connector="in1"/>
+                            <segment>
+                              <node>
+                                <join-node/>
+                                <node-display x="1" y="0"/>
+                              </node>
+                              <transition target-connector="in1" target-path="../+1/b2.1"/>
+                            </segment>
+                          </branch>
+                        </node>
+                        <transition target-connector="in1" target-path="./+1"/>
+                      </segment>
+                      <segment>
+                        <node>
+                          <join-node/>
+                          <node-display x="0" y="1"/>
+                        </node>
+                        <simple-transition/>
+                        <node>
                           <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
                             <key-binding alias="CurrentForms.profile.customer" key="Form"/>
                             <key-binding alias="Customer.profile" key="Object"/>
                           </pipelet-node>
                           <node-display x="0" y="1"/>
-                          <branch basename="b3" source-connector="error">
+                          <branch basename="b2" source-connector="error">
                             <transition target-connector="in2"/>
                             <segment>
                               <node>
                                 <join-node/>
                                 <node-display x="1" y="0"/>
                               </node>
-                              <transition target-connector="in1" target-path="../b4.1"/>
+                              <transition target-connector="in1" target-path="../b3.1"/>
                             </segment>
                           </branch>
                         </node>
@@ -191,7 +237,7 @@
                             <key-binding alias="Customer" key="CurrentCustomer"/>
                           </pipelet-node>
                           <node-display x="0" y="1"/>
-                          <branch basename="b4" source-connector="error">
+                          <branch basename="b3" source-connector="error">
                             <transition target-connector="in1"/>
                             <segment>
                               <node>
@@ -205,7 +251,7 @@
                                 </pipelet-node>
                                 <node-display x="0" y="1"/>
                               </node>
-                              <transition target-connector="in2" target-path="../b5.1"/>
+                              <transition target-connector="in2" target-path="../b4.1"/>
                             </segment>
                           </branch>
                         </node>
@@ -265,7 +311,7 @@
                             <key-binding alias="RememberMe" key="RememberMe"/>
                           </pipelet-node>
                           <node-display x="0" y="1"/>
-                          <branch basename="b5" source-connector="error">
+                          <branch basename="b4" source-connector="error">
                             <transition target-connector="in1"/>
                             <segment>
                               <node>
@@ -275,7 +321,7 @@
                               <simple-transition/>
                               <node>
                                 <end-node name="error"/>
-                                <node-display x="0" y="1"/>
+                                <node-display x="0" y="2"/>
                               </node>
                             </segment>
                           </branch>
@@ -285,10 +331,14 @@
                           <call-node start-name-ref="ltkEmailSignup-Inline"/>
                           <node-display x="0" y="1"/>
                         </node>
-                        <simple-transition/>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
                         <node>
                           <end-node name="ok"/>
-                          <node-display x="-1" y="0"/>
+                          <node-display x="0" y="1"/>
                         </node>
                       </segment>
                     </branch>
@@ -1813,9 +1863,68 @@
     <segment>
       <node>
         <text-node>
+          <description>The stored password hash becomes invalid when login changes. Make sure password is set whenever login changes.</description>
+        </text-node>
+        <node-display x="7" y="18"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_19">
+    <segment>
+      <node>
+        <text-node>
           <description>This pipeline contains the login procedure specific for the customer account, e.g. order tracking.</description>
         </text-node>
-        <node-display x="3" y="15"/>
+        <node-display x="4" y="19"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_20">
+    <segment>
+      <node>
+        <text-node>
+          <description>Store entered email address as login and email.</description>
+        </text-node>
+        <node-display x="8" y="16"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_21">
+    <segment>
+      <node>
+        <text-node>
+          <description>Renders the account navigation.</description>
+        </text-node>
+        <node-display x="13" y="16"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="IncludeNavigation">
+    <segment>
+      <node>
+        <start-node name="IncludeNavigation" secure="false"/>
+        <node-display x="13" y="17"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="account/accountnavigation"/>
+        </interaction-node>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_23">
+    <segment>
+      <node>
+        <text-node>
+          <description>Checks the given user name on existence and ends on a named end node to communicated the status back.</description>
+        </text-node>
+        <node-display x="1" y="23"/>
       </node>
     </segment>
   </branch>
@@ -1823,7 +1932,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="RequireLogin" secure="false"/>
-        <node-display x="4" y="15"/>
+        <node-display x="4" y="20"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -1973,17 +2082,17 @@
                     <branch basename="b2" source-connector="error">
                       <transition target-connector="in1">
                         <transition-display>
-                          <bend-point relative-to="source" x="1" y="2"/>
+                          <bend-point relative-to="source" x="1" y="-2"/>
                         </transition-display>
                       </transition>
                       <segment>
                         <node>
                           <join-node/>
-                          <node-display x="2" y="1"/>
+                          <node-display x="2" y="-1"/>
                         </node>
                         <transition target-connector="in1" target-path="../..">
                           <transition-display>
-                            <bend-point relative-to="source" x="0" y="-8"/>
+                            <bend-point relative-to="source" x="0" y="-4"/>
                           </transition-display>
                         </transition>
                       </segment>
@@ -2091,84 +2200,6 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_20">
-    <segment>
-      <node>
-        <text-node>
-          <description>The stored password hash becomes invalid when login changes. Make sure password is set whenever login changes.</description>
-        </text-node>
-        <node-display x="7" y="18"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_21">
-    <segment>
-      <node>
-        <text-node>
-          <description>Store entered email address as login and email.</description>
-        </text-node>
-        <node-display x="8" y="16"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_22">
-    <segment>
-      <node>
-        <text-node>
-          <description>Renders the account navigation.</description>
-        </text-node>
-        <node-display x="13" y="16"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="IncludeNavigation">
-    <segment>
-      <node>
-        <start-node name="IncludeNavigation" secure="false"/>
-        <node-display x="13" y="17"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="account/accountnavigation"/>
-        </interaction-node>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
-    <segment>
-      <node>
-        <text-node>
-          <description>Used when user has attempted to use their facebook account to create a storefront account that is already in the BM</description>
-        </text-node>
-        <node-display x="3" y="22"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
-    <segment>
-      <node>
-        <text-node>
-          <description>Checks the given user name on existence and ends on a named end node to communicated the status back.</description>
-        </text-node>
-        <node-display x="1" y="23"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="DuplicateRegistrationFromFB">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="DuplicateRegistrationFromFB" secure="false"/>
-        <node-display x="3" y="23"/>
-      </node>
-      <transition target-connector="in1" target-path="/RequireLogin.1/b2.3"/>
-    </segment>
-  </branch>
   <branch basename="CheckUserName">
     <segment>
       <node>
@@ -2233,7 +2264,17 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_28">
+  <branch basename="_ANONYMOUS_BRANCH_26">
+    <segment>
+      <node>
+        <text-node>
+          <description>Used when user has attempted to use their facebook account to create a storefront account that is already in the BM</description>
+        </text-node>
+        <node-display x="3" y="25"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_27">
     <segment>
       <node>
         <text-node>
@@ -2312,13 +2353,22 @@
       </node>
     </segment>
   </branch>
+  <branch basename="DuplicateRegistrationFromFB">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="DuplicateRegistrationFromFB" secure="false"/>
+        <node-display x="3" y="28"/>
+      </node>
+      <transition target-connector="in1" target-path="/RequireLogin.1/b2.3"/>
+    </segment>
+  </branch>
   <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
           <description>Facebook Connect for registration</description>
         </text-node>
-        <node-display x="1" y="29"/>
+        <node-display x="0" y="30"/>
       </node>
     </segment>
   </branch>
@@ -2326,7 +2376,7 @@
     <segment>
       <node>
         <start-node name="Connect" secure="true"/>
-        <node-display x="1" y="30"/>
+        <node-display x="0" y="31"/>
       </node>
       <simple-transition>
         <transition-display>
