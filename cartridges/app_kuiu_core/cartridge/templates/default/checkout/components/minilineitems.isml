@@ -64,7 +64,7 @@
 
 			<div class="mini-cart-pricing">
 				${Resource.msg('global.qty','locale',null)}: 1
-				<isprint value="${pdict.p_giftcertlineitem.price}"/>
+				<span class="bonus-gift"><isprint value="${pdict.p_giftcertlineitem.price}"/></span>
 			</div>
 
 		</div>

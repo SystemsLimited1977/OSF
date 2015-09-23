@@ -1359,6 +1359,7 @@ nav[role="navigation"] {
   position: relative; }
   .mini-cart-product:last-of-type {
     border: none; }
+  .mini-cart-product.collapsed .mini-cart-name, .mini-cart-product.collapsed .mini-cart-attributes, .mini-cart-product.collapsed .mini-cart-pricing, .mini-cart-product.collapsed .product-availability-list {
     width: 90%; }
   .mini-cart-product.collapsed .mini-cart-image {
     display: none; }

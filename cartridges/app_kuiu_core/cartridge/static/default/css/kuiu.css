@@ -18,6 +18,17 @@ a {
     text-decoration: none;
 }
 
+table {
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size:100%;
+    font-variant: normal;
+    font-style: normal;
+    color: -webkit-text;
+    text-align: start;
+}
+
 a:active,
 a:hover,
 a:focus,
@@ -2741,7 +2752,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin-left: -1px;
 }
 
-.product-tile .product-swatches li a.selected:before,
+/*.product-tile .product-swatches li a.selected:before,
 .product-tile .product-swatches li a.selected:after {
     font-weight: normal;
     background-image: url("../images/icon-color-cross.png");
@@ -2754,6 +2765,12 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     height: 26px;
     z-index: 700;
     content: " ";
+}
+*/
+
+.product-tile .product-swatches .selected img, .product-tile .product-swatches img:hover,
+.pdp-main .product-variations .color li.selected, .pdp-main .product-variations .color li.selected {
+	    border-color: #000 !important;
 }
 
 .product-tile .product-swatches-all,
@@ -2953,7 +2970,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .pdp-main .product-variations ul.swatches li.selected {}
 
 .pdp-main .product-variations .color li a {
-    border: 1px solid #c3c3c3;
+   /* border: 1px solid #c3c3c3;*/
     height: 32px;
     padding: 2px;
     width: 32px;
@@ -2981,6 +2998,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin: 0;
     overflow: visible;
 }
+.product-variations .color li:hover a, .product-variations .color li.selected a {border-color: #000;}
 
 .pdp-main .product-variations li a:hover,
 .pdp-main .product-variations .swatches.size li a:hover {
@@ -3013,7 +3031,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     padding: 2px 0;
 }
 
-.pdp-main .product-variations ul.swatches.color li.selected a {
+/*.pdp-main .product-variations ul.swatches.color li.selected a {
     font-weight: normal;
     background-image: url("../images/icon-color-cross.png");
     background-repeat: no-repeat;
@@ -3034,7 +3052,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     height: 30px;
     z-index: 100;
     content: " ";
-}
+}*/
 
 .pdp-main .product-variations ul.swatches.size li.unselectable a {
     position: relative;
@@ -4165,10 +4183,10 @@ a#password-reset {
     top: 2px;
 }
 
-#main .checkoutlogin .login-box sup {
+/*#main .checkoutlogin .login-box sup {
     font-size: 16px;
     top: -2px;
-}
+}*/
 
 .pt_cart #main h1 {
     margin: 40px 0 10px;
@@ -4274,6 +4292,7 @@ a#password-reset {
 .ui-dialog.bonus-product-popup {
     border: none;
     padding: 29px 29px;
+    top:150px !important;
 }
 
 .ui-dialog.bonus-product-popup .ui-widget-header,
@@ -6049,7 +6068,7 @@ ul.product-availability-list li {
 
 .ui-dialog.video-popup {
     border: none;
-    padding: 0;
+    padding: 2px;
 }
 
 .ui-dialog.video-popup .ui-widget-header {
@@ -6065,14 +6084,19 @@ ul.product-availability-list li {
 
 .ui-dialog.video-popup .ui-dialog-titlebar-close {
     z-index: 100;
+    margin-left: -9px;
 }
 
 .ui-dialog.video-popup .ui-icon-closethick {
-    background-image: url("../images/qw_popup_close.jpg");
+    background-image: url("../images/qw_popup_close-new.png");
     background-repeat: no-repeat;
     background-position: center center;
     border-bottom: none;
     width: 100%;
+    margin-left: 2px;
+    margin-top: -7px;
+    background-color: transparent;
+    
 }
 
 #youtube-video-container {
@@ -6676,10 +6700,10 @@ ul.product-availability-list li {
     clear: none;
     position: absolute;
     left: 88px;
-    top: 0;
+    top: 2px;
 }
 .ui-dialog.size-chart-popup {
-	top: 40px;
+	top: 40px !important;
 }
 
 .ui-dialog.size-chart-popup .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
@@ -7191,7 +7215,11 @@ a.tooltip.bonus-new span {
 	margin-top:28px;
 } 
 .mini-cart-pricing span.bonus-gift {
-	margin-left:115px;
+    position: absolute;
+    left: 0;
+    float: right;
+    right: 0;
+    margin-left: 85%;
 }
 
 .maintaince-wrap .logo-maintaince {
@@ -7330,6 +7358,10 @@ tr.gift-certi-summary td.order-shipment-gift-message {
     .pt_account .dialog-required.login-required {
 		padding-left: 27.5%;
 }
+#main .checkoutlogin .login-box sup {
+    font-size: 16px;
+    top: -2px;
+	}
 }
 
 .ie .pt_account .dialog-required.login-required {
@@ -7344,4 +7376,26 @@ tr.gift-certi-summary td.order-shipment-gift-message {
 }
 .preorder-msg {
 	line-height:21px;
+}
+
+input:focus::-webkit-input-placeholder {
+        color:transparent;
+}
+
+.ui-dialog.video-popup .ui-dialog-titlebar-close {
+	    height: 14px;
+	    width: 20px;
+}
+.ui-dialog.video-popup .ui-dialog-titlebar button {
+    background-color: transparent;
+}
+
+.ui-dialog.add-cc-details .form-row.month.label-removed.error .form-caption.error-message {
+	width:100%;
+	margin: 0 0 0 0% !important;
+	
+}
+
+.pdp-main .product-variations {
+	width:100%;
 }
