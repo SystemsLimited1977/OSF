@@ -21,7 +21,9 @@
 		<ul class="payment-list">
 			<isloop items="${pdict.CurrentForms.paymentinstruments.creditcards.storedcards}" var="creditcard" status="loopstate">
 			<li class="<isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
+			<div>${pdict.CurrentCustomer.profile.firstName}&nbsp;${pdict.CurrentCustomer.profile.lastName}</div>
 				<isminicreditcard p_card="${creditcard.object}" p_show_expiration="${true}"/>
+				<div><isprint value="${creditcard.object.custom.maskedFourDigit}"/></div>
 				<form action="${URLUtils.url('PaymentInstruments-Delete')}" name="payment-remove" method="post" id="creditcards_${loopstate.count}">
 					<fieldset>
 						 <button type="submit" class="button-text delete payment-button" value="${Resource.msg('account.paymentinstrumentlist.deletecard','account',null)}" name="${creditcard.remove.htmlName}">
