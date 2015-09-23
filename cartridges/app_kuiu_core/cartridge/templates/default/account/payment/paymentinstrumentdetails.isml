@@ -56,7 +56,7 @@
 				<!-- end code changes for billing fields. -->
 				
 				<div class="form-row form-row-button">	
-					<button id="applyBtn" class="applyBtn" type="submit" value="${Resource.msg('global.apply','locale',null)}">
+					<button id="applyBtn" class="applyBtn" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.create.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
 						${Resource.msg('global.apply','locale',null)}
 					</button>	
 					

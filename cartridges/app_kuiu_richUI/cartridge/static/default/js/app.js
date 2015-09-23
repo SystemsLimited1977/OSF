@@ -1498,19 +1498,8 @@ function initializePaymentForm() {
 			type: 'POST'
 		};
 		$.ajax(options).done(function (data) {
-			if (typeof(data) !== 'string') {
-				if (data.success) {
-					dialog.close();
-					page.refresh();
-				} else {
-					window.alert(data.message);
-					return false;
-				}
-			} else {
-				$('#dialog-container').html(data);
-				account.init();
-				tooltip.init();
-			}
+			dialog.close();
+			page.refresh();	
 		});
 	}).on('click', '.cancel-button', function (e) {
 		e.preventDefault();
