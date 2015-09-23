@@ -48,7 +48,11 @@
 				<iselse/>	
 					<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
 					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>
-					<div><isprint value="${paymentInstr.maskedCreditCardNumber}"/></div>						
+					<isif condition="${!empty(paymentInstr.custom.maskedFourDigit)}"> 
+						<div><isprint value="${paymentInstr.custom.maskedFourDigit}"/></div>
+					<iselse/>	
+					  <div><isprint value="${paymentInstr.maskedCreditCardNumber}"/></div>
+					</isif>							
 					<div>
 						${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/>
 					</div><!-- END: payment-amount -->

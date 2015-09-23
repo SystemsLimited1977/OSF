@@ -97,7 +97,11 @@
 				<iselse/>
 					<iscomment><span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span></iscomment>
 					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>
-					<div><isprint value="${paymentInstr.maskedCreditCardNumber}"/></div>
+					<isif condition="${!empty(paymentInstr.custom.maskedFourDigit)}">
+						<div><isprint value="${paymentInstr.custom.maskedFourDigit}"/></div>
+					<iselse/>	
+						<div><isprint value="${paymentInstr.maskedCreditCardNumber}"/></div>
+					</isif>	
 					<div class="payment-amount">
 						<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
 						<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
