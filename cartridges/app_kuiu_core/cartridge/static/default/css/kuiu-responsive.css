@@ -15,6 +15,9 @@
     #footer-cust {
         float: left;
     }
+    .menu-utility-user li a span {
+    	display:block;
+    }
 }
 
 @media ( min-width: 992px) {
@@ -874,7 +877,8 @@
     }
     .product-new-tag {
         top: 0;
-        margin-left: 0
+        margin-left: 0;
+        margin-top:0px;
     }
     .pt_product-details .primary-content {
         padding-bottom: 0;
@@ -2047,7 +2051,7 @@
 		margin-top: 4px;
 	}
 	#main .pdp-main .product-add-to-cart button {
-		width:70%;
+		width:67%;
 	}
 	.pdp-main .product-add-to-cart .inventory {
 		width:25%;
@@ -2090,13 +2094,46 @@
 		 margin-bottom: 30px;
 	}
 	.power-by-text {
-	color: #fff;
-    position: static;
-    text-align: center;
-    float: none;
-    margin-top: 10px;
+		color: #fff;
+	    position: static;
+	    text-align: center;
+	    float: none;
+	    margin-top: 10px;
 	}
-
+	
+	.menu-utility-user li a:hover {
+		color: #2b2b2b;
+    	text-decoration: none;
+	}
+	.menu-utility-user li {
+		border-top:none;
+	}
+	
+	.top-banner.responsive-nav ul.menu-utility-user li a {
+    	font-size: 14px;
+    	color: #2b2b2b;
+    	font-weight: 500;
+	}
+	ul.menu-utility-user li {
+		color: #2b2b2b;
+		padding: 0 22px;
+	}
+	.menu-utility-user li:hover {
+		background-color: transparent;
+		color: #000;
+	}
+	ul.menu-utility-user li a:hover span {
+    	border-bottom: 2px solid #2b2b2b;
+	}
+	.menu-utility-user li:first-child {
+    	border: none;
+    	border-bottom: 1px solid #e0e0e0;
+   		padding-bottom: 11px;
+    	min-width: 236px;
+	}
+	.menu-utility-user {
+		float:left;
+	}
 }
 
 @media ( min-width: 768px) and (max-width: 991px) {
@@ -2190,6 +2227,7 @@
     /* home slider styles */
     #homepage-slides .slide {
         /*height: 550px;*/
+        height: calc(100vh - 150px);
     }
     #homepage-slides .slide .inner-box h1 {
         font-size: 30px;
@@ -2336,7 +2374,7 @@
         padding-bottom: 40px;
     }
     .addthis_toolbox.addthis_default_style {
-        margin-left: 78px;
+        margin-left: 86px;
     }
     .pt_giftcert #main .no-design {
         margin-top: 35px;
@@ -2797,6 +2835,9 @@
 	.product-variations .attribute .size-chart-link {
 		display:none;
 	}
+	.quickview-popup .product-add-to-cart .inventory {
+		width:15%;
+	}
 }
 
 @media ( min-width: 992px) and (max-width: 1199px) {
@@ -2841,10 +2882,10 @@
         max-width: 80%;
     }
     .home-slider-wrap {
-        height: 550px;
+        height: 463px;
     }
     #homepage-slider .jcarousel-control {
-        top: 490px;
+        top: 425px;
     }
     /*PDP Styling*/
     .weather_badage_icon {

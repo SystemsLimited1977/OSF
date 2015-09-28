@@ -123,6 +123,21 @@ of a customer using call center application <isif
 			<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
 			<iscomment>Multi-Currency Selection</iscomment>
 			<isinclude template="components/header/multicurrency"/>
+					<ul class="menu-utility-user">
+
+			<iscomment>Store Locator
+		
+			<li>
+				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('global.header.storelocator', 'locale', null)}">
+					<i class="fa fa-map-marker"></i>
+					<span>${Resource.msg('global.header.storelocator', 'locale', null)}</span>
+				</a>
+			</li>
+			</iscomment>
+			<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
+			<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
+
+		</ul>
 
 		</nav>
 

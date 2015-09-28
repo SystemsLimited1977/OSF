@@ -37,14 +37,12 @@
 					</fieldset>
 				</form>
 				</div>
-				<iscomment>
 				<a class="tooltip">
    					${Resource.msg('checkoutlogin.registerbenefits','checkout',null)}
     				<div class="tooltip-content" data-layout="large tooltip-whyaccount">
     					<iscontentasset aid="create-account-benefits"/>
 	    			</div>
 	    		</a>
-				</iscomment>
 			</div>	
 				
 		</div>

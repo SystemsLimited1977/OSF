@@ -34,13 +34,13 @@
 		<!-- shown only in quick view -->
 	<div class="link-viewdetails"><a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a> </div>
 	</isif>
-	
+	<div class="hidden-xs">
 	<isset name="showTieredPrice" value="${true}" scope="page"/>
 	<isinclude template="product/components/pricing"/>
-	
+	</div>
 	<div class="hidden-xs pdp-description-wrap">
 		<isprint value="${pdict.Product.shortDescription}" encoding="off" />
-		<a href="#product-overview">See More</a>
+		<a id="product-overview-link" href="#product-overview">See More</a>
 	</div>
 
 
@@ -100,16 +100,16 @@
 
 			<div class="inventory">
 				<div class="quantity">
-					<label for="Quantity">${isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.qty','locale',null) }</label>
+					<label for="Quantity">&nbsp;&nbsp;&nbsp;&nbsp;${isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.qty','locale',null) }</label>
 					<iscomment>
 						<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 					</iscomment>
 					<select name="Quantity" id="Quantity" class="quantity-box pdp-qty-box" data-available="${availableCount}">
 						<isloop begin="1" end="10" step="1" status="qntyStat">
 							<isif condition="${pdict.CurrentHttpParameterMap.Quantity.stringValue.equals(qntyStat.count)}">
-								<option value="${qntyStat.count}" selected="selected"><isprint value="${qntyStat.count}"/></option>
+								<option value="${qntyStat.count}" selected="selected">&nbsp;&nbsp;&nbsp;<isprint value="${qntyStat.count}"/></option>
 							<iselse>
-								<option value="${qntyStat.count}"><isprint value="${qntyStat.count}"/></option>
+								<option value="${qntyStat.count}">&nbsp;&nbsp;&nbsp;<isprint value="${qntyStat.count}"/></option>
 							</isif>
 						</isloop>
 					</select>

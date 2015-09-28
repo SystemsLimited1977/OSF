@@ -71,9 +71,9 @@
 						<select name="Quantity" id="${uniqueFormID}-quantity" class="quantity-box pdp-qty-box" data-available="${availableCount}" style="width: 100%;">
 							<isloop begin="1" end="10" step="1" status="qntyStat">
 								<isif condition="${pdict.CurrentHttpParameterMap.Quantity.stringValue.equals(qntyStat.count)}">
-									<option value="${qntyStat.count}" selected="selected"><isprint value="${qntyStat.count}"/></option>
+									<option value="${qntyStat.count}" selected="selected">&nbsp;&nbsp;&nbsp;<isprint value="${qntyStat.count}"/></option>
 								<iselse>
-									<option value="${qntyStat.count}"><isprint value="${qntyStat.count}"/></option>
+									<option value="${qntyStat.count}">&nbsp;&nbsp;&nbsp;<isprint value="${qntyStat.count}"/></option>
 								</isif>
 							</isloop>
 						</select>

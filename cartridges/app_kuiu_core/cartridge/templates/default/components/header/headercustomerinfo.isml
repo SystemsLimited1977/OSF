@@ -12,7 +12,7 @@
 	        (<span class="user-logout">${Resource.msg('headercustomerinfo.not','locale',null)}</span>&nbsp;<a title="${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}" class="usernot">${pdict.CurrentCustomer.profile.firstName}</a>?)
     	<iselse>
 	        
-	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login','locale',null)}" class="userlogin">${Resource.msg('headercustomerinfo.welcome','locale',null)}</a>
+	        <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login','locale',null)}" class="userlogin"><span>${Resource.msg('headercustomerinfo.welcome','locale',null)}</span></a>
 	        <span class="divider">|</span>
 	        <iscomment>
 	        	<a title="${Resource.msg('global.subscribe','locale',null)}" class="userregister">${Resource.msg('global.subscribe','locale',null)}</a>
