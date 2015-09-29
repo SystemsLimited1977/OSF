@@ -22,6 +22,7 @@
 * 	
 *	@output DecisionManager : String Decision Manager XML response. Order Center support for Decision Manager requires this data in custom.bfDecisionManager attribute of exported order payment instruments.
 * 	@input Order : dw.order.Order The current order
+* 	@output SvedSubscriptionNumber : String
 */
 importPackage( dw.system );
 importPackage( dw.system );
@@ -40,6 +41,7 @@ function execute( pdict : PipelineDictionary ) : Number
 {
 
 	var subscriptionID : String = pdict.subscriptionID;
+	pdict.SvedSubscriptionNumber = subscriptionID;
 	var purchaseObject: PurchaseTotals_Object = pdict.purchaseTotals;
 	var billToObject: BillTo_Object = pdict.billTo;
 	var shipToObject: ShipTo_Object = pdict.shipTo;
@@ -111,7 +113,8 @@ function execute( pdict : PipelineDictionary ) : Number
 			pdict.authorizationCode = response.ccAuthReply.authorizationCode;
 			pdict.authorizedDateTime = response.ccAuthReply.authorizedDateTime;
 			pdict.processorResponse = response.ccAuthReply.processorResponse;
-			pdict.reasonCode = response.ccAuthReply.reasonCode;
+			//pdict.reasonCode = response.ccAuthReply.reasonCode;
+			pdict.reasonCode = response.reasonCode.get();
 			pdict.reconciliationID = response.ccAuthReply.reconciliationID;
 			pdict.decision = response.decision;
 			pdict.requestID = response.requestID;

@@ -473,7 +473,7 @@
                           <branch basename="b2" source-connector="yes">
                             <transition target-connector="in">
                               <transition-display>
-                                <bend-point relative-to="target" x="-1" y="0"/>
+                                <bend-point relative-to="source" x="1" y="0"/>
                               </transition-display>
                             </transition>
                             <segment>
@@ -501,7 +501,12 @@
                                   <key-binding alias="DecisionManager" key="From_9"/>
                                   <key-binding alias="TargetPaymentInstrument.paymentTransaction.paymentInstrument.custom.bfDecisionManager" key="To_9"/>
                                 </pipelet-node>
-                                <node-display orientation="horizontal" x="2" y="0"/>
+                                <node-display orientation="horizontal" x="1" y="0"/>
+                              </node>
+                              <simple-transition/>
+                              <node>
+                                <call-node start-name-ref="Cybersource-SetSubscriptionID"/>
+                                <node-display orientation="horizontal" x="1" y="0"/>
                               </node>
                               <simple-transition/>
                               <node>
@@ -957,8 +962,7 @@
                           <branch basename="b8" source-connector="yes">
                             <transition target-connector="in">
                               <transition-display>
-                                <bend-point relative-to="target" x="-3" y="-2"/>
-                                <bend-point relative-to="target" x="-2" y="0"/>
+                                <bend-point relative-to="target" x="-1" y="-2"/>
                               </transition-display>
                             </transition>
                             <segment>
@@ -986,9 +990,22 @@
                                   <key-binding alias="null" key="To_9"/>
                                   <key-binding alias="AuthorizationAmount" key="From_4"/>
                                 </pipelet-node>
-                                <node-display orientation="horizontal" x="4" y="1"/>
+                                <node-display orientation="horizontal" x="3" y="1"/>
                               </node>
-                              <simple-transition/>
+                              <simple-transition>
+                                <transition-display>
+                                  <bend-point relative-to="source" x="1" y="0"/>
+                                </transition-display>
+                              </simple-transition>
+                              <node>
+                                <call-node start-name-ref="Cybersource-SetSubscriptionID"/>
+                                <node-display orientation="horizontal" x="1" y="0"/>
+                              </node>
+                              <simple-transition>
+                                <transition-display>
+                                  <bend-point relative-to="source" x="1" y="0"/>
+                                </transition-display>
+                              </simple-transition>
                               <node>
                                 <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                                   <config-property key="Transactional" value="false"/>
@@ -6220,7 +6237,137 @@ General Error</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_64">
+  <branch basename="SetSubscriptionID">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="SetSubscriptionID" secure="false"/>
+        <node-display x="13" y="22"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="CybersourceData-CreatePaymentCard"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="!empty(PaymentInstrument.custom.isSubscription) &amp;&amp; (PaymentInstrument.custom.isSubscription == true)" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="!empty(subscriptionID)" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in"/>
+                <segment>
+                  <node>
+                    <pipelet-node custom-name="Update PaymentTransaction with CS response" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="true"/>
+                      <key-binding alias="requestID" key="From_0"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_0"/>
+                      <key-binding alias="card.getCardType()" key="From_1"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.cardType" key="To_1"/>
+                      <key-binding alias="requestID" key="From_2"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.requestId" key="To_2"/>
+                      <key-binding alias="requestToken" key="From_3"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.requestToken" key="To_3"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.authAmount" key="To_4"/>
+                      <key-binding alias="authorizationCode" key="From_5"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.authCode" key="To_5"/>
+                      <key-binding alias="reasonCode" key="From_6"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.approvalStatus" key="To_6"/>
+                      <key-binding alias="amount" key="From_4"/>
+                      <key-binding alias="DecisionManager" key="From_7"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.paymentInstrument.custom.bfDecisionManager" key="To_7"/>
+                      <key-binding alias="PaymentInstrument.custom.maskedFourDigit" key="From_8"/>
+                      <key-binding alias="PaymentInstrument.creditCardNumber" key="To_8"/>
+                      <key-binding alias="subscriptionID" key="From_9"/>
+                      <key-binding alias="PaymentInstrument.paymentTransaction.custom.subscriptionID" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <transition target-connector="in1" target-path="../+1"/>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <pipelet-node custom-name="Update PaymentTransaction with CS response" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <key-binding alias="requestID" key="From_0"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_0"/>
+                <key-binding alias="card.getCardType()" key="From_1"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.cardType" key="To_1"/>
+                <key-binding alias="requestID" key="From_2"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.requestId" key="To_2"/>
+                <key-binding alias="requestToken" key="From_3"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.requestToken" key="To_3"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.authAmount" key="To_4"/>
+                <key-binding alias="authorizationCode" key="From_5"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.authCode" key="To_5"/>
+                <key-binding alias="reasonCode" key="From_6"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.approvalStatus" key="To_6"/>
+                <key-binding alias="amount" key="From_4"/>
+                <key-binding alias="DecisionManager" key="From_7"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.paymentInstrument.custom.bfDecisionManager" key="To_7"/>
+                <key-binding alias="PaymentInstrument.custom.maskedFourDigit" key="From_8"/>
+                <key-binding alias="PaymentInstrument.creditCardNumber" key="To_8"/>
+                <key-binding alias="SvedSubscriptionNumber" key="From_9"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.subscriptionID" key="To_9"/>
+              </pipelet-node>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="target" x="2" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="-1" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node custom-name="Copy the relevant credit card details to the payment instrument" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <key-binding alias="&quot;************&quot;+PaymentInstrument.getCreditCardNumber().slice(PaymentInstrument.getCreditCardNumber().length-4,PaymentInstrument.getCreditCardNumber().length)" key="From_0"/>
+          <key-binding alias="PaymentInstrument.custom.maskedFourDigit" key="To_0"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+          <key-binding alias="true" key="From_1"/>
+          <key-binding alias="PaymentInstrument.custom.isSubscription" key="To_1"/>
+          <key-binding alias="PaymentInstrument.paymentTransaction.custom.subscriptionID" key="To_2"/>
+          <key-binding alias="SubscriptionID" key="From_2"/>
+        </pipelet-node>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_65">
     <segment>
       <node>
         <text-node>
@@ -6230,7 +6377,7 @@ General Error</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_65">
+  <branch basename="_ANONYMOUS_BRANCH_66">
     <segment>
       <node>
         <text-node>
@@ -6240,7 +6387,7 @@ General Error</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_66">
+  <branch basename="_ANONYMOUS_BRANCH_67">
     <segment>
       <node>
         <text-node>
@@ -6250,13 +6397,35 @@ General Error</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_67">
+  <branch basename="_ANONYMOUS_BRANCH_68">
     <segment>
       <node>
         <text-node>
           <description>ReasonCode = 999 is set when cybersource request timesout.</description>
         </text-node>
         <node-display x="1" y="26"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_69">
+    <segment>
+      <node>
+        <pipelet-node custom-name="Copy the relevant credit card details to the payment instrument" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <key-binding alias="&quot;************&quot;+PaymentInstrument.getCreditCardNumber().slice(PaymentInstrument.getCreditCardNumber().length-4,PaymentInstrument.getCreditCardNumber().length)" key="From_0"/>
+          <key-binding alias="PaymentInstrument.custom.maskedFourDigit" key="To_0"/>
+          <key-binding alias="SubscriptionID" key="From_1"/>
+          <key-binding alias="PaymentInstrument.creditCardNumber" key="To_1"/>
+          <key-binding alias="true" key="From_2"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+          <key-binding alias="PaymentInstrument.custom.isSubscription" key="To_2"/>
+        </pipelet-node>
+        <node-display x="12" y="25"/>
       </node>
     </segment>
   </branch>
