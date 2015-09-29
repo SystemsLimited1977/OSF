@@ -101,7 +101,19 @@ module.exports = function () {
 	$(function() {
 		$( "#accordion" ).accordion();
 	});
-	
+	//More Button Scroll function
+	 $('#product-overview-link').on('click', function(event) {
+	 
+	     var target = $('#product-overview');
+	 
+	     if( target.length ) {
+	         event.preventDefault();
+	         $('html, body').animate({
+	             scrollTop: target.offset().top
+	         }, 1000);
+	     }
+	 
+	 });
 	//initialize Fieldshoot and Recomendations carousel on PDP
 	owlCarousel.init();
 	
