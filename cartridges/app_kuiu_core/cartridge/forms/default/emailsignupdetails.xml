@@ -4,8 +4,7 @@
 		parse-error="profile.emailparseerror" missing-error="forms.emailsignupdetails.email.missing-error"/>
 	<field formid="firstname" binding="custom.firstName" label="forms.emailsignupdetails.firstname" type="string" max-length="50" mandatory="true" missing-error="forms.emailsignupdetails.firstname.missing-error"/>
 	<field formid="lastname" binding="custom.lastName" label="forms.emailsignupdetails.lastname" type="string" max-length="50" mandatory="true" missing-error="forms.emailsignupdetails.lastname.missing-error"/>
-	<field formid="zipcode" binding="custom.zipCode" label="forms.zippostalcode" type="number" mandatory="true" min-length="4" 
-	max-length="10"	missing-error="forms.errorzip" range-error="forms.address.field.invalid" value-error="forms.address.field.invalid" />
+	<field formid="postal" label="resource.zipcode" type="string" mandatory="true" min-length="2" max-length="10" binding="postalCode" missing-error="resource.errorzip" range-error="address.field.invalid"/>
 	<action formid="submit" valid-form="true"/>
 	
 </form>

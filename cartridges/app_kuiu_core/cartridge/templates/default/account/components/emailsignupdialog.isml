@@ -20,7 +20,7 @@
 				
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.firstname}" type="input" />
 				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.lastname}" type="input" />
-				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.zipcode}" type="input"  rowclass="zcode" />
+				<isinputfield formfield="${pdict.CurrentForms.emailsignupdetails.postal}" type="input"  rowclass="zcode" />
 			
 			<div class="form-row form-row-button">
 				<button class="dialogify" id="emailsignupid" name="${pdict.CurrentForms.emailsignupdetails.submit.htmlName}" type="submit" value="${Resource.msg('global.submit','locale',null)}"  title="${Resource.msg('global.emailNewsletterMsg','locale',null)}">${Resource.msg('global.submit','locale',null)}</button>

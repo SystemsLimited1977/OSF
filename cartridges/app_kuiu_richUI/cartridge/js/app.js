@@ -114,13 +114,19 @@ function initializeEvents() {
 		dialog.open({
 			url: $(e.target).attr('href'),
 			options: {
-				height: 600
-			}
+				height: 600,
+				open: privacyPolicyDialogOutSideClose
+			},
 		});
 		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('password-forget');
 		$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle span').html('<h1>Privacy Policy</h1>');
 	});
-
+	//Close privacy policy dialog by clicking outside
+	function privacyPolicyDialogOutSideClose() {
+		close: $('.ui-widget-overlay').bind('click', function() {
+	        dialog.close();
+	    })
+	}
 	// main menu toggle
 	$('.menu-toggle').on('click', function () {
 		$('#wrapper').toggleClass('menu-active');
