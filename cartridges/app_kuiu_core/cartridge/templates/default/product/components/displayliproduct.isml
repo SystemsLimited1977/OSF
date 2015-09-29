@@ -52,16 +52,18 @@
 		<div class="promo"><isprint value="${Resource.msg('product.display.surcharge','product',null)}"/></div>
 	</isif>
 <iselse/>
-	<isscript>
-		var defaultMethod : dw.order.ShippingMethod = dw.order.ShippingMgr.getDefaultShippingMethod();
-		var shippingModel : dw.order.ProductShippingModel = dw.order.ShippingMgr.getProductShippingModel(productLineItem.getProduct());
-		var shippingCost : dw.order.ProductShippingCost = null;
-		if (null!=defaultMethod) {
-			shippingCost = shippingModel.getShippingCost(defaultMethod);
-		}
-	</isscript>
-	<isif condition="${!empty(shippingCost) && shippingCost.surcharge}">
-		<div class="promo"><isprint value="${Resource.msg('product.display.surcharge','product',null)}"/></div>
+	<isif condition="${productLineItem.product.ID != null}">
+		<isscript>
+			var defaultMethod : dw.order.ShippingMethod = dw.order.ShippingMgr.getDefaultShippingMethod();
+			var shippingModel : dw.order.ProductShippingModel = dw.order.ShippingMgr.getProductShippingModel(productLineItem.product);
+			var shippingCost : dw.order.ProductShippingCost = null;
+			if (null!=defaultMethod) {
+				shippingCost = shippingModel.getShippingCost(defaultMethod);
+			}
+		</isscript>
+		<isif condition="${!empty(shippingCost) && shippingCost.surcharge}">
+			<div class="promo"><isprint value="${Resource.msg('product.display.surcharge','product',null)}"/></div>
+		</isif>
 	</isif>
 </isif>
 
