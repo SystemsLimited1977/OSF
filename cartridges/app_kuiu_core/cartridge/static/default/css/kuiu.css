@@ -3592,7 +3592,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     width: 72%;
     float: left;
     margin-top: 25px;
-    height: 35px !important;
+    height: 36px !important;
 }
 
 #main .pdp-main .product-add-to-cart button#add-all-to-cart {
@@ -6703,7 +6703,7 @@ ul.product-availability-list li {
 	float: left;
     clear: none;
     position: absolute;
-    right: 0px;
+    right: 5px;
     top: 2px;
 }
 .ui-dialog.size-chart-popup {
@@ -7448,5 +7448,8 @@ select::-ms-expand {
 	page-break-before: always;
     page-break-inside: avoid;
 }
+}
 
+.product-tile .product-swatches .selected img {
+	border:2px solid #000;
 }

@@ -3005,5 +3005,7 @@
     	margin-left: 91px;
 	}
     	
-    
+    .product-variations .attribute .size-chart-link {
+    	right:7px;
+    }
 }
