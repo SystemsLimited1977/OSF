@@ -28,6 +28,9 @@ function execute( pdict : PipelineDictionary ) : Number
 		var csReference 	: WebReference 	= webreferences.taxsvc;
 		var taxationService : Stub 			= csReference.getDefaultService();
 		
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		var AvataxHelper = getAvataxHelper();
 		AvataxHelper.setEndpoint(taxationService);
 		AvataxHelper.createHeader(taxationService);

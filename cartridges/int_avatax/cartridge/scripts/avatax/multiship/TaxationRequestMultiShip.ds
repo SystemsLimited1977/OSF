@@ -65,6 +65,9 @@ function execute( args : PipelineDictionary ) : Number
 			totalTax 		: Number			= 0,					
 			shipNum 							= -1;
 		
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		if(!empty(args.Basket))
 		{
 			var _dataContainer : Basket = args.Basket;

@@ -54,6 +54,10 @@ MainStreet.prototype = {
 	
 	getService: function() {
 		var service : Stub = this.mainstreetReference.getService("Website","BasicHttpBinding_IWebsite");
+		
+		//setting timeout Visionet Fix
+		service.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		if (!empty(this.MainStreetEndpoint)) {
 			service._setProperty(Stub.ENDPOINT_ADDRESS_PROPERTY, this.MainStreetEndpoint);
 		}

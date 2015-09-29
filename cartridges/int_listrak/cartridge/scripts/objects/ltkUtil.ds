@@ -50,7 +50,10 @@ _Client.prototype.SubmitQueryStringData = function(endpoint, path, data) {
    	var req : HTTPClient = new HTTPClient();
     var strURL : String = "http://" + endpoint + '/' + path + "?" + data;
     req.open("GET", strURL);
-    req.timeout = 3000;
+    //req.timeout = 3000;
+    
+    //setting timeout Visionet Fix
+	req.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
     
     try {
     	req.send();

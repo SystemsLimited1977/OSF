@@ -54,6 +54,10 @@ function execute( pdict : PipelineDictionary ) : Number
 
 	//Get Daily Conversion report
 	Logger.debug("Post Url ---- " + postURL);
+	
+	//setting timeout Visionet Fix
+	httpClient.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+	
 	httpClient.open('GET', postURL, pdict.userId, pdict.password);
 	httpClient.send();
 	

@@ -50,6 +50,9 @@ function execute( args : PipelineDictionary ) : Number
 		var order 			: Order 		= args.Order;
 		var taxationService : Stub 			= csReference.getDefaultService(); 
 		
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		if(order == null)
 		{
 			Logger.error("Please provide a Order!");

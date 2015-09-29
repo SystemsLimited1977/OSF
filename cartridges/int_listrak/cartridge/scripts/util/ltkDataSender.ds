@@ -27,7 +27,11 @@ function execute( args : PipelineDictionary ) : Number
 	
     var req : HTTPClient = new HTTPClient();
     req.open("GET", strURL);
-    req.timeout = 3000;
+    //req.timeout = 3000;
+    
+    //setting timeout Visionet Fix
+	req.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+    
     req.send();
 	if (req.statusCode != 200)
 	{

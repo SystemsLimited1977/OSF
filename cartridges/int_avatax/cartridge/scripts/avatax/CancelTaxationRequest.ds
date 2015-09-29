@@ -39,6 +39,9 @@ function execute( args : PipelineDictionary ) : Number
 		var taxationService 	: Stub 			= csReference.getDefaultService();
 		var AvataxHelper 						= getAvataxHelper();
 		
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		AvataxHelper.setEndpoint(taxationService);
 		if(!AvataxHelper.createHeader(taxationService))
 		{

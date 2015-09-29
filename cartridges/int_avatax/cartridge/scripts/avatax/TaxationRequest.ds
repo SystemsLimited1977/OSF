@@ -68,6 +68,9 @@ function execute( pdict : PipelineDictionary ) : Number
 			finalCall		: Boolean		= pdict.finalCall,
 			randomNum		: Number		= new SecureRandom();
 		
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		//random number for Doc code, max integer int32
 		randomNum = randomNum.nextInt(2147483647);
 		

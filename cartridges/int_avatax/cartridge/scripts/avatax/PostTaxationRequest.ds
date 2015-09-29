@@ -53,6 +53,9 @@ function execute( args : PipelineDictionary ) : Number
 			dateTime						= "",
 			_reasonCode 	: String 		= "";
 
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+
 		AvataxHelper = getAvataxHelper();
 		AvataxHelper.setEndpoint(taxationService);
 		

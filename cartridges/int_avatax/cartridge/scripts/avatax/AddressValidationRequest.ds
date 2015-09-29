@@ -70,6 +70,9 @@ function execute( pdict : PipelineDictionary ) : Number
 			taxService 			: TaxService_Object 	= pdict.taxService,
 			excludedCountries							= dw.system.Site.current.preferences.custom.AtExcludedCountries;
 		
+		//setting timeout Visionet Fix
+		taxationService.setTimeout(dw.system.Site.getCurrent().getCustomPreferenceValue('servicesTimeouts'));
+		
 		if(excludedCountries != null)
 		{
 			var exCountriesArray = excludedCountries.split(",");
