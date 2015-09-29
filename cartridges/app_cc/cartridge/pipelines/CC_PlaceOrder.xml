@@ -75,15 +75,23 @@
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
         </transition-display>
       </simple-transition>
+      <node>
+        <jump-node start-name-ref="Home-Show"/>
+        <node-display x="0" y="2"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_3">
+    <segment>
       <node>
         <pipelet-node pipelet-name="LoginAgentUser" pipelet-set-identifier="bc_api">
           <key-binding alias="AgentUserName" key="Login"/>
           <key-binding alias="AgentPassword" key="Password"/>
         </pipelet-node>
-        <node-display x="0" y="1"/>
+        <node-display x="3" y="3"/>
         <branch basename="b2" source-connector="error">
           <transition target-connector="in">
             <transition-display>
@@ -99,15 +107,6 @@
             </node>
           </segment>
         </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <jump-node start-name-ref="Home-Show"/>
-        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>

@@ -160,6 +160,7 @@
   
   </isscript>    
  
+   <iscomment>  
      <isif condition="${evoucherPreference}">
        <Td>
          <form method="post"  method="post" action="${URLUtils.url('CC_Voucher-Form')}">
@@ -169,6 +170,8 @@
          </form>
        </Td>
      </isif>
+   </iscomment>  
+     
       <Td>
        <form target="placeorder" action="${URLUtils.url('CC_PlaceOrder-Registered')}" method="post">
           <input type="hidden" name="Login" value="<isprint value="${pdict.Customer.profile.credentials.login}">">
