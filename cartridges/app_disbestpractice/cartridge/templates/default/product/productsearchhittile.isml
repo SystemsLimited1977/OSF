@@ -312,6 +312,26 @@
 	</div>
 			
 </isif>
+
+<iscomment>Create Data Object For Universall Analytics</iscomment>
+	<isif condition="${Product.priceModel.price.value != '0'}">
+		<isset name="productObjPrice" value="${Product.priceModel.price.value.toFixed(2)}" scope="page" />
+	<iselseif condition="${Product.priceModel.maxPrice.value != '0'}" >
+		<isset name="productObjPrice" value="${Product.priceModel.maxPrice.value.toFixed(2)}" scope="page" />
+	<iselse>
+		<isset name="productObjPrice" value="${Product.priceModel.minPrice.value.toFixed(2)}" scope="page" />
+	</isif>
+	
+	<isif condition="${Product.primaryCategory != null}">
+		<isset name="productObjCategory" value="${Product.primaryCategory.ID}" scope="page" />
+    <iselseif condition="${Product.master == false && Product.masterProduct != null && Product.masterProduct.primaryCategory != null}" >
+    	<isset name="productObjCategory" value="${Product.masterProduct.primaryCategory.ID}" scope="page" />
+    <iselse>
+    	<isset name="productObjCategory" value="" scope="page" />
+    </isif>
+		        
+	<div class="analytics-data" analytics-data='{"name" : "${Product.name}", "id" : "${Product.ID}", "price" : "${productObjPrice}", "brand" : "${Product.brand}", "category" : "${productObjCategory}", "variant" : "${!empty(Product.custom.refinementColor) ? Product.custom.refinementColor : ""}", "position" : "${}" }'></div>
+
 	
 </div><!--  END: .product-tile -->
 	

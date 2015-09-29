@@ -1,0 +1,544 @@
+<iscomment>Starting Universal Analytics </iscomment>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableUniversalAnalytics')}">
+		<script>
+		  dataLayer = [{
+		    'pageCategory': '${this.pageContext.type}',
+		    'visitorType': '${pdict.CurrentCustomer.registered ? "Registered" : "Unregistered"}'
+		  }];
+		</script>
+		
+		
+		<script>
+			window.onload = function () {
+				$('.header-promotion').each(function(event){
+					var promotionObj = JSON.parse($(this).find('.slot-data-container').attr('promo-data'));
+					promoImpresions(promotionObj);
+					$(this).bind('click', function(e){
+						var promotionObj = JSON.parse($(this).find('.slot-data-container').attr('promo-data'));
+						promoImpresions(promotionObj);
+						debugger;
+					});
+				});
+			}
+			
+			function promoImpresions(promoObj){
+				dataLayer.push({
+					  'ecommerce': {
+					    'promoView': {
+					      'promotions': [                     // Array of promoFieldObjects.
+						       {
+						         'id': promoObj.id,            // ID or Name is required.
+						         'name': promoObj.name,
+						         'creative': promoObj.creative,	//${promotion.details}
+						         'position': promoObj.position
+						       }
+					       ]
+					    }
+					  }
+					}); 
+			}
+			
+			//Global Active Promotions
+			dataLayer.push({
+			  'ecommerce': {
+			    'promoView': {
+			      'promotions': [                     // Array of promoFieldObjects.
+			       <isloop items="${dw.campaign.PromotionMgr.getActivePromotions().getPromotions()}" var="promotion" status="promotionIndex" >
+				       {
+				         'id': '${promotion.ID}',            // ID or Name is required.
+				         'name': '${!empty(promotion.name) ? promotion.name : ""}',
+				         'creative': '<isprint value="${promotion.calloutMsg}" encoding="off" />',	//${promotion.details}
+				         'position': '${promotionIndex.count}'
+				       }<isif condition="${!promotionIndex.last}">,</isif>
+				       
+			       </isloop>
+			       ]
+			    }
+			  }
+			});
+		</script>
+		
+		<isif condition="${this.pageContext.type == 'product' && !empty(pdict.Product)}">
+			<script>
+				<iscomment>Product Impressions</iscomment>
+				dataLayer.push({
+				  'ecommerce': {
+				    'detail': {
+				      'actionField': {'list': 'Apparel Gallery'},    // 'detail' actions have an optional list property.
+				      'products': [{
+				        'name': '${pdict.Product.name}',         // Name or ID is required.
+				        'id': '${pdict.Product.ID}',
+				        <isif condition="${pdict.Product.priceModel.price.value != '0'}">
+				        	'price': '${pdict.Product.priceModel.price.value.toFixed(2)}',
+				        <iselseif condition="${pdict.Product.priceModel.maxPrice.value != '0'}" >
+				        	'price': '${pdict.Product.priceModel.maxPrice.value.toFixed(2)}',
+				        <iselse>
+				        	'price': '${pdict.Product.priceModel.minPrice.value.toFixed(2)}',
+				        </isif>
+				        'brand': '${pdict.Product.brand}',
+				        <isif condition="${pdict.Product.primaryCategory != null}">
+				        	'category': '${pdict.Product.primaryCategory.ID}',
+				        <iselseif condition="${pdict.Product.master == false && pdict.Product.masterProduct != null && pdict.Product.masterProduct.primaryCategory != null}" >
+				        	'category': '${pdict.Product.masterProduct.primaryCategory.ID}',
+				        <iselse>
+				        	'category': '',
+				        </isif>
+				        'variant': '${!empty(pdict.Product.custom.refinementColor) ? pdict.Product.custom.refinementColor : ""}'
+				       }]
+				     }
+				   }
+				});
+				
+				<iscomment>Product Add to Cart Impressions</iscomment>
+				// Measure adding a product to a shopping cart by using an 'add' actionFieldObject
+				// and a list of productFieldObjects.
+				function addToCartProductImpression(){
+					var quantityBox = document.getElementById("Quantity");//jQuery('#Quantity').val();
+					var quantity = quantityBox.options[quantityBox.selectedIndex].value;
+					dataLayer.push({
+					  'event': 'addToCart',
+					  'ecommerce': {
+					    'currencyCode': '${session.getCurrency().getCurrencyCode()}',
+					    'add': {                                // 'add' actionFieldObject measures.
+					      'products': [{                        //  adding a product to a shopping cart.
+					        'name': '${pdict.Product.name}',
+					        'id': '${pdict.Product.ID}',
+					        <isif condition="${pdict.Product.priceModel.price.value != '0'}">
+					        	'price': '${pdict.Product.priceModel.price.value.toFixed(2)}',
+					        <iselseif condition="${pdict.Product.priceModel.maxPrice.value != '0'}" >
+					        	'price': '${pdict.Product.priceModel.maxPrice.value.toFixed(2)}',
+					        <iselse>
+					        	'price': '${pdict.Product.priceModel.minPrice.value.toFixed(2)}',
+					        </isif>
+					        'brand': '${pdict.Product.brand}',
+					        <isif condition="${pdict.Product.primaryCategory != null}">
+					        	'category': '${pdict.Product.primaryCategory.ID}',
+					        <iselseif condition="${pdict.Product.master == false && pdict.Product.masterProduct != null && pdict.Product.masterProduct.primaryCategory != null}" >
+					        	'category': '${pdict.Product.masterProduct.primaryCategory.ID}',
+					        <iselse>
+					        	'category': '',
+					        </isif>
+					        'variant': '${!empty(pdict.Product.custom.refinementColor) ? pdict.Product.custom.refinementColor : ""}',
+					        'quantity': quantity
+					       }]
+					    }
+					  }
+					});
+				}
+				
+				
+				//Recomendations
+				<isscript>
+					// get all orderable cross sell recommendations (1 = cross sell)
+					var crossSellRecommendations : dw.util.Iterator = pdict.Product.getOrderableRecommendations(1).iterator();
+					var crossSellProducts : dw.util.Collection = new dw.util.ArrayList();
+			
+					// display 20 recommendations at maximum
+					var maxRecs = 20, counter = 0;
+			
+					while( crossSellRecommendations.hasNext() )
+					{
+						var recommendation : dw.catalog.Recommendation = crossSellRecommendations.next();
+						var recommendedProduct : dw.catalog.Product = recommendation.getRecommendedItem();
+			
+						crossSellProducts.add( recommendedProduct );
+			
+						if(++counter >= maxRecs)
+						{
+							break;
+						}
+					}
+				</isscript>
+				dataLayer.push({
+				  'ecommerce': {
+				    'currencyCode': '${session.getCurrency().getCurrencyCode()}',                       // Local currency is optional.
+				    'impressions': [
+						<isloop items="${crossSellProducts}" var="recommendation" status="recomendationItemIndex">
+								{
+							       'name': '${recommendation.name}',       // Name or ID is required.
+							       'id': '${recommendation.ID}',
+							       <isif condition="${recommendation.priceModel.price.value != '0'}">
+							        	'price': '${recommendation.priceModel.price.value.toFixed(2)}',
+							        <iselseif condition="${recommendation.priceModel.maxPrice.value != '0'}" >
+							        	'price': '${recommendation.priceModel.maxPrice.value.toFixed(2)}',
+							        <iselse>
+							        	'price': '${recommendation.priceModel.minPrice.value.toFixed(2)}',
+							        </isif>
+							       'brand': '${!empty(recommendation.brand) ? recommendation.brand : ""}',
+							       <isif condition="${recommendation.primaryCategory != null}">
+							        	'category': '${recommendation.primaryCategory.ID}',
+							        <iselseif condition="${recommendation.master == false && recommendation.masterProduct != null && recommendation.masterProduct.primaryCategory != null}" >
+							        	'category': '${recommendation.masterProduct.primaryCategory.ID}',
+							        <iselse>
+							        	'category': '',
+							        </isif>
+							       'variant': '${!empty(recommendation.custom.refinementColor) ? recommendation.custom.refinementColor : ""}',
+							       'list': 'Relevant Products',
+							       'position': ${recomendationItemIndex.count}
+							     }<isif condition="${!recomendationItemIndex.last}">,</isif>
+						</isloop>
+				     ]
+				  }
+				});
+			</script>
+		</isif>
+		
+		
+		<isif condition="${this.pageContext.type == 'Cart'}">
+			<script>
+				//Last Visited Products
+				dataLayer.push({
+				  'ecommerce': {
+				    'currencyCode': '${session.getCurrency().getCurrencyCode()}',                       // Local currency is optional.
+				    'impressions': [
+						<isloop items="${pdict.LastVisitedProducts}" var="lastVisitedItem"  status="lastVisitedItemIndex">            
+								{
+							       'name': '${lastVisitedItem.name}',       // Name or ID is required.
+							       'id': '${lastVisitedItem.ID}',
+							       <isif condition="${lastVisitedItem.priceModel.price.value != '0'}">
+							        	'price': '${lastVisitedItem.priceModel.price.value.toFixed(2)}',
+							        <iselseif condition="${lastVisitedItem.priceModel.maxPrice.value != '0'}" >
+							        	'price': '${lastVisitedItem.priceModel.maxPrice.value.toFixed(2)}',
+							        <iselse>
+							        	'price': '${lastVisitedItem.priceModel.minPrice.value.toFixed(2)}',
+							        </isif>
+							       'brand': '${!empty(lastVisitedItem.brand) ? featureProduct.brand : ""}',
+							       <isif condition="${lastVisitedItem.primaryCategory != null}">
+							        	'category': '${lastVisitedItem.primaryCategory.ID}',
+							        <iselseif condition="${lastVisitedItem.master == false && lastVisitedItem.masterProduct != null && lastVisitedItem.masterProduct.primaryCategory != null}" >
+							        	'category': '${lastVisitedItem.masterProduct.primaryCategory.ID}',
+							        <iselse>
+							        	'category': '',
+							        </isif>
+							       'variant': '${!empty(lastVisitedItem.custom.refinementColor) ? lastVisitedItem.custom.refinementColor : ""}',
+							       'list': 'Last Visited Products',
+							       'position': ${recomendationItemIndex.count}
+							     }<isif condition="${!lastVisitedItemIndex.last}">,</isif>
+						</isloop>
+				     ]
+				  }
+				});
+			</script>
+		</isif>
+		
+		
+		<isif condition="${this.pageContext.type == 'Cart' && !empty(pdict.TriggeredAction.object.product)}">
+			<script>
+				<iscomment>Remove Product from cart</iscomment>
+				// Measure the removal of a product from a shopping cart.
+				dataLayer.push({
+				  'event': 'removeFromCart',
+				  'ecommerce': {
+				    'remove': {                               // 'remove' actionFieldObject measures.
+				      'products': [{                          //  removing a product to a shopping cart.
+				          'name': '${pdict.TriggeredAction.object.product.name}',
+				          'id': '${pdict.TriggeredAction.object.product.ID}',
+				          <isif condition="${pdict.TriggeredAction.object.product.priceModel.price.value != '0'}">
+				          	'price': '${pdict.TriggeredAction.object.product.priceModel.price.value.toFixed(2)}',
+				          <iselseif condition="${pdict.TriggeredAction.object.product.priceModel.maxPrice.value != '0'}" >
+				        	'price': '${pdict.TriggeredAction.object.product.priceModel.maxPrice.value.toFixed(2)}',
+				          <iselse>
+				        	'price': '${pdict.TriggeredAction.object.product.priceModel.minPrice.value.toFixed(2)}',
+				          </isif>
+				          'brand': '${pdict.TriggeredAction.object.product.brand}',
+				          <isif condition="${pdict.TriggeredAction.object.product.primaryCategory != null}">
+				        	'category': '${pdict.TriggeredAction.object.product.primaryCategory.ID}',
+					      <iselseif condition="${pdict.TriggeredAction.object.product.master == false && pdict.TriggeredAction.object.product.masterProduct != null && pdict.TriggeredAction.object.product.masterProduct.primaryCategory != null}" >
+					       	'category': '${pdict.TriggeredAction.object.product.masterProduct.primaryCategory.ID}',
+					      <iselse>
+					       	'category': '',
+					      </isif>
+				          'variant': '${!empty(pdict.TriggeredAction.object.product.custom.refinementColor) ? pdict.TriggeredAction.object.product.custom.refinementColor : ""}',
+				          'quantity': ${pdict.TriggeredAction.object.quantityValue.toFixed(2)}
+				      }]
+				    }
+				  }
+				});
+			</script>
+		</isif>
+		
+		<isif condition="${this.pageContext.type == 'orderconfirmation' && !empty(pdict.Order)}">
+			<script>
+				// Send transaction data with a pageview if available
+				// when the page loads. Otherwise, use an event when the transaction
+				// data becomes available.
+				dataLayer.push({
+				  'ecommerce': {
+				    'purchase': {
+				      'actionField': {
+				        'id': '${pdict.Order.orderNo}',                         // Transaction ID. Required for purchases and refunds.
+				        'affiliation': '${pdict.Order.createdBy}',
+				        'revenue': '${(pdict.Order.adjustedMerchandizeTotalGrossPrice.value + pdict.Order.adjustedShippingTotalNetPrice.value + pdict.Order.shippingTotalTax.value).toFixed(2)}',                     // Total transaction value (incl. tax and shipping)
+				        'tax':'${((pdict.Order.totalTax)?pdict.Order.totalTax.value.toFixed(2):"")}',
+				        'shipping': '${pdict.Order.adjustedShippingTotalNetPrice.value.toFixed(2)}'
+				      },
+				      'products': [
+							<isloop items="${pdict.Order.getAllProductLineItems()}" var="productLineItem" status="productLineItemIndex">
+									{                            // List of productFieldObjects.
+							        	'name': '${productLineItem.product.name}',     // Name or ID is required.
+							        	'id': '${productLineItem.product.ID}',
+							        	<isif condition="${productLineItem.product.priceModel.price.value != '0'}">
+								        	'price': '${productLineItem.product.priceModel.price.value.toFixed(2)}',
+								        <iselseif condition="${productLineItem.product.priceModel.maxPrice.value != '0'}" >
+								        	'price': '${productLineItem.product.priceModel.maxPrice.value.toFixed(2)}',
+								        <iselse>
+								        	'price': '${productLineItem.product.priceModel.minPrice.value.toFixed(2)}',
+								        </isif>
+							        	'brand': '${!empty(productLineItem.product.brand) ? productLineItem.product.brand : ""}',
+							        	<isif condition="${productLineItem.product.primaryCategory != null}">
+								        	'category': '${productLineItem.product.primaryCategory.ID}',
+								        <iselseif condition="${productLineItem.product.master == false && productLineItem.product.masterProduct != null && productLineItem.product.masterProduct.primaryCategory != null}" >
+								        	'category': '${productLineItem.product.masterProduct.primaryCategory.ID}',
+								        <iselse>
+								        	'category': '',
+								        </isif>
+								        'variant': '${!empty(productLineItem.product.custom.refinementColor) ? productLineItem.product.custom.refinementColor : ""}',
+								        'quantity': ${productLineItem.quantityValue.toFixed(2)}
+							       }<isif condition="${!productLineItemIndex.last}">,</isif>
+							</isloop>
+				       ]
+				    }
+				  }
+				});
+			</script>
+		</isif>
+		
+		<isif condition="${this.pageContext.type == 'search' && !empty(pdict.ProductSearchResult)}">
+			<script>
+				// Measures product impressions and also tracks a standard
+				// pageview for the tag configuration.
+				// Product impressions are sent by pushing an impressions object
+				// containing one or more impressionFieldObjects.
+				dataLayer.push({
+				  'ecommerce': {
+				    'currencyCode': '${session.getCurrency().getCurrencyCode()}',                       // Local currency is optional.
+				    'impressions': [
+						<isloop items="${pdict.pagingmodel.pageElements}" var="LoopProductHit" status="loopstate">
+								{
+							       'name': '${LoopProductHit.product.name}',       // Name or ID is required.
+							       'id': '${LoopProductHit.product.ID}',
+							       <isif condition="${LoopProductHit.product.priceModel.price.value != '0'}">
+							        	'price': '${LoopProductHit.product.priceModel.price.value.toFixed(2)}',
+							        <iselseif condition="${LoopProductHit.product.priceModel.maxPrice.value != '0'}" >
+							        	'price': '${LoopProductHit.product.priceModel.maxPrice.value.toFixed(2)}',
+							        <iselse>
+							        	'price': '${LoopProductHit.product.priceModel.minPrice.value.toFixed(2)}',
+							        </isif>
+							       'brand': '${!empty(LoopProductHit.product.brand) ? LoopProductHit.product.brand : ""}',
+							       <isif condition="${LoopProductHit.product.primaryCategory != null}">
+							        	'category': '${LoopProductHit.product.primaryCategory.ID}',
+							        <iselseif condition="${LoopProductHit.product.master == false && LoopProductHit.product.masterProduct != null && LoopProductHit.product.masterProduct.primaryCategory != null}" >
+							        	'category': '${LoopProductHit.product.masterProduct.primaryCategory.ID}',
+							        <iselse>
+							        	'category': '',
+							        </isif>
+							       'variant': '${!empty(LoopProductHit.product.custom.refinementColor) ? LoopProductHit.product.custom.refinementColor : ""}',
+							       'list': 'Search Results',
+							       'position': ${loopstate.count}
+							     }<isif condition="${!loopstate.last}">,</isif>
+						</isloop>
+				     ]
+				  }
+				});
+			</script>
+		</isif>
+		
+		<isif condition="${this.pageContext.type == 'checkout'}">
+			<script>
+					//Measure Checkout steps
+					dataLayer.push({
+						'event': 'checkout',
+						'ecommerce': {
+						   'checkout': {
+						      'actionField': {
+						    	  	<isif condition="${pdict.IsShipping}">
+						    	  		'step': 1   //number
+						  	   		<iselseif condition="${pdict.IsBilling}" >
+						  	   			'step': 2   //number
+						  	   		<iselseif condition="${pdict.IsSummary}" >
+						  	   			'step': 3   //number
+						  	   		</isif>
+						       }
+						     }
+						 }
+					});
+				
+					<isif condition="${pdict.IsShipping}">
+						//Measure Selected Shipping Option
+						dataLayer.push({
+						    'event': 'checkoutOption',
+						    'ecommerce': {
+						      'checkout_option': {
+						        'actionField': {
+						        	<isif condition="${pdict.IsShipping && pdict.ApplicableShippingMethods.size() > 0}">
+							        	<isloop items="${pdict.ApplicableShippingMethods}" var="shippingMethod" status="loopstate">
+								        	<isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">
+								        		'step': 1,
+												'option': '${shippingMethod.displayName}'
+								        	</isif>
+										</isloop>	
+									</isif>
+								}
+						      }
+						    }
+						});
+						
+						/**
+						 * A function to handle a click leading to a checkout option selection.
+						 * find this click function $shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {}
+						 * place this line in this click event onCheckoutOption($(this).val());
+						 */
+						function onCheckoutOption(shippingMethodID) {
+						  dataLayer.push({
+						    'event': 'checkoutOption',
+						    'ecommerce': {
+						      'checkout_option': {
+						        'actionField': {
+						        	'step': 1,
+						        	'option': shippingMethodID
+						        }
+						      }
+						    }
+						  });
+						}
+					</isif> 
+				
+					<isif condition="${pdict.IsBilling}">
+						//Measure Selected Credit Card
+						dataLayer.push({
+						    'event': 'checkoutOption',
+						    'ecommerce': {
+						      'checkout_option': {
+						        'actionField': {
+						        	'step': 2,
+									'option': "${pdict.CurrentForms.billing.paymentMethods.creditCard.type.options[0].value}" 
+						        }
+						      }
+						    }
+						});
+						
+						window.onload = function () {
+							//Guest User CC selection
+							$('select[name="dwfrm_billing_paymentMethods_creditCard_type"]', '#creditCardList').change(function(){
+								var checkoutOption = $(this).val();
+								onCheckoutOptionCC(checkoutOption);
+							});
+												
+							/**
+							 * A function to handle a click leading to a checkout option selection.
+							 */
+							function onCheckoutOptionCC(checkoutOption) {
+								dataLayer.push({
+								    'event': 'checkoutOption',
+								    'ecommerce': {
+								      'checkout_option': {
+								        'actionField': {
+								        	'step': 2,
+								        	'option': checkoutOption
+								        }
+								      }
+								    }
+								});
+							}
+						}
+				</isif>
+			</script>
+		</isif>
+		
+		<isif condition="${this.pageContext.type == 'Cart' || this.pageContext.type == 'search' || this.pageContext.type == 'product'}">
+			<script>
+				window.onload = function () {
+					$('.product-tile').click(function(event){
+						var productObj = JSON.parse($(this).find('.analytics-data').attr('analytics-data'));
+						productObj.url = $(this).find('.product-name a').attr('href');
+						measureProductClick(productObj);
+					});
+				}
+				/**
+				 * Call this function when a user clicks on a product link. This function uses the event
+				 * callback datalayer variable to handle navigation after the ecommerce data has been sent
+				 * to Google Analytics.
+				 * @param {Object} productObj An object representing a product.
+				 */
+				function measureProductClick(productObj){
+				  dataLayer.push({
+				    'event': 'productClick',
+				    'ecommerce': {
+				      'click': {
+				        'actionField': {'list': '${this.pageContext.type}'},      // Optional list property.
+				        'products': [{
+				          'name': productObj.name,                      // Name or ID is required.
+				          'id': productObj.id,
+				          'price': productObj.price,
+				          'brand': productObj.brand,
+				          'category': productObj.category,
+				          'variant': productObj.variant,
+				          'position': productObj.position
+				         }]
+				       }
+				     },
+				     'eventCallback': function() {
+				       document.location = productObj.url
+				     }
+				  });
+				}
+			</script>
+		</isif>
+	</isif>	
+<iscomment>End Universal Analytics</iscomment>
+
+
+<iscomment>Starting Google Tag Manager</iscomment>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableGoogleTagManager')}">
+		<noscript>
+			<iframe src="//www.googletagmanager.com/ns.html?id=GTM-MRDPH2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+		</noscript>
+		<script>
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-MRDPH2');
+		</script>
+	</isif>
+<iscomment>Ending Google Product Feed </iscomment>	
+	
+	
+<iscomment>Starting Facebook Conversion</iscomment>
+	<isif condition="${(this.pageContext.type == 'MyAccount') && (pdict.CurrentHttpParameterMap.registration.booleanValue == true) && (dw.system.Site.getCurrent().getCustomPreferenceValue('EnableFacebookSocialPixels'))}">
+			<!-- Facebook Conversion Code for KUIU CVR (Registrations) -->
+			<script>
+				console.log("${this.pageContext.type}");	
+				(function() {
+					var _fbq = window._fbq || (window._fbq = []);
+					if (!_fbq.loaded) {
+					var fbds = document.createElement('script');
+					fbds.async = true;
+					fbds.src = '//connect.facebook.net/en_US/fbds.js';
+					var s = document.getElementsByTagName('script')[0];
+					s.parentNode.insertBefore(fbds, s);
+					_fbq.loaded = true;
+					}
+				})();
+				window._fbq = window._fbq || [];
+				window._fbq.push(['track', '6028523528362', {'value':'0.00','currency':'${session.getCurrency().getCurrencyCode()}'}]);
+			</script>
+			<noscript>
+				<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6028523528362&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" />
+			</noscript>
+	</isif>
+<iscomment>Ending Facebook Conversion</iscomment>
+
+
+<iscomment>Starting Google Product Feed</iscomment>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableGoogleProductFeed')}">
+		<iscomment>Google Product Feed code goes here</iscomment>
+	</isif>
+<iscomment>Ending Google Product Feed</iscomment>
+
+
+<iscomment>Starting Pepperjam Pixel</iscomment>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnablePepperjamPixel')}">
+		<iscomment>Pepperjam Pixel code goes here</iscomment>
+	</isif>
+<iscomment>Ending Pepperjam Pixel</iscomment>

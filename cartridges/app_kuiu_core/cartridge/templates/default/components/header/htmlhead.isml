@@ -72,3 +72,8 @@ If you are not using the build cartridge the comments can be safely removed.
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleAnalyticsEnabled')}">	
 	<isinclude template="components/analytics/googleanalytics.isml"/>
 </isif>
+
+<iscomment>Universal Analytics Include</iscomment>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableAnalytics')}">	
+	<isinclude template="components/analytics/analytics.isml"/>
+</isif>

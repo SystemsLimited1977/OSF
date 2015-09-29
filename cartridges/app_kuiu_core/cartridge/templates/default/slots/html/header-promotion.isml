@@ -4,7 +4,9 @@
 <iscomment>Template for promotion slot on the top of the header</iscomment>
 <div class="header-promotion">
 	<isif condition="${slotcontent != null}">
-		<isloop items="${slotcontent.content}" var="markupText">
+		<isset name="emptyStr" value="${''}" scope="page" />
+		<div class="slot-data-container" promo-data='{"id":"${slotcontent.slotID}", "name":"${slotcontent.slotID}", "creative":"${!empty(slotcontent.calloutMsg) ? slotcontent.calloutMsg : emptyStr}", "position":"${emptyStr}"}' style="display: none;"></div>
+		<isloop items="${slotcontent.content}" var="markupText" status="loopstate" > 
 			<isprint value="${markupText.markup}" encoding="off"/>
 		</isloop>
 	</isif>

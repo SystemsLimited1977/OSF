@@ -123,6 +123,27 @@
 									</isif>
 								</div>
 							</div>
+							
+							<iscomment>Create Data Object For Universall Analytics</iscomment>
+							<isif condition="${pdict.Product.priceModel.price.value != '0'}">
+								<isset name="productObjPrice" value="${pdict.Product.priceModel.price.value.toFixed(2)}" scope="page" />
+							<iselseif condition="${pdict.Product.priceModel.maxPrice.value != '0'}" >
+								<isset name="productObjPrice" value="${pdict.Product.priceModel.maxPrice.value.toFixed(2)}" scope="page" />
+							<iselse>
+								<isset name="productObjPrice" value="${pdict.Product.priceModel.minPrice.value.toFixed(2)}" scope="page" />
+							</isif>
+							
+							<isif condition="${pdict.Product.primaryCategory != null}">
+								<isset name="productObjCategory" value="${pdict.Product.primaryCategory.ID}" scope="page" />
+						    <iselseif condition="${pdict.Product.master == false && pdict.Product.masterProduct != null && pdict.Product.masterProduct.primaryCategory != null}" >
+						    	<isset name="productObjCategory" value="${pdict.Product.masterProduct.primaryCategory.ID}" scope="page" />
+						    <iselse>
+						    	<isset name="productObjCategory" value="" scope="page" />
+						    </isif>
+								        
+							<div class="analytics-data" analytics-data='{"name" : "${pdict.Product.name}", "id" : "${pdict.Product.ID}", "price" : "${productObjPrice}", "brand" : "${pdict.Product.brand}", "category" : "${productObjCategory}", "variant" : "${!empty(pdict.Product.custom.refinementColor) ? pdict.Product.custom.refinementColor : ""}", "position" : "${}" }'></div>
+							
+							
 						</div>
 					</isloop>
 					<iscomment>Restore the Product instance</iscomment>
