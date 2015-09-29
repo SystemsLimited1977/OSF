@@ -3851,11 +3851,6 @@ var quickview = {
 				width: 920,
 				title: 'Product Quickview',
 				open: function () {
-					$(function() {
-					    $(".product-details").mCustomScrollbar({
-					    	theme: "dark"
-					    });
-					});
 					$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('quickview-popup');
 					this.setup(url);
 					if (typeof options.callback === 'function') { options.callback(); }
@@ -5235,7 +5230,7 @@ var youtube = {
 	        var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
 	        var thumbid = reg.exec($(videos[i]).attr('thumb-id'))[1];
 	        //videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos[i].id + '/sddefault.jpg)';
-	        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + thumbid + '/sddefault.jpg)';
+	        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + thumbid + '/default.jpg)';
 	        $(videos[i]).attr('id', thumbid);
 
 	        // Overlay the Play icon to make it look like a video player
@@ -6273,7 +6268,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6286,7 +6281,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
