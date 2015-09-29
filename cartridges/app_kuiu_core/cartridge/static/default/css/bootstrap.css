@@ -198,7 +198,29 @@ th {
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
   }
-  a,
+  .pt_order-confirmation .item-list td,
+  .pt_order-confirmation  .order-shipment-table td.order-gift-cert-attributes,
+  .pt_order-confirmation table.order-shipment-table td {
+  	width:35% !important;
+  }
+  .pt_order-confirmation .item-list {
+  	font-size:13px;
+  }
+  .pt_order-confirmation .visible-xs-block .section-header.items-header-products,
+  .pt_order-confirmation .order-shipment-table tr td.visible-xs-block  {
+  	   visibility:hidden;
+    width:0px;
+    height:0px 
+  }
+  .order-shipment-table tr {
+  	width:100%;
+  }
+  .pt_order-confirmation table td {
+  	padding:0px;
+  }
+  
+}
+  /*a,
   a:visited {
     text-decoration: underline;
   }
@@ -259,7 +281,7 @@ th {
   .table-bordered td {
     border: 1px solid #ddd !important;
   }
-}
+}*/
 @font-face {
   font-family: 'Glyphicons Halflings';
 
@@ -6753,6 +6775,7 @@ button.close {
 .visible-print {
   display: none !important;
 }
+/*
 @media print {
   .visible-print {
     display: block !important;
@@ -6797,4 +6820,5 @@ button.close {
     display: none !important;
   }
 }
+*/
 /*# sourceMappingURL=bootstrap.css.map */

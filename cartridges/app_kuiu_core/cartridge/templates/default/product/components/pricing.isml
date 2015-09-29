@@ -110,7 +110,7 @@ if ( pdict.Product.variationGroup )
 			</isif>
 			<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
 			
-			<span class="price-sales"><isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}"><isprint value="${SalesPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
+			<span class="price-sales sale-price-pdp"><isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}"><isprint value="${SalesPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
 					
 		</isif>
 		

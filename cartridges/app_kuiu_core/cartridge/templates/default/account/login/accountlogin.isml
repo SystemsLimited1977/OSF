@@ -66,15 +66,13 @@
 							<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 						</fieldset>
 					</form>
-					<iscomment>
+					
 					<a class="tooltip">
 	   					${Resource.msg('checkoutlogin.registerbenefits','checkout',null)}
 	    				<div class="tooltip-content" data-layout="large tooltip-whyaccount">
 	    					<iscontentasset aid="create-account-benefits"/>
 		    			</div>
 		    		</a>
-					</iscomment>
-					<iscontentasset aid="create-account-benefits"/>
 	
 				</div>
 	
