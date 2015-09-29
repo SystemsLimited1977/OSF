@@ -40,7 +40,7 @@ ${Resource.msg('order.orderconfirmation-email.storelocation','order',null)}<br>
 ${Resource.msg('order.orderconfirmation-email.storephone','order',null)}</td>
 </tr>
 <tr >
-<th colspan="2" style="background:#333;padding:7px 20px;;font-size:14px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.orderWishlist','locale',null)}</th>
+<th colspan="2" style="background:#333;padding:3px 20px;;font-size:14px;font-family:arial;text-align:left;color:#fff;">${Resource.msg('global.orderWishlist','locale',null)}</th>
 </tr>
 
 
@@ -49,8 +49,8 @@ ${Resource.msg('order.orderconfirmation-email.storephone','order',null)}</td>
 		<h1 style="font-size:20px;font-family:arial;font-weight:bold">${Resource.msg('global.ordermyWishlist','locale',null)}</h1>
 		
 		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
-		<p><strong>From:</strong><isprint value="${pdict.CurrentCustomer.profile.firstName}"/> <isprint value="${pdict.CurrentCustomer.profile.lastName}"/></p>
-		<p><strong>Email</strong> = <isprint value="${pdict.CurrentCustomer.profile.email}"/></p>
+		<p style="margin:0px;padding:0px;"><strong>From:</strong><isprint value="${pdict.CurrentCustomer.profile.firstName}"/> <isprint value="${pdict.CurrentCustomer.profile.lastName}"/></p>
+		<p style="margin:0px;padding:0px;"><strong>Email</strong> = <isprint value="${pdict.CurrentCustomer.profile.email}"/></p>
 		     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitwishlist','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitwishlist','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
 		
 		

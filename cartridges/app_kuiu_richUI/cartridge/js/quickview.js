@@ -103,11 +103,6 @@ var quickview = {
 				width: 920,
 				title: 'Product Quickview',
 				open: function () {
-					$(function() {
-					    $(".product-details").mCustomScrollbar({
-					    	theme: "dark"
-					    });
-					});
 					$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable').addClass('quickview-popup');
 					this.setup(url);
 					if (typeof options.callback === 'function') { options.callback(); }

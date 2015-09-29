@@ -47,7 +47,7 @@
 			</isif>
 		</td>
 		<td class="hidden-xs">
-			<div class="pull-right"><button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button></div>
+			<div class="pull-right"><button class="print-page" onclick="onclick="printDiv('main')"">${Resource.msg('confirmation.print','checkout',null)}</button></div>
 		</td>
 	</tr>
 

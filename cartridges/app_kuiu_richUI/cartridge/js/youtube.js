@@ -24,7 +24,7 @@ var youtube = {
 	        var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
 	        var thumbid = reg.exec($(videos[i]).attr('thumb-id'))[1];
 	        //videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos[i].id + '/sddefault.jpg)';
-	        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + thumbid + '/sddefault.jpg)';
+	        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + thumbid + '/default.jpg)';
 	        $(videos[i]).attr('id', thumbid);
 
 	        // Overlay the Play icon to make it look like a video player

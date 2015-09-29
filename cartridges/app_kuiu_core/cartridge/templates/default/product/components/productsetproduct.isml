@@ -64,7 +64,7 @@
 				<input type="hidden" name="pid" value="${pdict.Product.ID}" />
 				<div class="inventory">
 					<div class="quantity">
-					    <label for="${uniqueFormID}-quantity">${Resource.msg('global.qty','locale',null)}</label>
+					    <label for="${uniqueFormID}-quantity">&nbsp;&nbsp;&nbsp;${Resource.msg('global.qty','locale',null)}</label>
 						<iscomment>
 							<input type="text" name="Quantity" id="${uniqueFormID}-quantity" maxlength="3" class="input-text" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" size="2" maxlength="6" />
 						</iscomment>

@@ -178,12 +178,12 @@
 				</isloop>
 				<isif condition="${!empty(pdict.Product.custom.productVideo1)}">
 					<li class="thumb">
-						<div class="youtubevideo" id="${pdict.Product.custom.productVideo1}" thumb-id="${pdict.Product.custom.productVideo1}" style="width:100px;height:100px;"></div>
+						<div class="youtubevideo" id="${pdict.Product.custom.productVideo1}" thumb-id="${pdict.Product.custom.productVideo1}"></div>
 					</li>
 				</isif>
 				<isif condition="${!empty(pdict.Product.custom.productVideo2)}">
 					<li class="thumb">
-						<div class="youtubevideo" id="${pdict.Product.custom.productVideo2}" thumb-id="${pdict.Product.custom.productVideo2}" style="width:100px;height:100px;"></div>
+						<div class="youtubevideo" id="${pdict.Product.custom.productVideo2}" thumb-id="${pdict.Product.custom.productVideo2}"></div>
 					</li>
 				</isif>
 			</ul>
