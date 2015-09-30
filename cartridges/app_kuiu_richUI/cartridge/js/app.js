@@ -71,6 +71,12 @@ function initializeEvents() {
 
 	// print handler
 	$('.print-page').on('click', function () {
+		 var t = !!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) 
+
+		  if (t == true ) {
+			  $(".hidden-print, .hidden" ).remove();
+			  $('.hidden-xs').removeClass("hidden-xs");
+		  }
 		window.print();
 		return false;
 	});
