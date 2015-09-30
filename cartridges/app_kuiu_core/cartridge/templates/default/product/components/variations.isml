@@ -165,7 +165,11 @@
 									}
 								</isscript>
 								<isif condition="${isAvailable}">
-									<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${!empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>' <isprint value="${selected}" encoding="off"/>>
+									<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.value) && pdict.CurrentHttpParameterMap.source.value == 'cart'}">
+										<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${!empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>' <isprint value="${selected}" encoding="off"/>>
+									<iselse>
+										<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>' <isprint value="${selected}" encoding="off"/>>
+									</isif>		
 											<isprint value="${(VV.displayValue||VV.value)}"/>
 									</option>
 								</isif>
