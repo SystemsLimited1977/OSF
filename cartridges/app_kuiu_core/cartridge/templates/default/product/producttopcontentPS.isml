@@ -91,10 +91,16 @@
 						<isset name="hi_res" scope="page" value="${''}" />
 						<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 					</isif>
-					<div class="magnifik-example basic">
+					<div class='${!isQuickView ? "magnifik-example basic" : ""}'>
+					
+					 <isif condition="${isQuickView}">
+						<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${pdict.Product.name}${imageTitle}"/>
+					<iselse>
 						<a ${href} class="z3 product-image main-image" title="${pdict.Product.name}${imageTitle}">
 							<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${pdict.Product.name}${imageTitle}"/>
 						</a>
+					</isif>
+						
 					</div>
 				</div>
 			

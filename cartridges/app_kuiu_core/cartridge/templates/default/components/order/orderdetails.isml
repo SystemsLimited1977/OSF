@@ -19,7 +19,7 @@
 </h2>
 
 <table class="item-list">
-	<tr class="hidden">
+	<tr class="hidden ">
 		<th colspan="3" class="section-header">${Resource.msg('order.orderdetails.orderinformation','order',null)}</th>
 	</tr>
 	<tr>
@@ -47,7 +47,7 @@
 			</isif>
 		</td>
 		<td class="hidden-xs">
-			<div class="pull-right"><button class="print-page" onclick="onclick="printDiv('main')"">${Resource.msg('confirmation.print','checkout',null)}</button></div>
+			<div class="pull-right"><button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button></div>
 		</td>
 	</tr>
 
@@ -68,11 +68,11 @@
 
 		
 		<td class="order-billing">
-			<div class="section-header visible-xs-block">${Resource.msg('order.orderdetails.billingaddress','order',null)}</div>
+			<div class="section-header visible-xs-block hidden-print">${Resource.msg('order.orderdetails.billingaddress','order',null)}</div>
 			<isminiaddress p_address="${Order.billingAddress}"/>
 		</td>
 		<td class="order-payment-instruments">
-		<div class="section-header visible-xs-block">
+		<div class="section-header visible-xs-block hidden-print">
 			<isif condition="${Order.paymentInstruments.length == 1}">
 				${Resource.msg('order.orderdetails.paymentmethod','order',null)}
 			<iselse/>
@@ -111,7 +111,7 @@
 			</isloop>
 		</td>
 		<td class="order-payment-summary">
-		<div class="section-header visible-xs-block">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</div>
+		<div class="section-header visible-xs-block hidden-print">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</div>
 			<div class="order-detail-summary">
 			<isif condition="${Order.shipments.length > 1}">
 				<isordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${true}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
@@ -208,13 +208,13 @@
 									</div>
 								</isif>
 							</td>
-							<td class="visible-xs-block">
+							<td class="visible-xs-block hidden-print">
 								<div class="section-header items-header-products">${Resource.msg('global.item','locale',null)}</div>
 							</td>
 						</isif>
 					</tr>
 					
-					<tr class="visible-xs-block">
+					<tr class="visible-xs-block hidden-print">
 					<iscomment>only show shipping address for first pli in shipment</iscomment>
 					
 						<isif condition="${pliloopstate.first}">
@@ -252,7 +252,7 @@
 									</div>
 								</isif>
 							</td>
-							<td class="visible-xs-block">
+							<td class="visible-xs-block hidden-print">
 								<div class="section-header items-header-products">${Resource.msg('global.item','locale',null)}</div>
 							</td>
 						</isif>
@@ -318,7 +318,7 @@
 				
 				
 					<tr>
-							<td class="visible-xs-block">
+							<td class="visible-xs-block hidden-print">
 								<div class="section-header items-header-products">${Resource.msg('global.item','locale',null)}</div>
 							</td>
 						<td class="order-gift-cert-attributes">

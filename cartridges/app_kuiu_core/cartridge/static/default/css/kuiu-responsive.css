@@ -572,7 +572,7 @@
     }
     .refinements-breadcrumb #clearallrefinements {
         position: absolute;
-        top: 8px;
+        top: 10px;
         right: 0;
     }
     .page-banner-main {
@@ -2837,6 +2837,10 @@
 	}
 	.quickview-popup .product-add-to-cart .inventory {
 		width:15%;
+	}
+	
+	.refinements-breadcrumb #clearallrefinements {
+		right: 115px;
 	}
 }
 

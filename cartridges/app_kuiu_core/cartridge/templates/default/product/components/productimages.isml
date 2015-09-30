@@ -69,10 +69,15 @@
     <isset name="smImage" value="${new ProductImage('small', imageProduct, imgSmStatus.index)}" scope="page"/>
     <div class="owl-carousel-mobile-item thumb${imgSmStatus.first ? ' selected' : ''}">
      
-     <div class="magnifik-example basic">
-		<a class="z2" href="${mediumImage.getURL()}">
-		<img src="${mediumImage.getURL()}" alt="${mediumImage.alt}" title="${mediumImage.title}" />
-        </a>
+     <div class='${!isQuickView ? "magnifik-example basic" : ""}'>
+     	<isif condition="${isQuickView}">
+			<img src="${mediumImage.getURL()}" alt="${mediumImage.alt}" title="${mediumImage.title}" />
+		<iselse>
+			<a class="z2" href="${mediumImage.getURL()}">
+				<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
+				<div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div>
+	        </a>
+		</isif>
     </div>
  
     </div>
@@ -126,11 +131,15 @@
 		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
 	</isif>
 	</iscomment>
-	<div class="magnifik-example basic">
-		<a class="z1" href="${imageUrlHiRes}">
-		<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
-		<div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div>
-        </a>
+	<div class='${!isQuickView ? "magnifik-example basic" : ""}'>
+		<isif condition="${isQuickView}">
+			<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
+		<iselse>
+			<a class="z1" href="${imageUrlHiRes}">
+				<img  itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageAlt}"/>
+				<div class="zoom_button"><i class="fa fa-search fa-lg"></i><span>Zoom</span></div>
+	        </a>
+		</isif>
     </div>
     
 </div>

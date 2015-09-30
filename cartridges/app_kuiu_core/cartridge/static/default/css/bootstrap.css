@@ -200,25 +200,38 @@ th {
   }
   .pt_order-confirmation .item-list td,
   .pt_order-confirmation  .order-shipment-table td.order-gift-cert-attributes,
-  .pt_order-confirmation table.order-shipment-table td {
+  .pt_order-confirmation table.order-shipment-table td,
+  .pt_order-confirmation table tr th.section-header.order-confirm-price {
   	width:35% !important;
+  }
+  .pt_order-confirmation table tr th.section-header.order-confirm-price {
+  
+  	text-align:left;
   }
   .pt_order-confirmation .item-list {
   	font-size:13px;
   }
-  .pt_order-confirmation .visible-xs-block .section-header.items-header-products,
-  .pt_order-confirmation .order-shipment-table tr td.visible-xs-block  {
-  	   visibility:hidden;
-    width:0px;
-    height:0px 
-  }
   .order-shipment-table tr {
   	width:100%;
   }
-  .pt_order-confirmation table td {
-  	padding:0px;
+  .pt_order-confirmation table td,
+  .pt_order-confirmation table.order-shipment-table td{
+  	padding:0px !important;
   }
   
+  .pt_order-confirmation table.order-shipment-table tr th.section-header.pull-right.order-confirm-price,
+  .pt_order-confirmation table.order-shipment-table .line-item-price.pull-right {
+   	float: left !important;
+  	text-align:left;
+  	padding:0px !important;
+  }
+  .logo-div,
+  .pt_order-confirmation .login-box.login-create-account,
+  .mobile-logo,
+  .footer-container.footer-up{
+  	display :none;
+  
+}
 }
   /*a,
   a:visited {

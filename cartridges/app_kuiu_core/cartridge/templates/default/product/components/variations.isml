@@ -200,7 +200,7 @@
 				}
 			</isscript>
 			<isif condition="${!empty(sizeChartID)}">
-				<div class="size-chart-link">
+				<div class="size-chart-link shoes-case">
 					[&nbsp;<a href="${URLUtils.url('Page-Show','cid', sizeChartID)}" target="_blank" title="${Resource.msg('product.variations.sizechart', 'product', null)}">${Resource.msg('product.variations.sizechart', 'product', null)}</a>&nbsp;]
 				</div>
 				<isscript>

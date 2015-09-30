@@ -110,7 +110,7 @@
 					<iselse/>
 						<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
 					</isif>
-					<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+					<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}"><span>x</span></a>
 				</span>
 			</span>
 			</div>
@@ -135,7 +135,7 @@
 								<iselse/>
 									<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
 								</isif>
-								<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+								<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}"><span>x</span></a>
 							</span>
 						</isif>
 					</isloop>
