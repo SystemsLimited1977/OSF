@@ -2223,9 +2223,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     text-align: right;
     padding-right: 3px;
     font-family: "Times New Roman", Georgia, Serif;
-    position: absolute;
-    right: 88px;
-    top: 106px;
+    margin-top: -16px;
 }
 
 .refinements-breadcrumb .breadcrumb {
