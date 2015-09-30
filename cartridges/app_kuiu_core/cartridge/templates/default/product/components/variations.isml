@@ -176,5 +176,33 @@
 			</isif>
 		</isloop>
 		</ul>
+		<isif condition="${vaId != 'color' && !sizeChartShown}">
+			<isscript>
+				// get category from products primary category
+				var category = pdict.Product.primaryCategory,
+					sizeChartID;
+
+				// get category from product master if not set at variant
+				if (!category && pdict.Product.variant) {
+					category = pdict.Product.masterProduct.primaryCategory;
+				}
+
+				while (category && !sizeChartID) {
+					if ('sizeChartID' in category.custom && !empty(category.custom.sizeChartID)) {
+						sizeChartID = category.custom.sizeChartID;
+					} else {
+						category = category.parent;
+					}
+				}
+			</isscript>
+			<isif condition="${!empty(sizeChartID)}">
+				<div class="size-chart-link">
+					[&nbsp;<a href="${URLUtils.url('Page-Show','cid', sizeChartID)}" target="_blank" title="${Resource.msg('product.variations.sizechart', 'product', null)}">${Resource.msg('product.variations.sizechart', 'product', null)}</a>&nbsp;]
+				</div>
+				<isscript>
+					sizeChartShown = true;
+				</isscript>
+			</isif>
+		</isif>
 	</div>
 </isif>
