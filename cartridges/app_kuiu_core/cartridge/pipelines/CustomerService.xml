@@ -180,10 +180,8 @@
                 <key-binding alias="MailSubject" key="To_2"/>
                 <key-binding alias="&quot;mail/contactus&quot;" key="From_3"/>
                 <key-binding alias="MailTemplate" key="To_3"/>
-                <key-binding alias="CurrentForms.contactus.email.value" key="From_4"/>
+                <key-binding alias="&quot;service@kuiu.com&quot;" key="From_4"/>
                 <key-binding alias="MailTo" key="To_4"/>
-                <key-binding alias="null" key="From_5"/>
-                <key-binding alias="null" key="To_5"/>
                 <key-binding alias="null" key="From_6"/>
                 <key-binding alias="null" key="To_6"/>
                 <key-binding alias="null" key="From_7"/>
