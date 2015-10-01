@@ -2186,7 +2186,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .refinements-breadcrumb .breadcrumb-refinement-value {
     background-color: transparent;
     padding: 0;
-    margin: 8px 0 8px -4px;
+    margin: 8px 4px 8px -4px;
 }
 
 .refinements-breadcrumb .breadcrumb-relax {
@@ -2203,7 +2203,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     text-align: center;
     line-height: 14px;
     vertical-align: bottom;
-    margin-bottom: -4px;
+    margin-bottom: -3px;
     font-weight: 500;
     margin-left: 2px;
 }
@@ -7426,10 +7426,6 @@ input:focus::-webkit-input-placeholder {
 	width:50% !important;
 }
 
-select::-ms-expand {
-    display: none;
-}
-
 /*.pdp-main .product-price .price-standard {
 	color:#2b2b2b;
 }
@@ -7460,4 +7456,16 @@ select::-ms-expand {
 	float: right;
     clear: none;
     margin-top: -42px;
+}
+
+.tooltip {
+filter:none !important;
+}
+
+.ie select {
+	padding-right:0px !important;
+	background-image :none !important;
+}
+select::-ms-expand {
+    display: none;
 }
