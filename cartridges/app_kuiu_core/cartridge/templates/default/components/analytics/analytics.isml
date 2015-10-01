@@ -491,21 +491,21 @@
 <iscomment>Starting Google Tag Manager</iscomment>
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableGoogleTagManager')}">
 		<noscript>
-			<iframe src="//www.googletagmanager.com/ns.html?id=GTM-MRDPH2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+			<iframe src="${'//www.googletagmanager.com/ns.html?id=' + dw.system.Site.getCurrent().getCustomPreferenceValue('GoogleTagManagerContainerID')}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
 		</noscript>
 		<script>
 			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-			})(window,document,'script','dataLayer','GTM-MRDPH2');
+			})(window,document,'script','dataLayer','${dw.system.Site.getCurrent().getCustomPreferenceValue("GoogleTagManagerContainerID")}');
 		</script>
 	</isif>
 <iscomment>Ending Google Product Feed </iscomment>	
 	
 	
-<iscomment>Starting Facebook Conversion</iscomment>
-	<isif condition="${(this.pageContext.type == 'MyAccount') && (pdict.CurrentHttpParameterMap.registration.booleanValue == true) && (dw.system.Site.getCurrent().getCustomPreferenceValue('EnableFacebookSocialPixels'))}">
+<iscomment>Starting Facebook Conversion for Registration</iscomment>
+	<isif condition="${(this.pageContext.type == 'MyAccount') && (pdict.CurrentHttpParameterMap.registration.booleanValue == true) && (dw.system.Site.getCurrent().getCustomPreferenceValue('EnableFacebookConversionForAccountCreation'))}">
 			<!-- Facebook Conversion Code for KUIU CVR (Registrations) -->
 			<script>
 				console.log("${this.pageContext.type}");	
@@ -527,7 +527,142 @@
 				<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6028523528362&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" />
 			</noscript>
 	</isif>
-<iscomment>Ending Facebook Conversion</iscomment>
+<iscomment>Ending Facebook Conversion for Registration</iscomment>
+
+
+<iscomment>Starting Facebook Conversion-Tracking Pixel for Order Confirmation</iscomment>
+	<isif condition="${this.pageContext.type == 'orderconfirmation' && !empty(pdict.Order) && (dw.system.Site.getCurrent().getCustomPreferenceValue('EnableFacebookConversionForCheckouts'))}">
+		<!-- Facebook Conversion Code for KUIU CVR (Checkouts) -->
+		<script>
+		(function() {
+			var _fbq = window._fbq || (window._fbq = []);
+			if (!_fbq.loaded) {
+				var fbds = document.createElement('script');
+				fbds.async = true;
+				fbds.src = '//connect.facebook.net/en_US/fbds.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(fbds, s);
+				_fbq.loaded = true;
+			}
+		})();
+		window._fbq = window._fbq || [];
+		window._fbq.push(['track', '${pdict.Order.orderNo}',
+            {
+				'value':'${(pdict.Order.adjustedMerchandizeTotalGrossPrice.value + pdict.Order.adjustedShippingTotalNetPrice.value + pdict.Order.shippingTotalTax.value).toFixed(2)}',
+				'currency':'${session.getCurrency().getCurrencyCode()}'
+			}
+		]);
+		</script>
+		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6027963324362&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+	</isif>
+<iscomment>Ending Facebook Conversion-Tracking Pixel for Order Confirmation</iscomment>
+
+
+<iscomment>Starting Facebook Conversion-Tracking Pixel for Order Confirmation</iscomment>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableFacebookCustomAudiencePixel')}">
+		<!-- Facebook Pixel Code -->
+			<script>
+				!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+				n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+				n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+				t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+				document,'script','//connect.facebook.net/en_US/fbevents.js');
+				
+				fbq('init', '908631972564531');
+				fbq('track', 'PageView');
+			</script>
+			<noscript>
+				<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=908631972564531&ev=PageView&noscript=1"/>
+			</noscript>
+		<!-- End Facebook Pixel Code -->
+		
+		<iscomment>Standard Events</iscomment>
+		<script>
+			<isif condition="${this.pageContext.type == 'storefront' || this.pageContext.type == 'search' || this.pageContext.type == 'product' || this.pageContext.type == 'customerservice' || this.pageContext.type == null}">
+				// ViewContent
+				// Track key page views (ex: product page, landing page or article)
+				fbq('track', 'ViewContent');
+			</isif>
+	
+			<isif condition="${this.pageContext.type == 'search'}">
+				// Search
+				// Track searches on your website (ex. product searches)
+				fbq('track', 'Search');
+			</isif>
+	
+			<isif condition="${this.pageContext.type == 'orderconfirmation' && !empty(pdict.Order)}">
+				// Purchase
+				// Track purchases or checkout flow completions (ex. landing on "Thank You" or confirmation page)
+				fbq('track', 'Purchase', {value: '${(pdict.Order.adjustedMerchandizeTotalGrossPrice.value + pdict.Order.adjustedShippingTotalNetPrice.value + pdict.Order.shippingTotalTax.value).toFixed(2)}', currency: '${session.getCurrency().getCurrencyCode()}'});
+			</isif>
+	
+			<isif condition="${(this.pageContext.type == 'MyAccount') && (pdict.CurrentHttpParameterMap.registration.booleanValue == true)}">
+				// CompleteRegistration
+				// Track when a registration form is completed (ex. complete subscription, sign up for a service)
+				fbq('track', 'CompleteRegistration');
+			</isif>
+			
+			<isif condition="${this.pageContext.type == 'customerservice' || (pdict.IsAccountRegisterationPage == true && this.pageContext.type == 'MyAccount') || this.pageContext.type == 'checkout'}">
+				// Lead
+				// Track when a user expresses interest in your offering (ex. form submission, sign up for trial, landing on pricing page)
+				fbq('track', 'Lead');
+			</isif>
+			
+			// CustomConversion
+			// 
+			fbq('track', 'CustomConversion');
+
+			window.onload = function () {
+				
+				$('#add-to-cart').click(function(event){
+					// AddToCart
+					// Track when items are added to a shopping cart (ex. click/landing page on Add to Cart button)
+					fbq('track', 'AddToCart');
+				});
+				
+				$('.wl-action').click(function(event){
+					// AddToWishlist
+					// Track when items are added to a wishlist (ex. click/landing page on Add to Wishlist button)
+					fbq('track', 'AddToWishlist');
+				});
+				
+				$('button[name="dwfrm_cart_checkoutCart"]').click(function(event){
+					// InitiateCheckout
+					// Track when people enter the checkout flow (ex. click/landing page on checkout button)
+					fbq('track', 'InitiateCheckout');
+				});
+				
+				$('button[name="dwfrm_billing_save"]').click(function(event){
+					// AddPaymentInfo
+					// Track when payment information is added in the checkout flow (ex. click/landing page on billing info)
+					var ccName = $('input[name="dwfrm_billing_paymentMethods_creditCard_number"]').val().length;
+					var ccType = $('select[name="dwfrm_billing_paymentMethods_creditCard_type"]').val().length;
+					var ccCVN = $('input[name="dwfrm_billing_paymentMethods_creditCard_cvn"]').val().length;
+					var ccNo = $('input[name="dwfrm_billing_paymentMethods_creditCard_number"]').val().length;
+					var ccMaskedNo = $('input[name="dwfrm_billing_paymentMethods_creditCard_maskedFourDigit"]').val().length;
+					
+					if(ccName > 0 && ccType > 0 && ccCVN > 0 && (ccNo > 0 || ccMaskedNo > 0))
+						fbq('track', 'AddPaymentInfo');
+				});
+				
+				$('#footer-email').click(function(event){
+					// Lead
+					// Track when a user expresses interest in your offering (ex. form submission, sign up for trial, landing on pricing page)
+					fbq('track', 'Lead');
+				});
+				
+				$('#email-alert-address').keypress(function(ev) {
+				    if(ev.which == 13) {
+				    	// Lead
+						// Track when a user expresses interest in your offering (ex. form submission, sign up for trial, landing on pricing page)
+						fbq('track', 'Lead');
+				    }
+				});
+			}
+		</script>
+	</isif>
+<iscomment>Ending Facebook Conversion-Tracking Pixel for Order Confirmation</iscomment>
+
 
 
 <iscomment>Starting Google Product Feed</iscomment>
@@ -538,7 +673,79 @@
 
 
 <iscomment>Starting Pepperjam Pixel</iscomment>
-	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnablePepperjamPixel')}">
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnablePepperjamPixel') && this.pageContext.type == 'orderconfirmation' && !empty(pdict.Order)}">
 		<iscomment>Pepperjam Pixel code goes here</iscomment>
+		<isscript>
+			var url : Array = new Array();
+			var counter : Number = 1;
+			
+			url.push("https://t.pepperjamnetwork.com/track?INT=DYNAMIC&");
+			url.push("PROGRAM_ID=" + dw.system.Site.getCurrent().getCustomPreferenceValue('PepperjamPixelProgramID'));
+			url.push("&ORDER_ID=" + pdict.Order.orderNo);
+			
+			for each(var productLineItem : dw.order.ProductLineItem in pdict.Order.getAllProductLineItems()){
+				url.push("&ITEM_ID" + counter + "=" + productLineItem.product.ID);
+				
+				if(productLineItem.product.priceModel.price.value != '0'){
+					url.push("&ITEM_PRICE" + counter + "=" + productLineItem.product.priceModel.price.value.toFixed(2));
+				}
+				else if(productLineItem.product.priceModel.maxPrice.value != '0'){
+					url.push("&ITEM_PRICE" + counter + "=" + productLineItem.product.priceModel.maxPrice.value.toFixed(2));
+				}
+				else{
+					url.push("&ITEM_PRICE" + counter + "=" + productLineItem.product.priceModel.minPrice.value.toFixed(2));
+				}
+				
+				url.push("&QUANTITY" + counter + "=" + productLineItem.quantityValue.toFixed(2));
+				
+				if(productLineItem.product.primaryCategory != null){
+					url.push("&CATEGORY" + counter + "=" + productLineItem.product.primaryCategory.ID);
+				}
+				else if(productLineItem.product.master == false && productLineItem.product.masterProduct != null && productLineItem.product.masterProduct.primaryCategory != null){
+					url.push("&CATEGORY" + counter + "=" + productLineItem.product.masterProduct.primaryCategory.ID);
+				}
+				else{
+					url.push("&CATEGORY" + counter + "=" + "");
+				}
+				
+				counter++;
+			}
+			
+			/*
+			var coupons : String = "&COUPON=";
+			for each(var couponLineItem : dw.order.CouponLineItem in pdict.Order.getCouponLineItems()){
+				coupons = coupons + couponLineItem.couponCode + ;
+			}
+			url.push("&CATEGORY" + counter + "=" + "");
+			*/
+		</isscript>
+		
+		<isset name="coupons" value="&COUPON=" scope="page" />
+		<isloop items="${pdict.Order.getCouponLineItems()}" var="couponLineItem" status="couponLineItemIndex">
+			<isif condition="${!couponLineItemIndex.last}">
+				<isset name="coupons" value="${coupons + couponLineItem.couponCode + ','}" scope="page" />
+			<iselse>
+				<isset name="coupons" value="${coupons + couponLineItem.couponCode}" scope="page" />
+			</isif>
+		</isloop>
+		
+		<isscript>
+			url.push(coupons);
+			
+			if(pdict.CurrentCustomer.authenticated){
+				url.push("&NEW_TO_FILE=0");
+			}
+			else{
+				url.push("&NEW_TO_FILE=1");
+			}
+		</isscript>
+		
+		<iframe id="haseeb" src="${url.join('')}" width="1" height="1" frameborder="0"></iframe>
 	</isif>
 <iscomment>Ending Pepperjam Pixel</iscomment>
+
+<iscomment>Debugging
+	<script>
+		console.log("${this.pageContext.type}");
+	</script>
+</iscomment>
