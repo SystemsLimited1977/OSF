@@ -40,8 +40,11 @@
 		ga('set','dimension10',brandName);
 	</isif>
 	<isif condition="${pdict.CurrentCustomer.registered}">
-		var gender = '${pdict.CurrentCustomer.profile.gender}';
-		var zipCode = '${pdict.CurrentCustomer.profile.addressBook.preferredAddress.postalCode}';
+		var gender = '${pdict.CurrentCustomer.profile.gender}'; 
+		<isif condition="${pdict.CurrentCustomer.profile != null && pdict.CurrentCustomer.profile.addressBook != null && pdict.CurrentCustomer.profile.addressBook.preferredAddress != null}">
+			var zipCode = '${pdict.CurrentCustomer.profile.addressBook.preferredAddress.postalCode}';
+		</isif>
+		
 		var birthday = new Date('${pdict.CurrentCustomer.profile.birthday}');
 		var today = new Date();
 		var age = today.getFullYear()- birthday.getFullYear();
@@ -49,9 +52,11 @@
 			age--;
 		}
 		ga('set','dimension4','registered');
-		<isif condition="${!empty(pdict.CurrentCustomer.profile.addressBook.preferredAddress.postalCode)}">
-			ga('set','dimension6',zipCode);
-		</isif>
+		<isif condition="${pdict.CurrentCustomer.profile != null && pdict.CurrentCustomer.profile.addressBook != null && pdict.CurrentCustomer.profile.addressBook.preferredAddress != null}">
+			<isif condition="${!empty(pdict.CurrentCustomer.profile.addressBook.preferredAddress.postalCode)}">
+				ga('set','dimension6',zipCode);
+			</isif>
+		</isif>	
 		<isif condition="${!empty(pdict.CurrentCustomer.profile.gender) && pdict.CurrentCustomer.profile.gender !='0'}">
 			ga('set','dimension7',gender);
 		</isif>
