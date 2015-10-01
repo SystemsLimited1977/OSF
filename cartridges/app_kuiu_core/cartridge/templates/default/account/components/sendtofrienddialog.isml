@@ -75,7 +75,7 @@
 
 				<div class="form-caption">
 					<iscomment>${Resource.msg('global.email.policy','locale',null)}</iscomment>
-					<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" title="${Resource.msg('global.privacypolicy','locale',null)}" class="privacy-policy" >
+					<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy-footer')}" title="${Resource.msg('global.privacypolicy','locale',null)}" class="privacy-policy" >
 						${Resource.msg('global.privacypolicy','locale',null)}
 					</a>
 				</div>
