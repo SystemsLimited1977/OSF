@@ -60,6 +60,17 @@ var updateContent = function (href) {
 			
 			//Update Youtube video contents
 			youtube.init();
+			
+			//More Button Scroll function
+			  $('#product-overview-link').on('click', function(event) {
+				  var target = $('#product-overview');			
+				  if( target.length ) {
+		          event.preventDefault();
+		          $('html, body').animate({
+		              scrollTop: target.offset().top
+		          }, 1000);
+		      }
+		  });
 		}
 	});
 };

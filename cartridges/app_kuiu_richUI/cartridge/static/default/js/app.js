@@ -3075,6 +3075,17 @@ var updateContent = function (href) {
 			
 			//Update Youtube video contents
 			youtube.init();
+			
+			//More Button Scroll function
+			  $('#product-overview-link').on('click', function(event) {
+				  var target = $('#product-overview');			
+				  if( target.length ) {
+		          event.preventDefault();
+		          $('html, body').animate({
+		              scrollTop: target.offset().top
+		          }, 1000);
+		      }
+		  });
 		}
 	});
 };
@@ -6274,7 +6285,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6287,7 +6298,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
