@@ -117,7 +117,7 @@
 		</isif>
 
 		<iscomment>attributes</iscomment>
-		<div >
+		<div class="pull-left" >
 		<isset name="hasAttributes" value="${false}" scope="page" />
 		<isloop items="${pdict.ProductSearchResult.refinements.refinementDefinitions}" var="definition" status="attributes">
 			<isif condition="${definition.isAttributeRefinement() && pdict.ProductSearchResult.isRefinedByAttribute(definition.attributeID)}">
