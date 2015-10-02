@@ -2226,8 +2226,8 @@
     }
     /* home slider styles */
     #homepage-slides .slide {
-        /*height: 550px;*/
-        height: calc(100vh - 150px);
+        height: 470px;
+        /*height: calc(100vh - 150px);*/
     }
     #homepage-slides .slide .inner-box h1 {
         font-size: 30px;
@@ -2788,9 +2788,9 @@
 	.ui-dialog.bonusproduct-quickview-container .product-add-to-cart .inventory {
 		width:22%;
 	}
-	.mini-cart-pricing span.bonus-gift {
+	/*.mini-cart-pricing span.bonus-gift {
 		margin-left:70px;
-	}
+	}*/
 	.pt_checkout.checkout-steps #cart-table tr td {
 		padding: 10px 0px;
 	}
