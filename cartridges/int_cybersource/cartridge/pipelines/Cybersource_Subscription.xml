@@ -877,6 +877,7 @@
           <key-binding alias="OrderNo" key="OrderNo"/>
           <key-binding alias="Order" key="Order"/>
           <key-binding alias="SvedSubscriptionNumber" key="SvedSubscriptionNumber"/>
+          <key-binding alias="item" key="item"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">

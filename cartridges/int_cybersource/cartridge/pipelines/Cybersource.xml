@@ -111,14 +111,19 @@
               <call-node start-name-ref="CybersourceData-CreateShipTo"/>
               <node-display x="0" y="1"/>
             </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="CybersourceData-CreateItem"/>
+              <node-display x="-1" y="1"/>
+            </node>
             <simple-transition>
               <transition-display>
-                <bend-point relative-to="target" x="-1" y="0"/>
+                <bend-point relative-to="source" x="1" y="0"/>
               </transition-display>
             </simple-transition>
             <node>
               <decision-node condition-key="!empty(PaymentInstrument.custom.isSubscription) &amp;&amp; (PaymentInstrument.custom.isSubscription == true)" condition-operator="expr"/>
-              <node-display orientation="horizontal" x="0" y="1"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in">
                   <transition-display>

@@ -16,7 +16,6 @@
 					$(this).bind('click', function(e){
 						var promotionObj = JSON.parse($(this).find('.slot-data-container').attr('promo-data'));
 						promoImpresions(promotionObj);
-						debugger;
 					});
 				});
 			}
@@ -665,13 +664,6 @@
 
 
 
-<iscomment>Starting Google Product Feed</iscomment>
-	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnableGoogleProductFeed')}">
-		<iscomment>Google Product Feed code goes here</iscomment>
-	</isif>
-<iscomment>Ending Google Product Feed</iscomment>
-
-
 <iscomment>Starting Pepperjam Pixel</iscomment>
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('EnablePepperjamPixel') && this.pageContext.type == 'orderconfirmation' && !empty(pdict.Order)}">
 		<iscomment>Pepperjam Pixel code goes here</iscomment>
@@ -743,9 +735,3 @@
 		<iframe id="haseeb" src="${url.join('')}" width="1" height="1" frameborder="0"></iframe>
 	</isif>
 <iscomment>Ending Pepperjam Pixel</iscomment>
-
-<iscomment>Debugging
-	<script>
-		console.log("${this.pageContext.type}");
-	</script>
-</iscomment>

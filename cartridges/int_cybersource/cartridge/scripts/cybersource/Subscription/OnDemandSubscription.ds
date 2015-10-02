@@ -1,7 +1,7 @@
 /**
 *	OnDemandSubscription.ds
 *	Perfroms the on demand subscription info service and returns the response.
-*
+* 	@input  item : Array
 *	@input 	subscriptionID : String
 *	@input 	purchaseTotals : Object
 * 	@input  billTo : Object 
@@ -61,7 +61,7 @@ function execute( pdict : PipelineDictionary ) : Number
 
 	var request = new csReference.RequestMessage();
 
-	CybersourceHelper.addOnDemandSubscriptionInfo(subscriptionID, request, purchaseObject, pdict.Order.getOrderNo());
+	CybersourceHelper.addOnDemandSubscriptionInfo(subscriptionID, request, purchaseObject, pdict.Order.getOrderNo(), billToObject, shipToObject, pdict.item);
 	
 	/********************************/
 	/* DAV-related WebService setup */
@@ -92,6 +92,10 @@ function execute( pdict : PipelineDictionary ) : Number
 	
 	CybersourceHelper.addAVSRequestInfo(request,ignoreAVSResult,declineAVSFlags);
 	/* End of AVS Service setup */
+	
+	//Enableing Cybersource Decesion Manager from Business Manager
+	request.decisionManager = new CybersourceHelper.csReference.DecisionManager();
+  	request.decisionManager.enabled = Site.getCurrent().getCustomPreferenceValue('enableDecisionManager');
 		
 	var response = null;
 	// send request

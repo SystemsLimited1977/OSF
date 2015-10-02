@@ -147,6 +147,11 @@ function execute( pdict : PipelineDictionary ) : Number
 	
 	CybersourceHelper.addAVSRequestInfo(request,ignoreAVSResult,declineAVSFlags);
 	/* End of AVS Service setup */
+	
+	//Enableing Cybersource Decesion Manager from Business Manager
+	request.decisionManager = new CybersourceHelper.csReference.DecisionManager();
+  	request.decisionManager.enabled = Site.getCurrent().getCustomPreferenceValue('enableDecisionManager');
+	
 	writeOutDebugLog(request,orderNo);
 	//**************************************************************************//
 	// Execute Request

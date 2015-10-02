@@ -490,7 +490,10 @@ var CybersourceHelper = {
 		request.item = items;
 		
 		request.ccAuthService = new CybersourceHelper.csReference.CCAuthService();		
-		request.ccAuthService.run = true;	
+		request.ccAuthService.run = true;
+		
+		request.decisionManager = new CybersourceHelper.csReference.DecisionManager();
+  		request.decisionManager.enabled = Site.getCurrent().getCustomPreferenceValue('enableDecisionManager');
 	},
 	
 	
@@ -645,7 +648,10 @@ var CybersourceHelper = {
 										subscriptionID : String,
 										request : Object,
 										purchase : PurchaseTotals_Object,
-										refCode : String)
+										refCode : String,
+										billTo : BillTo_Object,
+										shipTo : ShipTo_Object,
+										itemsCybersource: dw.util.List)
 	{
 		request.merchantID = CybersourceHelper.getMerchantID();
 		__setClientData( request, refCode );
@@ -656,7 +662,22 @@ var CybersourceHelper = {
 		request.recurringSubscriptionInfo = request_recurringSubscriptionInfo;
 		
 		request.ccAuthService = new CybersourceHelper.csReference.CCAuthService();		
-		request.ccAuthService.run = true;	
+		request.ccAuthService.run = true;
+		
+		request.billTo = __copyBillTo( billTo );
+		request.shipTo = __copyShipTo( shipTo );
+		
+		var items : Array = new Array();
+		if(null!=itemsCybersource)
+		{
+			var iter : dw.util.Iterator = itemsCybersource.iterator();
+			while(iter.hasNext())
+			{
+				items.push(__copyItemFrom(iter.next()));
+			}
+		}
+		
+		request.item = items;	
 	},
 
 	addBMLAuthRequestInfo : function(request : Object, billTo : BillTo_Object, shipTo : ShipTo_Object, purchase : PurchaseTotals_Object, card : Card_Object,bml : BML_Object, promo : Boolean, refCode : String)
