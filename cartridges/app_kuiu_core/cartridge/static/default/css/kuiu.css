@@ -7501,6 +7501,10 @@ select::-ms-expand {
 li.attribute.variant-dropdown.dropdownpdp {
 	width:75%;
 }
+.pdp-main select.variation-select#va-baglength{ width: 80% !important;}
+   
 .pdp-main select.variation-select#va-bootSize {
 	width:70% !important;
 }
+
+.ui-dialog.quickview-popup select.variation-select {width: 67% !important;}
