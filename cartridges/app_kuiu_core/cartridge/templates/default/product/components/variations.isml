@@ -144,7 +144,7 @@
 				</li>
 			<iselse/>
 				<iscomment>Drop down list</iscomment>
-				<li class="attribute variant-dropdown">
+				<li class="attribute variant-dropdown dropdownpdp">
 					<label for="va-${vaId}">
 						<isprint value="${VA.displayName}"/>:
 					</label>

@@ -7426,6 +7426,10 @@ input:focus::-webkit-input-placeholder {
 	width:50% !important;
 }
 
+.pdp-main select.variation-select#va-set {
+	width:85% !important;
+}
+
 /*.pdp-main .product-price .price-standard {
 	color:#2b2b2b;
 }
@@ -7455,7 +7459,7 @@ input:focus::-webkit-input-placeholder {
 .size-chart-link.shoes-case {
 	float: right;
     clear: none;
-    margin-top: -42px;
+    margin-top: 20px;
 }
 
 .tooltip {
@@ -7471,4 +7475,8 @@ select::-ms-expand {
 }
 .refinements-breadcrumb .container {
 	    border-bottom: 1px solid #dadad9;
+}
+
+.dropdownpdp {
+	float:left;
 }
