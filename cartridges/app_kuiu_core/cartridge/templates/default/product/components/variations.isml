@@ -146,7 +146,7 @@
 				<iscomment>Drop down list</iscomment>
 				<li class="attribute variant-dropdown dropdownpdp">
 					<label for="va-${vaId}">
-						<isprint value="${VA.displayName}"/>:
+						<isprint value="${VA.displayName}"/>:&nbsp;
 					</label>
 					<select class="variation-select" id="va-${vaId}" name="${'dwvar_' + pdict.Product.variationModel.master.ID + '_' + vaId}">
 						<option value="">${Resource.msg('global.select','locale',null)} <isprint value="${VA.displayName}"/></option>

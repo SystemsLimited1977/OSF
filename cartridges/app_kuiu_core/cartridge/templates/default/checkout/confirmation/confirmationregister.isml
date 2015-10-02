@@ -13,6 +13,7 @@
 				
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 				<fieldset>
+					<div class="dialog-required login-required pull-right guest-user"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>

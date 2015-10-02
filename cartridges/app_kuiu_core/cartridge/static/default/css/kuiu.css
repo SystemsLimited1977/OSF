@@ -6756,7 +6756,8 @@ ul.product-availability-list li {
 .address-billing {
 	padding-top:12px;
 }
-.mini-shipment.order-component-block.first .name {
+.mini-shipment.order-component-block.first .name,
+.bonusproduct-quickview-container .size-chart-link {
 	display:none;
 }
 
@@ -7423,12 +7424,9 @@ input:focus::-webkit-input-placeholder {
 }
 
 .pdp-main select.variation-select {
-	width:50% !important;
-}
-
-.pdp-main select.variation-select#va-set {
 	width:85% !important;
 }
+
 
 /*.pdp-main .product-price .price-standard {
 	color:#2b2b2b;
@@ -7479,4 +7477,30 @@ select::-ms-expand {
 
 .dropdownpdp {
 	float:left;
+}
+
+.pt_order-confirmation table.order-shipment-table tr td.order-gift-cert-attributes {
+	padding-left:0px;
+}
+
+.pt_order-confirmation .login-box.login-create-account .form-caption.error-message {
+	width:100%;
+}
+
+.dialog-required.login-required.guest-user {
+	position: absolute;
+    right: -11px;
+    margin-top: 6px;
+}
+
+.ui-dialog.quickview-popup .product-add-to-cart .inventory {
+	width:19%;
+}
+
+
+li.attribute.variant-dropdown.dropdownpdp {
+	width:75%;
+}
+.pdp-main select.variation-select#va-bootSize {
+	width:70% !important;
 }
