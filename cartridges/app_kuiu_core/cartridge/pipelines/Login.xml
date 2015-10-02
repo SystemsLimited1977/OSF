@@ -129,14 +129,14 @@
             </node>
             <simple-transition>
               <transition-display>
-                <bend-point relative-to="target" x="0" y="-1"/>
+                <bend-point relative-to="source" x="0" y="1"/>
               </transition-display>
             </simple-transition>
             <node>
               <interaction-node transaction-required="false">
                 <template buffered="true" dynamic="false" name="util/redirect.isml"/>
               </interaction-node>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
@@ -170,8 +170,97 @@
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="target" x="0" y="-1"/>
-          <bend-point relative-to="target" x="-1" y="-1"/>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="typeof(TempCustomer) != 'undefined'&amp;&amp; TempCustomer != null &amp;&amp; TempCustomer.profile != null" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <decision-node condition-key="TempCustomer.profile.custom.isLegacyCustomer" condition-operator="expr"/>
+              <node-display x="-1" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <pipelet-node custom-name="SetLegacyCustomerTrue" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="true" key="From_0"/>
+                      <key-binding alias="IsLegacyCustomer" key="To_0"/>
+                      <key-binding alias="null" key="From_1"/>
+                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="null" key="From_2"/>
+                      <key-binding alias="null" key="To_2"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
+                      <key-binding alias="CurrentForms.login.loginsucceeded" key="FormElement"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+                      <key-binding alias="CurrentForms.login.password" key="FormElement"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <end-node name="login_failed"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="1" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="-1" y="1"/>
           <bend-point relative-to="target" x="-1" y="0"/>
         </transition-display>
       </simple-transition>
@@ -181,6 +270,7 @@
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in1" target-path="./b3.2">
             <transition-display>
+              <bend-point relative-to="source" x="4" y="0"/>
               <bend-point relative-to="target" x="0" y="-2"/>
             </transition-display>
           </transition>
@@ -282,13 +372,13 @@
             </node>
             <simple-transition/>
             <node>
-	      <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
-		<key-binding alias="CurrentForms.login.password" key="FormElement"/>
-	      </pipelet-node>
-	      <node-display x="0" y="1"/>
-	    </node>
-	    <simple-transition/>
-	    <node>
+              <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentForms.login.password" key="FormElement"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <end-node name="login_failed"/>
               <node-display x="0" y="1"/>
             </node>
@@ -305,7 +395,7 @@
       <simple-transition/>
       <node>
         <end-node name="login_succeeded"/>
-	<node-display x="0" y="2"/>
+        <node-display x="0" y="2"/>
       </node>
     </segment>
   </branch>

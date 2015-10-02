@@ -13,7 +13,9 @@
 		<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${pdict.CurrentForms.login.htmlName}">
 
 			<iscomment>Login Unsuccessful Error Message</iscomment>
-			<isif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">
+			<isif condition="${pdict.IsLegacyCustomer == true}">
+				<div class="error-form">${Resource.msg('account.login.logininclude.legacycustomer','account',null)}</div>
+			<iselseif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">
 				<div class="error-form">${Resource.msg('account.login.logininclude.locked','account',null)}</div>
 			<iselseif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && (pdict.TempCustomer.profile.credentials.remainingLoginAttempts == 1)}">
 				<div class="error-form">${Resource.msg('account.login.logininclude.willbelocked','account',null)}</div>
