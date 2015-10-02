@@ -137,13 +137,16 @@
 						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
 						<th class="section-header">${Resource.msg('global.qty','locale',null)}</th>
 						<th class="section-header pull-right order-confirm-price">${Resource.msg('global.price','locale',null)}</th>
-						<isif condition="${shipment.hasOwnProperty('custom.shipmentType')}">
-							<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
-								<th class="section-header order-confirm-shipping">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
-							<iselse/>
-								<th class="section-header order-confirm-shipping">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
+						<iscomment>Shipping to heading was not shown on order summery page
+							<isif condition="${shipment.hasOwnProperty('custom.shipmentType')}">
+								<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
+									<th class="section-header order-confirm-shipping">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
+								<iselse/>
+									<th class="section-header order-confirm-shipping">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
+								</isif>
 							</isif>
-						</isif>
+						</iscomment>
+						<th class="section-header order-confirm-shipping">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 					</tr>
 				</thead>
 				
@@ -187,8 +190,10 @@
 										<span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
 									</isif>
 								</div>
-								<isif condition="${shipment.hasOwnProperty('custom.shipmentType')}">
+								<iscomment><isif condition="${shipment.hasOwnProperty('custom.shipmentType')}">
 									<isif condition="${shipment.custom.shipmentType != 'instore'}">
+								</iscomment>
+									
 									<div class="shipping-status">
 										<span class="label">${Resource.msg('order.orderdetails.shippingstatus','order',null)}</span>
 										<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
@@ -199,8 +204,10 @@
 											<span class="value">${Resource.msg('order.orderdetails.notknown','order',null)}</span>
 										</isif>
 									</div>
-									</isif>
-								</isif>
+									
+									<iscomment></isif>
+								</isif></iscomment>
+								
 								<isif condition="${!empty(shipment.trackingNumber)}">
 									<div class="trackingnumber">
 										<span class="label">${Resource.msg('order.orderdetails.tracking','order',null)}</span>
@@ -231,8 +238,10 @@
 										<span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
 									</isif>
 								</div>
-								<isif condition="${shipment.hasOwnProperty('custom.shipmentType')}">
+								<iscomment><isif condition="${shipment.hasOwnProperty('custom.shipmentType')}">
 									<isif condition="${shipment.custom.shipmentType != 'instore'}">
+								</iscomment>
+								
 									<div class="shipping-status">
 										<span class="label">${Resource.msg('order.orderdetails.shippingstatus','order',null)}</span>
 										<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
@@ -243,8 +252,10 @@
 											<span class="value">${Resource.msg('order.orderdetails.notknown','order',null)}</span>
 										</isif>
 									</div>
-									</isif>
-								</isif>
+									
+									<iscomment></isif>
+								</isif></iscomment>
+								
 								<isif condition="${!empty(shipment.trackingNumber)}">
 									<div class="trackingnumber">
 										<span class="label">${Resource.msg('order.orderdetails.tracking','order',null)}</span>
