@@ -223,18 +223,19 @@
 			<isif condition="${!empty(selectableColors) && selectableColors.size() > 1 && !empty(colorVarAttr)}">
 				<div class="product-swatches">
 					<iscomment>render a link to the palette and hide the actual palette if there are more than five colors contained</iscomment>
-					<isif condition="${selectableColors.size() > 5}">
-						<a class="product-swatches-all">${Resource.msg('productresultarea.viewallcolors','search',null)} (<isprint value="${selectableColors.size()}"/>)</a>
-					</isif>
-
-					<iscomment>render the palette, the first swatch is always preselected</iscomment>
 					<isset name="hasOrderableselectableColors" value="${0}" scope="page"/>
 					<isloop items="${selectableColors}" var="colorValue">
 						  <isif condition="${cleanPVM.hasOrderableVariants(colorVarAttr, colorValue)}">
-								<isset name="hasOrderableselectableColors" value="${hasOrderableselectableColors + 1}" scope="page"/>
+						       <isset name="hasOrderableselectableColors" value="${hasOrderableselectableColors + 1}" scope="page"/>
 					      </isif>
-					</isloop>	
-				 	<ul class="swatch-list<isif condition="${hasOrderableselectableColors > 5}"> swatch-toggle</isif>">
+					</isloop>
+					
+					<isif condition="${hasOrderableselectableColors > 5}">
+						<a class="product-swatches-all">${Resource.msg('productresultarea.viewallcolors','search',null)} (<isprint value="${hasOrderableselectableColors}" style="INTEGER"/>)</a>
+					</isif>
+
+					<iscomment>render the palette, the first swatch is always preselected</iscomment>
+					<ul class="swatch-list<isif condition="${hasOrderableselectableColors > 5}"> swatch-toggle</isif>">
 						<isloop items="${selectableColors}" var="colorValue" status="varloop">
 						  <isif condition="${cleanPVM.hasOrderableVariants(colorVarAttr, colorValue)}">
 								<iscomment>Determine the swatch and the thumbnail for this color</iscomment>
