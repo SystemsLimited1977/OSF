@@ -228,7 +228,13 @@
 					</isif>
 
 					<iscomment>render the palette, the first swatch is always preselected</iscomment>
-					<ul class="swatch-list<isif condition="${selectableColors.size() > 5}"> swatch-toggle</isif>">
+					<isset name="hasOrderableselectableColors" value="${0}" scope="page"/>
+					<isloop items="${selectableColors}" var="colorValue">
+						  <isif condition="${cleanPVM.hasOrderableVariants(colorVarAttr, colorValue)}">
+								<isset name="hasOrderableselectableColors" value="${hasOrderableselectableColors + 1}" scope="page"/>
+					      </isif>
+					</isloop>	
+				 	<ul class="swatch-list<isif condition="${hasOrderableselectableColors > 5}"> swatch-toggle</isif>">
 						<isloop items="${selectableColors}" var="colorValue" status="varloop">
 						  <isif condition="${cleanPVM.hasOrderableVariants(colorVarAttr, colorValue)}">
 								<iscomment>Determine the swatch and the thumbnail for this color</iscomment>
