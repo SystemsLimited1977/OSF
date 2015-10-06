@@ -28,8 +28,43 @@ function initializePaymentForm() {
 			type: 'POST'
 		};
 		$.ajax(options).done(function (data) {
-			dialog.close();
-			page.refresh();	
+			if (typeof(data) === 'string') {
+				if($('#dwfrm_paymentinstruments_creditcards_address_city').val().length < 2 && ($('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').val() < (new Date().getMonth() + 1) && $('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').val() <= new Date().getFullYear()))
+					{
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','red');
+						return false;
+					}
+				else if($('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').val() < (new Date().getMonth() + 1) && $('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').val() <= new Date().getFullYear())
+					{
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','');
+						return false;
+					}
+				else if($('#dwfrm_paymentinstruments_creditcards_address_city').val().length < 2)
+					{
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','');
+						return false;
+					}
+				else
+					{
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','');
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','');
+					}
+					dialog.close();
+					page.refresh();
+				
+			} else {
+				$('#dialog-container').html(data);
+				
+				account.init();
+				tooltip.init();
+			}
 		});
 	}).on('click', '.cancel-button', function (e) {
 		e.preventDefault();

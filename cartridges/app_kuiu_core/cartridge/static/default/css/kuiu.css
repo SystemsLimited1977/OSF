@@ -674,6 +674,8 @@ header .col-md-12 ul {
 
 .primary-logo {
     margin: 0;
+    width:136px;
+ 	height:80px;
 }
 
 .primary-logo a {

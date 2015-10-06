@@ -1510,8 +1510,43 @@ function initializePaymentForm() {
 			type: 'POST'
 		};
 		$.ajax(options).done(function (data) {
-			dialog.close();
-			page.refresh();	
+			if (typeof(data) === 'string') {
+				if($('#dwfrm_paymentinstruments_creditcards_address_city').val().length < 2 && ($('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').val() < (new Date().getMonth() + 1) && $('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').val() <= new Date().getFullYear()))
+					{
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','red');
+						return false;
+					}
+				else if($('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').val() < (new Date().getMonth() + 1) && $('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').val() <= new Date().getFullYear())
+					{
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','');
+						return false;
+					}
+				else if($('#dwfrm_paymentinstruments_creditcards_address_city').val().length < 2)
+					{
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','red');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','');
+						return false;
+					}
+				else
+					{
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_month').css('border-color','');
+						$('#dwfrm_paymentinstruments_creditcards_newcreditcard_year').css('border-color','');
+						$('#dwfrm_paymentinstruments_creditcards_address_city').css('border-color','');
+					}
+					dialog.close();
+					page.refresh();
+				
+			} else {
+				$('#dialog-container').html(data);
+				
+				account.init();
+				tooltip.init();
+			}
 		});
 	}).on('click', '.cancel-button', function (e) {
 		e.preventDefault();
@@ -6285,7 +6320,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.0 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6298,7 +6333,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.0';
+  var VERSION = '3.10.1';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
