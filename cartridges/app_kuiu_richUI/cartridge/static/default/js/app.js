@@ -1352,12 +1352,8 @@ var minicart = {
 		util.scrollBrowser(0);
 		this.init();
 		bonusProductsView.loadBonusOption();
-		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+		if (/Android|webOS|iPhone|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
 			$('.mini-cart-total:eq(1)').html($('.mini-cart-total:eq(0)').find('a'));
-		}
-		else
-		{
-			this.slide();
 		}
 	},
 	/**
