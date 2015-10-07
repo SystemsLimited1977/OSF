@@ -53,6 +53,7 @@ var minicart = {
 		this.$el.html(html);
 		util.scrollBrowser(0);
 		this.init();
+		this.slide();
 		bonusProductsView.loadBonusOption();
 		if (/Android|webOS|iPhone|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
 			$('.mini-cart-total:eq(1)').html($('.mini-cart-total:eq(0)').find('a'));

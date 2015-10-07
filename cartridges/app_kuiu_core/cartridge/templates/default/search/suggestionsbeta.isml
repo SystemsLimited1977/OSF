@@ -105,13 +105,14 @@
 							
                      	</isif>
                         <isset name="category" value="${suggestedCategory.getCategory()}" scope="page"/>
-                      
-                            <a class="search-suggestion-left-panel-hitgroup-link" href="${URLUtils.url('Search-Show', 'cgid', category.getID())}">
-                                <isprint value="${category.getDisplayName()}" />
-                                <isif condition="${category.isTopLevel() == false}">
-                                    <span class="search-suggestion-left-panel-parent-category">${Resource.msg('search.suggest.in','search',null)} <isprint value="${category.getParent().getDisplayName()}" /></span>
-                                </isif>
-                            </a>
+                      		<isif condition="${!empty(category)}">
+	                            <a class="search-suggestion-left-panel-hitgroup-link" href="${URLUtils.url('Search-Show', 'cgid', category.getID())}">
+	                                <isprint value="${category.getDisplayName()}" />
+	                                <isif condition="${category.isTopLevel() == false}">
+	                                    <span class="search-suggestion-left-panel-parent-category">${Resource.msg('search.suggest.in','search',null)} <isprint value="${category.getParent().getDisplayName()}" /></span>
+	                                </isif>
+	                            </a>
+                            </isif>
                         </div>
                     </isloop>
 

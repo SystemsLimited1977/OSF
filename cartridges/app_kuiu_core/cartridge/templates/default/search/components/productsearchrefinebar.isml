@@ -45,7 +45,7 @@
 			
 		<isif condition="${pdict.ProductSearchResult.categorySearch && pdict.ProductSearchResult.category.ID
 		!='root'}">
-			<span class="refinement-header"><isprint value="${path.get(0).displayName}"/></span>
+			<span class="refinement-header"><isif condition="${!empty(path)}"><isprint value="${path.get(0).displayName}"/></isif></span>
 		<iselse/>
 			<span class="refinement-header">${Resource.msg('searchrefinebar.searchresults','search',null)}</span>
 		</isif>
@@ -60,7 +60,9 @@
 					<isif condition="${!pdict.ProductSearchResult.categorySearch}">
 						<div class="refinement-top-level">
 							<a href="${pdict.ProductSearchResult.urlRefineCategory('Search-Show', path.get(0).ID)}">
-								<isprint value="${path.get(0).displayName}"/>
+							<isif condition="${!empty(path)}">
+								<isprint value="${path.get(0)}"/>
+							</isif>
 							</a>
 							(<a href="${pdict.ProductSearchResult.urlRelaxCategory('Search-Show')}">${Resource.msg('searchrefinebar.viewall','search',null)}</a>)
 						</div>
