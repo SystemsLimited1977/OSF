@@ -3145,7 +3145,7 @@ module.exports = function () {
 	// click on swatch - should replace product content with new variant
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
 		e.preventDefault();
-		if ($(this).parents('li').hasClass('unselectable')) { return; }
+		//if ($(this).parents('li').hasClass('unselectable')) { return; }
 		updateContent(this.href);
 	});
 
@@ -6317,7 +6317,7 @@ if ( typeof define === 'function' && define.amd ) {
 (function (global){
 /**
  * @license
- * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6330,7 +6330,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.10.1';
+  var VERSION = '3.10.0';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,

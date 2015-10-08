@@ -89,9 +89,8 @@
 											}
 										}
 									</isscript>
-									
-									<isif condition="${selectable}">
-										<li class="${swatchClass}">
+									<li class="${swatchClass}">
+										<isif condition="${selectable}">
 											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 												<isif condition="${vaId == 'color' && !empty(swImage)}">
 													<img src="${swImage.getURL()}" title="${displayValue}">
@@ -99,9 +98,7 @@
 													<isprint value="${displayValue}"/>
 												</isif>
 											</a>
-										</li>
-									<iselse/>
-										<li class="${'available'}">
+										<iselse/>
 											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 									            <isif condition="${vaId == 'color' && !empty(swImage)}">
 									             	<img src="${swImage.getURL()}" alt="${displayValue}">
@@ -109,8 +106,8 @@
 									             	<isprint value="${displayValue}"/>
 									            </isif>
 								           </a>
-								          </li> 
-									</isif>
+										</isif>
+									</li>
 								</isif>
 							</isloop>
 							<isif condition="${selectedSwatch}">

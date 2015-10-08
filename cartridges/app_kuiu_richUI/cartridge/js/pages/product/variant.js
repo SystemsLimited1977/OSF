@@ -98,7 +98,7 @@ module.exports = function () {
 	// click on swatch - should replace product content with new variant
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
 		e.preventDefault();
-		if ($(this).parents('li').hasClass('unselectable')) { return; }
+		//if ($(this).parents('li').hasClass('unselectable')) { return; }
 		updateContent(this.href);
 	});
 
