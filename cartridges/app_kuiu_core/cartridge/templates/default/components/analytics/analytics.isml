@@ -607,10 +607,11 @@
 				fbq('track', 'Lead');
 			</isif>
 			
+			//Currently Commented uncomment for adding custom events
 			// CustomConversion
 			// 
-			fbq('track', 'CustomConversion');
-
+			//fbq('track', 'CustomConversion');
+			
 			window.onload = function () {
 				
 				$('#add-to-cart').click(function(event){
