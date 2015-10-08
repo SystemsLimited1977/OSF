@@ -21,10 +21,10 @@
 			    <div class="row">
 				 	<div class="col-sm-12 overview-top">
 							<center>
-							<h1>Product Overview</h1>
-							 <isif condition="${!empty(pdict.Product.custom.productviewheading)}">	
-								<p class="hidden-xs"><isprint value="${pdict.Product.custom.productviewheading}" /></p>
-							 </isif>
+                            <h1>Product Overview</h1>
+                             <isif condition="${!empty(pdict.Product.custom.productviewheading)}">    
+                                <p class="hidden-xs"><isprint value="${pdict.Product.custom.productviewheading}" /></p>
+                             </isif>
 							</center>
 					</div>
 					<isif condition="${!empty(pdict.Product.custom.productviewimage)}">
@@ -78,30 +78,30 @@
 	 <div class="container">
 	  <div class="col-xs-12">
 		<div id="accordion">
-		  <h2>Product Overview</h2>
+			<h1>Product Overview</h1>
 		  <div class="accordin-content">
-		    <isif condition="${!empty(pdict.Product.custom.productviewheading)}">
-		    	<h4><isprint value="${pdict.Product.custom.productviewheading}" /></h4>
-		    </isif>
+		    <isif condition="${!empty(pdict.Product.custom.productviewheading)}">    
+               <p class="sub-mobile"><isprint value="${pdict.Product.custom.productviewheading}" /></p>
+            </isif>
 		    <isprint value="${pdict.Product.longDescription}" encoding="off"/>
 		    <isif condition="${!empty(pdict.Product.custom.productviewimage)}">
 		    	<isprint value="${pdict.Product.custom.productviewimage}" encoding="off"/>
 		    </isif>	
 		  </div>
 		  <isif condition="${!empty(pdict.Product.custom.technologyAsset1)}">
-			  <h2>Technology</h2>
+			  <h1>Technology</h1>
 			  <div class="techonology-msection">
 			  	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset1).custom.body}" encoding="off"/>
 			  </div>
 		  </isif>
 		  <isif condition="${!empty(pdict.Product.custom.technologyAsset2)}">
-			  <h2>Technology Asset2</h2>
+			  <h1>Technology 2</h1>
 			  <div class="techonology-msection">
 			   	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset2).custom.body}" encoding="off"/>
 			  </div>
 		  </isif>
 		  <isif condition="${!empty(pdict.Product.custom.technologyAsset3)}">
-			  <h2>Technology Asset3</h2>
+			  <h1>Technology 3</h1>
 			  <div class="techonology-msection">
 			   	<isprint value="${dw.content.ContentMgr.getContent(pdict.Product.custom.technologyAsset3).custom.body}" encoding="off"/>
 			  </div>

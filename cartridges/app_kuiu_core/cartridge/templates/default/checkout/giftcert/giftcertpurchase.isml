@@ -7,14 +7,14 @@
 			<div class="col-sm-6 col-md-7 gc-left">
 			<div class="visible-xs-block">
 			<h1>${Resource.msg('giftcertpurchase.giftcertificates', 'checkout', null)}</h1>	
-			<p>${Resource.msg('giftcertpurchase.giftcertificatesText', 'checkout', null)}</p>			
+			<p class="gift-subhead">${Resource.msg('giftcertpurchase.giftcertificatesText', 'checkout', null)}</p>			
 			</div>
 			<iscontentasset aid="gift-details"/>
 			</div>
 			<div class="col-sm-6 col-md-5 gc-right">
 			<div class="hidden-xs">
 			<h1>${Resource.msg('giftcertpurchase.giftcertificates', 'checkout', null)}</h1>	
-			<p>${Resource.msg('giftcertpurchase.giftcertificatesText', 'checkout', null)}</p>
+			<p class="gift-subhead">${Resource.msg('giftcertpurchase.giftcertificatesText', 'checkout', null)}</p>
 			</div>
 			<isif condition="${pdict.GiftCertificateLineItem == null}">
 			

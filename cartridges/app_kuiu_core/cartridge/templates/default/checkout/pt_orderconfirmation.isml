@@ -33,7 +33,7 @@
 
 		<center>
 			<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
-			<p>${Resource.msg('confirmation.message','checkout',null)}${Resource.msg('confirmation.contact','checkout',null)}</p>
+			<h2 class="confirmation-subhead">${Resource.msg('confirmation.message','checkout',null)}${Resource.msg('confirmation.contact','checkout',null)}</h2>
 			<div class="confirmation-message">
 					<iscontentasset aid="confirmation-message" />
 			</div>

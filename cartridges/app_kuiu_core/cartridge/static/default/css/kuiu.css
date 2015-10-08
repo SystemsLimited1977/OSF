@@ -343,7 +343,7 @@ footer .footer-container .content-asset ul {
 footer .footer_email #email-alert-address,
 #main footer .footer_email #email-alert-address {
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     width: 200px;
     height: 22px;
     background-color: #9e9e9e;
@@ -439,7 +439,7 @@ header {
     width: 179px;
     height: 22px;
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     background-color: #e0e0e0;
 }
 
@@ -1067,7 +1067,7 @@ div {
 
 .pt_customer-service #primary .account-nav-asset h2 {
     color: #2b2b2b;
-    font-weight:600;
+    font-weight:500;
 }
 
 .pt_customer-service #primary .account-nav-asset a {
@@ -1088,6 +1088,7 @@ div {
     text-transform: uppercase;
     margin-top: 29px;
     line-height: 100%;
+    letter-spacing: 0.2em;
 }
 
 .pt_account #main h1 {
@@ -1559,12 +1560,12 @@ sup {
     margin-top: 0px !important;
     padding-top: 15px;
     padding-bottom: 5px;
-    font-size: 22px !important;
-    ;
     font-weight: 400;
     margin-bottom: 0;
-    letter-spacing: 0.5px;
+    /*letter-spacing: 0.5px;*/
     font-size: 22px !important;
+    /*font-change*/
+    letter-spacing:2px !important;
 }
 
 .home-bottom-slots .home-first p,
@@ -1589,11 +1590,17 @@ sup {
 }
 
 .home-bottom-slots .col-sm-12 p,
-.home-bottom-first .col-sm-12 p {
+.home-bottom-first .col-sm-12 p,
+.home-bottom-first .col-xs-12.home-more-kuiu,
+.cl-section-title p   {
     margin: 6px 0px;
     padding-bottom: 10px;
     color: #1a1a1a;
     font-family: 'Roboto', sans-serif;
+    /*font-change*/
+    font-size:16px;
+    letter-spacing:0.1em;
+    text-transform: uppercase;
 }
 
 .home-bottom-slots .home-gear-accessories h1 {
@@ -2281,11 +2288,13 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin: 0 0 5px;
 }
 
+/*
+font-change on clothing landing page
 #main .cl-section-title p {
     margin: 0;
     font-size: 13px;
     font-weight: 500;
-}
+}*/
 
 .cl-section-categories {
     margin: 30px 0 40px;
@@ -2653,16 +2662,24 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .product-tile .product-name a {
-    font-size: 13px;
+    /*font-size: 13px;*/
     color: #2b2b2b;
-    font-family: "Times New Roman", Georgia, Serif;
+    /*font-family: "Times New Roman", Georgia, Serif;*/
+    /*font-change*/
+    font-size:14px;
+
 }
 
 .product-tile .product-pricing {
-    font-size: 12px;
+    /*font-size: 12px;*/
     color: #2b2b2b;
     font-family: 'Roboto', sans-serif;
     padding-left: 18px;
+    
+    /*font-change*/
+    
+    font-size:14px;
+    font-weight:600;
 }
 
 .product-tile .product-name {
@@ -2846,6 +2863,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     width: 100%;
     text-align: left;
     display: block;
+    /*Font-change*/
+    letter-spacing: 2px !important;
 }
 
 .pdp-main .product-price {
@@ -2901,10 +2920,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .pdp-main .pdp-des-content a,
 .pdp-description-wrap a {
     color: #1d1512;
-    font-size: 13px;
-    font-family: "Times New Roman", Georgia, Serif;
-    font-style: italic;
+    font-size: 12px;
     text-decoration: underline;
+    line-height: 35px;
+    margin-left: 6px;
 }
 
 .pdp-main .pdp-des-content p {
@@ -3029,7 +3048,8 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     background-position: left top;
 }
 
-.pdp-main .product-variations ul.swatches.size li.selected a {
+.pdp-main .product-variations ul.swatches.size li.selected a
+ {
     border: 2px solid #fff;
     font-weight: normal;
     background-color: #e0e0e0;
@@ -3062,12 +3082,15 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     content: " ";
 }*/
 
-.pdp-main .product-variations ul.swatches.size li.unselectable a {
+.pdp-main .product-variations ul.swatches.size li.unselectable a,
+.pdp-main .product-variations ul.swatches.color li.unselectable a {
     position: relative;
 }
 
 .pdp-main .product-variations ul.swatches.size li.unselectable a:before,
-.pdp-main .product-variations ul.swatches.size li.unselectable a:after {
+.pdp-main .product-variations ul.swatches.size li.unselectable a:after,
+.pdp-main .product-variations ul.swatches.color li.unselectable a:before,
+.pdp-main .product-variations ul.swatches.color li.unselectable a:after {
     font-weight: normal;
     position: absolute;
     left: -10px;
@@ -3100,10 +3123,6 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     left: 30px;
     bottom: 0;
 }
-
-.pdp-main .product-variations .color li a,
-.pdp-main .product-variations .color li:hover,
-.pdp-main .product-variations .color li.selected {}
 
 .pdp-main .product-add-to-cart,
 .pdp-main .product-actions {
@@ -3271,21 +3290,30 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 .pdp-main .product-overview .overview-top p,
 .pdp-main .product-technology3 .overview-top p {
     text-transform: uppercase;
-    font-size: 18px;
-    font-family: "Times New Roman", Georgia, Serif;
+    /*font-size: 18px;
+    font-family: "Times New Roman", Georgia, Serif;*/
     margin: 0px;
     color: #2b2b2b;
+    
+    /*font-change*/
+    
+    font-size:16px;
+    letter-spacing: 0.1em;
 }
 
 .pdp-main .product-overview .pdp-overview-content p,
 .pdp-main .product-technology p.pdp-overview-content,
 .pdp-main .product-technology2 p.pdp-overview-content,
 .pdp-main .product-technology3 p.pdp-overview-content {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 22px;
     margin: 0px;
-    font-family: "Times New Roman", Georgia, Serif;
-    padding: 35px 22px 20px 0;
+   /* padding: 35px 22px 20px 0;*/
+   
+   /*Font Changes */
+   
+    padding: 0px 22px 20px 0;
+    font-weight:300;
 }
 
 .pdp-main .product-overview .pdp-overview-content ul {
@@ -3371,15 +3399,19 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .pdp-main .recommendations .product-name {
-    font-size: 13px;
+    font-size: 14px;
     font-style: normal;
-    font-family: "Times New Roman", Georgia, Serif;
 }
 
 .pdp-main .recommendations .product-price {
-    font-size: 12px;
+    /*font-size: 12px;*/
     padding-left: 18px;
     float: left;
+    
+    /*font change*/
+    
+    font-size: 14px;
+    font-weight: 600;
 }
 
 
@@ -3508,12 +3540,17 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .pdp-main .recommendations h2 {
-    font-size: 26px;
+    /*font-size: 26px;*/
     font-style: normal;
     font-family: "Times New Roman", Georgia, Serif;
     color: #2b2b2b;
     text-align: center;
     margin: 0 0 40px;
+    
+    /*font-change*/
+    
+    font-size:32px;
+    letter-spacing: 0.2em;
 }
 
 .refinements-breadcrumb .breadcrumb {}
@@ -3634,7 +3671,11 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     padding-left: 18px;
     float: left;
     clear: both;
-    padding-top: 19px;
+    /*padding-top: 19px;*/
+    
+    /*Font-change*/
+    
+    padding-top:10px;
 }
 
 #main .product-compare label {
@@ -3741,7 +3782,10 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 
 .pdp-main .pdp-description-wrap {
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    /*Font Change */
+    font-size: 13px;
+    font-weight: 300;
 }
 
 .quickview-popup .pdp-main .product-variations {
@@ -3777,7 +3821,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .quickview-popup .addthis_toolbox.addthis_default_style {
-    margin-left: 84px;
+    margin-right: 6px;
 }
 
 .quickview-popup .pdp-main .product-primary-image {
@@ -3948,8 +3992,11 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
     margin-top: 0;
     margin-bottom: 20px;
     text-transform: uppercase;
+    /*Font change
     font-family: "Times New Roman", Georgia, Serif;
-    font-weight: 500;
+    font-weight: 500;*/
+    letter-spacing:0.1em;
+    font-weight: 300;
 }
 
 .pt_giftcert #main .gc-check-balance-wrap form .gift-cert-balance > label {
@@ -4002,7 +4049,7 @@ ul.menu-category.level-1 li#menu-space3 .level-2 {
 }
 
 .pt_giftcert #main select {
-    background-position: right 3px;
+    background-position: right 0px;
 }
 
 .fa-square-o {
@@ -4202,6 +4249,7 @@ a#password-reset {
 
 .pt_cart #main h1 {
     margin: 40px 0 10px;
+    font-weight:400;
 }
 
 #main .checkoutlogin {
@@ -4919,6 +4967,7 @@ table .section-header {
 
 .pt_order-confirmation h1 {
     margin-bottom: 0;
+    font-weight:400;
 }
 
 .pt_order-confirmation p.sub-title {
@@ -5195,9 +5244,11 @@ table .section-header {
 .pt_account .al-profilename {
     display: block;
     text-align: center;
-    font-size: 13px;
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
     text-transform: capitalize;
+    letter-spacing:0.1em;
+    font-weight:400;
 }
 
 .pt_account h1 .account-logout {
@@ -6583,6 +6634,7 @@ ul.product-availability-list li {
 	font-size: 32px;
     text-transform: uppercase;
     font-family: "Times New Roman", Georgia, Serif;
+    letter-spacing:0.2em;
 }
 
 .pt_product-search-result .product-price .price-standard { 
@@ -6594,12 +6646,12 @@ ul.product-availability-list li {
 	 padding-bottom:40px;
 }
 .content-page-section h2 {
-	font-size:12px;
-	font-weight:600;
+	font-size:16px;
+	font-weight:500;
 }
 .content-page-section p {
-	font-size:12px;
-	font-weight:400;
+	font-size:14px;
+	font-weight:300;
 }
 .pt_product-search-result .product-tile .product-promo {
 	font-size: 10px;
@@ -6736,7 +6788,7 @@ ul.product-availability-list li {
 }
 
 #main .new-account #RegistrationForm fieldset legend {
-	 width: 84%
+	 width: 84%;
 }
 
 .pt_account #main .new-account #RegistrationForm input[type="text"],
@@ -7014,7 +7066,8 @@ footer .footer_email span.error {
     position: absolute;
 }
 .pdp-main .product-actions li {
-	margin:0 5px 0 0;
+	margin: 8px 5px 4px 0;
+	width:100%;
 }
 .shipping-chart {
 	margin:0px;padding:0px;
@@ -7233,7 +7286,7 @@ a.tooltip.bonus-new span {
     left: 0;
     float: right;
     right: 0;
-    margin-left: 85%;
+    margin-left: 80%;
 }
 
 .maintaince-wrap .logo-maintaince {
@@ -7358,7 +7411,7 @@ tr.gift-certi-summary td.order-shipment-gift-message {
     margin: 1% 2% 0 0%;
 }
 .not-available-msg, .in-stock-date-msg, .not-available, .out-of-stock, .store-error {
-	margin:0px;
+	margin:2px;
 }
 .container-with-image .product-overview-text,
 .container-with-empty-image .product-overview-text {
@@ -7375,6 +7428,9 @@ tr.gift-certi-summary td.order-shipment-gift-message {
 #main .checkoutlogin .login-box sup {
     font-size: 16px;
     top: -2px;
+	}
+	.product-variations .color li a img {
+		    vertical-align: top !important;
 	}
 }
 
@@ -7510,3 +7566,87 @@ li.attribute.variant-dropdown.dropdownpdp {
 }
 
 .ui-dialog.quickview-popup select.variation-select {width: 67% !important;}
+
+/*font-chnage*/
+
+.product-pricing .promotional-message {
+	font-size:13px;
+	font-weight:400;
+}
+
+.pdp-main .product-overview-text p,
+p.gift-subhead {
+	font-size:16px;
+	font-weight: 300;
+	letter-spacing:0.1em;
+}
+
+.pdp-main .product-overview-text h2,
+.pdp-main .technology-container h2 {
+	font-weight:600;
+	font-size:16px;
+	text-transform: capitalize;
+}
+.pdp-main .product-overview-text ul,
+.pdp-main .technology-container ul {
+	font-size:16px;
+	font-weight:300;
+	list-style:initial;
+	padding: 0px 20px;
+}
+.pdp-main .technology-container span {
+	font-size:14px;
+	font-style: italic;
+}
+
+/*Font change*/
+.pdp-main .product-actions {
+	border-bottom:1px solid #e0e0e0;
+	width:99%;
+}
+
+.pdp-main .pdp-description-wrap ul,
+.pdp-main .mobile-short-description ul {
+	padding: 0px 18px;
+    list-style: inherit;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#cust-service #RegistrationForm .form-caption.error-message {
+	margin-left:135px;
+}
+.gift-cert-used.form-indent {
+	margin-left:0px;
+}
+.item-image.certificate-img img {
+	max-width: 150px !important;
+}
+
+.pt_order-confirmation .confirmation-subhead,
+.sub-mobile {
+	font-size:16px;
+	letter-spacing:0.1em;
+	font-family: 'Roboto', sans-serif;
+	font-weight:400;
+}
+.ui-dialog.quickview-popup .product-actions li {
+	width:97%;
+}
+
+.content-asset ul, .content-asset ol {
+	font-size: 14px;
+    font-weight: 300;
+}
+
+.wishlist-details h1 {
+	font-size:22px !important;
+	letter-spacing:0.1em !important;
+}
+
+.pdp-main .product-variations ul.swatches.color li.unselectable a:before:hover, 
+.pdp-main .product-variations ul.swatches.color li.unselectable a:after:hover {
+	
+	left: -12px;
+    top: -15px;
+}

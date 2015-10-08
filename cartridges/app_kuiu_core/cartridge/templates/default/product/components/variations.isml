@@ -89,25 +89,33 @@
 											}
 										}
 									</isscript>
-									<li class="${swatchClass}">
+									
 										<isif condition="${selectable}">
-											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
-												<isif condition="${vaId == 'color' && !empty(swImage)}">
-													<img src="${swImage.getURL()}" title="${displayValue}">
-												<iselse/>
-													<isprint value="${displayValue}"/>
-												</isif>
-											</a>
+											<li class="${swatchClass}">
+												<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+													<isif condition="${vaId == 'color' && !empty(swImage)}">
+														<img src="${swImage.getURL()}" title="${displayValue}">
+													<iselse/>
+														<isprint value="${displayValue}"/>
+													</isif>
+												</a>
+											</li>
 										<iselse/>
-											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
-									            <isif condition="${vaId == 'color' && !empty(swImage)}">
-									             	<img src="${swImage.getURL()}" alt="${displayValue}">
-									            <iselse/>
-									             	<isprint value="${displayValue}"/>
-									            </isif>
-								           </a>
+											<isif condition="${swatchClass == 'selected'}">
+												<li class="${swatchClass + ' unselectable'}">
+											<iselse>
+												<li class="${swatchClass}">	
+											</isif>
+													<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+											            <isif condition="${vaId == 'color' && !empty(swImage)}">
+											             	<img src="${swImage.getURL()}" alt="${displayValue}">
+											            <iselse/>
+											             	<isprint value="${displayValue}"/>
+											            </isif>
+										           </a>
+								           </li>
 										</isif>
-									</li>
+									
 								</isif>
 							</isloop>
 							<isif condition="${selectedSwatch}">

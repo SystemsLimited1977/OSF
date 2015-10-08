@@ -24,10 +24,11 @@
 			<iselseif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
 				<div class="error-form">${Resource.msg('account.login.logininclude.loginerror','account',null)}</div>
 			</isif>
-
+	
 			<fieldset>
+			<iscomment>
 		        <div class="dialog-required login-required"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
-
+			</iscomment>
 				<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" xhtmlclass="email login-email-req" p_dynamic="true" requiredtext="${Resource.msg('login.username.missing-error','forms',null)}"/>
 				
 

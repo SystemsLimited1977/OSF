@@ -26,8 +26,9 @@
 	
 					<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.ordertrack.htmlName}">
 						<fieldset>
+						<iscomment>
 							<div class="dialog-required login-required pull-right"> <span class="required-indicator">* ${Resource.msg('global.requiredfield','locale',null)}</span></div>
-						
+						</iscomment>
 							<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderNumber}" type="input"/>
 	
 							<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderEmail}" xhtmlclass="email" type="input"/>
