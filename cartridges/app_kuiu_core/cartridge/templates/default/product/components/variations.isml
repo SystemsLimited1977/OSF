@@ -99,9 +99,13 @@
 												</isif>
 											</a>
 										<iselse/>
-											<a class="swatchanchor" title="${Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}">
-												<isprint value="${displayValue}"/>
-											</a>
+											<a class="swatchanchor" title="${Resource.msgf('product.variationnotavailable','product', null, vaId, displayValue)}">
+									            <isif condition="${vaId == 'color' && !empty(swImage)}">
+									             	<img src="${swImage.getURL()}" alt="${displayValue}">
+									            <iselse/>
+									             	<isprint value="${displayValue}"/>
+									            </isif>
+								           </a>
 										</isif>
 									</li>
 								</isif>
