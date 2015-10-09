@@ -1128,7 +1128,7 @@ div {
     appearance: none;
     background-image: url("../images/drop-down_arrow.png");
     background-repeat: no-repeat;
-    background-position: right 3px;
+    background-position: right 0px;
     cursor: pointer;
     padding-left: 3px;
 }
@@ -6825,7 +6825,7 @@ ul.product-availability-list li {
 }
 
 .mini-address-location {
-	min-height:70px;
+	min-height:104px;
 }
 .ui-dialog.create-new-address {
 	width:650px !important;
@@ -7668,4 +7668,7 @@ p.gift-subhead {
     left: 0 !important;
     right: 0 !important;
     float: left !important;
+}
+.button-text.delete.payment-button{
+	margin-left:-2px;
 }
