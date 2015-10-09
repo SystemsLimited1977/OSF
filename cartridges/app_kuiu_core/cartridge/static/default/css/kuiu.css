@@ -7576,9 +7576,9 @@ li.attribute.variant-dropdown.dropdownpdp {
 
 .pdp-main .product-overview-text p,
 p.gift-subhead {
-	font-size:16px;
+	font-size:14px;
 	font-weight: 300;
-	letter-spacing:0.1em;
+	/*letter-spacing:0.1em;*/
 }
 
 .pdp-main .product-overview-text h2,
@@ -7589,7 +7589,7 @@ p.gift-subhead {
 }
 .pdp-main .product-overview-text ul,
 .pdp-main .technology-container ul {
-	font-size:16px;
+	font-size:14px;
 	font-weight:300;
 	list-style:initial;
 	padding: 0px 20px;
@@ -7649,4 +7649,23 @@ p.gift-subhead {
 	
 	left: -12px;
     top: -15px;
+}
+
+.pass-reset-new p,.pass-reset-new h2,.pt-pass-rest h2 {
+	font-size:14px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.pt-pass-rest input {
+	    width: 45% !important;
+}
+.pt_account .pt-pass-rest .form-row span.error {
+	    margin: 1% 2% 0 0%;
+}
+.pt-pass-rest button {
+	clear: both;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    float: left !important;
 }

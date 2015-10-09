@@ -2322,7 +2322,7 @@ footer {
     .product-variations .swatches li:hover a, .product-variations .swatches li.selected a {
       border-color: #84bd00; }
     .product-variations .swatches li.unselectable a {
-      opacity: 0.5; }
+      opacity: 0.6; }
     /*.product-variations .swatches li.unselectable:hover {
       border-color: #e0e0e0; }
       .product-variations .swatches li.unselectable:hover a {
