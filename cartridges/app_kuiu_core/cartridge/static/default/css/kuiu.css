@@ -54,7 +54,8 @@ textarea:focus {
     outline: none;
 }
 
-a:hover {
+a:hover,
+a:focus {
     color: #2b2b2b;
     text-decoration: underline;
 }
@@ -1480,7 +1481,8 @@ span.error {
     width: 49.5966%;
 }
 
-.ui-dialog .cancel-button {
+.ui-dialog .cancel-button,
+.ui-dialog .preview-button {
     background-color: #e6e6e6;
     border: 2px solid #e6e6e6;
     color: #1d1512;
@@ -1495,7 +1497,8 @@ span.error {
     margin-left: 0px;
 }
 
-.ui-dialog .cancel-button:hover {
+.ui-dialog .cancel-button:hover,
+.ui-dialog .preview-button:hover {
     background-color: #fff;
     border: 2px solid #e6e6e6;
     color: #1d1512;
@@ -7669,6 +7672,7 @@ p.gift-subhead {
     right: 0 !important;
     float: left !important;
 }
-.button-text.delete.payment-button{
+.button-text.delete.payment-button,
+.ui-dialog .preview-button {
 	margin-left:-2px;
 }
