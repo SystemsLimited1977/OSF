@@ -225,6 +225,14 @@
                   </node>
                   <simple-transition/>
                   <node>
+                    <call-node start-name-ref="Cybersource_Subscription-CreateSubscriptionBilling"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="./b3.1"/>
+                    </branch>
+                  </node>
+                  <simple-transition/>
+                  <node>
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="ScriptFile" value="cybersource/CCAuthRequest.ds"/>
                       <config-property key="Transactional" value="true"/>
@@ -268,15 +276,17 @@
                       <key-binding alias="MissingFieldsArray" key="MissingFieldsArray"/>
                       <key-binding alias="DecisionManager" key="DecisionManager"/>
                       <key-binding alias="Order" key="Order"/>
+                      <key-binding alias="subscriptionID" key="UnSavedCreditCardSubscriptionID"/>
                     </pipelet-node>
                     <node-display x="0" y="1"/>
-                    <branch basename="b2" source-connector="error">
-                      <transition target-connector="in">
-                        <transition-display>
-                          <bend-point relative-to="source" x="1" y="0"/>
-                        </transition-display>
-                      </transition>
+                    <branch basename="b3" source-connector="error">
+                      <transition target-connector="in1"/>
                       <segment>
+                        <node>
+                          <join-node/>
+                          <node-display x="1" y="0"/>
+                        </node>
+                        <simple-transition/>
                         <node>
                           <pipelet-node custom-name="Log error" pipelet-name="Assign" pipelet-set-identifier="bc_api">
                             <key-binding alias="dw.system.Logger.error('An error occured during PaymentAuthoriztion check. (ReasonCode: {0} , RequestID: {1}',ReasonCode,RequestID)" key="From_0"/>
@@ -302,11 +312,7 @@
                           </pipelet-node>
                           <node-display orientation="horizontal" x="1" y="0"/>
                         </node>
-                        <transition target-connector="in1" target-path="../../b3.1">
-                          <transition-display>
-                            <bend-point relative-to="source" x="2" y="0"/>
-                          </transition-display>
-                        </transition>
+                        <transition target-connector="in1" target-path="../../b3.1"/>
                       </segment>
                     </branch>
                   </node>
@@ -315,7 +321,7 @@
                 <segment>
                   <node>
                     <join-node/>
-                    <node-display x="0" y="2"/>
+                    <node-display x="0" y="1"/>
                   </node>
                   <simple-transition>
                     <transition-display>
@@ -6295,7 +6301,7 @@ General Error</description>
           <segment>
             <node>
               <decision-node condition-key="!empty(subscriptionID)" condition-operator="expr"/>
-              <node-display x="0" y="1"/>
+              <node-display x="0" y="3"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in">
                   <transition-display>
@@ -6464,6 +6470,56 @@ General Error</description>
       </node>
       <simple-transition/>
       <node>
+        <decision-node condition-key="dw.system.Site.getCurrent().getCustomPreferenceValue('enableDecisionManager')" condition-operator="expr"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+        <branch basename="b3" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <pipelet-node custom-name="Update PaymentTransaction for Order Center" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.approvalStatus" key="To_0"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.authAmount" key="To_1"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.authCode" key="To_2"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.bfDecisionManager" key="To_3"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.cardType" key="To_4"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.requestId" key="To_5"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.requestToken" key="To_6"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.subscriptionID" key="To_7"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.isSubscription" key="To_8"/>
+                <key-binding alias="PaymentInstrument.paymentTransaction.custom.maskedFourDigit" key="To_9"/>
+                <key-binding alias="card.getCardType()" key="From_4"/>
+                <key-binding alias="DecisionManager" key="From_3"/>
+                <key-binding alias="RequestID" key="From_5"/>
+                <key-binding alias="subscriptionID" key="From_7"/>
+                <key-binding alias="AuthorizationAmount" key="From_1"/>
+                <key-binding alias="AuthorizationCode" key="From_2"/>
+                <key-binding alias="RequestToken" key="From_6"/>
+                <key-binding alias="AuthorizationReasonCode" key="From_0"/>
+                <key-binding alias="&quot;************&quot;+PaymentInstrument.getCreditCardNumber().slice(PaymentInstrument.getCreditCardNumber().length-4,PaymentInstrument.getCreditCardNumber().length)" key="From_9"/>
+                <key-binding alias="true" key="From_8"/>
+                <key-binding alias="subscriptionID" key="From_2"/>
+              </pipelet-node>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
         <pipelet-node custom-name="Update PaymentTransaction for Order Center" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <key-binding alias="PaymentInstrument.paymentTransaction.custom.approvalStatus" key="To_0"/>
@@ -6486,13 +6542,18 @@ General Error</description>
           <key-binding alias="AuthorizationReasonCode" key="From_0"/>
           <key-binding alias="&quot;************&quot;+PaymentInstrument.getCreditCardNumber().slice(PaymentInstrument.getCreditCardNumber().length-4,PaymentInstrument.getCreditCardNumber().length)" key="From_9"/>
           <key-binding alias="true" key="From_8"/>
+          <key-binding alias="subscriptionID" key="From_2"/>
         </pipelet-node>
-        <node-display orientation="horizontal" x="1" y="0"/>
+        <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <end-node/>
-        <node-display orientation="horizontal" x="1" y="0"/>
+        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>
