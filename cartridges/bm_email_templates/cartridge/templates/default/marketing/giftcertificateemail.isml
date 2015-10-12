@@ -1,35 +1,61 @@
-<iscontent type="text/html" charset="UTF-8" compact="true">
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-
-<isset name="SHOP_URL" value="${URLUtils.http(new dw.web.URLAction('Home-Show', pdict.StorefrontName))}" scope="PAGE"/>
-
+<subject>Gift Certificate</subject>
 <html>
-<head><title>A Gift Certificate for You</title></head>
+<head>
+
+</head>
 
 <body>
-	<div style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: x-small; color: Black;">
-		<isif condition="${empty(pdict.GiftCertificate.recipientName)}">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td style="background:#e0e0e0;padding:50px 0" align="center">
+<center>
+<table style="background:#ffffff;border:1px solid #999999;width:680px">
+<tbody>
+<tr>
+<td style="font-size:12px;font-family:arial;padding:20px 20px 0 20px;vertical-align:top">
+							<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">
+								<img src="${URLUtils.httpStatic('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
+							</a></td>
+<td style="font-size:12px;font-family:arial;padding:35px 20px;vertical-align:top;border-left:1px solid #b2b6b5;">
+<b>KUIU Ultralight Hunting</b><br>
+1920 N Lincoln St,<br>
+#101 Dixon,CA 95620<br>
+kuiu.com<br>
+Phone: +1-855-367-5848<br>
+</td>
+</tr>
+<tr >
+<th colspan="2" style="background:#333;padding:7px 20px;;font-size:14px;font-family:arial;text-align:left;color:#fff;">Gift Certificate</th>
+</tr>
+<tr>
+<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 20px;vertical-align:top">
+
+<isif condition="${empty(pdict.GiftCertificate.recipientName)}">
 			Dear Valued Customer,
 		<iselse>
 			Dear&nbsp;<isprint value="${pdict.GiftCertificate.recipientName}">,
 		</isif>
 		<br/>
 		<br/>
-			A Gift Certificate has been issued to you in the amount of <isprint value="${pdict.GiftCertificate.amount}">.
+			You have been sent a <isprint value="${pdict.GiftCertificate.amount}"> gift certificate for the <a href="${SHOP_URL}">KUIU Ultralight Hunting online store.</a>.
 		<br/>
 		<br/>
+		
 		<isif condition="${!empty(pdict.GiftCertificate.message)}">
-			Message:
+								<isif condition="${empty(pdict.GiftCertificate.senderName)}">
+									${Resource.msg('giftcert.someone','email',null)}
+								<iselse/>
+									<isprint value="${pdict.GiftCertificate.senderName}"/>
+								</isif> has left the following message for you:
 			<br/>
 			<br/>
-			<isprint value="${pdict.GiftCertificate.message}">
-			<br/>
+			<p style="width:100%;"><isprint value="${pdict.GiftCertificate.message}"></isprint></p>
 			<br/>
 		</isif>
-		You can redeem your gift certificate at <a href="${SHOP_URL}">our online store</a>.
-		<br/>
-		<br/>
-		Your gift certificate code is <b><isprint value="${pdict.GiftCertificate.giftCertificateCode}"></b>.
+		To redeem your gift certificate, use the following code within the billing step of the checkout:<b><isprint value="${pdict.GiftCertificate.giftCertificateCode}"></b>
 		<br/>
 		<br/>
 		Sincerely, 
@@ -40,6 +66,15 @@
 		<iselse>
 			<isprint value="${pdict.GiftCertificateSenderName}">
 		</isif>
-	</div>
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+	
 </body>
 </html>
