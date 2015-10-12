@@ -122,7 +122,7 @@ function initializeEvents() {
 	});
 	$('#closeslider').click(function(e){
 		e.preventDefault();
-		$('#secondary').slideToggle();
+		$('#secondary').slideUp();
 	});
 }
 
