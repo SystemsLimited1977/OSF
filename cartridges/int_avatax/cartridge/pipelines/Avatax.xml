@@ -211,40 +211,18 @@
                   <simple-transition/>
                   <node>
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                      <config-property key="Transactional" value="true"/>
+                      <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
                       <config-property key="ScriptFile" value="avatax/multiship/TaxationRequestMultiShip.ds"/>
                       <config-property key="Timeout" value="300"/>
-                      <key-binding alias="ScriptLog1" key="ScriptLog"/>
-                      <key-binding alias="Basket" key="Basket"/>
-                      <key-binding alias="CustomerProfile" key="CustomerProfile"/>
-                      <key-binding alias="Discount" key="Discount"/>
-                      <key-binding alias="ia" key="itemArray"/>
-                      <key-binding alias="itemArrayMapByShip" key="itemArrayMapByShip"/>
-                      <key-binding alias="im" key="itemMap"/>
-                      <key-binding alias="itemMapByShip" key="itemMapByShip"/>
-                      <key-binding alias="OrderNo" key="OrderNo"/>
-                      <key-binding alias="PaymentProcessed" key="PaymentProcessed"/>
-                      <key-binding alias="ShipToAddresses" key="ShipToAddresses"/>
-                      <key-binding alias="address" key="address"/>
-                      <key-binding alias="addressCode" key="addressCode"/>
-                      <key-binding alias="basket" key="basket"/>
-                      <key-binding alias="boundaryLevel" key="boundaryLevel"/>
-                      <key-binding alias="city" key="city"/>
-                      <key-binding alias="country" key="country"/>
-                      <key-binding alias="jurisCode" key="jurisCode"/>
-                      <key-binding alias="postalCode" key="postalCode"/>
-                      <key-binding alias="ReasonCode" key="ReasonCode"/>
-                      <key-binding alias="region" key="region"/>
-                      <key-binding alias="response" key="response"/>
-                      <key-binding alias="taxRegionId" key="taxRegionId"/>
-                      <key-binding alias="totalTaxAmount" key="totalTaxAmount"/>
+                      <key-binding alias="null" key="ScriptLog"/>
                     </pipelet-node>
                     <node-display x="0" y="5"/>
                     <branch basename="b3" source-connector="error">
                       <transition target-connector="in">
                         <transition-display>
                           <bend-point relative-to="source" x="2" y="0"/>
+                          <bend-point relative-to="target" x="0" y="-1"/>
                         </transition-display>
                       </transition>
                       <segment>

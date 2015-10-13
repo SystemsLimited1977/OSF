@@ -98,20 +98,11 @@ function execute( args : PipelineDictionary ) : Number
 			var req 						= taxationRequest.getTaxRequest = new csReference.GetTaxRequest();
 			var _date 			: Date		= new Date();
 			
-			var dateTime 				= ( _date.getFullYear() +  "-" + insertLeadingZero(_date.getMonth()+1) + "-" + insertLeadingZero(_date.getDate()) ).toString();
-			
-			
 			shipNum++;
 			
-			//not needed and not passed in
-			//var shipToObject	: ShipTo_Object 	= args.shipToHashMap.get(shipment.ID);
+			var shipToObject	: ShipTo_Object 	= args.shipToHashMap.get(shipment.ID);
 			var _shipToAddress 	: ShipToObject 		= shipment;
-			//SPECIAL CASE - if no shipping address it's a gift card - skip the calculation
-			if (_shipToAddress.shippingAddress == null){
-				continue;	
-			}
-			
-			
+	
 			var itemArray 		: Array 			= args.itemArrayMapByShip.get(shipment.ID);
 			var itemMap 		: HashMap 			= args.itemMapByShip.get(shipment.ID);
 
@@ -122,17 +113,17 @@ function execute( args : PipelineDictionary ) : Number
 			req.docType 				= (args.PaymentProcessed ? csReference.DocumentType.SalesInvoice : csReference.DocumentType.SalesOrder);
 			req.commit 					= false;
 		    req.detailLevel 			= csReference.DetailLevel.Diagnostic;
-		    //req.serviceMode 			= csReference.ServiceMode.Automatic; //removing to get Multiship to work
+		    req.serviceMode 			= csReference.ServiceMode.Automatic;
 		    req.discount 				= (args.Discount != null) ? args.Discount.value : 0.0;
-		    //req.paymentDate 			= _date; //removing to get Multiship to work
-		    //req.exchangeRate 			= 1.0; //removing to get Multiship to work
-		    //req.exchangeRateEffDate 	= new Date("1970-01-01"); //removing to get Multiship to work
+		    req.paymentDate 			= _date;
+		    req.exchangeRate 			= 1.0;
+		    req.exchangeRateEffDate 	= new Date("1970-01-01");
 			req.companyCode 			= AvataxHelper.getCompanyCode();
-		    req.docDate 				= dateTime;
+		    req.docDate 				= _date;
 		    req.docCode 				= (empty(args.OrderNo) ? '123' : args.OrderNo);
 		    req.customerCode 			= _dataContainer.customer != null && 'ID' in _dataContainer.customer ? _dataContainer.customer.ID : 'Cust123';
 		   	req.customerUsageType		= customer.authenticated && "entityCode" in customer.profile.custom ? customer.profile.custom.entityCode : "";
-	   		//req.currencyCode			= _dataContainer.currencyCode != null ? _dataContainer.currencyCode : ""; //removing to get Multiship to work
+	   		req.currencyCode			= _dataContainer.currencyCode != null ? _dataContainer.currencyCode : "";
 		    
 		    if(!(args.CustomerProfile == null)) 
 	    	{
@@ -311,14 +302,3 @@ function ResetTaxForBasketLineItems(basket : Basket)
 	
 	basket.updateTotals();
 }
-function insertLeadingZero(nb : Number) : String 
-	 {
-	  	 if(nb < 10) 
-	  	 {
-	         return "0"+nb;
-	     } 
-	     else 
-	     {
-	         return ""+nb;
-	     }
-	 }
